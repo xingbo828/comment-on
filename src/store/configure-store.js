@@ -1,9 +1,26 @@
 import rootReducer from './rootReducer';
-import { createStore, compose } from 'redux';
+import Immutable from 'immutable';
+import { createStore, compose, applyMiddleware } from 'redux';
+import { createLogger } from 'redux-logger';
+
+
+const middlewares = [];
+
+if (process.env.NODE_ENV === 'development') {
+  const logger = createLogger({
+    stateTransformer: (state) => {
+      return Immutable.Iterable.isIterable(state) ? state.toJS() : state;
+    }
+  });
+  middlewares.push(applyMiddleware(logger));
+  middlewares.push(window.devToolsExtension ? window.devToolsExtension() : f => f);
+  
+}
+
 
 const enhancers = compose(
-  window.devToolsExtension ? window.devToolsExtension() : f => f
-)
+  ...middlewares
+);
 
 export default (initialState) => {
   return createStore(rootReducer, initialState, enhancers);
