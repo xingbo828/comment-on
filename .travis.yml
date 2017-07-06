@@ -1,6 +1,14 @@
 language: node_js
+node_js:
+- '7'
+before_install:
+- npm install -g firebase-tools
 
-deploy:
-  provider: firebase
-  token:
-    secure: qmh9MraBJoxsnxNqQUvp07XhD9GNMbdjZRibty7oBPzXY8LY2kCYdNL2Ub+LW4YPDT32ygCZg+I9i+X6th6L5cPFob78MIHa7iV6jgXShP88DgzL4HBk+mwa4wioSqJ4IxilSPb5F+ku/vN01xbO6knk40zfvpKwKnn0UWGyUGZlpKy+kBBclQW0zzhLS7sr6DUAf4TA6TjmY6YxPA0BMSzqyW49tDgvWKwPrz8pBrvrBVjef5GEaY6NZLDLJ3vFel2UFLo5wzkSfBPx9D6/q0Z/BN4ULJIyoE0/xLnHH0bkrVBkX/qZz5V54RD+MpgCzrLsDQHT9HQqAl+1NobdK4lw/IkIKQK3FQcTUmejrq4k+vlAUIOqeJwWcEk5QvfcFIz2TWzf3FhQkMepjuQbnoYTms9/oAK1PcZr9hoYHqEnM9ubmniWFrLIowRKJ0H+217chRGVLJifkqMAN5Id1u8iuhubMlkr3QDJt8voGcx549GA05C7X5bWR+TRb73F+FolpakG75EURmHEMA7QDfDA5Q2eLVP/kzSIIg9pj4Qpis9UvAiX+EQRA1D2HoQqk9rC6qO8YBbMuukrj3j20fmLTPWu4OyXTQAOXePHml34muNsc5TVlnHo5XuxNfYI3LevAGmTi2a5Op0rSRPph2OOJROkqp/7jpmPAccnLfo=
+install:
+- npm install
+
+before_script:
+- npm run build
+
+after_success:
+- firebase deploy --token $FIREBASE_TOKEN
