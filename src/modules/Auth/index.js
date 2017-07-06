@@ -1,5 +1,22 @@
-import React from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom'
+import { compose } from 'recompose';
+import Auth from './Auth';
+import { auth } from './authAction';
 
-const Auth = () => <p>This is Auth Page</p>;
+const mapStateToProps = (state, props) => {
+  return {
+    user: state.user
+  };
+}
 
-export default Auth;
+const mapDispatchToProps = (dispatch) => ({
+  login: () => dispatch(auth())
+});
+
+const enhance = compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps)
+);
+
+export default enhance(Auth);
