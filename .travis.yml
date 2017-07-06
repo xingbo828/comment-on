@@ -1,0 +1,21 @@
+language: node_js
+node_js:
+- '6.0'
+
+services:
+
+env:
+
+before_install:
+- npm install -g firebase-tools
+install:
+- npm install
+before_script:
+- npm run build
+deploy:
+- provider: firebase
+  access_key_id: AKIAJ6RYD6UZB4PLYXBA
+  token:
+    secure: "f35zdbL3JVD06s0+vOo1SeeVnnhUI3RaFBDzKiHMQMKHp+ziHJ5M0/pzOXuiEAWBEBat6a09N+KJkgVnQmosnzAZT9n4aNiQTtu0v24Udc4yzSYMeWOYmLERG4QIbdbu10RdM42Xcy8sR0jvQWihvtXJEDgUU4aVLEGxdo/AGAcC4EwGCrAo8s8kctiIsZfr2gLLdIk7wL5wjhzYsdNCHaIRlfXJY0tOHUtcnBa2F0g9iPd7nzdMtupeQ3ujf2B0dKVH6rUrYiKxy1ORCA3HiRI5Vm+HK40IOld04nfNgfTs4GNb4VWLkLSCKFbjTkzpJqsAKeEZ7cR5feCvc/utz+8E/P9NhrtOiHG58oG5mHnW6KQaW7fuDh7c1j+xVzzOt+RvO7NhM96GfVjckV+VGeEcc6XoGtzdek0s5ATcaGFkW6XO8v86TGjcvI/Wlvxfe+vAf9YJ2claFXpcCDCCaAIMsula+zFNrpzosHQEXtnJRcCGes91ZmbbNUdfC6jVEMitfGH0XmFw2jLO24LyE84Yz9wPIFtllHOdBvY3uXxVLVtgOUMPNB1BYfokkcFTssVdWOoNi4vYKWN2z+sKcZC6MjPBIUNgZyAawUSE6cZZ1LXXZmPEt7WamYJ2t3NYXZCdmWbKOL4yzWRD8pedHOFnuBK6kEmJhIszw0qXL28="
+  on:
+    branch: testing
