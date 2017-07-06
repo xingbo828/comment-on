@@ -17,9 +17,9 @@ class App extends Component {
             <li><Link to="/">Home Page</Link></li>
             <li><Link to="/auth">Auth Page</Link></li>
           </ul>
-          <hr/>
-          <Route exact path="/" component={HomePage}/>
-          <Route path="/auth" component={AuthPage}/>
+          <hr />
+          <Route exact path="/" component={HomePage} />
+          <Route path="/auth" component={AuthPage} />
         </div>
       </Router>
     );

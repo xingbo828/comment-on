@@ -1,17 +1,15 @@
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import mapImmutablePropsToPlainProps from '../../global/mapImmutablePropsToPlainProps';
 import Auth from './Auth';
 import { login } from './loginAction';
 
-const mapStateToProps = (state, props) => {
-  return {
-    user: state.get('user')
-  };
-}
+const mapStateToProps = (state, props) => ({
+  user: state.get('user')
+});
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   login: () => dispatch(login())
 });
 

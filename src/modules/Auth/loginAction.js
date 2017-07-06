@@ -1,19 +1,14 @@
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 
-export const login = () => {
-  return (dispatch) => {
+export const login = () => (dispatch) => {
+  dispatch({
+    type: LOGIN_REQUEST
+  });
+  setTimeout(() => {
     dispatch({
-      type: LOGIN_REQUEST
+      type: LOGIN_SUCCESS
     });
-    setTimeout(() => {
-      dispatch({
-        type: LOGIN_SUCCESS
-      });
-    }, 1000);
-  }
-} 
-
-
-
+  }, 1000);
+};
 
