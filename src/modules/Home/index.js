@@ -24,7 +24,7 @@ const Logo = styled.img`
 const HomePage = () => (
   <Container>
     <Logo src={logo} alt="logo" />
-    <H1>Hello World!!!!!</H1>
+    <H1>Hello world</H1>
     <p>{process.env.NODE_ENV}</p>
   </Container>
 );
