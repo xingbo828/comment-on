@@ -23,7 +23,7 @@ const logout = () => {
 };
 
 const mapStateToProps = (state, props) => ({
-  auth: state.get('auth')
+  account: state.get('account')
 });
 
 

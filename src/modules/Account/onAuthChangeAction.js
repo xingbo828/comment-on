@@ -5,6 +5,7 @@ export const USER_LOGOUT = 'USER_LOGOUT';
 
 export const onAuthChange = () => (dispatch) => {
   auth.onAuthStateChanged((user) => {
+    console.log(user);
     if (user) {
       dispatch({
         type: USER_LOGIN,

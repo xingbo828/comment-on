@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import App from './App';
 import configureStore from './store/configure-store';
 import registerServiceWorker from './registerServiceWorker';
-import { onAuthChange } from './modules/Auth/onAuthChangeAction';
+import { onAuthChange } from './modules/Account/onAuthChangeAction';
 
 const store = configureStore();
 ReactDOM.render(

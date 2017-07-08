@@ -6,7 +6,8 @@ import {
 } from 'react-router-dom';
 
 import HomePage from './modules/Home';
-import LoginPage from './modules/Auth/loginContainer';
+import LoginPage from './modules/Account/loginContainer';
+import ProfilePage from './modules/Account/profileContainer';
 
 class App extends Component {
   render() {
@@ -15,11 +16,13 @@ class App extends Component {
         <div>
           <ul>
             <li><Link to="/">Home Page</Link></li>
-            <li><Link to="/login">Login Page</Link></li>
+            <li><Link to="/account">Profile Page</Link></li>
+            <li><Link to="/account/login">Login Page</Link></li>
           </ul>
           <hr />
           <Route exact path="/" component={HomePage} />
-          <Route path="/login" component={LoginPage} />
+          <Route exact path="/account" component={ProfilePage} />
+          <Route path="/account/login" component={LoginPage} />
         </div>
       </Router>
     );

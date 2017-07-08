@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Auth = ({ auth, facebookLogin, googleLogin, logout }) => {
+const Login = ({ account, facebookLogin, googleLogin, logout }) => {
   const renderLoginOptions = () => {
     return (
       <div>
@@ -13,14 +13,14 @@ const Auth = ({ auth, facebookLogin, googleLogin, logout }) => {
   const renderUserInfo = () => {
     return (
       <div>
-        <img src={auth.user.photoURL} alt="avatar" />
-        <p>Hi, {auth.user.displayName}</p>
+        <img src={account.user.photoURL} alt="avatar" />
+        <p>Hi, {account.user.displayName}</p>
         <button onClick={logout}>Logout</button>
       </div>);
   };
 
   const render = () => {
-    switch (auth.status) {
+    switch (account.status) {
       case 'AUTHENTICATED':
         return renderUserInfo();
       case 'NOT_AUTHENTICATED':
@@ -35,8 +35,4 @@ const Auth = ({ auth, facebookLogin, googleLogin, logout }) => {
   );
 };
 
-Auth.prototype = {
-
-};
-
-export default Auth;
+export default Login;
