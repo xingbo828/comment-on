@@ -8,7 +8,7 @@ export const updateProfile = profile => (dispatch) => {
   .then(() => {
     dispatch({
       type: UPDATE_PROFILE,
-      data: user
+      data: user.toJSON()
     });
   }, () => {
 

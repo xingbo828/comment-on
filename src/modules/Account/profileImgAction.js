@@ -4,7 +4,7 @@ import { updateProfile } from './profileAction';
 const storageRef = storage.ref();
 
 const uploadProfileImg = (file, uid) => (dispatch) => {
-  const profileImageRef = storageRef.child(`images/profile/${uid}dddd/${file.name}`);
+  const profileImageRef = storageRef.child(`images/profile/${uid}/${file.name}`);
   profileImageRef.put(file)
   .then((result) => {
     const updatedProfileImageUrl = result.downloadURL;

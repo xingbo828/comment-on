@@ -8,7 +8,7 @@ export const onAuthChange = () => (dispatch) => {
     if (user) {
       dispatch({
         type: USER_LOGIN,
-        data: user
+        data: user.toJSON()
       });
     } else {
       dispatch({
