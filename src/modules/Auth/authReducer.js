@@ -1,22 +1,22 @@
 import Immutable from 'immutable';
-import { LOGIN_SUCCESS, LOGIN_REQUEST } from './loginAction';
+import { USER_LOGIN, USER_LOGOUT } from './onAuthChangeAction';
 
 const initState = Immutable.fromJS({
   status: 'UNINIT',
-  name: ''
+  user: {}
 });
 
 export default (state = initState, action) => {
   switch (action.type) {
-    case LOGIN_SUCCESS:
+    case USER_LOGIN:
       return state.withMutations((st) => {
-        st.set('name', 'Bo');
-        st.set('status', 'SUCCESSFUL');
+        st.set('user', Immutable.fromJS(action.data));
+        st.set('status', 'AUTHENTICATED');
       });
-    case LOGIN_REQUEST:
+    case USER_LOGOUT:
       return state.withMutations((st) => {
-        st.set('name', '');
-        st.set('status', 'PENDING');
+        st.set('user', Immutable.fromJS({}));
+        st.set('status', 'NOT_AUTHENTICATED');
       });
     default:
       return state;

@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux-immutable';
-import login from '../modules/Auth/loginReducer';
+
+import auth from '../modules/Auth/authReducer';
 
 const rootReducer = combineReducers({
-  user: login
+  auth
 });
 
 export default rootReducer;
