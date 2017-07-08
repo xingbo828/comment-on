@@ -7,7 +7,8 @@ export const updateProfile = profile => (dispatch) => {
   user.updateProfile(profile)
   .then(() => {
     dispatch({
-      type: UPDATE_PROFILE
+      type: UPDATE_PROFILE,
+      data: user
     });
   }, () => {
 

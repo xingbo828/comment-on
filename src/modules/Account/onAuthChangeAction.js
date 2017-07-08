@@ -8,11 +8,7 @@ export const onAuthChange = () => (dispatch) => {
     if (user) {
       dispatch({
         type: USER_LOGIN,
-        data: {
-          displayName: user.displayName,
-          email: user.email,
-          photoURL: user.photoURL
-        }
+        data: user
       });
     } else {
       dispatch({
