@@ -4,14 +4,14 @@ import { compose, withProps } from 'recompose';
 import * as firebase from 'firebase';
 import mapImmutablePropsToPlainProps from '../../global/mapImmutablePropsToPlainProps';
 import Profile from './Profile';
-import {updateProfile} from './profileAction';
+import { updateProfile } from './profileAction';
 
 const mapStateToProps = (state, props) => ({
   user: state.getIn(['account', 'user'])
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateProfile: (profile) => dispatch(updateProfile(profile))
+  updateProfile: profile => dispatch(updateProfile(profile))
 });
 
 const enhance = compose(

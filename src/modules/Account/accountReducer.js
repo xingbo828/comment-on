@@ -9,10 +9,11 @@ const initState = Immutable.fromJS({
 export default (state = initState, action) => {
   switch (action.type) {
     case USER_LOGIN:
-      return state.withMutations((st) => {
-        st.set('user', Immutable.fromJS(action.data));
-        st.set('status', 'AUTHENTICATED');
-      });
+      return state.set('user', Immutable.fromJS(action.data)).set('status', 'AUTHENTICATED');
+      // return state.withMutations((st) => {
+      //   st.set('user', action.data);
+      //   st.set('status', 'AUTHENTICATED');
+      // });
     case USER_LOGOUT:
       return state.withMutations((st) => {
         st.set('user', Immutable.fromJS({}));
