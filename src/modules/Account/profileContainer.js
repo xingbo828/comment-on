@@ -15,6 +15,7 @@ const mapDispatchToProps = dispatch => ({
   uploadProfileImage: (file, uid) => dispatch(uploadProfileImg(file, uid))
 });
 
+
 const enhance = compose(
   withRouter,
   connect(mapStateToProps, mapDispatchToProps),

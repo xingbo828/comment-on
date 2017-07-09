@@ -23,6 +23,16 @@ class Profile extends Component {
     this.props.updateProfile(this.state);
   }
 
+  profileImgFileCheck(img) {
+    const isImage = (file) => {
+      return ['image/jpeg', 'image/png'].includes(file.type);
+    };
+    const isSmallerThanSize = size => (file) => {
+      return file.size < size;
+    };
+    return isImage(img) && isSmallerThanSize(1024 * 1024 * 1024)(img);
+  }
+
   handleInputChange(event) {
     if (event.target.name === "displayName") {
       this.setState({
@@ -31,7 +41,10 @@ class Profile extends Component {
     } else if (event.target.name === 'profileImage') {
       const file = event.target.files[0];
       const uid = this.props.user.uid;
-      this.props.uploadProfileImage(file, uid);
+      console.log(file);
+      if (this.profileImgFileCheck(file)) {
+        this.props.uploadProfileImage(file, uid);
+      }
     }
   }
 
