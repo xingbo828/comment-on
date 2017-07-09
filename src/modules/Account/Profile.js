@@ -41,9 +41,10 @@ class Profile extends Component {
     } else if (event.target.name === 'profileImage') {
       const file = event.target.files[0];
       const uid = this.props.user.uid;
-      console.log(file);
       if (this.profileImgFileCheck(file)) {
         this.props.uploadProfileImage(file, uid);
+      } else {
+        console.error('not valid file');
       }
     }
   }
