@@ -30,7 +30,7 @@ class Profile extends Component {
     const isSmallerThanSize = size => (file) => {
       return file.size < size;
     };
-    return isImage(img) && isSmallerThanSize(1024 * 1024 * 1024)(img);
+    return isImage(img) && isSmallerThanSize(1024 * 1024)(img);
   }
 
   handleInputChange(event) {
