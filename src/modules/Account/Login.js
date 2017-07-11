@@ -1,4 +1,6 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
+
 
 const Login = ({ account, facebookLogin, googleLogin, logout }) => {
   const renderLoginOptions = () => {
@@ -11,12 +13,7 @@ const Login = ({ account, facebookLogin, googleLogin, logout }) => {
   };
 
   const renderUserInfo = () => {
-    return (
-      <div>
-        <img src={account.user.photoURL} alt="avatar" />
-        <p>Hi, {account.user.displayName}</p>
-        <button onClick={logout}>Logout</button>
-      </div>);
+    return <Redirect to="/" />
   };
 
   const render = () => {

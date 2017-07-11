@@ -1,4 +1,5 @@
 import Immutable from 'immutable';
+import { createSelector } from 'reselect';
 import { USER_LOGIN, USER_LOGOUT } from './onAuthChangeAction';
 import { UPDATE_PROFILE } from './profileAction';
 
@@ -27,3 +28,13 @@ export default (state = initState, action) => {
       return state;
   }
 };
+
+
+// Selectors
+export const getUser = (state) => ({ user: state.getIn(['account', 'user'])});
+export const getAccount = state => ({ account: state.get('account') });
+
+
+export const isLoggedin = createSelector(
+  [ getUser ], ({user}) => ({ isLoggedIn: user.size > 0, user })
+);

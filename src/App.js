@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
-  Route,
-  Link
+  Route
 } from 'react-router-dom';
-
+import ProtectedRoute from './modules/Common/ProtectedRoute';
+import Header from './modules/Common/Header';
 import HomePage from './modules/Home';
 import LoginPage from './modules/Account/loginContainer';
 import ProfilePage from './modules/Account/profileContainer';
@@ -14,15 +14,10 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <ul>
-            <li><Link to="/">Home Page</Link></li>
-            <li><Link to="/account">Profile Page</Link></li>
-            <li><Link to="/account/login">Login Page</Link></li>
-          </ul>
-          <hr />
+          <Header />
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/account" component={ProfilePage} />
-          <Route path="/account/login" component={LoginPage} />
+          <ProtectedRoute exact path="/account" component={ProfilePage} />
+          <Route exact path="/login" component={LoginPage} />
         </div>
       </Router>
     );

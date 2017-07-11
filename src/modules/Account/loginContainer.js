@@ -2,10 +2,10 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose, withProps } from 'recompose';
 import * as firebase from 'firebase';
-import mapImmutablePropsToPlainProps from '../../global/mapImmutablePropsToPlainProps';
+import mapImmutablePropsToPlainProps from '../Common/mapImmutablePropsToPlainProps';
 import Login from './Login';
 import { auth as firebaseAuth } from '../../firebaseClient';
-
+import { getAccount } from './accountReducer';
 
 const facebookLogin = () => {
   const provider = new firebase.auth.FacebookAuthProvider();
@@ -18,13 +18,7 @@ const googleLogin = () => {
   firebaseAuth.signInWithRedirect(provider);
 };
 
-const logout = () => {
-  firebaseAuth.signOut();
-};
-
-const mapStateToProps = (state, props) => ({
-  account: state.get('account')
-});
+const mapStateToProps = state => getAccount(state);
 
 
 const enhance = compose(
@@ -32,8 +26,7 @@ const enhance = compose(
   connect(mapStateToProps),
   withProps(props => ({
     facebookLogin,
-    googleLogin,
-    logout
+    googleLogin
   })),
   mapImmutablePropsToPlainProps
 );
