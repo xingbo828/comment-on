@@ -5,9 +5,7 @@ import {
 } from 'react-router-dom';
 import ProtectedRoute from './modules/Common/ProtectedRoute';
 import Header from './modules/Common/Header';
-import HomePage from './modules/Home';
-import LoginPage from './modules/Account/loginContainer';
-import ProfilePage from './modules/Account/profileContainer';
+import asyncLoad from './modules/Common/asyncLoad';
 
 class App extends Component {
   render() {
@@ -15,9 +13,9 @@ class App extends Component {
       <Router>
         <div>
           <Header />
-          <Route exact path="/" component={HomePage} />
-          <ProtectedRoute exact path="/account" component={ProfilePage} />
-          <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/" component={asyncLoad(() => import('./modules/Home'))} />
+          <ProtectedRoute exact path="/account" component={asyncLoad(() => import('./modules/Account/profileContainer'))} />
+          <Route exact path="/login" component={asyncLoad(() => import('./modules/Account/loginContainer'))} />
         </div>
       </Router>
     );
