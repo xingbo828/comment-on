@@ -6,6 +6,8 @@ import BasicProfile from './BasicProfile';
 import { updateProfile } from './accountAction';
 import { getUser } from  './accountReducer';
 
+import { isRequired, isValidEmail, isValidBirthDate } from '../Common/validators';
+
 const mapStateToProps = state => ({initialValues: getUser(state).user});
 
 const mapDispatchToProps = dispatch => ({
@@ -14,11 +16,28 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
+const validate = values => {
+  console.log('VALUES', values.get('birthdate'));
+  const errors = {};
+  if (!isRequired(values.get('displayName'))) {
+    errors.displayName = 'Required';
+  }
+  if (!isValidEmail(values.get('email'))) {
+     errors.email = 'Invalid email address';
+  }
+  if (!isValidBirthDate(values.get('birthdate'))) {
+    errors.birthdate = 'Invalid Birth date';
+  }
+  return errors;
+}
+
+
 const enhance = compose(
   withRouter,
   connect(mapStateToProps, mapDispatchToProps),
   reduxForm({
-    form: 'profile.basic'
+    form: 'profile.basic',
+    validate
   })
 );
 

@@ -1,64 +1,31 @@
 import React from 'react';
 import { Field } from 'redux-form/immutable';
-import styled from 'styled-components';
+import Input from '../../globalComponents/Input';
 
-const FormLabel = styled.label`
-  display: block;
-  padding: .5rem 0;
-`;
 
 const BasicProfile = ({ handleSubmit, pristine, reset, submitting, updateProfile }) => {
   return (
     <form onSubmit={handleSubmit(updateProfile)}>
-      <FormLabel htmlFor="displayName">
-        Display Name:
         <Field
-          component="input"
+          component={Input}
           type="text"
           name="displayName"
+          label="Display Name"
           />
-      </FormLabel>
-      <FormLabel htmlFor="phoneNumber">
-        Phone Number:
+
         <Field
-          component="input"
-          type="tel"
-          name="phoneNumber"
-          />
-      </FormLabel>
-      <FormLabel htmlFor="email">
-        Email:
-        <Field
-          component="input"
+          component={Input}
           type="email"
           name="email"
+          label="Email"
           />
-      </FormLabel>
-      <FormLabel htmlFor="birthdate">
-        Birth Date:
+
         <Field
-          component="input"
+          component={Input}
           type="date"
           name="birthdate"
+          label="Birth Date"
           />
-      </FormLabel>
-      <FormLabel htmlFor="gender">
-        Gender:
-        <Field
-          component="input"
-          type="radio"
-          name="gender"
-          value="male"
-          />
-        Male
-        <Field
-          component="input"
-          type="radio"
-          name="gender"
-          value="female"
-          />
-        Female
-      </FormLabel>
       <input type="submit" value="Save" />
     </form>
   );
