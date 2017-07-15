@@ -7,9 +7,9 @@ const FormLabel = styled.label`
   padding: .5rem 0;
 `;
 
-const BasicProfile = ({ handleSubmit, pristine, reset, submitting }) => {
+const BasicProfile = ({ handleSubmit, pristine, reset, submitting, updateProfile }) => {
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(updateProfile)}>
       <FormLabel htmlFor="displayName">
         Display Name:
         <Field
