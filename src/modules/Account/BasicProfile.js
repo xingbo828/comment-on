@@ -34,6 +34,31 @@ const BasicProfile = ({ handleSubmit, pristine, reset, submitting, updateProfile
           name="email"
           />
       </FormLabel>
+      <FormLabel htmlFor="birthdate">
+        Birth Date:
+        <Field
+          component="input"
+          type="date"
+          name="birthdate"
+          />
+      </FormLabel>
+      <FormLabel htmlFor="gender">
+        Gender:
+        <Field
+          component="input"
+          type="radio"
+          name="gender"
+          value="male"
+          />
+        Male
+        <Field
+          component="input"
+          type="radio"
+          name="gender"
+          value="female"
+          />
+        Female
+      </FormLabel>
       <input type="submit" value="Save" />
     </form>
   );

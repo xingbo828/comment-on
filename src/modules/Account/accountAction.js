@@ -1,19 +1,25 @@
-import { auth, storage } from '../../firebaseClient';
+import { auth, storage, database } from '../../firebaseClient';
 
 const storageRef = storage.ref();
 
 export const UPDATE_PROFILE = 'UPDATE_PROFILE';
 
+const _extractAdditionalProfile = ({ gender, birthdate }) => ({ gender, birthdate });
+
 export const updateProfile = profile => (dispatch) => {
   const user = auth.currentUser;
+
   user.updateProfile(profile.toJS())
   .then(() => {
+    const userRef = database.ref("users/" + user.uid);
+    return userRef.set(_extractAdditionalProfile(profile.toJS()));
+  }).then(() => {
     dispatch({
       type: UPDATE_PROFILE,
-      data: user.toJSON()
+      data: profile.toJSON()
     });
-  }, () => {
-
+  }).catch((error) => {
+    console.log(error);
   });
 };
 
