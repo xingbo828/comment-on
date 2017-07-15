@@ -12,24 +12,7 @@ const Login = ({ account, facebookLogin, googleLogin, logout }) => {
     );
   };
 
-  const renderUserInfo = () => {
-    return <Redirect to="/" />
-  };
-
-  const render = () => {
-    switch (account.status) {
-      case 'AUTHENTICATED':
-        return renderUserInfo();
-      case 'NOT_AUTHENTICATED':
-        return renderLoginOptions();
-      default:
-        return <p>Loading...</p>;
-    }
-  };
-
-  return (
-    render()
-  );
+  return account.status === 'AUTHENTICATED' ? <Redirect to="/" /> : renderLoginOptions();
 };
 
 export default Login;

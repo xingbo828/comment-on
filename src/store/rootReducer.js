@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux-immutable';
-import { reducer as formReducer } from 'redux-form';
+import { reducer as form } from 'redux-form/immutable';
 import account from '../modules/Account/accountReducer';
 
 const rootReducer = combineReducers({
   account,
-  form: formReducer
+  form
 });
 
 export default rootReducer;

@@ -1,74 +1,42 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Field } from 'redux-form/immutable';
+import styled from 'styled-components';
 
-class Profile extends Component {
-  constructor(props) {
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.state = {
-      displayName: this.props.user.displayName || "",
-      photoURL: this.props.user.photoURL || ""
-    };
-  }
+const FormLabel = styled.label`
+  display: block;
+  padding: .5rem 0;
+`;
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.user !== nextProps.user) {
-      this.setState({
-        ...nextProps.user
-      });
-    }
-  }
-  handleSubmit(event) {
-    event.preventDefault();
-    this.props.updateProfile(this.state);
-  }
+const BasicProfile = ({ handleSubmit, pristine, reset, submitting }) => {
+  return (
+    <form onSubmit={handleSubmit}>
+      <FormLabel htmlFor="displayName">
+        Display Name:
+        <Field
+          component="input"
+          type="text"
+          name="displayName"
+          />
+      </FormLabel>
+      <FormLabel htmlFor="phoneNumber">
+        Phone Number:
+        <Field
+          component="input"
+          type="tel"
+          name="phoneNumber"
+          />
+      </FormLabel>
+      <FormLabel htmlFor="email">
+        Email:
+        <Field
+          component="input"
+          type="email"
+          name="email"
+          />
+      </FormLabel>
+      <input type="submit" value="Save" />
+    </form>
+  );
+};
 
-  profileImgFileCheck(img) {
-    const isImage = (file) => {
-      return ['image/jpeg', 'image/png'].includes(file.type);
-    };
-    const isSmallerThanSize = size => (file) => {
-      return file.size < size;
-    };
-    return isImage(img) && isSmallerThanSize(1024 * 1024)(img);
-  }
-
-  handleInputChange(event) {
-    if (event.target.name === "displayName") {
-      this.setState({
-        displayName: event.target.value
-      });
-    } else if (event.target.name === 'profileImage') {
-      const file = event.target.files[0];
-      const uid = this.props.user.uid;
-      if (this.profileImgFileCheck(file)) {
-        this.props.uploadProfileImage(file, uid);
-      } else {
-        console.error('not valid file');
-      }
-    }
-  }
-
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit} >
-        <label htmlFor="profileImage">
-          Upload profile picture:
-          <img src={this.state.photoURL} alt="profile" />
-          <input type="file" name="profileImage" onChange={this.handleInputChange} />
-        </label>
-        <label htmlFor="displayName">
-          Name:
-          <input
-            type="text"
-            name="displayName"
-            onChange={this.handleInputChange}
-            value={this.state.displayName} />
-        </label>
-        <input type="submit" value="Save" />
-      </form>
-    );
-  }
-}
-
-export default Profile;
+export default BasicProfile;

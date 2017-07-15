@@ -4,12 +4,12 @@ import { compose, renderComponent, branch } from 'recompose';
 import isLoggedIn from './isLoggedIn';
 import mapImmutablePropsToPlainProps from './mapImmutablePropsToPlainProps';
 
+import Spinner from '../../globalComponents/Spinner';
+
 const ProtectedRoute = ({ component: Component, isLoggedIn, ...rest }) => (
   <Route {...rest} render= {props => (isLoggedIn ? <Component {...props} /> : <Redirect to="/login" />)} />
 );
 
-
-const Spinner = () => <p>Loading...</p>;
 
 export default compose(
   withRouter,
