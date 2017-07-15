@@ -14,7 +14,6 @@ export const isValidBirthDate = (date) => {
   const today = moment().startOf('day');
   const isInFuture = momentDate.isAfter(today);
   const isOlderThan110 = momentDate.isBefore(today.subtract(110, 'years'));
-  console.log(isOlderThan110);
   return !isInFuture && !isOlderThan110;
 };
 

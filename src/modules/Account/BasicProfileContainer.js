@@ -17,7 +17,6 @@ const mapDispatchToProps = dispatch => ({
 
 
 const validate = values => {
-  console.log('VALUES', values.get('birthdate'));
   const errors = {};
   if (!isRequired(values.get('displayName'))) {
     errors.displayName = 'Required';

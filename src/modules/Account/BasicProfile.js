@@ -26,7 +26,7 @@ const BasicProfile = ({ handleSubmit, pristine, reset, submitting, updateProfile
           name="birthdate"
           label="Birth Date"
           />
-      <input type="submit" value="Save" />
+      <input type="submit" disabled={pristine || submitting} value="Save" />
     </form>
   );
 };

@@ -3,6 +3,11 @@ import { Redirect } from 'react-router-dom';
 
 
 const Login = ({ account, facebookLogin, googleLogin, logout }) => {
+
+  const redirectAfterLogin = () => {
+    return account.user.hasProfile ? <Redirect to="/" /> : <Redirect to="/account/profile-basic" />;
+  };
+
   const renderLoginOptions = () => {
     return (
       <div>
@@ -12,7 +17,7 @@ const Login = ({ account, facebookLogin, googleLogin, logout }) => {
     );
   };
 
-  return account.status === 'AUTHENTICATED' ? <Redirect to="/" /> : renderLoginOptions();
+  return account.status === 'AUTHENTICATED' ? redirectAfterLogin() : renderLoginOptions();
 };
 
 export default Login;
