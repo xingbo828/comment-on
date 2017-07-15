@@ -22,6 +22,7 @@ export default (state = initState, action) => {
       });
     case UPDATE_PROFILE:
       return state.withMutations((st) => {
+        action.data.hasProfile = true;
         st.set('user', Immutable.fromJS(action.data));
       });
     default:
