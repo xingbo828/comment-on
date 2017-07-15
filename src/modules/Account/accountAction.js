@@ -4,7 +4,12 @@ const storageRef = storage.ref();
 
 export const UPDATE_PROFILE = 'UPDATE_PROFILE';
 
-const _extractAdditionalProfile = ({ gender, birthdate }) => ({ gender, birthdate });
+const _extractAdditionalProfile = ({ gender, birthdate }) => {
+  return {
+    gender: gender || null,
+    birthdate: birthdate || null
+  }
+};
 
 export const updateProfile = profile => (dispatch) => {
   const user = auth.currentUser;

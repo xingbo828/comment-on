@@ -10,10 +10,9 @@ export const onAuthChange = () => (dispatch) => {
     if (user) {
       database.ref('users/' + user.uid).once('value')
       .then((data) => {
-        console.log(data.toJSON());
         dispatch({
           type: USER_LOGIN,
-          data: {...user.toJSON(), ...data.toJSON() }
+          data: {...user.toJSON(), ...data.toJSON(), hasProfile: data.exists()}
         });
       }).catch((error) => {
         console.log(error);
