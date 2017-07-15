@@ -2,9 +2,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import mapImmutablePropsToPlainProps from '../Common/mapImmutablePropsToPlainProps';
-import Profile from './Profile';
-import { updateProfile } from './profileAction';
-import uploadProfileImg from './profileImgAction';
+import BasicProfile from './BasicProfile';
+import { updateProfile, uploadProfileImg } from './accountAction';
 import { getUser } from  './accountReducer';
 
 const mapStateToProps = state => getUser(state);
@@ -21,4 +20,4 @@ const enhance = compose(
   mapImmutablePropsToPlainProps
 );
 
-export default enhance(Profile);
+export default enhance(BasicProfile);

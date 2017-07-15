@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
+  Switch,
   Route
 } from 'react-router-dom';
 import ProtectedRoute from './modules/Common/ProtectedRoute';
@@ -13,9 +14,11 @@ class App extends Component {
       <Router>
         <div>
           <Header />
-          <Route exact path="/" component={asyncLoad(() => import('./modules/Home'))} />
-          <ProtectedRoute exact path="/account" component={asyncLoad(() => import('./modules/Account/profileContainer'))} />
-          <Route exact path="/login" component={asyncLoad(() => import('./modules/Account/loginContainer'))} />
+          <Switch>
+            <Route exact path="/" component={asyncLoad(() => import('./modules/Home'))} />
+            <ProtectedRoute path="/account" component={asyncLoad(() => import('./modules/Account'))} />
+            <Route path="/login" component={asyncLoad(() => import('./modules/Account/LoginContainer'))} />
+          </Switch>
         </div>
       </Router>
     );

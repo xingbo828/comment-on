@@ -1,17 +1,22 @@
 import React from 'react';
 import { Route, withRouter, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { compose } from 'recompose';
-import { isLoggedin } from '../Account/accountReducer';
+import { compose, renderComponent, branch } from 'recompose';
+import isLoggedIn from './isLoggedIn';
 import mapImmutablePropsToPlainProps from './mapImmutablePropsToPlainProps';
-
 
 const ProtectedRoute = ({ component: Component, isLoggedIn, ...rest }) => (
   <Route {...rest} render= {props => (isLoggedIn ? <Component {...props} /> : <Redirect to="/login" />)} />
 );
 
+
+const Spinner = () => <p>Loading...</p>;
+
 export default compose(
   withRouter,
-  connect(state => isLoggedin(state)),
-  mapImmutablePropsToPlainProps
+  isLoggedIn,
+  mapImmutablePropsToPlainProps,
+  branch(
+    props => props.loginStatus === 'UNINIT',
+    renderComponent(Spinner)
+  )
 )(ProtectedRoute);

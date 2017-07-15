@@ -1,7 +1,7 @@
 import Immutable from 'immutable';
 import { createSelector } from 'reselect';
 import { USER_LOGIN, USER_LOGOUT } from './onAuthChangeAction';
-import { UPDATE_PROFILE } from './profileAction';
+import { UPDATE_PROFILE } from './accountAction';
 
 const initState = Immutable.fromJS({
   status: 'UNINIT',
@@ -36,5 +36,5 @@ export const getAccount = state => ({ account: state.get('account') });
 
 
 export const isLoggedin = createSelector(
-  [ getUser ], ({user}) => ({ isLoggedIn: user.size > 0, user })
+  [ getAccount ], ({account}) => ({ isLoggedIn: account.get('user').size > 0, user: account.get('user'), loginStatus: account.get('status')})
 );
