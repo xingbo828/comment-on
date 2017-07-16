@@ -15,7 +15,7 @@ class App extends Component {
           <Header />
           <Route exact path="/" component={asyncLoad(() => import('./modules/Home'))} />
           <ProtectedRoute exact path="/account" component={asyncLoad(() => import('./modules/Account/profileContainer'))} />
-          <Route exact path="/login" component={asyncLoad(() => import('./modules/Account/loginContainer'))} />
+          <Route exact path="/login" component={asyncLoad(() => import('./modules/Account/Login/loginContainer'))} />
         </div>
       </Router>
     );

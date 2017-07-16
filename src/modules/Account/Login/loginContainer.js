@@ -2,10 +2,10 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose, withProps } from 'recompose';
 import * as firebase from 'firebase';
-import mapImmutablePropsToPlainProps from '../Common/mapImmutablePropsToPlainProps';
+import mapImmutablePropsToPlainProps from '../../Common/mapImmutablePropsToPlainProps';
 import Login from './Login';
-import { auth as firebaseAuth } from '../../firebaseClient';
-import { getAccount } from './accountReducer';
+import { auth as firebaseAuth } from '../../../firebaseClient';
+import { getAccount } from '../accountReducer';
 
 const facebookLogin = () => {
   const provider = new firebase.auth.FacebookAuthProvider();
