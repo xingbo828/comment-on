@@ -17,7 +17,7 @@ export const Nav = ({ user, isLoggedIn, logout }) => {
     <NavRoot>
       <NavList>
         <NavListItem><Link to="/">Home Page</Link></NavListItem>
-        { isLoggedIn && <NavListItem><Link to="/account">Management Account</Link></NavListItem> }
+        { isLoggedIn && <NavListItem><Link to="/account">My Account</Link></NavListItem> }
         { !isLoggedIn && <NavListItem><Link to="/login">Login</Link></NavListItem> }
         { isLoggedIn && <NavListItem>
             Hi, {user.displayName} <a href="" onClick={logout}>Logout</a>
