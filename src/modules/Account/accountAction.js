@@ -14,7 +14,7 @@ const _extractAdditionalProfile = ({ gender, birthdate }) => {
 export const updateProfile = profile => (dispatch) => {
   const user = auth.currentUser;
 
-  user.updateProfile(profile.toJS())
+  return user.updateProfile(profile.toJS())
   .then(() => {
     const userRef = database.ref("users/" + user.uid);
     return userRef.set(_extractAdditionalProfile(profile.toJS()));
