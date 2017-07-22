@@ -29,11 +29,7 @@ const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
   reduxForm({
     form: 'profile.photo',
-    onSubmit: (values, dispatch, props) => {
-      console.log(values.get('photoURL'));
-      console.log(props.initialValues.get('uid'));
-      return props.uploadProfileImage(values.get('photoURL')[0], props.initialValues.get('uid'));
-    },
+    onSubmit: (values, dispatch, props) =>  props.uploadProfileImage(values.get('photoURL')[0], props.initialValues.get('uid')),
     onSubmitSuccess: (result, dispatch, props) => { props.history.push('/'); },
     validate
   })
