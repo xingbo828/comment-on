@@ -12,3 +12,8 @@ before_script:
 
 after_success:
 - firebase deploy --token $FIREBASE_TOKEN
+
+branches:
+  only:
+    - master
+    - qa

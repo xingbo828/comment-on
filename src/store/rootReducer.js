@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux-immutable';
-import login from '../modules/Auth/loginReducer';
+import { reducer as form } from 'redux-form/immutable';
+import account from '../modules/Account/accountReducer';
 
 const rootReducer = combineReducers({
-  user: login
+  account,
+  form
 });
 
 export default rootReducer;
