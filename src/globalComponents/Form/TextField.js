@@ -17,7 +17,7 @@ const InputErrorMsg = styled.span`
   color: red;
 `;
 
-const Input = ({ label, type, input, meta: { touched, error, warning }}) => {
+const TextField = ({ label, type, input, meta: { touched, error, warning }}) => {
   return (
     <InputContainer>
       <InputLabel>
@@ -33,6 +33,6 @@ const Input = ({ label, type, input, meta: { touched, error, warning }}) => {
   );
 };
 
-export default Input;
+export default TextField;
 
 
