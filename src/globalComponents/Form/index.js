@@ -1,11 +1,11 @@
 import TextField from './TextField';
 import Radio from './Radio';
 import RadioGroup from './RadioGroup';
-import Upload from './Upload';
+import ImgUpload from './ImgUpload';
 
 export {
   TextField,
   Radio,
   RadioGroup,
-  Upload
+  ImgUpload
 };
