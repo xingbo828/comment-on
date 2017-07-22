@@ -1,12 +1,12 @@
 import React from 'react';
 import { Field } from 'redux-form/immutable';
-import { Upload } from '../../globalComponents/Form';
+import { ImgUpload } from '../../globalComponents/Form';
 
-const ProfilePicture = ({ initialValues, handleSubmit, pristine, reset, valid, submitting }) => {
+const ProfilePicture = ({ initialValues, uploadProfileImage, handleSubmit, pristine, reset, valid, submitting }) => {
   return (
     <form onSubmit={handleSubmit}>
       <Field
-        component={Upload}
+        component={ImgUpload}
         name="photoURL"
         label="Upload Profile Picture"
         />

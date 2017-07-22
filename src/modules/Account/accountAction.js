@@ -1,3 +1,4 @@
+import Immutable from 'immutable';
 import { auth, storage, database } from '../../firebaseClient';
 
 const storageRef = storage.ref();
@@ -30,11 +31,12 @@ export const updateProfile = profile => (dispatch) => {
 
 export const uploadProfileImg = (file, uid) => (dispatch) => {
   const profileImageRef = storageRef.child(`images/profile/${uid}/${file.name}`);
-  profileImageRef.put(file)
+  return profileImageRef.put(file)
   .then((result) => {
     const updatedProfileImageUrl = result.downloadURL;
-    dispatch(updateProfile({
+    const promise = dispatch(updateProfile(Immutable.fromJS({
       photoURL: updatedProfileImageUrl
-    }));
+    })));
+    return promise;
   });
 };
