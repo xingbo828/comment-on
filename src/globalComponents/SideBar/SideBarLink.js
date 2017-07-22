@@ -1,14 +1,17 @@
 import React from 'react';
-import { Switch, Link } from 'react-router-dom';
+import { Switch, NavLink, withRouter } from 'react-router-dom';
+import { ListItem } from './Styled';
  
-const SideBarLink = ({ path }) => {
+const SideBarLink = ({ path, title }) => {
   return (
-    <li>
-      <Link   
+    <ListItem>
+      <NavLink   
         to={path}
       >
-        Manage my basic profile
-      </Link>
-    </li>
+        {title}
+      </NavLink>
+    </ListItem>
   );
 };
+
+export default withRouter(SideBarLink);

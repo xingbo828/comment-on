@@ -1,13 +1,14 @@
 import React from 'react';
 import { 
-    listItem
+    ListItem,
+    List
 } from './Styled';
 
 const Sidebar = ({ children }) => {
   return (    
-    <ul>
+    <List>
       {children}
-    </ul>
+    </List>
   );
 };
 
