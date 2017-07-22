@@ -1,14 +1,18 @@
 import React from 'react';
 import { Field } from 'redux-form/immutable';
-import { TextField, Radio, RadioGroup } from '../../globalComponents/Form';
+import { TextField, Radio, RadioGroup, Checkbox, CheckboxGroup } from '../../globalComponents/Form';
 
 const renderRadioGroup = ({ input, ...rest }) =>
   <RadioGroup
     {...input}
     {...rest}
     label="Gender"
-    valueSelected={input.value}
-    onChange={(event, value) => input.onChange(value)}
+  />
+const renderCheckboxGroup = ({ input, ...rest }) =>
+  <CheckboxGroup
+    {...input}
+    {...rest}
+    label="Test"
   />
 
 const BasicProfile = ({ handleSubmit, pristine, reset, valid, submitting }) => {
@@ -39,6 +43,9 @@ const BasicProfile = ({ handleSubmit, pristine, reset, valid, submitting }) => {
           name="birthdate"
           label="Birth Date"
           />
+
+        <Field component={Checkbox} name="test" label="1" />
+
       <input type="submit" disabled={pristine || submitting || !valid} value="Save" />
     </form>
   );
