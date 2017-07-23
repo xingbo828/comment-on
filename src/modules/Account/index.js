@@ -23,16 +23,14 @@ const SideBarLinks = [
 
 const Account = () => {
   return (
-    <ContainerDiv>
-      <Settings links={SideBarLinks}>
-        <Switch>
-          <ProtectedRoute 
-            path="/account/profile-basic" 
-            component={BasicProfile} 
-          />                                                               
-        </Switch>
-      </Settings>
-    </ContainerDiv>
+    <Settings links={SideBarLinks}>
+      <Switch>
+        <ProtectedRoute 
+          path="/account/profile-basic" 
+          component={BasicProfile} 
+        />                                                               
+      </Switch>
+    </Settings>
   );
 };
 

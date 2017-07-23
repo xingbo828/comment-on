@@ -15,10 +15,18 @@ export const medium = '768px';
 export const small = '442px';
 export const xs = '320px';
 
+// Marins
+export const gutterWidth = '5.5%';
+
 
 export const media = {
-  small: (...args) => css`
-    @media (max-width: ${small}) {
+  fromSmall: (...args) => css`
+    @media (min-width: ${small}) {
+      ${css(...args)}
+    }
+  `,
+  fromMedium: (...args) => css`
+    @media (min-width: ${medium}) {
       ${css(...args)}
     }
   `

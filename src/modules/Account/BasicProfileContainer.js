@@ -36,6 +36,8 @@ const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
   reduxForm({
     form: 'profile.basic',
+    onSubmit: (values, dispatch, props) => { return props.updateProfile(values); },
+    onSubmitSuccess: (result, dispatch, props) => { props.history.push('/'); },
     validate
   })
 );

@@ -21,6 +21,8 @@ injectGlobal`
   body {
     font-size: 16px;
     color: ${textDark};
+    padding: 0;
+    margin: 0;
     font-family: 'Roboto', sans-serif;
     -webkit-font-smoothing: antialiased;
   }
