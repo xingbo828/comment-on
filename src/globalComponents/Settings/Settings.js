@@ -1,12 +1,12 @@
 import React from 'react';
 import { SideBar, SideBarLink } from '../SideBar';
-import { Switch, NavLink, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { PanelDiv, SidebarDiv, ContainerDiv } from './Styled';
 
 const mapLinks = (links) => {
-  return links.map((link) => {
+  return links.map((link, index) => {
     const { title, path } = link;
-    return <SideBarLink title={title} path={path} />
+    return <SideBarLink key={index} title={title} path={path} />
   });
 };
 
@@ -18,7 +18,7 @@ const Settings = ({ links, children, match }) => {
           { mapLinks(links) }
         </SideBar>
       </SidebarDiv>
-      <PanelDiv match={match.isExact}> 
+      <PanelDiv match={match.isExact}>
         { children }
       </PanelDiv>
     </ContainerDiv>

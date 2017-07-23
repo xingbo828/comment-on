@@ -1,18 +1,12 @@
 import React from 'react';
 import { Field } from 'redux-form/immutable';
-import { TextField, Radio, RadioGroup, Checkbox, CheckboxGroup } from '../../globalComponents/Form';
+import { TextField, Radio, RadioGroup } from '../../globalComponents/Form';
 
 const renderRadioGroup = ({ input, ...rest }) =>
   <RadioGroup
     {...input}
     {...rest}
     label="Gender"
-  />
-const renderCheckboxGroup = ({ input, ...rest }) =>
-  <CheckboxGroup
-    {...input}
-    {...rest}
-    label="Test"
   />
 
 const BasicProfile = ({ handleSubmit, pristine, reset, valid, submitting }) => {

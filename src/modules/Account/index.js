@@ -1,8 +1,7 @@
 import React from 'react';
-import { Switch, Link } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import ProtectedRoute from '../Common/ProtectedRoute';
 import BasicProfile from './BasicProfileContainer';
-import ContainerDiv from '../../foundation/Components/ContainerDiv';
 
 import Settings from '../../globalComponents/Settings';
 
@@ -25,10 +24,10 @@ const Account = () => {
   return (
     <Settings links={SideBarLinks}>
       <Switch>
-        <ProtectedRoute 
-          path="/account/profile-basic" 
-          component={BasicProfile} 
-        />                                                               
+        <ProtectedRoute
+          path="/account/profile-basic"
+          component={BasicProfile}
+        />
       </Switch>
     </Settings>
   );

@@ -1,9 +1,7 @@
 import Styled from 'styled-components';
-import { 
+import {
   media,
   borderPrimary,
-  textDark,
-  offWhite,
   gutterWidth
 } from '../../foundation/Variables';
 

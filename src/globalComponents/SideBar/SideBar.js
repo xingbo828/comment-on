@@ -1,11 +1,10 @@
 import React from 'react';
-import { 
-    ListItem,
+import {
     List
 } from './Styled';
 
 const Sidebar = ({ children }) => {
-  return (    
+  return (
     <List>
       {children}
     </List>
