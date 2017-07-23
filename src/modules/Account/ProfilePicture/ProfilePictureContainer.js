@@ -3,10 +3,10 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import { reduxForm } from 'redux-form/immutable'
 import ProfilePicture from './ProfilePicture';
-import { uploadProfileImg } from './accountAction';
-import { getUser } from  './accountReducer';
+import { uploadProfileImg } from '../accountAction';
+import { getUser } from  '../accountReducer';
 
-import { isRequired } from '../Common/validators';
+import { isRequired } from '../../Common/validators';
 
 const mapStateToProps = state => ({initialValues: getUser(state).user});
 
@@ -30,7 +30,6 @@ const enhance = compose(
   reduxForm({
     form: 'profile.photo',
     onSubmit: (values, dispatch, props) =>  props.uploadProfileImage(values.get('photoURL')[0], props.initialValues.get('uid')),
-    onSubmitSuccess: (result, dispatch, props) => { props.history.push('/'); },
     validate
   })
 );

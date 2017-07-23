@@ -3,6 +3,10 @@ import styled from 'styled-components';
 
 const StyledContainer = styled.div`
   display: flex;
+  border: solid ${props => props.theme.borderPrimary};
+  border-width: 0 0 1px 0;
+  margin: 0 0 1rem;
+  padding: 0.5rem 0;
 `;
 const StyledInput = styled.span`
   display: none;
@@ -21,9 +25,18 @@ const StyledUpLoadBtn = styled.button`
   width: 100px;
   height: 100px;
   margin-left: 1rem;
-  background-color: #dfdfdf;
+  background-color: ${props => props.theme.offWhite};
   border: none;
   border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  :hover {
+    background-color: ${props => props.theme.borderPrimary};
+    border: 1px dashed ${props => props.theme.textDark};
+  }
+  :focus {
+    outline: 0;
+  }
 `;
 
 class ImgUpload extends Component {
@@ -59,14 +72,14 @@ class ImgUpload extends Component {
   }
 
   render() {
-    const { input } = this.props;
+    const { input, label } = this.props;
     return (
       <StyledContainer>
         <StyleImg src={this.state.imageUrl} alt={input.name}/>
         <StyledInput>
           <input type="file" name={input.name} onChange={this.handleOnChange} ref={(input) => { this.inputElement = input; }} />
         </StyledInput>
-        <StyledUpLoadBtn onClick={this.handleClick}>Upload</StyledUpLoadBtn>
+        <StyledUpLoadBtn onClick={this.handleClick}>{label}</StyledUpLoadBtn>
       </StyledContainer>
     );
   }
