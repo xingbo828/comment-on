@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import Radio from './Radio';
 import styled from 'styled-components';
 
+const Container = styled.div`
+  margin: 0 0 1rem;  
+`;
+
 const RadioGroupLabel = styled.label`
   ::after {
     content: ':';
@@ -45,12 +49,12 @@ class RadioGroup extends Component {
     }, this);
 
     return (
-      <div>
+      <Container>
         <RadioGroupLabel>
           {this.props.label}
         </RadioGroupLabel>
         {options}
-      </div>
+      </Container>
     );
   }
 };

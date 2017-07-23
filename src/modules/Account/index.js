@@ -2,20 +2,35 @@ import React from 'react';
 import { Switch, Link } from 'react-router-dom';
 import ProtectedRoute from '../Common/ProtectedRoute';
 import BasicProfile from './BasicProfileContainer';
-import ProfilePicture from './ProfilePictureContainer';
+import ContainerDiv from '../../foundation/Components/ContainerDiv';
+
+import Settings from '../../globalComponents/Settings';
+
+const SideBarLinks = [
+  {
+    title: "Info",
+    path: "/account/profile-basic"
+  },
+  {
+    title: "Info",
+    path: "/account/profile-1"
+  },
+  {
+    title: "Info",
+    path: "/account/profile-2"
+  }
+];
 
 const Account = () => {
   return (
-    <div>
-      <ul>
-        <li><Link to="/account/profile-basic">Manage my basic profile</Link></li>
-        <li><Link to="/account/profile-picture">Manage my profile picture</Link></li>
-      </ul>
+    <Settings links={SideBarLinks}>
       <Switch>
-        <ProtectedRoute path="/account/profile-basic" component={BasicProfile} />
-        <ProtectedRoute path="/account/profile-picture" component={ProfilePicture} />
+        <ProtectedRoute 
+          path="/account/profile-basic" 
+          component={BasicProfile} 
+        />                                                               
       </Switch>
-    </div>
+    </Settings>
   );
 };
 
