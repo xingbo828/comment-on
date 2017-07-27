@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { injectGlobal } from 'styled-components';
 import RobotoRegular from './fonts/Roboto-Regular.ttf';
 import RobotoMedium from './fonts/Roboto-Medium.ttf';

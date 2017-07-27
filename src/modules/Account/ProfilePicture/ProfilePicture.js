@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field } from 'redux-form/immutable';
-import { ImgUpload } from '../../globalComponents/Form';
+import { ImgUpload, Button } from '../../../globalComponents/Form';
 
 const ProfilePicture = ({ initialValues, uploadProfileImage, handleSubmit, pristine, reset, valid, submitting }) => {
   return (
@@ -8,9 +8,9 @@ const ProfilePicture = ({ initialValues, uploadProfileImage, handleSubmit, prist
       <Field
         component={ImgUpload}
         name="photoURL"
-        label="Upload Profile Picture"
+        label="Replace"
         />
-      <input type="submit" disabled={pristine || submitting || !valid} value="Save" />
+      <Button type="submit" primary disabled={pristine || submitting || !valid}>Save</Button>
     </form>
   );
 };

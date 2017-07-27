@@ -3,10 +3,10 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import { reduxForm } from 'redux-form/immutable'
 import BasicProfile from './BasicProfile';
-import { updateProfile } from './accountAction';
-import { getUser } from  './accountReducer';
+import { updateProfile } from '../accountAction';
+import { getUser } from  '../accountReducer';
 
-import { isRequired, isValidEmail, isValidBirthDate } from '../Common/validators';
+import { isRequired, isValidEmail, isValidBirthDate } from '../../Common/validators';
 
 const mapStateToProps = state => ({initialValues: getUser(state).user});
 
@@ -37,7 +37,6 @@ const enhance = compose(
   reduxForm({
     form: 'profile.basic',
     onSubmit: (values, dispatch, props) => { return props.updateProfile(values); },
-    onSubmitSuccess: (result, dispatch, props) => { props.history.push('/'); },
     validate
   })
 );

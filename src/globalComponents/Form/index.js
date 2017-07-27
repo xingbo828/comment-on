@@ -1,3 +1,4 @@
+import Button from './Button';
 import TextField from './TextField';
 import Radio from './Radio';
 import RadioGroup from './RadioGroup';
@@ -6,6 +7,7 @@ import CheckboxGroup from './CheckboxGroup';
 import ImgUpload from './ImgUpload';
 
 export {
+  Button,
   TextField,
   Radio,
   RadioGroup,

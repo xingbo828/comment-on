@@ -1,37 +1,39 @@
 import React from 'react';
-import { Switch, Link } from 'react-router-dom';
+import { Switch, withRouter, Redirect} from 'react-router-dom';
 import ProtectedRoute from '../Common/ProtectedRoute';
-import BasicProfile from './BasicProfileContainer';
-import ContainerDiv from '../../foundation/Components/ContainerDiv';
-
+import BasicProfile from './BasicProfile';
+import ProfilePicture from './ProfilePicture';
 import Settings from '../../globalComponents/Settings';
 
 const SideBarLinks = [
   {
-    title: "Info",
+    title: "Basic Profile",
     path: "/account/profile-basic"
   },
   {
-    title: "Info",
-    path: "/account/profile-1"
-  },
-  {
-    title: "Info",
-    path: "/account/profile-2"
+    title: "Profile Picture",
+    path: "/account/profile-picture"
   }
 ];
 
-const Account = () => {
+const Account = ({ match: { isExact } }) => {
+  if (isExact) {
+    return <Redirect to="/account/profile-basic" />;
+  }
   return (
     <Settings links={SideBarLinks}>
       <Switch>
-        <ProtectedRoute 
-          path="/account/profile-basic" 
-          component={BasicProfile} 
-        />                                                               
+        <ProtectedRoute
+          path="/account/profile-basic"
+          component={BasicProfile}
+        />
+        <ProtectedRoute
+        path="/account/profile-picture"
+        component={ProfilePicture}
+      />
       </Switch>
     </Settings>
   );
 };
 
-export default Account;
+export default withRouter(Account);

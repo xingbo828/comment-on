@@ -1,19 +1,9 @@
 import React from 'react';
 import { Field } from 'redux-form/immutable';
-import { TextField, Radio, RadioGroup, Checkbox, CheckboxGroup } from '../../globalComponents/Form';
+import { Button, TextField, Radio, RadioGroup } from '../../../globalComponents/Form';
 
 const renderRadioGroup = ({ input, ...rest }) =>
-  <RadioGroup
-    {...input}
-    {...rest}
-    label="Gender"
-  />
-const renderCheckboxGroup = ({ input, ...rest }) =>
-  <CheckboxGroup
-    {...input}
-    {...rest}
-    label="Test"
-  />
+  <RadioGroup {...input} {...rest} label="Gender" />;
 
 const BasicProfile = ({ handleSubmit, pristine, reset, valid, submitting }) => {
   return (
@@ -23,18 +13,14 @@ const BasicProfile = ({ handleSubmit, pristine, reset, valid, submitting }) => {
         type="text"
         name="displayName"
         label="Display Name"
-        />
+      />
 
-      <Field
-        component={TextField}
-        type="email"
-        name="email"
-        label="Email"
-        />
+      <Field component={TextField} type="email" name="email" label="Email" />
 
       <Field name="gender" component={renderRadioGroup}>
         <Radio value="male" label="Male" />
         <Radio value="female" label="Female" />
+        <Radio value="other" label="Other" />
       </Field>
 
       <Field
@@ -42,8 +28,12 @@ const BasicProfile = ({ handleSubmit, pristine, reset, valid, submitting }) => {
         type="date"
         name="birthdate"
         label="Birth Date"
-        />
-      <input type="submit" disabled={pristine || submitting || !valid} value="Save" />
+      />
+      <Button
+        type="submit"
+        primary
+        disabled={pristine || submitting || !valid}
+      >Save</Button>
     </form>
   );
 };

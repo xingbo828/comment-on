@@ -1,11 +1,11 @@
 import React from 'react';
-import { Switch, NavLink, withRouter } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import { ListItem } from './Styled';
- 
+
 const SideBarLink = ({ path, title }) => {
   return (
     <ListItem>
-      <NavLink   
+      <NavLink
         to={path}
       >
         {title}
