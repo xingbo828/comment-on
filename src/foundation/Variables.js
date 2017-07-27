@@ -3,6 +3,7 @@ import { css } from 'styled-components'
 
 // Colors
 export const primaryColor = '#6b6bd5';
+export const primaryActionColor = '#5aad5e';
 export const borderPrimary = '#d3d3d3';
 export const buttonPrimary = 'red';
 export const textDark = '#525458';

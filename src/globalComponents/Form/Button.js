@@ -8,7 +8,7 @@ const getBackgroundColor = props => {
   if (props.disabled) {
     return props.theme.borderPrimary;
   } else if(props.primary) {
-    return props.theme.primaryColor;
+    return props.theme.primaryActionColor;
   }
   return 'white';
 };
@@ -16,8 +16,8 @@ const getBackgroundColor = props => {
 const getBorderColor = props => {
   if (props.disabled) {
     return props.theme.borderPrimary;
-  } else if(props.primary) {
-    return props.theme.primaryColor;
+  } else if (props.primary) {
+    return props.theme.primaryActionColor;
   }
   return 'white';
 };
@@ -32,6 +32,7 @@ const getFontColor = props => {
 };
 
 const Button = styled.button`
+  box-sizing: content-box;
   display: inline-block;
   margin-bottom: 0;
   font-weight: bold;
@@ -40,13 +41,11 @@ const Button = styled.button`
   background-image: none;
   border: 1px solid transparent;
   white-space: nowrap;
-  line-height: 1.2;
-  padding: 0 20px;
-  font-size: 14px;
-  border-radius: 4px;
-  height: 40px;
+  padding: 1rem 2rem;
+  min-width: 80px;
+  font-size: 1rem;
+  border-radius: 2px;
   user-select: none;
-  width: 100%;
   transition: all .3s cubic-bezier(.645,.045,.355,1);
   position: relative;
   color: ${getFontColor};
@@ -59,8 +58,8 @@ const Button = styled.button`
 
   :hover {
     background-color: ${props => props.disabled ? '' : 'white'};
-    color: ${props => props.disabled ? '' : props.theme.primaryColor};
-    border-color: ${props => props.disabled ? '' : props.theme.primaryColor};
+    color: ${props => props.disabled ? '' : props.theme.primaryActionColor};
+    border-color: ${props => props.disabled ? '' : props.theme.primaryActionColor};
   }
 
   disabled {

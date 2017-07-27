@@ -29,6 +29,7 @@ const BasicProfile = ({ handleSubmit, pristine, reset, valid, submitting }) => {
         name="birthdate"
         label="Birth Date"
       />
+
       <Button
         type="submit"
         primary
