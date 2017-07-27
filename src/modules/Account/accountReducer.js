@@ -37,5 +37,5 @@ export const getAccount = state => ({ account: state.get('account') });
 
 
 export const isLoggedin = createSelector(
-  [ getAccount ], ({account}) => ({ isLoggedIn: account.get('user').size > 0, user: account.get('user'), loginStatus: account.get('status')})
+  [ getAccount ], ({ account }) => ({ isLoggedIn: account.get('user').size > 0, user: account.get('user'), loginStatus: account.get('status')})
 );
