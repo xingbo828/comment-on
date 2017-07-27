@@ -28,9 +28,11 @@ const ProfilePic = Styled.div`
   cursor: pointer;
   height: 40px;
   width: 40px;
-  background: gray;
+  background: white;
   border-radius: 999px;
   margin: 10px;
+  background-image: url(${props => props.backgroundImage});
+  background-size: cover;
 `;
 
 const Menu = Styled.div`
@@ -113,7 +115,8 @@ class AccountNav extends React.Component {
         active={active}
         innerRef={(el) => { this.containerRef = el; }}
       >
-        <ProfilePic 
+        <ProfilePic
+          backgroundImage={user.photoURL}
           onClick={this.handleClick}
         />
         <Menu active={active}>
