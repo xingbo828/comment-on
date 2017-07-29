@@ -5,7 +5,7 @@ import { reduxForm } from 'redux-form/immutable'
 import BasicProfile from './BasicProfile';
 import { updateProfile } from '../accountAction';
 import { getUser } from  '../accountReducer';
-
+import { withSettingsContext } from '../../../globalComponents/Settings';
 import { isRequired, isValidEmail, isValidBirthDate } from '../../Common/validators';
 
 const mapStateToProps = state => ({initialValues: getUser(state).user});
@@ -33,11 +33,15 @@ const validate = values => {
 
 const enhance = compose(
   withRouter,
+  withSettingsContext,
   connect(mapStateToProps, mapDispatchToProps),
   reduxForm({
     form: 'profile.basic',
     onSubmit: (values, dispatch, props) => { return props.updateProfile(values); },
-    validate
+    validate,
+    onSubmitSuccess: (values, dispatch, props) => {
+      props.toggleFormMode();
+    }
   })
 );
 

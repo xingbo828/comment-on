@@ -1,10 +1,11 @@
 import React from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import { ListItem } from './Styled';
+import withSettingsContext from '../Settings/withSettingsContext';
 
-const SideBarLink = ({ path, title }) => {
+const SideBarLink = ({ path, title, toggleFormMode }) => {
   return (
-    <ListItem>
+    <ListItem onClick={toggleFormMode}>
       <NavLink
         to={path}
       >
@@ -14,4 +15,4 @@ const SideBarLink = ({ path, title }) => {
   );
 };
 
-export default withRouter(SideBarLink);
+export default withRouter(withSettingsContext(SideBarLink));

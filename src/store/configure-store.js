@@ -16,7 +16,8 @@ if (process.env.NODE_ENV === 'development') {
         '@@redux-form/REGISTER_FIELD',
         '@@redux-form/FOCUS',
         '@@redux-form/BLUR',
-        '@@redux-form/UPDATE_SYNC_ERRORS'
+        '@@redux-form/UPDATE_SYNC_ERRORS',
+        '@@redux-form/DESTROY'
       ];
       return !byPassAction.includes(action.type);
     }

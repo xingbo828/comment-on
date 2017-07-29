@@ -1,7 +1,7 @@
 import Immutable from 'immutable';
 import { createSelector } from 'reselect';
 import { USER_LOGIN, USER_LOGOUT } from './onAuthChangeAction';
-import { UPDATE_PROFILE } from './accountAction';
+import { UPDATE_PROFILE, UPDATE_PROFILE_PICTURE } from './accountAction';
 
 const initState = Immutable.fromJS({
   status: 'UNINIT',
@@ -24,6 +24,10 @@ export default (state = initState, action) => {
       return state.withMutations((st) => {
         action.data.hasProfile = true;
         st.set('user', Immutable.fromJS(action.data));
+      });
+    case UPDATE_PROFILE_PICTURE:
+      return state.withMutations((st) => {
+        st.setIn(['user', 'photoURL'], action.data);
       });
     default:
       return state;

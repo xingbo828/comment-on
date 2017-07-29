@@ -20,7 +20,7 @@ const PanelDiv = Styled.div`
   display: block;
   padding: 2rem;
   flex: 3;
-  display: ${props => props.match ? 'none' : 'block'};
+  display: ${props => props.formMode ? 'block' : 'none'};
 
   ${media.fromMedium`
     display: block;
@@ -32,7 +32,7 @@ const SidebarDiv = Styled.div`
   margin: 0;
   display: block;
   flex: 1;
-  display: ${props => props.match ? 'block' : 'none'};
+  display: ${props => props.formMode ? 'none' : 'block'};
 
   ${media.fromMedium`
     margin: 0 2rem 0 0;
