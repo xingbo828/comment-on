@@ -5,7 +5,7 @@ export const isRequired = value => !(typeof value === 'string' ? !value.trim() :
 export const isValidEmail = value => {
   if (value === undefined) return false;
 
-  const formattedValue = value.trim();
+  const formattedValue = value ? value.trim() : '';
   return !(formattedValue && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,63}$/i.test(formattedValue));
 };
 

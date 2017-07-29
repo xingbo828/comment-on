@@ -5,6 +5,7 @@ import { reduxForm } from 'redux-form/immutable'
 import ProfilePicture from './ProfilePicture';
 import { uploadProfileImg } from '../accountAction';
 import { getUser } from  '../accountReducer';
+import { withSettingsContext } from '../../../globalComponents/Settings';
 
 import { isRequired } from '../../Common/validators';
 
@@ -27,10 +28,14 @@ const validate = values => {
 const enhance = compose(
   withRouter,
   connect(mapStateToProps, mapDispatchToProps),
+  withSettingsContext,
   reduxForm({
     form: 'profile.photo',
     onSubmit: (values, dispatch, props) =>  props.uploadProfileImage(values.get('photoURL')[0], props.initialValues.get('uid')),
-    validate
+    validate,
+    onSubmitSuccess: (values, dispatch, props) => {
+      props.toggleFormMode();
+    }
   })
 );
 
