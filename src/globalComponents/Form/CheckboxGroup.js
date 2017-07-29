@@ -13,43 +13,49 @@ class CheckboxGroup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      checked: props.value || ''
+      checked: props.value || []
     };
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange = (event) => {
-    this.setState({
-      checked: event.target.value
-    });
-    this.props.onChange(event, event.target.value);
+    const value = [...this.state.checked];
+    if (event.target.checked) {
+      value.push(event.target.name)
+    } else {
+      value.splice(value.indexOf(event.target.name), 1);
+    }
+    this.state.checked = value;
+    this.props.input.onChange(value);
   };
 
 
   render() {
-    const options = React.Children.map(this.props.children, (option) => {
-      const {
-        value,
-        label,
-        onChange,
-        ...other
-      } = option.props;
+    const { input, label } = this.props;
+    const checkboxes = this.props.options.map((option, index) => {
+      const name = `${input.name}[${index}]`;
       return (
-        <Checkbox
-          {...other}
-          value={option.props.value}
-          label={option.props.label}
-          onChange={this.handleChange}
-          checked={option.props.value === this.state.selected}
-        />
+        <label key={index}>
+          <span>
+            <input type="checkbox"
+              name={name}
+              value={option.label}
+              checked={this.state.checked.indexOf(name) !== -1}
+              onChange={this.handleChange} />
+          </span>
+          <span>
+            {option.label}
+          </span>
+        </label>
       );
     }, this);
 
     return (
       <div>
         <CheckboxGroupLabel>
-          {this.props.label}
+          {label}
         </CheckboxGroupLabel>
-        {options}
+        {checkboxes}
       </div>
     );
   }
