@@ -41,6 +41,7 @@ class CheckboxGroup extends Component {
               name={name}
               value={option.label}
               checked={this.state.checked.indexOf(name) !== -1}
+              disabled={!!option.disabled}
               onChange={this.handleChange} />
           </span>
           <span>

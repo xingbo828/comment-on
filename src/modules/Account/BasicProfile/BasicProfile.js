@@ -4,14 +4,6 @@ import { Button, TextField, Radio, RadioGroup, CheckboxGroup } from '../../../gl
 
 const renderRadioGroup = ({ input, ...rest }) =>
   <RadioGroup {...input} {...rest} label="Gender" />;
-const options = [
-  { label: 'Apple', value: 'Apple' },
-  { label: 'Pear', value: 'Pear' },
-  { label: 'Orange', value: 'Orange' },
-];
-const renderCheckboxGroup = ({...rest}) =>
-  <CheckboxGroup {...rest} options={options} label="checkboxes" />;
-
 const BasicProfile = ({ handleSubmit, pristine, reset, valid, submitting }) => {
   return (
     <form onSubmit={handleSubmit}>
@@ -29,8 +21,6 @@ const BasicProfile = ({ handleSubmit, pristine, reset, valid, submitting }) => {
         <Radio value="female" label="Female" />
         <Radio value="other" label="Other" />
       </Field>
-
-       <Field name="check" component={renderCheckboxGroup} />
 
       <Field
         component={TextField}
