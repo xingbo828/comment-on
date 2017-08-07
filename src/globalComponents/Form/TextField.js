@@ -1,6 +1,6 @@
 import React from 'react';
 import Styled from 'styled-components';
-import { 
+import {
   borderPrimary,
   primaryColor
 } from '../../foundation/Variables';
@@ -50,7 +50,7 @@ const TextField = ({ label, type, input, meta: { touched, error, warning }}) => 
       <InputLabel>
         {label}
       </InputLabel>
-      <Input {...input} placeholder={label} type={type} />
+      <Input {...input} type={type} />
       <FocusBorder />
       {touched &&
       ((error &&

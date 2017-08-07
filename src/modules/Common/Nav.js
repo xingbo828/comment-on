@@ -9,6 +9,7 @@ import AccountNav from './AccountNav';
 const fromTheme = (prop) => ({ theme }) => theme[prop]
 
 const ContextHeader = styled.div`
+  display: flex;
   box-sizing: border-box;
   background: ${fromTheme('primaryColor')};
   height: 60px;
@@ -18,6 +19,7 @@ const ContextHeader = styled.div`
 `;
 
 const Heading = styled.h1`
+  flex: 1;
   display: inline;
   font-size: 1rem;
   color: white;
@@ -28,10 +30,25 @@ const Heading = styled.h1`
 `;
 
 const Location = styled.span`
+  flex: 1;
   font-size: 1rem;
   color: white;
   margin: 0;
   padding: 0;
+`;
+
+const ContextHeaderLinks = styled.ul`
+  flex: 10;
+  display: flex;
+`;
+
+const ContextHeaderLink = styled.li`
+  list-style: none;
+  line-height: 30px;
+> a {
+    color: ${fromTheme('offWhite')};
+    text-decoration: none;
+  }
 `;
 
 const NavRoot = styled.nav`
@@ -82,6 +99,11 @@ export const Nav = ({ user, isLoggedIn, logout }) => {
       <ContextHeader>
         <Heading>Comment on</Heading>
         <Location>Vancouver</Location>
+        <ContextHeaderLinks>
+          <ContextHeaderLink>
+            <Link to="/business/create">Register business</Link>
+          </ContextHeaderLink>
+        </ContextHeaderLinks>
         <AccountNav />
       </ContextHeader>
       <NavList>
