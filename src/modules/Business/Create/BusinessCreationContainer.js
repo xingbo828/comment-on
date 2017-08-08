@@ -1,4 +1,4 @@
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import { reduxForm } from 'redux-form/immutable'

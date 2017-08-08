@@ -16,19 +16,24 @@ class BusinessHour extends Component {
   }
 
   addHours(hours) {
-    this.setState({
-      hoursList: this.state.hoursList.concat([hours]).sort((a, b) => {
-        const dayIndexOfA = weekdays.findIndex(day => day === a.day);
-        const dayIndexOfB = weekdays.findIndex(day => day === b.day);
-        return dayIndexOfA > dayIndexOfB;
-      })
+    const newHoursList = this.state.hoursList.concat([hours]).sort((a, b) => {
+      const dayIndexOfA = weekdays.findIndex(day => day === a.day);
+      const dayIndexOfB = weekdays.findIndex(day => day === b.day);
+      return dayIndexOfA > dayIndexOfB;
     });
+    this.setState({
+      hoursList: newHoursList
+    });
+
+    this.props.input.onChange(newHoursList);
   }
 
   removeHours(key) {
+    const newHoursList = this.state.hoursList.filter((ele, i) => i!==key);
     this.setState({
-      hoursList: this.state.hoursList.filter((ele, i) => i!==key)
+      hoursList: newHoursList
     });
+    this.props.input.onChange(newHoursList);
   }
 
 

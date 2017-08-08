@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Select, Option } from '../../../../globalComponents/Form';
 
 export const BusinessHourContainer = styled.div`
   padding: 0.5rem 0;
@@ -17,15 +16,22 @@ export const HoursSelectContainer = styled.div`
 
 export const WeekDaySelect = styled.div`
   flex: 1;
+  padding-right: 10px;
+  > select {
+    width: 100%;
+  }
 `;
 
 export const TimeSelect = styled.div`
   flex: 1;
+  padding-right: 10px;
+  > select {
+    width: 100%;
+  }
 `;
 
 export const HoursSelectButtonWrapper = styled.div`
   flex: 1;
-  padding: 0 5px;
 `;
 
 export const HoursList = styled.ul`

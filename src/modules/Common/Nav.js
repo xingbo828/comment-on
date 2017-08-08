@@ -56,6 +56,7 @@ const NavRoot = styled.nav`
   margin: 0 0 4rem;
 `;
 
+/*
 const Account = styled.div`
   float: right;
   line-height: 60px;
@@ -69,6 +70,7 @@ const Pic = styled.div`
   background: white;
   display: inline-block;
 `;
+*/
 
 const NavList = styled.ul`
   list-style-type: none;

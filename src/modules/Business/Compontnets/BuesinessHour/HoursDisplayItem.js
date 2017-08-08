@@ -18,7 +18,7 @@ const HoursDisplayItem = ({ content, removeHours, hourIndex }) => {
       {`${content.day[0].toUpperCase() + content.day.slice(1)} ${formatTime(content.startTime)} - ${formatTime(content.endTime)}`}
       </HoursListItemText>
       <HoursListItemLink>
-        <a href="#" onClick={removeHandler}>Remove</a>
+        <a href="" onClick={removeHandler}>Remove</a>
       </HoursListItemLink>
     </HoursListItem>
   );

@@ -1,9 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import {
-  borderPrimary,
-  primaryColor
-} from '../../foundation/Variables';
 
 const InputContainer = styled.div`
   display: block;

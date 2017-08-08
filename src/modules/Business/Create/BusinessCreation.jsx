@@ -8,6 +8,9 @@ import BusinessHour from '../Compontnets/BuesinessHour';
 const renderDescriptionTextArea = ({ input, ...rest }) =>
 <TextArea input={input} {...rest} rows="4" />;
 
+const renderBusinessHour = ({ input, ...rest }) =>
+<BusinessHour input={input} {...rest} />;
+
 const BusinessCreation = ({ handleSubmit,  pristine, reset, valid, submitting }) => {
   return (
     <Container>
@@ -22,7 +25,7 @@ const BusinessCreation = ({ handleSubmit,  pristine, reset, valid, submitting })
         <Field component={TextField} type="tel" name="businessPhoneNumber" label="Business Phone Number" />
 
         <Field component={renderDescriptionTextArea} name="businessDescription" label="Description" />
-        <BusinessHour />
+        <Field component={renderBusinessHour} name="businessHour" label="Business hours" />
         <Button
           type="submit"
           primary

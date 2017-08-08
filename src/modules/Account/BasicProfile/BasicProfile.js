@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field } from 'redux-form/immutable';
-import { Button, TextField, Radio, RadioGroup, CheckboxGroup } from '../../../globalComponents/Form';
+import { Button, TextField, Radio, RadioGroup } from '../../../globalComponents/Form';
 
 const renderRadioGroup = ({ input, ...rest }) =>
   <RadioGroup {...input} {...rest} label="Gender" />;

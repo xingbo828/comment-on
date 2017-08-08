@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Checkbox from './Checkbox';
 import styled from 'styled-components';
 
 const CheckboxGroupLabel = styled.label`
@@ -25,7 +24,9 @@ class CheckboxGroup extends Component {
     } else {
       value.splice(value.indexOf(event.target.name), 1);
     }
-    this.state.checked = value;
+    this.setState({
+      checked: true
+    });
     this.props.input.onChange(value);
   };
 
