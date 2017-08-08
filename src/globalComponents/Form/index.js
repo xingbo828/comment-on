@@ -6,6 +6,7 @@ import Checkbox from './Checkbox';
 import CheckboxGroup from './CheckboxGroup';
 import ImgUpload from './ImgUpload';
 import TextArea from './TextArea';
+import { StyledSelect, StyledOption } from './Select';
 
 export {
   Button,
@@ -15,5 +16,7 @@ export {
   RadioGroup,
   Checkbox,
   CheckboxGroup,
-  ImgUpload
+  ImgUpload,
+  StyledSelect as Select,
+  StyledOption as Option
 };

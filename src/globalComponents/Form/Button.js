@@ -51,7 +51,7 @@ const Button = styled.button`
   color: ${getFontColor};
   background-color:  ${getBackgroundColor};
   border-color: ${getBorderColor};
-
+  padding: ${props => props.small ? '5px 10px' : '16px 32px'};
   ${media.fromMedium`
     width: auto;
   `}
@@ -60,10 +60,6 @@ const Button = styled.button`
     background-color: ${props => props.disabled ? '' : 'white'};
     color: ${props => props.disabled ? '' : props.theme.primaryActionColor};
     border-color: ${props => props.disabled ? '' : props.theme.primaryActionColor};
-  }
-
-  disabled {
-
   }
 `;
 

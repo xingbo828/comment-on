@@ -1,7 +1,9 @@
 import React from 'react';
 import { Field } from 'redux-form/immutable';
 import { Button, TextField, TextArea } from '../../../globalComponents/Form';
-import { Container } from './Styled';
+import { Container, Form } from './Styled';
+
+import BusinessHour from '../Compontnets/BuesinessHour';
 
 const renderDescriptionTextArea = ({ input, ...rest }) =>
 <TextArea input={input} {...rest} rows="4" />;
@@ -9,7 +11,7 @@ const renderDescriptionTextArea = ({ input, ...rest }) =>
 const BusinessCreation = ({ handleSubmit,  pristine, reset, valid, submitting }) => {
   return (
     <Container>
-      <form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <Field
           component={TextField}
           type="text"
@@ -20,13 +22,13 @@ const BusinessCreation = ({ handleSubmit,  pristine, reset, valid, submitting })
         <Field component={TextField} type="tel" name="businessPhoneNumber" label="Business Phone Number" />
 
         <Field component={renderDescriptionTextArea} name="businessDescription" label="Description" />
-
+        <BusinessHour />
         <Button
           type="submit"
           primary
           disabled={pristine || submitting || !valid}
         >Submit</Button>
-    </form>
+    </Form>
     </Container>
   );
 };

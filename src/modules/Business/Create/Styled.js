@@ -15,3 +15,10 @@ export const Container = styled.div`
     max-width: 1200px;
   `}
 `;
+
+export const Form = styled.form`
+  width: 100%;
+  ${media.fromMedium`
+    width: 60%;
+  `}
+`;
