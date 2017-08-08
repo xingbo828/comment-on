@@ -5,10 +5,13 @@ const storageRef = storage.ref();
 export const UPDATE_PROFILE = 'UPDATE_PROFILE';
 export const UPDATE_PROFILE_PICTURE = 'UPDATE_PROFILE_PICTURE';
 
-const _extractAdditionalProfile = ({ gender, birthdate }) => {
+const _extractAdditionalProfile = ({ gender, birthdate, displayName, email, photoURL }) => {
   return {
     gender: gender || null,
-    birthdate: birthdate || null
+    birthdate: birthdate || null,
+    displayName: displayName || null,
+    email: email || null,
+    photoURL: photoURL || null
   }
 };
 
