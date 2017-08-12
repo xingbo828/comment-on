@@ -38,9 +38,8 @@ class SingleImageUpload extends Component {
       this.setState({
         imageUrl: imgData
       });
-
+      this.props.input.onChange(event, img);
     });
-    this.props.input.onChange(event, img);
   }
 
   render() {

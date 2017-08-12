@@ -47,8 +47,9 @@ class MultiImgUpload extends Component {
       this.setState({
         images: currentImages
       });
+      this.props.input.onChange(event, currentImages);
     });
-    this.props.input.onChange(event, currentImages);
+
   }
 
   handleRemove(event, index) {
