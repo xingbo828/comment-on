@@ -15,12 +15,17 @@ class MultiImgUpload extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      images: []
+      images: [],
+      files: []
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
     this.renderActionBtn = this.renderActionBtn.bind(this);
+  }
+
+  componentDidUpdate() {
+    this.props.input.onChange(this.state.files);
   }
 
   getBase64(img, callback) {
@@ -40,24 +45,26 @@ class MultiImgUpload extends Component {
       return;
     }
     let currentImages = this.state.images;
+    let files = this.state.files.concat([img]);
     this.getBase64(img, (imgData) => {
       currentImages = currentImages.concat([{
         imageUrl: imgData
       }]);
       this.setState({
-        images: currentImages
+        images: currentImages,
+        files
       });
-      this.props.input.onChange(event, currentImages);
     });
 
   }
 
   handleRemove(event, index) {
     const currentImages = this.state.images.filter((img, key) => key !== index);
+    const currentFiles = this.state.files.filter((file,key)=> key !== index);
     this.setState({
-      images: currentImages
+      images: currentImages,
+      files: currentFiles
     });
-    this.props.input.onChange(event, currentImages);
   }
 
   renderImges(imgs) {
