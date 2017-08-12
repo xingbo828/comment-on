@@ -40,6 +40,22 @@ export const updateProfile = profile => (dispatch) => {
   });
 };
 
+export const updateUserBusiness = (businessId, uid) => {
+  const ownedBusinessesRef = database.ref().child('users').child(uid).child('businesses');
+  console.log(ownedBusinessesRef);
+  return ownedBusinessesRef.once('value')
+    .then((data) => {
+      data = data.toJSON();
+      if (!data) {
+        data = {};
+      }
+      if (!data[businessId]) {
+        data[businessId] = true;
+        return ownedBusinessesRef.set(data);
+      }
+    });
+}
+
 export const uploadProfileImg = (file, uid) => (dispatch) => {
   const profileImageRef = storageRef.child(`images/profile/${uid}/${file.name}`);
   return profileImageRef.put(file)

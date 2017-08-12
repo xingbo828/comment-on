@@ -1,9 +1,16 @@
 // import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { reduxForm } from 'redux-form/immutable'
 import BusinessCreation from './BusinessCreation';
+import { addBusiness } from '../businessAction';
+
 import { isRequired, isValidPhoneNumber, isValidBusinessHours } from '../../Common/validators';
+
+const mapDispatchToProps = dispatch => ({
+  addBusiness: (profile) => dispatch(addBusiness(profile))
+});
 
 const validate = values => {
   const errors = {};
@@ -21,9 +28,10 @@ const validate = values => {
 
 const enhance = compose(
   withRouter,
-  // connect(mapStateToProps, mapDispatchToProps),
+  connect(null, mapDispatchToProps),
   reduxForm({
     form: 'business.creation',
+    onSubmit: (values, dispatch, props) => { return props.addBusiness(values); },
     validate
   })
 );
