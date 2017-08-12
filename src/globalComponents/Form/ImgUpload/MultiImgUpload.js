@@ -15,8 +15,8 @@ class MultiImgUpload extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      images: [],
-      files: []
+      images: this.props.images.map(img => ({ imageUrl: img })),
+      files: this.props.images
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
@@ -105,6 +105,7 @@ class MultiImgUpload extends Component {
 }
 MultiImgUpload.defaultProps = {
   limit: 0,
-  actionText: 'Upload'
+  actionText: 'Upload',
+  images: []
 };
 export default MultiImgUpload;
