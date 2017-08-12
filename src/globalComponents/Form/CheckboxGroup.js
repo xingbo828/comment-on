@@ -25,7 +25,7 @@ class CheckboxGroup extends Component {
       value.splice(value.indexOf(event.target.name), 1);
     }
     this.setState({
-      checked: true
+      checked: value
     });
     this.props.input.onChange(value);
   };
@@ -40,10 +40,10 @@ class CheckboxGroup extends Component {
           <span>
             <input type="checkbox"
               name={name}
-              value={option.label}
+              value={option.value}
               checked={this.state.checked.indexOf(name) !== -1}
               disabled={!!option.disabled}
-              onChange={this.handleChange} />
+              onChange={(e) => {this.handleChange(e, index)}} />
           </span>
           <span>
             {option.label}
