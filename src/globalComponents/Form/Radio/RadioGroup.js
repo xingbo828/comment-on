@@ -1,29 +1,10 @@
 import React, { Component } from 'react';
 import Radio from './Radio';
-import styled from 'styled-components';
-
-const Container = styled.div`
-  border: solid ${props => props.theme.borderPrimary};
-  border-width: 0 0 1px 0;
-  margin: 0 0 1rem;
-`;
-
-const RadioGroupLabel = styled.label`
-  font-weight: bold;
-  font-size: 1rem;
-  ::after {
-    content: ':';
-    margin: 0 8px 0 2px;
-  }
-`;
-
-const RadioList = styled.div`
-  display: block;
-  width: 100%;
-  font-size: 1rem;
-  padding: 1rem 0;
-  outline: none;
-`;
+import {
+  Container,
+  RadioGroupLabel,
+  RadioList
+} from './Styled';
 
 class RadioGroup extends Component {
   constructor(props) {
