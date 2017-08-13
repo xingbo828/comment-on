@@ -13,7 +13,7 @@ const Checkbox = ({ label, input, meta: { touched, error, warning } }) => {
       <span>
         {label}
       </span>
-      {touched &&
+      { touched &&
       ((error &&
         <InputErrorMsg>
           {error}
