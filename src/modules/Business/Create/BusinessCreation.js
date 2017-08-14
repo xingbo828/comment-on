@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field } from 'redux-form/immutable';
-import { Button, TextField, TextArea, ImgUpload, CheckboxGroup } from '../../../globalComponents/Form';
+import { Button, TextField, TextArea, ImgUpload, Checkbox } from '../../../globalComponents/Form';
 import { Container, Form } from './Styled';
 import { SERVICE_AREAS } from '../../Common/constants';
 
@@ -18,7 +18,7 @@ const renderBusinessImgs = ({ input, ...rest }) =>
 <MultiImgUpload input={input} {...rest} limit={3} actionText="Upload Images(s)" />;
 
 const renderBusinessServiceAreas = ({ input, ...rest }) =>
-  <CheckboxGroup input={input} {...rest} options={SERVICE_AREAS} />;
+  <Checkbox.CheckboxGroup input={input} {...rest} label="Service Areas" />;
 
 const BusinessCreation = ({ handleSubmit,  pristine, reset, valid, submitting }) => {
   return (
@@ -30,10 +30,11 @@ const BusinessCreation = ({ handleSubmit,  pristine, reset, valid, submitting })
           name="businessName"
           label="Business Name"
         />
-
         <Field component={TextField} type="tel" name="businessPhoneNumber" label="Business Phone Number" />
         <Field component={renderDescriptionTextArea} name="businessDescription" label="Description" />
-        <Field component={renderBusinessServiceAreas} name="businessServiceArea" label="Service Areas" />
+        <Field component={renderBusinessServiceAreas} name="businessServiceArea">
+          {SERVICE_AREAS.map(s => <Checkbox.Checkbox key={s.value} value={s.value} label={s.label} />)}
+        </Field>
         <Field component={renderBusinessHour} name="businessHour" label="Business hours" />
         <Field component={renderBusinessImgs} name="businessImgs" label="Business Images" />
         <Button
