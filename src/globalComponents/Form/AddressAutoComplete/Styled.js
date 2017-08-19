@@ -14,6 +14,7 @@ export const GeosuggestStyled = styled(Geosuggest)`
     box-shadow: 0 0 1px ${props => props.theme.borderPrimary};
     padding: .5em 1em;
     transition: border 0.2s, box-shadow 0.2s;
+    box-sizing: border-box;
   }
 
   .geosuggest__input:focus {
