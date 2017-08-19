@@ -6,9 +6,10 @@ export const isRequired = value => !(typeof value === 'string' ? !value.trim() :
 export const isValidBusinessHours = value => Array.isArray(value) ? value.length > 0 : false;
 
 export const isValidEmail = value => {
-  if (value === undefined) return false;
-
   const formattedValue = value ? value.trim() : '';
+  if (formattedValue === '') {
+    return true;
+  }
   return !(formattedValue && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,63}$/i.test(formattedValue));
 };
 
@@ -22,14 +23,19 @@ export const isValidBirthDate = (date) => {
 
 export const isValidPhoneNumber = (value) => {
   let phoneNumber = typeof value === 'string' ? value : '';
+  if (phoneNumber === '') {
+    return true;
+  }
   return /^\d{10}$/.test(
     phoneNumber.replace(/-|\s|\(|\)/g, '').replace(/^1/, '').trim()
   );
 };
 
 export const isValidPostalCode = (value) => {
-  if (value === undefined) return false;
   const formattedValue = value ? value.trim() : '';
+  if (formattedValue === '') {
+    return true;
+  }
   return !(formattedValue && !/^[ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1} *\d{1}[A-Z]{1}\d{1}$/i.test(formattedValue));
 }
 
