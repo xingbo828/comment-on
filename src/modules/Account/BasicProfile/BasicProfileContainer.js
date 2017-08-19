@@ -6,30 +6,27 @@ import BasicProfile from './BasicProfile';
 import { updateProfile } from '../accountAction';
 import { getUser } from  '../accountReducer';
 import { withSettingsContext } from '../../../globalComponents/Settings';
-import { isRequired, isValidEmail, isValidBirthDate } from '../../Common/validators';
+import validators, { validateFunc } from '../../Common/validators';
 
 const mapStateToProps = state => ({initialValues: getUser(state).user});
 
 const mapDispatchToProps = dispatch => ({
   updateProfile: profile => dispatch(updateProfile(profile))
-  // uploadProfileImage: (file, uid) => dispatch(uploadProfileImg(file, uid))
 });
 
-
-const validate = values => {
-  const errors = {};
-  if (!isRequired(values.get('displayName'))) {
-    errors.displayName = 'Required';
-  }
-  if (!isValidEmail(values.get('email'))) {
-     errors.email = 'Invalid email address';
-  }
-  if (!isValidBirthDate(values.get('birthdate'))) {
-    errors.birthdate = 'Invalid Birth date';
-  }
-  return errors;
-}
-
+const validate = validateFunc([{
+  field: 'displayName',
+  validator: 'isRequired',
+  message: 'Required'
+}, {
+  field: 'email',
+  validator: 'isValidEmail',
+  message: 'Invalid email address'
+}, {
+  field: 'birthdate',
+  validator: 'isValidBirthDate',
+  message: 'Invalid Birth date'
+}] ,validators);
 
 const enhance = compose(
   withRouter,

@@ -35,11 +35,11 @@ const InputLabel = styled.label`
   font-size: 1rem;
 `;
 
-const TextArea = ({ label, rows, input, meta: { touched, error, warning }}) => {
+const TextArea = ({ label, placeholder, rows, input, meta: { touched, error, warning }}) => {
   return (
     <InputContainer>
       <InputLabel>{label}</InputLabel>
-      <TextAreaStyled {...input} rows={rows}/>
+      <TextAreaStyled {...input} rows={rows} placeholder={placeholder} />
       {touched &&
       ((error &&
         <InputErrorMsg>

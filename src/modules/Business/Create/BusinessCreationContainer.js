@@ -1,37 +1,50 @@
-// import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-import { reduxForm } from 'redux-form/immutable'
+import { reduxForm } from 'redux-form/immutable';
 import BusinessCreation from './BusinessCreation';
 import { addBusiness } from '../businessAction';
 
-import { isRequired, isValidPhoneNumber, isValidBusinessHours } from '../../Common/validators';
+import validators, { validateFunc } from '../../Common/validators';
 
 const mapDispatchToProps = dispatch => ({
-  addBusiness: (profile) => dispatch(addBusiness(profile))
+  addBusiness: profile => dispatch(addBusiness(profile))
 });
 
-const validate = values => {
-  const errors = {};
-  if (!isRequired(values.get('businessName'))) {
-    errors.businessName = 'Required';
-  }
-  if (!isValidPhoneNumber(values.get('businessPhoneNumber'))) {
-     errors.businessPhoneNumber = 'Invalid phone number';
-  }
-  if (!isValidBusinessHours(values.get('businessHour'))) {
-    errors.businessHour = 'Invalid business hours';
-  }
-  return errors;
-}
+const validate = validateFunc([{
+  field: 'businessName',
+  validator: 'isRequired',
+  message: 'Required'
+}, {
+  field: 'businessAddrCity',
+  validator: 'isRequired',
+  message: 'Required'
+}, {
+  field: 'businessAddrPostalCode',
+  validator: 'isRequired',
+  message: 'Required'
+}, {
+  field: 'businessPhoneNumber',
+  validator: 'isValidPhoneNumber',
+  message: 'Invalid phone number'
+}, {
+  field: 'businessHour',
+  validator: 'isValidBusinessHours',
+  message: 'Invalid business hours'
+}, {
+  field: 'businessEmail',
+  validator: 'isValidEmail',
+  message: 'Invalid business email'
+}] ,validators);
 
 const enhance = compose(
   withRouter,
   connect(null, mapDispatchToProps),
   reduxForm({
     form: 'business.creation',
-    onSubmit: (values, dispatch, props) => { return props.addBusiness(values); },
+    onSubmit: (values, dispatch, props) => {
+      return props.addBusiness(values);
+    },
     validate
   })
 );

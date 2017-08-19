@@ -7,7 +7,7 @@ import { uploadProfileImg } from '../accountAction';
 import { getUser } from  '../accountReducer';
 import { withSettingsContext } from '../../../globalComponents/Settings';
 
-import { isRequired } from '../../Common/validators';
+import validators, { validateFunc } from '../../Common/validators';
 
 const mapStateToProps = state => ({initialValues: getUser(state).user});
 
@@ -15,15 +15,11 @@ const mapDispatchToProps = dispatch => ({
   uploadProfileImage: (file, uid) => dispatch(uploadProfileImg(file, uid))
 });
 
-
-const validate = values => {
-  const errors = {};
-  if (!isRequired(values.get('photoURL'))) {
-    errors.photoURL = 'Required';
-  }
-  return errors;
-}
-
+const validate = validateFunc([{
+  field: 'photoURL',
+  validator: 'isRequired',
+  message: 'Required'
+}] ,validators);
 
 const enhance = compose(
   withRouter,
