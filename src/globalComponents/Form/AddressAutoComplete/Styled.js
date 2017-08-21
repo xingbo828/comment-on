@@ -59,11 +59,11 @@ export const GeosuggestStyled = styled(Geosuggest)`
   }
   .geosuggest__item:hover,
   .geosuggest__item:focus {
-    background: ${props => props.theme.primaryColor};
+    background: ${props => props.theme.primaryActionColor};
     color: #fff;
   }
   .geosuggest__item--active {
-    background: ${props => props.theme.primaryColor};
+    background: ${props => props.theme.primaryActionColor};
     color: #fff;
   }
   .geosuggest__item--active:hover,

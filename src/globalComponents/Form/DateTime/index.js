@@ -65,6 +65,7 @@ class DateTime extends Component {
         <LabelTxt>{label}</LabelTxt>
         <InputBtn
           onClick={this.handleInputBtnClick}
+          onFocus={this.handleInputBtnClick}
           datePicked={displayValue!==placeholder}
         >{displayValue}</InputBtn>
         <DateTimeContainer visible={isOverlayVisible} innerRef={container => this.dateTimeContainer = container}>
