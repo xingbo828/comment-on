@@ -3,7 +3,7 @@ import moment from 'moment';
 import {
   Label,
   LabelTxt,
-  Input,
+  InputBtn,
   DateTimeContainer
 } from './Styled';
 
@@ -12,26 +12,44 @@ import Calendar from './Calendar';
 class DateTime extends Component {
   constructor(props) {
     super(props);
+    const m = moment;
     this.state = {
-      isOverlayVisible: false
+      moment: m,
+      isOverlayVisible: false,
+      selectedDate: this.props.value ? m(this.props.value) : m(),
+      displayValue: this.props.value || this.props.placeholder
     };
-    this.handleInputFocus = this.handleInputFocus.bind(this);
+    this.handleInputBtnClick = this.handleInputBtnClick.bind(this);
+    this.handleSelectionComplete = this.handleSelectionComplete.bind(this);
   }
 
-  handleInputFocus() {
+  handleInputBtnClick(e) {
+    e.preventDefault();
     this.setState({
       isOverlayVisible: true
     });
   }
 
+
+  handleSelectionComplete(value) {
+    this.setState({
+      isOverlayVisible: false,
+      displayValue: value.format('MMM DD, YYYY')
+    });
+  }
+
   render() {
-    const { value, label, placeholder } = this.props;
+    const { label, placeholder } = this.props;
+    const { displayValue, isOverlayVisible, moment, selectedDate } = this.state;
     return (
       <Label>
         <LabelTxt>{label}</LabelTxt>
-        <Input onFocus={this.handleInputFocus} readonly placeholder={placeholder} value={value} />
-        <DateTimeContainer visible={this.state.isOverlayVisible}>
-          <Calendar />
+        <InputBtn
+          onClick={this.handleInputBtnClick}
+          datePicked={displayValue!==placeholder}
+        >{displayValue}</InputBtn>
+        <DateTimeContainer visible={isOverlayVisible}>
+          <Calendar moment={moment} selectedDate={selectedDate} onSelectionComplete={this.handleSelectionComplete}/>
         </DateTimeContainer>
     </Label>
     );

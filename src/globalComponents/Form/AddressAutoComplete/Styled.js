@@ -9,6 +9,11 @@ export const Label = styled.label`
 
 export const LabelTxt = styled.span`
   padding: .5rem;
+  ::before {
+    font-family: 'FontAwesome';
+    content: '\f041';
+    padding-right: 10px;
+  }
 `;
 
 export const GeosuggestStyled = styled(Geosuggest)`
@@ -21,6 +26,7 @@ export const GeosuggestStyled = styled(Geosuggest)`
     box-sizing: border-box;
     padding: .5rem;
     border: 0;
+    color: ${props => props.theme.textDark};
   }
 
   .geosuggest__input:focus {
