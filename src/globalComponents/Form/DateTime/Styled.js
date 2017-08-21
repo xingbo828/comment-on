@@ -20,7 +20,6 @@ export const InputBtn = styled.button`
   outline: none;
   font-size: 1.2rem;
   width: 100%;
-  box-sizing: border-box;
   padding: .5rem;
   border: 0;
   background-color: transparent;
@@ -39,7 +38,7 @@ export const DateTimeContainer = styled.div`
   background: #fff;
   border: 1px solid ${props => props.theme.borderPrimary};
   border-top-width: 0;
-  height: 300px;
+  height: 310px;
 `;
 
 export const CalendarContainer = styled.div`
@@ -109,14 +108,11 @@ export const CalenderTable = styled.table`
   border-spacing: 0;
   border-collapse: collapse;
 
-  tr {
-    box-sizing: border-box;
-  }
   td {
     text-align: center;
     cursor: pointer;
     font-weight: bold;
-    padding: .6rem 0;
+    height: 35px;
     border: 1px solid ${props => props.theme.borderPrimary};
   }
 
