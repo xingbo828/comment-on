@@ -35,19 +35,23 @@ export const DateTimeContainer = styled.div`
   top: 100%;
   left: -1px;
   right: -1px;
-  padding-top: 1rem;
   margin-top: -1px;
   background: #fff;
   border: 1px solid ${props => props.theme.borderPrimary};
   border-top-width: 0;
+  height: 300px;
 `;
 
 export const CalendarContainer = styled.div`
-  visibility: ${props => props.visible ? 'visible': 'hidden'};
-  opacity: ${props => props.visible ? '1': '0'};
-  max-height: ${props => props.visible ? '300px': '0'};
+  position: absolute;
+  top: 0;
+  left:0;
+  right:0;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
   transition:  .3s;
-  padding: 0 1rem;
+  padding: .5rem 1rem 0;
+  transform: rotateY(${props => props.visible ? '0deg': '180deg'});
 `;
 
 export const CalendarToolbar = styled.div`
@@ -122,42 +126,61 @@ export const CalenderTable = styled.table`
       color: ${props => props.theme.primaryActionColor};
     }
   }
-
-  tbody {
-    td {
-      :hover {
-        background-color: ${props => props.theme.primaryActionColor};
-        color: white;
-      }
-    }
-  }
 `;
 
 export const CalendarCell = styled.td`
   ${props => {
-    if (props.isSelectedDate) {
+    if (props.isDisabled) {
+      return `
+        background-color: ${props.theme.offWhite};
+        color: ${props.theme.borderPrimary};
+        :hover {
+          cursor: not-allowed;
+        }
+      `;
+    }
+    else if (props.isSelectedDate) {
       return `
         color: ${props.theme.primaryActionColor};
+        :hover {
+          background-color: ${props.theme.primaryActionColor};
+          color: white;
+        }
       `;
     } else if (!props.isCurrentMonth) {
       return `
         color: ${props.theme.borderPrimary};
+        :hover {
+          background-color: ${props.theme.primaryActionColor};
+          color: white;
+        }
+      `;
+    } else {
+      return `
+        :hover {
+          background-color: ${props.theme.primaryActionColor};
+          color: white;
+        }
       `;
     }
   }}
 `;
 
 export const TimeContainer = styled.div`
-  visibility: ${props => props.visible ? 'visible': 'hidden'};
-  max-height: ${props => props.visible ? '300px': '0'};
-  opacity: ${props => props.visible ? '1': '0'};
-  padding: 0 1rem;
+  position: absolute;
+  top: 0;
+  left:0;
+  right:0;
+  transform: rotateY(${props => props.visible ? '0deg': '-180deg'});
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  padding: 2.5rem 1rem 0;
   transition: .3s;
 `;
 
 export const TimeSelection = styled.div`
   display: flex;
-  padding-bottom: 1rem;
+  padding-bottom: 2rem;
 `;
 
 export const TimeSelectionDisplay = styled.span`

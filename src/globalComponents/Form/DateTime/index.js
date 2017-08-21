@@ -14,11 +14,14 @@ class DateTime extends Component {
   constructor(props) {
     super(props);
     const m = moment;
+    const currentDateTime = m().add(1, 'hour').minute(0);
+    const format = this.props.includeTime ? 'MMM DD, YYYY HH:mm' : 'MMM DD, YYYY ';
     this.state = {
       isOverlayVisible: false,
-      selectedDateTime: this.props.value || m(),
-      displayValue: this.props.value ? this.props.value.format('MMM DD, YYYY HH:mm') : this.props.placeholder,
-      userInteractionPhase: 'calendar'
+      selectedDateTime: this.props.value || currentDateTime,
+      displayValue: this.props.value ? this.props.value.format(format) : this.props.placeholder,
+      userInteractionPhase: 'calendar',
+      format
     };
     this.handleInputBtnClick = this.handleInputBtnClick.bind(this);
     this.handleCalendarSelectionComplete = this.handleCalendarSelectionComplete.bind(this);
@@ -50,13 +53,13 @@ class DateTime extends Component {
     if (!this.props.includeTime) {
       this.setState({
         isOverlayVisible: false,
-        displayValue: value.format('MMM DD, YYYY HH:mm')
+        displayValue: value.format(this.state.format)
       });
       this.props.onSelect(value);
     } else {
       this.setState({
         selectedDateTime: value,
-        displayValue: value.format('MMM DD, YYYY HH:mm'),
+        displayValue: value.format(this.state.format),
         userInteractionPhase: 'time'
       });
     }
@@ -64,7 +67,7 @@ class DateTime extends Component {
 
   handleTimeSelectionComplete(value) {
     this.setState({
-      displayValue: value.format('MMM DD, YYYY HH:mm'),
+      displayValue: value.format(this.state.format),
       isOverlayVisible: false,
       userInteractionPhase: 'calendar'
     });
@@ -91,7 +94,7 @@ class DateTime extends Component {
   }
 
   render() {
-    const { label, placeholder, includeTime } = this.props;
+    const { label, placeholder, includeTime, disabledDate } = this.props;
     const {
       userInteractionPhase,
       displayValue,
@@ -113,6 +116,7 @@ class DateTime extends Component {
         >
           <Calendar
             visible={userInteractionPhase === 'calendar'}
+            disabledDate={disabledDate}
             selectedDate={selectedDateTime}
             onSelectionComplete={this.handleCalendarSelectionComplete}
           />
@@ -130,7 +134,9 @@ class DateTime extends Component {
 DateTime.defaultProps = {
   value: '',
   label: 'Pick date and time',
-  placeholder: 'Date & time'
+  placeholder: 'Date & time',
+  includeTime: false,
+  disabledDate: () => false
 };
 
 export default DateTime;

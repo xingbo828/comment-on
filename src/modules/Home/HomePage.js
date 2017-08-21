@@ -1,6 +1,7 @@
 import React from 'react';
 import { AddressAutoComplete, DateTime } from '../../globalComponents/Form';
 import { Field } from 'redux-form/immutable';
+import moment from 'moment';
 import {
     Container,
     Banner,
@@ -18,14 +19,22 @@ const renderMoveAddress = ({ input, label, ...rest, placeholder }) =>
     {...rest}
   />;
 
-const renderMoveDateTime = ({ input, label, placeholder, ...rest }) =>
-<DateTime
-  placeholder={placeholder}
-  onSelect={input.onChange}
-  label={label}
-  value={input.value}
-  includeTime
-/>;
+const renderMoveDateTime = ({ input, label, placeholder, ...rest }) => {
+  const disabledDate = (date) => {
+    return date.diff(moment(), 'days') < 1 ;
+  };
+  return (
+    <DateTime
+      placeholder={placeholder}
+      onSelect={input.onChange}
+      disabledDate={disabledDate}
+      label={label}
+      value={input.value}
+      includeTime
+    />
+  );
+}
+
 
 const HomePage = ({
   handleSubmit,

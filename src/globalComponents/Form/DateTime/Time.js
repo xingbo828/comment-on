@@ -47,7 +47,7 @@ class Time extends Component {
   increaseMin(e) {
     e.preventDefault();
     this.setState({
-      currentDisplayTime: this.state.currentDisplayTime.clone().add(1, 'minute')
+      currentDisplayTime: this.state.currentDisplayTime.clone().add(15, 'minute')
     });
   }
   decreaseHr(e) {
@@ -59,7 +59,7 @@ class Time extends Component {
   decreaseMin(e) {
     e.preventDefault();
     this.setState({
-      currentDisplayTime: this.state.currentDisplayTime.clone().subtract(1, 'minute')
+      currentDisplayTime: this.state.currentDisplayTime.clone().subtract(15, 'minute')
     });
   }
 
@@ -94,7 +94,7 @@ class Time extends Component {
           </TimeSelectionMin>
         </TimeSelection>
         <DoneBtnWrapper>
-          <Button primary onClick={this.setTime}>Save</Button>
+          <Button primary onClick={this.setTime}>Done</Button>
         </DoneBtnWrapper>
       </TimeContainer>
     );

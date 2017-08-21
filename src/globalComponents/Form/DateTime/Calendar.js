@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { instanceOf } from 'prop-types';
+import { instanceOf, func } from 'prop-types';
 import Moment from 'moment';
 import range from 'lodash/range';
 import chunk from 'lodash/chunk';
@@ -26,6 +26,25 @@ class Calendar extends Component {
     this.nextMonth = this.nextMonth.bind(this);
     this.isCurrentMonth = this.isCurrentMonth.bind(this);
     this.selectDate = this.selectDate.bind(this);
+    this.getSelectedDate = this.getSelectedDate.bind(this);
+    this.isDateDisabled = this.isDateDisabled.bind(this);
+    this.handleKeyboardEvent = this.handleKeyboardEvent.bind(this);
+  }
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeyboardEvent);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyboardEvent);
+  }
+
+  handleKeyboardEvent(e) {
+    if (e.code === 'ArrowLeft') {
+      this.prevMonth(e);
+    } else if(e.code === 'ArrowRight') {
+      this.nextMonth(e);
+    }
   }
 
   isSelectedDate(d, w) {
@@ -53,7 +72,12 @@ class Calendar extends Component {
     return !prevMonth && !nextMonth;
   }
 
-  selectDate(d, w) {
+  isDateDisabled(d, w) {
+    const m = this.getSelectedDate(d, w);
+    return this.props.disabledDate(m);
+  }
+
+  getSelectedDate(d, w) {
     const prevMonth = w === 0 && d > 7;
     const nextMonth = w >= 4 && d <= 14;
     const m = this.state.currentDisplayDate.clone();
@@ -66,12 +90,18 @@ class Calendar extends Component {
     else {
       m.date(d);
     }
-    this.setState({
-      currentDisplayDate: m,
-      selectedDate: m
-    });
+    return m;
+  }
 
-    this.props.onSelectionComplete(m);
+  selectDate(d, w) {
+    const m = this.getSelectedDate(d, w);
+    if(!this.isDateDisabled(d, w)) {
+      this.setState({
+        currentDisplayDate: m,
+        selectedDate: m
+      });
+      this.props.onSelectionComplete(m);
+    }
   }
 
   render() {
@@ -105,6 +135,7 @@ class Calendar extends Component {
                 {row.map(d =>
                   <CalendarCell
                     key={d}
+                    isDisabled={this.isDateDisabled(d, w)}
                     isCurrentMonth={this.isCurrentMonth(d, w)}
                     isSelectedDate={this.isSelectedDate(d, w)}
                     onClick={(e) => {e.preventDefault(); this.selectDate(d, w)}}
@@ -122,6 +153,7 @@ class Calendar extends Component {
 };
 
 Calendar.propTypes = {
-  selectedDate: instanceOf(Moment)
+  selectedDate: instanceOf(Moment),
+  disabledDate: func
 };
 export default Calendar;
