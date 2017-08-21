@@ -1,21 +1,21 @@
 import React from 'react';
 import { GeosuggestStyled, Label, LabelTxt } from './Styled';
 
-const AddressAutoComplete = ({ handleSuggestionSelect, placeholder, label }) => {
+const AddressAutoComplete = ({ onSelect, placeholder, label }) => {
   return (
     <Label>
       <LabelTxt>{label}</LabelTxt>
       <GeosuggestStyled
         country="ca"
         placeholder={placeholder}
-        onSuggestSelect={handleSuggestionSelect}
+        onSuggestSelect={onSelect}
       />
     </Label>
   );
 };
 
 AddressAutoComplete.defaultProps = {
-  handleSuggestionSelect: () => {},
+  onSelect: () => {},
   placeholder: 'Search place',
   label: 'Start Here',
 };

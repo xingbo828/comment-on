@@ -10,21 +10,21 @@ export const Banner = styled.div`
 
 `;
 
-export const AddressSearchWrapper = styled.div`
+export const SearchWrapper = styled.div`
   label {
     border-right-width: 0;
   }
   flex: 5;
 `;
 
-export const AddressSearchWrapperWithRadius = styled(AddressSearchWrapper)`
+export const SearchWrapperWithRadius = styled(SearchWrapper)`
   label {
     border-top-left-radius: 2px;
     border-bottom-left-radius: 2px;
   }
 `;
 
-export const AddressSearchButton = styled(Button)`
+export const SearchButton = styled(Button)`
   flex: 1;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;

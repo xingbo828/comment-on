@@ -1,66 +1,69 @@
-import React, { Component } from 'react';
-import { AddressAutoComplete } from '../../globalComponents/Form';
+import React from 'react';
+import { AddressAutoComplete, DateTime } from '../../globalComponents/Form';
+import { Field } from 'redux-form/immutable';
 import {
     Container,
     Banner,
-    AddressSearchWrapper,
-    AddressSearchWrapperWithRadius,
-    AddressSearchButton,
+    SearchWrapper,
+    SearchWrapperWithRadius,
+    SearchButton,
     Form
   } from './Styled';
 
-class HomePage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentAddress: null,
-      destinationAddress: null
-    };
-    this.isValidForSubmission = this.isValidForSubmission.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
-  }
+const renderMoveAddress = ({ input, label, ...rest, placeholder }) =>
+  <AddressAutoComplete
+    onSelect={input.onChange}
+    placeholder={placeholder}
+    label={label}
+    {...rest}
+  />;
 
-  setAddress(geoObj, type) {
-    const currentState = Object.assign({}, this.state);
-    currentState[type] = geoObj;
-    this.setState(currentState);
-  }
+const renderMoveDateTime = ({ input, label, placeholder, ...rest }) =>
+<DateTime
+  placeholder={placeholder}
+  label={label}
+  value={input.value}
+/>;
 
-  isValidForSubmission() {
-    return this.state.currentAddress && this.state.destinationAddress;
-  }
-
-  handleFormSubmit(e) {
-    e.preventDefault();
-    this.props.getBusinessList(this.state.currentAddress, this.state.destinationAddress);
-  }
-
-  render() {
-    return (
-      <Container>
-        <Banner>
-          <Form onSubmit={this.handleFormSubmit}>
-          <AddressSearchWrapperWithRadius>
-            <AddressAutoComplete
-              handleSuggestionSelect={(geoObj) =>{ this.setAddress(geoObj, 'currentAddress') }}
-              placeholder="current address"
-              label="Moving from"
-            />
-          </AddressSearchWrapperWithRadius>
-          <AddressSearchWrapper>
-            <AddressAutoComplete
-              handleSuggestionSelect={(geoObj) =>{ this.setAddress(geoObj, 'destinationAddress') }}
-              placeholder="destination address"
-              label="to"
-            />
-          </AddressSearchWrapper>
-          <AddressSearchButton primary disabled={!this.isValidForSubmission()}>Search</AddressSearchButton>
-          </Form>
-        </Banner>
-      </Container>
-    );
-  }
-};
+const HomePage = ({
+  handleSubmit,
+  pristine,
+  reset,
+  valid,
+  submitting
+}) => (
+  <Container>
+    <Banner>
+      <Form onSubmit={handleSubmit}>
+      <SearchWrapperWithRadius>
+        <Field
+          component={renderMoveAddress}
+          name="moveFrom"
+          placeholder="current address"
+          label="from"
+        />
+      </SearchWrapperWithRadius>
+      <SearchWrapper>
+        <Field
+          component={renderMoveAddress}
+          placeholder="destination address"
+          name="moveTo"
+          label="to"
+        />
+      </SearchWrapper>
+      <SearchWrapper>
+        <Field
+          component={renderMoveDateTime}
+          placeholder="pick a day to move"
+          name="moveDateTime"
+          label="when"
+        />
+      </SearchWrapper>
+      <SearchButton primary disabled={pristine || submitting || !valid}>Search</SearchButton>
+      </Form>
+    </Banner>
+  </Container>
+  );
 
 
 export default HomePage;
