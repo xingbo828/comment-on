@@ -180,7 +180,7 @@ export const TimeSelection = styled.div`
 `;
 
 export const TimeSelectionDisplay = styled.span`
-  font-size: 2.5rem;
+  font-size: 3.5rem;
   font-weight: bold;
   padding: 1rem 0;
   text-align: center;
