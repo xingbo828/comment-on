@@ -3,6 +3,7 @@ import { injectGlobal } from 'styled-components';
 import RobotoRegular from './fonts/Roboto-Regular.ttf';
 import RobotoMedium from './fonts/Roboto-Medium.ttf';
 import { textDark } from './Variables';
+import { media, offWhite } from './Variables';
 
 injectGlobal`
   @font-face {
@@ -26,5 +27,10 @@ injectGlobal`
     margin: 0;
     font-family: 'Roboto', sans-serif;
     -webkit-font-smoothing: antialiased;
+    background: ${offWhite};
+
+    ${media.fromMedium`
+      background: white;
+    `}
   }
 `;

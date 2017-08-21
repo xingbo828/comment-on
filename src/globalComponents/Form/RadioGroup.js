@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import Radio from './Radio';
 import styled from 'styled-components';
 
-const Container = styled.div`
-  border: solid ${props => props.theme.borderPrimary};
-  border-width: 0 0 1px 0;
-  margin: 0 0 1rem;
-`;
+const Container = styled.div``;
 
 const RadioGroupLabel = styled.label`
   font-weight: bold;

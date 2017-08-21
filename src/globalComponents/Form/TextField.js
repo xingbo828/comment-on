@@ -20,6 +20,7 @@ const Input = Styled.input`
   font-size: 1rem;
   padding: 1rem 0;
   outline: none;
+  font-family: inherit;
 
   &:focus + div{
     transform: scale(1);

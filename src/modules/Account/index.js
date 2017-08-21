@@ -17,9 +17,9 @@ const SideBarLinks = [
 ];
 
 const Account = ({ match: { isExact } }) => {
-  if (isExact) {
-    return <Redirect to="/account/profile-basic" />;
-  }
+  // if (isExact) {
+  //   return <Redirect to="/account/profile-basic" />;
+  // }
   return (
     <Settings links={SideBarLinks}>
       <Switch>

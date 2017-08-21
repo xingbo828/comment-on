@@ -17,6 +17,7 @@ const ContainerDiv = Styled.div`
 
 const PanelDiv = Styled.div`
   border-radius: 3px;
+  background: white;
   display: block;
   padding: 2rem;
   flex: 3;
@@ -29,6 +30,7 @@ const PanelDiv = Styled.div`
 `;
 
 const SidebarDiv = Styled.div`
+  background: white;
   margin: 0;
   display: block;
   flex: 1;
