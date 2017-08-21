@@ -21,6 +21,15 @@ class DateTime extends Component {
     };
     this.handleInputBtnClick = this.handleInputBtnClick.bind(this);
     this.handleSelectionComplete = this.handleSelectionComplete.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+  }
+
+  componentDidMount() {
+    document.addEventListener('mousedown', this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutside);
   }
 
   handleInputBtnClick(e) {
@@ -38,6 +47,16 @@ class DateTime extends Component {
     });
   }
 
+  handleClickOutside(event) {
+    if (this.state.isOverlayVisible && this.dateTimeContainer && !this.dateTimeContainer.contains(event.target)) {
+      this.setState({
+        isOverlayVisible: false
+      });
+    }
+  }
+
+
+
   render() {
     const { label, placeholder } = this.props;
     const { displayValue, isOverlayVisible, moment, selectedDate } = this.state;
@@ -48,7 +67,7 @@ class DateTime extends Component {
           onClick={this.handleInputBtnClick}
           datePicked={displayValue!==placeholder}
         >{displayValue}</InputBtn>
-        <DateTimeContainer visible={isOverlayVisible}>
+        <DateTimeContainer visible={isOverlayVisible} innerRef={container => this.dateTimeContainer = container}>
           <Calendar moment={moment} selectedDate={selectedDate} onSelectionComplete={this.handleSelectionComplete}/>
         </DateTimeContainer>
     </Label>
