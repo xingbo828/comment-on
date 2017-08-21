@@ -1,11 +1,29 @@
-import React from 'react';
 import styled from 'styled-components';
 import {
   media
-} from '../../foundation/Variables';
+} from '../../../foundation/Variables';
+
+export const Container = styled.div`
+  border: solid ${props => props.theme.borderPrimary};
+  border-width: 0 0 1px 0;
+  margin: 0 0 1rem;
+`;
+
+export const RadioGroupLabel = styled.label`
+  font-weight: bold;
+  font-size: 1rem;
+`;
+
+export const RadioList = styled.div`
+  display: block;
+  width: 100%;
+  font-size: 1rem;
+  padding: 1rem 0;
+  outline: none;
+`;
 
 
-const StyledLabel = styled.label`
+export const StyledLabel = styled.label`
   display: block;
   padding: .5rem 0;
   position: relative;
@@ -19,7 +37,7 @@ const StyledLabel = styled.label`
   `}
 `;
 
-const StyledRadio = styled.input`
+export const StyledRadio = styled.input`
   opacity: 0;
   position: absolute;
   height: 18px;
@@ -27,11 +45,11 @@ const StyledRadio = styled.input`
   z-index: 1;
 `;
 
-const StyledRadioReplacementContainer = styled.div`
+export const StyledRadioReplacementContainer = styled.div`
   display: flex;
 `;
 
-const StyledRadioReplacement = styled.span`
+export const StyledRadioReplacement = styled.span`
   border-color: ${props => props.theme.primaryColor};
   position: relative;
   top: 0;
@@ -61,23 +79,3 @@ const StyledRadioReplacement = styled.span`
     transition: all .3s cubic-bezier(.78,.14,.15,.86);
   }
 `;
-
-
-const Radio = ({ label, value, checked = false, onCheck }) => {
-  return (
-    <StyledLabel>
-      <StyledRadio
-        type="radio"
-        value={value}
-        onChange={onCheck}
-        checked={checked}
-      />
-      <StyledRadioReplacementContainer>
-        <StyledRadioReplacement checked={checked} />
-        {label}
-      </StyledRadioReplacementContainer>
-    </StyledLabel>
-  );
-};
-
-export default Radio;

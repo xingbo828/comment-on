@@ -1,25 +1,22 @@
 import React, { Component } from 'react';
-import Checkbox from './Checkbox';
-import styled from 'styled-components';
+import Radio from './Radio';
+import {
+  Container,
+  RadioGroupLabel,
+  RadioList
+} from './Styled';
 
-const CheckboxGroupLabel = styled.label`
-  ::after {
-    content: ':';
-    margin: 0 8px 0 2px;
-  }
-`;
-
-class CheckboxGroup extends Component {
+class RadioGroup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      checked: props.value || ''
+      selected: props.value || ''
     };
   }
 
   handleChange = (event) => {
     this.setState({
-      checked: event.target.value
+      selected: event.target.value
     });
     this.props.onChange(event, event.target.value);
   };
@@ -30,29 +27,29 @@ class CheckboxGroup extends Component {
       const {
         value,
         label,
-        onChange,
         ...other
       } = option.props;
+
       return (
-        <Checkbox
+        <Radio
           {...other}
           value={option.props.value}
           label={option.props.label}
-          onChange={this.handleChange}
+          onCheck={this.handleChange}
           checked={option.props.value === this.state.selected}
         />
       );
     }, this);
 
     return (
-      <div>
-        <CheckboxGroupLabel>
+      <Container>
+        <RadioGroupLabel>
           {this.props.label}
-        </CheckboxGroupLabel>
-        {options}
-      </div>
+        </RadioGroupLabel>
+        <RadioList>{options}</RadioList>
+      </Container>
     );
   }
 };
 
-export default CheckboxGroup;
+export default RadioGroup;
