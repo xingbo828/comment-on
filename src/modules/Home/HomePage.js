@@ -21,8 +21,10 @@ const renderMoveAddress = ({ input, label, ...rest, placeholder }) =>
 const renderMoveDateTime = ({ input, label, placeholder, ...rest }) =>
 <DateTime
   placeholder={placeholder}
+  onSelect={input.onChange}
   label={label}
   value={input.value}
+  includeTime
 />;
 
 const HomePage = ({
@@ -54,7 +56,7 @@ const HomePage = ({
       <SearchWrapper>
         <Field
           component={renderMoveDateTime}
-          placeholder="pick a day to move"
+          placeholder="pick a day & time to move"
           name="moveDateTime"
           label="when"
         />

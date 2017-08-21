@@ -13,6 +13,10 @@ const validate = validateFunc([{
   field: 'moveTo',
   validator: 'isRequired',
   message: 'Required'
+},{
+  field: 'moveDateTime',
+  validator: 'isRequired',
+  message: 'Required'
 }] ,validators);
 
 const mapDispatchToProps = dispatch => ({

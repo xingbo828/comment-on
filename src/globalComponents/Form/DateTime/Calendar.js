@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { instanceOf } from 'prop-types';
+import Moment from 'moment';
 import range from 'lodash/range';
 import chunk from 'lodash/chunk';
 import {
@@ -17,7 +19,6 @@ class Calendar extends Component {
     super(props, context);
     this.state = {
       selectedDate: this.props.selectedDate,
-      moment: this.props.moment,
       currentDisplayDate: this.props.selectedDate
     };
     this.isSelectedDate = this.isSelectedDate.bind(this);
@@ -74,6 +75,7 @@ class Calendar extends Component {
   }
 
   render() {
+    const { visible } = this.props;
     const { currentDisplayDate: m } = this.state;
     const weeks = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const d1 = m.clone().subtract(1, 'month').endOf('month').date();
@@ -85,7 +87,7 @@ class Calendar extends Component {
       range(1, 42 - d3 - d2 + 1)
     );
     return (
-      <CalendarContainer>
+      <CalendarContainer visible={visible}>
         <CalendarToolbar>
           <PrevMonthBtn onClick={this.prevMonth} />
           <CurrentDate>{this.state.currentDisplayDate.format('MMM, YYYY')}</CurrentDate>
@@ -119,4 +121,7 @@ class Calendar extends Component {
   }
 };
 
+Calendar.propTypes = {
+  selectedDate: instanceOf(Moment)
+};
 export default Calendar;
