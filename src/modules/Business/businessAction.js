@@ -35,6 +35,7 @@ export const addBusiness = (businessInfo) => (dispatch) => {
 
 const updateBusiness = (businessInfo, businessId) => {
   businessInfo = (businessInfo.toJS && businessInfo.toJS()) || businessInfo;
+  businessInfo.businessServiceArea = reduceServiceArea(businessInfo.businessServiceArea);
   const businessRef = businessDbRef.child(businessId);
   return uploadBusinessImgs(businessInfo.businessImgs, businessId)
   .then((imgUrls) => {
@@ -43,8 +44,15 @@ const updateBusiness = (businessInfo, businessId) => {
   });
 }
 
+const reduceServiceArea = (serviceAreas) => {
+  return serviceAreas && serviceAreas.reduce((result, serviceArea) => {
+    result[serviceArea] = true;
+    return result;
+  }, {})
+}
+
 const uploadBusinessImgs = (businessImgs, businessId) => {
-  if (Array.isArray(businessImgs)) {
+  if (Array.isArray(businessImgs) && businessImgs.length) {
     const storagePromises = businessImgs.map(img => {
       if (typeof img === 'string') {
         return Promise.resolve(img);
@@ -57,4 +65,5 @@ const uploadBusinessImgs = (businessImgs, businessId) => {
     });
     return Promise.all(storagePromises);
   }
+  return Promise.resolve([]);
 }
