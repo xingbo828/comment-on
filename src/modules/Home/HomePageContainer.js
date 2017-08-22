@@ -1,9 +1,8 @@
 import HomePage from './HomePage';
-import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
-import { getBusinessList } from './homepageAction';
 import validators, { validateFunc } from '../Common/validators';
+import { withRouter } from 'react-router-dom'
 
 const validate = validateFunc([{
   field: 'moveFrom',
@@ -19,16 +18,17 @@ const validate = validateFunc([{
   message: 'Required'
 }] ,validators);
 
-const mapDispatchToProps = dispatch => ({
-  getBusinessList: (current, destination) => dispatch(getBusinessList(current, destination))
-});
 
 const enhanced = compose(
-  connect(null, mapDispatchToProps),
+  withRouter,
   reduxForm({
     form: 'homepage',
     onSubmit: (values, dispatch, props) => {
-      console.log(values);
+      const formData = values.toJS();
+      props.history.push({
+        pathname: '/business/search',
+        search: `?origin=${formData.moveFrom.placeId}&destination=${formData.moveTo.placeId}&dateTime=${formData.moveDateTime.unix()}`
+      });
     },
     validate
   }),

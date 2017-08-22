@@ -4,7 +4,23 @@ import { updateUserBusiness } from '../Account/accountAction';
 const businessDbRef = database.ref().child('businesses');
 const imgStorageRef = storage.ref();
 
-export const UPDATE_BUSINESS_PROFILE = 'UPDATE_BUSINESS_PROFILE';
+
+export const SEARCH_BUSINESS = 'SEARCH_BUSINESS';
+
+export const searchBusiness = (origin, destination, dateTime) => (dispatch) => {
+  const API = `https://us-central1-comment-on-85597.cloudfunctions.net/business?origin=${origin}&destination=${destination}`;
+  return fetch(API)
+  .then(res => res.json())
+  .then((business) => {
+    return dispatch({
+      type: SEARCH_BUSINESS,
+      data: business
+    });
+  });
+}
+
+
+// export const UPDATE_BUSINESS_PROFILE = 'UPDATE_BUSINESS_PROFILE';
 
 export const addBusiness = (businessInfo) => (dispatch) => {
   businessInfo = businessInfo.toJS();
@@ -12,27 +28,18 @@ export const addBusiness = (businessInfo) => (dispatch) => {
   businessInfo.businessOwners = {};
   businessInfo.businessOwners[uid] = true;
   const businessId = businessDbRef.push().key;
-  console.log(businessInfo);
 
   return updateUserBusiness(businessId, uid)
-  .then(() => {
-    return dispatch(updateBusiness(businessInfo, businessId));
-  });
+  .then(() => updateBusiness(businessInfo, businessId));
 }
 
-export const updateBusiness = (businessInfo, businessId) => (dispatch) => {
+const updateBusiness = (businessInfo, businessId) => {
   businessInfo = (businessInfo.toJS && businessInfo.toJS()) || businessInfo;
   const businessRef = businessDbRef.child(businessId);
   return uploadBusinessImgs(businessInfo.businessImgs, businessId)
   .then((imgUrls) => {
     businessInfo.businessImgs = imgUrls;
     return businessRef.set(businessInfo);
-  })
-  .then(() => {
-    dispatch({
-      type: UPDATE_BUSINESS_PROFILE,
-      data: businessInfo
-    })
   });
 }
 
