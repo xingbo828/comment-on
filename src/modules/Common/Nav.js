@@ -53,7 +53,13 @@ const ContextHeaderLink = styled.li`
 
 const NavRoot = styled.nav`
   display: block;
-  margin: 0 0 4rem;
+  margin: 0 0 2rem;
+  background: white;
+
+  ${props => props.theme.media.fromMedium`
+      margin: 0 0 4rem;
+    `
+  }
 `;
 
 /*
@@ -73,25 +79,60 @@ const Pic = styled.div`
 */
 
 const NavList = styled.ul`
+  display: flex;
   list-style-type: none;
   margin: 0;
   padding: 0;
   height: 60px;
   line-height: 60px;
   border-bottom: 1px solid ${fromTheme('borderPrimary')};
+
+  ${props => props.theme.media.fromMedium`
+      display: block;
+      margin: 0 0 4rem;
+    `
+  }
 `;
 
 const NavListItem = styled.li`
-  height: 60px;
-  display: inline-block;
-  border-right: 1px solid ${fromTheme('borderPrimary')};
+  text-align: center;
+  flex: 1;
+
+  span {
+    display: none;
+  }
 
   a {
     text-decoration: none;
-    padding: 0 2rem;
+    height: 60px;
+    display: block;
     color: inherit;
     cursor: pointer;
     font-weight: bold;
+  }
+
+  a::after {
+    content: '\f015';
+    font-family: FontAwesome;
+    font-size: 1rem;
+  }
+
+  ${props => props.theme.media.fromMedium`
+      border-right: 1px solid ${fromTheme('borderPrimary')};
+      display: inline-block;
+
+      span {
+        display: inline;
+      }
+
+      a {
+        padding: 0 2rem;
+      }
+      
+      a::after {
+        display: none;
+      }
+    `
   }
 `;
 
@@ -109,10 +150,11 @@ export const Nav = ({ user, isLoggedIn, logout }) => {
         <AccountNav />
       </ContextHeader>
       <NavList>
-        <NavListItem><Link to="/">Overview</Link></NavListItem>
-        <NavListItem><Link to="/">Menu Item</Link></NavListItem>
-        <NavListItem><Link to="/">Menu Item</Link></NavListItem>
-        { !isLoggedIn && <NavListItem><Link to="/login">Login</Link></NavListItem> }
+        <NavListItem><Link to="/"><span>Overview</span></Link></NavListItem>
+        <NavListItem><Link to="/"><span>Menu Item</span></Link></NavListItem>
+        <NavListItem><Link to="/"><span>Menu Item</span></Link></NavListItem>
+        <NavListItem><Link to="/"><span>Menu Item</span></Link></NavListItem>
+        {/* { !isLoggedIn && <NavListItem><Link to="/login">Login</Link></NavListItem> } */}
       </NavList>
     </NavRoot>
   );

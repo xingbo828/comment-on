@@ -6,12 +6,14 @@ import ImgUpload from './ImgUpload';
 import TextArea from './TextArea';
 import { StyledSelect, StyledOption } from './Select';
 import AddressAutoComplete from './AddressAutoComplete';
+import DateTime from './DateTime';
 
 export {
   Button,
   TextField,
   TextArea,
   AddressAutoComplete,
+  DateTime,
   Radio,
   Checkbox,
   ImgUpload,

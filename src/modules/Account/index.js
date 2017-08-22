@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, withRouter, Redirect} from 'react-router-dom';
+import { Switch, withRouter } from 'react-router-dom';
 import ProtectedRoute from '../Common/ProtectedRoute';
 import BasicProfile from './BasicProfile';
 import ProfilePicture from './ProfilePicture';
@@ -17,9 +17,9 @@ const SideBarLinks = [
 ];
 
 const Account = ({ match: { isExact } }) => {
-  if (isExact) {
-    return <Redirect to="/account/profile-basic" />;
-  }
+  // if (isExact) {
+  //   return <Redirect to="/account/profile-basic" />;
+  // }
   return (
     <Settings links={SideBarLinks}>
       <Switch>
