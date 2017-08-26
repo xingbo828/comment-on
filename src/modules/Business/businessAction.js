@@ -30,18 +30,23 @@ export const addBusiness = (businessInfo) => (dispatch) => {
   const businessId = businessDbRef.push().key;
 
   return updateUserBusiness(businessId, uid)
-  .then(() => updateBusiness(businessInfo, businessId));
+  .then(() => updateBusinessBasic(businessInfo, businessId));
 }
 
-const updateBusiness = (businessInfo, businessId) => {
+export const addBusinessImages = (profileImages) => (dispatch) => {
+
+}
+
+const updateBusinessBasic = (businessInfo, businessId) => {
   businessInfo = (businessInfo.toJS && businessInfo.toJS()) || businessInfo;
   businessInfo.businessServiceArea = reduceServiceArea(businessInfo.businessServiceArea);
   const businessRef = businessDbRef.child(businessId);
-  return uploadBusinessImgs(businessInfo.businessImgs, businessId)
-  .then((imgUrls) => {
-    businessInfo.businessImgs = imgUrls;
-    return businessRef.set(businessInfo);
-  });
+  return businessRef.set(businessInfo);
+  // return uploadBusinessImgs(businessInfo.businessImgs, businessId)
+  // .then((imgUrls) => {
+  //   businessInfo.businessImgs = imgUrls;
+  //   return businessRef.set(businessInfo);
+  // });
 }
 
 const reduceServiceArea = (serviceAreas) => {
