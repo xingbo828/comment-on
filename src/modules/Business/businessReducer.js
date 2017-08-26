@@ -1,19 +1,32 @@
 import Immutable from 'immutable';
-import { createSelector } from 'reselect';
-import { UPDATE_BUSINESS_PROFILE } from './businessAction';
+import { combineReducers } from 'redux-immutable';
+// import { createSelector } from 'reselect';
+import { SEARCH_BUSINESS } from './businessAction';
 
-const initState = Immutable.fromJS({
+
+
+const initSearchResultState = Immutable.fromJS({
   status: 'UNINIT',
-  user: {}
+  result: []
 });
 
-export default (state = initState, action) => {
+const search = (state = initSearchResultState, action) => {
   switch (action.type) {
-    case UPDATE_BUSINESS_PROFILE:
+    case SEARCH_BUSINESS: {
       return state.withMutations((st) => {
-        st.set('business', Immutable.fromJS(action.data));
+        st.set('status', 'SUCCESS');
+        st.set('result', Immutable.fromJS(action.data));
       });
+    }
+
     default:
       return state;
   }
 };
+
+// Selectors
+export const getSearchResult = (state) => ({ search: state.getIn(['business', 'search'])});
+
+export default combineReducers({
+  search
+});

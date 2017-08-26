@@ -1,16 +1,37 @@
 import HomePage from './HomePage';
-import { connect } from 'react-redux';
 import { compose } from 'recompose';
+import { reduxForm } from 'redux-form/immutable';
+import validators, { validateFunc } from '../Common/validators';
+import { withRouter } from 'react-router-dom'
 
-import { getBusinessList } from './homepageAction';
+const validate = validateFunc([{
+  field: 'moveFrom',
+  validator: 'isRequired',
+  message: 'Required'
+}, {
+  field: 'moveTo',
+  validator: 'isRequired',
+  message: 'Required'
+},{
+  field: 'moveDateTime',
+  validator: 'isRequired',
+  message: 'Required'
+}] ,validators);
 
-
-const mapDispatchToProps = dispatch => ({
-  getBusinessList: (current, destination) => dispatch(getBusinessList(current, destination))
-});
 
 const enhanced = compose(
-  connect(null, mapDispatchToProps)
+  withRouter,
+  reduxForm({
+    form: 'homepage',
+    onSubmit: (values, dispatch, props) => {
+      const formData = values.toJS();
+      props.history.push({
+        pathname: '/business/search',
+        search: `?origin=${formData.moveFrom.placeId}&destination=${formData.moveTo.placeId}&dateTime=${formData.moveDateTime.unix()}`
+      });
+    },
+    validate
+  }),
 );
 
 export default enhanced(HomePage);

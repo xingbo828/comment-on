@@ -1,9 +1,9 @@
 import React from 'react';
-import { Switch, withRouter } from 'react-router-dom';
+import { Switch, withRouter, Route } from 'react-router-dom';
 import ProtectedRoute from '../Common/ProtectedRoute';
 import BusinessCreation from './Create';
 import Profile from './Profile';
-
+import BusinessSearch from './Search';
 
 const Business = ({ match: { isExact } }) => {
   return (
@@ -15,6 +15,10 @@ const Business = ({ match: { isExact } }) => {
       <ProtectedRoute
         path="/business/:businessId"
         component={Profile}
+      />
+      <Route
+        path="/business/search"
+        component={BusinessSearch}
       />
     </Switch>
   );

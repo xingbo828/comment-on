@@ -21,7 +21,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={asyncLoad(() => import('./modules/Home'))} />
               <ProtectedRoute path="/account" component={asyncLoad(() => import('./modules/Account'))} />
-              <ProtectedRoute path="/business" component={asyncLoad(() => import('./modules/Business'))} />
+              <Route path="/business" component={asyncLoad(() => import('./modules/Business'))} />
               <Route path="/login" component={asyncLoad(() => import('./modules/Account/Login'))} />
             </Switch>
           </main>

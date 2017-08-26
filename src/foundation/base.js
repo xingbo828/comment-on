@@ -49,5 +49,8 @@ injectGlobal`
     ${media.fromMedium`
       background: white;
     `}
+    * {
+      box-sizing: border-box;
+    }
   }
 `;
