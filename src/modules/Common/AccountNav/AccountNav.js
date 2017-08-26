@@ -123,6 +123,7 @@ class AccountNav extends React.Component {
           <DisplayName>{user.displayName}</DisplayName>
           <MenuList onClick={this.handleClick}>
             <MenuItem><Link to="/account">Settings</Link></MenuItem>
+            <MenuItem><Link to="/business-profile">Company profile</Link></MenuItem>
             <MenuItem><a href="" onClick={logout}>Logout</a></MenuItem>
           </MenuList>
         </Menu>

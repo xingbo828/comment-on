@@ -11,7 +11,7 @@ const fromTheme = (prop) => ({ theme }) => theme[prop]
 const ContextHeader = styled.div`
   display: flex;
   box-sizing: border-box;
-  background: ${fromTheme('primaryColor')};
+  // background: ${fromTheme('primaryColor')};
   height: 60px;
   width: 100%;
   line-height: 60px;
@@ -26,7 +26,9 @@ const Heading = styled.h1`
   margin: 0 1rem 0 0;
   padding: 0 1rem 0 0;
   border-right: 1px solid white;
-  font-weight: bold;
+  font-weight: 800;
+  letter-spacing: .1em;
+  color: ${fromTheme('brandPrimary')};
 `;
 
 const Location = styled.span`
@@ -53,11 +55,9 @@ const ContextHeaderLink = styled.li`
 
 const NavRoot = styled.nav`
   display: block;
-  margin: 0 0 2rem;
   background: white;
 
   ${props => props.theme.media.fromMedium`
-      margin: 0 0 4rem;
     `
   }
 `;
@@ -89,7 +89,6 @@ const NavList = styled.ul`
 
   ${props => props.theme.media.fromMedium`
       display: block;
-      margin: 0 0 4rem;
     `
   }
 `;
@@ -140,8 +139,8 @@ export const Nav = ({ user, isLoggedIn, logout }) => {
   return (
     <NavRoot>
       <ContextHeader>
-        <Heading>Comment on</Heading>
-        <Location>Vancouver</Location>
+        <Heading>LOGO</Heading>
+        {/* <Location>Vancouver</Location> */}
         <ContextHeaderLinks>
           <ContextHeaderLink>
             <Link to="/business/create">Register business</Link>
@@ -149,13 +148,12 @@ export const Nav = ({ user, isLoggedIn, logout }) => {
         </ContextHeaderLinks>
         <AccountNav />
       </ContextHeader>
-      <NavList>
+      {/* <NavList>
         <NavListItem><Link to="/"><span>Overview</span></Link></NavListItem>
         <NavListItem><Link to="/"><span>Menu Item</span></Link></NavListItem>
         <NavListItem><Link to="/"><span>Menu Item</span></Link></NavListItem>
         <NavListItem><Link to="/"><span>Menu Item</span></Link></NavListItem>
-        {/* { !isLoggedIn && <NavListItem><Link to="/login">Login</Link></NavListItem> } */}
-      </NavList>
+      </NavList> */}
     </NavRoot>
   );
 };
@@ -172,4 +170,3 @@ const NavContainer = compose(
 )(Nav);
 
 export default NavContainer;
-
