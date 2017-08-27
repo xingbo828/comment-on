@@ -1,26 +1,4 @@
 import styled from 'styled-components';
-import {
-  media,
-  gutterWidth
-} from '../../../foundation/Variables';
-
-
-export const Container = styled.div`
-  display: flex;
-
-  ${media.fromMedium`
-    padding: 0 ${gutterWidth} 50px;
-    margin: 0 auto;
-    max-width: 1200px;
-  `}
-`;
-
-export const Form = styled.form`
-  width: 100%;
-  ${media.fromMedium`
-    width: 60%;
-  `}
-`;
 
 export const AddressDetailContainer = styled.div`
   display: flex;
