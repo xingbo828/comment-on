@@ -17,7 +17,8 @@ exports.fetch = (url) => {
       result.businessAddr1 = $info.find('span[itemprop="streetAddress"]').text();
       result.businessAddrCity = $info.find('span[itemprop="addressLocality"]').text();
       result.businessPhoneNumber = $info.find('span[itemprop="phone"]').text();
-      result.businessImgs = [$element.find('.sponsor_img img').prop('src')];
+      result.logo = $element.find('.sponsor_img img').prop('src');
+      result.businessImgs = [result.logo];
       result.businessAddrProv = 'British Columbia';
       result.businessDescription = result.businessName;
       data.push(result);
