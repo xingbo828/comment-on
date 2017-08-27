@@ -1,0 +1,13 @@
+{
+  "name": "firebaseSeedScript",
+  "description": "script to parse and seed firebase db",
+  "dependencies": {
+    "cheerio": "latest",
+    "firebase-admin": "~4.2.1",
+    "firebase": "^4.1.3",
+    "moment": "latest",
+    "node-fetch": "latest",
+    "@google/maps": "latest"
+  },
+  "private": true
+}
