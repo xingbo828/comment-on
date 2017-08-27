@@ -45,6 +45,11 @@ const enhance = compose(
     onSubmit: (values, dispatch, props) => {
       return props.addBusiness(values);
     },
+    onSubmitSuccess: (result, dispatch, props) => {
+      props.history.push({
+        pathname: `/business/edit/${result}/business-pictures`
+      });
+    },
     validate
   })
 );

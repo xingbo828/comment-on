@@ -27,7 +27,9 @@ const enhance = compose(
   withSettingsContext,
   reduxForm({
     form: 'profile.photo',
-    onSubmit: (values, dispatch, props) =>  props.uploadProfileImage(values.get('photoURL')[0], props.initialValues.get('uid')),
+    onSubmit: (values, dispatch, props) =>  {
+      return props.uploadProfileImage(values.get('photoURL'), props.initialValues.get('uid'))
+    },
     validate,
     onSubmitSuccess: (values, dispatch, props) => {
       props.toggleFormMode();

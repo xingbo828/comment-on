@@ -13,9 +13,12 @@ class SingleImageUpload extends Component {
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
+    console.log(this.props.input.value);
     this.state = {
-      imageUrl: this.props.input.value
+      imageUrl: this.props.input.value,
+      touched: false
     };
+    this.getBase64 = this.getBase64.bind(this);
   }
 
   getBase64(img, callback) {
@@ -29,17 +32,27 @@ class SingleImageUpload extends Component {
     e.preventDefault();
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.input.value !== nextProps.input.value && !this.state.touched) {
+      this.state = {
+        imageUrl: nextProps.input.value
+      };
+    }
+  }
+
   handleOnChange(event) {
     const img = event.target.files[0];
+    const updateImageUrlInState = (imgData) => {
+      this.setState({
+        imageUrl: imgData,
+        touched: true
+      });
+      this.props.input.onChange(img);
+    };
     if(!img) {
       return;
     }
-    this.getBase64(img, (imgData) => {
-      this.setState({
-        imageUrl: imgData
-      });
-      this.props.input.onChange(event, img);
-    });
+    this.getBase64(img, updateImageUrlInState.bind(this));
   }
 
   render() {

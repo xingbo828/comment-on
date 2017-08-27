@@ -8,31 +8,37 @@ import {
 const MultiImgUpload = ImgUpload.MultiImgUpload;
 const SingleImgUpload = ImgUpload.SingleImgUpload;
 
-const renderBusinessLogo = ({ input, ...rest }) =>
-<SingleImgUpload
+const renderBusinessLogo = ({ input, ...rest }) => {
+  return <SingleImgUpload
   input={input}
   {...rest}
   actionText="Upload logo"
 />;
+}
 
 
-const renderBusinessImgs = ({ input, ...rest }) =>
-<MultiImgUpload
+
+const renderBusinessImgs = ({ input, ...rest }) =>{
+  return <MultiImgUpload
   input={input}
+  images={input.value}
   {...rest}
   limit={3}
   actionText="Upload profile images(s)"
 />;
+}
 
-const ProfilePictureCreation = ({
+
+const ProfilePicture = ({
   handleSubmit,
   pristine,
   reset,
   valid,
-  submitting
+  submitting,
+  doneLoading
 }) => {
-  return (
-      <div>
+  if (!doneLoading) return null;
+  return (<form onSubmit={handleSubmit}>
         <Field
           component={renderBusinessLogo}
           name="businessLogo"
@@ -50,8 +56,7 @@ const ProfilePictureCreation = ({
         >
           Submit
         </Button>
-      </div>
-  );
+    </form>);
 };
 
-export default ProfilePictureCreation;
+export default ProfilePicture;

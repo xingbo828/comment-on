@@ -30,23 +30,34 @@ export const addBusiness = (businessInfo) => (dispatch) => {
   const businessId = businessDbRef.push().key;
 
   return updateUserBusiness(businessId, uid)
-  .then(() => updateBusinessBasic(businessInfo, businessId));
+  .then(() => updateBusiness(businessInfo, businessId))
+  .then(() => businessId);
 }
 
-export const addBusinessImages = (profileImages) => (dispatch) => {
-
+export const getBusinessInfo = (businessId) => {
+  const businessRef = businessDbRef.child(businessId);
+  return businessRef.once('value').then(obj => obj.toJSON());
 }
 
-const updateBusinessBasic = (businessInfo, businessId) => {
+export const editBusinessImages = (images, businessId) => (dispatch) => {
+  const { businessLogo, businessImgs } = images.toJS();
+  const uploadBusinessImgsPromise = uploadBusinessImgs(businessImgs, businessId);
+  const uploadBusinessLogoPromise = uploadBusinessLogo(businessLogo, businessId);
+  return Promise.all([uploadBusinessLogoPromise, uploadBusinessImgsPromise])
+  .then(([imgLogoUrl, imgProfileUrls]) => {
+    const businessRef = businessDbRef.child(businessId);
+    return businessRef.set({
+      logo: imgLogoUrl,
+      businessImgs: imgProfileUrls
+    });
+  });
+}
+
+const updateBusiness = (businessInfo, businessId) => {
   businessInfo = (businessInfo.toJS && businessInfo.toJS()) || businessInfo;
   businessInfo.businessServiceArea = reduceServiceArea(businessInfo.businessServiceArea);
   const businessRef = businessDbRef.child(businessId);
   return businessRef.set(businessInfo);
-  // return uploadBusinessImgs(businessInfo.businessImgs, businessId)
-  // .then((imgUrls) => {
-  //   businessInfo.businessImgs = imgUrls;
-  //   return businessRef.set(businessInfo);
-  // });
 }
 
 const reduceServiceArea = (serviceAreas) => {
@@ -55,6 +66,17 @@ const reduceServiceArea = (serviceAreas) => {
     return result;
   }, {})
 }
+
+
+const uploadBusinessLogo = (businessLogo, businessId) => {
+  if (typeof businessLogo === 'string') {
+    return Promise.resolve(businessLogo);
+  }
+  const imgRef = imgStorageRef.child(`images/business/${businessId}/${businessLogo.name}`);
+  return imgRef.put(businessLogo)
+  .then((result) => result.downloadURL);
+};
+
 
 const uploadBusinessImgs = (businessImgs, businessId) => {
   if (Array.isArray(businessImgs) && businessImgs.length) {
