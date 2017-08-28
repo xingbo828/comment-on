@@ -2,17 +2,13 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose, lifecycle, branch, renderComponent } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
-import ProfilePicture from './ProfilePicture';
-import { editBusinessImages, getBusinessInfo } from '../businessAction';
+import BasicInfo from './BasicInfo';
+import { getBusinessInfo, updateBusiness } from '../businessAction';
 import Spinner from '../../../globalComponents/Spinner';
 
-const mapDispatchToProps = dispatch => ({
-  editBusinessImages: (values, businessId) => dispatch(editBusinessImages(values, businessId))
-});
 
 const enhance = compose(
   withRouter,
-  connect(null, mapDispatchToProps),
   lifecycle({
     componentDidMount() {
       const businessId = this.props.match.params.businessId;
@@ -23,7 +19,9 @@ const enhance = compose(
       .then((businessInfo) => {
         this.setState({
           initialValues: Object.assign(businessInfo, {
-            businessImgs: (businessInfo && businessInfo.businessImgs) ? Object.values(businessInfo.businessImgs) : []
+            businessImgs: (businessInfo && businessInfo.businessImgs) ? Object.values(businessInfo.businessImgs) : [],
+            businessHour: (businessInfo && businessInfo.businessHour) ? Object.values(businessInfo.businessHour) : [],
+            businessServiceArea: (businessInfo && businessInfo.businessServiceArea) ? Object.keys(businessInfo.businessServiceArea) : [],
           }),
           doneLoading: true
         });
@@ -32,11 +30,12 @@ const enhance = compose(
   }),
   branch(({doneLoading}) => !doneLoading, renderComponent(Spinner)),
   reduxForm({
-    form: 'business.edit.profilePictures',
+    form: 'business.edit.basicInfo',
     onSubmit: (values, dispatch, props) => {
-      return props.editBusinessImages(values, props.match.params.businessId);
-    },
+      console.log(values);
+      return updateBusiness(values, props.match.params.businessId);
+    }
   })
 );
 
-export default enhance(ProfilePicture);
+export default enhance(BasicInfo);

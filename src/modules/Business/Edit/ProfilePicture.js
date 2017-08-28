@@ -37,11 +37,11 @@ const ProfilePicture = ({
   submitting,
   doneLoading
 }) => {
-  if (!doneLoading) return null;
-  return (<form onSubmit={handleSubmit}>
+  return (
+    <form onSubmit={handleSubmit}>
         <Field
           component={renderBusinessLogo}
-          name="businessLogo"
+          name="logo"
           label="Business Logo"
           />
         <Field
@@ -56,7 +56,8 @@ const ProfilePicture = ({
         >
           Submit
         </Button>
-    </form>);
+    </form>
+  );
 };
 
 export default ProfilePicture;

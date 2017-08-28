@@ -13,7 +13,6 @@ class SingleImageUpload extends Component {
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
-    console.log(this.props.input.value);
     this.state = {
       imageUrl: this.props.input.value,
       touched: false

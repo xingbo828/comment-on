@@ -19,6 +19,7 @@ const ContextHeader = styled.div`
 `;
 
 const Heading = styled.h1`
+  text-decoration: none;
   flex: 1;
   display: inline;
   font-size: 1rem;
@@ -127,7 +128,7 @@ const NavListItem = styled.li`
       a {
         padding: 0 2rem;
       }
-      
+
       a::after {
         display: none;
       }
@@ -139,7 +140,7 @@ export const Nav = ({ user, isLoggedIn, logout }) => {
   return (
     <NavRoot>
       <ContextHeader>
-        <Heading>LOGO</Heading>
+        <Link to="/"><Heading>LOGO</Heading></Link>
         {/* <Location>Vancouver</Location> */}
         <ContextHeaderLinks>
           <ContextHeaderLink>

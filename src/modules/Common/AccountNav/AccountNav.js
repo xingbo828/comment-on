@@ -101,17 +101,17 @@ class AccountNav extends React.Component {
   handleClick(event) {
     this.setState({ active: !this.state.active });
   }
-  
+
   render() {
     const { user, isLoggedIn, logout } = this.props;
     const active = this.state.active;
-
+    const myBusiness = user.businesses ? Object.keys(user.businesses)[0] : null;
     if (!isLoggedIn) {
       return (null);
     }
-    
+
     return (
-      <ContainerDiv 
+      <ContainerDiv
         active={active}
         innerRef={(el) => { this.containerRef = el; }}
       >
@@ -123,7 +123,7 @@ class AccountNav extends React.Component {
           <DisplayName>{user.displayName}</DisplayName>
           <MenuList onClick={this.handleClick}>
             <MenuItem><Link to="/account">Settings</Link></MenuItem>
-            <MenuItem><Link to="/business-profile">Company profile</Link></MenuItem>
+            {myBusiness && <MenuItem><Link to={`/business/profile/${myBusiness}`}>Company profile</Link></MenuItem>}
             <MenuItem><a href="" onClick={logout}>Logout</a></MenuItem>
           </MenuList>
         </Menu>
