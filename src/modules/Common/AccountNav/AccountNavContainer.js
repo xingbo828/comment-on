@@ -1,4 +1,4 @@
-import { compose, withProps } from 'recompose';
+import { compose, withProps, renderNothing, branch } from 'recompose';
 import AccountNav from './AccountNav';
 import isLoggedIn from '../isLoggedIn';
 import { auth } from '../../../firebaseClient';
@@ -11,5 +11,9 @@ export default compose(
   isLoggedIn,
   withProps(props => ({
     logout
-  }))
+  })),
+  branch(
+    props => props.loginStatus === 'UNINIT',
+    renderNothing
+  )
 )(AccountNav);

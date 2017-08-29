@@ -10,23 +10,31 @@ import Settings from '../../../globalComponents/Settings';
 const BusinessEdit = ({ match: { isExact, params: { businessId } } }) => {
   const SideBarLinks = [
     {
-      title: "Basic Info",
-      path: `/business/edit/${businessId}/basic-info`
+      title: "Basic info",
+      path: `/business/edit/${businessId}/basic`
     },
     {
-      title: "Pictures",
-      path: `/business/edit/${businessId}/business-pictures`
+      title: "Profile pictures",
+      path: `/business/edit/${businessId}/pictures`
+    },
+    {
+      title: "Vehicles",
+      path: `/business/edit/${businessId}/vehicles`
+    },
+    {
+      title: "Team",
+      path: `/business/edit/${businessId}/team`
     }
   ];
   return (
     <Settings links={SideBarLinks}>
       <Switch>
         <ProtectedRoute
-          path="/business/edit/:businessId/basic-info"
+          path="/business/edit/:businessId/basic"
           component={BasicInfoContainer}
         />
         <ProtectedRoute
-          path="/business/edit/:businessId/business-pictures"
+          path="/business/edit/:businessId/pictures"
           component={ProfilePictureContainer}
         />
       </Switch>

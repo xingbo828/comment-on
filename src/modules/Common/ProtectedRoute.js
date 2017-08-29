@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, withRouter, Redirect } from 'react-router-dom';
-import { compose } from 'recompose';
+import { compose, branch, renderNothing } from 'recompose';
 import isLoggedIn from './isLoggedIn';
 
 const ProtectedRoute = ({ component: Component, isLoggedIn, ...rest }) => (
@@ -10,5 +10,9 @@ const ProtectedRoute = ({ component: Component, isLoggedIn, ...rest }) => (
 
 export default compose(
   withRouter,
-  isLoggedIn
+  isLoggedIn,
+  branch(
+    props => props.loginStatus === 'UNINIT',
+    renderNothing
+  )
 )(ProtectedRoute);
