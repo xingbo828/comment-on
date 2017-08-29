@@ -1,11 +1,9 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { compose, lifecycle, branch, renderComponent } from 'recompose';
+import { compose, lifecycle, branch, renderNothing } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import BasicInfo from './BasicInfo';
 import { getBusinessInfo, updateBusiness } from '../businessAction';
-import Spinner from '../../../globalComponents/Spinner';
-
 
 const enhance = compose(
   withRouter,
@@ -28,11 +26,10 @@ const enhance = compose(
       })
     }
   }),
-  branch(({doneLoading}) => !doneLoading, renderComponent(Spinner)),
+  branch(({doneLoading}) => !doneLoading, renderNothing),
   reduxForm({
     form: 'business.edit.basicInfo',
     onSubmit: (values, dispatch, props) => {
-      console.log(values);
       return updateBusiness(values, props.match.params.businessId);
     }
   })

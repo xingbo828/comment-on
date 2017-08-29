@@ -4,6 +4,7 @@ import {
   Button,
   ImgUpload,
 } from '../../../globalComponents/Form';
+import { GridContainer } from '../../../globalComponents/Grid';
 
 const MultiImgUpload = ImgUpload.MultiImgUpload;
 const SingleImgUpload = ImgUpload.SingleImgUpload;
@@ -38,7 +39,8 @@ const ProfilePicture = ({
   doneLoading
 }) => {
   return (
-    <form onSubmit={handleSubmit}>
+    <GridContainer>
+      <form onSubmit={handleSubmit}>
         <Field
           component={renderBusinessLogo}
           name="logo"
@@ -56,7 +58,8 @@ const ProfilePicture = ({
         >
           Submit
         </Button>
-    </form>
+      </form>
+    </GridContainer>
   );
 };
 

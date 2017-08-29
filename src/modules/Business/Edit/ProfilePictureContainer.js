@@ -1,10 +1,9 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { compose, lifecycle, branch, renderComponent } from 'recompose';
+import { compose, lifecycle, branch, renderNothing } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import ProfilePicture from './ProfilePicture';
 import { editBusinessImages, getBusinessInfo } from '../businessAction';
-import Spinner from '../../../globalComponents/Spinner';
 
 const mapDispatchToProps = dispatch => ({
   editBusinessImages: (values, businessId) => dispatch(editBusinessImages(values, businessId))
@@ -30,7 +29,7 @@ const enhance = compose(
       })
     }
   }),
-  branch(({doneLoading}) => !doneLoading, renderComponent(Spinner)),
+  branch(({doneLoading}) => !doneLoading, renderNothing),
   reduxForm({
     form: 'business.edit.profilePictures',
     onSubmit: (values, dispatch, props) => {

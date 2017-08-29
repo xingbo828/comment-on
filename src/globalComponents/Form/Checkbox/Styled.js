@@ -27,6 +27,7 @@ export const CheckboxList = styled.div`
 export const CheckboxContainer = styled.label`
   display: flex;
   padding-right: 20px;
+  cursor: pointer;
 `;
 
 export const CheckboxLabel = styled.span`
@@ -51,8 +52,8 @@ export const CheckboxInner = styled.span`
   top: 0;
   left: 0;
   display: block;
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   border: 1px solid ${props => props.checked ? props.theme.primaryColor : props.theme.borderPrimary};
   border-radius: 2px;
   background-color: ${props => props.checked ? props.theme.primaryColor : '#fff'};

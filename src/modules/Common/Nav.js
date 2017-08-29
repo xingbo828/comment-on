@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { compose, withProps } from 'recompose';
+import { Link, withRouter } from 'react-router-dom';
+import { compose, withProps, branch, renderNothing } from 'recompose';
 import { auth } from '../../firebaseClient';
 import isLoggedIn from './isLoggedIn';
 import AccountNav from './AccountNav';
@@ -164,10 +164,15 @@ const logout = () => {
 };
 
 const NavContainer = compose(
+  withRouter,
   isLoggedIn,
- withProps(props => ({
-   logout
- })),
+  withProps(props => ({
+    logout
+  })),
+  branch(
+    props => props.location.pathname === '/login',
+    renderNothing
+  )
 )(Nav);
 
 export default NavContainer;
