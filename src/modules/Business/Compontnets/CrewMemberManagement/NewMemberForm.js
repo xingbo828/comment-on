@@ -62,7 +62,7 @@ class NewMemberForm extends Component {
         <ImgUpload.SingleImgUpload input={avatarInput} name="avatar" label="Profile picture" />
         <TextField input={nameInput} name="name" label="Name"  />
         <TextArea input={descInput} name="desc" label="Description"  />
-        <Button small primary onClick={this.addNewMember}>Save</Button>
+        <Button small primary onClick={this.addNewMember}>Create</Button>
       </div>
     );
   }

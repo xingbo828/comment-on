@@ -1,27 +1,18 @@
 import React, { Component } from 'react';
 import Tabs from '../../../../globalComponents/Tabs';
-import { ImgUpload } from '../../../../globalComponents/Form';
 import NewMemberForm from './NewMemberForm';
 import EditMember from './EditMember';
+import mapImmutablePropsToPlainProps from '../../../Common/mapImmutablePropsToPlainProps'
+import {NewMemberHeader} from './Styles';
 
-const SingleImgUpload = ImgUpload.SingleImgUpload;
 const TabPanel = Tabs.TabPanel;
-
-
 
 class CrewmemberManagement extends Component {
   constructor(props) {
     super(props);
     this.state = {
       activeTabKey: '0',
-      members: [{
-        name: 'crew #1',
-        description: 'desc'
-      }, {
-        name: 'crew #2',
-        description: 'desc'
-      }
-    ]
+      members: this.props.members || []
     };
     this.addNewMember = this.addNewMember.bind(this);
     this.removeMember = this.removeMember.bind(this);
@@ -30,9 +21,11 @@ class CrewmemberManagement extends Component {
 
 
   addNewMember(member) {
+    const members = this.state.members.concat([member]);
     this.setState({
-      members: this.state.members.concat([member])
+      members
     });
+    this.props.onUpdate(members);
   }
 
   updateMember(member, index) {
@@ -41,13 +34,16 @@ class CrewmemberManagement extends Component {
     this.setState({
       members
     });
+    this.props.onUpdate(members);
   }
 
   removeMember(index) {
+    const members = this.state.members.filter((m,i)=>i!==index);
     this.setState({
-      members: this.state.members.filter((m,i)=>i!==index),
+      members,
       activeTabKey: '0'
     });
+    this.props.onUpdate(members);
   }
 
   render() {
@@ -68,7 +64,7 @@ class CrewmemberManagement extends Component {
                 />
               </TabPanel>
             ))}
-            <TabPanel header='+' panelKey="new-member">
+            <TabPanel header={<NewMemberHeader> new member</NewMemberHeader>} panelKey="new-member">
               <NewMemberForm addNewMember={this.addNewMember}/>
             </TabPanel>
           </Tabs>
@@ -78,4 +74,4 @@ class CrewmemberManagement extends Component {
   }
 }
 
-export default CrewmemberManagement;
+export default mapImmutablePropsToPlainProps(CrewmemberManagement);

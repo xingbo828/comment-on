@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { TabPanelContainer } from './Styled';
 
 class TabPanel extends Component {
-  constructor(props) {
-    super(props);
-  }
   componentDidMount() {
     this.height = this.divElement.offsetHeight + 40;
     if (this.props.isActive) {

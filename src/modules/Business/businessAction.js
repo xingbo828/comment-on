@@ -54,6 +54,17 @@ export const editBusinessImages = (businessInfo, businessId) => (dispatch) => {
   });
 }
 
+export const updateBusinessCrewMember = (crewMembers, businessId) => {
+  const businessRef = businessDbRef.child(businessId);
+  businessRef.once('value')
+  .then(obj => obj.toJSON())
+  .then((businessInfo) => {
+    return businessRef.set(Object.assign({}, businessInfo, {
+      crewMembers
+    }));
+  })
+}
+
 export const updateBusiness = (businessInfo, businessId) => {
   businessInfo = (businessInfo.toJS && businessInfo.toJS()) || businessInfo;
   businessInfo.businessServiceArea = reduceServiceArea(businessInfo.businessServiceArea);
