@@ -55,10 +55,25 @@ export const editBusinessImages = (businessInfo, businessId) => (dispatch) => {
 }
 
 export const updateBusinessCrewMember = (crewMembers, businessId) => {
+  const crewMemberAvatarPromises = Promise.all(crewMembers.map(c => {
+    if (typeof c.avatar === 'string') {
+      return Promise.resolve(c.avatar);
+    }
+    const imgRef = imgStorageRef.child(`images/business/${businessId}/${c.avatar.name}`);
+    return imgRef.put(c.avatar)
+    .then((result) => result.downloadURL);
+  }));
+
   const businessRef = businessDbRef.child(businessId);
-  businessRef.once('value')
-  .then(obj => obj.toJSON())
-  .then((businessInfo) => {
+  const businessInfoPromise = businessRef.once('value').then(obj => obj.toJSON());
+
+  Promise
+  .all([crewMemberAvatarPromises, businessInfoPromise])
+  .then(([crewMemberMemberImages, businessInfo]) => {
+    crewMembers = crewMembers.map((c, index) => {
+      c.avatar = crewMemberMemberImages[index];
+      return c;
+    });
     return businessRef.set(Object.assign({}, businessInfo, {
       crewMembers
     }));
