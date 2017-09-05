@@ -3,6 +3,8 @@ import { Switch, withRouter } from 'react-router-dom';
 import ProtectedRoute from '../../Common/ProtectedRoute';
 import ProfilePictureContainer from './ProfilePictureContainer';
 import BasicInfoContainer from './BasicInfoContainer';
+import CrewMemberContainer from './CrewMemberContainer';
+import VehiclesContainer from './VehiclesContainer';
 import Settings from '../../../globalComponents/Settings';
 
 
@@ -36,6 +38,14 @@ const BusinessEdit = ({ match: { isExact, params: { businessId } } }) => {
         <ProtectedRoute
           path="/business/edit/:businessId/pictures"
           component={ProfilePictureContainer}
+        />
+        <ProtectedRoute
+          path="/business/edit/:businessId/team"
+          component={CrewMemberContainer}
+        />
+        <ProtectedRoute
+          path="/business/edit/:businessId/vehicles"
+          component={VehiclesContainer}
         />
       </Switch>
     </Settings>

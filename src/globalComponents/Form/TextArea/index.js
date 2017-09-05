@@ -5,15 +5,13 @@ import {
   Input,
   FocusBorder,
   InputErrorMsg
-} from './Styled'
+} from './Styled';
 
-const TextField = ({ label, type, placeholder, input, meta: { touched, error, warning }}) => {
+const TextArea = ({ label, placeholder, rows, input, meta: { touched, error, warning }}) => {
   return (
     <InputContainer>
-      <InputLabel>
-        {label}
-      </InputLabel>
-      <Input {...input} type={type} placeholder={placeholder}/>
+      <InputLabel>{label}</InputLabel>
+      <Input {...input} rows={rows} placeholder={placeholder} />
       <FocusBorder />
       {touched &&
       ((error &&
@@ -24,14 +22,11 @@ const TextField = ({ label, type, placeholder, input, meta: { touched, error, wa
   );
 };
 
-
-TextField.defaultProps = {
+TextArea.defaultProps = {
   meta: {},
   placeholder: '',
   label: '',
   type: 'text'
 };
 
-export default TextField;
-
-
+export default TextArea;

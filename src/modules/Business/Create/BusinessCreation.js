@@ -19,7 +19,7 @@ import BusinessHour from '../Compontnets/BuesinessHour';
 
 
 const renderDescriptionTextArea = ({ input, ...rest }) =>
-  <TextArea input={input} {...rest} rows="4" />;
+  <TextArea input={input} {...rest} />;
 
 const renderBusinessHour = ({ input, ...rest }) =>
   <BusinessHour input={input} {...rest} />;

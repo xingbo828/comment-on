@@ -4,6 +4,7 @@ import {
   StyledSubContainer,
   InputLabel,
   StyleImg,
+  StyleImgReplace,
   StyledInput,
   StyledUpLoadBtn
 } from './Styled';
@@ -13,8 +14,10 @@ class SingleImageUpload extends Component {
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
+    this.getInputValue = this.getInputValue.bind(this);
+
     this.state = {
-      imageUrl: this.props.input.value,
+      imageUrl: this.getInputValue(this.props.input.value),
       touched: false
     };
     this.getBase64 = this.getBase64.bind(this);
@@ -34,9 +37,22 @@ class SingleImageUpload extends Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.input.value !== nextProps.input.value && !this.state.touched) {
       this.state = {
-        imageUrl: nextProps.input.value
+        imageUrl: this.getInputValue(nextProps.input.value)
       };
     }
+  }
+
+  getInputValue(value) {
+    if(value && value.constructor.name === 'File') {
+      const updateImageUrlInState = (imgData) => {
+        this.setState({
+          imageUrl: imgData
+        });
+      };
+      this.getBase64(value, updateImageUrlInState.bind(this));
+      return null;
+    }
+    return value;
   }
 
   handleOnChange(event) {
@@ -61,10 +77,11 @@ class SingleImageUpload extends Component {
         <InputLabel>{label}</InputLabel>
         <StyledSubContainer>
           {this.state.imageUrl && <StyleImg src={this.state.imageUrl} alt={input.name} />}
+          {this.state.imageUrl && <StyleImgReplace onClick={this.handleClick} />}
           <StyledInput>
             <input type="file" name={input.name} onChange={this.handleOnChange} ref={(input) => { this.inputElement = input; }} />
           </StyledInput>
-          <StyledUpLoadBtn onClick={this.handleClick}>{actionText}</StyledUpLoadBtn>
+          {!this.state.imageUrl && <StyledUpLoadBtn onClick={this.handleClick}>{actionText}</StyledUpLoadBtn>}
         </StyledSubContainer>
       </StyledContainer>
     );
