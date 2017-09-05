@@ -24,7 +24,9 @@ export const TabBarLinkContainer = styled.li`
       `;
     }
   }}
-
+  :hover {
+    color: ${props => props.theme.primaryColor};
+  }
 `;
 
 export const TabBarLinkInk = styled.div`

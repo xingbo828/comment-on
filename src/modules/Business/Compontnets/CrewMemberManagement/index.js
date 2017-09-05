@@ -49,7 +49,7 @@ class CrewmemberManagement extends Component {
   render() {
     return (
       <div>
-        <h2>Edit your team</h2>
+        <h2>Introduce your team</h2>
         <div>
           <Tabs activeKey={this.state.activeTabKey}>
             {this.state.members.map((m, index) => (
