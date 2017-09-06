@@ -18,6 +18,8 @@ const getBorderColor = props => {
     return props.theme.borderPrimary;
   } else if (props.primary) {
     return props.theme.primaryActionColor;
+  } else if(props.danger) {
+    return props.theme.dangerActionColor;
   }
   return 'white';
 };
@@ -27,9 +29,44 @@ const getFontColor = props => {
     return props.theme.offWhite;
   } else if(props.primary) {
     return 'white';
+  } else if(props.danger) {
+    return props.theme.dangerActionColor;
   }
   return 'rgba(0,0,0,.65)';
 };
+
+const getHoverBackgroundColor = props => {
+  if (props.disabled) {
+    return '';
+  } else if(props.primary) {
+    return 'white';
+  } else if(props.danger) {
+    return props.theme.dangerActionColor;
+  }
+  return 'white';
+}
+
+const getHoverBorderColor = props => {
+  if (props.disabled) {
+    return '';
+  } else if (props.primary) {
+    return props.theme.primaryActionColor;
+  } else if(props.danger) {
+    return props.theme.dangerActionColor;
+  }
+  return 'white';
+}
+
+const getHoverFontColor = props => {
+  if (props.disabled) {
+    return '';
+  } else if(props.primary) {
+    return props.theme.primaryActionColor;
+  } else if(props.danger) {
+    return 'white';
+  }
+  return 'rgba(0,0,0,.65)';
+}
 
 const Button = styled.button`
   box-sizing: content-box;
@@ -57,9 +94,9 @@ const Button = styled.button`
   `}
 
   :hover {
-    background-color: ${props => props.disabled ? '' : 'white'};
-    color: ${props => props.disabled ? '' : props.theme.primaryActionColor};
-    border-color: ${props => props.disabled ? '' : props.theme.primaryActionColor};
+    background-color: ${getHoverBackgroundColor};
+    color: ${getHoverFontColor};
+    border-color: ${getHoverBorderColor};
   }
 `;
 

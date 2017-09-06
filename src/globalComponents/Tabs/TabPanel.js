@@ -3,15 +3,14 @@ import { TabPanelContainer } from './Styled';
 
 class TabPanel extends Component {
   componentDidMount() {
-    this.height = this.divElement.offsetHeight + 40;
     if (this.props.isActive) {
-      this.props.updateParentHeight(this.height);
+      this.props.updateParentHeight(this.divElement.offsetHeight + 40);
     }
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.isActive === false && this.props.isActive === true) {
-      this.props.updateParentHeight(this.height);
+      this.props.updateParentHeight(this.divElement.offsetHeight + 40);
     }
   }
   render() {

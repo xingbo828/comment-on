@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Styled from 'styled-components';
+import Avatar from '../../../globalComponents/Avatar';
 
 const fromTheme = props => ({ theme }) => theme[props];
 
@@ -24,16 +25,6 @@ const ContainerDiv = Styled.div`
     }
 `;
 
-const ProfilePic = Styled.div`
-  cursor: pointer;
-  height: 40px;
-  width: 40px;
-  background: white;
-  border-radius: 999px;
-  margin: 10px;
-  background-image: url(${props => props.backgroundImage});
-  background-size: cover;
-`;
 
 const Menu = Styled.div`
   line-height: 1rem;
@@ -118,10 +109,7 @@ class AccountNav extends React.Component {
         active={active}
         innerRef={(el) => { this.containerRef = el; }}
       >
-        <ProfilePic
-          backgroundImage={user.photoURL}
-          onClick={this.handleClick}
-        />
+        <Avatar src={user.photoURL} onClick={this.handleClick} />
         <Menu active={active}>
           <DisplayName>{user.displayName}</DisplayName>
           <MenuList onClick={this.handleClick}>

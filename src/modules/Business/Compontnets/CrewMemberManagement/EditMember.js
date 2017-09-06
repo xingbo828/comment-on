@@ -80,7 +80,7 @@ class EditMember extends Component {
         <TextField input={nameInput} name="name" label="Name"  />
         <TextArea input={descInput} name="desc" label="Description"  />
         <Button small primary onClick={this.updateMember}>Save</Button>
-        <Button small onClick={this.removeMember}>Remove</Button>
+        <Button small danger onClick={this.removeMember}>Remove</Button>
       </div>
     );
   }
