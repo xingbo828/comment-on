@@ -56,9 +56,22 @@ export const CheckboxInner = styled.span`
   height: 16px;
   border: 1px solid ${props => props.checked ? props.theme.primaryColor : props.theme.borderPrimary};
   border-radius: 2px;
-  background-color: ${props => props.checked ? props.theme.primaryColor : '#fff'};
   transition: all .3s;
-
+  ${props => {
+    if(props.disabled){
+      return `
+        background-color: ${props.theme.borderPrimary};
+      `;
+    } else if (props.checked) {
+      return `
+        background-color: ${props.theme.primaryColor};
+      `;
+    } else {
+      return `
+        background-color: white;
+      `;
+    }
+  }}
   ::after {
     position: absolute;
     content: "";
@@ -66,9 +79,15 @@ export const CheckboxInner = styled.span`
     top: 2px;
     width: 3px;
     height: 8px;
-    border: solid #fff;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
+    ${props => {
+      if(props.checked){
+        return `
+          border: solid #fff;
+          border-width: 0 2px 2px 0;
+          transform: rotate(45deg);
+        `;
+      }
+    }}
   }
 `;
 

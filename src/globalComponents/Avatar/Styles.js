@@ -20,7 +20,7 @@ export const AvatarContainer = styled.div`
     }
   }}
   cursor: pointer;
-  border-radius: 999px;
+  border-radius: 100%;
   margin: 10px;
   overflow: hidden;
   display: flex;
@@ -29,5 +29,23 @@ export const AvatarContainer = styled.div`
 `;
 
 export const AvatarImg = styled.img`
-  width: 100%;
+  max-width: 100%;
+  ${props=> {
+    if(props.size === 'sm'){
+      return `
+        height: 20px;
+        width: 20px;
+      `;
+    } else if (props.size === 'lg') {
+      return `
+        height: 60px;
+        width: 60px;
+      `;
+    } else {
+      return `
+        height: 40px;
+        width: 40px;
+      `;
+    }
+  }}
 `;

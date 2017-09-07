@@ -1,4 +1,5 @@
 import React from 'react';
+import { string } from 'prop-types';
 import {
   StyledLabel,
   StyledRadio,
@@ -21,6 +22,11 @@ const Radio = ({ label, value, checked = false, onCheck }) => {
       </StyledRadioReplacementContainer>
     </StyledLabel>
   );
+};
+
+Radio.propTypes = {
+  label: string.isRequired,
+  value: string.isRequired
 };
 
 export default Radio;

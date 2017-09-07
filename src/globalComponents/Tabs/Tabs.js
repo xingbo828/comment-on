@@ -1,5 +1,5 @@
 import React, { Component, Children } from 'react';
-
+import { string, func } from 'prop-types';
 import {
   TabContainer,
   TabBar,
@@ -7,7 +7,7 @@ import {
 } from './Styled';
 import TabBarLink from './TabBarLink';
 
-class Tab extends Component {
+class Tabs extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -31,6 +31,9 @@ class Tab extends Component {
     this.setState({
       activekey: panelKey
     });
+    if(this.props.onTabChange){
+      this.props.onTabChange(panelKey);
+    }
   }
 
   updateParentHeight(height) {
@@ -72,7 +75,7 @@ class Tab extends Component {
   render() {
     const tabs = this.construct();
     return (
-      <TabContainer containerHeight={this.state.containerHeight}>
+      <TabContainer {...this.props} containerHeight={this.state.containerHeight}>
         <TabBar>{tabs.tabBarLinks}</TabBar>
         <TabPanelsContainer>{tabs.panels}</TabPanelsContainer>
       </TabContainer>
@@ -80,4 +83,9 @@ class Tab extends Component {
   }
 }
 
-export default Tab;
+Tabs.propTypes = {
+  activeKey: string,
+  onTabChange: func
+};
+
+export default Tabs;

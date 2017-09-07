@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { TabPanelContainer } from './Styled';
+import { string, bool, node, oneOfType } from 'prop-types';
 
 class TabPanel extends Component {
   componentDidMount() {
@@ -21,6 +22,12 @@ class TabPanel extends Component {
       </TabPanelContainer>
     );
   }
+};
+
+TabPanel.propTypes = {
+  panelKey: string.isRequired,
+  header: oneOfType([string, node]).isRequired,
+  children: node.isRequired
 };
 
 export default TabPanel;

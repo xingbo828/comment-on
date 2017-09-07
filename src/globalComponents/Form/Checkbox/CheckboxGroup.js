@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Iterable } from 'immutable';
+import { func, string, shape, array, bool } from 'prop-types';
 import Checkbox from './Checkbox';
 import { Container, CheckboxList, InputErrorMsg, CheckboxGroupLabel } from './Styled';
 
@@ -69,6 +70,23 @@ class CheckboxGroup extends Component {
     );
 
   }
+};
+
+CheckboxGroup.defaultProps = {
+  meta: {}
+}
+
+CheckboxGroup.propTypes = {
+  label: string,
+  name: string.isRequired,
+  input: shape({
+    value: array,
+    onChange: func
+  }).isRequired,
+  meta: shape({
+    touched: bool,
+    error: string
+  })
 };
 
 export default CheckboxGroup;
