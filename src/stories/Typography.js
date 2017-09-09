@@ -12,6 +12,7 @@ const HeadingDemo = () => (
     <Heading wrapperTag="h3">Hello world</Heading>
   </div>
 );
+
 const TypographyStory = storiesOf('Typography', module)
   .add('Heading', withInfo('Heading')(HeadingDemo));
 

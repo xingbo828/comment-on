@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 import {
   media
-} from '../../foundation/Variables';
-
+} from '../../../foundation/Variables';
 
 const getBackgroundColor = props => {
   if (props.disabled) {
@@ -68,36 +67,34 @@ const getHoverFontColor = props => {
   return 'rgba(0,0,0,.65)';
 }
 
-const Button = styled.button`
-  box-sizing: content-box;
-  display: inline-block;
-  margin-bottom: 0;
-  font-weight: bold;
-  text-align: center;
-  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
-  background-image: none;
-  border: 1px solid transparent;
-  white-space: nowrap;
-  padding: 1rem 2rem;
-  min-width: 80px;
-  font-size: 1rem;
-  border-radius: 2px;
-  user-select: none;
-  transition: all .3s cubic-bezier(.645,.045,.355,1);
-  position: relative;
-  color: ${getFontColor};
-  background-color:  ${getBackgroundColor};
-  border-color: ${getBorderColor};
-  padding: ${props => props.small ? '5px 10px' : '16px 32px'};
-  ${media.fromMedium`
-    width: auto;
-  `}
+export const Button = styled.button`
+box-sizing: content-box;
+display: inline-block;
+margin-bottom: 0;
+font-weight: bold;
+text-align: center;
+cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
+background-image: none;
+border: 1px solid transparent;
+white-space: nowrap;
+padding: 1rem 2rem;
+min-width: 80px;
+font-size: 1rem;
+border-radius: 2px;
+user-select: none;
+transition: all .3s cubic-bezier(.645,.045,.355,1);
+position: relative;
+color: ${getFontColor};
+background-color:  ${getBackgroundColor};
+border-color: ${getBorderColor};
+padding: ${props => props.small ? '5px 10px' : '16px 32px'};
+${media.fromMedium`
+  width: auto;
+`}
 
-  :hover {
-    background-color: ${getHoverBackgroundColor};
-    color: ${getHoverFontColor};
-    border-color: ${getHoverBorderColor};
-  }
+:hover {
+  background-color: ${getHoverBackgroundColor};
+  color: ${getHoverFontColor};
+  border-color: ${getHoverBorderColor};
+}
 `;
-
-export default Button;
