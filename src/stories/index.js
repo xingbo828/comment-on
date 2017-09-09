@@ -17,6 +17,7 @@ import ButtonStory from './Form/Button';
 import RadioStory from './Form/Radio';
 import CheckboxStory from './Form/Checkbox';
 import TextFieldStory from './Form/TextField';
+import NumberFieldStory from './Form/NumberField';
 import AddressAutoCompleteStory from './Form/AddressAutoComplete';
 import TextAreaStory from './Form/TextArea';
 import DateTimeStory from './Form/DateTime';

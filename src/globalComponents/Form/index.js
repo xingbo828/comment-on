@@ -1,5 +1,6 @@
 import Button from './Button';
 import TextField from './TextField';
+import NumberField from './NumberField';
 import Radio from './Radio';
 import Checkbox from './Checkbox';
 import ImgUpload from './ImgUpload';
@@ -11,6 +12,7 @@ import DateTime from './DateTime';
 export {
   Button,
   TextField,
+  NumberField,
   TextArea,
   AddressAutoComplete,
   DateTime,
