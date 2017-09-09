@@ -1,21 +1,47 @@
-import React, { Component } from 'react';
-import Icon from '../Icon';
-import PropTypes from 'prop-types';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Messages from './Messages';
 
-class Message extends Component {
-  render() {
-    return (
-      <div>
+let instance;
+const defaultDuration = 300;
+let seed = 0;
 
-      </div>
-    );
-  }
+const container = document.createElement('div');
+document.body.appendChild(container);
+
+const messages = ReactDOM.render(<Messages />, container);
+
+
+const success = (content, duration = defaultDuration) => {
+  messages.addMessage({
+    key: seed++,
+    type: 'success',
+    duration,
+    content
+  });
 }
 
-Message.propTypes = {
+const info = (content, duration = defaultDuration) => {
+  messages.addMessage({
+    key: seed++,
+    type: 'info',
+    duration,
+    content
+  });
+}
 
+const error = (content, duration = defaultDuration) => {
+  messages.addMessage({
+    key: seed++,
+    type: 'error',
+    duration,
+    content
+  });
+}
+
+
+export default {
+  success,
+  info,
+  error
 };
-
-export default Message;
-
-

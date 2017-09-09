@@ -53,7 +53,7 @@ class CrewmemberManagement extends Component {
         <div>
           <Tabs activeKey={this.state.activeTabKey}>
             {this.state.members.map((m, index) => (
-              <TabPanel key={m.name} header={m.name} panelKey={index}>
+              <TabPanel key={m.name} header={m.name} panelKey={index.toString()}>
                 <EditMember
                   index={index}
                   name={m.name}

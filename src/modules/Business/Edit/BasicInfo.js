@@ -26,7 +26,7 @@ const renderBusinessHour = ({ input, ...rest }) => {
 }
 
 const renderBusinessServiceAreas = ({ input, ...rest }) =>{
-  return <Checkbox.CheckboxGroup input={input} {...rest} label="Service Areas" />;
+  return <Checkbox.CheckboxGroup name={input.name} value={input.value} onChange={input.onChange} {...rest} label="Service Areas" />;
 }
 
 

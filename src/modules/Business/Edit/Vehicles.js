@@ -1,12 +1,14 @@
 import React from 'react';
 import { Field } from 'redux-form/immutable';
 import {
-  Button,
-  TextField,
-  TextArea,
-  Checkbox
+  Button
 } from '../../../globalComponents/Form';
 import { GridContainer } from '../../../globalComponents/Grid';
+import VehiclesInfoManagement from '../Compontnets/VehiclesInfoManagement';
+
+const renderVehiclesInfoManagement = ({ input, ...rest }) => {
+  return <VehiclesInfoManagement vehicles={input.value} onChange={input.onChange} {...rest} />;
+}
 
 
 const Vehicles = ({
@@ -19,7 +21,14 @@ const Vehicles = ({
   return (
     <GridContainer>
       <form onSubmit={handleSubmit}>
-        Vehicles
+        <Field component={renderVehiclesInfoManagement} name="vehiclesInfo" />
+        <Button
+          type="submit"
+          primary
+          disabled={pristine || submitting || !valid}
+        >
+          Submit
+        </Button>
       </form>
     </GridContainer>
   );

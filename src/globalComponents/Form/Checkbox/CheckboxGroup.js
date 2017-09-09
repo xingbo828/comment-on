@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
-import { Iterable } from 'immutable';
 import { func, string, shape, array, bool } from 'prop-types';
 import Checkbox from './Checkbox';
 import { Container, CheckboxList, InputErrorMsg, CheckboxGroupLabel } from './Styled';
+import mapImmutablePropsToPlainProps from '../../../modules/Common/mapImmutablePropsToPlainProps'
 
 class CheckboxGroup extends Component {
   constructor(props){
     super(props);
-    const { value } = this.props.input;
-    const initValue = value ? (Iterable.isIterable(value) ? value.toJS() : value) : [];
     this.state = {
-      checked: initValue
+      checked: props.value
     };
     this.isChecked = this.isChecked.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -31,7 +29,7 @@ class CheckboxGroup extends Component {
     this.setState({
       checked: newState
     });
-    this.props.input.onChange(newState);
+    this.props.onChange(newState);
   }
 
   render() {
@@ -73,20 +71,19 @@ class CheckboxGroup extends Component {
 };
 
 CheckboxGroup.defaultProps = {
-  meta: {}
+  meta: {},
+  value: []
 }
 
 CheckboxGroup.propTypes = {
   label: string,
   name: string.isRequired,
-  input: shape({
-    value: array,
-    onChange: func
-  }).isRequired,
+  value: array,
+  onChange: func.isRequired,
   meta: shape({
     touched: bool,
     error: string
   })
 };
 
-export default CheckboxGroup;
+export default mapImmutablePropsToPlainProps(CheckboxGroup);

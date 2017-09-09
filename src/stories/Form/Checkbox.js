@@ -5,12 +5,8 @@ import { withInfo } from '@storybook/addon-info';
 import { action } from '@storybook/addon-actions';
 import Checkbox from '../../globalComponents/Form/Checkbox';
 
-const input = {
-  onChange: action('checkbox changed'),
-  value: []
-}
 const BasicCheckBoxGroup = withInfo('Basic checkbox group')(() =>
-  <Checkbox.CheckboxGroup label="Team Players" input={input} name="team">
+  <Checkbox.CheckboxGroup label="Team Players" value={[]} onChange={action('checkbox changed')} name="team">
     <Checkbox.Checkbox value="player-1" label="Player 1" />
     <Checkbox.Checkbox value="player-2" label="Player 2" />
     <Checkbox.Checkbox value="player-3" label="Player 3" disabled />

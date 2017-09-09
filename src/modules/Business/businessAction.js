@@ -41,7 +41,7 @@ export const getBusinessInfo = (businessId) => {
 
 export const editBusinessImages = (businessInfo, businessId) => (dispatch) => {
   const businessInfoRaw = businessInfo.toJS();
-  const { logo, businessImgs } = businessInfoRaw
+  const { logo, businessImgs } = businessInfoRaw;
   const uploadBusinessImgsPromise = uploadBusinessImgs(businessImgs, businessId);
   const uploadBusinessLogoPromise = uploadBusinessLogo(logo, businessId);
   return Promise.all([uploadBusinessLogoPromise, uploadBusinessImgsPromise])
@@ -79,6 +79,15 @@ export const updateBusinessCrewMember = (crewMembers, businessId) => {
     }));
   })
 }
+
+export const updateVehiclesInfo = (businessInfo, businessId) => {
+  const businessInfoRaw = businessInfo.toJS();
+  const { vehiclesInfo } = businessInfoRaw;
+  const businessRef = businessDbRef.child(businessId);
+  return businessRef.set(Object.assign({}, businessInfoRaw, {
+    vehiclesInfo
+  }));
+};
 
 export const updateBusiness = (businessInfo, businessId) => {
   businessInfo = (businessInfo.toJS && businessInfo.toJS()) || businessInfo;
