@@ -67,7 +67,7 @@ export const updateBusinessCrewMember = (crewMembers, businessId) => {
   const businessRef = businessDbRef.child(businessId);
   const businessInfoPromise = businessRef.once('value').then(obj => obj.toJSON());
 
-  Promise
+  return Promise
   .all([crewMemberAvatarPromises, businessInfoPromise])
   .then(([crewMemberMemberImages, businessInfo]) => {
     crewMembers = crewMembers.map((c, index) => {

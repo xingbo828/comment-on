@@ -4,6 +4,7 @@ import { compose, lifecycle, branch, renderNothing } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import ProfilePicture from './ProfilePicture';
 import { editBusinessImages, getBusinessInfo } from '../businessAction';
+import message from '../../../globalComponents/Message';
 
 const mapDispatchToProps = dispatch => ({
   editBusinessImages: (values, businessId) => dispatch(editBusinessImages(values, businessId))
@@ -35,6 +36,9 @@ const enhance = compose(
     onSubmit: (values, dispatch, props) => {
       return props.editBusinessImages(values, props.match.params.businessId);
     },
+    onSubmitSuccess: () => {
+      message.success('Profile pictures saved');
+    }
   })
 );
 

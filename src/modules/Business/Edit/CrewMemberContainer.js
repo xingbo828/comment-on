@@ -3,8 +3,13 @@ import { compose, lifecycle, branch, renderNothing, withProps } from 'recompose'
 import { reduxForm } from 'redux-form/immutable';
 import CrewMember from './CrewMember';
 import { getBusinessInfo, updateBusinessCrewMember } from '../businessAction';
+import message from '../../../globalComponents/Message';
 
-const wrappedUpdateBusiness = businessId => (members) => updateBusinessCrewMember(members, businessId);
+const wrappedUpdateBusiness = businessId => (members) => {
+  updateBusinessCrewMember(members, businessId).then(() => {
+    message.success('Crew member updated.');
+  });
+};
 
 const enhance = compose(
   withRouter,

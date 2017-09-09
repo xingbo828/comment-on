@@ -2,8 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Messages from './Messages';
 
-let instance;
-const defaultDuration = 300;
+const defaultDuration = 3;
 let seed = 0;
 
 const container = document.createElement('div');

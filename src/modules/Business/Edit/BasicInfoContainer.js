@@ -4,6 +4,7 @@ import { compose, lifecycle, branch, renderNothing } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import BasicInfo from './BasicInfo';
 import { getBusinessInfo, updateBusiness } from '../businessAction';
+import message from '../../../globalComponents/Message';
 
 const enhance = compose(
   withRouter,
@@ -31,6 +32,9 @@ const enhance = compose(
     form: 'business.edit.basicInfo',
     onSubmit: (values, dispatch, props) => {
       return updateBusiness(values, props.match.params.businessId);
+    },
+    onSubmitSuccess: () => {
+      message.success('Basic information saved.');
     }
   })
 );
