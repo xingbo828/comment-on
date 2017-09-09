@@ -86,7 +86,7 @@ class MultiImgUpload extends Component {
   }
 
   render() {
-    const { input, label, actionText, limit } = this.props;
+    const { input, label, actionText, limit, name } = this.props;
     return (
       <StyledContainer>
         <InputLabel>{label}</InputLabel>
@@ -95,7 +95,7 @@ class MultiImgUpload extends Component {
             {this.renderImges(this.state.images)}
           </StyledImgList>
           <StyledInput>
-            <input type="file" name={input.name} onChange={this.handleAdd} ref={(input) => { this.inputElement = input; }} />
+            <input type="file" name={name} onChange={this.handleAdd} ref={(input) => { this.inputElement = input; }} />
           </StyledInput>
           {this.renderActionBtn(limit, actionText)}
         </StyledSubContainer>

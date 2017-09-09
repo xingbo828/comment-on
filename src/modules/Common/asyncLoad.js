@@ -20,7 +20,6 @@ const asyncLoad = (loader) => {
     }
 
     render() {
-      console.log();
       return this.state.component ? <this.state.component.default {...this.props} /> : null;
     }
   }

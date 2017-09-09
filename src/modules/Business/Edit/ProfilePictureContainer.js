@@ -1,6 +1,6 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { compose, lifecycle } from 'recompose';
+import { compose, lifecycle, branch, renderNothing } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import ProfilePicture from './ProfilePicture';
 import { editBusinessImages, getBusinessInfo } from '../businessAction';
@@ -21,15 +21,15 @@ const enhance = compose(
       getBusinessInfo(businessId)
       .then((businessInfo) => {
         this.setState({
-          initialValues: {
-            businessLogo: businessInfo.logo,
-            businessImgs: businessInfo.businessImgs ? Object.values(businessInfo.businessImgs) : []
-          },
+          initialValues: Object.assign(businessInfo, {
+            businessImgs: (businessInfo && businessInfo.businessImgs) ? Object.values(businessInfo.businessImgs) : []
+          }),
           doneLoading: true
         });
       })
     }
   }),
+  branch(({doneLoading}) => !doneLoading, renderNothing),
   reduxForm({
     form: 'business.edit.profilePictures',
     onSubmit: (values, dispatch, props) => {

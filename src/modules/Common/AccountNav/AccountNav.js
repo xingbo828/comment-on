@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Styled from 'styled-components';
+import Avatar from '../../../globalComponents/Avatar';
 
 const fromTheme = props => ({ theme }) => theme[props];
 
@@ -24,16 +25,6 @@ const ContainerDiv = Styled.div`
     }
 `;
 
-const ProfilePic = Styled.div`
-  cursor: pointer;
-  height: 40px;
-  width: 40px;
-  background: white;
-  border-radius: 999px;
-  margin: 10px;
-  background-image: url(${props => props.backgroundImage});
-  background-size: cover;
-`;
 
 const Menu = Styled.div`
   line-height: 1rem;
@@ -101,29 +92,29 @@ class AccountNav extends React.Component {
   handleClick(event) {
     this.setState({ active: !this.state.active });
   }
-  
-  render() {
-    const { user, isLoggedIn, logout } = this.props;
-    const active = this.state.active;
 
-    if (!isLoggedIn) {
-      return (null);
+  render() {
+    const { user, loginStatus, logout } = this.props;
+    const active = this.state.active;
+    const myBusiness = user.businesses ? Object.keys(user.businesses)[0] : null;
+    if (loginStatus === 'UNINIT') {
+      return null;
     }
-    
+    else if (loginStatus === 'NOT_AUTHENTICATED') {
+      return <Link to="/login">Sign up / Login</Link>;
+    }
+
     return (
-      <ContainerDiv 
+      <ContainerDiv
         active={active}
         innerRef={(el) => { this.containerRef = el; }}
       >
-        <ProfilePic
-          backgroundImage={user.photoURL}
-          onClick={this.handleClick}
-        />
+        <Avatar src={user.photoURL} onClick={this.handleClick} />
         <Menu active={active}>
           <DisplayName>{user.displayName}</DisplayName>
           <MenuList onClick={this.handleClick}>
             <MenuItem><Link to="/account">Settings</Link></MenuItem>
-            <MenuItem><Link to="/business-profile">Company profile</Link></MenuItem>
+            {myBusiness && <MenuItem><Link to={`/business/profile/${myBusiness}`}>Company profile</Link></MenuItem>}
             <MenuItem><a href="" onClick={logout}>Logout</a></MenuItem>
           </MenuList>
         </Menu>

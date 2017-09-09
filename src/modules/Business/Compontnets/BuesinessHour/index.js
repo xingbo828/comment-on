@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Iterable } from 'immutable';
 import HoursDisplay from './HoursDisplay';
 import HoursSelect from './HoursSelect';
 import { BusinessHourContainer, BusinessHourHeading } from './Styled';
@@ -6,10 +7,12 @@ import { weekdays } from './constants';
 
 class BusinessHour extends Component {
 
-  constructor(){
-    super();
+  constructor(props) {
+    super(props);
+    const { value } = this.props.input;
+    const initValue = value ? (Iterable.isIterable(value) ? value.toJS() : value) : [];
     this.state = {
-      hoursList: []
+      hoursList: initValue
     };
     this.addHours = this.addHours.bind(this);
     this.removeHours = this.removeHours.bind(this);

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { compose, withProps } from 'recompose';
+import { Link, withRouter } from 'react-router-dom';
+import { compose, withProps, branch, renderNothing } from 'recompose';
 import { auth } from '../../firebaseClient';
 import isLoggedIn from './isLoggedIn';
 import AccountNav from './AccountNav';
@@ -19,6 +19,7 @@ const ContextHeader = styled.div`
 `;
 
 const Heading = styled.h1`
+  text-decoration: none;
   flex: 1;
   display: inline;
   font-size: 1rem;
@@ -127,7 +128,7 @@ const NavListItem = styled.li`
       a {
         padding: 0 2rem;
       }
-      
+
       a::after {
         display: none;
       }
@@ -139,7 +140,7 @@ export const Nav = ({ user, isLoggedIn, logout }) => {
   return (
     <NavRoot>
       <ContextHeader>
-        <Heading>LOGO</Heading>
+        <Link to="/"><Heading>LOGO</Heading></Link>
         {/* <Location>Vancouver</Location> */}
         <ContextHeaderLinks>
           <ContextHeaderLink>
@@ -163,10 +164,15 @@ const logout = () => {
 };
 
 const NavContainer = compose(
+  withRouter,
   isLoggedIn,
- withProps(props => ({
-   logout
- })),
+  withProps(props => ({
+    logout
+  })),
+  branch(
+    props => props.location.pathname === '/login',
+    renderNothing
+  )
 )(Nav);
 
 export default NavContainer;

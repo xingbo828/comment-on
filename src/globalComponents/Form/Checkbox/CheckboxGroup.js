@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
+import { Iterable } from 'immutable';
+import { func, string, shape, array, bool } from 'prop-types';
 import Checkbox from './Checkbox';
 import { Container, CheckboxList, InputErrorMsg, CheckboxGroupLabel } from './Styled';
 
 class CheckboxGroup extends Component {
   constructor(props){
     super(props);
+    const { value } = this.props.input;
+    const initValue = value ? (Iterable.isIterable(value) ? value.toJS() : value) : [];
     this.state = {
-      checked: this.props.input.value || []
+      checked: initValue
     };
     this.isChecked = this.isChecked.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -66,6 +70,23 @@ class CheckboxGroup extends Component {
     );
 
   }
+};
+
+CheckboxGroup.defaultProps = {
+  meta: {}
+}
+
+CheckboxGroup.propTypes = {
+  label: string,
+  name: string.isRequired,
+  input: shape({
+    value: array,
+    onChange: func
+  }).isRequired,
+  meta: shape({
+    touched: bool,
+    error: string
+  })
 };
 
 export default CheckboxGroup;

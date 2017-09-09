@@ -24,7 +24,7 @@ const InnerDiv = Styled.div`
 const FacebookButton = Styled.button`
   font-size: 1rem;
   appearance: none;
-  width: 300px;
+  width: 100%;
   margin: 0 auto 1rem;
   padding: 1rem 0;
   color: white;
@@ -52,7 +52,7 @@ const FacebookButton = Styled.button`
 const GoogleButton = Styled.button`
   font-size: 1rem;
   appearance: none;
-  width: 300px;
+  width: 100%;
   margin: 0 auto;
   padding: 1rem 0;
   color: white;
