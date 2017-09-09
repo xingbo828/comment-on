@@ -8,8 +8,10 @@ const getBackgroundColor = props => {
     return props.theme.borderPrimary;
   } else if(props.primary) {
     return props.theme.primaryActionColor;
+  } else if(props.danger) {
+    return props.theme.dangerActionColor;
   }
-  return 'white';
+  return props.theme.secondaryActionColor;
 };
 
 const getBorderColor = props => {
@@ -20,18 +22,14 @@ const getBorderColor = props => {
   } else if(props.danger) {
     return props.theme.dangerActionColor;
   }
-  return 'white';
+  return props.theme.secondaryActionColor;
 };
 
 const getFontColor = props => {
   if (props.disabled) {
     return props.theme.offWhite;
-  } else if(props.primary) {
-    return 'white';
-  } else if(props.danger) {
-    return props.theme.dangerActionColor;
   }
-  return 'rgba(0,0,0,.65)';
+  return 'white'
 };
 
 const getHoverBackgroundColor = props => {
@@ -40,7 +38,7 @@ const getHoverBackgroundColor = props => {
   } else if(props.primary) {
     return 'white';
   } else if(props.danger) {
-    return props.theme.dangerActionColor;
+    return 'white';
   }
   return 'white';
 }
@@ -53,7 +51,7 @@ const getHoverBorderColor = props => {
   } else if(props.danger) {
     return props.theme.dangerActionColor;
   }
-  return 'white';
+  return props.theme.secondaryActionColor;
 }
 
 const getHoverFontColor = props => {
@@ -62,9 +60,9 @@ const getHoverFontColor = props => {
   } else if(props.primary) {
     return props.theme.primaryActionColor;
   } else if(props.danger) {
-    return 'white';
+    return props.theme.dangerActionColor;
   }
-  return 'rgba(0,0,0,.65)';
+  return props.theme.secondaryActionColor;
 }
 
 export const Button = styled.button`
