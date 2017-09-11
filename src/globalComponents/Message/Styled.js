@@ -6,12 +6,13 @@ import {
   dangerActionColor
 } from '../../foundation/Variables';
 
-const MessageIn = keyframes`
+const spin = keyframes`
   from {
-    opacity: 0;
+    transform: rotate(0deg);
   }
+
   to {
-    opacity: 1;
+    transform: rotate(360deg);
   }
 `;
 
@@ -35,7 +36,7 @@ export const MessageContainer = styled.li`
   overflow: hidden;
 `;
 
-const MessageContent = styled.div`
+export const MessageContent = styled.div`
   cursor: pointer;
   padding: 5px 12px;
   border-radius: 2px;
@@ -44,34 +45,42 @@ const MessageContent = styled.div`
   display: inline-block;
   pointer-events: all;
   font-size: 0.85rem;
-  animation: ${MessageIn} .3s linear;
-
-  ::before {
-    font-family: 'FontAwesome';
-    padding-right: 8px;
-  }
 `
 
-export const SuccessMessageContent = MessageContent.extend`
+const MessageContentIcon = styled.span`
+  margin-right: 8px;
+  display: inline-block;
+  ::before {
+    font-family: 'FontAwesome';
+  }
+`;
+
+export const SuccessMessageContent = MessageContentIcon.extend`
   ::before {
     color: ${ primaryActionColor };
     content: '\f058';
   }
 `;
 
-export const ErrorMessageContent = MessageContent.extend`
+export const ErrorMessageContent = MessageContentIcon.extend`
   ::before {
     color: ${ dangerActionColor };
     content: '\f06a';
   }
 `;
 
-export const InfoMessageContent = MessageContent.extend`
+export const InfoMessageContent = MessageContentIcon.extend`
   ::before {
     color: ${ secondaryActionColor };
     content: '\f05a';
   }
 `;
 
+export const LoadingMessageContent = MessageContentIcon.extend`
+  animation: ${spin} 2s linear infinite;
+  ::before {
+    content: '\f021';
+  }
+`;
 
 

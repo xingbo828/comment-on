@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import {
   MessageContainer,
+  MessageContent,
   SuccessMessageContent,
   InfoMessageContent,
-  ErrorMessageContent
+  ErrorMessageContent,
+  LoadingMessageContent
 } from './Styled';
 
 class Message extends Component {
@@ -41,6 +43,8 @@ class Message extends Component {
       return InfoMessageContent;
     } else if (type === 'error') {
       return ErrorMessageContent;
+    } else if (type === 'loading') {
+      return LoadingMessageContent;
     } else {
       throw new Error('Unknown message type');
     }
@@ -51,7 +55,10 @@ class Message extends Component {
     const ContentContainer = this.getContainerType(type);
     return (
       <MessageContainer onClick={this.remove}>
-        <ContentContainer>{ content }</ContentContainer>
+        <MessageContent>
+          <ContentContainer />
+          { content }
+        </MessageContent>
       </MessageContainer>
     );
   }

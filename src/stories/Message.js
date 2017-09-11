@@ -5,16 +5,19 @@ import { withInfo } from '@storybook/addon-info';
 import message from '../globalComponents/Message';
 import Button from '../globalComponents/Form/Button';
 
-
+const triggerLoadingMessage = () => {
+  const messageKey = message.loading('this message will be removed in 3s');
+  setTimeout(() => {
+    message.remove(messageKey);
+  }, 3000);
+};
 const MessageDemo = () => {
-  const messageSuccess = () => {
-    message.success('this is success message', 3);
-  }
   return (
     <div style={{padding: '200px 0 0 50px', width: '500px'}}>
       <Button primary small onClick={()=>{message.success('this is success message', 3)}}>Success</Button>
       <Button small onClick={()=>{message.info('this is info message', 3)}}>Info</Button>
       <Button danger small onClick={()=>{message.error('this is error message', 3)}}>Error</Button>
+      <Button small onClick={triggerLoadingMessage}>Loading</Button>
     </div>
   );
 }

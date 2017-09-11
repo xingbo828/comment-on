@@ -1,8 +1,9 @@
 import React from 'react';
 import { string } from 'prop-types';
-const Icon = ({ icon, tag, size, ...rest }) => {
+const Icon = ({ icon, tag, size, spin, ...rest }) => {
   let className = `fa fa-${icon}`;
   if(size){className = `${className} fa-${size}`};
+  if(spin){className = `${className} fa-spin`}
   return React.createElement(tag, {
     ...rest,
     'aria-hidden': true,

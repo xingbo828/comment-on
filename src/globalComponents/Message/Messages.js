@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import TransitionGroup from 'react-transition-group/TransitionGroup';
 import Icon from '../Icon';
 import Message from './Message';
 import { MessagesContainer } from './Styled';
+import MessageTransition from './MessageTransition';
 
 class Messages extends Component {
   constructor(props) {
@@ -24,6 +26,7 @@ class Messages extends Component {
         };
       }
     });
+    return key;
   }
 
   removeMessage(messagekey) {
@@ -36,14 +39,20 @@ class Messages extends Component {
 
   renderMessages(messages) {
     return messages.map(m => {
-      return <Message removeMessage={this.removeMessage.bind(this, m.key)} key={m.key} content={m.content} type={m.type} duration={m.duration} />;
+      return (
+        <MessageTransition key={m.key} unmountOnExit>
+          {() => <Message removeMessage={this.removeMessage.bind(this, m.key)} key={m.key} content={m.content} type={m.type} duration={m.duration} />}
+        </MessageTransition>
+        );
     });
   }
 
   render() {
     return (
       <MessagesContainer>
-        {this.renderMessages(this.state.messages)}
+        <TransitionGroup>
+          {this.renderMessages(this.state.messages)}
+        </TransitionGroup>
       </MessagesContainer>
     );
   }

@@ -12,7 +12,7 @@ const messages = ReactDOM.render(<Messages />, container);
 
 
 const success = (content, duration = defaultDuration) => {
-  messages.addMessage({
+  return messages.addMessage({
     key: seed++,
     type: 'success',
     duration,
@@ -21,7 +21,7 @@ const success = (content, duration = defaultDuration) => {
 }
 
 const info = (content, duration = defaultDuration) => {
-  messages.addMessage({
+  return messages.addMessage({
     key: seed++,
     type: 'info',
     duration,
@@ -30,7 +30,7 @@ const info = (content, duration = defaultDuration) => {
 }
 
 const error = (content, duration = defaultDuration) => {
-  messages.addMessage({
+  return messages.addMessage({
     key: seed++,
     type: 'error',
     duration,
@@ -38,9 +38,24 @@ const error = (content, duration = defaultDuration) => {
   });
 }
 
+const loading = (content) => {
+  return messages.addMessage({
+    key: seed++,
+    type: 'loading',
+    duration: 0,
+    content
+  });
+}
+
+const remove = (key) => {
+  messages.removeMessage(key);
+}
+
 
 export default {
   success,
   info,
-  error
+  error,
+  loading,
+  remove
 };
