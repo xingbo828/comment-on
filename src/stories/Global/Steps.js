@@ -3,8 +3,8 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withInfo } from '@storybook/addon-info';
 import { withKnobs, text, boolean, number } from '@storybook/addon-knobs';
-import Steps from '../globalComponents/Steps';
-import Icon from '../globalComponents/Icon';
+import Steps from '../../globalComponents/Steps';
+import Icon from '../../globalComponents/Icon';
 
 const Step = Steps.Step;
 
@@ -35,7 +35,7 @@ const StepsDemo = () => (
   </div>
 );
 
-const StepsStory = storiesOf('Steps', module)
+const StepsStory = storiesOf('Global/Steps', module)
 .addDecorator(withKnobs)
 .add('Steps', withInfo('Default')(StepsDemo));
 

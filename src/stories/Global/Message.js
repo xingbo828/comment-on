@@ -2,8 +2,8 @@ import React from 'react';
 
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
-import message from '../globalComponents/Message';
-import Button from '../globalComponents/Form/Button';
+import message from '../../globalComponents/Message';
+import Button from '../../globalComponents/Form/Button';
 
 const triggerLoadingMessage = () => {
   const messageKey = message.loading('this message will be removed in 3s');
@@ -22,7 +22,7 @@ const MessageDemo = () => {
   );
 }
 
-const MessageStory = storiesOf('Message', module)
+const MessageStory = storiesOf('Global/Message', module)
 .add('messages', withInfo({
   text:
   `

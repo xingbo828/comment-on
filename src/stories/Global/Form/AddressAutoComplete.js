@@ -3,7 +3,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { action } from '@storybook/addon-actions';
-import AddressAutoComplete from '../../globalComponents/Form/AddressAutoComplete';
+import AddressAutoComplete from '../../../globalComponents/Form/AddressAutoComplete';
 
 const AddressAutoCompleteDemo = withInfo('Basic radio group')(() =>
   <div style={{width: '400px'}}>
@@ -15,6 +15,6 @@ const AddressAutoCompleteDemo = withInfo('Basic radio group')(() =>
   </div>
 );
 
-const AddressAutoCompleteStory = storiesOf('Form/AddressAutoComplete', module)
+const AddressAutoCompleteStory = storiesOf('Global/Form/AddressAutoComplete', module)
 .add('Address auto complete', AddressAutoCompleteDemo);
 export default AddressAutoCompleteStory;

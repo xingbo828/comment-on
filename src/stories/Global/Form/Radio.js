@@ -3,7 +3,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { action } from '@storybook/addon-actions';
-import Radio from '../../globalComponents/Form/Radio';
+import Radio from '../../../globalComponents/Form/Radio';
 
 const BasicRadioGroup = withInfo('Basic radio group')(() =>
   <Radio.RadioGroup
@@ -17,6 +17,6 @@ const BasicRadioGroup = withInfo('Basic radio group')(() =>
   </Radio.RadioGroup>
 );
 
-const RadioStory = storiesOf('Form/Radio', module)
+const RadioStory = storiesOf('Global/Form/Radio', module)
   .add('Basic usage', BasicRadioGroup);
 export default RadioStory;

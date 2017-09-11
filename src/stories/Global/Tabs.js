@@ -3,8 +3,8 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withInfo } from '@storybook/addon-info';
-import Tabs from '../globalComponents/Tabs';
-import Icon from '../globalComponents/Icon';
+import Tabs from '../../globalComponents/Tabs';
+import Icon from '../../globalComponents/Icon';
 const TabPanel = Tabs.TabPanel;
 
 
@@ -35,7 +35,7 @@ const TabsWithReactEleHeader = () => (
   );
 
 
-const TabsStory = storiesOf('Tabs', module)
+const TabsStory = storiesOf('Global/Tabs', module)
 .add('basic tabs', withInfo('Basic Tabs')(BasicTabs))
 .add('custom header link', withInfo('React element header links')(TabsWithReactEleHeader));
 

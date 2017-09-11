@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import moment from 'moment';
 import { action } from '@storybook/addon-actions';
 import { withInfo } from '@storybook/addon-info';
-import DateTime from '../../globalComponents/Form/DateTime';
+import DateTime from '../../../globalComponents/Form/DateTime';
 
 const DateOnly = withInfo('Date only')(() =>
   <div style={{width: '300px'}}>
@@ -46,7 +46,7 @@ const DateWithDisabledDates = withInfo('Date and time with disabled dates')(() =
 </div>
 );
 
-const DateTimeStory = storiesOf('Form/DateTime', module)
+const DateTimeStory = storiesOf('Global/Form/DateTime', module)
   .add('Date only', DateOnly)
   .add('With disabled dates', DateWithDisabledDates)
   .add('With time', DateAndTime);

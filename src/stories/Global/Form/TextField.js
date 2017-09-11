@@ -3,7 +3,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withInfo } from '@storybook/addon-info';
-import NumberField from '../../globalComponents/Form/NumberField';
+import TextField from '../../../globalComponents/Form/TextField';
 
 const input = {
   onChange: action('Input changed')
@@ -12,8 +12,8 @@ const meta = {
   touched: true,
   error: 'oops, something is wrong!'
 };
-const BasicNumberField = withInfo('Basic NumberField')(() =>
-  <NumberField
+const BasicTextField = withInfo('Basic TextField')(() =>
+  <TextField
     type="text"
     name="address"
     lable="Address"
@@ -22,8 +22,8 @@ const BasicNumberField = withInfo('Basic NumberField')(() =>
   />
 );
 
-const NumberFieldWithError = withInfo('With error message')(()=>
-  <NumberField
+const TextFieldWithError = withInfo('With error message')(()=>
+  <TextField
     type="text"
     name="address"
     lable="Address"
@@ -33,7 +33,7 @@ const NumberFieldWithError = withInfo('With error message')(()=>
   />
 );
 
-const NumberFieldStory = storiesOf('Form/NumberField', module)
-  .add('Basic number field', BasicNumberField)
-  .add('With error message', NumberFieldWithError);
-export default NumberFieldStory;
+const TextFieldStory = storiesOf('Global/Form/TextField', module)
+  .add('Basic text field', BasicTextField)
+  .add('With error message', TextFieldWithError);
+export default TextFieldStory;

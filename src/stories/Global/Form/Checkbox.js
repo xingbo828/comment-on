@@ -3,7 +3,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { action } from '@storybook/addon-actions';
-import Checkbox from '../../globalComponents/Form/Checkbox';
+import Checkbox from '../../../globalComponents/Form/Checkbox';
 
 const BasicCheckBoxGroup = withInfo('Basic checkbox group')(() =>
   <Checkbox.CheckboxGroup label="Team Players" value={[]} onChange={action('checkbox changed')} name="team">
@@ -24,7 +24,7 @@ const SingleCheckbox = withInfo('Single checkbox usage')(() =>{
   }
 );
 
-const CheckBoxStory = storiesOf('Form/Checkbox', module)
+const CheckBoxStory = storiesOf('Global/Form/Checkbox', module)
   .add('Basic group usage', BasicCheckBoxGroup)
   .add('Single checkbox usage', SingleCheckbox);
 export default CheckBoxStory;

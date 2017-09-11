@@ -2,7 +2,7 @@ import React from 'react';
 
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
-import Icon from '../globalComponents/Icon';
+import Icon from '../../globalComponents/Icon';
 
 const BasicIcon = () => <Icon icon="user" />;
 const SpinningIcon = () => (
@@ -22,7 +22,7 @@ const ListOfIconsWithDifferenceSize = () => (
     <Icon size="5x" icon="user" />
   </div>
 );
-const IconStory = storiesOf('Icon', module)
+const IconStory = storiesOf('Global/Icon', module)
   .add('basic icon', withInfo('Basic usage')(BasicIcon))
   .add('with different size',withInfo('Icon with sizes(lg/3x/5x)')(ListOfIconsWithDifferenceSize))
   .add('spinning icon', withInfo('Spinning icon')(SpinningIcon));

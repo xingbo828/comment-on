@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withInfo } from '@storybook/addon-info';
-import ImgUpload from '../../globalComponents/Form/ImgUpload';
+import ImgUpload from '../../../globalComponents/Form/ImgUpload';
 
 const { SingleImgUpload, MultiImgUpload } = ImgUpload;
 
@@ -39,7 +39,7 @@ const MultiImgUploadDemo = withInfo('Multiple images upload')(() =>
   />
 );
 
-const ImageUploadStory = storiesOf('Form/ImgUpload', module)
+const ImageUploadStory = storiesOf('Global/Form/ImgUpload', module)
   .add('Single image upload', SingleImgUploadDemo)
   .add('Multiple images upload', MultiImgUploadDemo);
 

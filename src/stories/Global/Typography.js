@@ -3,7 +3,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withInfo } from '@storybook/addon-info';
-import Heading from '../globalComponents/Typography/Heading';
+import Heading from '../../globalComponents/Typography/Heading';
 
 const HeadingDemo = () => (
   <div>
@@ -13,7 +13,7 @@ const HeadingDemo = () => (
   </div>
 );
 
-const TypographyStory = storiesOf('Typography', module)
+const TypographyStory = storiesOf('Global/Typography', module)
   .add('Heading', withInfo('Heading')(HeadingDemo));
 
 export default TypographyStory;
