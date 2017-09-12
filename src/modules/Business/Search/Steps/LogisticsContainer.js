@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import LogisticsStep from './Logistics';
+import message from '../../../../globalComponents/Message';
 
 const enhance = compose(
   withRouter,
@@ -13,6 +14,7 @@ const enhance = compose(
     },
     onSubmitSuccess: (result, dispatch, props) => {
       // send user to next step
+      message.loading('Looking for movers...');
     }
   })
 );
