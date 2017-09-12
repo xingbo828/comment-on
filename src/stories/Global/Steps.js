@@ -9,7 +9,7 @@ import Icon from '../../globalComponents/Icon';
 const Step = Steps.Step;
 
 const StepsDemo = () => (
-  <div style={{width: '500px'}}>
+  <div style={{width: '700px'}}>
     <Steps current={number('curent', 1)}>
       <Step
         icon={<Icon icon="sign-in" />}

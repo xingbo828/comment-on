@@ -22,7 +22,7 @@ const MessageTransition = ({ timeout=150, in: inProp, children , unmountOnExit})
         ...defaultStyle,
         ...transitionStyles[state]
       }}>
-        {children()}
+        {children(state)}
       </div>
       );
     }}
