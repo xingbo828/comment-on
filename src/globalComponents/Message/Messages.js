@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
-import Icon from '../Icon';
 import Message from './Message';
 import { MessagesContainer } from './Styled';
 import MessageTransition from './MessageTransition';

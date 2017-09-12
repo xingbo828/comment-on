@@ -3,12 +3,10 @@ import PropTypes from 'prop-types';
 import { Field } from 'redux-form/immutable';
 import {
   Button
-} from '../../../globalComponents/Form';
-import SearchSteps from './components/SearchSteps';
-import { GridContainer } from '../../../globalComponents/Grid';
+} from '../../../../globalComponents/Form';
+import { GridContainer } from '../../../../globalComponents/Grid';
 
-const Date = ({
-  history,
+const Logistics = ({
   handleSubmit,
   pristine,
   reset,
@@ -17,7 +15,6 @@ const Date = ({
 }) => {
   return (
     <GridContainer>
-      <SearchSteps current={2} history={history} />
       <form onSubmit={handleSubmit}>
         <Button type="submit" primary>Next</Button>
       </form>
@@ -25,8 +22,8 @@ const Date = ({
   );
 };
 
-Date.propTypes = {
+Logistics.propTypes = {
 
 };
 
-export default Date;
+export default Logistics;
