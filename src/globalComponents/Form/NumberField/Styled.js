@@ -2,7 +2,6 @@ import Styled from 'styled-components';
 import {
   borderPrimary,
   primaryColor,
-  secondaryActionColor,
   primaryActionColor,
   textDark
 } from '../../../foundation/Variables';
