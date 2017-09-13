@@ -21,4 +21,5 @@ import DateTimeStory from './Global/Form/DateTime';
 import ImageUploadStory from './Global/Form/ImageUpload';
 import StepsStory from './Global/Steps';
 import MessageStory from './Global/Message';
+import BadgeStory from './Global/Badge';
 //-----------Global End------------
