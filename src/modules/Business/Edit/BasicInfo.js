@@ -16,13 +16,13 @@ import {
 import { GridContainer } from '../../../globalComponents/Grid';
 import { SERVICE_AREAS } from '../../Common/constants';
 
-import BusinessHour from '../Compontnets/BuesinessHour';
+import BusinessHour from '../components/BusinessHour';
 
 const renderDescriptionTextArea = ({ input, ...rest }) =>
   <TextArea input={input} {...rest} rows="4" />;
 
 const renderBusinessHour = ({ input, ...rest }) => {
-  return <BusinessHour input={input} {...rest} />;
+  return <BusinessHour value={input.value.toJS()} onChange={input.onChange} {...rest} />;
 }
 
 const renderBusinessServiceAreas = ({ input, ...rest }) =>{

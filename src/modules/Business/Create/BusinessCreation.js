@@ -15,14 +15,14 @@ import {
 import { GridContainer } from '../../../globalComponents/Grid';
 import { SERVICE_AREAS } from '../../Common/constants';
 
-import BusinessHour from '../Compontnets/BuesinessHour';
+import BusinessHour from '../components/BusinessHour';
 
 
 const renderDescriptionTextArea = ({ input, ...rest }) =>
   <TextArea input={input} {...rest} />;
 
 const renderBusinessHour = ({ input, ...rest }) =>
-  <BusinessHour input={input} {...rest} />;
+  <BusinessHour value={input.value.toJS()} onChange={input.onChange} {...rest} />;
 
 const renderBusinessServiceAreas = ({ input, ...rest }) =>
   <Checkbox.CheckboxGroup input={input} {...rest} label="Service Areas" />;

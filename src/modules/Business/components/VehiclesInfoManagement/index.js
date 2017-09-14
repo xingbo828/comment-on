@@ -49,4 +49,4 @@ VehiclesInfoManagement.defaultProps = {
   onChange: ()=>{}
 };
 
-export default mapImmutablePropsToPlainProps(VehiclesInfoManagement);
+export default VehiclesInfoManagement;

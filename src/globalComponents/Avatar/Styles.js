@@ -6,9 +6,11 @@ export const AvatarContainer = styled.div`
       return `
         height: 20px;
         width: 20px;
+        line-height: 20px;
       `;
     } else if (props.size === 'lg') {
       return `
+        line-height: 70px;
         height: 60px;
         width: 60px;
       `;
@@ -16,16 +18,15 @@ export const AvatarContainer = styled.div`
       return `
         height: 40px;
         width: 40px;
+        line-height: 40px;
       `;
     }
   }}
   cursor: pointer;
   border-radius: 100%;
-  margin: 10px;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
+  display: inline-block;
 `;
 
 export const AvatarImg = styled.img`

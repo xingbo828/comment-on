@@ -19,7 +19,9 @@ class Badge extends Component {
     } else if(type === 'count') {
       return (
         <BadgeTransition in={count > 0}>
-          {()=><BadgeNumSup>{count}</BadgeNumSup>}
+          {()=><BadgeNumSup>
+            {count > 0 ? (count > 99 ? '99+' : count) : null}
+            </BadgeNumSup>}
         </BadgeTransition>
       );
     }

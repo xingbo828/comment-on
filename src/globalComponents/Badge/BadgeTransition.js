@@ -12,6 +12,7 @@ const BadgeTransition = ({
   const defaultStyle = {
     transition: `transform ${timeout}ms cubic-bezier(0.720, -0.600, 0.370, 1.650)`,
     transform: `scale(0, 0)`,
+    transformOrigin: '-4px',
     height: '8px',
     width: getWidth(type),
     position: 'absolute'

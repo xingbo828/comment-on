@@ -8,6 +8,7 @@ import TextArea from './TextArea';
 import { StyledSelect, StyledOption } from './Select';
 import AddressAutoComplete from './AddressAutoComplete';
 import DateTime from './DateTime';
+import Switch from './Switch';
 
 export {
   Button,
@@ -18,6 +19,7 @@ export {
   DateTime,
   Radio,
   Checkbox,
+  Switch,
   ImgUpload,
   StyledSelect as Select,
   StyledOption as Option

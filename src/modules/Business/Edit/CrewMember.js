@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field } from 'redux-form/immutable';
 import { GridContainer } from '../../../globalComponents/Grid';
-import CrewMemberManagement from '../Compontnets/CrewMemberManagement';
+import CrewMemberManagement from '../components/CrewMemberManagement';
 
 const renderCrewMemberManagement = ({ input, onUpdate, ...rest }) => {
   return <CrewMemberManagement members={input.value}  onUpdate={onUpdate} {...rest} />;

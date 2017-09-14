@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TabPanelContainer } from './Styled';
-import { string, bool, node, oneOfType } from 'prop-types';
+import { string, node, oneOfType } from 'prop-types';
 
 class TabPanel extends Component {
   componentDidMount() {

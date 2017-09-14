@@ -13,7 +13,7 @@ const BadgeSup = styled.sup`
   border-radius: 100%;
   background-color: ${props => props.theme.dangerActionColor};
   z-index: 10;
-  transform-origin: -10% center;
+  transform: translateX(-50%);
 `;
 
 export const BadgeDotSup = BadgeSup.extend`

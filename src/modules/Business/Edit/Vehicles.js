@@ -4,10 +4,10 @@ import {
   Button
 } from '../../../globalComponents/Form';
 import { GridContainer } from '../../../globalComponents/Grid';
-import VehiclesInfoManagement from '../Compontnets/VehiclesInfoManagement';
+import VehiclesInfoManagement from '../components/VehiclesInfoManagement';
 
 const renderVehiclesInfoManagement = ({ input, ...rest }) => {
-  return <VehiclesInfoManagement vehicles={input.value} onChange={input.onChange} {...rest} />;
+  return <VehiclesInfoManagement vehicles={input.value.toJS()} onChange={input.onChange} {...rest} />;
 }
 
 

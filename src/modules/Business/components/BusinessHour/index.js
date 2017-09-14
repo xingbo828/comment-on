@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Iterable } from 'immutable';
+import { array, func } from 'prop-types';
 import HoursDisplay from './HoursDisplay';
 import HoursSelect from './HoursSelect';
 import { BusinessHourContainer, BusinessHourHeading } from './Styled';
@@ -9,10 +9,8 @@ class BusinessHour extends Component {
 
   constructor(props) {
     super(props);
-    const { value } = this.props.input;
-    const initValue = value ? (Iterable.isIterable(value) ? value.toJS() : value) : [];
     this.state = {
-      hoursList: initValue
+      hoursList: this.props.value || []
     };
     this.addHours = this.addHours.bind(this);
     this.removeHours = this.removeHours.bind(this);
@@ -28,7 +26,7 @@ class BusinessHour extends Component {
       hoursList: newHoursList
     });
 
-    this.props.input.onChange(newHoursList);
+    this.props.onChange(newHoursList);
   }
 
   removeHours(key) {
@@ -36,7 +34,7 @@ class BusinessHour extends Component {
     this.setState({
       hoursList: newHoursList
     });
-    this.props.input.onChange(newHoursList);
+    this.props.onChange(newHoursList);
   }
 
 
@@ -50,5 +48,10 @@ class BusinessHour extends Component {
     );
   }
 }
+
+BusinessHour.propTypes = {
+  value: array,
+  onChange: func.isRequired
+};
 
 export default BusinessHour;
