@@ -24,6 +24,7 @@ import StepsStory from './Global/Steps';
 import MessageStory from './Global/Message';
 import BadgeStory from './Global/Badge';
 import RateStory from './Global/Rate';
+import MapStory from './Global/Map';
 //-----------Global End------------
 
 

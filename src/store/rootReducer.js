@@ -9,4 +9,6 @@ const rootReducer = combineReducers({
   form
 });
 
+console.log(rootReducer);
+
 export default rootReducer;
