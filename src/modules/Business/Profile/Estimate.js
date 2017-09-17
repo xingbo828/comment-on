@@ -7,18 +7,16 @@ const Pricing = Styled.div`
 `;
 
 const PricingContainer = Styled.div`
-  background: ${({theme}) => theme.brandPrimary };
+  padding: 0 0 1rem;
   justify-content: center;
   display: flex;
   flex-direction: column;
-  height: 120px;
-  //border-bottom: 1px solid ${({theme}) => theme.borderPrimary };
-  color: white;
+  border-bottom: 1px dashed ${({theme}) => theme.borderPrimary };
 
   span {
     text-transform: uppercase;
     font-weight: 800;
-    color: ${({theme}) => theme.textDarkest };
+    color: ${({theme}) => theme.textLight };
     letter-spacing: .03em;
     font-size: .875rem;
   }
@@ -37,16 +35,11 @@ const PricingContainer = Styled.div`
 
 const EstimateContainer = Styled.div`
   border-radius: 3px;
-  // border: ${({theme}) => theme.borderPrimary } 1px solid;
   padding: 0 0 1rem;
   background: white;
   width: 100%;
-  height: 500px;
-  transform: translateY(-120px);
   text-align: center;
-  // box-shadow: 0px 0px 15px rgba(0,0,0,.08);
-  // border-radius: 3px;
-  // overflow: hidden;
+  color: ${({theme}) => theme.brandPrimary };
 `;
 
 const Estimate = () => (
