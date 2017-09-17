@@ -7,7 +7,8 @@ import {
   InputErrorMsg,
   InputWrapper,
   NumberHandlerWrapper,
-  NumberHandler,
+  PlusNumberHandler,
+  MinusNumberHandler,
   Icon
 } from './Styled'
 
@@ -40,22 +41,17 @@ class NumberField extends Component {
   }
 
   render() {
-    const { label, type, placeholder, input, meta: { touched, error, warning }} = this.props;
+    const { placeholder, input, meta: { touched, error, warning }} = this.props;
     return (
       <InputContainer>
-        <InputLabel>
-          {label}
-        </InputLabel>
         <InputWrapper>
-          <NumberHandlerWrapper>
-            <NumberHandler onClick={this.handleClickUp}>
-              <Icon className="fa fa-chevron-up" aria-hidden="true"></Icon>
-            </NumberHandler>
-            <NumberHandler onClick={this.handleClickDown}>
-              <Icon className="fa fa-chevron-down" aria-hidden="true"></Icon>
-            </NumberHandler>
-          </NumberHandlerWrapper>
-          <Input {...input} type={type} placeholder={placeholder}/>
+          <PlusNumberHandler onClick={this.handleClickUp}>
+            <Icon className="fa fa-plus" aria-hidden="true"></Icon>
+          </PlusNumberHandler>
+          <MinusNumberHandler onClick={this.handleClickDown}>
+            <Icon className="fa fa-minus" aria-hidden="true"></Icon>
+          </MinusNumberHandler>
+          <Input {...input} placeholder={placeholder}>{input.value || 0}</Input>
         </InputWrapper>
         <FocusBorder />
         {touched &&
@@ -73,9 +69,8 @@ NumberField.defaultProps = {
   placeholder: '',
   label: '',
   value: 0,
-  min: 1,
-  max: 10,
-  type: 'text'
+  min: 0,
+  max: 10
 };
 
 export default NumberField;

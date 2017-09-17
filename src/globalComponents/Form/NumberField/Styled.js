@@ -15,7 +15,7 @@ margin: 0 0 1rem;
 
 export const InputWrapper = Styled.div`
 position: relative;
-width: 300px;
+width: 100%;
 `;
 
 export const NumberHandlerWrapper = Styled.div`
@@ -26,33 +26,46 @@ height: 100%;
 width: 40px;
 `;
 
-export const NumberHandler = Styled.span`
+const NumberHandler = Styled.span`
 cursor: pointer;
 text-align: center;
 line-height: 0;
-height: 50%;
+height: 100%;
 overflow: hidden;
 color: ${textDark};
-position: relative;
+position: absolute;
 display: block;
-width: 100%;
+width: 2rem;
 font-weight: 700;
+border-radius: 500px;
+padding-top: 1rem;
+color: ${primaryColor};
+&:hover {
+  color: ${primaryActionColor};
+}
+`;
+
+export const PlusNumberHandler = NumberHandler.extend`
+right: 0;
+`;
+
+export const MinusNumberHandler = NumberHandler.extend`
+left: 0;
 `;
 
 export const Icon = Styled.i`
-  &:hover {
-    color: ${primaryActionColor};
-  }
 `;
 
-export const Input = Styled.input`
+export const Input = Styled.span`
 display: block;
 width: 100%;
 border: solid ${borderPrimary};
-border-width: 0 0 1px 0;
+border-width: 1px;
+border-radius: 500px;
 font-size: 1rem;
 padding: 1rem 0;
 outline: none;
+text-align: center;
 
 &:focus + div{
   transform: scale(1);
