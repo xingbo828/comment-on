@@ -31,6 +31,7 @@ import MapStory from './Global/Map';
 //-----------Mover Module Start----------------//
 import BusinessHourStory from './Mover/BusinessHour';
 import VehiclesInfoManagement from './Mover/VehiclesInfoManagement';
+import AddressSelectionStory from './Mover/AddressSelection';
 //-----------Mover Module End----------------//
 
 //-----------Account Module Start----------------//
