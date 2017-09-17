@@ -21,7 +21,13 @@ const Aside = Styled.aside`
   margin-left: 2.75%;
 `;
 
+const CtaContainer = Styled.div`
+  text-align: center;
+  transform: translateY(58px);
+`;
+
 export {
+  CtaContainer,
   HeroDiv,
   ProfileContentContainer,
   Content,

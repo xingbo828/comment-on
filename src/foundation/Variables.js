@@ -4,7 +4,7 @@ import { css } from 'styled-components'
 // Colors
 export const primaryColor = '#FFA500';
 export const brandPrimary = '#FFA500';
-export const primaryActionColor = '#5aad5e';
+export const primaryActionColor = '#FFA500';
 export const secondaryActionColor = '#1d407f';
 export const dangerActionColor = '#f04134';
 export const borderPrimary = '#d3d3d3';
