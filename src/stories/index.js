@@ -9,6 +9,7 @@ import TypographyStory from './Global/Typography';
 import IconStory from './Global/Icon';
 import AvatarStory from './Global/Avatar';
 import TabsStory from './Global/Tabs';
+import TableStory from './Global/Table';
 // Global Form components
 import ButtonStory from './Global/Form/Button';
 import RadioStory from './Global/Form/Radio';
