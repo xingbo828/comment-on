@@ -7,7 +7,7 @@ import {
   Route
 } from 'react-router-dom';
 import ProtectedRoute from './modules/Common/ProtectedRoute';
-import Header from './modules/Common/Header';
+import Nav from './modules/Common/Nav';
 import asyncLoad from './modules/Common/asyncLoad';
 import './foundation/base.js';
 
@@ -17,7 +17,7 @@ class App extends Component {
       <Router>
         <ThemeProvider theme={theme}>
           <main>
-            <Header />
+            <Nav />
             <Switch>
               <Route exact path="/" component={asyncLoad(() => import('./modules/Home'))} />
               <ProtectedRoute path="/account" component={asyncLoad(() => import('./modules/Account'))} />

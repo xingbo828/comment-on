@@ -2,13 +2,17 @@
 import { css } from 'styled-components'
 
 // Colors
-export const primaryColor = '#6b6bd5';
-export const primaryActionColor = '#5aad5e';
+export const primaryColor = '#FFA500';
+export const brandPrimary = '#FFA500';
+export const primaryActionColor = '#FFA500';
+export const secondaryActionColor = '#1d407f';
+export const dangerActionColor = '#f04134';
 export const borderPrimary = '#d3d3d3';
 export const buttonPrimary = 'red';
+export const textDarkest = '#2d2d2d';
 export const textDark = '#525458';
+export const textLight = '#a6a7a9';
 export const offWhite = '#f8f8f8';
-
 // Media
 export const xl = '1200px';
 export const large = '992px';

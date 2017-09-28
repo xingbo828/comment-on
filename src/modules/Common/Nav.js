@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { compose, withProps } from 'recompose';
+import { Link, withRouter } from 'react-router-dom';
+import { compose, withProps, branch, renderNothing } from 'recompose';
 import { auth } from '../../firebaseClient';
 import isLoggedIn from './isLoggedIn';
 import AccountNav from './AccountNav';
@@ -11,7 +11,7 @@ const fromTheme = (prop) => ({ theme }) => theme[prop]
 const ContextHeader = styled.div`
   display: flex;
   box-sizing: border-box;
-  background: ${fromTheme('primaryColor')};
+  // background: ${fromTheme('primaryColor')};
   height: 60px;
   width: 100%;
   line-height: 60px;
@@ -19,6 +19,7 @@ const ContextHeader = styled.div`
 `;
 
 const Heading = styled.h1`
+  text-decoration: none;
   flex: 1;
   display: inline;
   font-size: 1rem;
@@ -26,7 +27,9 @@ const Heading = styled.h1`
   margin: 0 1rem 0 0;
   padding: 0 1rem 0 0;
   border-right: 1px solid white;
-  font-weight: bold;
+  font-weight: 800;
+  letter-spacing: .1em;
+  color: ${fromTheme('brandPrimary')};
 `;
 
 const Location = styled.span`
@@ -53,11 +56,9 @@ const ContextHeaderLink = styled.li`
 
 const NavRoot = styled.nav`
   display: block;
-  margin: 0 0 2rem;
   background: white;
 
   ${props => props.theme.media.fromMedium`
-      margin: 0 0 4rem;
     `
   }
 `;
@@ -89,7 +90,6 @@ const NavList = styled.ul`
 
   ${props => props.theme.media.fromMedium`
       display: block;
-      margin: 0 0 4rem;
     `
   }
 `;
@@ -128,7 +128,7 @@ const NavListItem = styled.li`
       a {
         padding: 0 2rem;
       }
-      
+
       a::after {
         display: none;
       }
@@ -140,8 +140,8 @@ export const Nav = ({ user, isLoggedIn, logout }) => {
   return (
     <NavRoot>
       <ContextHeader>
-        <Heading>Comment on</Heading>
-        <Location>Vancouver</Location>
+        <Link to="/"><Heading>LOGO</Heading></Link>
+        {/* <Location>Vancouver</Location> */}
         <ContextHeaderLinks>
           <ContextHeaderLink>
             <Link to="/business/create">Register business</Link>
@@ -149,13 +149,12 @@ export const Nav = ({ user, isLoggedIn, logout }) => {
         </ContextHeaderLinks>
         <AccountNav />
       </ContextHeader>
-      <NavList>
+      {/* <NavList>
         <NavListItem><Link to="/"><span>Overview</span></Link></NavListItem>
         <NavListItem><Link to="/"><span>Menu Item</span></Link></NavListItem>
         <NavListItem><Link to="/"><span>Menu Item</span></Link></NavListItem>
         <NavListItem><Link to="/"><span>Menu Item</span></Link></NavListItem>
-        {/* { !isLoggedIn && <NavListItem><Link to="/login">Login</Link></NavListItem> } */}
-      </NavList>
+      </NavList> */}
     </NavRoot>
   );
 };
@@ -165,11 +164,15 @@ const logout = () => {
 };
 
 const NavContainer = compose(
+  withRouter,
   isLoggedIn,
- withProps(props => ({
-   logout
- })),
+  withProps(props => ({
+    logout
+  })),
+  branch(
+    props => props.location.pathname === '/login',
+    renderNothing
+  )
 )(Nav);
 
 export default NavContainer;
-

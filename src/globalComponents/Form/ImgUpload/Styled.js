@@ -31,6 +31,29 @@ export const StyledImgListItem = styled.li`
   margin-right: 1rem;
 `;
 
+export const StyleImgReplace = styled.div`
+opacity: 0;
+width: 100px;
+height: 100px;
+position: absolute;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+::after {
+  font-family: FontAwesome;
+  content: '\f093';
+  font-size: 2.0rem;
+  color: ${props => props.theme.buttonPrimary};
+}
+:hover {
+  background-color: rgba(0,0,0,.6);
+  opacity: .7;
+}
+
+transition: opacity 0.3s;
+`;
+
 export const StyledImgRemove = styled.div`
   opacity: 0;
   width: 100%;

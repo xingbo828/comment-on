@@ -1,5 +1,12 @@
 import React from 'react';
-import { CheckboxWrapper, CheckboxInput, CheckboxInner, CheckboxContainer, CheckboxLabel } from './Styled';
+import { bool, string, func } from 'prop-types';
+import {
+  CheckboxWrapper,
+  CheckboxInput,
+  CheckboxInner,
+  CheckboxContainer,
+  CheckboxLabel
+} from './Styled';
 
 const Checkbox = ({disabled, value, label, name, onChange, checked}) => {
     return (
@@ -13,7 +20,7 @@ const Checkbox = ({disabled, value, label, name, onChange, checked}) => {
               onChange={onChange}
               checked={!!checked}
             />
-            <CheckboxInner checked={!!checked} />
+            <CheckboxInner disabled={disabled} checked={!!checked} />
           </CheckboxWrapper>
         <CheckboxLabel>
           {label}
@@ -21,5 +28,14 @@ const Checkbox = ({disabled, value, label, name, onChange, checked}) => {
       </CheckboxContainer>
     );
 }
+
+Checkbox.propTypes = {
+  disabled: bool,
+  value: string,
+  label: string,
+  name: string,
+  onChange: func,
+  checked: bool
+};
 
 export default Checkbox;

@@ -24,6 +24,14 @@ const TextField = ({ label, type, placeholder, input, meta: { touched, error, wa
   );
 };
 
+
+TextField.defaultProps = {
+  meta: {},
+  placeholder: '',
+  label: '',
+  type: 'text'
+};
+
 export default TextField;
 
 

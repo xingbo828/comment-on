@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BusinessCardList, BusinessCard } from './Styled';
+import { BusinessCardList, BusinessCard, BusinessCardLogo, BusinessCardName, BusinessCardLogoImg } from './Styled';
 
 class SearchBusiness extends Component {
   constructor(props) {
@@ -16,7 +16,15 @@ class SearchBusiness extends Component {
   renderBusinessCard() {
     return this.props.search.result.map(business => (
       <BusinessCard key={business.id}>
-        <pre>{JSON.stringify(business, null, 2) }</pre>
+        <BusinessCardLogo><BusinessCardLogoImg src={business.logo} /></BusinessCardLogo>
+        <BusinessCardName>{business.businessName}</BusinessCardName>
+        <BusinessCardName>{business.businessAddrCity}</BusinessCardName>
+        <BusinessCardName><i className="fa fa-star" aria-hidden="true"></i>
+        <i className="fa fa-star" aria-hidden="true"></i>
+        <i className="fa fa-star" aria-hidden="true"></i>
+        <i className="fa fa-star" aria-hidden="true"></i>
+        </BusinessCardName>
+        <BusinessCardName>$345.00</BusinessCardName>
       </BusinessCard>
     ));
   }

@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import { func, string, shape, array, bool } from 'prop-types';
 import Checkbox from './Checkbox';
 import { Container, CheckboxList, InputErrorMsg, CheckboxGroupLabel } from './Styled';
+import mapImmutablePropsToPlainProps from '../../../modules/Common/mapImmutablePropsToPlainProps'
 
 class CheckboxGroup extends Component {
   constructor(props){
     super(props);
     this.state = {
-      checked: this.props.input.value || []
+      checked: props.value
     };
     this.isChecked = this.isChecked.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -27,7 +29,7 @@ class CheckboxGroup extends Component {
     this.setState({
       checked: newState
     });
-    this.props.input.onChange(newState);
+    this.props.onChange(newState);
   }
 
   render() {
@@ -68,4 +70,20 @@ class CheckboxGroup extends Component {
   }
 };
 
-export default CheckboxGroup;
+CheckboxGroup.defaultProps = {
+  meta: {},
+  value: []
+}
+
+CheckboxGroup.propTypes = {
+  label: string,
+  name: string.isRequired,
+  value: array,
+  onChange: func.isRequired,
+  meta: shape({
+    touched: bool,
+    error: string
+  })
+};
+
+export default mapImmutablePropsToPlainProps(CheckboxGroup);

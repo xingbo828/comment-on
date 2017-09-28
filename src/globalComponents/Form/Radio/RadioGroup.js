@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Radio from './Radio';
+import { func, string } from 'prop-types';
 import {
   Container,
   RadioGroupLabel,
@@ -50,6 +51,11 @@ class RadioGroup extends Component {
       </Container>
     );
   }
+};
+
+RadioGroup.propTypes = {
+  onChange: func.isRequired,
+  value: string
 };
 
 export default RadioGroup;

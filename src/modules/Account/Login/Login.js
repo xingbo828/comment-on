@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { 
-  WrapperDiv, 
+import {
+  WrapperDiv,
   FacebookButton,
   GoogleButton,
   StyledH1,

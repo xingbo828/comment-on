@@ -2,22 +2,38 @@ import styled from 'styled-components';
 import Geosuggest from 'react-geosuggest';
 
 export const Label = styled.label`
-  display: flex;
-  flex-direction: column;
-  border: 1px solid ${props => props.theme.borderPrimary};
+  
 `;
 
-export const LabelTxt = styled.span`
-  padding: .5rem;
-  ::before {
-    font-family: 'FontAwesome';
-    content: '\f041';
-    padding-right: 10px;
+export const FocusBorder = styled.div`
+height: 2px;
+width: 100%;
+background: ${props=>props.theme.primaryColor};
+margin-top: -2px;
+transition: .3s;
+${props => {
+  if(props.focused) {
+    return `
+      transform: scale(1);
+    `;
   }
+  return `transform: scale(0);`;
+}}
 `;
+
 
 export const GeosuggestStyled = styled(Geosuggest)`
   position: relative;
+  padding-left: 30px;
+  ::before {
+    font-family: 'FontAwesome';
+    content: '\f041';
+    font-size: 1.2rem;
+    position: absolute;
+    top:0;
+    left: 10px;
+    line-height: 40px;
+  }
   text-align: left;
   .geosuggest__input {
     outline: none;

@@ -4,36 +4,25 @@ import {
   Button,
   TextField,
   TextArea,
-  ImgUpload,
   Checkbox
 } from '../../../globalComponents/Form';
 import {
-  Container,
-  Form,
   AddressDetailContainer,
   AddressDetailCity,
   AddressDetailProv,
   AddressDetailPostalCode
 } from './Styled';
+import { GridContainer } from '../../../globalComponents/Grid';
 import { SERVICE_AREAS } from '../../Common/constants';
 
-import BusinessHour from '../Compontnets/BuesinessHour';
+import BusinessHour from '../components/BusinessHour';
 
-const MultiImgUpload = ImgUpload.MultiImgUpload;
 
 const renderDescriptionTextArea = ({ input, ...rest }) =>
-  <TextArea input={input} {...rest} rows="4" />;
+  <TextArea input={input} {...rest} />;
 
 const renderBusinessHour = ({ input, ...rest }) =>
-  <BusinessHour input={input} {...rest} />;
-
-const renderBusinessImgs = ({ input, ...rest }) =>
-  <MultiImgUpload
-    input={input}
-    {...rest}
-    limit={3}
-    actionText="Upload Images(s)"
-  />;
+  <BusinessHour value={input.value.toJS()} onChange={input.onChange} {...rest} />;
 
 const renderBusinessServiceAreas = ({ input, ...rest }) =>
   <Checkbox.CheckboxGroup input={input} {...rest} label="Service Areas" />;
@@ -46,8 +35,8 @@ const BusinessCreation = ({
   submitting
 }) => {
   return (
-    <Container>
-      <Form onSubmit={handleSubmit}>
+    <GridContainer>
+      <form onSubmit={handleSubmit}>
         <Field
           component={TextField}
           type="text"
@@ -130,11 +119,6 @@ const BusinessCreation = ({
           name="businessHour"
           label="Business hours"
         />
-        <Field
-          component={renderBusinessImgs}
-          name="businessImgs"
-          label="Business Images"
-        />
         <Button
           type="submit"
           primary
@@ -142,8 +126,8 @@ const BusinessCreation = ({
         >
           Submit
         </Button>
-      </Form>
-    </Container>
+      </form>
+    </GridContainer>
   );
 };
 

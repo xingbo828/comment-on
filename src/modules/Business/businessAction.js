@@ -30,18 +30,70 @@ export const addBusiness = (businessInfo) => (dispatch) => {
   const businessId = businessDbRef.push().key;
 
   return updateUserBusiness(businessId, uid)
-  .then(() => updateBusiness(businessInfo, businessId));
+  .then(() => updateBusiness(businessInfo, businessId))
+  .then(() => businessId);
 }
 
-const updateBusiness = (businessInfo, businessId) => {
+export const getBusinessInfo = (businessId) => {
+  const businessRef = businessDbRef.child(businessId);
+  return businessRef.once('value').then(obj => obj.toJSON());
+}
+
+export const editBusinessImages = (businessInfo, businessId) => (dispatch) => {
+  const businessInfoRaw = businessInfo.toJS();
+  const { logo, businessImgs } = businessInfoRaw;
+  const uploadBusinessImgsPromise = uploadBusinessImgs(businessImgs, businessId);
+  const uploadBusinessLogoPromise = uploadBusinessLogo(logo, businessId);
+  return Promise.all([uploadBusinessLogoPromise, uploadBusinessImgsPromise])
+  .then(([imgLogoUrl, imgProfileUrls]) => {
+    const businessRef = businessDbRef.child(businessId);
+    return businessRef.set(Object.assign({}, businessInfoRaw, {
+      logo: imgLogoUrl,
+      businessImgs: imgProfileUrls
+    }));
+  });
+}
+
+export const updateBusinessCrewMember = (crewMembers, businessId) => {
+  const crewMemberAvatarPromises = Promise.all(crewMembers.map(c => {
+    if (typeof c.avatar === 'string') {
+      return Promise.resolve(c.avatar);
+    }
+    const imgRef = imgStorageRef.child(`images/business/${businessId}/${c.avatar.name}`);
+    return imgRef.put(c.avatar)
+    .then((result) => result.downloadURL);
+  }));
+
+  const businessRef = businessDbRef.child(businessId);
+  const businessInfoPromise = businessRef.once('value').then(obj => obj.toJSON());
+
+  return Promise
+  .all([crewMemberAvatarPromises, businessInfoPromise])
+  .then(([crewMemberMemberImages, businessInfo]) => {
+    crewMembers = crewMembers.map((c, index) => {
+      c.avatar = crewMemberMemberImages[index];
+      return c;
+    });
+    return businessRef.set(Object.assign({}, businessInfo, {
+      crewMembers
+    }));
+  })
+}
+
+export const updateVehiclesInfo = (businessInfo, businessId) => {
+  const businessInfoRaw = businessInfo.toJS();
+  const { vehiclesInfo } = businessInfoRaw;
+  const businessRef = businessDbRef.child(businessId);
+  return businessRef.set(Object.assign({}, businessInfoRaw, {
+    vehiclesInfo
+  }));
+};
+
+export const updateBusiness = (businessInfo, businessId) => {
   businessInfo = (businessInfo.toJS && businessInfo.toJS()) || businessInfo;
   businessInfo.businessServiceArea = reduceServiceArea(businessInfo.businessServiceArea);
   const businessRef = businessDbRef.child(businessId);
-  return uploadBusinessImgs(businessInfo.businessImgs, businessId)
-  .then((imgUrls) => {
-    businessInfo.businessImgs = imgUrls;
-    return businessRef.set(businessInfo);
-  });
+  return businessRef.set(businessInfo);
 }
 
 const reduceServiceArea = (serviceAreas) => {
@@ -50,6 +102,17 @@ const reduceServiceArea = (serviceAreas) => {
     return result;
   }, {})
 }
+
+
+const uploadBusinessLogo = (businessLogo, businessId) => {
+  if (typeof businessLogo === 'string') {
+    return Promise.resolve(businessLogo);
+  }
+  const imgRef = imgStorageRef.child(`images/business/${businessId}/${businessLogo.name}`);
+  return imgRef.put(businessLogo)
+  .then((result) => result.downloadURL);
+};
+
 
 const uploadBusinessImgs = (businessImgs, businessId) => {
   if (Array.isArray(businessImgs) && businessImgs.length) {
