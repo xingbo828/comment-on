@@ -15,9 +15,19 @@ const SmallButtons = withInfo('Small buttons')(() => (
   </div>
 ));
 
+const IconButton = withInfo('With icon')(() =>
+  <div>
+    <Button primary icon="arrow-right">Click</Button>
+    <Button icon="plus">Click</Button>
+    <Button icon="arrow-right" danger>Hello world</Button>
+    <Button icon="arrow-right" disabled>Hello world</Button>
+</div>
+);
+
 const ButtonStory = storiesOf('Global/Form/Button', module)
   .add('Basic primary button', BasicButton)
   .add('Danger button', DangerButton)
   .add('Disabled button', DisabledButton)
-  .add('Small buttons', SmallButtons);
+  .add('Small buttons', SmallButtons)
+  .add('With icon', IconButton);
 export default ButtonStory;

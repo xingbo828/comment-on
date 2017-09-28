@@ -3,7 +3,7 @@ import {
   media
 } from '../../../foundation/Variables';
 
-const getBackgroundColor = props => {
+const getBackColor = props => {
   if (props.disabled) {
     return props.theme.borderPrimary;
   } else if(props.primary) {
@@ -25,7 +25,7 @@ const getBorderColor = props => {
   return props.theme.secondaryActionColor;
 };
 
-const getFontColor = props => {
+const getForeColor = props => {
   if (props.disabled) {
     return props.theme.offWhite;
   }
@@ -67,32 +67,34 @@ const getHoverFontColor = props => {
 
 const getIcon = props => {
   if (props.icon) {
-    console.log(props.icon);
     let contentValue;
     switch (props.icon) {
       case 'arrow-right':
-      console.log('gogog');
           contentValue = '\\f061';
         break;
       case 'plus':
           contentValue = '\\f067';
-      break;  
+      break;
       default:
         return null
     }
 
-    console.log(contentValue);
-
     return `
       &:after {
+        transition: .3s cubic-bezier(.645,.045,.355,1);
         display: inline-block;
-        background: white;
-        color: ${props.theme.primaryActionColor};
+        background: ${getForeColor(props)};
+        color: ${getBackColor(props)};
         font-family: FontAwesome;
         content: "${contentValue}";
         border-radius: 99em;
         padding: .5rem;
         transform: translateX(1rem);
+      }
+      :hover {
+        &:after {
+          background: ${!props.disabled && getBackColor(props)};
+          color: ${!props.disabled && getForeColor(props)};
       }
     `
   }
@@ -117,8 +119,8 @@ export const Button = styled.button`
   user-select: none;
   transition: all .3s cubic-bezier(.645,.045,.355,1);
   position: relative;
-  color: ${getFontColor};
-  background-color:  ${getBackgroundColor};
+  color: ${getForeColor};
+  background-color:  ${getBackColor};
   border-color: ${getBorderColor};
   padding: ${props => props.small ? '5px 10px' : '16px 32px'};
   ${media.fromMedium`
@@ -132,4 +134,5 @@ export const Button = styled.button`
     color: ${getHoverFontColor};
     border-color: ${getHoverBorderColor};
   }
+
 `;
