@@ -4,6 +4,8 @@ import { compose } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import ItemsStep from './Items';
 import message from '../../../../globalComponents/Message';
+import scrollToTopOnMount from '../../../Common/scrollToTopOnMount';
+
 
 const enhance = compose(
   withRouter,
@@ -19,7 +21,8 @@ const enhance = compose(
         pathname: '/business/search/steps/date'
       });
     }
-  })
+  }),
+  scrollToTopOnMount
 );
 
 export default enhance(ItemsStep);

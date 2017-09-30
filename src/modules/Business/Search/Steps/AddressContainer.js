@@ -4,6 +4,7 @@ import { compose, lifecycle } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import AddressStep from './Address';
 import message from '../../../../globalComponents/Message';
+import scrollToTopOnMount from '../../../Common/scrollToTopOnMount';
 
 const enhance = compose(
   withRouter,
@@ -25,7 +26,8 @@ const enhance = compose(
     shouldComponentUpdate(nextProps) {
       return false;
     }
-  })
+  }),
+  scrollToTopOnMount
 );
 
 export default enhance(AddressStep);
