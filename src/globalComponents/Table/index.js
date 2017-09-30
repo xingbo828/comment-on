@@ -1,8 +1,9 @@
 import React from 'react';
-import { Table, Tr, Td } from './Styled';
+import { Table, Tr, Td, Th } from './Styled';
 
 export {
   Table,
   Tr,
-  Td
+  Td,
+  Th
 }

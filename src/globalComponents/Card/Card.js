@@ -4,9 +4,9 @@ import {
 } from './Styled';
 
 
-const Card = ({ children, offset }) => {
+const Card = ({ children, offset, style }) => {
   return(
-    <CardDiv offset="-120">
+    <CardDiv offset={offset} style={style}>
       {children}
     </CardDiv>
   );
