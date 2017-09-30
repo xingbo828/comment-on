@@ -25,7 +25,7 @@ class AddressAutoComplete extends Component {
   }
 
   render() {
-    const { onSelect, placeholder, label } = this.props;
+    const { initialValue, onSelect, placeholder, label } = this.props;
     return (
       <Label>
         <GeosuggestStyled
@@ -34,6 +34,7 @@ class AddressAutoComplete extends Component {
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
           onSuggestSelect={onSelect}
+          initialValue={initialValue}
         />
         <FocusBorder focused={this.state.focused}/>
       </Label>
@@ -44,7 +45,8 @@ class AddressAutoComplete extends Component {
 
 AddressAutoComplete.defaultProps = {
   onSelect: () => {},
-  placeholder: 'Search place'
+  placeholder: 'Search place',
+  initialValue: ''
 };
 
 export default AddressAutoComplete;

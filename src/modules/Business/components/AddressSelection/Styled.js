@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const AddressSelectionContainer = styled.div`
+  padding: 1.5rem 0;
 `;
 export const Label = styled.label`
   font-size: 1.5rem;

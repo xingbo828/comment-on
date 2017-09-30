@@ -14,24 +14,51 @@ class AddressSelection extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      address: this.props.address,
+      address: null,
       zoom: this.props.zoom
     };
     this.onAddressSelect = this.onAddressSelect.bind(this);
   }
 
+  componentDidMount() {
+    const geoCoder = new this.props.google.maps.Geocoder;
+    geoCoder.geocode({'placeId': this.props.placeId}, (result, status) => {
+      if(status === 'OK') {
+        const address = result[0];
+        this.setState({
+          address: {
+            location: {
+              lat: address.geometry.location.lat(),
+              lng: address.geometry.location.lng(),
+            },
+            label: address.formatted_address,
+            placeId: this.props.placeId
+          }
+        })
+      }
+    });
+
+  }
 
   onAddressSelect(address) {
     this.setState({
-      address
-    });
-    this.props.onChange(address);
-  }
+      address: {
+        location: {
+          lat: address.location.lat,
+          lng: address.location.lng
+        },
+        label: address.label,
+        placeId: address.placeId
+      }
+    })
+    this.props.onChange(address.placeId);
+  };
 
 
   render() {
     const { address, zoom } = this.state;
     const { google, label, desc } = this.props;
+    const initialValue = address ? address.label : undefined;
     return (
       <AddressSelectionContainer>
         <Label>{label}</Label>
@@ -42,7 +69,7 @@ class AddressSelection extends Component {
             </MapInnerContainer>
           </MapContainer>
           <InputContainer>
-            <AddressAutoComplete placeholder="where you from?" onSelect={this.onAddressSelect} />
+            <AddressAutoComplete initialValue={initialValue} placeholder="Address" onSelect={this.onAddressSelect} />
             <p>{desc}</p>
           </InputContainer>
         </AddressSelectionInner>
@@ -55,7 +82,7 @@ AddressSelection.propTypes = {
   google: object.isRequired,
   onChange: func.isRequired,
   zoom: number,
-  address: object,
+  placeId: string,
   label: string,
   desc: string
 };
@@ -63,7 +90,8 @@ AddressSelection.propTypes = {
 AddressSelection.defaultProps = {
   zoom: 15,
   label: 'Address',
-  desc: ''
+  desc: '',
+  placeId: null
 };
 
 export default AddressSelection;

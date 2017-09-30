@@ -1,6 +1,6 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { compose } from 'recompose';
+import { compose, lifecycle } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import AddressStep from './Address';
 import message from '../../../../globalComponents/Message';
@@ -19,6 +19,11 @@ const enhance = compose(
       props.history.push({
         pathname: '/business/search/steps/items'
       });
+    }
+  }),
+  lifecycle({
+    shouldComponentUpdate(nextProps) {
+      return false;
     }
   })
 );
