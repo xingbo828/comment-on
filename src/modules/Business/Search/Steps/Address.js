@@ -7,8 +7,8 @@ import {
 import { GridContainer } from '../../../../globalComponents/Grid';
 import AddressSelection from '../../components/AddressSelection';
 
-const renderAddressSelection = (desc) => ({ input, ...rest }) =>
-<AddressSelection google={window.google} desc={desc} onChange={input.onChange} placeId={input.value}  />;
+const renderAddressSelection = (desc) => ({ input, label }) =>
+  <AddressSelection google={window.google} desc={desc} label={label} onChange={input.onChange} placeId={input.value}  />;
 
 const Address = ({
   handleSubmit,
