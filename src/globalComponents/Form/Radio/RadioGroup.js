@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Radio from './Radio';
 import { func, string } from 'prop-types';
+import Card from '../../Card';
 import {
   Container,
   RadioGroupLabel,
@@ -25,12 +26,39 @@ class RadioGroup extends Component {
 
   render() {
     const options = React.Children.map(this.props.children, (option) => {
+
+
+      if (option.type === Card) {
+        const card = React.Children.map(option.props.children, (child) => {
+          if (child.type !== Radio) {
+            return (child);
+          }
+          const {
+            value,
+            label,
+            ...other
+          } = child.props;
+          return (
+            <Radio
+              {...other}
+              value={child.props.value}
+              label={child.props.label}
+              onCheck={this.handleChange}
+              checked={child.props.value === this.state.selected}
+            />
+          );
+        });
+        return (
+          <Card offset="0" style={{float: 'left'}}>
+            {card}
+          </Card>
+        );
+      }
       const {
         value,
         label,
         ...other
       } = option.props;
-
       return (
         <Radio
           {...other}

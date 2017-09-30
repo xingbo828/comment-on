@@ -16,7 +16,7 @@ export const Table = styled.div`
 export const Tr = styled.ul`
   list-style: none;
   width: 100%;
-  border-top: 1px solid ${borderPrimary};
+  border-bottom: 1px solid ${borderPrimary};
   overflow: hidden;
   display: flex;
   flex-direction: row;
@@ -26,6 +26,10 @@ export const Tr = styled.ul`
     flex-direction: column;
   }
 `;
+
+export const Th = styled.li`
+  flex: 1;
+`
 
 export const Td = styled.li`
   flex: 1;
