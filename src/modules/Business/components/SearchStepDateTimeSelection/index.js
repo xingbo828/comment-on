@@ -17,7 +17,7 @@ class DateTimeSelection extends Component {
         <Label>{label}</Label>
         <DateTimeSelectionInner>
           <DateTimeBtnWrapper>
-            <DateTime onChange={onChange} disabledDate={disabledDate} includeTime placeholder={placeholder} />
+            <DateTime value={value} onChange={onChange} disabledDate={disabledDate} includeTime placeholder={placeholder} />
           </DateTimeBtnWrapper>
         </DateTimeSelectionInner>
       </DateTimeSelectionContainer>

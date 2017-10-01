@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { string, bool, func } from 'prop-types';
+import { instanceOf, string, bool, func } from 'prop-types';
 import {
   Label,
   InputBtn,
@@ -131,7 +131,7 @@ class DateTime extends Component {
 }
 
 DateTime.propTypes = {
-  value: string,
+  value: instanceOf(moment),
   placeholder: string,
   includeTime: bool,
   onChange: func,
@@ -139,7 +139,7 @@ DateTime.propTypes = {
 };
 
 DateTime.defaultProps = {
-  value: '',
+  value: null,
   placeholder: 'Date & time',
   includeTime: false,
   disabledDate: () => false

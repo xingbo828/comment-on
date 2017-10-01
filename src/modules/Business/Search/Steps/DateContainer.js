@@ -26,9 +26,9 @@ const mapDispatchToProps = dispatch => ({
   loadDateTime: () => dispatch(loadDateTime())
 });
 
-const mapStateToProps = state => ({initialValues: getDateTime(state)});
+const mapStateToProps = state => ({initialValues: getDateTime(state).dateTime});
 
-const isLoading = (props) => props.initialValues.dateTime.get('status') !== 'LOADED';
+const isLoading = (props) => props.initialValues.get('status') !== 'LOADED';
 
 const enhance = compose(
   withRouter,
@@ -39,8 +39,8 @@ const enhance = compose(
     },
     shouldComponentUpdate(nextProps) {
       return (
-        this.props.initialValues.dateTime.get('dateTime') !== nextProps.initialValues.dateTime.get('dateTime') ||
-        this.props.initialValues.dateTime.get('dateTime') === null
+        this.props.initialValues.get('dateTime') !== nextProps.initialValues.get('dateTime') ||
+        this.props.initialValues.get('dateTime') === null
       );
     }
   }),
@@ -51,9 +51,7 @@ const enhance = compose(
   reduxForm({
     form: 'search.steps.date',
     validate,
-    onSubmit: (values, dispatch, props) => {
-      // handle submit
-    },
+    onSubmit: (values, dispatch, props) => localSaveDateTime(values.get('dateTime'))(dispatch),
     onSubmitSuccess: (result, dispatch, props) => {
       // send user to next step
       props.history.push({

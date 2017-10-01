@@ -8,7 +8,7 @@ import { GridContainer } from '../../../../globalComponents/Grid';
 import DateTimeSelection from '../../components/SearchStepDateTimeSelection'
 
 const renderDateTimeSelection =  ({ input, label }) => {
-  return <DateTimeSelection label={label} value={input.value} onChange={input.onChange} placeholder="Select date & time" />;
+  return <DateTimeSelection label={label} value={input.value || null} onChange={input.onChange} placeholder="Select date & time" />;
 }
 
 const Date = ({

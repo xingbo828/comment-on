@@ -1,5 +1,6 @@
 import localforge from 'localforage';
 import omit from 'lodash/omit';
+import moment from 'moment';
 
 export const LOCALSTOREAGE_STEP_INFO_KEY = 'steps-info';
 
@@ -42,7 +43,7 @@ export const LOADING_DATE_TIME = 'LOADING_DATE_TIME';
 
 export const localSaveDateTime = (dateTime) => async (dispatch) => {
   const stepInfo = await localforge.getItem(LOCALSTOREAGE_STEP_INFO_KEY)
-  await localforge.setItem(LOCALSTOREAGE_STEP_INFO_KEY, Object.assign(stepInfo || {}, { dateTime }));
+  await localforge.setItem(LOCALSTOREAGE_STEP_INFO_KEY, Object.assign(stepInfo || {}, { dateTime: dateTime.unix() }));
   dispatch({
     type: LOCAL_SAVE_DATE_TIME,
     data: dateTime
@@ -55,9 +56,10 @@ export const loadDateTime = () => async (dispatch) => {
   });
   const stepInfo = await localforge.getItem(LOCALSTOREAGE_STEP_INFO_KEY);
   const dateTime = (stepInfo && stepInfo.dateTime) ? stepInfo.dateTime : null;
+  const convertedDateTime = dateTime ? moment.unix(dateTime) : dateTime;
   dispatch({
     type: GET_DATE_TIME,
-    data: dateTime
+    data: convertedDateTime
   });
 }
 
