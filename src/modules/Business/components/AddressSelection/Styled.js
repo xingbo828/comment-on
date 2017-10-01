@@ -35,5 +35,6 @@ export const MapInnerContainer = styled.div`
 `;
 
 export const InputContainer = styled.div`
+  visibility: ${props=>props.isLoading ? 'hidden': 'visible'};
   flex: 1;
 `;

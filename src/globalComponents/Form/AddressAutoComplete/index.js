@@ -10,12 +10,14 @@ class AddressAutoComplete extends Component {
 
     this.handleFocus = this.handleFocus.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
+    this.handleOnChange = this.handleOnChange.bind(this);
   }
 
-  handleFocus() {
+  handleFocus(event) {
     this.setState({
       focused: true
     });
+    this._geoSuggest.input.input.select()
   }
 
   handleBlur() {
@@ -24,16 +26,24 @@ class AddressAutoComplete extends Component {
     });
   }
 
+  handleOnChange(value) {
+    if(value === '') {
+      this.props.onSelect(null);
+    }
+  }
+
   render() {
     const { initialValue, onSelect, placeholder, label } = this.props;
     return (
       <Label>
         <GeosuggestStyled
+          innerRef={el=>this._geoSuggest=el}
           country="ca"
           placeholder={placeholder}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
           onSuggestSelect={onSelect}
+          onChange={this.handleOnChange}
           initialValue={initialValue}
         />
         <FocusBorder focused={this.state.focused}/>

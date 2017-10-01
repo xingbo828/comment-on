@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { string, object, func, number } from 'prop-types';
+import isNull from 'lodash/isNull';
 import Map from '../../../../globalComponents/Map';
 import AddressAutoComplete from '../../../../globalComponents/Form/AddressAutoComplete';
 import {
@@ -18,41 +19,83 @@ class AddressSelection extends Component {
       zoom: this.props.zoom
     };
     this.onAddressSelect = this.onAddressSelect.bind(this);
+    this.renderMap = this.renderMap.bind(this);
+    this.renderInput = this.renderInput.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.placeId !== this.props.placeId) {
+      this.updateAddress(nextProps.placeId);
+    }
   }
 
   componentDidMount() {
-    const geoCoder = new this.props.google.maps.Geocoder;
-    geoCoder.geocode({'placeId': this.props.placeId}, (result, status) => {
-      if(status === 'OK') {
-        const address = result[0];
-        this.setState({
-          address: {
-            location: {
-              lat: address.geometry.location.lat(),
-              lng: address.geometry.location.lng(),
-            },
-            label: address.formatted_address,
-            placeId: this.props.placeId
-          }
-        })
-      }
-    });
+    this.updateAddress(this.props.placeId);
+  }
 
+
+  updateAddress(placeId) {
+    if(!!placeId) {
+      const geoCoder = new this.props.google.maps.Geocoder();
+      geoCoder.geocode({'placeId': placeId}, (result, status) => {
+        if(status === 'OK') {
+          const address = result[0];
+          this.setState({
+            address: {
+              location: {
+                lat: address.geometry.location.lat(),
+                lng: address.geometry.location.lng(),
+              },
+              label: address.formatted_address,
+              placeId: this.props.placeId
+            }
+          })
+        }
+      });
+    }
   }
 
   onAddressSelect(address) {
-    this.setState({
-      address: {
-        location: {
-          lat: address.location.lat,
-          lng: address.location.lng
-        },
-        label: address.label,
-        placeId: address.placeId
-      }
-    })
-    this.props.onChange(address.placeId);
+    if(!isNull(address)) {
+      this.setState({
+        address: {
+          location: {
+            lat: address.location.lat,
+            lng: address.location.lng
+          },
+          label: address.label,
+          placeId: address.placeId
+        }
+      })
+      this.props.onChange(address.placeId);
+    }
+    else {
+      this.setState({
+        address: null
+      });
+      this.props.onChange('');
+    }
   };
+
+  renderMap(address, google, zoom) {
+    return (
+      <MapContainer>
+        <MapInnerContainer showMapPlaceHolder={!address}>
+        {address && <Map google={google} lat={address.location.lat} lng={address.location.lng} zoom={zoom} />}
+        </MapInnerContainer>
+      </MapContainer>
+    );
+  }
+
+  renderInput(initialValue, desc) {
+    const isLoading = this.props.placeId !== '' && !initialValue;
+    return (
+      <InputContainer isLoading={isLoading}>
+        <AddressAutoComplete initialValue={initialValue} placeholder="Address" onSelect={this.onAddressSelect} />
+        <p>{desc}</p>
+      </InputContainer>
+    );
+  }
 
 
   render() {
@@ -63,15 +106,8 @@ class AddressSelection extends Component {
       <AddressSelectionContainer>
         <Label>{label}</Label>
         <AddressSelectionInner>
-          <MapContainer>
-            <MapInnerContainer showMapPlaceHolder={!address}>
-            {address && <Map google={google} lat={address.location.lat} lng={address.location.lng} zoom={zoom} />}
-            </MapInnerContainer>
-          </MapContainer>
-          <InputContainer>
-            <AddressAutoComplete initialValue={initialValue} placeholder="Address" onSelect={this.onAddressSelect} />
-            <p>{desc}</p>
-          </InputContainer>
+        {this.renderMap(address, google, zoom)}
+        {this.renderInput(initialValue, desc)}
         </AddressSelectionInner>
       </AddressSelectionContainer>
     );

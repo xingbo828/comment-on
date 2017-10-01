@@ -7,8 +7,9 @@ import {
 import { GridContainer } from '../../../../globalComponents/Grid';
 import AddressSelection from '../../components/AddressSelection';
 
-const renderAddressSelection = (desc) => ({ input, label }) =>
-  <AddressSelection google={window.google} desc={desc} label={label} onChange={input.onChange} placeId={input.value}  />;
+const renderAddressSelection =  ({ input, label, desc }) => {
+  return <AddressSelection google={window.google} desc={desc} label={label} onChange={input.onChange} placeId={input.value}  />;
+}
 
 const Address = ({
   handleSubmit,
@@ -17,22 +18,26 @@ const Address = ({
   valid,
   submitting
 }) => {
+
   const homeAddressDesc= `Home address description`;
   const destAddressDesc= `Destination address description`;
+
   return (
     <GridContainer>
       <form onSubmit={handleSubmit}>
         <Field
-          component={renderAddressSelection(homeAddressDesc)}
+          component={renderAddressSelection}
           name="homeAddress"
           label="Home address"
+          desc={homeAddressDesc}
         />
         <Field
-          component={renderAddressSelection(destAddressDesc)}
+          component={renderAddressSelection}
           name="destAddress"
           label="Destination address"
+          desc={destAddressDesc}
         />
-        <Button type="submit" primary>Next</Button>
+        <Button type="submit" primary disabled={submitting || !valid}>Next</Button>
       </form>
     </GridContainer>
   );

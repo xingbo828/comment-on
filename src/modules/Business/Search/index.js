@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, withRouter, Route } from 'react-router-dom';
 
-import SearchResult from './SearchBusinessContainer';
+// import SearchResult from './SearchBusinessContainer';
 import SearchSteps from './Steps';
 
 const Search = ({ match: { isExact } }) => {
@@ -12,10 +12,10 @@ const Search = ({ match: { isExact } }) => {
           component={SearchSteps}
         />
 
-        <Route
+        {/* <Route
           path="/business/search/result"
           component={SearchResult}
-        />
+        /> */}
       </Switch>
   );
 };
