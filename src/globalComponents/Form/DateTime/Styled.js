@@ -3,29 +3,33 @@ import styled from 'styled-components';
 export const Label = styled.label`
   display: flex;
   flex-direction: column;
-  border: 1px solid ${props => props.theme.borderPrimary};
   position: relative;
 `;
 
-export const LabelTxt = styled.span`
-  padding: .5rem;
-  ::before {
-    padding-right: 10px;
-    font-family: 'FontAwesome';
-    content: '\f073';
-  }
-`;
+
 
 export const InputBtn = styled.button`
   outline: none;
   font-size: 1.2rem;
   width: 100%;
-  padding: .5rem;
+  padding: 0.5rem 0 0.5rem 2.5rem;
   border: 0;
   background-color: transparent;
   text-align: left;
   cursor: pointer;
   color: ${props =>  props.datePicked ? props.theme.textDark : 'grey'};
+
+  ::before {
+    padding-right: 0px;
+    font-family: 'FontAwesome';
+    content: '\f073';
+    color: ${props =>   props.theme.textDark };
+    font-size: 1.2rem;
+    position: absolute;
+    top:0;
+    left: 10px;
+    line-height: 40px;
+  }
 `;
 
 export const DateTimeContainer = styled.div`
@@ -39,6 +43,7 @@ export const DateTimeContainer = styled.div`
   border: 1px solid ${props => props.theme.borderPrimary};
   border-top-width: 0;
   height: 310px;
+  z-index: 999;
 `;
 
 export const CalendarContainer = styled.div`

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import { string, bool, func } from 'prop-types';
 import {
   Label,
-  LabelTxt,
   InputBtn,
   DateTimeContainer
 } from './Styled';
@@ -55,7 +55,7 @@ class DateTime extends Component {
         isOverlayVisible: false,
         displayValue: value.format(this.state.format)
       });
-      this.props.onSelect(value);
+      this.props.onChange(value);
     } else {
       this.setState({
         selectedDateTime: value,
@@ -71,7 +71,7 @@ class DateTime extends Component {
       isOverlayVisible: false,
       userInteractionPhase: 'calendar'
     });
-    this.props.onSelect(value);
+    this.props.onChange(value);
   }
 
   handleClickOutside(event) {
@@ -104,7 +104,6 @@ class DateTime extends Component {
 
     return (
       <Label>
-        <LabelTxt>{label}</LabelTxt>
         <InputBtn
           onClick={this.handleInputBtnClick}
           onFocus={this.handleInputBtnClick}
@@ -131,9 +130,16 @@ class DateTime extends Component {
   }
 }
 
+DateTime.propTypes = {
+  value: string,
+  placeholder: string,
+  includeTime: bool,
+  onChange: func,
+  disabledDate: func
+};
+
 DateTime.defaultProps = {
   value: '',
-  label: 'Pick date and time',
   placeholder: 'Date & time',
   includeTime: false,
   disabledDate: () => false

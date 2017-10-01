@@ -23,7 +23,7 @@ export const BadgeDotSup = BadgeSup.extend`
 export const BadgeNumSup = BadgeSup.extend`
   font-weight: bold;
   border-radius: 10px;
-  top: -10px;
+  top: -5px;
   height: 20px;
   padding: 0 6px;
   min-width: 20px;

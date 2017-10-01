@@ -5,7 +5,7 @@ import {
   Button
 } from '../../../../globalComponents/Form';
 import { GridContainer } from '../../../../globalComponents/Grid';
-import AddressSelection from '../../components/AddressSelection';
+import AddressSelection from '../../components/SearchStepAddressSelection';
 
 const renderAddressSelection =  ({ input, label, desc }) => {
   return <AddressSelection google={window.google} desc={desc} label={label} onChange={input.onChange} placeId={input.value}  />;

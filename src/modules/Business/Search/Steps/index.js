@@ -5,8 +5,8 @@ import AddressStep from './AddressContainer';
 import ItemsStep from './ItemsContainer';
 import DateStep from './DateContainer';
 import LogisticsStep from './LogisticsContainer';
-import SearchSteps from './components/SearchSteps';
-import StepsRouteTransition from './components/StepsRouteTransition';
+import SearchSteps from '../../components/SearchSteps';
+import StepsRouteTransition from './StepsRouteTransition';
 
 const Steps = ({ location, history, match }) => {
   const paths = [

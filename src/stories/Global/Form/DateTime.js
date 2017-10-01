@@ -10,10 +10,9 @@ const DateOnly = withInfo('Date only')(() =>
   <div style={{width: '300px'}}>
     <DateTime
       name="date"
-      lable="Date"
       placeholder="Select date"
       includeTime={false}
-      onSelect={action('Date selected')}
+      onChange={action('Date selected')}
     />
   </div>
 );
@@ -22,10 +21,9 @@ const DateAndTime = withInfo('Date and time')(() =>
   <div style={{width: '300px'}}>
     <DateTime
       name="datetime"
-      lable="Date and time"
       includeTime={true}
       placeholder="Select date & time"
-      onSelect={action('Datetime selected')}
+      onChange={action('Datetime selected')}
     />
   </div>
 );
@@ -37,10 +35,9 @@ const DateWithDisabledDates = withInfo('Date and time with disabled dates')(() =
 <div style={{width: '300px'}}>
   <DateTime
     name="datetime"
-    lable="Date and time"
     includeTime={false}
     placeholder="Select date "
-    onSelect={action('Date selected')}
+    onChange={action('Date selected')}
     disabledDate={disabledDate}
   />
 </div>

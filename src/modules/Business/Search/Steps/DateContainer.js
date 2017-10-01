@@ -1,22 +1,61 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { compose } from 'recompose';
+import { compose, lifecycle, branch, renderNothing } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import DateStep from './Date';
-import message from '../../../../globalComponents/Message';
 import scrollToTopOnMount from '../../../Common/scrollToTopOnMount';
+import validators, { validateFunc } from '../../../Common/validators';
 
+import {
+  localSaveDateTime,
+  loadDateTime
+} from '../searchActions';
+
+import {
+  getDateTime
+} from '../searchReducers';
+
+
+const validate = validateFunc([{
+  field: 'dateTime',
+  validator: 'isRequired',
+  message: 'Required'
+}] , validators);
+
+const mapDispatchToProps = dispatch => ({
+  loadDateTime: () => dispatch(loadDateTime())
+});
+
+const mapStateToProps = state => ({initialValues: getDateTime(state)});
+
+const isLoading = (props) => props.initialValues.dateTime.get('status') !== 'LOADED';
 
 const enhance = compose(
   withRouter,
+  connect(mapStateToProps, mapDispatchToProps),
+  lifecycle({
+    componentDidMount() {
+      this.props.loadDateTime();
+    },
+    shouldComponentUpdate(nextProps) {
+      return (
+        this.props.initialValues.dateTime.get('dateTime') !== nextProps.initialValues.dateTime.get('dateTime') ||
+        this.props.initialValues.dateTime.get('dateTime') === null
+      );
+    }
+  }),
+  branch(
+    isLoading,
+    renderNothing
+  ),
   reduxForm({
     form: 'search.steps.date',
+    validate,
     onSubmit: (values, dispatch, props) => {
       // handle submit
     },
     onSubmitSuccess: (result, dispatch, props) => {
       // send user to next step
-      message.success('Date info collected');
       props.history.push({
         pathname: '/business/search/steps/logistics'
       });

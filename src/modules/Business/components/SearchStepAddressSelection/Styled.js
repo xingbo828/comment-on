@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const AddressSelectionContainer = styled.div`
-  padding: 1.5rem 0;
+  padding: 1rem 0;
 `;
 export const Label = styled.label`
   font-size: 1.5rem;
@@ -12,7 +12,7 @@ export const Label = styled.label`
 export const AddressSelectionInner = styled.div`
   border: 1px solid ${props=>props.theme.borderPrimary};
   display: flex;
-  padding: 70px;
+  padding: 1rem;
 `;
 
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { string, object, func, number } from 'prop-types';
 import isNull from 'lodash/isNull';
 import Map from '../../../../globalComponents/Map';
+import { Paragraph } from '../../../../globalComponents/Typography';
 import AddressAutoComplete from '../../../../globalComponents/Form/AddressAutoComplete';
 import {
   AddressSelectionContainer,
@@ -92,7 +93,7 @@ class AddressSelection extends Component {
     return (
       <InputContainer isLoading={isLoading}>
         <AddressAutoComplete initialValue={initialValue} placeholder="Address" onSelect={this.onAddressSelect} />
-        <p>{desc}</p>
+        <Paragraph>{desc}</Paragraph>
       </InputContainer>
     );
   }

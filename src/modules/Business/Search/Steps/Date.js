@@ -5,6 +5,11 @@ import {
   Button
 } from '../../../../globalComponents/Form';
 import { GridContainer } from '../../../../globalComponents/Grid';
+import DateTimeSelection from '../../components/SearchStepDateTimeSelection'
+
+const renderDateTimeSelection =  ({ input, label }) => {
+  return <DateTimeSelection label={label} value={input.value} onChange={input.onChange} placeholder="Select date & time" />;
+}
 
 const Date = ({
   handleSubmit,
@@ -16,8 +21,12 @@ const Date = ({
   return (
     <GridContainer>
       <form onSubmit={handleSubmit}>
-        <h2>Date Form</h2>
-        <Button type="submit" primary>Next</Button>
+        <Field
+          component={renderDateTimeSelection}
+          name="dateTime"
+          label="Moving Date & Time"
+        />
+        <Button type="submit" primary disabled={submitting || !valid}>Next</Button>
       </form>
     </GridContainer>
   );
