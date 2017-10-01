@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Radio from './Radio';
-import { func, string } from 'prop-types';
-import Card from '../../Card';
+import { oneOf, func, string } from 'prop-types';
 import {
   Container,
   RadioGroupLabel,
@@ -14,6 +13,9 @@ class RadioGroup extends Component {
     this.state = {
       selected: props.value || ''
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.renderRadioOnlyChildren = this.renderRadioOnlyChildren.bind(this);
+    this.renderWildChildren = this.renderWildChildren.bind(this);
   }
 
   handleChange = (event) => {
@@ -23,42 +25,14 @@ class RadioGroup extends Component {
     this.props.onChange(event, event.target.value);
   };
 
-
-  render() {
-    const options = React.Children.map(this.props.children, (option) => {
-
-
-      if (option.type === Card) {
-        const card = React.Children.map(option.props.children, (child) => {
-          if (child.type !== Radio) {
-            return (child);
-          }
-          const {
-            value,
-            label,
-            ...other
-          } = child.props;
-          return (
-            <Radio
-              {...other}
-              value={child.props.value}
-              label={child.props.label}
-              onCheck={this.handleChange}
-              checked={child.props.value === this.state.selected}
-            />
-          );
-        });
-        return (
-          <Card offset="0" style={{float: 'left'}}>
-            {card}
-          </Card>
-        );
-      }
+  renderRadioOnlyChildren(children) {
+    return React.Children.map(children, (option) => {
       const {
         value,
         label,
         ...other
       } = option.props;
+
       return (
         <Radio
           {...other}
@@ -69,13 +43,34 @@ class RadioGroup extends Component {
         />
       );
     }, this);
+  }
 
+  renderWildChildren(children) {
+    return React.Children.map(children, (C) => {
+      return React.cloneElement(C, {
+        onCheck: this.handleChange,
+        checked: C.props.value === this.state.selected
+      })
+    }, this);
+  }
+
+  renderChildren(type, children) {
+    if(type === 'radio') {
+      return this.renderRadioOnlyChildren(children);
+    }
+    else {
+      return this.renderWildChildren(children);
+    }
+  }
+
+
+  render() {
     return (
       <Container>
         <RadioGroupLabel>
           {this.props.label}
         </RadioGroupLabel>
-        <RadioList>{options}</RadioList>
+        <RadioList>{this.renderChildren(this.props.childType, this.props.children)}</RadioList>
       </Container>
     );
   }
@@ -83,7 +78,12 @@ class RadioGroup extends Component {
 
 RadioGroup.propTypes = {
   onChange: func.isRequired,
-  value: string
+  value: string,
+  childType: oneOf(['wild', 'radio'])
 };
+
+RadioGroup.defaultProps = {
+  childType: 'radio'
+}
 
 export default RadioGroup;

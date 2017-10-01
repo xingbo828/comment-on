@@ -18,25 +18,22 @@ const BasicRadioGroup = withInfo('Basic radio group')(() =>
   </Radio.RadioGroup>
 );
 
-const CardsRadioGroup = withInfo('Radio group in cards')(() =>
-  <Radio.RadioGroup
+const RadioBlocksGroup = withInfo('Radio blocks in group')(() => {
+  const placeholdertext = `Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.`;
+  return  (<Radio.RadioGroup
+    childType="wild"
     label="Gender"
     name="gender"
     value="male"
     onChange={action('changed')}
   >
-    <Card offset="0">
-      <Radio.Radio value="male" label="Male" />
-      <p>Text for male or female</p>
-    </Card>
-    <Card offset="0">
-      <Radio.Radio value="female" label="Female" />
-      <p>Text for male or female</p>
-    </Card>
-  </Radio.RadioGroup>
+   <Radio.RadioBlock desc={placeholdertext} value="male" label="Male" />
+   <Radio.RadioBlock desc={placeholdertext} value="female" label="Female" />
+  </Radio.RadioGroup>);
+}
 );
 
 const RadioStory = storiesOf('Global/Form/Radio', module)
   .add('Basic usage', BasicRadioGroup)
-  .add('Radio group in cards', CardsRadioGroup);
+  .add('Radio blocks in group', RadioBlocksGroup);
 export default RadioStory;

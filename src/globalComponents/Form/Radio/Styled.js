@@ -15,7 +15,7 @@ export const RadioGroupLabel = styled.label`
 `;
 
 export const RadioList = styled.div`
-  display: block;
+  display: flex;
   width: 100%;
   font-size: 1rem;
   padding: 1rem 0;
@@ -61,7 +61,7 @@ export const StyledRadioReplacement = styled.span`
   border: 1px solid ${props => props.theme.borderPrimary};
   background-color: #fff;
   transition: all .3s;
-  margin-right: 5px;
+  margin-right: 1rem;
   ::after {
     position: absolute;
     width: 6px;
