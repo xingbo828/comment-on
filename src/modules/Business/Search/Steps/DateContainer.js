@@ -26,7 +26,7 @@ const mapDispatchToProps = dispatch => ({
   loadDateTime: () => dispatch(loadDateTime())
 });
 
-const mapStateToProps = state => ({initialValues: getDateTime(state).dateTime});
+const mapStateToProps = state => ({initialValues: getDateTime(state)});
 
 const isLoading = (props) => props.initialValues.get('status') !== 'LOADED';
 

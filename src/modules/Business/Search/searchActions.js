@@ -63,4 +63,32 @@ export const loadDateTime = () => async (dispatch) => {
   });
 }
 
+// Logistics
+// MOVING DATE TIME
+export const LOCAL_SAVE_LOGISTICS = 'LOCAL_SAVE_LOGISTICS';
+
+export const GET_LOGISTICS = 'GET_LOGISTICS';
+
+export const LOADING_LOGISTICS = 'LOADING_LOGISTICS';
+
+export const localSaveLogistics = (logistics) => async (dispatch) => {
+  const stepInfo = await localforge.getItem(LOCALSTOREAGE_STEP_INFO_KEY)
+  await localforge.setItem(LOCALSTOREAGE_STEP_INFO_KEY, Object.assign(stepInfo || {}, { logistics: omit(logistics, ['status']) }));
+  dispatch({
+    type: LOCAL_SAVE_LOGISTICS,
+    data: logistics
+  });
+};
+
+export const loadLogistics = () => async (dispatch) => {
+  dispatch({
+    type: LOADING_LOGISTICS
+  });
+  const stepInfo = await localforge.getItem(LOCALSTOREAGE_STEP_INFO_KEY);
+  const logistics = (stepInfo && stepInfo.logistics) ? stepInfo.logistics : {};
+  dispatch({
+    type: GET_LOGISTICS,
+    data: logistics
+  });
+}
 

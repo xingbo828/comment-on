@@ -4,14 +4,11 @@ import {
 } from '../../../foundation/Variables';
 
 export const Container = styled.div`
-  border: solid ${props => props.theme.borderPrimary};
-  border-width: 0 0 1px 0;
   margin: 0 0 1rem;
 `;
 
 export const RadioGroupLabel = styled.label`
-  font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.5rem;
 `;
 
 export const RadioList = styled.div`

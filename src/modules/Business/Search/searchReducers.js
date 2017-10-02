@@ -6,7 +6,10 @@ import {
   LOADING_ADDRESSES,
   LOCAL_SAVE_DATE_TIME,
   GET_DATE_TIME,
-  LOADING_DATE_TIME
+  LOADING_DATE_TIME,
+  LOADING_LOGISTICS,
+  LOCAL_SAVE_LOGISTICS,
+  GET_LOGISTICS
 } from './searchActions';
 
 
@@ -78,14 +81,50 @@ const searchDateTimeStep = (state = initDateTimeState, action) => {
   }
 };
 
+// Logistics
+const initLogisticsState = Immutable.fromJS({
+  havePiano: null,
+  ableToAssist: null,
+  status: 'UNINIT'
+});
+
+const searchLogisticsStep = (state = initLogisticsState, action) => {
+  switch (action.type) {
+    case LOCAL_SAVE_LOGISTICS: {
+      return state.withMutations((st) => {
+        st.set('havePiano', action.data.havePiano);
+        st.set('ableToAssist', action.data.ableToAssist);
+      });
+    }
+
+    case GET_LOGISTICS: {
+      return state.withMutations((st) => {
+        st.set('havePiano', action.data.havePiano);
+        st.set('ableToAssist', action.data.ableToAssist);
+        st.set('status', 'LOADED');
+      });
+    }
+
+    case LOADING_LOGISTICS: {
+      return state.withMutations((st) => {
+        st.set('status', 'PENDING');
+      });
+    }
+
+    default:
+      return state;
+  }
+};
+
 
 export default combineReducers({
   addressesStep: searchAddressesStep,
-  dateTimeStep: searchDateTimeStep
+  dateTimeStep: searchDateTimeStep,
+  logisticsStep: searchLogisticsStep
 });
 
 
 // Selectors
-export const getAddresses = (state) => ({ addresses: state.getIn(['business', 'search', 'addressesStep'])});
-export const getDateTime = (state) => ({ dateTime: state.getIn(['business', 'search', 'dateTimeStep'])});
-
+export const getAddresses = (state) => state.getIn(['business', 'search', 'addressesStep']);
+export const getDateTime = (state) => state.getIn(['business', 'search', 'dateTimeStep']);
+export const getLogistics = (state) => state.getIn(['business', 'search', 'logisticsStep']);

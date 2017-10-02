@@ -33,7 +33,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  initialValues: getAddresses(state).addresses
+  initialValues: getAddresses(state)
 });
 
 const isLoading = (props) => props.initialValues.get('status') !== 'LOADED';
