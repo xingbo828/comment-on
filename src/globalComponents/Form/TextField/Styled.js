@@ -1,8 +1,5 @@
 import Styled from 'styled-components';
-import {
-  borderPrimary,
-  primaryColor
-} from '../../../foundation/Variables';
+import variables from '../../../foundation/variables';
 
 export const InputContainer = Styled.div`
 display: block;
@@ -14,7 +11,7 @@ margin: 0 0 1rem;
 export const Input = Styled.input`
 display: block;
 width: 100%;
-border: solid ${borderPrimary};
+border: solid ${variables.colors.borderPrimary};
 border-width: 0 0 1px 0;
 font-size: 1rem;
 padding: 1rem 0;
@@ -28,7 +25,7 @@ outline: none;
 export const FocusBorder = Styled.div`
 height: 2px;
 width: 100%;
-background: ${primaryColor};
+background: ${variables.colors.primary};
 margin-top: -2px;
 transition: .3s;
 transform: scale(0);

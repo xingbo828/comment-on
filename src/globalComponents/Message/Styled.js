@@ -1,10 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 
-import {
-  primaryActionColor,
-  secondaryActionColor,
-  dangerActionColor
-} from '../../foundation/Variables';
+import variables from '../../foundation/variables';
 
 const spin = keyframes`
   from {
@@ -57,21 +53,21 @@ const MessageContentIcon = styled.span`
 
 export const SuccessMessageContent = MessageContentIcon.extend`
   ::before {
-    color: ${ primaryActionColor };
+    color: ${ variables.colors.primaryAction };
     content: '\f058';
   }
 `;
 
 export const ErrorMessageContent = MessageContentIcon.extend`
   ::before {
-    color: ${ dangerActionColor };
+    color: ${ variables.colors.dangerAction };
     content: '\f06a';
   }
 `;
 
 export const InfoMessageContent = MessageContentIcon.extend`
   ::before {
-    color: ${ secondaryActionColor };
+    color: ${ variables.colors.secondaryAction };
     content: '\f05a';
   }
 `;

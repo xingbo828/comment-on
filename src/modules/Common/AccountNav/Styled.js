@@ -27,7 +27,7 @@ export const Menu = Styled.div`
   line-height: 1rem;
   box-sizing: border-box;
   z-index: 10;
-  border: 1px solid ${fromTheme('primaryColor')};
+  border: 1px solid ${fromTheme('primary')};
   border-top: none;
 `;
 
@@ -41,7 +41,7 @@ export const MenuItem = Styled.li`
   border-top: 1px solid ${fromTheme('borderPrimary')};
   :hover {
     color: white;
-    background-color: ${fromTheme('primaryActionColor')};
+    background-color: ${fromTheme('primaryAction')};
   }
   a {
     text-decoration: none;

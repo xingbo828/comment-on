@@ -2,7 +2,7 @@ import React from 'react';
 import { MemoryRouter } from 'react-router-dom'
 import { configure, addDecorator } from '@storybook/react';
 import { ThemeProvider } from 'styled-components'
-import * as theme from '../src/foundation/Variables';
+import theme from '../src/foundation/variables';
 import '../src/foundation/base';
 
 addDecorator(story => (

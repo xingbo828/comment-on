@@ -39,7 +39,7 @@ const EstimateContainer = Styled.div`
   background: white;
   width: 100%;
   text-align: center;
-  color: ${({theme}) => theme.brandPrimary };
+  color: ${({theme}) => theme.primary };
 `;
 
 const Estimate = () => (

@@ -3,15 +3,16 @@ import styled from 'styled-components';
 import { Link, withRouter } from 'react-router-dom';
 import { compose, withProps, branch, renderNothing } from 'recompose';
 import { auth } from '../../firebaseClient';
+import media  from '../../foundation/mediaQueries';
 import isLoggedIn from './isLoggedIn';
 import AccountNav from './AccountNav';
 
-const fromTheme = (prop) => ({ theme }) => theme[prop]
+const fromTheme = (prop) => ({ theme }) => theme.colors[prop]
 
 const ContextHeader = styled.div`
   display: flex;
   box-sizing: border-box;
-  // background: ${fromTheme('primaryColor')};
+  // background: ${fromTheme('primary')};
   height: 60px;
   width: 100%;
   line-height: 60px;
@@ -29,7 +30,7 @@ const Heading = styled.h1`
   border-right: 1px solid white;
   font-weight: 800;
   letter-spacing: .1em;
-  color: ${fromTheme('brandPrimary')};
+  color: ${fromTheme('primary')};
 `;
 
 const Location = styled.span`
@@ -57,10 +58,6 @@ const ContextHeaderLink = styled.li`
 const NavRoot = styled.nav`
   display: block;
   background: white;
-
-  ${props => props.theme.media.fromMedium`
-    `
-  }
 `;
 
 /*
@@ -88,7 +85,7 @@ const NavList = styled.ul`
   line-height: 60px;
   border-bottom: 1px solid ${fromTheme('borderPrimary')};
 
-  ${props => props.theme.media.fromMedium`
+  ${media.greaterThan('md')`
       display: block;
     `
   }
@@ -117,7 +114,7 @@ const NavListItem = styled.li`
     font-size: 1rem;
   }
 
-  ${props => props.theme.media.fromMedium`
+  ${media.greaterThan('md')`
       border-right: 1px solid ${fromTheme('borderPrimary')};
       display: inline-block;
 

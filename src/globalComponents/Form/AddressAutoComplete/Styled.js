@@ -8,7 +8,7 @@ export const Label = styled.label`
 export const FocusBorder = styled.div`
 height: 2px;
 width: 100%;
-background: ${props=>props.theme.primaryColor};
+background: ${props=>props.theme.colors.primary};
 margin-top: -2px;
 transition: .3s;
 ${props => {
@@ -42,7 +42,7 @@ export const GeosuggestStyled = styled(Geosuggest)`
     box-sizing: border-box;
     padding: .5rem;
     border: 0;
-    color: ${props => props.theme.textDark};
+    color: ${props => props.theme.colors.textDark};
   }
 
   .geosuggest__input:focus {
@@ -56,7 +56,7 @@ export const GeosuggestStyled = styled(Geosuggest)`
     padding: 0;
     margin-top: -1px;
     background: #fff;
-    border: 1px solid ${props => props.theme.borderPrimary};
+    border: 1px solid ${props => props.theme.colors.borderPrimary};
     border-top-width: 0;
     overflow-x: hidden;
     overflow-y: auto;
@@ -75,11 +75,11 @@ export const GeosuggestStyled = styled(Geosuggest)`
   }
   .geosuggest__item:hover,
   .geosuggest__item:focus {
-    background: ${props => props.theme.primaryActionColor};
+    background: ${props => props.theme.colors.primaryAction};
     color: #fff;
   }
   .geosuggest__item--active {
-    background: ${props => props.theme.primaryActionColor};
+    background: ${props => props.theme.colors.primaryAction};
     color: #fff;
   }
   .geosuggest__item--active:hover,

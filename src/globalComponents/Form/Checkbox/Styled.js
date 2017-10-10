@@ -54,17 +54,17 @@ export const CheckboxInner = styled.span`
   display: block;
   width: 16px;
   height: 16px;
-  border: 1px solid ${props => props.checked ? props.theme.primaryColor : props.theme.borderPrimary};
+  border: 1px solid ${props => props.checked ? props.theme.colors.primary : props.theme.colors.borderPrimary};
   border-radius: 2px;
   transition: all .3s;
   ${props => {
     if(props.disabled){
       return `
-        background-color: ${props.theme.borderPrimary};
+        background-color: ${props.theme.colors.borderPrimary};
       `;
     } else if (props.checked) {
       return `
-        background-color: ${props.theme.primaryColor};
+        background-color: ${props.theme.colors.primary};
       `;
     } else {
       return `

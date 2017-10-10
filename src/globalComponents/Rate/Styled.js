@@ -15,13 +15,13 @@ const renderIcon = (props) => {
   } else if (props.empty) {
     return `
       i {
-        color: ${props.theme.textLight};
+        color: ${props.theme.colors.textLight};
       }
     `;
   }
   return `
     i {
-      color: ${props.theme.textLight};
+      color: ${props.theme.colors.textLight};
     }
     i:first-child {
       line-height: 19px;

@@ -20,19 +20,19 @@ const Heading = ({ wrapperTag, children, underline, theme }) => {
     display: inline-block;
     transform: translateY(1px);
     position: relative;
-    color: ${theme.textDarkest};
+    color: ${theme.colors.textDarkest};
 
     ${underline ? `
       ::after{
         content: '';
         position: absolute;
         height: 4px;
-        background: ${theme.primaryColor};
+        background: ${theme.colors.primary};
         bottom: 0;
         right: 50%;
         left: 0;
       }
-      // border-bottom: solid 1px ${theme.primaryColor};
+      // border-bottom: solid 1px ${theme.colors.primary};
     `: ``}
   `;
 

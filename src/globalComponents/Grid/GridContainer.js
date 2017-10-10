@@ -1,11 +1,8 @@
 import Styled from 'styled-components';
-import {
-  media,
-  gutterWidth
-} from '../../foundation/Variables';
+import variables from '../../foundation/variables';
 
 export default Styled.div`
   margin: 0 auto;
   max-width: 1200px;
-  padding: 0 ${gutterWidth};
+  padding: 0 ${variables.layout.gutterWidth};
 `;

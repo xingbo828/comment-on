@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ThemeProvider } from 'styled-components'
-import * as theme from './foundation/Variables';
+import theme from './foundation/variables';
 import {
   BrowserRouter as Router,
   Switch,

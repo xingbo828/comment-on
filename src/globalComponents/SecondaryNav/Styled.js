@@ -3,7 +3,7 @@ import Styled from 'styled-components';
 const ContainerNav = Styled.nav`
   height: 60px;
   line-height: 60px;
-  // border: ${({theme}) => theme.borderPrimary} solid 1px;
+  // border: ${({theme}) => theme.colors.borderPrimary} solid 1px;
 
   ul {
     padding: 0 5.5%;
@@ -17,7 +17,7 @@ const ContainerNav = Styled.nav`
   }
 
   a {
-    color: ${({theme}) => theme.secondaryActionColor};
+    color: ${({theme}) => theme.colors.secondaryAction};
     text-decoration: none;
     font-weight: 600;
   }

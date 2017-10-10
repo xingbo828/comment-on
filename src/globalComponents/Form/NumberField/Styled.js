@@ -1,10 +1,5 @@
 import Styled from 'styled-components';
-import {
-  borderPrimary,
-  primaryColor,
-  primaryActionColor,
-  textDark
-} from '../../../foundation/Variables';
+import variables from '../../../foundation/variables';
 
 export const InputContainer = Styled.div`
 display: block;
@@ -32,16 +27,16 @@ text-align: center;
 line-height: 0;
 height: 100%;
 overflow: hidden;
-color: ${textDark};
+color: ${variables.colors.textDark};
 position: absolute;
 display: block;
 width: 2rem;
 font-weight: 700;
 border-radius: 500px;
 padding-top: 1rem;
-color: ${primaryColor};
+color: ${variables.colors.primary};
 &:hover {
-  color: ${primaryActionColor};
+  color: ${variables.colors.primaryAction};
 }
 `;
 
@@ -59,7 +54,7 @@ export const Icon = Styled.i`
 export const Input = Styled.span`
 display: block;
 width: 100%;
-border: solid ${borderPrimary};
+border: solid ${variables.colors.borderPrimary};
 border-width: 1px;
 border-radius: 500px;
 font-size: 1rem;
@@ -75,7 +70,7 @@ text-align: center;
 export const FocusBorder = Styled.div`
 height: 2px;
 width: 100%;
-background: ${primaryColor};
+background: ${variables.colors.primary};
 margin-top: -2px;
 transition: .3s;
 transform: scale(0);
