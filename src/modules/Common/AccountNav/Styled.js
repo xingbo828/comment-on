@@ -1,8 +1,9 @@
 import Styled from 'styled-components';
 
-const fromTheme = props => ({ theme }) => theme[props];
+const fromTheme = props => ({ theme }) => theme.colors[props];
 
 export const ContainerDiv = Styled.div`
+  z-index: 99;
   height: 60px;
   width: 60px;
   float: right;
