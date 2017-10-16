@@ -18,18 +18,18 @@ export const StepContainer = styled.li`
     if (props.status === 'completed') {
       return `
         cursor: pointer;
-        color: ${props.theme.primaryActionColor};
-        border-bottom-color: ${props.theme.primaryActionColor};
+        color: ${props.theme.colors.primaryAction};
+        border-bottom-color: ${props.theme.colors.primaryAction};
       `;
     } else if (props.status === 'inProgress') {
       return `
-        color: ${props.theme.secondaryActionColor};
-        border-bottom-color: ${props.theme.secondaryActionColor};
+        color: ${props.theme.secondaryAction};
+        border-bottom-color: ${props.theme.colors.secondaryAction};
       `;
     } else {
       return `
         color: ${props.theme.textLight};
-        border-bottom-color: ${props.theme.borderPrimary};
+        border-bottom-color: ${props.theme.colors.borderPrimary};
       `;
     }
   }}

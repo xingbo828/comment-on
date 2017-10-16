@@ -17,13 +17,13 @@ export const InputBtn = styled.button`
   background-color: transparent;
   text-align: left;
   cursor: pointer;
-  color: ${props =>  props.datePicked ? props.theme.textDark : 'grey'};
+  color: ${props =>  props.datePicked ? props.theme.colors.textDark : 'grey'};
 
   ::before {
     padding-right: 0px;
     font-family: 'FontAwesome';
     content: '\f073';
-    color: ${props =>   props.theme.textDark };
+    color: ${props =>   props.theme.colors.textDark };
     font-size: 1.2rem;
     position: absolute;
     top:0;
@@ -40,7 +40,7 @@ export const DateTimeContainer = styled.div`
   right: -1px;
   margin-top: -1px;
   background: #fff;
-  border: 1px solid ${props => props.theme.borderPrimary};
+  border: 1px solid ${props => props.theme.colors.borderPrimary};
   border-top-width: 0;
   height: 310px;
   z-index: 999;
@@ -69,19 +69,19 @@ const CalendarBtn = styled.button`
   outline: none;
   border-radius: 3px;
   background-color: transparent;
-  border: 1px solid ${props => props.theme.borderPrimary};
+  border: 1px solid ${props => props.theme.colors.borderPrimary};
 
   white-space: nowrap;
   padding: 0.5rem 0;
   ::after {
-    color: ${props => props.theme.textDark};
+    color: ${props => props.theme.colors.textDark};
     font-family: 'FontAwesome';
   }
 
   :hover {
-    border-color: ${props => props.theme.primaryActionColor};
+    border-color: ${props => props.theme.colors.primaryAction};
     ::after {
-      color: ${props => props.theme.primaryActionColor};
+      color: ${props => props.theme.colors.primaryAction};
     }
   }
 `;
@@ -118,13 +118,13 @@ export const CalenderTable = styled.table`
     cursor: pointer;
     font-weight: bold;
     height: 35px;
-    border: 1px solid ${props => props.theme.borderPrimary};
+    border: 1px solid ${props => props.theme.colors.borderPrimary};
   }
 
   thead {
     td {
       text-transform: uppercase;
-      color: ${props => props.theme.primaryActionColor};
+      color: ${props => props.theme.colors.primaryAction};
     }
   }
 `;
@@ -133,8 +133,8 @@ export const CalendarCell = styled.td`
   ${props => {
     if (props.isDisabled) {
       return `
-        background-color: ${props.theme.offWhite};
-        color: ${props.theme.borderPrimary};
+        background-color: ${props.theme.colors.offWhite};
+        color: ${props.theme.colors.borderPrimary};
         :hover {
           cursor: not-allowed;
         }
@@ -142,24 +142,24 @@ export const CalendarCell = styled.td`
     }
     else if (props.isSelectedDate) {
       return `
-        color: ${props.theme.primaryActionColor};
+        color: ${props.theme.colors.primaryAction};
         :hover {
-          background-color: ${props.theme.primaryActionColor};
+          background-color: ${props.theme.colors.primaryAction};
           color: white;
         }
       `;
     } else if (!props.isCurrentMonth) {
       return `
-        color: ${props.theme.borderPrimary};
+        color: ${props.theme.colors.borderPrimary};
         :hover {
-          background-color: ${props.theme.primaryActionColor};
+          background-color: ${props.theme.colors.primaryAction};
           color: white;
         }
       `;
     } else {
       return `
         :hover {
-          background-color: ${props.theme.primaryActionColor};
+          background-color: ${props.theme.colors.primaryAction};
           color: white;
         }
       `;
@@ -219,7 +219,7 @@ const TimeChangeBtn = styled.button`
   outline: none;
   border-radius: 3px;
   background-color: transparent;
-  border: 1px solid ${props => props.theme.borderPrimary};
+  border: 1px solid ${props => props.theme.colors.borderPrimary};
   white-space: nowrap;
   position: relative;
   width:30px;
@@ -230,9 +230,9 @@ const TimeChangeBtn = styled.button`
     font-family: 'FontAwesome';
   }
   :hover {
-    border-color: ${props => props.theme.primaryActionColor};
+    border-color: ${props => props.theme.colors.primaryAction};
     ::after {
-      color: ${props => props.theme.primaryActionColor};
+      color: ${props => props.theme.colors.primaryAction};
     }
   }
 `;

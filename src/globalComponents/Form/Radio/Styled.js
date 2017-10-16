@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-import {
-  media
-} from '../../../foundation/Variables';
+import media from '../../../foundation/mediaQueries';
 
 export const Container = styled.div`
   margin: 0 0 1rem;
@@ -28,7 +26,7 @@ export const StyledLabel = styled.label`
   cursor: pointer;
   margin-right: 1rem;
 
-  ${media.fromMedium`
+  ${media.greaterThan('md')`
     display: inline-block;
     padding: auto;
   `}
@@ -47,7 +45,7 @@ export const StyledRadioReplacementContainer = styled.div`
 `;
 
 export const StyledRadioReplacement = styled.span`
-  border-color: ${props => props.theme.primaryColor};
+  border-color: ${props => props.theme.colors.primary};
   position: relative;
   top: 0;
   left: 0;
@@ -55,7 +53,7 @@ export const StyledRadioReplacement = styled.span`
   width: 18px;
   height: 18px;
   border-radius: 16px;
-  border: 1px solid ${props => props.theme.borderPrimary};
+  border: 1px solid ${props => props.theme.colors.borderPrimary};
   background-color: #fff;
   transition: all .3s;
   margin-right: 1rem;
@@ -70,7 +68,7 @@ export const StyledRadioReplacement = styled.span`
     border-top: 0;
     border-left: 0;
     content: " ";
-    background-color: ${props => props.theme.primaryColor};
+    background-color: ${props => props.theme.colors.primary};
     opacity: ${props => props.checked ? '1' : '0' };
     transform: scale(${props => props.checked ? '1.2' : '0' });
     transition: all .3s cubic-bezier(.78,.14,.15,.86);

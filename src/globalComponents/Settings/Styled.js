@@ -1,15 +1,11 @@
 import Styled from 'styled-components';
-import {
-  media,
-  borderPrimary,
-  gutterWidth
-} from '../../foundation/Variables';
+import media from '../../foundation/mediaQueries';
 
 const ContainerDiv = Styled.div`
   display: flex;
 
-  ${media.fromMedium`
-    padding: 0 ${gutterWidth};
+  ${media.greaterThan('md') `
+    padding: 0 ${props => props.theme.layout.gutterWidth};
     margin: 0 auto;
     max-width: 1200px;
   `}
@@ -23,9 +19,9 @@ const PanelDiv = Styled.div`
   flex: 3;
   display: ${props => props.formMode ? 'block' : 'none'};
 
-  ${media.fromMedium`
+  ${media.greaterThan('md') `
     display: block;
-    border: 1px solid ${borderPrimary};
+    border: 1px solid ${props => props.theme.colors.borderPrimary};
   `}
 `;
 
@@ -36,7 +32,7 @@ const SidebarDiv = Styled.div`
   flex: 1;
   display: ${props => props.formMode ? 'none' : 'block'};
 
-  ${media.fromMedium`
+  ${media.greaterThan('md') `
     margin: 0 2rem 0 0;
     display: block;
   `}

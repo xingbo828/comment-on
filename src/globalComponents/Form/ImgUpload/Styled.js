@@ -66,7 +66,7 @@ export const StyledImgRemove = styled.div`
     font-family: FontAwesome;
     content: '\f1f8';
     font-size: 2.0rem;
-    color: ${props => props.theme.buttonPrimary};
+    color: ${props => props.theme.colors.buttonPrimary};
   }
   :hover {
     background-color: rgba(0,0,0,.6);
@@ -88,14 +88,14 @@ export const StyleImg = styled.img`
 export const StyledUpLoadBtn = styled.button`
   width: 100px;
   height: 100px;
-  background-color: ${props => props.theme.offWhite};
+  background-color: ${props => props.theme.colors.offWhite};
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
   :hover {
-    background-color: ${props => props.theme.borderPrimary};
-    border: 1px dashed ${props => props.theme.textDark};
+    background-color: ${props => props.theme.colors.borderPrimary};
+    border: 1px dashed ${props => props.theme.colors.textDark};
   }
   :focus {
     outline: 0;

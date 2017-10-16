@@ -1,33 +1,31 @@
 import styled from 'styled-components';
-import {
-  media
-} from '../../../foundation/Variables';
+import media from '../../../foundation/mediaQueries';
 
 const getBackColor = props => {
   if (props.disabled) {
     return props.theme.borderPrimary;
   } else if(props.primary) {
-    return props.theme.primaryActionColor;
+    return props.theme.colors.primaryAction;
   } else if(props.danger) {
-    return props.theme.dangerActionColor;
+    return props.theme.colors.dangerAction;
   }
-  return props.theme.secondaryActionColor;
+  return props.theme.colors.secondaryAction;
 };
 
 const getBorderColor = props => {
   if (props.disabled) {
-    return props.theme.borderPrimary;
+    return props.theme.colors.borderPrimary;
   } else if (props.primary) {
-    return props.theme.primaryActionColor;
+    return props.theme.colors.primaryAction;
   } else if(props.danger) {
-    return props.theme.dangerActionColor;
+    return props.theme.colors.dangerAction;
   }
-  return props.theme.secondaryActionColor;
+  return props.theme.colors.secondaryAction;
 };
 
 const getForeColor = props => {
   if (props.disabled) {
-    return props.theme.offWhite;
+    return props.theme.colors.offWhite;
   }
   return 'white'
 };
@@ -47,22 +45,22 @@ const getHoverBorderColor = props => {
   if (props.disabled) {
     return '';
   } else if (props.primary) {
-    return props.theme.primaryActionColor;
+    return props.theme.colors.primaryAction;
   } else if(props.danger) {
-    return props.theme.dangerActionColor;
+    return props.theme.colors.dangerAction;
   }
-  return props.theme.secondaryActionColor;
+  return props.theme.colors.secondaryAction;
 }
 
 const getHoverFontColor = props => {
   if (props.disabled) {
     return '';
   } else if(props.primary) {
-    return props.theme.primaryActionColor;
+    return props.theme.colors.primaryAction;
   } else if(props.danger) {
-    return props.theme.dangerActionColor;
+    return props.theme.colors.dangerAction;
   }
-  return props.theme.secondaryActionColor;
+  return props.theme.colors.secondaryAction;
 }
 
 const getIcon = props => {
@@ -125,7 +123,7 @@ export const Button = styled.button`
   background-color:  ${getBackColor};
   border-color: ${getBorderColor};
   padding: ${props => props.small ? '5px 10px' : '16px 32px'};
-  ${media.fromMedium`
+  ${media.greaterThan('md')`
     width: auto;
   `}
 

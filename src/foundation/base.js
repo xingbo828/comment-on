@@ -4,8 +4,8 @@ import RobotoRegular from './fonts/Roboto-Regular.ttf';
 import RobotoMedium from './fonts/Roboto-Medium.ttf';
 import RobotoBold from './fonts/Roboto-Bold.ttf';
 import RobotoBlack from './fonts/Roboto-Black.ttf';
-import { textDark } from './Variables';
-import { media, offWhite } from './Variables';
+import variables from './variables';
+import media from './mediaQueries';
 
 injectGlobal`
   @font-face {
@@ -38,15 +38,15 @@ injectGlobal`
 
   body {
     font-size: 16px;
-    color: ${textDark};
+    color: ${variables.colors.textDark};
     padding: 0;
     margin: 0;
     font-family: 'Roboto', sans-serif;
     font-weight: normal;
     -webkit-font-smoothing: antialiased;
-    background: ${offWhite};
+    background: ${variables.colors.offWhite};
 
-    ${media.fromMedium`
+    ${media.greaterThan('md')`
       background: white;
     `}
     * {

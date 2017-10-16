@@ -8,7 +8,7 @@ export const TabBar = styled.ul`
   display: flex;
   padding: 0;
   margin: 0;
-  border-bottom: 1px solid ${props => props.theme.borderPrimary};
+  border-bottom: 1px solid ${props => props.theme.colors.borderPrimary};
 `;
 
 export const TabBarLinkContainer = styled.li`
@@ -20,19 +20,19 @@ export const TabBarLinkContainer = styled.li`
     if(props.isActive){
       return `
         font-weight: bold;
-        color: ${props.theme.primaryColor};
+        color: ${props.theme.colors.primary};
       `;
     }
   }}
   :hover {
-    color: ${props => props.theme.primaryColor};
+    color: ${props => props.theme.colors.primary};
   }
 `;
 
 export const TabBarLinkInk = styled.div`
   height: 2px;
   width: 100%;
-  background: ${props => props.theme.primaryColor};
+  background: ${props => props.theme.colors.primary};
   transition: .3s;
   position: absolute;
   left: 0;

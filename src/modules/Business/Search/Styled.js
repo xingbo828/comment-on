@@ -1,22 +1,17 @@
 import styled from 'styled-components';
-import {
-  borderPrimary,
-  primaryColor,
-  primaryActionColor,
-  textDark
-} from '../../../foundation/Variables';
+import { colors } from '../../../foundation/variables';
 
 export const BusinessCardList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   padding: 1rem;
-  color: ${textDark};
+  color: ${colors.textDark};
 `;
 
 export const BusinessCard = styled.li`
   list-style: none;
   width: 100%;
-  border-top: 1px solid ${borderPrimary};
+  border-top: 1px solid ${colors.borderPrimary};
   overflow: hidden;
   display: flex;
   flex-direction: row;
