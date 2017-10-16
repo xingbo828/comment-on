@@ -3,7 +3,7 @@ import { Field } from 'redux-form/immutable';
 import {
   Button
 } from '../../../../globalComponents/Form';
-import { GridContainer } from '../../../../globalComponents/Grid';
+import Grid from '../../../../globalComponents/Grid';
 import AddressSelection from '../../components/SearchStepAddressSelection';
 
 const renderAddressSelection =  ({ input, label, desc }) => {
@@ -22,7 +22,7 @@ const Address = ({
   const destAddressDesc= `Destination address description`;
 
   return (
-    <GridContainer>
+    <Grid.Container>
       <form onSubmit={handleSubmit}>
         <Field
           component={renderAddressSelection}
@@ -38,7 +38,7 @@ const Address = ({
         />
         <Button type="submit" primary icon="arrow-right" disabled={submitting || !valid}>Next</Button>
       </form>
-    </GridContainer>
+    </Grid.Container>
   );
 };
 

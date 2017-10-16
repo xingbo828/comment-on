@@ -12,7 +12,7 @@ import {
   AddressDetailProv,
   AddressDetailPostalCode
 } from './Styled';
-import { GridContainer } from '../../../globalComponents/Grid';
+import Grid from '../../../globalComponents/Grid';
 import { SERVICE_AREAS } from '../../Common/constants';
 
 import BusinessHour from '../components/BusinessHour';
@@ -34,6 +34,7 @@ const renderBusinessServiceAreas = ({ input, ...rest }) =>{
   />;
 }
 
+const { Container } = Grid;
 const BusinessCreation = ({
   handleSubmit,
   pristine,
@@ -42,7 +43,7 @@ const BusinessCreation = ({
   submitting
 }) => {
   return (
-    <GridContainer>
+    <Container>
       <form onSubmit={handleSubmit}>
         <Field
           component={TextField}
@@ -134,7 +135,7 @@ const BusinessCreation = ({
           Submit
         </Button>
       </form>
-    </GridContainer>
+    </Container>
   );
 };
 

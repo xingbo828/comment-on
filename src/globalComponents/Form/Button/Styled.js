@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import media from '../../../foundation/mediaQueries';
 
 const getBackColor = props => {
   if (props.disabled) {
@@ -123,7 +122,7 @@ export const Button = styled.button`
   background-color:  ${getBackColor};
   border-color: ${getBorderColor};
   padding: ${props => props.small ? '5px 10px' : '16px 32px'};
-  ${media.greaterThan('md')`
+  ${props=>props.theme.media.greaterThan('md')`
     width: auto;
   `}
 

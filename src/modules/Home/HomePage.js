@@ -1,7 +1,6 @@
 import React from 'react';
 import { AddressAutoComplete } from '../../globalComponents/Form';
 import { Field } from 'redux-form/immutable';
-import moment from 'moment';
 import {
     Container,
     Banner,

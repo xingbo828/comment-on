@@ -20,6 +20,10 @@ const validate = validateFunc([{
   validator: 'isRequired',
   message: 'Required'
 }, {
+  field: 'businessAddrProv',
+  validator: 'isRequired',
+  message: 'Required'
+}, {
   field: 'businessAddrPostalCode',
   validator: 'isRequired',
   message: 'Required'

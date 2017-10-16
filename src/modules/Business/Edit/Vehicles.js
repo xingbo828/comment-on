@@ -3,7 +3,7 @@ import { Field } from 'redux-form/immutable';
 import {
   Button
 } from '../../../globalComponents/Form';
-import { GridContainer } from '../../../globalComponents/Grid';
+import Grid from '../../../globalComponents/Grid';
 import VehiclesInfoManagement from '../components/VehiclesInfoManagement';
 
 const renderVehiclesInfoManagement = ({ input, ...rest }) => {
@@ -19,7 +19,7 @@ const Vehicles = ({
   submitting
 }) => {
   return (
-    <GridContainer>
+    <Grid.Container>
       <form onSubmit={handleSubmit}>
         <Field component={renderVehiclesInfoManagement} name="vehiclesInfo" />
         <Button
@@ -30,7 +30,7 @@ const Vehicles = ({
           Submit
         </Button>
       </form>
-    </GridContainer>
+    </Grid.Container>
   );
 };
 

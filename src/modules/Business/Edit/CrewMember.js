@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field } from 'redux-form/immutable';
-import { GridContainer } from '../../../globalComponents/Grid';
+import Grid from '../../../globalComponents/Grid';
 import CrewMemberManagement from '../components/CrewMemberManagement';
 
 const renderCrewMemberManagement = ({ input, onUpdate, ...rest }) => {
@@ -16,11 +16,11 @@ const CrewMember = ({
   updateBusiness
 }) => {
   return (
-    <GridContainer>
+    <Grid.Container>
       <form onSubmit={handleSubmit}>
         <Field onUpdate={updateBusiness} component={renderCrewMemberManagement} name="crewMembers" />
       </form>
-    </GridContainer>
+    </Grid.Container>
   );
 };
 

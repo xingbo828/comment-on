@@ -3,7 +3,7 @@ import { Field } from 'redux-form/immutable';
 import {
   Button
 } from '../../../../globalComponents/Form';
-import { GridContainer } from '../../../../globalComponents/Grid';
+import Grid from '../../../../globalComponents/Grid';
 import DateTimeSelection from '../../components/SearchStepDateTimeSelection'
 
 const renderDateTimeSelection =  ({ input, label }) => {
@@ -18,7 +18,7 @@ const Date = ({
   submitting
 }) => {
   return (
-    <GridContainer>
+    <Grid.Container>
       <form onSubmit={handleSubmit}>
         <Field
           component={renderDateTimeSelection}
@@ -27,7 +27,7 @@ const Date = ({
         />
         <Button type="submit" icon="arrow-right" primary disabled={submitting || !valid}>Next</Button>
       </form>
-    </GridContainer>
+    </Grid.Container>
   );
 };
 

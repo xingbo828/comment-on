@@ -4,7 +4,7 @@ import {
   Button,
   Radio
 } from '../../../../globalComponents/Form';
-import { GridContainer } from '../../../../globalComponents/Grid';
+import Grid from '../../../../globalComponents/Grid';
 
 const renderAbleToAssist =  ({ input, name, label, desc }) => {
   const placeholdertext = `Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.`;
@@ -46,7 +46,7 @@ const Logistics = ({
   submitting
 }) => {
   return (
-    <GridContainer>
+    <Grid.Container>
       <form onSubmit={handleSubmit}>
         <Field
           component={renderAbleToAssist}
@@ -60,7 +60,7 @@ const Logistics = ({
         />
         <Button type="submit" icon="arrow-right" primary disabled={submitting || !valid}>Next</Button>
       </form>
-    </GridContainer>
+    </Grid.Container>
   );
 };
 

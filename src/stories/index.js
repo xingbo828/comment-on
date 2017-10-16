@@ -5,6 +5,7 @@ import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
 
 // -----------Global Start------------------
+import Grid from './Global/Grid';
 import TypographyStory from './Global/Typography';
 import IconStory from './Global/Icon';
 import AvatarStory from './Global/Avatar';

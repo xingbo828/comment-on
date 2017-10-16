@@ -1,5 +1,5 @@
 import React from 'react';
-import { GridContainer } from '../../../globalComponents/Grid';
+import Grid from '../../../globalComponents/Grid';
 import SecondaryNav from '../../../globalComponents/SecondaryNav';
 import { Heading, Paragraph } from '../../../globalComponents/Typography';
 import Estimate from './Estimate';
@@ -11,7 +11,7 @@ import {
 import {
   Button
 } from '../../../globalComponents/Form';
-import { 
+import {
   HeroDiv,
   ProfileContentContainer,
   Content,
@@ -19,11 +19,13 @@ import {
   CtaContainer
 } from './Styled';
 
+const { Container } = Grid;
+
 const BusinessProfile = () => (
   <div>
     <HeroDiv />
     <SecondaryNav />
-    <GridContainer>
+    <Container>
       <ProfileContentContainer>
         <Content>
           <Heading wrapperTag="h3">Something Something Company Name</Heading>
@@ -49,7 +51,7 @@ const BusinessProfile = () => (
           </Card>
         </Aside>
       </ProfileContentContainer>
-    </GridContainer>
+    </Container>
   </div>
 );
 

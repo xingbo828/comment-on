@@ -5,7 +5,6 @@ import RobotoMedium from './fonts/Roboto-Medium.ttf';
 import RobotoBold from './fonts/Roboto-Bold.ttf';
 import RobotoBlack from './fonts/Roboto-Black.ttf';
 import variables from './variables';
-import media from './mediaQueries';
 
 injectGlobal`
   @font-face {
@@ -46,7 +45,7 @@ injectGlobal`
     -webkit-font-smoothing: antialiased;
     background: ${variables.colors.offWhite};
 
-    ${media.greaterThan('md')`
+    ${variables.media.greaterThan('md')`
       background: white;
     `}
     * {

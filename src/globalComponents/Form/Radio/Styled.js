@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import media from '../../../foundation/mediaQueries';
 
 export const Container = styled.div`
   margin: 0 0 1rem;
@@ -26,7 +25,7 @@ export const StyledLabel = styled.label`
   cursor: pointer;
   margin-right: 1rem;
 
-  ${media.greaterThan('md')`
+  ${props=>props.theme.media.greaterThan('md')`
     display: inline-block;
     padding: auto;
   `}

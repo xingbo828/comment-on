@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Button
 } from '../../../../globalComponents/Form';
-import { GridContainer } from '../../../../globalComponents/Grid';
+import Grid from '../../../../globalComponents/Grid';
 
 const Items = ({
   handleSubmit,
@@ -12,12 +12,12 @@ const Items = ({
   submitting
 }) => {
   return (
-    <GridContainer>
+    <Grid.Container>
       <form onSubmit={handleSubmit}>
         <h2>Items Form</h2>
         <Button type="submit" icon="arrow-right" primary>Next</Button>
       </form>
-    </GridContainer>
+    </Grid.Container>
   );
 };
 
