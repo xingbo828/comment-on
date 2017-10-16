@@ -59,7 +59,7 @@ const Logistics = ({
           name="havePiano"
           label="Do you have a piano?"
         />
-        <Button type="submit" primary disabled={submitting || !valid}>Next</Button>
+        <Button type="submit" icon="arrow-right" primary disabled={submitting || !valid}>Next</Button>
       </form>
     </GridContainer>
   );

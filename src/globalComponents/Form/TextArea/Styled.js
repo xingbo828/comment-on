@@ -31,8 +31,7 @@ export const Input = styled.textarea`
 `;
 
 export const InputLabel = styled.label`
-  font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.5rem;
 `;
 
 

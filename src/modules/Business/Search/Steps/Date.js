@@ -26,7 +26,7 @@ const Date = ({
           name="dateTime"
           label="Moving Date & Time"
         />
-        <Button type="submit" primary disabled={submitting || !valid}>Next</Button>
+        <Button type="submit" icon="arrow-right" primary disabled={submitting || !valid}>Next</Button>
       </form>
     </GridContainer>
   );

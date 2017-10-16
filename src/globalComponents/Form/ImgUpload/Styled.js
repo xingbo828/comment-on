@@ -15,8 +15,7 @@ export const StyledInput = styled.span`
 
 
 export const InputLabel = styled.label`
-  font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.5rem;
 `;
 
 export const StyledImgList = styled.ul`

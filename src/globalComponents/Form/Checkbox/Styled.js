@@ -12,8 +12,7 @@ export const InputErrorMsg = styled.span`
 `;
 
 export const CheckboxGroupLabel = styled.label`
-  font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.5rem;
 `;
 
 export const CheckboxList = styled.div`

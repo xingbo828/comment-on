@@ -89,6 +89,8 @@ const getIcon = props => {
         content: "${contentValue}";
         border-radius: 99em;
         padding: .5rem;
+        width: 1rem;
+        height: 1rem;
         transform: translateX(1rem);
       }
       :hover {

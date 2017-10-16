@@ -35,8 +35,7 @@ transform: scale(0);
 `;
 
 export const InputLabel = Styled.label`
-font-weight: bold;
-font-size: 1rem;
+font-size: 1.5rem;
 `;
 
 export const InputErrorMsg = Styled.span`

@@ -17,7 +17,7 @@ const Items = ({
     <GridContainer>
       <form onSubmit={handleSubmit}>
         <h2>Items Form</h2>
-        <Button type="submit" primary>Next</Button>
+        <Button type="submit" icon="arrow-right" primary>Next</Button>
       </form>
     </GridContainer>
   );
