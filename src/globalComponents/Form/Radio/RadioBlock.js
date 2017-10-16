@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Radio from './Radio';
 import { Paragraph } from '../../Typography';
 import {

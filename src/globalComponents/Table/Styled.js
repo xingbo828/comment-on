@@ -1,17 +1,16 @@
 import styled from 'styled-components';
-import { colors } from '../../foundation/variables';
 
 export const Table = styled.div`
   display: flex;
   flex-wrap: wrap;
   padding: 1rem;
-  color: ${colors.textDark};
+  color: ${props => props.theme.colors.textDark};
 `;
 
 export const Tr = styled.ul`
   list-style: none;
   width: 100%;
-  border-bottom: 1px solid ${colors.borderPrimary};
+  border-bottom: 1px solid ${props => props.theme.colors.borderPrimary};
   overflow: hidden;
   display: flex;
   flex-direction: row;

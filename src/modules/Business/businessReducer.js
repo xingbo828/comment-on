@@ -1,4 +1,3 @@
-import Immutable from 'immutable';
 import { combineReducers } from 'redux-immutable';
 import search from './Search/searchReducers';
 

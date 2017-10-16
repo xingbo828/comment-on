@@ -33,7 +33,7 @@ class AddressAutoComplete extends Component {
   }
 
   render() {
-    const { initialValue, onSelect, placeholder, label } = this.props;
+    const { initialValue, onSelect, placeholder } = this.props;
     return (
       <Label>
         <GeosuggestStyled

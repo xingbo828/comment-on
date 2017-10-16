@@ -1,5 +1,4 @@
 import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import ItemsStep from './Items';

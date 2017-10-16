@@ -22,10 +22,17 @@ const renderDescriptionTextArea = ({ input, ...rest }) =>
   <TextArea input={input} {...rest} />;
 
 const renderBusinessHour = ({ input, ...rest }) =>
-  <BusinessHour value={input.value.toJS()} onChange={input.onChange} {...rest} />;
+  <BusinessHour value={input.value || []} onChange={input.onChange} {...rest} />;
 
-const renderBusinessServiceAreas = ({ input, ...rest }) =>
-  <Checkbox.CheckboxGroup input={input} {...rest} label="Service Areas" />;
+const renderBusinessServiceAreas = ({ input, ...rest }) =>{
+  return <Checkbox.CheckboxGroup
+    value={input.value || []}
+    onChange={input.onChange}
+    name={input.name}
+    label="Service Areas"
+    {...rest}
+  />;
+}
 
 const BusinessCreation = ({
   handleSubmit,

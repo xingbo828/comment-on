@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import isEmpty from 'lodash/isEmpty';
-import mapImmutablePropsToPlainProps from '../../../Common/mapImmutablePropsToPlainProps'
 
 class VehiclesInfoManagement extends Component {
   constructor(props) {
@@ -13,7 +12,7 @@ class VehiclesInfoManagement extends Component {
 
   handleOnChange(type, e) {
     const newVehiclesState = Object.assign({}, this.state.vehicles, {
-      [type]: parseInt(e.target.value)
+      [type]: parseInt(e.target.value, 10)
     });
     this.setState({
       vehicles: newVehiclesState

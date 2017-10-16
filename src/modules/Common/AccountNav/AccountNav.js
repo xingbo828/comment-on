@@ -47,7 +47,7 @@ class AccountNav extends React.Component {
   }
 
   render() {
-    const { user, loginStatus, logout } = this.props;
+    const { user, loginStatus } = this.props;
     const active = this.state.active;
     const myBusiness = user.businesses ? Object.keys(user.businesses)[0] : null;
     if (loginStatus === 'NOT_AUTHENTICATED') {

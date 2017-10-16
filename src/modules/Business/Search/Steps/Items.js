@@ -1,6 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Field } from 'redux-form/immutable';
 import {
   Button
 } from '../../../../globalComponents/Form';

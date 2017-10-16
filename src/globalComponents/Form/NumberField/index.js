@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import {
   InputContainer,
-  InputLabel,
   Input,
   FocusBorder,
   InputErrorMsg,
   InputWrapper,
-  NumberHandlerWrapper,
   PlusNumberHandler,
   MinusNumberHandler,
   Icon
@@ -23,7 +21,7 @@ class NumberField extends Component {
   handleClick(interval, e) {
     e.preventDefault();
     const input = this.props.input;
-    let value = parseInt(input.value);
+    let value = parseInt(input.value, 10);
     if (!value) {
       value = 0;
     }
@@ -41,7 +39,7 @@ class NumberField extends Component {
   }
 
   render() {
-    const { placeholder, input, meta: { touched, error, warning }} = this.props;
+    const { placeholder, input, meta: { touched, error }} = this.props;
     return (
       <InputContainer>
         <InputWrapper>

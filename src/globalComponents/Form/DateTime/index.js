@@ -94,7 +94,7 @@ class DateTime extends Component {
   }
 
   render() {
-    const { label, placeholder, includeTime, disabledDate } = this.props;
+    const { placeholder, includeTime, disabledDate } = this.props;
     const {
       userInteractionPhase,
       displayValue,

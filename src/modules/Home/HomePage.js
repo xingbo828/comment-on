@@ -1,6 +1,5 @@
 import React from 'react';
 import { AddressAutoComplete, DateTime } from '../../globalComponents/Form';
-import Icon from '../../globalComponents/Icon';
 import { Field } from 'redux-form/immutable';
 import moment from 'moment';
 import {

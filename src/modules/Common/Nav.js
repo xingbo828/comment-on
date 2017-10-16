@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Link, withRouter } from 'react-router-dom';
 import { compose, withProps, branch, renderNothing } from 'recompose';
 import { auth } from '../../firebaseClient';
-import media  from '../../foundation/mediaQueries';
 import isLoggedIn from './isLoggedIn';
 import AccountNav from './AccountNav';
 
@@ -33,13 +32,13 @@ const Heading = styled.h1`
   color: ${fromTheme('primary')};
 `;
 
-const Location = styled.span`
-  flex: 1;
-  font-size: 1rem;
-  color: white;
-  margin: 0;
-  padding: 0;
-`;
+// const Location = styled.span`
+//   flex: 1;
+//   font-size: 1rem;
+//   color: white;
+//   margin: 0;
+//   padding: 0;
+// `;
 
 const ContextHeaderLinks = styled.ul`
   flex: 10;
@@ -76,62 +75,62 @@ const Pic = styled.div`
 `;
 */
 
-const NavList = styled.ul`
-  display: flex;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  height: 60px;
-  line-height: 60px;
-  border-bottom: 1px solid ${fromTheme('borderPrimary')};
+// const NavList = styled.ul`
+//   display: flex;
+//   list-style-type: none;
+//   margin: 0;
+//   padding: 0;
+//   height: 60px;
+//   line-height: 60px;
+//   border-bottom: 1px solid ${fromTheme('borderPrimary')};
 
-  ${media.greaterThan('md')`
-      display: block;
-    `
-  }
-`;
+//   ${media.greaterThan('md')`
+//       display: block;
+//     `
+//   }
+// `;
 
-const NavListItem = styled.li`
-  text-align: center;
-  flex: 1;
+// const NavListItem = styled.li`
+//   text-align: center;
+//   flex: 1;
 
-  span {
-    display: none;
-  }
+//   span {
+//     display: none;
+//   }
 
-  a {
-    text-decoration: none;
-    height: 60px;
-    display: block;
-    color: inherit;
-    cursor: pointer;
-    font-weight: bold;
-  }
+//   a {
+//     text-decoration: none;
+//     height: 60px;
+//     display: block;
+//     color: inherit;
+//     cursor: pointer;
+//     font-weight: bold;
+//   }
 
-  a::after {
-    content: '\f015';
-    font-family: FontAwesome;
-    font-size: 1rem;
-  }
+//   a::after {
+//     content: '\f015';
+//     font-family: FontAwesome;
+//     font-size: 1rem;
+//   }
 
-  ${media.greaterThan('md')`
-      border-right: 1px solid ${fromTheme('borderPrimary')};
-      display: inline-block;
+//   ${media.greaterThan('md')`
+//       border-right: 1px solid ${fromTheme('borderPrimary')};
+//       display: inline-block;
 
-      span {
-        display: inline;
-      }
+//       span {
+//         display: inline;
+//       }
 
-      a {
-        padding: 0 2rem;
-      }
+//       a {
+//         padding: 0 2rem;
+//       }
 
-      a::after {
-        display: none;
-      }
-    `
-  }
-`;
+//       a::after {
+//         display: none;
+//       }
+//     `
+//   }
+// `;
 
 export const Nav = ({ user, isLoggedIn, logout }) => {
   return (
