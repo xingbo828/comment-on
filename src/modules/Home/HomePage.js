@@ -1,5 +1,5 @@
 import React from 'react';
-import { AddressAutoComplete, DateTime } from '../../globalComponents/Form';
+import { AddressAutoComplete } from '../../globalComponents/Form';
 import { Field } from 'redux-form/immutable';
 import moment from 'moment';
 import {
@@ -18,22 +18,6 @@ const renderMoveAddress = ({ input, label, ...rest, placeholder }) =>
     label={label}
     {...rest}
   />;
-
-const renderMoveDateTime = ({ input, label, placeholder, ...rest }) => {
-  const disabledDate = (date) => {
-    return date.diff(moment(), 'days') < 1 ;
-  };
-  return (
-    <DateTime
-      placeholder={placeholder}
-      onSelect={input.onChange}
-      disabledDate={disabledDate}
-      label={label}
-      value={input.value}
-      includeTime
-    />
-  );
-}
 
 
 const HomePage = ({
@@ -60,14 +44,6 @@ const HomePage = ({
           placeholder="destination address"
           name="moveTo"
           label="to"
-        />
-      </SearchWrapper>
-      <SearchWrapper>
-        <Field
-          component={renderMoveDateTime}
-          placeholder="pick a day & time to move"
-          name="moveDateTime"
-          label="when"
         />
       </SearchWrapper>
       <SearchButton primary disabled={pristine || submitting || !valid}>Search</SearchButton>

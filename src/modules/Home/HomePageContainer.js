@@ -12,10 +12,6 @@ const validate = validateFunc([{
   field: 'moveTo',
   validator: 'isRequired',
   message: 'Required'
-},{
-  field: 'moveDateTime',
-  validator: 'isRequired',
-  message: 'Required'
 }] ,validators);
 
 
@@ -27,7 +23,7 @@ const enhanced = compose(
       const formData = values.toJS();
       props.history.push({
         pathname: '/business/search',
-        search: `?origin=${formData.moveFrom.placeId}&destination=${formData.moveTo.placeId}&dateTime=${formData.moveDateTime.unix()}`
+        search: `?origin=${formData.moveFrom.placeId}&destination=${formData.moveTo.placeId}`
       });
     },
     validate
