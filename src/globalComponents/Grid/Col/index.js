@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
-
-const calculateBasis = (ratio) => ratio ? `flex-basis: ${ratio*100/24}%` : 'flex-basis: 100%';
+const calculateBasis = (ratio) => ratio ? `flex: 0 0 ${ratio*100/24}%` : 'flex: 0 0 100%';
 
 const calculateOffset = (offsetRatio) => {
   if(offsetRatio) {
@@ -11,7 +10,6 @@ const calculateOffset = (offsetRatio) => {
 };
 
 export default styled.div`
-  flex-basis: 100%;
   padding: 0 15px;
 
   ${props=>props.theme.media.lessThan('xs')`
