@@ -1,6 +1,5 @@
 import Styled from 'styled-components';
 
-
 const PanelDiv = Styled.div`
   border-radius: 3px;
   background: white;

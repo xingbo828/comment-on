@@ -11,7 +11,8 @@ const colors = {
   textDarkest: '#2d2d2d',
   textDark: '#525458',
   textLight: '#a6a7a9',
-  offWhite: '#f8f8f8'
+  offWhite: '#f8f8f8',
+  borderPrimary: '#d3d3d3'
 }
 
 
