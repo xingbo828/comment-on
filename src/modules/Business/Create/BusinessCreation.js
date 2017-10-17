@@ -6,12 +6,7 @@ import {
   TextArea,
   Checkbox
 } from '../../../globalComponents/Form';
-import {
-  AddressDetailContainer,
-  AddressDetailCity,
-  AddressDetailProv,
-  AddressDetailPostalCode
-} from './Styled';
+
 import Grid from '../../../globalComponents/Grid';
 import { SERVICE_AREAS } from '../../Common/constants';
 
