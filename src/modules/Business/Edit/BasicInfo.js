@@ -17,9 +17,10 @@ const renderDescriptionTextArea = ({ input, ...rest }) => (
 );
 
 const renderBusinessHour = ({ input, ...rest }) => {
+  const pureValue = (input.value.toJS && input.value.toJS()) || input.value;
   return (
     <BusinessHour
-      value={input.value.toJS()}
+      value={pureValue}
       onChange={input.onChange}
       {...rest}
     />
@@ -77,7 +78,7 @@ const BasicInfo = ({ handleSubmit, pristine, reset, valid, submitting }) => {
           </Col>
         </Row>
         <Row>
-          <Col xs={24} sm={24} md={12} lg={12}>
+          <Col xs={24} sm={24} md={10} lg={10}>
             <Field
               component={TextField}
               type="text"
@@ -86,7 +87,7 @@ const BasicInfo = ({ handleSubmit, pristine, reset, valid, submitting }) => {
               placeholder="Vancouver"
             />
           </Col>
-          <Col xs={24} sm={24} md={5} lg={5}>
+          <Col xs={24} sm={24} md={7} lg={7}>
             <Field
               component={TextField}
               type="text"

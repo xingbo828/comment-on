@@ -9,17 +9,17 @@ margin: 0 0 1rem;
 `;
 
 export const Input = Styled.input`
-display: block;
-width: 100%;
-border: solid ${variables.colors.borderPrimary};
-border-width: 0 0 1px 0;
-font-size: 1rem;
-padding: 1rem 0;
-outline: none;
+  display: block;
+  width: 100%;
+  border: solid ${variables.colors.borderPrimary};
+  border-width: 0 0 1px 0;
+  font-size: 1rem;
+  padding: 1rem 0;
+  outline: none;
 
-&:focus + div{
-  transform: scale(1);
-}
+  &:focus + div{
+    transform: scale(1);
+  }
 `;
 
 export const FocusBorder = Styled.div`
@@ -32,7 +32,7 @@ transform: scale(0);
 `;
 
 export const InputLabel = Styled.label`
-font-size: 1.5rem;
+  font-size: 1.2rem;
 `;
 
 export const InputErrorMsg = Styled.span`

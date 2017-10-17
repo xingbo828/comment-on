@@ -5,7 +5,7 @@ export const Container = styled.div`
 `;
 
 export const RadioGroupLabel = styled.label`
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 `;
 
 export const RadioList = styled.div`

@@ -77,7 +77,7 @@ const BusinessCreation = ({
           </Col>
         </Row>
         <Row>
-          <Col xs={24} sm={24} md={12} lg={12}>
+          <Col xs={24} sm={24} md={10} lg={10}>
             <Field
               component={TextField}
               type="text"
@@ -86,7 +86,7 @@ const BusinessCreation = ({
               placeholder="Vancouver"
             />
           </Col>
-          <Col xs={24} sm={24} md={5} lg={5}>
+          <Col xs={24} sm={24} md={7} lg={7}>
             <Field
               component={TextField}
               type="text"

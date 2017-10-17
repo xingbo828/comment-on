@@ -6,8 +6,7 @@ export const BusinessHourContainer = styled.div`
 `;
 
 export const BusinessHourHeading = styled.label`
-  font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.2rem;
 `;
 
 export const HoursSelectContainer = styled.div`
@@ -35,7 +34,7 @@ export const HoursSelectButtonWrapper = styled.div`
 `;
 
 export const HoursList = styled.ul`
-  padding: 5px 0;
+  padding: 0;
 `;
 
 export const HoursListItem = styled.li`

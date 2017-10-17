@@ -27,7 +27,7 @@ export const Input = styled.textarea`
 `;
 
 export const InputLabel = styled.label`
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 `;
 
 

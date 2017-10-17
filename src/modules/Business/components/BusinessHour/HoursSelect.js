@@ -92,10 +92,10 @@ class HoursSelect extends Component {
         <HoursSelectButtonWrapper>
           <Button
             small
-            primary
+            secondary
             onClick={this.handleAddHours}
           >
-            Add Hours
+            add
           </Button>
         </HoursSelectButtonWrapper>
       </HoursSelectContainer>
