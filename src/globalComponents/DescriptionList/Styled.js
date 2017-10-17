@@ -7,6 +7,11 @@ const DefinitionContainer = Styled.div`
 const Term = Styled.dt`
   flex: 1;
   text-align: left;
+  color: ${({theme}) => theme.colors.textLight };
+  
+  &:not(:last-child) {
+    margin: 0 0 1rem;
+  }
 `;
 
 const Definition = Styled.dd`

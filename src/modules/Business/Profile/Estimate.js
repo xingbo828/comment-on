@@ -11,12 +11,12 @@ const PricingContainer = Styled.div`
   justify-content: center;
   display: flex;
   flex-direction: column;
-  border-bottom: 1px dashed ${({theme}) => theme.borderPrimary };
+  border-bottom: 1px dashed ${({theme}) => theme.colors.textLight };
 
   span {
     text-transform: uppercase;
     font-weight: 800;
-    color: ${({theme}) => theme.textLight };
+    color: ${({theme}) => theme.colors.textLight };
     letter-spacing: .03em;
     font-size: .875rem;
   }
@@ -39,7 +39,6 @@ const EstimateContainer = Styled.div`
   background: white;
   width: 100%;
   text-align: center;
-  color: ${({theme}) => theme.primary };
 `;
 
 const Estimate = () => (

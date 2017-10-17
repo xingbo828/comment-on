@@ -24,7 +24,7 @@ const { Container } = Grid;
 const BusinessProfile = () => (
   <div>
     <HeroDiv />
-    <SecondaryNav />
+    {/* <SecondaryNav /> */}
     <Container>
       <ProfileContentContainer>
         <Content>

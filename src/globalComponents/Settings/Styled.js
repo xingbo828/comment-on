@@ -4,7 +4,7 @@ const ContainerDiv = Styled.div`
   display: flex;
 
   ${props=>props.theme.media.greaterThan('md') `
-    padding: 0 ${props => props.theme.layout.gutterWidth};
+    padding: 0 5.5%;
     margin: 0 auto;
     max-width: 1200px;
   `}

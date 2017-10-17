@@ -2,26 +2,30 @@ import React from 'react';
 import Transition from 'react-transition-group/Transition';
 
 const DropDownTransition = ({
-  timeout=150,
+  timeout=300,
   in: inProp,
   children
 }) => {
   const defaultStyle = {
-    transition: `transform ${timeout}ms ease-out`,
-    transformOrigin: 'top',
-    transform: `scaleY(0)`,
+    top: '60px',
+    transition: `${timeout}ms`,
+    transformOrigin: 'top right',
+    opacity: 0,
     position: 'absolute',
     width: '300px',
-    right: '-1px',
+    right: '0',
     background: 'white'
   }
 
   const transitionStyles = {
+    entering: {
+      opacity: 1,
+    },
     entered:  {
-      transform: `scaleY(1)`
+      opacity: 1
     },
     exiting: {
-      transform: `scaleY(0)`
+      // transform: `scaleY(0)`
     }
   };
 

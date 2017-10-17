@@ -104,15 +104,13 @@ const getIcon = props => {
 export const Button = styled.button`
   border-radius: 99em;
   box-sizing: content-box;
-  display: inline-block;
   margin-bottom: 0;
   font-weight: bold;
   text-align: center;
-  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
   background-image: none;
   border: 1px solid transparent;
   white-space: nowrap;
-  padding: 1rem 2rem;
+  width: 100%;
   min-width: 80px;
   font-size: 1rem;
   user-select: none;
@@ -120,11 +118,14 @@ export const Button = styled.button`
   position: relative;
   color: ${getForeColor};
   background-color:  ${getBackColor};
-  border-color: ${getBorderColor};
-  padding: ${props => props.small ? '5px 10px' : '16px 32px'};
+  border-color: ${getBorderColor};  
+  padding: ${props => props.small ? '5px 0' : '1rem 0;'};
+  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};  
+
   ${props=>props.theme.media.greaterThan('md')`
     width: auto;
-  `}
+    padding: ${props => props.small ? '5px 10px' : '1rem 2rem;'};
+  `};
 
   ${getIcon}
 
