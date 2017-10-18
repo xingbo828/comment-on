@@ -13,50 +13,44 @@ import {
 class NumberField extends Component {
   constructor(props) {
     super(props);
-    this.handleClickUp = this.handleClick.bind(this, 1);
-    this.handleClickDown = this.handleClick.bind(this, -1);
-
+    this.state = {
+      value: this.props.value
+    };
   }
 
-  handleClick(interval, e) {
+  handleClick = (interval) => (e) => {
     e.preventDefault();
-    const input = this.props.input;
-    let value = parseInt(input.value, 10);
-    if (!value) {
-      value = 0;
-    }
+    let value = this.state.value;
     value += interval;
 
     if (value < this.props.min || value > this.props.max) {
       value -= interval;
     }
 
-    input.value = value;
     this.setState({
-      input: input
+      value
     });
-    this.props.input.onChange(value);
+    this.props.onChange(value);
   }
 
+  incAvailable = (max) => (v) => v+1 <= max;
+  decAvailable = (min) => (v) => v-1 >= min;
+
   render() {
-    const { placeholder, input, meta: { touched, error }} = this.props;
+    const { placeholder, onChange, max, min } = this.props;
+    const { value } = this.state;
     return (
       <InputContainer>
         <InputWrapper>
-          <PlusNumberHandler onClick={this.handleClickUp}>
+          <PlusNumberHandler available={this.incAvailable(max)(value)} onClick={this.handleClick(1)}>
             <Icon className="fa fa-plus" aria-hidden="true"></Icon>
           </PlusNumberHandler>
-          <MinusNumberHandler onClick={this.handleClickDown}>
+          <MinusNumberHandler available={this.decAvailable(min)(value)} onClick={this.handleClick(-1)}>
             <Icon className="fa fa-minus" aria-hidden="true"></Icon>
           </MinusNumberHandler>
-          <Input {...input} placeholder={placeholder}>{input.value || 0}</Input>
+          <Input onChange={onChange} placeholder={placeholder}>{value}</Input>
         </InputWrapper>
         <FocusBorder />
-        {touched &&
-        ((error &&
-          <InputErrorMsg>
-            {error}
-          </InputErrorMsg>))}
       </InputContainer>
     );
   }

@@ -23,7 +23,7 @@ const SearchSteps = ({current, history}) => {
 
       <Step
         icon={<Icon icon="truck" />}
-        title="items"
+        title="vehicle size"
         onStepClick={stepClickHandler.bind(this, 'items')}
       />
 

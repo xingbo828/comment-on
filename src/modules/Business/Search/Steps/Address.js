@@ -36,7 +36,7 @@ const Address = ({
           label="Destination address"
           desc={destAddressDesc}
         />
-        <Button type="submit" primary icon="arrow-right" disabled={submitting || !valid}>Next</Button>
+        <Button style={{float: 'right'}} type="submit" primary icon="arrow-right" disabled={submitting || !valid}>Next</Button>
       </form>
     </Grid.Container>
   );

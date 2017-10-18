@@ -21,14 +21,14 @@ import {
 
 const { Container } = Grid;
 
-const BusinessProfile = () => (
+const BusinessProfile = ({ profileState: { profile } }) => (
   <div>
     <HeroDiv />
     {/* <SecondaryNav /> */}
     <Container>
       <ProfileContentContainer>
         <Content>
-          <Heading wrapperTag="h3">Something Something Company Name</Heading>
+          <Heading wrapperTag="h3">{profile.businessName}</Heading>
           <Paragraph>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus.</Paragraph>
           <Heading wrapperTag="h3" underline>Vehicles</Heading>
           <Paragraph>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecatParagraph cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus.</Paragraph>

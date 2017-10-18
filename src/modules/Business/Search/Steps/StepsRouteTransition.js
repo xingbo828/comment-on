@@ -4,7 +4,6 @@ import Transition from 'react-transition-group/Transition';
 const StepsRouteTransition = ({ timeout=300, in: inProp, children, unmountOnExit}) => {
   const defaultStyle = {
     position: 'absolute',
-    height: '100%',
     width: '100%',
     transition: `all ${timeout}ms ease-out`,
     opacity: 0,

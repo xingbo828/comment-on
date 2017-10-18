@@ -7,7 +7,8 @@ import Grid from '../../../globalComponents/Grid';
 import VehiclesInfoManagement from '../components/VehiclesInfoManagement';
 
 const renderVehiclesInfoManagement = ({ input, ...rest }) => {
-  return <VehiclesInfoManagement vehicles={input.value.toJS()} onChange={input.onChange} {...rest} />;
+  const pureValue = (input.value.toJS && input.value.toJS()) || input.value;
+  return <VehiclesInfoManagement vehicles={pureValue} onChange={input.onChange} {...rest} />;
 }
 
 

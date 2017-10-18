@@ -15,7 +15,7 @@ const Items = ({
     <Grid.Container>
       <form onSubmit={handleSubmit}>
         <h2>Items Form</h2>
-        <Button type="submit" icon="arrow-right" primary>Next</Button>
+        <Button style={{float: 'right'}} type="submit" icon="arrow-right" primary>Next</Button>
       </form>
     </Grid.Container>
   );

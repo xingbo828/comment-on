@@ -4,8 +4,8 @@ export const AddressSelectionContainer = styled.div`
   padding: 1rem 0;
 `;
 export const Label = styled.label`
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
   display: inline-block;
 `;
 
@@ -23,7 +23,7 @@ export const MapContainer = styled.div`
 
 export const MapInnerContainer = styled.div`
   width: 400px;
-  height: 350px;
+  height: 300px;
   margin: 0 auto;
   ${props=>{
     if(props.showMapPlaceHolder) {

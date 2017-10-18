@@ -20,7 +20,7 @@ const mapLinks = (links) => {
 const Settings = ({ links, children, match }) => {
   return (
     <SettingsContext>
-      <Container>
+      <Container fluid>
       <Row>
         <Col md={8} lg={8}>
           <SidebarDivWithSettingsContext match={match.isExact}>

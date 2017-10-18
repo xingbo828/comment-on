@@ -37,6 +37,7 @@ injectGlobal`
 
   body {
     font-size: 16px;
+    overflow-x: hidden;
     color: ${variables.colors.textDark};
     padding: 0;
     margin: 0;

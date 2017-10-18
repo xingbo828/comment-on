@@ -35,7 +35,8 @@ import CardStory from './Global/Card';
 import BusinessHourStory from './Mover/BusinessHour';
 import VehiclesInfoManagement from './Mover/VehiclesInfoManagement';
 import AddressSelectionStory from './Mover/AddressSelection';
-import DateTimeSelection from './Mover/DateTimeSelection'
+import DateTimeSelection from './Mover/DateTimeSelection';
+import VehicleSizeSelection from './Mover/VehicleSizeSelection';
 //-----------Mover Module End----------------//
 
 //-----------Account Module Start----------------//

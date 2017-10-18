@@ -1,3 +1,3 @@
-import BusinessProfile from './BusinessProfile';
+import BusinessProfileContainer from './BusinessProfileContainer';
 
-export default BusinessProfile;
+export default BusinessProfileContainer;
