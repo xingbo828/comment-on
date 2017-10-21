@@ -14,6 +14,8 @@ export const RadioList = styled.div`
   font-size: 1rem;
   padding: 1rem 0;
   outline: none;
+  flex-wrap: wrap;
+  flex-direction: row;
 `;
 
 

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const getBackColor = props => {
   if (props.disabled) {
-    return props.theme.borderPrimary;
+    return props.theme.colors.borderPrimary;
   } else if(props.primary) {
     return props.theme.colors.primaryAction;
   } else if(props.danger) {
@@ -118,9 +118,9 @@ export const Button = styled.button`
   position: relative;
   color: ${getForeColor};
   background-color:  ${getBackColor};
-  border-color: ${getBorderColor};  
+  border-color: ${getBorderColor};
   padding: ${props => props.small ? '5px 0' : '1rem 0;'};
-  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};  
+  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
 
   ${props=>props.theme.media.greaterThan('md')`
     width: auto;

@@ -33,6 +33,34 @@ export const loadAddresses = () => async (dispatch) => {
   });
 }
 
+// VEHICLE
+export const LOCAL_SAVE_VEHICLE = 'LOCAL_SAVE_VEHICLE';
+
+export const GET_VEHICLE = 'GET_VEHICLE';
+
+export const LOADING_VEHICLE = 'LOADING_VEHICLE';
+
+export const localSaveVehicle = (vehicle) => async (dispatch) => {
+  const stepInfo = await localforge.getItem(LOCALSTOREAGE_STEP_INFO_KEY);
+  await localforge.setItem(LOCALSTOREAGE_STEP_INFO_KEY, Object.assign(stepInfo || {}, { vehicle: omit(vehicle, ['status']) }));
+  dispatch({
+    type: LOCAL_SAVE_VEHICLE,
+    data: vehicle
+  });
+};
+
+export const loadVehicle = () => async (dispatch) => {
+  dispatch({
+    type: LOADING_VEHICLE
+  });
+  const stepInfo = await localforge.getItem(LOCALSTOREAGE_STEP_INFO_KEY);
+  const vehicle = (stepInfo && stepInfo.vehicle) ? stepInfo.vehicle : {};
+  dispatch({
+    type: GET_VEHICLE,
+    data: vehicle
+  });
+}
+
 
 // MOVING DATE TIME
 export const LOCAL_SAVE_DATE_TIME = 'LOCAL_SAVE_DATE_TIME';

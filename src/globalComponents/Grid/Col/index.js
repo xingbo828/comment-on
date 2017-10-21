@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import floor from 'lodash/floor';
 
-const calculateBasis = (ratio) => ratio ? `flex: 0 0 ${floor(ratio*100/24, 1)}%` : 'flex: 0 0 100%';
+const calculateBasis = (ratio) => ratio ? `flex: 0 0 ${ratio*100/24}%` : 'flex: 0 0 100%';
 
 const calculateOffset = (offsetRatio) => {
   if(offsetRatio) {

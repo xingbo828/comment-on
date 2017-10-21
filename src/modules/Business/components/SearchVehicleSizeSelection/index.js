@@ -1,24 +1,47 @@
 import React from 'react';
 import {Radio} from '../../../../globalComponents/Form';
 import {
-  Container,
-  ParagraphWrapper
+  GroupWrapper
 } from  './Styled';
+import Size from './Size';
 
-import { Paragraph } from '../../../../globalComponents/Typography';
 
+const SearchVehicleSizeSelection = ({ value, onChange }) => {
 
-const SearchVehicleSizeSelection = ({img, label, value, checked, onCheck}) => {
+  const sizes = [{
+    value: 'small',
+    label: 'Small',
+    img: '',
+  }, {
+    value: 'medium',
+    label: 'Medium',
+    img: ''
+  }, {
+    value: 'large',
+    label: 'Large',
+    img: ''
+  }, {
+    value: 'xLarge',
+    label: 'Extra large',
+    img: ''
+  }];
+
+  const renderSizes = (sizes) => {
+    return sizes.map(s => <Size key={s.value} label={s.label} value={s.value} />);
+  }
+
   return (
-    <Container checked={checked}>
-      <img src="http://via.placeholder.com/200x100" />
-      <ParagraphWrapper checked={checked}>
-        <Paragraph>{label}</Paragraph>
-      </ParagraphWrapper>
-      <div style={{display: 'none'}}>
-        <Radio.Radio  onCheck={onCheck} label={label} value={value} />
-      </div>
-    </Container>
+    <GroupWrapper>
+      <Radio.RadioGroup
+        childType="wild"
+        label="Select the vehicle that suits your move"
+        name="vehicle"
+        value={value}
+        onChange={onChange}
+      >
+        {renderSizes(sizes)}
+      </Radio.RadioGroup>
+    </GroupWrapper>
   );
 };
 

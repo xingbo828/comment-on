@@ -2,39 +2,27 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose, lifecycle, branch, renderNothing } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
-import AddressStep from './Address';
+import Vehicle from './Vehicle';
 import scrollToTopOnMount from '../../../Common/scrollToTopOnMount';
-
 import validators, { validateFunc } from '../../../Common/validators';
-
-import {
-  localSaveAddresses,
-  loadAddresses
-} from '../searchActions';
-
-import {
-  getAddresses
-} from '../searchReducers';
-
+import { loadVehicle, localSaveVehicle } from '../searchActions';
+import { getVehicle } from '../searchReducers';
 
 const validate = validateFunc([{
-  field: 'homeAddress',
-  validator: 'isRequired',
-  message: 'Required'
-}, {
-  field: 'destAddress',
+  field: 'vehicle',
   validator: 'isRequired',
   message: 'Required'
 }] , validators);
 
 
 const mapDispatchToProps = dispatch => ({
-  loadAddresses: () => dispatch(loadAddresses())
+  loadVehicle: () => dispatch(loadVehicle())
 });
 
 const mapStateToProps = state => ({
-  initialValues: getAddresses(state)
+  initialValues: getVehicle(state)
 });
+
 
 const isLoading = (props) => props.initialValues.get('status') !== 'LOADED';
 
@@ -43,12 +31,13 @@ const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
     componentDidMount() {
-      this.props.loadAddresses();
+      this.props.loadVehicle();
     },
     shouldComponentUpdate(nextProps) {
-      const diffHomeAddr = this.props.initialValues.get('homeAddress') !== nextProps.initialValues.get('homeAddress');
-      const diffDestAddr = this.props.initialValues.get('destAddress') !== nextProps.initialValues.get('destAddress');
-      return diffHomeAddr || diffDestAddr;
+      return (
+        this.props.initialValues.get('vehicle') !== nextProps.initialValues.get('vehicle') ||
+        this.props.initialValues.get('vehicle') === null
+      );
     }
   }),
   branch(
@@ -56,18 +45,19 @@ const enhance = compose(
     renderNothing
   ),
   reduxForm({
-    form: 'search.steps.address',
+    form: 'search.steps.vehicle',
     validate,
     onSubmit: (values, dispatch, props) => {
-      return localSaveAddresses(values.toJS())(dispatch);
+      return localSaveVehicle(values.toJS())(dispatch);
     },
     onSubmitSuccess: (result, dispatch, props) => {
+      // send user to next step
       props.history.push({
-        pathname: '/business/search/steps/vehicle'
+        pathname: '/business/search/steps/date'
       });
     }
   }),
   scrollToTopOnMount
 );
 
-export default enhance(AddressStep);
+export default enhance(Vehicle);

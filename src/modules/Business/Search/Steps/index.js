@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, withRouter, Route } from 'react-router-dom';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
 import AddressStep from './AddressContainer';
-import ItemsStep from './ItemsContainer';
+import Vehicle from './VehicleContainer';
 import DateStep from './DateContainer';
 import LogisticsStep from './LogisticsContainer';
 import SearchSteps from '../../components/SearchSteps';
@@ -15,8 +15,8 @@ const Steps = ({ location, history, match }) => {
       component: AddressStep
     },
     {
-      path: '/business/search/steps/items',
-      component: ItemsStep
+      path: '/business/search/steps/vehicle',
+      component: Vehicle
     },
     {
       path: '/business/search/steps/date',
