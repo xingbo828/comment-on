@@ -32,4 +32,6 @@ export default profile;
 
 
 // Selectors
-export const getProfile = (state) => (businessId) => state.getIn(['business', 'profile', businessId]);
+export const getProfile = (state, businessId) => ({
+  profileState: state.getIn(['business', 'profile', businessId])
+});

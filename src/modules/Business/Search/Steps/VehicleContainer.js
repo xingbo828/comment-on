@@ -1,12 +1,13 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { compose, lifecycle, branch, renderNothing } from 'recompose';
+import { compose, lifecycle, branch, renderComponent } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import Vehicle from './Vehicle';
 import scrollToTopOnMount from '../../../Common/scrollToTopOnMount';
 import validators, { validateFunc } from '../../../Common/validators';
 import { loadVehicle, localSaveVehicle } from '../searchActions';
 import { getVehicle } from '../searchReducers';
+import Spin from '../../../../globalComponents/Spin';
 
 const validate = validateFunc([{
   field: 'vehicle',
@@ -42,7 +43,7 @@ const enhance = compose(
   }),
   branch(
     isLoading,
-    renderNothing
+    renderComponent(Spin.FullScreenSpinner)
   ),
   reduxForm({
     form: 'search.steps.vehicle',

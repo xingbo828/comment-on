@@ -1,11 +1,12 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { compose, lifecycle, branch, renderNothing } from 'recompose';
+import { compose, lifecycle, branch, renderComponent } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import LogisticsStep from './Logistics';
 import message from '../../../../globalComponents/Message';
 import scrollToTopOnMount from '../../../Common/scrollToTopOnMount';
 import validators, { validateFunc } from '../../../Common/validators';
+import Spin from '../../../../globalComponents/Spin';
 
 import {
   localSaveLogistics,
@@ -54,7 +55,7 @@ const enhance = compose(
   }),
   branch(
     isLoading,
-    renderNothing
+    renderComponent(Spin.FullScreenSpinner)
   ),
   reduxForm({
     form: 'search.steps.logistics',

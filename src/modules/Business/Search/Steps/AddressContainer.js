@@ -1,9 +1,10 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { compose, lifecycle, branch, renderNothing } from 'recompose';
+import { compose, lifecycle, branch, renderComponent } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import AddressStep from './Address';
 import scrollToTopOnMount from '../../../Common/scrollToTopOnMount';
+import Spin from '../../../../globalComponents/Spin';
 
 import validators, { validateFunc } from '../../../Common/validators';
 
@@ -53,7 +54,7 @@ const enhance = compose(
   }),
   branch(
     isLoading,
-    renderNothing
+    renderComponent(Spin.FullScreenSpinner)
   ),
   reduxForm({
     form: 'search.steps.address',

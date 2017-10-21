@@ -1,3 +1,7 @@
+/*
+  TODO: Refactor business level actions into sub module actions
+*/
+
 import { auth, storage, database } from '../../firebaseClient';
 import { updateUserBusiness } from '../Account/accountAction';
 
