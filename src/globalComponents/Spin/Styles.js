@@ -12,7 +12,7 @@ export const SpinWrapper = styled.div`
   position: relative;
   z-index: ${props=>props.theme.zIndex.modal};
   top: 45%;
-  left: 50%;
+  text-align: center;
 `;
 
 export const FullScreenDrop = styled.div`
