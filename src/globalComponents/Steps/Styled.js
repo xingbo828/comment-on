@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StepsContainer = styled.ul`
   display: flex;
   padding: 0;
-  font-size: .75rem;
+  font-size: .8rem;
 `;
 
 export const StepContainer = styled.li`
@@ -29,7 +29,7 @@ export const StepContainer = styled.li`
       `;
     } else {
       return `
-        color: ${props.theme.textLight};
+        color: ${props.theme.colors.textLight};
         border-bottom-color: ${props.theme.colors.borderPrimary};
       `;
     }
