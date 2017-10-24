@@ -37,7 +37,9 @@ const mapStateToProps = state => ({
   initialValues: getAddresses(state)
 });
 
-const isLoading = (props) => props.initialValues.get('status') !== 'LOADED';
+const isLoading = (props) => {
+  return props.initialValues.get('status') !== 'LOADED';
+};
 
 const enhance = compose(
   withRouter,
@@ -49,7 +51,8 @@ const enhance = compose(
     shouldComponentUpdate(nextProps) {
       const diffHomeAddr = this.props.initialValues.get('homeAddress') !== nextProps.initialValues.get('homeAddress');
       const diffDestAddr = this.props.initialValues.get('destAddress') !== nextProps.initialValues.get('destAddress');
-      return diffHomeAddr || diffDestAddr;
+      const diffStatus = this.props.initialValues.get('status') !== nextProps.initialValues.get('status');
+      return diffHomeAddr || diffDestAddr || diffStatus;
     }
   }),
   branch(

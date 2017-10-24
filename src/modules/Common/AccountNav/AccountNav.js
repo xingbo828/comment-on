@@ -62,7 +62,7 @@ class AccountNav extends React.Component {
         <Badge count={99}>
           <Avatar src={user.photoURL} onClick={this.handleClick} />
         </Badge>
-        <DropDownTransition in={active}>
+        { active && <DropDownTransition in={active}>
           {() =>
             <Menu active={active}>
               <DisplayName>{user.displayName}</DisplayName>
@@ -73,7 +73,7 @@ class AccountNav extends React.Component {
               </MenuList>
           </Menu>
         }
-        </DropDownTransition>
+        </DropDownTransition> }
       </ContainerDiv>
     );
   }

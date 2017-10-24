@@ -13,12 +13,16 @@ export const GET_ADDRESSES = 'GET_ADDRESSES';
 export const LOADING_ADDRESSES = 'LOADING_ADDRESSES';
 
 export const localSaveAddresses = (addresses) => async (dispatch) => {
-  const stepInfo = await localforge.getItem(LOCALSTOREAGE_STEP_INFO_KEY);
-  await localforge.setItem(LOCALSTOREAGE_STEP_INFO_KEY, Object.assign(stepInfo || {}, { addresses: omit(addresses, ['status']) }));
-  dispatch({
-    type: LOCAL_SAVE_ADDRESS,
-    data: addresses
-  });
+  try{
+    const stepInfo = await localforge.getItem(LOCALSTOREAGE_STEP_INFO_KEY);
+    await localforge.setItem(LOCALSTOREAGE_STEP_INFO_KEY, Object.assign(stepInfo || {}, { addresses: omit(addresses, ['status']) }));
+    dispatch({
+      type: LOCAL_SAVE_ADDRESS,
+      data: addresses
+    });
+  } catch(error) {
+    console.error(error);
+  }
 };
 
 export const loadAddresses = () => async (dispatch) => {

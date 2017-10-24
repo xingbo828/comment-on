@@ -16,11 +16,9 @@ const Heading = ({ wrapperTag, children, underline, theme }) => {
   const Tag = Styled[wrapperTag]`
     margin: 0;
     padding: 0 0 1rem;
-    font-size: 1.5rem;
     display: inline-block;
     transform: translateY(1px);
     position: relative;
-    color: ${theme.colors.textDarkest};
 
     ${underline ? `
       ::after{

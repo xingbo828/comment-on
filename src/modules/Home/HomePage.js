@@ -1,54 +1,19 @@
 import React from 'react';
-import { AddressAutoComplete } from '../../globalComponents/Form';
-import { Field } from 'redux-form/immutable';
 import {
-    Container,
-    Banner,
-    SearchWrapper,
-    SearchWrapperWithRadius,
-    SearchButton,
-    Form
+    Banner
   } from './Styled';
-
-const renderMoveAddress = ({ input, label, ...rest, placeholder }) =>
-  <AddressAutoComplete
-    onSelect={input.onChange}
-    placeholder={placeholder}
-    label={label}
-    {...rest}
-  />;
+import AddressSearchBar from './components/AddressSearchBar';
+import Grid from '../../globalComponents/Grid';
+import { Heading } from '../../globalComponents/Typography';
 
 
-const HomePage = ({
-  handleSubmit,
-  pristine,
-  reset,
-  valid,
-  submitting
-}) => (
-  <Container>
+const HomePage = () => (
+  <Grid.Container fluid>
     <Banner>
-      <Form onSubmit={handleSubmit}>
-      <SearchWrapperWithRadius>
-        <Field
-          component={renderMoveAddress}
-          name="moveFrom"
-          placeholder="current address"
-          label="from"
-        />
-      </SearchWrapperWithRadius>
-      <SearchWrapper>
-        <Field
-          component={renderMoveAddress}
-          placeholder="destination address"
-          name="moveTo"
-          label="to"
-        />
-      </SearchWrapper>
-      <SearchButton primary disabled={pristine || submitting || !valid}>Search</SearchButton>
-      </Form>
+      <Heading wrapperTag="h1">Your move. Made easy</Heading>
     </Banner>
-  </Container>
+    <AddressSearchBar />
+  </Grid.Container>
   );
 
 
