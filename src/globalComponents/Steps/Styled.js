@@ -11,7 +11,7 @@ export const StepContainer = styled.li`
   list-style: none;
   text-align: center;
   padding-bottom: 10px;
-  border-bottom-width: 2px;
+  border-bottom-width: 1px;
   border-bottom-style: solid;
   text-transform: uppercase;
   font-weight: ${props=> props.theme.fontWeights.medium};
