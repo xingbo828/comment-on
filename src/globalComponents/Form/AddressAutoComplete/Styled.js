@@ -75,7 +75,7 @@ export const GeosuggestStyled = styled(Geosuggest)`
 
   .geosuggest__item {
     font-size: 18px;
-    font-size: 1rem;
+    font-size: .9rem;
     padding: 1rem .5rem;
     cursor: pointer;
   }
