@@ -14,6 +14,7 @@ export const StepContainer = styled.li`
   border-bottom-width: 2px;
   border-bottom-style: solid;
   text-transform: uppercase;
+  font-weight: ${props=> props.theme.fontWeights.medium};
   ${props => {
     if (props.status === 'completed') {
       return `
@@ -23,7 +24,7 @@ export const StepContainer = styled.li`
       `;
     } else if (props.status === 'inProgress') {
       return `
-        color: ${props.theme.secondaryAction};
+        color: ${props.theme.colors.secondaryAction};
         border-bottom-color: ${props.theme.colors.secondaryAction};
       `;
     } else {

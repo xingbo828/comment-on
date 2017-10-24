@@ -1,6 +1,6 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { compose } from 'recompose';
+import { compose, withProps } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import AddressSearchBar from './AddressSearchBar';
 import validators, { validateFunc } from '../../../Common/validators';
@@ -19,16 +19,15 @@ const validate = validateFunc([{
 }] , validators);
 
 
-// const mapDispatchToProps = dispatch => ({
-//   loadVehicle: () => dispatch(loadVehicle())
-// });
-
-
-
-
 const enhance = compose(
   withRouter,
-  // connect(null, mapDispatchToProps),
+  withProps(props => ({
+    navToSearch: () => {
+      props.history.push({
+        pathname: '/business/search/steps/address'
+      });
+    }
+  })),
   reduxForm({
     form: 'homepage',
     validate,

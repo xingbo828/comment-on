@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const AddressSearchBarContainer = styled.div`
-  ${props=>props.theme.media.greaterThan('lg')`
+  ${props=>props.theme.media.greaterThan('md')`
     margin: 0 auto;
     width: 900px;
     height: 100px;
@@ -10,9 +10,24 @@ export const AddressSearchBarContainer = styled.div`
     box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.07);
     margin-top: -50px;
   `}
+  margin-top: 1rem;
+`;
+
+export const Form = styled.form`
+  ${props=>props.theme.media.lessThan('md')`
+    display: none;
+  `}
 `;
 
 
 export const InputWrapper = styled.div`
   line-height: 100px;
+  padding: 0;
+`;
+
+export const MobileCtaWrapper = styled.div`
+  padding: 0 1rem;
+  ${props=>props.theme.media.greaterThan('md')`
+    display: none;
+  `}
 `;

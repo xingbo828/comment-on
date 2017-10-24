@@ -5,7 +5,9 @@ import Grid from '../../../../globalComponents/Grid';
 
 import {
   AddressSearchBarContainer,
-  InputWrapper
+  InputWrapper,
+  Form,
+  MobileCtaWrapper
 } from './Styles';
 
 const renderMoveAddress = ({ input, label, ...rest, placeholder }) =>
@@ -25,27 +27,28 @@ const AddressSearchBar = ({
   pristine,
   reset,
   valid,
-  submitting
+  submitting,
+  navToSearch
 }) => {
   return (
     <AddressSearchBarContainer>
-      <form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <Row>
-          <Col xs={24} mdOffset={1} lgOffset={1} sm={24} md={9} lg={9}>
+          <Col xs={24} lgOffset={1} sm={24} md={24} lg={9}>
             <Field
               component={renderMoveAddress}
               name="homeAddress"
               placeholder="Start address"
             />
           </Col>
-          <Col xs={24} sm={24} md={8} lg={8}>
+          <Col xs={24} sm={24} md={24} lg={8}>
             <Field
               component={renderMoveAddress}
               placeholder="Destination address"
               name="destAddress"
             />
           </Col>
-          <Col xs={24} sm={24} md={6} lg={6}>
+          <Col xs={24} sm={24} md={24} lg={6}>
           <InputWrapper>
             <Button primary icon="arrow-right" disabled={pristine || submitting || !valid}>
               Get Started
@@ -53,7 +56,12 @@ const AddressSearchBar = ({
           </InputWrapper>
           </Col>
         </Row>
-      </form>
+      </Form>
+      <MobileCtaWrapper>
+        <Button primary icon="arrow-right" onClick={navToSearch}>
+          Get Started
+        </Button>
+      </MobileCtaWrapper>
     </AddressSearchBarContainer>
   );
 };
