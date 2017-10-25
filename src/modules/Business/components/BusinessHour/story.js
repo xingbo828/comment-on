@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, text, boolean, number } from '@storybook/addon-knobs';
-import BusinessHour from '../../modules/Business/components/BusinessHour';
+import BusinessHour from './';
 
 
 

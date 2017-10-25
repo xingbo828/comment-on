@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, text, boolean, number } from '@storybook/addon-knobs';
-import Login from '../../modules/Account/Login/Login';
+import Login from './Login';
 
 const account = {
   status: 'NOT_AUTHENTICATED'
