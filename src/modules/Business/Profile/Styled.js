@@ -20,6 +20,10 @@ const ProfileContentContainer = Styled.div`
   `}
 `;
 
+const CommentContainer = Styled.div`
+  margin: 2rem 0;
+`;
+
 const Content = Styled.div`
   flex: 1 100%;
   order: 2;
@@ -28,7 +32,6 @@ const Content = Styled.div`
     order: 1;
     flex: 8;
     margin-right: 2.75%;
-    margin: 3rem 0;
   `}
 `;
 
@@ -63,5 +66,6 @@ export {
   HeroDiv,
   ProfileContentContainer,
   Content,
-  Aside
+  Aside,
+  CommentContainer  
 }

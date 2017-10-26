@@ -3,10 +3,10 @@ import Styled from 'styled-components';
 import { withTheme } from 'styled-components';
 
 
-const Heading = ({ wrapperTag, children, underline, theme }) => {
+const Heading = ({ wrapperTag, children, underline, theme, size }) => {
 
   const HeadingContainer = Styled.div`
-    margin: 2rem 0 1rem;
+    margin: 3rem 0 1rem;
 
     ${underline ? `
       // border-bottom: solid 1px #d3d3d3;

@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const RateIconList = styled.ul`
-  padding: 5px 0;
+  padding: 0;
+  margin: 0;
   display: flex;
 `;
 
