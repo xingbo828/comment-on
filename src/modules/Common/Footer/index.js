@@ -15,24 +15,27 @@ const FooterNav = (props) => {
     <Footer>
       <Container>
         <Row>
-          <Col xs={24} sm={24} md={8} lg={8}>
-            <Heading wrapperTag="h4" size="xs">Test</Heading>
+          <Col xs={24} sm={24} md={6} lg={6}>
+            <Heading wrapperTag="h4" size="xs">Comment On</Heading>
+          </Col>
+          <Col xs={24} sm={24} md={6} lg={6}>
+            <Heading wrapperTag="h4" size="xs">About</Heading>
             <List>
               <ListItem>One</ListItem>
               <ListItem>Two</ListItem>
               <ListItem>Three</ListItem>
             </List>
           </Col>
-          <Col xs={24} sm={24} md={8} lg={8}>
-          <Heading wrapperTag="h4" size="xs">Test</Heading>
+          <Col xs={24} sm={24} md={6} lg={6}>
+          <Heading wrapperTag="h4" size="xs">Support</Heading>
             <List>
               <ListItem>One</ListItem>
               <ListItem>Two</ListItem>
               <ListItem>Three</ListItem>
             </List>
           </Col>
-          <Col xs={24} sm={24} md={8} lg={8}>
-          <Heading wrapperTag="h4" size="xs">Test</Heading>
+          <Col xs={24} sm={24} md={6} lg={6}>
+          <Heading wrapperTag="h4" size="xs">Terms &amp; services</Heading>
             <List>
               <ListItem>One</ListItem>
               <ListItem>Two</ListItem>
