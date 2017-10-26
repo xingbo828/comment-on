@@ -11,6 +11,7 @@ class AddressAutoComplete extends Component {
     this.handleFocus = this.handleFocus.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
+    this.mapSuggestDescription = this.mapSuggestDescription.bind(this);
   }
 
   handleFocus(event) {
@@ -32,6 +33,10 @@ class AddressAutoComplete extends Component {
     }
   }
 
+  mapSuggestDescription(suggest) {
+    return suggest.description.replace(', Canada', '');
+  }
+
   render() {
     const { initialValue, onSelect, placeholder } = this.props;
     return (
@@ -45,6 +50,7 @@ class AddressAutoComplete extends Component {
           onSuggestSelect={onSelect}
           onChange={this.handleOnChange}
           initialValue={initialValue}
+          getSuggestLabel={this.mapSuggestDescription}
         />
         <FocusBorder focused={this.state.focused}/>
       </Label>

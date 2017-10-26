@@ -4,7 +4,6 @@ import { compose, lifecycle, branch, renderComponent } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import AddressStep from './Address';
 import scrollToTopOnMount from '../../../Common/scrollToTopOnMount';
-import Spin from '../../../../globalComponents/Spin';
 
 import validators, { validateFunc } from '../../../Common/validators';
 
@@ -37,7 +36,6 @@ const mapStateToProps = state => ({
   initialValues: getAddresses(state)
 });
 
-const isLoading = (props) => props.initialValues.get('status') !== 'LOADED';
 
 const enhance = compose(
   withRouter,
@@ -49,13 +47,10 @@ const enhance = compose(
     shouldComponentUpdate(nextProps) {
       const diffHomeAddr = this.props.initialValues.get('homeAddress') !== nextProps.initialValues.get('homeAddress');
       const diffDestAddr = this.props.initialValues.get('destAddress') !== nextProps.initialValues.get('destAddress');
+      const diffStatus = this.props.initialValues.get('status') !== nextProps.initialValues.get('status');
       return diffHomeAddr || diffDestAddr;
     }
   }),
-  branch(
-    isLoading,
-    renderComponent(Spin.FullScreenSpinner)
-  ),
   reduxForm({
     form: 'search.steps.address',
     validate,

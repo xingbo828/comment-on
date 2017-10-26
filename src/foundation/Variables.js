@@ -18,6 +18,7 @@ const colors = {
 
 const zIndex = {
   negative: -1,
+  spinner: 500,
   dropdownBackdrop: 900,
   dropdown: 1000,
   navigation: 1000,

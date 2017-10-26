@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StepsContainer = styled.ul`
   display: flex;
   padding: 0;
-  font-size: .75rem;
+  font-size: .8rem;
 `;
 
 export const StepContainer = styled.li`
@@ -11,9 +11,10 @@ export const StepContainer = styled.li`
   list-style: none;
   text-align: center;
   padding-bottom: 10px;
-  border-bottom-width: 2px;
+  border-bottom-width: 1px;
   border-bottom-style: solid;
   text-transform: uppercase;
+  font-weight: ${props=> props.theme.fontWeights.medium};
   ${props => {
     if (props.status === 'completed') {
       return `
@@ -23,12 +24,12 @@ export const StepContainer = styled.li`
       `;
     } else if (props.status === 'inProgress') {
       return `
-        color: ${props.theme.secondaryAction};
+        color: ${props.theme.colors.secondaryAction};
         border-bottom-color: ${props.theme.colors.secondaryAction};
       `;
     } else {
       return `
-        color: ${props.theme.textLight};
+        color: ${props.theme.colors.textLight};
         border-bottom-color: ${props.theme.colors.borderPrimary};
       `;
     }

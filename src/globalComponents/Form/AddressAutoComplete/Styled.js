@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import Geosuggest from 'react-geosuggest';
 
 export const Label = styled.label`
-  
+  display: inline-block;
+  width: 100%;
 `;
 
 export const FocusBorder = styled.div`
@@ -25,7 +26,9 @@ ${props => {
 export const GeosuggestStyled = styled(Geosuggest)`
   position: relative;
   padding-left: 30px;
-  ::before {
+  line-height: 40px;
+
+  &::before {
     font-family: 'FontAwesome';
     content: '\f041';
     font-size: 1.2rem;
@@ -34,6 +37,7 @@ export const GeosuggestStyled = styled(Geosuggest)`
     left: 10px;
     line-height: 40px;
   }
+
   text-align: left;
   .geosuggest__input {
     outline: none;
@@ -43,6 +47,8 @@ export const GeosuggestStyled = styled(Geosuggest)`
     padding: .5rem;
     border: 0;
     color: ${props => props.theme.colors.textDark};
+
+
   }
 
   .geosuggest__input:focus {
@@ -69,7 +75,7 @@ export const GeosuggestStyled = styled(Geosuggest)`
 
   .geosuggest__item {
     font-size: 18px;
-    font-size: 1rem;
+    font-size: .9rem;
     padding: 1rem .5rem;
     cursor: pointer;
   }

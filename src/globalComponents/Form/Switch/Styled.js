@@ -65,7 +65,7 @@ export const SwitchContainer = styled.span`
   ::after {
     position: absolute;
     border-radius: 18px;
-    background-color: ${props=>props.theme.offWhite};
+    background-color: ${props=>props.theme.colors.offWhite};
     content: " ";
     cursor: pointer;
     transition: all .3s cubic-bezier(.78,.14,.15,.86);

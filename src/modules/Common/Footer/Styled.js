@@ -1,7 +1,7 @@
 import Styled from 'styled-components';
 
 const Footer = Styled.footer`
-  background: ${props => props.theme.colors.offWhite};
+  border-top: 1px solid ${props => props.theme.colors.borderPrimary};
 `;
 
 
@@ -10,8 +10,22 @@ const OrgContainer = Styled.div`
   line-height: 200px;
 `;
 
+const List = Styled.ul`
+  padding: 0;
+  line-height: 1.5;
+  list-style-type: none;
+`;
+
+const ListItem = Styled.li`
+  text-decoration: none;
+  color: ${props => props.theme.colors.textLight};
+`;
+
+
 
 export {
   Footer,
-  OrgContainer
+  OrgContainer,
+  List,
+  ListItem
 }
