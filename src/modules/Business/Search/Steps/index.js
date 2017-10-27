@@ -33,7 +33,7 @@ const Steps = ({ location, history, match }) => {
     <div>
       <SearchSteps current={getCurrentStep(history)} history={history} />
       <TransitionGroup>
-        <StepsRouteTransition key={location.key} unmountOnExit={true}>
+        <StepsRouteTransition key={location.key}>
           {() => <Switch location={location}>
               {
                 paths.map(p =>

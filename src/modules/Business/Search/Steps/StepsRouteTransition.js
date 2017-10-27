@@ -1,27 +1,29 @@
 import React from 'react';
-import Transition from 'react-transition-group/Transition';
+import Transition, {
+  ENTERING,
+  ENTERED,
+  EXITING,
+  EXITED
+} from 'react-transition-group/Transition';
 
-const StepsRouteTransition = ({ timeout=300, in: inProp, children, unmountOnExit}) => {
+const StepsRouteTransition = ({ timeout=250, in: inProp, children}) => {
   const defaultStyle = {
-    position: 'absolute',
-    width: '100%',
     transition: `all ${timeout}ms ease-out`,
-    opacity: 0,
-    transform: `translateX(50px)`
+    opacity: 0
   }
 
   const transitionStyles = {
-    entered:  {
+    [ENTERING]: {
+      opacity: 0,
+      transform: `translateX(30px)`
+    },
+    [ENTERED]:  {
       opacity: 1,
       transform: `translateX(0)`
-    },
-    exiting: {
-      opacity: 0,
-      transform: `translateX(-50px)`
     }
   };
 
-  return (<Transition in={inProp} timeout={timeout} unmountOnExit>
+  return (<Transition in={inProp} unmountOnExit exit={false} timeout={timeout}>
     {(state) => {
       return (
       <div className={state} style={{
