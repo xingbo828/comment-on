@@ -1,4 +1,6 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { compose, renderNothing, branch } from 'recompose';
 import {
   Footer,
   OrgContainer,
@@ -50,4 +52,10 @@ const FooterNav = (props) => {
   )
 };
 
-export default FooterNav;
+export default compose(
+  withRouter,
+  branch(
+    props => props.location.pathname === '/login',
+    renderNothing
+  )
+)(FooterNav);
