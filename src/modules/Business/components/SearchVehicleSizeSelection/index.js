@@ -4,30 +4,33 @@ import {
   GroupWrapper
 } from  './Styled';
 import Size from './Size';
-
+import pickUpTruck from './imgs/pickup-truck.png';
+import van from './imgs/van.png';
+import feet16 from './imgs/16-feet-truck.png';
+import semiTruck from './imgs/semi-truck.png';
 
 const SearchVehicleSizeSelection = ({ value, onChange }) => {
 
   const sizes = [{
-    value: 'small',
-    label: 'Small',
-    img: '',
+    value: 'pickUpTruck',
+    label: 'Pickup Truck',
+    img: pickUpTruck,
   }, {
-    value: 'medium',
-    label: 'Medium',
-    img: ''
+    value: 'van',
+    label: 'Van',
+    img: van
   }, {
-    value: 'large',
-    label: 'Large',
-    img: ''
+    value: '16-ft',
+    label: '16. ft',
+    img: feet16
   }, {
-    value: 'xLarge',
-    label: 'Extra large',
-    img: ''
+    value: 'semi',
+    label: 'Semi',
+    img: semiTruck
   }];
 
   const renderSizes = (sizes) => {
-    return sizes.map(s => <Size key={s.value} label={s.label} value={s.value} />);
+    return sizes.map(s => <Size key={s.value} img={s.img} label={s.label} value={s.value} />);
   }
 
   return (

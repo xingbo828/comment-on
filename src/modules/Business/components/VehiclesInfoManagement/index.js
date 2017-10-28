@@ -10,6 +10,12 @@ import {
   VehOptionContainer,
   ParaWrapper
 } from './Styled';
+import pickUpTruck from './imgs/pickup-truck.png';
+import van from './imgs/van.png';
+import feet16 from './imgs/16-feet-truck.png';
+import semiTruck from './imgs/semi-truck.png';
+
+
 const { Row, Col } = Grid;
 
 class VehiclesInfoManagement extends Component {
@@ -38,7 +44,7 @@ class VehiclesInfoManagement extends Component {
             <Col xs={24} sm={24} md={9} lg={9}>
               <ImgWrapperOutter>
                 <ImgWrapperInner>
-                  <img src="http://via.placeholder.com/300x200" />
+                  <img src={pickUpTruck} alt="Pick Up Truck" />
                 </ImgWrapperInner>
               </ImgWrapperOutter>
             </Col>
@@ -65,7 +71,7 @@ class VehiclesInfoManagement extends Component {
             <Col xs={24} sm={24} md={9} lg={9}>
               <ImgWrapperOutter>
                 <ImgWrapperInner>
-                  <img src="http://via.placeholder.com/300x200" />
+                  <img src={van} alt="Van" />
                 </ImgWrapperInner>
               </ImgWrapperOutter>
             </Col>
@@ -92,7 +98,7 @@ class VehiclesInfoManagement extends Component {
             <Col xs={24} sm={24} md={9} lg={9}>
               <ImgWrapperOutter>
                 <ImgWrapperInner>
-                  <img src="http://via.placeholder.com/300x200" />
+                  <img src={feet16} alt="16 feet truck" />
                 </ImgWrapperInner>
               </ImgWrapperOutter>
             </Col>
@@ -119,7 +125,7 @@ class VehiclesInfoManagement extends Component {
             <Col xs={24} sm={24} md={9} lg={9}>
               <ImgWrapperOutter>
                 <ImgWrapperInner>
-                  <img src="http://via.placeholder.com/300x200" />
+                  <img src={semiTruck} alt="Semi truck" />
                 </ImgWrapperInner>
               </ImgWrapperOutter>
             </Col>

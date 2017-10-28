@@ -58,6 +58,7 @@ export const Container = styled.label`
   padding: 1rem;
   border-radius: 3px;
   border: 1px solid;
+  height: 200px;
   border-color: ${props=>props.theme.colors.textLight};
   text-align: center;
   ${props=>{
