@@ -9,21 +9,6 @@ const businessDbRef = database.ref().child('businesses');
 const imgStorageRef = storage.ref();
 
 
-export const SEARCH_BUSINESS = 'SEARCH_BUSINESS';
-
-export const searchBusiness = (origin, destination, dateTime) => (dispatch) => {
-  const API = `https://us-central1-comment-on-85597.cloudfunctions.net/business?origin=${origin}&destination=${destination}`;
-  return fetch(API)
-  .then(res => res.json())
-  .then((business) => {
-    return dispatch({
-      type: SEARCH_BUSINESS,
-      data: business
-    });
-  });
-}
-
-
 // export const UPDATE_BUSINESS_PROFILE = 'UPDATE_BUSINESS_PROFILE';
 
 export const addBusiness = (businessInfo) => (dispatch) => {

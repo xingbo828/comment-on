@@ -5,6 +5,17 @@ import moment from 'moment';
 export const LOCALSTOREAGE_STEP_INFO_KEY = 'steps-info';
 
 
+export const getLocalStorageStepInfo = async () => {
+  const stepInfo = await localforge.getItem(LOCALSTOREAGE_STEP_INFO_KEY);
+
+  return {
+    origin: stepInfo.addresses.homeAddress,
+    destination: stepInfo.addresses.destAddress,
+    dateTime: stepInfo.dateTime,
+    vehicle: stepInfo.vehicle.vehicle
+  };
+};
+
 // ADDRESS
 export const LOCAL_SAVE_ADDRESS = 'LOCAL_SAVE_ADDRESS';
 
@@ -121,6 +132,24 @@ export const loadLogistics = () => async (dispatch) => {
   dispatch({
     type: GET_LOGISTICS,
     data: logistics
+  });
+}
+
+
+
+// Search result
+export const GET_SEARCH_RESULT = 'GET_SEARCH_RESULT';
+export const SEARCH_BUSINESS = 'SEARCH_BUSINESS';
+
+export const searchBusiness = ({origin, destination, dateTime, vehicle}) => async (dispatch) => {
+  dispatch({
+    type: SEARCH_BUSINESS
+  });
+  const API = `https://us-central1-comment-on-85597.cloudfunctions.net/business?origin=${origin}&destination=${destination}&dateTime=${dateTime}&vehicle=${vehicle}`;
+  const searchResult = await fetch(API).then(res => res.json());
+  return dispatch({
+    type: GET_SEARCH_RESULT,
+    data: searchResult
   });
 }
 

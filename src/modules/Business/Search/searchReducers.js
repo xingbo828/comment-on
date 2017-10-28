@@ -12,7 +12,9 @@ import {
   LOADING_DATE_TIME,
   LOADING_LOGISTICS,
   LOCAL_SAVE_LOGISTICS,
-  GET_LOGISTICS
+  GET_LOGISTICS,
+  GET_SEARCH_RESULT,
+  SEARCH_BUSINESS
 } from './searchActions';
 
 
@@ -152,11 +154,40 @@ const searchLogisticsStep = (state = initLogisticsState, action) => {
 };
 
 
+
+// Search Results
+const initResultState = Immutable.fromJS({
+  result: [],
+  status: 'UNINIT'
+});
+
+const searchResult = (state = initResultState, action) => {
+  switch (action.type) {
+    case GET_SEARCH_RESULT: {
+      return state.withMutations((st) => {
+        st.set('result', Immutable.fromJS(action.data));
+        st.set('status', 'LOADED');
+      });
+    }
+
+    case SEARCH_BUSINESS: {
+      return state.withMutations((st) => {
+        st.set('status', 'PENDING');
+      });
+    }
+
+    default:
+      return state;
+  }
+};
+
+
 export default combineReducers({
   addressesStep: searchAddressesStep,
   vehicleStep: searchVehicleStep,
   dateTimeStep: searchDateTimeStep,
-  logisticsStep: searchLogisticsStep
+  logisticsStep: searchLogisticsStep,
+  searchResult: searchResult
 });
 
 
@@ -165,3 +196,4 @@ export const getAddresses = (state) => state.getIn(['business', 'search', 'addre
 export const getVehicle = (state) => state.getIn(['business', 'search', 'vehicleStep']);
 export const getDateTime = (state) => state.getIn(['business', 'search', 'dateTimeStep']);
 export const getLogistics = (state) => state.getIn(['business', 'search', 'logisticsStep']);
+export const getSearchResult = (state) => state.getIn(['business', 'search', 'searchResult']);

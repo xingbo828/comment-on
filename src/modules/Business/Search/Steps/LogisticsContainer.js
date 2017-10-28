@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import { compose, lifecycle, branch, renderComponent } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import LogisticsStep from './Logistics';
-import message from '../../../../globalComponents/Message';
 import scrollToTopOnMount from '../../../Common/scrollToTopOnMount';
 import validators, { validateFunc } from '../../../Common/validators';
 import Spin from '../../../../globalComponents/Spin';
 
 import {
   localSaveLogistics,
-  loadLogistics
+  loadLogistics,
+  getLocalStorageStepInfo
 } from '../searchActions';
 
 import {
@@ -62,10 +62,18 @@ const enhance = compose(
     validate,
     onSubmit: (values, dispatch, props) => {
       return localSaveLogistics(values.toJS())(dispatch);
-      // handle submit
     },
-    onSubmitSuccess: (result, dispatch, props) => {
-      message.loading('Looking for movers...');
+    onSubmitSuccess: async (result, dispatch, props) => {
+      const {
+        origin,
+        destination,
+        dateTime,
+        vehicle
+      } = await getLocalStorageStepInfo();
+      props.history.push({
+        pathname: '/business/search/result',
+        search:`?origin=${origin}&destination=${destination}&dateTime=${dateTime}&vehicle=${vehicle}`
+      });
     }
   }),
   scrollToTopOnMount
