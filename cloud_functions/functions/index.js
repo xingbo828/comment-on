@@ -51,6 +51,13 @@ const filterByDestination = (destinationCity) => (business) => {
     return business.businessServiceArea[destinationCity]
 };
 
+const filterByVehicle = (vehicle) => (business) => {
+    if (!vehicle) {
+        return true;
+    }
+    return business.vehiclesInfo[vehicle] !== 0;
+}
+
 const filterByDateTime = (dateTime) => (business) => {
     if (!dateTime) {
         return true;
@@ -67,6 +74,7 @@ const business = ((request, response) => {
     const origin = request.query.origin;
     const destination = request.query.destination;
     const dateTime = request.query.dateTime;
+    const vehicle = request.query.vehicle;
 
     let destinationCity;
 
@@ -97,11 +105,12 @@ const business = ((request, response) => {
                     result.id = businessId;
                     return result;
                 });
-            if (destinationCity || dateTime) {
+            if (destinationCity || dateTime || vehicle) {
                 const cityFilter = filterByDestination(destinationCity);
                 const dateFilter = filterByDateTime(dateTime);
+                const vehicleFilter = filterByVehicle(vehicle);
                 businesses = businesses.filter((business) => {
-                    return cityFilter(business) && dateFilter(business);
+                    return cityFilter(business) && dateFilter(business) && vehicleFilter(business);
                 });
             }
 
