@@ -97,7 +97,7 @@ const business = ((request, response) => {
         .then((value) => {
             const businessData = value.val();
             if (!businessData) {
-                return response.status(404).json([]);
+                return response.json([]);
             }
             let businesses = Object.keys(businessData)
                 .map((businessId) => {
