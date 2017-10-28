@@ -16,18 +16,6 @@ const validate = validateFunc([{
   validator: 'isRequired',
   message: 'Required'
 }, {
-  field: 'businessAddrCity',
-  validator: 'isRequired',
-  message: 'Required'
-}, {
-  field: 'businessAddrProv',
-  validator: 'isRequired',
-  message: 'Required'
-}, {
-  field: 'businessAddrPostalCode',
-  validator: 'isRequired',
-  message: 'Required'
-}, {
   field: 'businessPhoneNumber',
   validator: 'isValidPhoneNumber',
   message: 'Invalid phone number'

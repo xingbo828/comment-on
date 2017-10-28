@@ -55,6 +55,7 @@ export const GeosuggestStyled = styled(Geosuggest)`
   }
 
   .geosuggest__suggests {
+    z-index: ${props => props.theme.zIndex.dropdown};
     position: absolute;
     top: 100%;
     left: -1px;
