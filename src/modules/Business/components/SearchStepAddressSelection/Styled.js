@@ -11,7 +11,10 @@ export const Label = styled.label`
 
 export const AddressSelectionInner = styled.div`
   border: 1px solid ${props=>props.theme.borderPrimary};
-  padding: 1rem;
+  padding: ${props=>props.theme.spaces.base};
+  ${props=>props.theme.media.greaterThan('md')`
+    padding: ${props=>props.theme.spaces.wide};
+  `}
 `;
 
 
