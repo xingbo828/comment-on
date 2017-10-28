@@ -43,11 +43,12 @@ export const DateTimeContainer = styled.div`
   border: 1px solid ${props => props.theme.colors.borderPrimary};
   border-top-width: 0;
   height: 310px;
-  z-index: 999;
+  z-index: ${props=>props.theme.zIndex.dropdown};
 `;
 
 export const CalendarContainer = styled.div`
   position: absolute;
+  z-index: ${props=>props.theme.zIndex.dropdown};
   top: 0;
   left:0;
   right:0;
