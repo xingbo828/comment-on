@@ -14,12 +14,12 @@ exports.fetch = (url) => {
       const $element = $(element);
       const $info = $element.find('.sponsor_info');
       result.businessName = $info.find('a[itemprop="name"] *').html();
-      result.businessAddr1 = $info.find('span[itemprop="streetAddress"]').text();
-      result.businessAddrCity = $info.find('span[itemprop="addressLocality"]').text();
+      // result.businessAddr1 = $info.find('span[itemprop="streetAddress"]').text();
+      // result.businessAddrCity = $info.find('span[itemprop="addressLocality"]').text();
       result.businessPhoneNumber = $info.find('span[itemprop="phone"]').text();
       result.logo = $element.find('.sponsor_img img').prop('src');
       result.businessImgs = [result.logo];
-      result.businessAddrProv = 'British Columbia';
+      // result.businessAddrProv = 'British Columbia';
       result.businessDescription = result.businessName;
       data.push(result);
     });
