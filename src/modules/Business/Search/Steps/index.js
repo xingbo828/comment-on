@@ -8,6 +8,7 @@ import LogisticsStep from './LogisticsContainer';
 import SearchSteps from '../../components/SearchSteps';
 import StepsRouteTransition from './StepsRouteTransition';
 
+
 const Steps = ({ location, history, match }) => {
   const paths = [
     {

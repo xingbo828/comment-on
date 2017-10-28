@@ -58,7 +58,18 @@ export const Container = styled.label`
   padding: 1rem;
   border-radius: 3px;
   border: 1px solid;
-  height: 200px;
+  ${props=>props.theme.media.lessThan('xs')`
+    height: 220px;
+  `}
+  ${props=>props.theme.media.between('xs', 'md')`
+    height: 250px;
+  `}
+  ${props=>props.theme.media.between('md', 'lg')`
+    height: 310px;
+  `}
+  ${props=>props.theme.media.greaterThan('lg')`
+    height: 200px;
+  `}
   border-color: ${props=>props.theme.colors.textLight};
   text-align: center;
   ${props=>{

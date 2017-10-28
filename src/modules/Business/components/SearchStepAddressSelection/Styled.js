@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const AddressSelectionContainer = styled.div`
-  padding: 1rem 0;
+  padding-bottom: ${props=>props.theme.spaces.base};
 `;
 export const Label = styled.label`
   font-size: 1.2rem;
@@ -11,18 +11,17 @@ export const Label = styled.label`
 
 export const AddressSelectionInner = styled.div`
   border: 1px solid ${props=>props.theme.borderPrimary};
-  display: flex;
   padding: 1rem;
 `;
 
 
 export const MapContainer = styled.div`
-  flex: 1;
   text-align: center;
 `;
 
 export const MapInnerContainer = styled.div`
-  width: 400px;
+  width: 100%;
+  max-width: 500px;
   height: 300px;
   margin: 0 auto;
   ${props=>{
@@ -36,5 +35,4 @@ export const MapInnerContainer = styled.div`
 
 export const InputContainer = styled.div`
   visibility: ${props=>props.isLoading ? 'hidden': 'visible'};
-  flex: 1;
 `;
