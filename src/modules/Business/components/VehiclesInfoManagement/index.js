@@ -23,11 +23,10 @@ class VehiclesInfoManagement extends Component {
   }
 
   handleOnChange = type => value => {
-    const newVehiclesState = Object.assign({}, this.state.vehicles, {
-      [type]: value
-    });
-
-    this.props.onChange(newVehiclesState);
+    const newVehiclesState = Object.assign({}, this.state);
+    newVehiclesState.vehicles[type] = value;
+    this.setState(newVehiclesState);
+    this.props.onChange(newVehiclesState.vehicles);
   };
 
   render() {
