@@ -1,12 +1,13 @@
 import React from 'react';
+import SearchResult from '../../components/SearchResult';
 
-const SearchResult = (props) => {
+const {Table} = SearchResult;
+
+const Result = (props) => {
   console.log(props);
     return (
-      <div>
-        test
-      </div>
+      <Table searchResult={props.result} />
     );
 }
 
-export default SearchResult;
+export default Result;
