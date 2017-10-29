@@ -31,6 +31,7 @@ class AddressSelection extends Component {
 
   componentWillReceiveProps(nextProps) {
     if(nextProps.placeId !== this.props.placeId) {
+      console.log(nextProps.placeId);
       this.updateAddress(nextProps.placeId);
     }
   }
