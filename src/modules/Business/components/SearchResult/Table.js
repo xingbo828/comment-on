@@ -20,6 +20,7 @@ const SearchResultTable = ({searchResult, onItemClick, history}) => {
   };
   const listings = searchResult.map((item) =>
     <SearchResultItem
+      key={item.id}
       price={249}
       name={item.businessName}
       id={item.id}

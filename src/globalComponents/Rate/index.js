@@ -105,10 +105,10 @@ class Rate extends Component {
 
 Rate.propTypes = {
   value: number,
-  size: string,
+  icon: string,
   /** Size of the icons: sm or lg */
-  icon: oneOf(['sm', 'lg']),
-  onChange: func.isRequired,
+  size: oneOf(['sm', 'lg']),
+  onChange: func,
   readOnly: bool
 };
 
