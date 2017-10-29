@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 
 export const DateTimeSelectionContainer = styled.div`
-  padding: 1rem 0;
+  padding-bottom: ${props=>props.theme.spaces.base};
 `;
 
 export const Label = styled.label`
   font-size: 1.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: ${props=>props.theme.spaces.base};
   display: inline-block;
+  font-weight: ${props=>props.theme.fontWeights.medium};
 `;
 
 export const DateTimeSelectionInner = styled.div`

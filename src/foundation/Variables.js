@@ -15,7 +15,6 @@ const colors = {
   borderPrimary: '#d3d3d3'
 }
 
-
 const zIndex = {
   negative: -1,
   spinner: 500,

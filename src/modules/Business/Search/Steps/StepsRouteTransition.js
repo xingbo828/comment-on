@@ -9,7 +9,8 @@ import Transition, {
 const StepsRouteTransition = ({ timeout=250, in: inProp, children}) => {
   const defaultStyle = {
     transition: `all ${timeout}ms ease-out`,
-    opacity: 0
+    opacity: 0,
+    padding: '1rem 0'
   }
 
   const transitionStyles = {
