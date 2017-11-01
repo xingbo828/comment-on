@@ -1,10 +1,10 @@
 import React from 'react';
-import {
-    Banner
-  } from './Styled';
+import { Banner } from './Styled';
 import AddressSearchBar from './components/AddressSearchBar';
 import Grid from '../../globalComponents/Grid';
 import { Heading } from '../../globalComponents/Typography';
+
+
 
 
 const HomePage = () => (
@@ -14,7 +14,6 @@ const HomePage = () => (
     </Banner>
     <AddressSearchBar />
   </Grid.Container>
-  );
-
+);
 
 export default HomePage;
