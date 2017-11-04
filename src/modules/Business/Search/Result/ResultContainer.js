@@ -40,8 +40,7 @@ export default compose(
       this.props.searchBusiness({
         origin: params.get('origin'),
         destination: params.get('destination'),
-        dateTime: params.get('dateTime'),
-        vehicle: params.get('vehicle')
+        dateTime: params.get('dateTime')
       });
     }
   }),

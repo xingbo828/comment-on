@@ -75,7 +75,7 @@ const enhance = compose(
       const { date, time } = dateTime;
       props.history.push({
         pathname: '/business/search/result',
-        search: `?origin=${origin}&destination=${destination}&datetime=${date},${time}`
+        search: `?origin=${origin}&destination=${destination}&dateTime=${date},${time}`
       });
     }
   }),
