@@ -7,7 +7,7 @@ import { withInfo } from '@storybook/addon-info';
 import DateTime from '../../../globalComponents/Form/DateTime';
 
 const DateOnly = withInfo('Date only')(() =>
-  <div style={{width: '300px'}}>
+  <div style={{width: '550px'}}>
     <DateTime
       name="date"
       placeholder="Select date"
@@ -18,7 +18,7 @@ const DateOnly = withInfo('Date only')(() =>
 );
 
 const DateAndTime = withInfo('Date and time')(() =>
-  <div style={{width: '300px'}}>
+  <div style={{width: '550px'}}>
     <DateTime
       name="datetime"
       includeTime={true}
@@ -32,7 +32,7 @@ const disabledDate = (date) => {
 };
 
 const DateWithDisabledDates = withInfo('Date and time with disabled dates')(() =>
-<div style={{width: '300px'}}>
+<div style={{width: '550px'}}>
   <DateTime
     name="datetime"
     includeTime={false}

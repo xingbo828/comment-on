@@ -6,9 +6,10 @@ export const Label = styled.label`
   position: relative;
 `;
 
-
-
 export const InputBtn = styled.button`
+${props => props.theme.media.lessThan('xs')`
+  display: none;
+`}
   outline: none;
   font-size: 1.2rem;
   width: 100%;
@@ -17,52 +18,56 @@ export const InputBtn = styled.button`
   background-color: transparent;
   text-align: left;
   cursor: pointer;
-  color: ${props =>  props.datePicked ? props.theme.colors.textDark : 'grey'};
+  color: ${props => (props.datePicked ? props.theme.colors.textDark : 'grey')};
 
   ::before {
     padding-right: 0px;
     font-family: 'FontAwesome';
     content: '\f073';
-    color: ${props =>   props.theme.colors.textDark };
+    color: ${props => props.theme.colors.textDark};
     font-size: 1.2rem;
     position: absolute;
-    top:0;
+    top: 0;
     left: 10px;
     line-height: 40px;
   }
 `;
 
 export const DateTimeContainer = styled.div`
-  display: ${props => props.visible ? 'block' : 'none'};
-  position: absolute;
-  top: 100%;
-  left: -1px;
-  right: -1px;
+  ${props => props.theme.media.greaterThan('xs')`
+    display: ${props => (props.visible ? 'block' : 'none')};
+    z-index: ${props => props.theme.zIndex.dropdown};
+    top: 100%;
+    left: -1px;
+    right: -1px;
+    position: absolute;
+    width: auto;
+    max-width: 550px;
+  `}
+  width: 100%;
+  position:relative;
+  border: 1px solid ${props => props.theme.colors.borderPrimary};
   margin-top: -1px;
   background: #fff;
-  border: 1px solid ${props => props.theme.colors.borderPrimary};
   border-top-width: 0;
   height: 310px;
-  z-index: ${props=>props.theme.zIndex.dropdown};
 `;
 
 export const CalendarContainer = styled.div`
   position: absolute;
-  z-index: ${props=>props.theme.zIndex.dropdown};
+  z-index: ${props => props.theme.zIndex.dropdown};
   top: 0;
-  left:0;
-  right:0;
+  left: 0;
+  right: 0;
+
   backface-visibility: hidden;
   transform-style: preserve-3d;
-  transition:  .3s;
-  padding: .5rem 1rem 0;
-  transform: rotateY(${props => props.visible ? '0deg': '180deg'});
+  transition: 0.3s;
+  padding: 0.5rem 1rem 0;
+  transform: rotateY(${props => (props.visible ? '0deg' : '180deg')});
 `;
 
-export const CalendarToolbar = styled.div`
-  display: flex;
-`;
-
+export const CalendarToolbar = styled.div`display: flex;`;
 
 const CalendarBtn = styled.button`
   flex: 1;
@@ -94,15 +99,14 @@ export const PrevMonthBtn = CalendarBtn.extend`
 `;
 export const NextMonthBtn = CalendarBtn.extend`
   ::after {
-      content: '\f178';
-    }
+    content: '\f178';
+  }
 `;
-
 
 export const CurrentDate = styled.span`
   flex: 6;
   text-align: center;
-  padding: .2rem;
+  padding: 0.2rem;
   font-weight: bold;
 `;
 
@@ -140,14 +144,10 @@ export const CalendarCell = styled.td`
           cursor: not-allowed;
         }
       `;
-    }
-    else if (props.isSelectedDate) {
+    } else if (props.isSelectedDate) {
       return `
-        color: ${props.theme.colors.primaryAction};
-        :hover {
-          background-color: ${props.theme.colors.primaryAction};
-          color: white;
-        }
+        color: ${props.theme.colors.offWhite};
+        background-color: ${props.theme.colors.primary};
       `;
     } else if (!props.isCurrentMonth) {
       return `
@@ -165,19 +165,20 @@ export const CalendarCell = styled.td`
         }
       `;
     }
-  }}
+  }};
 `;
 
 export const TimeContainer = styled.div`
   position: absolute;
   top: 0;
-  left:0;
-  right:0;
-  transform: rotateY(${props => props.visible ? '0deg': '-180deg'});
+  left: 0;
+  right: 0;
+
+  transform: rotateY(${props => (props.visible ? '0deg' : '-180deg')});
   transform-style: preserve-3d;
   backface-visibility: hidden;
   padding: 2.5rem 1rem 0;
-  transition: .3s;
+  transition: 0.3s;
 `;
 
 export const TimeSelection = styled.div`
@@ -223,10 +224,10 @@ const TimeChangeBtn = styled.button`
   border: 1px solid ${props => props.theme.colors.borderPrimary};
   white-space: nowrap;
   position: relative;
-  width:30px;
-  height:30px;
+  width: 30px;
+  height: 30px;
   ::after {
-    position:absolute;
+    position: absolute;
     font-size: 1rem;
     font-family: 'FontAwesome';
   }
@@ -238,9 +239,7 @@ const TimeChangeBtn = styled.button`
   }
 `;
 
-export const TimeChangeBtnWrapper = styled.span`
-  text-align: center;
-`;
+export const TimeChangeBtnWrapper = styled.span`text-align: center;`;
 export const TimeChangeBtnInc = TimeChangeBtn.extend`
   ::after {
     content: '\f0de';
