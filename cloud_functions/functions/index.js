@@ -58,17 +58,32 @@ const filterByVehicle = (vehicle) => (business) => {
     return business.vehiclesInfo[vehicle] !== 0;
 }
 
-const filterByDateTime = (dateTime) => (business) => {
-    if (!dateTime) {
-        return true;
-    }
-    const dateTimeObj = moment.unix(dateTime);
-    const day = dateTimeObj.format('ddd').toLowerCase();
-    const hour = dateTimeObj.hours() + dateTimeObj.minutes()/60;
-    return business.businessHour.some((businessHour) => {
-        return businessHour.day === day && businessHour.startTime <= hour && businessHour.endTime >= hour;
+const filterByDateTime = (dateTime) => {
+  if (!dateTime) {
+    return () => true;
+  }
+  const dateTimeArr = dateTime.split(',');
+  const date = dateTimeArr.shift();
+  const startHour = Number(dateTimeArr.shift());
+  let endHour = Number(dateTimeArr.shift());
+
+  if (isNaN(date) || isNaN(startHour)) {
+    return () => false;
+  }
+
+  if (isNaN(endHour)) {
+    endHour = startHour;
+  }
+
+  const dateTimeObj = moment(date, 'YYYYMMDD');
+  const day = dateTimeObj.format('ddd').toLowerCase();
+
+  return (business) => {
+    return business.businessHour.some(businessHour => {
+      return businessHour.day === day && businessHour.startTime <= endHour && businessHour.endTime >= startHour;
     });
-};
+  }
+}
 
 const business = ((request, response) => {
     const origin = request.query.origin;
