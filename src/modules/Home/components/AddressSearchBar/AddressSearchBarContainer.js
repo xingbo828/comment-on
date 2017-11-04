@@ -37,7 +37,7 @@ const enhance = compose(
         homeAddress: rawAddresses.homeAddress.placeId,
         destAddress: rawAddresses.destAddress.placeId
       };
-      return localSaveAddresses(newAddress)(dispatch);
+      return localSaveAddresses(newAddress);
     },
     onSubmitSuccess: (result, dispatch, props) => {
       // send user to next step

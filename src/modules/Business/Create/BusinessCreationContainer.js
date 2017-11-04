@@ -11,23 +11,46 @@ const mapDispatchToProps = dispatch => ({
   addBusiness: profile => dispatch(addBusiness(profile))
 });
 
-const validate = validateFunc([{
-  field: 'businessName',
-  validator: 'isRequired',
-  message: 'Required'
-}, {
-  field: 'businessPhoneNumber',
-  validator: 'isValidPhoneNumber',
-  message: 'Invalid phone number'
-}, {
-  field: 'businessHour',
-  validator: 'isValidBusinessHours',
-  message: 'Invalid business hours'
-}, {
-  field: 'businessEmail',
-  validator: 'isValidEmail',
-  message: 'Invalid business email'
-}] ,validators);
+const validate = validateFunc(
+  [
+    {
+      field: 'businessName',
+      validator: 'isRequired',
+      message: 'Required'
+    },
+    {
+      field: 'businessAddrCity',
+      validator: 'isRequired',
+      message: 'Required'
+    },
+    {
+      field: 'businessAddrProv',
+      validator: 'isRequired',
+      message: 'Required'
+    },
+    {
+      field: 'businessAddrPostalCode',
+      validator: 'isRequired',
+      message: 'Required'
+    },
+    {
+      field: 'businessPhoneNumber',
+      validator: 'isValidPhoneNumber',
+      message: 'Invalid phone number'
+    },
+    {
+      field: 'businessHour',
+      validator: 'isValidBusinessHours',
+      message: 'Invalid business hours'
+    },
+    {
+      field: 'businessEmail',
+      validator: 'isValidEmail',
+      message: 'Invalid business email'
+    }
+  ],
+  validators
+);
 
 const enhance = compose(
   withRouter,

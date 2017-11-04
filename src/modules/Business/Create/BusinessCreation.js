@@ -8,7 +8,7 @@ import {
 } from '../../../globalComponents/Form';
 
 import Grid from '../../../globalComponents/Grid';
-import { SERVICE_AREAS } from '../../Common/constants';
+import { SERVICE_AREAS } from '../../../constants';
 
 import BusinessHour from '../components/BusinessHour';
 
@@ -51,6 +51,57 @@ const BusinessCreation = ({
               name="businessName"
               label="Business Name"
               placeholder="StarBucks"
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={24} sm={24} md={24} lg={24}>
+            <Field
+              component={TextField}
+              type="text"
+              name="businessAddr1"
+              label="Address 1"
+              placeholder="123 Main St"
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={24} sm={24} md={24} lg={24}>
+            <Field
+              component={TextField}
+              type="text"
+              name="businessAddr2"
+              label="Address 2"
+              placeholder="Ste 200"
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={24} sm={24} md={10} lg={10}>
+            <Field
+              component={TextField}
+              type="text"
+              name="businessAddrCity"
+              label="City"
+              placeholder="Vancouver"
+            />
+          </Col>
+          <Col xs={24} sm={24} md={7} lg={7}>
+            <Field
+              component={TextField}
+              type="text"
+              name="businessAddrProv"
+              label="Province"
+              placeholder="BC"
+            />
+          </Col>
+          <Col xs={24} sm={24} md={7} lg={7}>
+            <Field
+              component={TextField}
+              type="text"
+              name="businessAddrPostalCode"
+              label="Postal Code"
+              placeholder="V1L 8PK"
             />
           </Col>
         </Row>

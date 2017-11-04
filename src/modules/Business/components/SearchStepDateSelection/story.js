@@ -4,23 +4,23 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, text, boolean, number } from '@storybook/addon-knobs';
-import DateTimeSelection from './';
+import DateSelection from './';
 
-const DateTimeSelectionDemo = withInfo('DateTime Selection')(() =>
+const DateSelectionDemo = withInfo('Date Selection')(() =>
 <div style={{padding: '25px'}}>
-  <DateTimeSelection
-    placeholder="Select date & time"
+  <DateSelection
+    placeholder="Select a date"
     label="When do you want to move?"
     value=""
-    onChange={action('DateTime changed')}
+    onChange={action('Date changed')}
   />
 </div>
 );
 
 
-const DateTimeSelectionStory = storiesOf('Mover/Search/DateTimeSelection', module)
+const DateSelectionStory = storiesOf('Mover/Search/DateSelection', module)
 .addDecorator(withKnobs)
-.add('Usage', DateTimeSelectionDemo);
+.add('Usage', DateSelectionDemo);
 
 
-export default DateTimeSelectionStory;
+export default DateSelectionStory;

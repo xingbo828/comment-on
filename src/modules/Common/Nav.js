@@ -139,9 +139,6 @@ export const Nav = ({ user, isLoggedIn, logout }) => {
         <Link to="/"><Heading>LOGO</Heading></Link>
         {/* <Location>Vancouver</Location> */}
         <ContextHeaderLinks>
-          <ContextHeaderLink>
-            <Link to="/business/create">Register business</Link>
-          </ContextHeaderLink>
         </ContextHeaderLinks>
         <AccountNav />
       </ContextHeader>
