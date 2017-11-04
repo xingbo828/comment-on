@@ -8,7 +8,7 @@ import {
 } from '../../../globalComponents/Form';
 
 import Grid from '../../../globalComponents/Grid';
-import { SERVICE_AREAS } from '../../Common/constants';
+import { SERVICE_AREAS } from '../../../constants';
 
 import BusinessHour from '../components/BusinessHour';
 

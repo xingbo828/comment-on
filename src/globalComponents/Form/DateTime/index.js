@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import { instanceOf, string, bool, func } from 'prop-types';
-import {
-  Label,
-  InputBtn,
-  DateTimeContainer
-} from './Styled';
+import { Label, InputBtn, DateTimeContainer } from './Styled';
 
 import Calendar from './Calendar';
 import Time from './Time';
@@ -14,21 +10,43 @@ class DateTime extends Component {
   constructor(props) {
     super(props);
     const m = moment;
-    const currentDateTime = m().add(1, 'hour').minute(0);
-    const format = this.props.includeTime ? 'MMM DD, YYYY HH:mm' : 'MMM DD, YYYY ';
+    const currentDateTime = m()
+      .add(1, 'hour')
+      .minute(0);
+    const getCurrentDateTime = inclueTime => {
+      if (inclueTime) {
+        return m()
+          .add(1, 'hour')
+          .minute(0);
+      }
+      return m()
+        .hour(0)
+        .minute(0)
+        .second(0);
+    };
+    const format = this.props.includeTime
+      ? 'MMM DD, YYYY HH:mm'
+      : 'MMM DD, YYYY ';
     this.state = {
       isOverlayVisible: false,
-      selectedDateTime: this.props.value || currentDateTime,
-      displayValue: this.props.value ? this.props.value.format(format) : this.props.placeholder,
+      selectedDateTime:
+        this.props.value || getCurrentDateTime(this.props.includeTime),
+      displayValue: this.props.value
+        ? this.props.value.format(format)
+        : this.props.placeholder,
       userInteractionPhase: 'calendar',
       format
     };
     this.handleInputBtnClick = this.handleInputBtnClick.bind(this);
-    this.handleCalendarSelectionComplete = this.handleCalendarSelectionComplete.bind(this);
+    this.handleCalendarSelectionComplete = this.handleCalendarSelectionComplete.bind(
+      this
+    );
     this.handleClickOutside = this.handleClickOutside.bind(this);
     this.hideDateTimeContainer = this.hideDateTimeContainer.bind(this);
     this.handleEscape = this.handleEscape.bind(this);
-    this.handleTimeSelectionComplete = this.handleTimeSelectionComplete.bind(this);
+    this.handleTimeSelectionComplete = this.handleTimeSelectionComplete.bind(
+      this
+    );
   }
 
   componentDidMount() {
@@ -47,7 +65,6 @@ class DateTime extends Component {
       isOverlayVisible: true
     });
   }
-
 
   handleCalendarSelectionComplete(value) {
     if (!this.props.includeTime) {
@@ -75,7 +92,11 @@ class DateTime extends Component {
   }
 
   handleClickOutside(event) {
-    if (this.state.isOverlayVisible && this.dateTimeContainer && !this.dateTimeContainer.contains(event.target)) {
+    if (
+      this.state.isOverlayVisible &&
+      this.dateTimeContainer &&
+      !this.dateTimeContainer.contains(event.target)
+    ) {
       this.hideDateTimeContainer();
     }
   }
@@ -107,11 +128,13 @@ class DateTime extends Component {
         <InputBtn
           onClick={this.handleInputBtnClick}
           onFocus={this.handleInputBtnClick}
-          datePicked={displayValue!==placeholder}
-        >{displayValue}</InputBtn>
+          datePicked={displayValue !== placeholder}
+        >
+          {displayValue}
+        </InputBtn>
         <DateTimeContainer
           visible={isOverlayVisible}
-          innerRef={container => this.dateTimeContainer = container}
+          innerRef={container => (this.dateTimeContainer = container)}
         >
           <Calendar
             visible={userInteractionPhase === 'calendar'}
@@ -119,13 +142,15 @@ class DateTime extends Component {
             selectedDate={selectedDateTime}
             onSelectionComplete={this.handleCalendarSelectionComplete}
           />
-          {includeTime && <Time
-            visible={userInteractionPhase === 'time'}
-            selectedTime={selectedDateTime}
-            onSelectionComplete={this.handleTimeSelectionComplete}
-          />}
+          {includeTime && (
+            <Time
+              visible={userInteractionPhase === 'time'}
+              selectedTime={selectedDateTime}
+              onSelectionComplete={this.handleTimeSelectionComplete}
+            />
+          )}
         </DateTimeContainer>
-    </Label>
+      </Label>
     );
   }
 }

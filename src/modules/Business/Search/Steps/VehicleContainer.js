@@ -49,7 +49,7 @@ const enhance = compose(
     form: 'search.steps.vehicle',
     validate,
     onSubmit: (values, dispatch, props) => {
-      return localSaveVehicle(values.toJS())(dispatch);
+      return localSaveVehicle(values.toJS());
     },
     onSubmitSuccess: (result, dispatch, props) => {
       // send user to next step

@@ -7,16 +7,22 @@ import {
   DateTimeSelectionInner,
   DateTimeBtnWrapper
 } from './Styled';
-class DateTimeSelection extends Component {
+
+class DateSelection extends Component {
   render() {
     const { value, label, placeholder, onChange } = this.props;
-    const disabledDate = (date) => date.diff(moment(), 'days') < 1 ;
+    const disabledDate = date => date.diff(moment(), 'days') < 1;
     return (
       <DateTimeSelectionContainer>
         <Label>{label}</Label>
         <DateTimeSelectionInner>
           <DateTimeBtnWrapper>
-            <DateTime value={value} onChange={onChange} disabledDate={disabledDate} includeTime placeholder={placeholder} />
+            <DateTime
+              value={value}
+              onChange={onChange}
+              disabledDate={disabledDate}
+              placeholder={placeholder}
+            />
           </DateTimeBtnWrapper>
         </DateTimeSelectionInner>
       </DateTimeSelectionContainer>
@@ -24,8 +30,6 @@ class DateTimeSelection extends Component {
   }
 }
 
-DateTimeSelection.propTypes = {
+DateSelection.propTypes = {};
 
-};
-
-export default DateTimeSelection;
+export default DateSelection;

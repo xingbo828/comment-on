@@ -66,7 +66,7 @@ const enhance = compose(
     form: 'search.steps.address',
     validate,
     onSubmit: (values, dispatch, props) => {
-      return localSaveAddresses(values.toJS())(dispatch);
+      return localSaveAddresses(values.toJS());
     },
     onSubmitSuccess: (result, dispatch, props) => {
       props.history.push({
