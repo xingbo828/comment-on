@@ -20,7 +20,7 @@ const SearchResultItem = ({logo, name, id, rate, rateCount, price, onClick}) => 
       <Col xs={18} sm={18} md={8} lg={8}>
         {name}
       </Col>
-      <Col xs={12} sm={12} md={6} lg={6}><Rate value={rate} readOnly /> ({rateCount})</Col>
+      <Col xs={12} sm={12} md={6} lg={6}><Rate value={rate} readOnly caption={`(${rateCount})`} /></Col>
       <Col xs={12} sm={12} md={6} lg={6}>${price}</Col>
     </ItemRow>
   );

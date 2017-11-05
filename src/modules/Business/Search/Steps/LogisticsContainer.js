@@ -6,6 +6,9 @@ import LogisticsStep from './Logistics';
 import scrollToTopOnMount from '../../../Common/scrollToTopOnMount';
 import validators, { validateFunc } from '../../../Common/validators';
 import Spin from '../../../../globalComponents/Spin';
+import searchQueryValidator from '../utils/searchQueryValidator';
+import searchQueryConstructor from '../utils/searchQueryConstructor';
+import message from '../../../../globalComponents/Message';
 
 import {
   localSaveLogistics,
@@ -66,16 +69,46 @@ const enhance = compose(
       return localSaveLogistics(values.toJS());
     },
     onSubmitSuccess: async (result, dispatch, props) => {
+      const search = props.location.search;
+      const params = new URLSearchParams(search);
+      const businessId = params.get('businessId');
       const {
         origin,
         destination,
-        dateTime,
-        vehicle
+        dateTime
       } = await getLocalStorageStepInfo();
-      const { date, time } = dateTime;
-      props.history.push({
+
+      const searchParameters = searchQueryConstructor([
+        {
+        label: 'origin',
+        value: origin
+        },
+        {
+          label: 'destination',
+          value: destination,
+        },
+        {
+          label: 'dateTime',
+          value: `${dateTime.date},${dateTime.time}`
+        }
+      ]);
+
+
+      const validator = searchQueryValidator(searchParameters);
+      if(!validator.status) {
+        message.error(validator.message);
+        return false;
+      }
+
+      if(businessId) {
+        return props.history.push({
+          pathname: `/business/profile/${businessId}`,
+          search: searchParameters
+        });
+      }
+      return props.history.push({
         pathname: '/business/search/result',
-        search: `?origin=${origin}&destination=${destination}&dateTime=${date},${time}`
+        search: searchParameters
       });
     }
   }),

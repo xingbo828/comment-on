@@ -1,5 +1,6 @@
 import localforge from 'localforage';
 import omit from 'lodash/omit';
+import get from 'lodash/get';
 import moment from 'moment';
 
 export const LOCALSTOREAGE_STEP_INFO_KEY = 'steps-info';
@@ -8,10 +9,10 @@ export const getLocalStorageStepInfo = async () => {
   const stepInfo = await localforge.getItem(LOCALSTOREAGE_STEP_INFO_KEY);
 
   return {
-    origin: stepInfo.addresses.homeAddress,
-    destination: stepInfo.addresses.destAddress,
-    dateTime: stepInfo.dateTime,
-    vehicle: stepInfo.vehicle.vehicle
+    origin: get(stepInfo, 'addresses.homeAddress'),
+    destination: get(stepInfo, 'addresses.destAddress'),
+    dateTime: get(stepInfo, 'dateTime'),
+    vehicle: get(stepInfo, 'vehicle.vehicle')
   };
 };
 
@@ -98,8 +99,8 @@ export const loadDateTime = () => async dispatch => {
   dispatch({
     type: GET_DATE_TIME,
     data: {
-      date: moment(dateTime.date),
-      time: dateTime.time
+      date: dateTime ? moment(dateTime.date) : null,
+      time: dateTime ? dateTime.time : null
     }
   });
 };
@@ -143,9 +144,17 @@ export const searchBusiness = ({
     type: SEARCH_BUSINESS
   });
   const API = `https://us-central1-comment-on-85597.cloudfunctions.net/business?origin=${origin}&destination=${destination}&dateTime=${dateTime}`;
-  const searchResult = await fetch(API).then(res => res.json());
-  return dispatch({
-    type: GET_SEARCH_RESULT,
-    data: searchResult
-  });
+  try {
+    const searchResult = await fetch(API).then(res => res.json());
+    return dispatch({
+      type: GET_SEARCH_RESULT,
+      data: searchResult
+    });
+  } catch(err) {
+    return dispatch({
+      type: GET_SEARCH_RESULT,
+      data: []
+    });
+  }
+
 };
