@@ -71,21 +71,16 @@ const enhance = compose(
     onSubmitSuccess: async (result, dispatch, props) => {
       const search = props.location.search;
       const params = new URLSearchParams(search);
-      const businessId = params.get('businessId');
-      const {
-        origin,
-        destination,
-        dateTime
-      } = await getLocalStorageStepInfo();
+      const { origin, destination, dateTime } = await getLocalStorageStepInfo();
 
       const searchParameters = urlQueryConstructor([
         {
-        label: 'origin',
-        value: origin
+          label: 'origin',
+          value: origin
         },
         {
           label: 'destination',
-          value: destination,
+          value: destination
         },
         {
           label: 'dateTime',
@@ -93,16 +88,19 @@ const enhance = compose(
         }
       ]);
 
-
       const validator = searchQueryValidator(searchParameters);
-      if(!validator.status) {
+      if (!validator.status) {
         message.error(validator.message);
         return false;
       }
 
-      if(businessId) {
+      if (
+        props.location.state &&
+        props.location.state.fromProfile &&
+        props.location.state.businessId
+      ) {
         return props.history.push({
-          pathname: `/business/profile/${businessId}`,
+          pathname: `/business/profile/${props.location.state.businessId}`,
           search: searchParameters
         });
       }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { number, string, oneOf, func, bool, array } from 'prop-types';
+import { Link } from 'react-router-dom'
 import Grid from '../../../../globalComponents/Grid';
 import SearchResultItem from './Item';
 import {
@@ -11,13 +12,13 @@ import {
 const {Row, Col} = Grid;
 
 
-const SearchResultTable = ({searchResult, onItemClick}) => {
-  // const clickHandler = (id) => {
-  //   history.push({
-  //     pathname: `/business/profile/${id}`
-  //   });
-  // };
+const SearchResultTable = ({searchResult, searchParams}) => {
+
   const listings = searchResult.map((item) =>
+  <Link to={{
+    pathname: `/business/profile/${item.id}`,
+    search: searchParams
+  }}>
     <SearchResultItem
       key={item.id}
       price={249}
@@ -26,8 +27,8 @@ const SearchResultTable = ({searchResult, onItemClick}) => {
       rate={3.5}
       rateCount={6}
       logo={item.logo}
-      onClick={onItemClick}
     />
+  </Link>
   );
   return (
     <div>
@@ -43,11 +44,9 @@ const SearchResultTable = ({searchResult, onItemClick}) => {
 
 SearchResultTable.propTypes = {
   searchResult: array,
-  onItemClick: func,
 };
 
 SearchResultTable.defaultProps = {
-  onItemClick: () => {},
   searchResult: []
 };
 

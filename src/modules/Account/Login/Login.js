@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import includes from 'lodash/includes';
 import {
   WrapperDiv,
   FacebookButton,
@@ -10,9 +11,13 @@ import {
 } from './Styled';
 
 
-const Login = ({ account, facebookLogin, googleLogin, logout }) => {
+const Login = ({ location, account, facebookLogin, googleLogin, logout }) => {
 
   const redirectAfterLogin = () => {
+    if(includes(location.search, '?redirect=')) {
+      const redirectTo = location.search.replace('?redirect=', '');
+      return <Redirect to={redirectTo} />;
+    }
     return account.user.hasProfile ? <Redirect to="/" /> : <Redirect to="/account/profile-basic" />;
   };
 

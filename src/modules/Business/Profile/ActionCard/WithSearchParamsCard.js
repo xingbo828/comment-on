@@ -19,7 +19,20 @@ import {
 
 const { SpinContainer } = Spin;
 
-const WithSearchParamsCard = ({ cardDoneLoading=false }) => {
+const WithSearchParamsCard = ({ isLoggedIn, location, history, cardDoneLoading=false,  }) => {
+
+  const handleRequestMove = () => {
+    if(!isLoggedIn) {
+      //redirect back to login page
+      const to = {
+        pathname: '/login',
+        search: `?redirect=${location.pathname}${location.search}`
+      };
+      return history.push(to);
+    }
+
+    console.log('logged in...');
+  };
 
   const renderContent = (available) => {
     if (available) {
@@ -32,7 +45,7 @@ const WithSearchParamsCard = ({ cardDoneLoading=false }) => {
             <Row term="Key" definition="Value" />
           </DescriptionList>
           <CtaContainer>
-            <Button primary icon="arrow-right">Request Move</Button>
+            <Button primary icon="arrow-right" onClick={handleRequestMove}>Request Move</Button>
           </CtaContainer>
         </div>
       );

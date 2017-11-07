@@ -54,7 +54,7 @@ const enhance = compose(
       // send user to next step
       props.history.push({
         pathname: '/business/search/steps/logistics',
-        search: props.location.search
+        state: props.location.state
       });
     }
   }),

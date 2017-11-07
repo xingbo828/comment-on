@@ -7,7 +7,10 @@ const WithoutSearchParamsCard = ({ match, history }) => {
   const clickHandler = () => {
     history.push({
       pathname: '/business/search/steps/address',
-      search: `?businessId=${match.params.businessId}`
+      state: {
+        fromProfile: true,
+        businessId: match.params.businessId
+      }
     });
   };
   return (

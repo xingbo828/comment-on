@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import WithoutSearchParamsCard from './WithoutSearchParamsCard';
 import WithSearchParamsCard from './WithSearchParamsCard';
 import searchQueryValidator from '../../utils/searchQueryValidator';
+import isLoggedIn from '../../../Common/isLoggedIn';
 
 const EnhancedWithSearchParamsCard = compose(
   lifecycle({
@@ -12,9 +13,10 @@ const EnhancedWithSearchParamsCard = compose(
         this.setState({
           cardDoneLoading: true
         });
-      },3000)
+      }, 1000)
     }
-  })
+  }),
+  isLoggedIn
 )(WithSearchParamsCard);
 
 

@@ -13,7 +13,7 @@ const Business = ({ match: { isExact } }) => {
         path="/business/create"
         component={BusinessCreation}
       />
-      <ProtectedRoute
+      <Route
         path="/business/profile/:businessId"
         component={Profile}
       />

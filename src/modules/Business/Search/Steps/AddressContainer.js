@@ -71,7 +71,7 @@ const enhance = compose(
     onSubmitSuccess: (result, dispatch, props) => {
       props.history.push({
         pathname: '/business/search/steps/vehicle',
-        search: props.location.search
+        state: props.location.state
       });
     }
   }),
