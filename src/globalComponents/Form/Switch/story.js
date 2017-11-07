@@ -3,7 +3,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { action } from '@storybook/addon-actions';
-import Switch from '../../../globalComponents/Form/Switch';
+import Switch from './';
 
 const SwitchDemo= withInfo('Basic checkbox group')(() =>
   <div style={{padding: '25px'}}>

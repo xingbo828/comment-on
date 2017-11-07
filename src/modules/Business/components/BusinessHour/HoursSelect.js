@@ -6,7 +6,7 @@ import {
   TimeSelect,
   HoursSelectButtonWrapper
 } from './Styled';
-import { Button } from '../../../../globalComponents/Form';
+import { Button, Select } from '../../../../globalComponents/Form';
 import moment from 'moment';
 
 class HoursSelect extends Component {
@@ -68,25 +68,25 @@ class HoursSelect extends Component {
     return (
       <HoursSelectContainer>
         <WeekDaySelect>
-          <select name="day" onChange={this.handleDayChange}>
+          <Select name="day" onChange={this.handleDayChange}>
             {weekdays.map(day =>
               <option key={day} value={day}>
                 {day[0].toUpperCase() + day.slice(1)}
               </option>
             )}
-          </select>
+          </Select>
         </WeekDaySelect>
 
         <TimeSelect>
-          <select name="startTime" onChange={this.handleStartTimeChange}>
+          <Select name="startTime" onChange={this.handleStartTimeChange}>
             {time.map(t => this.generateTimeOption(t))}
-          </select>
+          </Select>
         </TimeSelect>
 
         <TimeSelect>
-          <select name="endTime" onChange={this.handleEndTimeChange}>
+          <Select name="endTime" onChange={this.handleEndTimeChange}>
             {time.map(t => this.generateEndTimeOption(t))}
-          </select>
+          </Select>
         </TimeSelect>
 
         <HoursSelectButtonWrapper>

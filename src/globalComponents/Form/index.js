@@ -8,6 +8,7 @@ import TextArea from './TextArea';
 import AddressAutoComplete from './AddressAutoComplete';
 import DateTime from './DateTime';
 import Switch from './Switch';
+import Select from './Select';
 
 export {
   Button,
@@ -19,5 +20,6 @@ export {
   Radio,
   Checkbox,
   Switch,
+  Select,
   ImgUpload
 };
