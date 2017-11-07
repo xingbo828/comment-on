@@ -6,7 +6,7 @@ import {
   TimeSelect,
   HoursSelectButtonWrapper
 } from './Styled';
-import { Select, Option, Button } from '../../../../globalComponents/Form';
+import { Button } from '../../../../globalComponents/Form';
 import moment from 'moment';
 
 class HoursSelect extends Component {
@@ -51,9 +51,9 @@ class HoursSelect extends Component {
     const hour = Math.floor(time);
     const minute = (time - hour) * 60;
     return (
-      <Option key={time} value={time}>
+      <option key={time} value={time}>
         {moment().hour(time).minutes(minute).format('h:mm a')}
-      </Option>
+      </option>
     );
   }
 
@@ -68,25 +68,25 @@ class HoursSelect extends Component {
     return (
       <HoursSelectContainer>
         <WeekDaySelect>
-          <Select name="day" onChange={this.handleDayChange}>
+          <select name="day" onChange={this.handleDayChange}>
             {weekdays.map(day =>
-              <Option key={day} value={day}>
+              <option key={day} value={day}>
                 {day[0].toUpperCase() + day.slice(1)}
-              </Option>
+              </option>
             )}
-          </Select>
+          </select>
         </WeekDaySelect>
 
         <TimeSelect>
-          <Select name="startTime" onChange={this.handleStartTimeChange}>
+          <select name="startTime" onChange={this.handleStartTimeChange}>
             {time.map(t => this.generateTimeOption(t))}
-          </Select>
+          </select>
         </TimeSelect>
 
         <TimeSelect>
-          <Select name="endTime" onChange={this.handleEndTimeChange}>
+          <select name="endTime" onChange={this.handleEndTimeChange}>
             {time.map(t => this.generateEndTimeOption(t))}
-          </Select>
+          </select>
         </TimeSelect>
 
         <HoursSelectButtonWrapper>

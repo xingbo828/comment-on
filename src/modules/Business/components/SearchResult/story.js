@@ -10,7 +10,6 @@ import SearchResultTable from './Table';
 const SearchResultItemDemo = withInfo('Search Result item')(() =>
 <div style={{padding: '25px'}}>
   <SearchResultItem
-    onClick={action('Click')}
     price={number('price', 259)}
     name={text('name', 'Moving Co.')}
     id={text('id', 'abc')}
@@ -19,7 +18,6 @@ const SearchResultItemDemo = withInfo('Search Result item')(() =>
     logo={text('logo', 'http://www.doggy-paradise.com/wp-content/uploads/2015/12/bg-1024x602.jpg')}
   />
   <SearchResultItem
-    onClick={action('Click')}
     price={number('price', 259)}
     name={text('name', 'Moving Co.')}
     id={text('id', 'abc')}
