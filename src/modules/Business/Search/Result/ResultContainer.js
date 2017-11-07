@@ -14,7 +14,7 @@ import {
   getSearchResult
 } from '../searchReducers';
 
-import searchQueryValidator from '../utils/searchQueryValidator';
+import searchQueryValidator from '../../utils/searchQueryValidator';
 
 
 const isLoading = (props) => props.status !== 'LOADED';
@@ -43,12 +43,7 @@ export default compose(
       if (!validator.status) {
         message.error(validator.message);
       }
-      const params = new URLSearchParams(search);
-      this.props.searchBusiness({
-        origin: params.get('origin'),
-        destination: params.get('destination'),
-        dateTime: params.get('dateTime')
-      });
+      this.props.searchBusiness(search);
     }
   }),
   branch(

@@ -1,4 +1,4 @@
-const searchQueryConstructor = (params) => {
+const urlQueryConstructor = (params) => {
   return params.reduce(
     (prev, current) => {
       if(current.value) {
@@ -8,4 +8,4 @@ const searchQueryConstructor = (params) => {
     ,'?');
 };
 
-export default searchQueryConstructor;
+export default urlQueryConstructor;

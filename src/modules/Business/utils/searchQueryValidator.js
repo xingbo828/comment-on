@@ -15,7 +15,8 @@ const searchQueryValidator = (search) => {
   }
 
   return {
-    status: true
+    status: true,
+    params
   }
 };
 

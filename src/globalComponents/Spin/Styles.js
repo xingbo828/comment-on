@@ -38,8 +38,8 @@ export const ChildrenBlurWrapper = styled.div`
   ${props => {
     if(props.loading) {
       return `
-        opacity: .5;
-        filter: blur(1.2px);
+        opacity: .3;
+        filter: blur(2.5px);
       `;
     }
   }}

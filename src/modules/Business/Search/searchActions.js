@@ -135,15 +135,11 @@ export const loadLogistics = () => async dispatch => {
 export const GET_SEARCH_RESULT = 'GET_SEARCH_RESULT';
 export const SEARCH_BUSINESS = 'SEARCH_BUSINESS';
 
-export const searchBusiness = ({
-  origin,
-  destination,
-  dateTime
-}) => async dispatch => {
+export const searchBusiness = (searchParam) => async dispatch => {
   dispatch({
     type: SEARCH_BUSINESS
   });
-  const API = `https://us-central1-comment-on-85597.cloudfunctions.net/business?origin=${origin}&destination=${destination}&dateTime=${dateTime}`;
+  const API = `https://us-central1-comment-on-85597.cloudfunctions.net/business${searchParam}`;
   try {
     const searchResult = await fetch(API).then(res => res.json());
     return dispatch({

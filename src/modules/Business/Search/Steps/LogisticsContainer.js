@@ -6,8 +6,8 @@ import LogisticsStep from './Logistics';
 import scrollToTopOnMount from '../../../Common/scrollToTopOnMount';
 import validators, { validateFunc } from '../../../Common/validators';
 import Spin from '../../../../globalComponents/Spin';
-import searchQueryValidator from '../utils/searchQueryValidator';
-import searchQueryConstructor from '../utils/searchQueryConstructor';
+import searchQueryValidator from '../../utils/searchQueryValidator';
+import urlQueryConstructor from '../../../Common/urlQueryConstructor';
 import message from '../../../../globalComponents/Message';
 
 import {
@@ -78,7 +78,7 @@ const enhance = compose(
         dateTime
       } = await getLocalStorageStepInfo();
 
-      const searchParameters = searchQueryConstructor([
+      const searchParameters = urlQueryConstructor([
         {
         label: 'origin',
         value: origin

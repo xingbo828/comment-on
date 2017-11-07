@@ -2,23 +2,14 @@ import React from 'react';
 import Grid from '../../../globalComponents/Grid';
 import SecondaryNav from '../../../globalComponents/SecondaryNav';
 import { Heading, Paragraph } from '../../../globalComponents/Typography';
-import Estimate from './Estimate';
-import Card from '../../../globalComponents/Card';
 import Comment from '../../../globalComponents/Comment';
-import {
-  DescriptionList,
-  Row
-} from '../../../globalComponents/DescriptionList';
-import {
-  Button
-} from '../../../globalComponents/Form';
+import ActionCard from './ActionCard';
+
 import {
   HeroDiv,
   ProfileContentContainer,
   CommentContainer,
   Content,
-  Aside,
-  CtaContainer
 } from './Styled';
 
 const { Container } = Grid;
@@ -48,7 +39,7 @@ const mapCrew = (Crew) => (
   ))
 );
 
-const BusinessProfile = ({ profileState: { profile } }) => (
+const BusinessProfile = ({ profileState: { profile }, location }) => (
   <div>
     <HeroDiv />
     {/* <SecondaryNav /> */}
@@ -64,19 +55,7 @@ const BusinessProfile = ({ profileState: { profile } }) => (
           <Heading wrapperTag="h3" underline>Crew</Heading>
           {mapCrew([1,2])}
         </Content>
-        <Aside>
-          <Card>
-            <Estimate />
-            <DescriptionList>
-              <Row term="Key" definition="Value" />
-              <Row term="Key" definition="Value" />
-              <Row term="Key" definition="Value" />
-            </DescriptionList>
-            <CtaContainer>
-              <Button primary icon="arrow-right">Request Move</Button>
-            </CtaContainer>
-          </Card>
-        </Aside>
+        <ActionCard/>
       </ProfileContentContainer>
     </Container>
   </div>
