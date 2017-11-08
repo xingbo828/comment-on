@@ -21,7 +21,7 @@ const RateWithCustomIcon = withInfo('Rate with custom icon')(() =>
     <Rate
       icon="heart"
       size="lg"
-      value={3.2}
+      value={4.2}
       onChange={action('Rate changed')}
       readOnly={false}
     />
