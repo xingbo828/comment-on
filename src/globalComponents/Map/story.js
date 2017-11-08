@@ -17,7 +17,7 @@ const multipleMarkers = [{
   label: 'A'
 },
 {
-  lat: 38.774929,
+  lat: 36.774929,
   lng: -121.419416,
   label: 'B'
 },
@@ -27,7 +27,7 @@ const multipleMarkers = [{
   label: 'C'
 }];
 
-const twoMarkers = [{
+const withDirection = [{
   lat: 37.774929,
   lng: -122.419416
 },
@@ -46,11 +46,22 @@ const SingleMarkerMapDemo = () => (
   </div>
 );
 
-const TwoMarkerMapDemo = () => (
+const DirectionMapDemo = () => (
   <div style={{width: '800px', height: '600px', border: '1px solid black'}}>
     <Map
       google={window.google}
-      markers={twoMarkers}
+      markers={withDirection}
+      direction
+    />
+  </div>
+);
+
+const DirectionWithWayPointsMapDemo = () => (
+  <div style={{width: '800px', height: '600px', border: '1px solid black'}}>
+    <Map
+      google={window.google}
+      markers={multipleMarkers}
+      direction
     />
   </div>
 );
@@ -68,6 +79,7 @@ const MultipleMarkerMapDemo = () => (
 const MapStory = storiesOf('Global/Map', module)
 .addDecorator(withKnobs)
 .add('single marker map', withInfo('Map with single marker')(SingleMarkerMapDemo))
-.add('two markers map as route', withInfo('Map with two markers')(TwoMarkerMapDemo))
+.add('map with direction', withInfo('Map with direction')(DirectionMapDemo))
+.add('map with direction and waypoints', withInfo('Map with direction and Waypoints')(DirectionWithWayPointsMapDemo))
 .add('multiple markers map', withInfo('Map with more than 3 markers')(MultipleMarkerMapDemo));
 export default MapStory;

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { arrayOf, func, shape, string, number, object } from 'prop-types';
+import { arrayOf, func, bool, shape, string, number, object } from 'prop-types';
 import isEqual from 'lodash/isEqual';
+import first from 'lodash/first';
+import last from 'lodash/last';
 import {
   MapContainer
 } from './Styles';
@@ -12,13 +14,13 @@ class Map extends Component {
   }
 
   componentDidMount() {
-    const { google, markers, zoom, onRouteChange} = this.props;
-    this.renderMap(this.mapContainer, google, markers, zoom, onRouteChange);
+    const { google, markers, zoom, direction, onRouteChange} = this.props;
+    this.renderMap(this.mapContainer, google, markers, zoom, direction, onRouteChange);
   }
 
   componentWillUpdate(nextProps) {
-    const { google, markers, zoom, onRouteChange } = nextProps;
-    this.renderMap(this.mapContainer, google, markers, zoom, onRouteChange);
+    const { google, markers, zoom, direction, onRouteChange } = nextProps;
+    this.renderMap(this.mapContainer, google, markers, zoom, direction, onRouteChange);
   }
 
   renderSingleMarker = (container, google, marker, zoom) => {
@@ -54,7 +56,7 @@ class Map extends Component {
     map.fitBounds(bounds);
   }
 
-  renderRoute = (container, google, from, to, onRouteChange) => {
+  renderRoute = (container, google, markers, onRouteChange) => {
     const maps = google.maps;
     const map = new maps.Map(container, {
       streetViewControl: false
@@ -68,13 +70,26 @@ class Map extends Component {
       }
     });
     directionsDisplay.setMap(map);
+    const from = first(markers);
+    const to = last(markers);
     const fromPos = new maps.LatLng(from.lat, from.lng);
     const toPos = new maps.LatLng(to.lat, to.lng);
+    const waypoints = markers.map((m, index) => {
+      if(index!==0 && index!==markers.length-1) {
+        return m;
+      }
+    }).filter((i)=>!!i).map(marker => ({
+      location: new maps.LatLng(marker.lat, marker.lng),
+      stopover: true
+    }));
+
     const request = {
       origin: fromPos,
       destination: toPos,
-      travelMode: 'DRIVING'
+      travelMode: 'DRIVING',
+      waypoints
     };
+
     directionsService.route(request, function(result, status) {
       if (status === 'OK') {
         onRouteChange(result);
@@ -93,15 +108,15 @@ class Map extends Component {
     });
   };
 
-  renderMap = (container, google, markers, zoom, onRouteChange) => {
+  renderMap = (container, google, markers, zoom, direction, onRouteChange) => {
     if(markers.length === 0) {
       this.renderDefaultMap(container, google);
     }
     else if(markers.length === 1) {
       this.renderSingleMarker(container, google, markers[0], zoom);
     }
-    else if(markers.length === 2) {
-      this.renderRoute(container, google, markers[0], markers[1], onRouteChange);
+    else if(direction && markers.length >= 2) {
+      this.renderRoute(container, google, markers, onRouteChange);
     }
     else {
       this.renderMultipleMarkers(container, google, markers);
@@ -123,12 +138,14 @@ Map.propTypes = {
   })),
   zoom: number,
   google: object.isRequired,
-  onRouteChange: func
+  onRouteChange: func,
+  direction: bool
 };
 
 Map.defaultProps = {
   zoom: 11,
-  onRouteChange: () => {}
+  onRouteChange: () => {},
+  direction: false
 };
 
 export default Map;

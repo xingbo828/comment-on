@@ -67,7 +67,7 @@ class AddressSelection extends Component {
     return (
       <Container>
         <MapContainer>
-          <Map google={google} markers={markers} onRouteChange={this.onRouteChange}/>
+          <Map google={google} markers={markers} direction onRouteChange={this.onRouteChange}/>
         </MapContainer>
         {route && this.renderRouteInfo(route)}
         <InputsContainer>
