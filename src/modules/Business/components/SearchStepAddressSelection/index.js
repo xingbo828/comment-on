@@ -4,6 +4,8 @@ import isNull from 'lodash/isNull';
 import Map from '../../../../globalComponents/Map';
 import { Paragraph } from '../../../../globalComponents/Typography';
 import AddressAutoComplete from '../../../../globalComponents/Form/AddressAutoComplete';
+import Grid from '../../../../globalComponents/Grid';
+
 import {
   AddressSelectionContainer,
   MapContainer,
@@ -12,6 +14,9 @@ import {
   AddressSelectionInner,
   InputContainer
 } from './Styled';
+
+const { Row, Col } = Grid;
+
 class AddressSelection extends Component {
   constructor(props) {
     super(props);
@@ -26,6 +31,7 @@ class AddressSelection extends Component {
 
   componentWillReceiveProps(nextProps) {
     if(nextProps.placeId !== this.props.placeId) {
+      console.log(nextProps.placeId);
       this.updateAddress(nextProps.placeId);
     }
   }
@@ -80,21 +86,25 @@ class AddressSelection extends Component {
 
   renderMap(address, google, zoom) {
     return (
-      <MapContainer>
-        <MapInnerContainer showMapPlaceHolder={!address}>
-        {address && <Map google={google} lat={address.location.lat} lng={address.location.lng} zoom={zoom} />}
-        </MapInnerContainer>
-      </MapContainer>
+      <Col xs={0} sm={0} md={12} lg={12}>
+        <MapContainer>
+          <MapInnerContainer showMapPlaceHolder={!address}>
+          {address && <Map google={google} lat={address.location.lat} lng={address.location.lng} zoom={zoom} />}
+          </MapInnerContainer>
+        </MapContainer>
+      </Col>
     );
   }
 
   renderInput(initialValue, desc) {
     const isLoading = this.props.placeId !== '' && !initialValue;
     return (
-      <InputContainer isLoading={isLoading}>
-        <AddressAutoComplete initialValue={initialValue} placeholder="Address" onSelect={this.onAddressSelect} />
-        <Paragraph>{desc}</Paragraph>
-      </InputContainer>
+      <Col xs={24} sm={24} md={12} lg={12}>
+        <InputContainer isLoading={isLoading}>
+          <AddressAutoComplete initialValue={initialValue} placeholder="Address" onSelect={this.onAddressSelect} />
+          <Paragraph>{desc}</Paragraph>
+        </InputContainer>
+      </Col>
     );
   }
 
@@ -106,9 +116,12 @@ class AddressSelection extends Component {
     return (
       <AddressSelectionContainer>
         <Label>{label}</Label>
+
         <AddressSelectionInner>
-        {this.renderMap(address, google, zoom)}
-        {this.renderInput(initialValue, desc)}
+          <Row>
+          {this.renderMap(address, google, zoom)}
+          {this.renderInput(initialValue, desc)}
+          </Row>
         </AddressSelectionInner>
       </AddressSelectionContainer>
     );

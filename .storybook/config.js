@@ -5,6 +5,10 @@ import { ThemeProvider } from 'styled-components'
 import theme from '../src/foundation/variables';
 import '../src/foundation/base';
 
+const requireAll = (requireContext) => {
+  return requireContext.keys().map(requireContext);
+}
+
 addDecorator(story => (
   <ThemeProvider theme={theme}>
     <MemoryRouter initialEntries={['/']}>
@@ -14,7 +18,8 @@ addDecorator(story => (
 ));
 
 function loadStories() {
-  require('../src/stories');
+  // require('../src/stories');
+  requireAll(require.context("../src", true, /story\.jsx?$/));
 }
 
 

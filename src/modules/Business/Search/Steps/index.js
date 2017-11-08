@@ -8,6 +8,7 @@ import LogisticsStep from './LogisticsContainer';
 import SearchSteps from '../../components/SearchSteps';
 import StepsRouteTransition from './StepsRouteTransition';
 
+
 const Steps = ({ location, history, match }) => {
   const paths = [
     {
@@ -33,7 +34,7 @@ const Steps = ({ location, history, match }) => {
     <div>
       <SearchSteps current={getCurrentStep(history)} history={history} />
       <TransitionGroup>
-        <StepsRouteTransition key={location.key} unmountOnExit={true}>
+        <StepsRouteTransition key={location.key}>
           {() => <Switch location={location}>
               {
                 paths.map(p =>

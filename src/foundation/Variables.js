@@ -15,9 +15,9 @@ const colors = {
   borderPrimary: '#d3d3d3'
 }
 
-
 const zIndex = {
   negative: -1,
+  spinner: 500,
   dropdownBackdrop: 900,
   dropdown: 1000,
   navigation: 1000,

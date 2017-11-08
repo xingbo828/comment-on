@@ -56,7 +56,7 @@ const randomizeBusinessHour = () => {
     return {
       day: day,
       startTime: 8,
-      endTime: 5
+      endTime: 17
     }
   })
   .sort((a, b) => {
@@ -64,11 +64,21 @@ const randomizeBusinessHour = () => {
   });
 }
 
+const randomizeVehicleInfo = () => {
+  return {
+    large: Math.floor(Math.random() * 2),
+    medium: Math.floor(Math.random() * 2),
+    small: Math.floor(Math.random() * 2),
+    xLarge: Math.floor(Math.random() * 2)
+  }
+}
+
 bbb.fetch('https://www.bbb.org/mbc/accredited-business-directory/moving-and-storage-company/richmond-bc')
 .then((listings) => {
   return listings.map((listing) => {
     listing.businessServiceArea = randomizeServiceArea();
     listing.businessHour = randomizeBusinessHour();
+    listing.vehiclesInfo = randomizeVehicleInfo();
     return listing;
   });
 })

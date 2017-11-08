@@ -9,12 +9,12 @@ import {
 } from  './Styled';
 import { Paragraph } from '../../../../globalComponents/Typography';
 
-const Size = ({value, label, checked, onCheck}) =>
+const Size = ({value, img, label, checked, onCheck}) =>
 (
       <ContainerOutter>
         <Container checked={checked}>
           <CheckMark checked={checked} />
-          <Img src="http://via.placeholder.com/200x100" />
+          <Img src={img} />
           <ParagraphWrapper checked={checked}>
             <Paragraph>{label}</Paragraph>
           </ParagraphWrapper>

@@ -62,18 +62,18 @@ class AccountNav extends React.Component {
         <Badge count={99}>
           <Avatar src={user.photoURL} onClick={this.handleClick} />
         </Badge>
-        <DropDownTransition in={active}>
+        { active && <DropDownTransition in={active}>
           {() =>
             <Menu active={active}>
               <DisplayName>{user.displayName}</DisplayName>
               <MenuList onClick={this.handleClick}>
-                <MenuItem><Link to="/account">Settings</Link></MenuItem>
-                {myBusiness && <MenuItem><Link to={`/business/profile/${myBusiness}`}>Company profile</Link></MenuItem>}
+                <MenuItem><Link to="/account">My Profile</Link></MenuItem>
+                {myBusiness && <MenuItem><Link to={`/business/profile/${myBusiness}`}>Manage My Business</Link></MenuItem>}
                 <MenuItem><a href="" onClick={this.handleLogout}>Logout</a></MenuItem>
               </MenuList>
           </Menu>
         }
-        </DropDownTransition>
+        </DropDownTransition> }
       </ContainerDiv>
     );
   }

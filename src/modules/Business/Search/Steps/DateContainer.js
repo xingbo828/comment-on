@@ -7,29 +7,33 @@ import scrollToTopOnMount from '../../../Common/scrollToTopOnMount';
 import validators, { validateFunc } from '../../../Common/validators';
 import Spin from '../../../../globalComponents/Spin';
 
-import {
-  localSaveDateTime,
-  loadDateTime
-} from '../searchActions';
+import { localSaveDateTime, loadDateTime } from '../searchActions';
 
-import {
-  getDateTime
-} from '../searchReducers';
+import { getDateTime } from '../searchReducers';
 
-
-const validate = validateFunc([{
-  field: 'dateTime',
-  validator: 'isRequired',
-  message: 'Required'
-}] , validators);
+const validate = validateFunc(
+  [
+    {
+      field: 'date',
+      validator: 'isRequired',
+      message: 'Required'
+    },
+    {
+      field: 'time',
+      validator: 'isRequired',
+      message: 'Required'
+    }
+  ],
+  validators
+);
 
 const mapDispatchToProps = dispatch => ({
   loadDateTime: () => dispatch(loadDateTime())
 });
 
-const mapStateToProps = state => ({initialValues: getDateTime(state)});
+const mapStateToProps = state => ({ initialValues: getDateTime(state) });
 
-const isLoading = (props) => props.initialValues.get('status') !== 'LOADED';
+const isLoading = props => props.initialValues.get('status') !== 'LOADED';
 
 const enhance = compose(
   withRouter,
@@ -37,26 +41,20 @@ const enhance = compose(
   lifecycle({
     componentDidMount() {
       this.props.loadDateTime();
-    },
-    shouldComponentUpdate(nextProps) {
-      return (
-        this.props.initialValues.get('dateTime') !== nextProps.initialValues.get('dateTime') ||
-        this.props.initialValues.get('dateTime') === null
-      );
     }
   }),
-  branch(
-    isLoading,
-    renderComponent(Spin.FullScreenSpinner)
-  ),
+  branch(isLoading, renderComponent(Spin.FullScreenSpinner)),
   reduxForm({
     form: 'search.steps.date',
     validate,
-    onSubmit: (values, dispatch, props) => localSaveDateTime(values.get('dateTime'))(dispatch),
+    onSubmit: (values, dispatch, props) => {
+      return localSaveDateTime(values.toJS());
+    },
     onSubmitSuccess: (result, dispatch, props) => {
       // send user to next step
       props.history.push({
-        pathname: '/business/search/steps/logistics'
+        pathname: '/business/search/steps/logistics',
+        state: props.location.state
       });
     }
   }),

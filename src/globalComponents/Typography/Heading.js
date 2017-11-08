@@ -3,26 +3,64 @@ import Styled from 'styled-components';
 import { withTheme } from 'styled-components';
 
 
-const Heading = ({ wrapperTag, children, underline, theme }) => {
+const Heading = ({ wrapperTag, children, underline, theme, size }) => {
+
+
 
   const HeadingContainer = Styled.div`
-    margin: 2rem 0 1rem;
+    margin: 3rem 0 1rem;
 
-    ${underline ? `
-      // border-bottom: solid 1px #d3d3d3;
-    `: ``}
+    ${size === 'xl' && `
+      font-size: 4rem;
+    `}
+
+    ${size === 'lg' && `
+      font-size: 3rem;
+    `}
+
+    ${size === 'md' && `
+      font-size: 2rem;
+    `}
+
+    ${size === 'sm' && `
+      font-size: 1.5rem;
+    `}
+
+    ${size === 'xs' && `
+      margin: 1rem 0;
+    `}
   `;
 
   const Tag = Styled[wrapperTag]`
     margin: 0;
-    padding: 0 0 1rem;
-    font-size: 1.5rem;
+    padding: 0;
     display: inline-block;
-    transform: translateY(1px);
-    position: relative;
-    color: ${theme.colors.textDarkest};
+    font-size: 2rem;
+    font-weight: bold;
 
-    ${underline ? `
+    ${size === 'xl' && `
+      font-size: 4rem;
+    `}
+
+    ${size === 'lg' && `
+      font-size: 3rem;
+    `}
+
+    ${size === 'md' && `
+      font-size: 2rem;
+    `}
+
+    ${size === 'sm' && `
+      font-size: 1.5rem;
+    `}
+
+    ${size === 'xs' && `
+      font-size: 1rem;
+    `}
+
+    ${underline && `
+      padding: 0 0 1rem;
+
       ::after{
         content: '';
         position: absolute;
@@ -32,8 +70,7 @@ const Heading = ({ wrapperTag, children, underline, theme }) => {
         right: 50%;
         left: 0;
       }
-      // border-bottom: solid 1px ${theme.colors.primary};
-    `: ``}
+    `}
   `;
 
   return (

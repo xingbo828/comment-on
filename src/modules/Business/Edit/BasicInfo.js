@@ -8,7 +8,7 @@ import {
 } from '../../../globalComponents/Form';
 
 import Grid from '../../../globalComponents/Grid';
-import { SERVICE_AREAS } from '../../Common/constants';
+import { SERVICE_AREAS } from '../../../constants';
 
 import BusinessHour from '../components/BusinessHour';
 
@@ -18,13 +18,7 @@ const renderDescriptionTextArea = ({ input, ...rest }) => (
 
 const renderBusinessHour = ({ input, ...rest }) => {
   const pureValue = (input.value.toJS && input.value.toJS()) || input.value;
-  return (
-    <BusinessHour
-      value={pureValue}
-      onChange={input.onChange}
-      {...rest}
-    />
-  );
+  return <BusinessHour value={pureValue} onChange={input.onChange} {...rest} />;
 };
 
 const renderBusinessServiceAreas = ({ input, ...rest }) => {
@@ -51,7 +45,7 @@ const BasicInfo = ({ handleSubmit, pristine, reset, valid, submitting }) => {
               type="text"
               name="businessName"
               label="Business Name"
-              placeholder="StarBucks"
+              placeholder="My great moving company"
             />
           </Col>
         </Row>

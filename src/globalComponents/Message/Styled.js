@@ -40,7 +40,7 @@ export const MessageContent = styled.div`
   box-shadow: 0 2px 8px rgba(0,0,0,.2);
   display: inline-block;
   pointer-events: all;
-  font-size: 0.85rem;
+  font-size: 1rem;
 `
 
 const MessageContentIcon = styled.span`

@@ -4,6 +4,12 @@ export const GroupWrapper = styled.div`
   > div > div {
     margin: 0 -15px;
   }
+  > div  > label {
+    font-size: 1.5rem;
+    margin-bottom: ${props=>props.theme.spaces.base};
+    display: inline-block;
+    font-weight: ${props=>props.theme.fontWeights.medium};
+  }
 `;
 
 export const ContainerOutter = styled.div`
@@ -58,6 +64,18 @@ export const Container = styled.label`
   padding: 1rem;
   border-radius: 3px;
   border: 1px solid;
+  ${props=>props.theme.media.lessThan('xs')`
+    height: 220px;
+  `}
+  ${props=>props.theme.media.between('xs', 'md')`
+    height: 250px;
+  `}
+  ${props=>props.theme.media.between('md', 'lg')`
+    height: 310px;
+  `}
+  ${props=>props.theme.media.greaterThan('lg')`
+    height: 200px;
+  `}
   border-color: ${props=>props.theme.colors.textLight};
   text-align: center;
   ${props=>{

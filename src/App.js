@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom';
 import ProtectedRoute from './modules/Common/ProtectedRoute';
 import Nav from './modules/Common/Nav';
+import Footer from './modules/Common/Footer';
 import asyncLoad from './modules/Common/asyncLoad';
 import './foundation/base.js';
 
@@ -24,6 +25,7 @@ class App extends Component {
               <Route path="/business" component={asyncLoad(() => import('./modules/Business'))} />
               <Route path="/login" component={asyncLoad(() => import('./modules/Account/Login'))} />
             </Switch>
+            <Footer />
           </main>
         </ThemeProvider>
       </Router>

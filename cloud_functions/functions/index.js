@@ -51,22 +51,45 @@ const filterByDestination = (destinationCity) => (business) => {
     return business.businessServiceArea[destinationCity]
 };
 
-const filterByDateTime = (dateTime) => (business) => {
-    if (!dateTime) {
+const filterByVehicle = (vehicle) => (business) => {
+    if (!vehicle) {
         return true;
     }
-    const dateTimeObj = moment.unix(dateTime);
-    const day = dateTimeObj.format('ddd').toLowerCase();
-    const hour = dateTimeObj.hours() + dateTimeObj.minutes()/60;
-    return business.businessHour.some((businessHour) => {
-        return businessHour.day === day && businessHour.startTime <= hour && businessHour.endTime >= hour;
+    return business.vehiclesInfo[vehicle] !== 0;
+}
+
+const filterByDateTime = (dateTime) => {
+  if (!dateTime) {
+    return () => true;
+  }
+  const dateTimeArr = dateTime.split(',');
+  const date = dateTimeArr.shift();
+  const startHour = Number(dateTimeArr.shift());
+  let endHour = Number(dateTimeArr.shift());
+
+  if (isNaN(date) || isNaN(startHour)) {
+    return () => false;
+  }
+
+  if (isNaN(endHour)) {
+    endHour = startHour;
+  }
+
+  const dateTimeObj = moment(date, 'YYYYMMDD');
+  const day = dateTimeObj.format('ddd').toLowerCase();
+
+  return (business) => {
+    return business.businessHour.some(businessHour => {
+      return businessHour.day === day && businessHour.startTime <= endHour && businessHour.endTime >= startHour;
     });
-};
+  }
+}
 
 const business = ((request, response) => {
     const origin = request.query.origin;
     const destination = request.query.destination;
     const dateTime = request.query.dateTime;
+    const vehicle = request.query.vehicle;
 
     let destinationCity;
 
@@ -89,7 +112,7 @@ const business = ((request, response) => {
         .then((value) => {
             const businessData = value.val();
             if (!businessData) {
-                return response.status(404).json([]);
+                return response.json([]);
             }
             let businesses = Object.keys(businessData)
                 .map((businessId) => {
@@ -97,11 +120,12 @@ const business = ((request, response) => {
                     result.id = businessId;
                     return result;
                 });
-            if (destinationCity || dateTime) {
+            if (destinationCity || dateTime || vehicle) {
                 const cityFilter = filterByDestination(destinationCity);
                 const dateFilter = filterByDateTime(dateTime);
+                const vehicleFilter = filterByVehicle(vehicle);
                 businesses = businesses.filter((business) => {
-                    return cityFilter(business) && dateFilter(business);
+                    return cityFilter(business) && dateFilter(business) && vehicleFilter(business);
                 });
             }
 

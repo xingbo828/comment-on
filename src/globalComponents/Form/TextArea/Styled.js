@@ -20,7 +20,9 @@ export const Input = styled.textarea`
   font-size: 1rem;
   padding: 1rem 0;
   outline: none;
-
+  &::placeholder {
+    color: ${props=>props.theme.colors.textLight};
+  }
   &:focus + div{
     transform: scale(1);
   }

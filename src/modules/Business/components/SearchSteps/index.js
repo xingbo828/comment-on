@@ -5,10 +5,11 @@ import Icon from '../../../../globalComponents/Icon';
 const Step = Steps.Step;
 
 const SearchSteps = ({current, history}) => {
-
+  console.log(history);
   const stepClickHandler = (step) => {
     history.push({
-      pathname: `/business/search/steps/${step}`
+      pathname: `/business/search/steps/${step}`,
+      search: history.location.search
     });
   };
 

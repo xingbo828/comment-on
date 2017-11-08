@@ -8,5 +8,9 @@
     "moment": "latest",
     "@google/maps": "latest"
   },
+  "scripts": {
+    "serve": "firebase serve --only=functions",
+    "deploy": "firebase deploy --only=functions"
+  },
   "private": true
 }

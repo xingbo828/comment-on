@@ -62,6 +62,29 @@ const getHoverFontColor = props => {
   return props.theme.colors.secondaryAction;
 }
 
+
+const getIconSize = props => {
+  if (props.small) {
+    return `
+      border-radius: 50%;
+      width: 15px;
+      height: 15px;
+      line-height: 15px;
+      margin-left: 5px;
+      font-size: .7rem;
+    `;
+  }
+  return `
+    border-radius: 50%;
+    padding: .5rem;
+    width: 1rem;
+    height: 1rem;
+    margin-left: .5rem;
+  `;
+}
+
+
+
 const getIcon = props => {
   if (props.icon) {
     let contentValue;
@@ -75,6 +98,9 @@ const getIcon = props => {
       default:
         return null
     }
+    if(props.loading) {
+      contentValue = '\\f021';
+    }
 
     return `
       &:after {
@@ -84,11 +110,9 @@ const getIcon = props => {
         color: ${getBackColor(props)};
         font-family: FontAwesome;
         content: "${contentValue}";
-        border-radius: 99em;
-        padding: .5rem;
-        width: 1rem;
-        height: 1rem;
-        transform: translateX(1rem);
+
+        ${getIconSize(props)}
+        ${props.loading ? `animation: fa-spin 2s infinite linear;` : ''}
       }
       :hover {
         &:after {
@@ -101,6 +125,22 @@ const getIcon = props => {
   return null;
 }
 
+
+
+
+const getPadding = props => {
+  if (props.small) {
+    return `
+      padding: 5px 5px;
+      ${props.theme.media.greaterThan('md')`padding: 5px 10px;`.join('')}
+    `;
+  }
+  return `
+    padding: 1rem 0;
+    ${props.theme.media.greaterThan('md')`padding: 1rem 2rem;`.join('')}
+  `;
+}
+
 export const Button = styled.button`
   border-radius: 99em;
   box-sizing: content-box;
@@ -111,6 +151,9 @@ export const Button = styled.button`
   border: 1px solid transparent;
   white-space: nowrap;
   width: 100%;
+  ${props=>props.theme.media.greaterThan('md')`
+    width: auto;
+  `};
   min-width: 80px;
   font-size: 1rem;
   user-select: none;
@@ -119,14 +162,9 @@ export const Button = styled.button`
   color: ${getForeColor};
   background-color:  ${getBackColor};
   border-color: ${getBorderColor};
-  padding: ${props => props.small ? '5px 0' : '1rem 0;'};
-  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
+  cursor: ${props => props.disabled || props.loading ? 'not-allowed' : 'pointer'};
 
-  ${props=>props.theme.media.greaterThan('md')`
-    width: auto;
-    padding: ${props => props.small ? '5px 10px' : '1rem 2rem;'};
-  `};
-
+  ${getPadding}
   ${getIcon}
 
   :hover {
