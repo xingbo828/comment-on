@@ -3,24 +3,38 @@ import { arrayOf, func, bool, shape, string, number, object } from 'prop-types';
 import isEqual from 'lodash/isEqual';
 import first from 'lodash/first';
 import last from 'lodash/last';
-import {
-  MapContainer
-} from './Styles';
+import { MapContainer } from './Styles';
 
 class Map extends Component {
-
   shouldComponentUpdate(nextProps) {
-    return !isEqual(this.props.markers, nextProps.markers);
+    return (
+      !isEqual(this.props.markers, nextProps.markers) ||
+      this.props.zoom !== nextProps.zoom
+    );
   }
 
   componentDidMount() {
-    const { google, markers, zoom, direction, onRouteChange} = this.props;
-    this.renderMap(this.mapContainer, google, markers, zoom, direction, onRouteChange);
+    const { google, markers, zoom, direction, onRouteChange } = this.props;
+    this.renderMap(
+      this.mapContainer,
+      google,
+      markers,
+      zoom,
+      direction,
+      onRouteChange
+    );
   }
 
   componentWillUpdate(nextProps) {
     const { google, markers, zoom, direction, onRouteChange } = nextProps;
-    this.renderMap(this.mapContainer, google, markers, zoom, direction, onRouteChange);
+    this.renderMap(
+      this.mapContainer,
+      google,
+      markers,
+      zoom,
+      direction,
+      onRouteChange
+    );
   }
 
   renderSingleMarker = (container, google, marker, zoom) => {
@@ -36,7 +50,7 @@ class Map extends Component {
       label: marker.label,
       map
     });
-  }
+  };
 
   renderMultipleMarkers = (container, google, markers) => {
     const bounds = new google.maps.LatLngBounds();
@@ -54,19 +68,19 @@ class Map extends Component {
       });
     });
     map.fitBounds(bounds);
-  }
+  };
 
   renderRoute = (container, google, markers, onRouteChange) => {
     const maps = google.maps;
     const map = new maps.Map(container, {
       streetViewControl: false
     });
-    const directionsService = new google.maps.DirectionsService;
+    const directionsService = new google.maps.DirectionsService();
     const directionsDisplay = new google.maps.DirectionsRenderer({
       polylineOptions: {
-        strokeColor: "#1d407f",
+        strokeColor: '#1d407f',
         strokeWeight: 5,
-        strokeOpacity: .8
+        strokeOpacity: 0.8
       }
     });
     directionsDisplay.setMap(map);
@@ -74,14 +88,12 @@ class Map extends Component {
     const to = last(markers);
     const fromPos = new maps.LatLng(from.lat, from.lng);
     const toPos = new maps.LatLng(to.lat, to.lng);
-    const waypoints = markers.map((m, index) => {
-      if(index!==0 && index!==markers.length-1) {
-        return m;
-      }
-    }).filter((i)=>!!i).map(marker => ({
-      location: new maps.LatLng(marker.lat, marker.lng),
-      stopover: true
-    }));
+    const waypoints = markers
+      .filter((m, index) => index !== 0 && index !== markers.length - 1)
+      .map(marker => ({
+        location: new maps.LatLng(marker.lat, marker.lng),
+        stopover: false
+      }));
 
     const request = {
       origin: fromPos,
@@ -109,33 +121,36 @@ class Map extends Component {
   };
 
   renderMap = (container, google, markers, zoom, direction, onRouteChange) => {
-    if(markers.length === 0) {
+    if (markers.length === 0) {
       this.renderDefaultMap(container, google);
-    }
-    else if(markers.length === 1) {
+    } else if (markers.length === 1) {
       this.renderSingleMarker(container, google, markers[0], zoom);
-    }
-    else if(direction && markers.length >= 2) {
+    } else if (direction && markers.length >= 2) {
       this.renderRoute(container, google, markers, onRouteChange);
-    }
-    else {
+    } else {
       this.renderMultipleMarkers(container, google, markers);
     }
-  }
+  };
 
   render() {
     return (
-      <MapContainer innerRef={(c) => { this.mapContainer = c; }} />
+      <MapContainer
+        innerRef={c => {
+          this.mapContainer = c;
+        }}
+      />
     );
   }
 }
 
 Map.propTypes = {
-  markers: arrayOf(shape({
-    lat: number.isRequired,
-    lng: number.isRequired,
-    label: string
-  })),
+  markers: arrayOf(
+    shape({
+      lat: number.isRequired,
+      lng: number.isRequired,
+      label: string
+    })
+  ),
   zoom: number,
   google: object.isRequired,
   onRouteChange: func,
