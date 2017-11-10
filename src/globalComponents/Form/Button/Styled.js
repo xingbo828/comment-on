@@ -66,7 +66,6 @@ const getHoverFontColor = props => {
 const getIconSize = props => {
   if (props.small) {
     return `
-      border-radius: 50%;
       width: 15px;
       height: 15px;
       line-height: 15px;
@@ -75,56 +74,12 @@ const getIconSize = props => {
     `;
   }
   return `
-    border-radius: 50%;
     padding: .5rem;
-    width: 1rem;
-    height: 1rem;
+    width: 2rem;
+    height: 2rem;
     margin-left: .5rem;
   `;
 }
-
-
-
-const getIcon = props => {
-  if (props.icon) {
-    let contentValue;
-    switch (props.icon) {
-      case 'arrow-right':
-          contentValue = '\\f061';
-        break;
-      case 'plus':
-          contentValue = '\\f067';
-      break;
-      default:
-        return null
-    }
-    if(props.loading) {
-      contentValue = '\\f021';
-    }
-
-    return `
-      &:after {
-        transition: .3s cubic-bezier(.645,.045,.355,1);
-        display: inline-block;
-        background: ${getForeColor(props)};
-        color: ${getBackColor(props)};
-        font-family: FontAwesome;
-        content: "${contentValue}";
-
-        ${getIconSize(props)}
-        ${props.loading ? `animation: fa-spin 2s infinite linear;` : ''}
-      }
-      :hover {
-        &:after {
-          background: ${!props.disabled && getBackColor(props)};
-          color: ${!props.disabled && getForeColor(props)};
-      }
-    `
-  }
-
-  return null;
-}
-
 
 
 
@@ -141,7 +96,7 @@ const getPadding = props => {
   `;
 }
 
-export const Button = styled.button`
+export const StyledButton = styled.button`
   border-radius: 99em;
   box-sizing: content-box;
   margin-bottom: 0;
@@ -165,12 +120,22 @@ export const Button = styled.button`
   cursor: ${props => props.disabled || props.loading ? 'not-allowed' : 'pointer'};
 
   ${getPadding}
-  ${getIcon}
-
-  :hover {
+  > i {
+      transition: .3s cubic-bezier(.645,.045,.355,1);
+      display: inline-block;
+      border-radius: 50%;
+      color: ${props=>getBackColor(props)};
+      background: ${props=>getForeColor(props)};
+      ${getIconSize}
+    }
+  &:hover {
     background-color: ${getHoverBackgroundColor};
     color: ${getHoverFontColor};
     border-color: ${getHoverBorderColor};
+    > i {
+      color: ${props=>props.disabled ? getBackColor(props) : getForeColor(props)};
+      background: ${props=> props.disabled ? getForeColor(props) : getBackColor(props)};
+    }
   }
-
 `;
+
