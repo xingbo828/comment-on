@@ -29,7 +29,7 @@ const renderSize = (props) => {
 const renderChecked = (props) => {
   if(props.checked) {
     return `
-      background-color: ${props.theme.colors.primaryAction};
+      background-color: ${props.theme.colors.primary};
       ::after {
         left: 100%;
         margin-left: ${props.size === 'default' ? '-19px' : ' -12.5px'};

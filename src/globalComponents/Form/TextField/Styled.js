@@ -10,7 +10,7 @@ export const InputContainer = Styled.div`
 export const Input = Styled.input`
   display: block;
   width: 100%;
-  border: solid ${props=>props.theme.colors.borderPrimary};
+  border: solid ${props=>props.theme.colors.border};
   border-width: 0 0 1px 0;
   font-size: 1rem;
   padding: 1rem 0;

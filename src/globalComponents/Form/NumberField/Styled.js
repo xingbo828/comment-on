@@ -56,7 +56,7 @@ export const Icon = Styled.i`
 export const Input = Styled.span`
   display: block;
   width: 100%;
-  border: solid ${props=>props.theme.colors.borderPrimary};
+  border: solid ${props=>props.theme.colors.border};
   border-width: 1px;
   border-radius: 500px;
   font-size: 1.5rem;

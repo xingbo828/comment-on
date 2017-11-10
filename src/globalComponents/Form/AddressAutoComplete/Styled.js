@@ -63,7 +63,7 @@ export const GeosuggestStyled = styled(Geosuggest)`
     padding: 0;
     margin-top: -1px;
     background: #fff;
-    border: 1px solid ${props => props.theme.colors.borderPrimary};
+    border: 1px solid ${props => props.theme.colors.border};
     border-top-width: 0;
     overflow-x: hidden;
     overflow-y: auto;
@@ -82,11 +82,11 @@ export const GeosuggestStyled = styled(Geosuggest)`
   }
   .geosuggest__item:hover,
   .geosuggest__item:focus {
-    background: ${props => props.theme.colors.primaryAction};
+    background: ${props => props.theme.colors.primary};
     color: #fff;
   }
   .geosuggest__item--active {
-    background: ${props => props.theme.colors.primaryAction};
+    background: ${props => props.theme.colors.primary};
     color: #fff;
   }
   .geosuggest__item--active:hover,

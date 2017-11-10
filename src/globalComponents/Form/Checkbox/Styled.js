@@ -53,13 +53,13 @@ export const CheckboxInner = styled.span`
   display: block;
   width: 16px;
   height: 16px;
-  border: 1px solid ${props => props.checked ? props.theme.colors.primary : props.theme.colors.borderPrimary};
+  border: 1px solid ${props => props.checked ? props.theme.colors.primary : props.theme.colors.border};
   border-radius: 2px;
   transition: all .3s;
   ${props => {
     if(props.disabled){
       return `
-        background-color: ${props.theme.colors.borderPrimary};
+        background-color: ${props.theme.colors.border};
       `;
     } else if (props.checked) {
       return `

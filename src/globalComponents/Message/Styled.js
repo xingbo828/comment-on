@@ -53,21 +53,21 @@ const MessageContentIcon = styled.span`
 
 export const SuccessMessageContent = MessageContentIcon.extend`
   ::before {
-    color: ${ variables.colors.primaryAction };
+    color: ${ variables.colors.success };
     content: '\f058';
   }
 `;
 
 export const ErrorMessageContent = MessageContentIcon.extend`
   ::before {
-    color: ${ variables.colors.dangerAction };
+    color: ${ variables.colors.danger };
     content: '\f06a';
   }
 `;
 
 export const InfoMessageContent = MessageContentIcon.extend`
   ::before {
-    color: ${ variables.colors.secondaryAction };
+    color: ${ variables.colors.secondary };
     content: '\f05a';
   }
 `;

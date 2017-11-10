@@ -46,7 +46,7 @@ export const DateTimeContainer = styled.div`
   `}
   width: 100%;
   position:relative;
-  border: 1px solid ${props => props.theme.colors.borderPrimary};
+  border: 1px solid ${props => props.theme.colors.border};
   margin-top: -1px;
   background: #fff;
   border-top-width: 0;
@@ -75,7 +75,7 @@ const CalendarBtn = styled.button`
   outline: none;
   border-radius: 3px;
   background-color: transparent;
-  border: 1px solid ${props => props.theme.colors.borderPrimary};
+  border: 1px solid ${props => props.theme.colors.border};
 
   white-space: nowrap;
   padding: 0.5rem 0;
@@ -85,9 +85,9 @@ const CalendarBtn = styled.button`
   }
 
   :hover {
-    border-color: ${props => props.theme.colors.primaryAction};
+    border-color: ${props => props.theme.colors.primary};
     ::after {
-      color: ${props => props.theme.colors.primaryAction};
+      color: ${props => props.theme.colors.primary};
     }
   }
 `;
@@ -123,13 +123,13 @@ export const CalenderTable = styled.table`
     cursor: pointer;
     font-weight: bold;
     height: 35px;
-    border: 1px solid ${props => props.theme.colors.borderPrimary};
+    border: 1px solid ${props => props.theme.colors.border};
   }
 
   thead {
     td {
       text-transform: uppercase;
-      color: ${props => props.theme.colors.primaryAction};
+      color: ${props => props.theme.colors.primary};
     }
   }
 `;
@@ -139,7 +139,7 @@ export const CalendarCell = styled.td`
     if (props.isDisabled) {
       return `
         background-color: ${props.theme.colors.offWhite};
-        color: ${props.theme.colors.borderPrimary};
+        color: ${props.theme.colors.border};
         :hover {
           cursor: not-allowed;
         }
@@ -151,16 +151,16 @@ export const CalendarCell = styled.td`
       `;
     } else if (!props.isCurrentMonth) {
       return `
-        color: ${props.theme.colors.borderPrimary};
+        color: ${props.theme.colors.border};
         :hover {
-          background-color: ${props.theme.colors.primaryAction};
+          background-color: ${props.theme.colors.primary};
           color: white;
         }
       `;
     } else {
       return `
         :hover {
-          background-color: ${props.theme.colors.primaryAction};
+          background-color: ${props.theme.colors.primary};
           color: white;
         }
       `;
@@ -221,7 +221,7 @@ const TimeChangeBtn = styled.button`
   outline: none;
   border-radius: 3px;
   background-color: transparent;
-  border: 1px solid ${props => props.theme.colors.borderPrimary};
+  border: 1px solid ${props => props.theme.colors.border};
   white-space: nowrap;
   position: relative;
   width: 30px;
@@ -232,9 +232,9 @@ const TimeChangeBtn = styled.button`
     font-family: 'FontAwesome';
   }
   :hover {
-    border-color: ${props => props.theme.colors.primaryAction};
+    border-color: ${props => props.theme.colors.primary};
     ::after {
-      color: ${props => props.theme.colors.primaryAction};
+      color: ${props => props.theme.colors.primary};
     }
   }
 `;

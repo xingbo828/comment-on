@@ -2,24 +2,24 @@ import styled from 'styled-components';
 
 const getBackColor = props => {
   if (props.disabled) {
-    return props.theme.colors.borderPrimary;
+    return props.theme.colors.border;
   } else if(props.primary) {
-    return props.theme.colors.primaryAction;
+    return props.theme.colors.primary;
   } else if(props.danger) {
-    return props.theme.colors.dangerAction;
+    return props.theme.colors.danger;
   }
-  return props.theme.colors.secondaryAction;
+  return props.theme.colors.secondary;
 };
 
 const getBorderColor = props => {
   if (props.disabled) {
-    return props.theme.colors.borderPrimary;
+    return props.theme.colors.border;
   } else if (props.primary) {
-    return props.theme.colors.primaryAction;
+    return props.theme.colors.primary;
   } else if(props.danger) {
-    return props.theme.colors.dangerAction;
+    return props.theme.colors.danger;
   }
-  return props.theme.colors.secondaryAction;
+  return props.theme.colors.secondary;
 };
 
 const getForeColor = props => {
@@ -44,22 +44,22 @@ const getHoverBorderColor = props => {
   if (props.disabled) {
     return '';
   } else if (props.primary) {
-    return props.theme.colors.primaryAction;
+    return props.theme.colors.primary;
   } else if(props.danger) {
-    return props.theme.colors.dangerAction;
+    return props.theme.colors.danger;
   }
-  return props.theme.colors.secondaryAction;
+  return props.theme.colors.secondary;
 }
 
 const getHoverFontColor = props => {
   if (props.disabled) {
     return '';
   } else if(props.primary) {
-    return props.theme.colors.primaryAction;
+    return props.theme.colors.primary;
   } else if(props.danger) {
-    return props.theme.colors.dangerAction;
+    return props.theme.colors.danger;
   }
-  return props.theme.colors.secondaryAction;
+  return props.theme.colors.secondary;
 }
 
 
