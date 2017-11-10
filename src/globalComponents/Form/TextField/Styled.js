@@ -1,5 +1,4 @@
 import Styled from 'styled-components';
-import variables from '../../../foundation/variables';
 
 export const InputContainer = Styled.div`
   display: block;
@@ -11,7 +10,7 @@ export const InputContainer = Styled.div`
 export const Input = Styled.input`
   display: block;
   width: 100%;
-  border: solid ${variables.colors.borderPrimary};
+  border: solid ${props=>props.theme.colors.borderPrimary};
   border-width: 0 0 1px 0;
   font-size: 1rem;
   padding: 1rem 0;
@@ -27,7 +26,7 @@ export const Input = Styled.input`
 export const FocusBorder = Styled.div`
   height: 2px;
   width: 100%;
-  background: ${variables.colors.primary};
+  background: ${props=>props.theme.colors.primary};
   margin-top: -2px;
   transition: .3s;
   transform: scale(0);
