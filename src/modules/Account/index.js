@@ -3,7 +3,7 @@ import { Switch, withRouter, Redirect } from 'react-router-dom';
 import ProtectedRoute from '../Common/ProtectedRoute';
 import BasicProfile from './BasicProfile';
 import ProfilePicture from './ProfilePicture';
-import Settings from '../../globalComponents/Settings';
+import Settings from '../Common/Settings';
 
 const SideBarLinks = [
   {

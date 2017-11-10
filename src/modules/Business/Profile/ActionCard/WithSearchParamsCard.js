@@ -7,7 +7,7 @@ import Estimate from './Estimate';
 import {
   DescriptionList,
   Row
-} from '../../../../globalComponents/DescriptionList';
+} from '../../../Common/DescriptionList';
 import {
   Button
 } from '../../../../globalComponents/Form';

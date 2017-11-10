@@ -5,7 +5,7 @@ import { reduxForm } from 'redux-form/immutable'
 import BasicProfile from './BasicProfile';
 import { updateProfile } from '../accountAction';
 import { getUser } from  '../accountReducer';
-import { withSettingsContext } from '../../../globalComponents/Settings';
+import { withSettingsContext } from '../../Common/Settings';
 import validators, { validateFunc } from '../../Common/validators';
 
 const mapStateToProps = state => ({initialValues: getUser(state).user});

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { GeosuggestStyled, Label , FocusBorder} from './Styled';
+import { GeosuggestStyled, Label, FocusBorder } from './Styled';
 
 class AddressAutoComplete extends Component {
   constructor(props) {
     super(props);
     this.state = {
       focused: false
-    }
+    };
 
     this.handleFocus = this.handleFocus.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
@@ -18,7 +18,7 @@ class AddressAutoComplete extends Component {
     this.setState({
       focused: true
     });
-    this._geoSuggest.input.input.select()
+    this._geoSuggest.input.input.select();
   }
 
   handleBlur() {
@@ -28,7 +28,7 @@ class AddressAutoComplete extends Component {
   }
 
   handleOnChange(value) {
-    if(value === '') {
+    if (value === '') {
       this.props.onSelect(null);
     }
   }
@@ -42,7 +42,7 @@ class AddressAutoComplete extends Component {
     return (
       <Label>
         <GeosuggestStyled
-          innerRef={el=>this._geoSuggest=el}
+          innerRef={el => (this._geoSuggest = el)}
           country="ca"
           placeholder={placeholder}
           onFocus={this.handleFocus}
@@ -52,12 +52,11 @@ class AddressAutoComplete extends Component {
           initialValue={initialValue}
           getSuggestLabel={this.mapSuggestDescription}
         />
-        <FocusBorder focused={this.state.focused}/>
+        <FocusBorder focused={this.state.focused} />
       </Label>
     );
   }
 }
-
 
 AddressAutoComplete.defaultProps = {
   onSelect: () => {},
