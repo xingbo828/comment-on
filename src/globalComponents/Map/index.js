@@ -78,7 +78,7 @@ class Map extends Component {
     const directionsService = new google.maps.DirectionsService();
     const directionsDisplay = new google.maps.DirectionsRenderer({
       polylineOptions: {
-        strokeColor: '#1d407f',
+        strokeColor: '#42b56b',
         strokeWeight: 5,
         strokeOpacity: 0.8
       }

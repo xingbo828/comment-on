@@ -3,29 +3,31 @@ import styled from 'styled-components';
 export const StepsContainer = styled.ul`
   display: flex;
   padding: 0;
-  font-size: .8rem;
+  font-size: .75rem;
 `;
 
 export const StepContainer = styled.li`
+  position: relative;
   flex: 1;
   list-style: none;
   text-align: center;
-  padding-bottom: 10px;
+  padding: ${props=>props.theme.spaces.base} 0;
   border-bottom-width: 1px;
   border-bottom-style: solid;
   text-transform: uppercase;
-  font-weight: ${props=> props.theme.fontWeights.medium};
+  font-weight: ${props=>props.theme.fontWeights.medium};
   ${props => {
     if (props.status === 'completed') {
       return `
         cursor: pointer;
-        color: ${props.theme.colors.primary};
-        border-bottom-color: ${props.theme.colors.primary};
+        border-bottom-color: ${props.theme.colors.success};
+        i {
+          color: ${props.theme.colors.success};
+        }
       `;
     } else if (props.status === 'inProgress') {
       return `
-        color: ${props.theme.colors.secondary};
-        border-bottom-color: ${props.theme.colors.secondary};
+        border-bottom-color: transparent;
       `;
     } else {
       return `
@@ -37,10 +39,24 @@ export const StepContainer = styled.li`
 `;
 
 
-export const StepWithIconWrapper = styled.span`
+export const StepLabel = styled.span`
 
 `;
 
-export const StepIconWrapper = styled.span`
-  padding: 0 5px;
+export const StepSeperatorWrapper = styled.span`
+  padding-right: ${props=>props.theme.spaces.xTight};
+
 `;
+
+export const StepHighLightBar = styled.span`
+  transition: .3s;
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background-color: ${props=>props.theme.colors.primary};
+  bottom: -1px;
+  left: 0;
+  transform-origin: 0 0;
+  transform: ${props=>props.status === 'inProgress' ? 'scale(1)' : 'scale(0)'};
+`;
+
