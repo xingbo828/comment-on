@@ -14,18 +14,19 @@ import {
 } from './V2Styled';
 
 class AddressSelection extends Component {
-
-  state = {
-    from:null,
-    to: null,
+constructor(props) {
+  super(props);
+  this.state = {
+    from: props.from,
+    to: props.to,
     route: null
   };
+}
 
   onFromAddressSelect = (geo) => {
     this.setState({
       from : {
-        lat: geo.location.lat,
-        lng: geo.location.lng,
+        placeId: geo.placeId
       }
     });
   }
@@ -33,8 +34,7 @@ class AddressSelection extends Component {
   onToAddressSelect = (geo) => {
     this.setState({
       to : {
-        lat: geo.location.lat,
-        lng: geo.location.lng,
+        placeId: geo.placeId
       }
     });
   };
@@ -42,6 +42,11 @@ class AddressSelection extends Component {
   onRouteChange = (result) => {
     this.setState({
       route: result.routes[0].legs[0]
+    });
+    const { from, to } = this.state;
+    this.props.onChange({
+      from,
+      to
     });
   };
 
@@ -78,5 +83,18 @@ class AddressSelection extends Component {
     );
   }
 }
+
+AddressSelection.propTypes = {
+  onChange: func.isRequired,
+  google: object.isRequired,
+  from: object,
+  to: object
+};
+
+AddressSelection.defaultProps = {
+  from: null,
+  to: null
+};
+
 
 export default AddressSelection;

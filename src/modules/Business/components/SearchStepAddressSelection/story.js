@@ -18,7 +18,7 @@ const AddressSelectionDemo = withInfo('Address Selection')(() =>
 
 const AddressSelectionV2Demo = withInfo('Address Selection')(() =>
 <div style={{padding: '25px'}}>
-  <V2 google={window.google} desc={descPlaceHolder}  />
+  <V2 google={window.google} desc={descPlaceHolder} onChange={action('changed')} />
 </div>
 );
 
