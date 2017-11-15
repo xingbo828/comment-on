@@ -15,3 +15,7 @@ export const RouteInfoContainer = styled.div`
 export const InputsContainer = styled.div`
   padding-top: ${props=>props.theme.spaces.base};
 `;
+
+export const InputContainer = styled.div`
+  margin-bottom: ${props=>props.theme.spaces.base};
+`;

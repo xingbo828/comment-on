@@ -4,7 +4,7 @@ import isEqual from 'lodash/isEqual';
 import first from 'lodash/first';
 import has from 'lodash/has';
 import last from 'lodash/last';
-import { MapContainer } from './Styles';
+import MapContainer from './Styles';
 
 class Map extends Component {
   shouldComponentUpdate(nextProps) {
@@ -16,16 +16,16 @@ class Map extends Component {
 
   async componentDidMount() {
     const { google, markers, zoom, direction, onRouteChange } = this.props;
-    this.placeIdConverter = this._placeIdToAddress(new google.maps.Geocoder);
-    const processedMarkers = await this.convertMarkersFromPlaceIdToAddress(markers, this.placeIdConverter);
-    this.renderMap(
-      this.mapContainer,
-      google,
-      processedMarkers,
-      zoom,
-      direction,
-      onRouteChange
-    );
+      this.placeIdConverter = this._placeIdToAddress(new google.maps.Geocoder);
+      const processedMarkers = await this.convertMarkersFromPlaceIdToAddress(markers, this.placeIdConverter);
+      this.renderMap(
+        this.mapContainer,
+        google,
+        processedMarkers,
+        zoom,
+        direction,
+        onRouteChange
+      );
   }
 
   async componentWillUpdate(nextProps) {

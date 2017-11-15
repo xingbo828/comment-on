@@ -10,7 +10,8 @@ import {
   Container,
   MapContainer,
   RouteInfoContainer,
-  InputsContainer
+  InputsContainer,
+  InputContainer
 } from './V2Styled';
 
 class AddressSelection extends Component {
@@ -19,7 +20,9 @@ constructor(props) {
   this.state = {
     from: props.from,
     to: props.to,
-    route: null
+    route: null,
+    fromInputValue: '',
+    toInputValue: ''
   };
 }
 
@@ -41,7 +44,9 @@ constructor(props) {
 
   onRouteChange = (result) => {
     this.setState({
-      route: result.routes[0].legs[0]
+      route: result.routes[0].legs[0],
+      fromInputValue: result.routes[0].legs[0].start_address,
+      toInputValue: result.routes[0].legs[0].end_address,
     });
     const { from, to } = this.state;
     this.props.onChange({
@@ -67,7 +72,7 @@ constructor(props) {
 
   render() {
     const { google } = this.props;
-    const { from, to, route } = this.state;
+    const { from, to, route, fromInputValue, toInputValue} = this.state;
     const markers = [from, to].filter(i=> !isNull(i));
     return (
       <Container>
@@ -76,8 +81,8 @@ constructor(props) {
         </MapContainer>
         {route && this.renderRouteInfo(route)}
         <InputsContainer>
-          <AddressAutoComplete placeholder="From" onSelect={this.onFromAddressSelect} />
-          <AddressAutoComplete placeholder="To" onSelect={this.onToAddressSelect} />
+          <InputContainer><AddressAutoComplete  initialValue={fromInputValue} placeholder="Current address" onSelect={this.onFromAddressSelect} /></InputContainer>
+          <InputContainer><AddressAutoComplete  initialValue={toInputValue} placeholder="Destination address" onSelect={this.onToAddressSelect} /></InputContainer>
         </InputsContainer>
       </Container>
     );

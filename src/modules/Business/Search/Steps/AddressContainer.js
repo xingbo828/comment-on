@@ -1,12 +1,12 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+
 import { compose, lifecycle, branch, renderComponent } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import AddressStep from './Address';
 import scrollToTopOnMount from '../../../Common/scrollToTopOnMount';
 import Spin from '../../../../globalComponents/Spin';
 import validators, { validateFunc } from '../../../Common/validators';
-
 import { localSaveAddresses, loadAddresses } from '../searchActions';
 
 import { getAddresses } from '../searchReducers';
@@ -14,12 +14,7 @@ import { getAddresses } from '../searchReducers';
 const validate = validateFunc(
   [
     {
-      field: 'homeAddress',
-      validator: 'isRequired',
-      message: 'Required'
-    },
-    {
-      field: 'destAddress',
+      field: 'addresses',
       validator: 'isRequired',
       message: 'Required'
     }
@@ -42,26 +37,15 @@ const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
     componentDidMount() {
-      if (notLoaded(this.props)) {
         this.props.loadAddresses();
-      }
+    },
+    shouldComponentUpdate(nextProps) {
+      return (
+        this.props.initialValues.get('addresses') !== nextProps.initialValues.get('addresses')
+      );
     }
   }),
   branch(notLoaded, renderComponent(Spin.FullScreenSpinner)),
-  lifecycle({
-    shouldComponentUpdate(nextProps) {
-      const diffHomeAddr =
-        this.props.initialValues.get('homeAddress') !==
-        nextProps.initialValues.get('homeAddress');
-      const diffDestAddr =
-        this.props.initialValues.get('destAddress') !==
-        nextProps.initialValues.get('destAddress');
-      const diffStatus =
-        this.props.initialValues.get('status') !==
-        nextProps.initialValues.get('status');
-      return diffHomeAddr || diffDestAddr;
-    }
-  }),
   reduxForm({
     form: 'search.steps.address',
     validate,
