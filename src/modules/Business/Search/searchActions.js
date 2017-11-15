@@ -21,7 +21,7 @@ export const getLocalStorageStepInfo = async () => {
 export const GET_ADDRESSES = 'GET_ADDRESSES';
 
 export const LOADING_ADDRESSES = 'LOADING_ADDRESSES';
-
+export const RESET_ADDRESSES = 'RESET_ADDRESSES';
 export const localSaveAddresses = async (addresses) => {
   try {
     const stepInfo = await localforge.getItem(LOCALSTOREAGE_STEP_INFO_KEY);
@@ -33,6 +33,12 @@ export const localSaveAddresses = async (addresses) => {
     console.error(error);
   }
 };
+
+export const resetAddresses = () => dispatch => {
+  dispatch({
+    type: RESET_ADDRESSES
+  });
+}
 
 export const loadAddresses = () => async dispatch => {
   dispatch({

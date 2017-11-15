@@ -3,6 +3,7 @@ import { combineReducers } from 'redux-immutable';
 import {
   GET_ADDRESSES,
   LOADING_ADDRESSES,
+  RESET_ADDRESSES,
   GET_VEHICLE,
   LOADING_VEHICLE,
   GET_DATE_TIME,
@@ -28,9 +29,17 @@ const searchAddressesStep = (state = initAddressesState, action) => {
       });
     }
 
+    case RESET_ADDRESSES: {
+      return state.withMutations(st => {
+        st.set('status', 'UNINIT');
+        st.set('addresses', null)
+      });
+    }
+
     case LOADING_ADDRESSES: {
       return state.withMutations(st => {
         st.set('status', 'PENDING');
+        st.set('addresses', null)
       });
     }
 
