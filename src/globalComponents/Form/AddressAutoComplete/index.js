@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { GeosuggestStyled, Label, FocusBorder } from './Styled';
-
+import { GeosuggestStyled, Label, FocusBorder, IconContainer } from './Styled';
+import Icon from '../../Icon';
 class AddressAutoComplete extends Component {
   constructor(props) {
     super(props);
@@ -41,6 +41,7 @@ class AddressAutoComplete extends Component {
     const { initialValue, onSelect, placeholder } = this.props;
     return (
       <Label>
+        <IconContainer><Icon icon={this.props.icon} size="lg" /></IconContainer>
         <GeosuggestStyled
           innerRef={el => (this._geoSuggest = el)}
           country="ca"
@@ -61,7 +62,8 @@ class AddressAutoComplete extends Component {
 AddressAutoComplete.defaultProps = {
   onSelect: () => {},
   placeholder: 'Search place',
-  initialValue: ''
+  initialValue: '',
+  icon: 'map-marker'
 };
 
 export default AddressAutoComplete;

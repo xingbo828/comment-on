@@ -71,16 +71,16 @@ const enhance = compose(
     onSubmitSuccess: async (result, dispatch, props) => {
       const search = props.location.search;
       const params = new URLSearchParams(search);
-      const { origin, destination, dateTime } = await getLocalStorageStepInfo();
-
+      const { addresses, dateTime } = await getLocalStorageStepInfo();
+      debugger;
       const searchParameters = urlQueryConstructor([
         {
           label: 'origin',
-          value: origin
+          value: addresses.from
         },
         {
           label: 'destination',
-          value: destination
+          value: addresses.to
         },
         {
           label: 'dateTime',

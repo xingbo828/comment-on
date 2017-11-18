@@ -97,15 +97,8 @@ class AddressSelection extends Component {
 
   renderRouteInfo = (routeInfo) => {
     return (
-      <RouteInfoContainer>
-        <Grid.Row>
-          <Grid.Col xs={12} sm={8} md={6} lg={4}>
-            <Icon icon="truck" /> {routeInfo.distance.text}
-          </Grid.Col>
-          <Grid.Col xs={12} sm={8} md={6} lg={4}>
-            <Icon icon="clock-o" /> {routeInfo.duration.text}
-          </Grid.Col>
-        </Grid.Row>
+      <RouteInfoContainer visible={routeInfo}>
+          <Icon icon="truck" /> {routeInfo && routeInfo.distance.text}
       </RouteInfoContainer>
     );
   }
@@ -126,10 +119,10 @@ class AddressSelection extends Component {
         <MapContainer>
           <Map google={google} markers={markers} direction onRouteChange={this.onRouteChange}/>
         </MapContainer>
-        {route && this.renderRouteInfo(route)}
+        {this.renderRouteInfo(route)}
         <InputsContainer>
-          <InputContainer><AddressAutoComplete  initialValue={this.getInitValue(from)} placeholder="Current address" onSelect={this.onFromAddressSelect} /></InputContainer>
-          <InputContainer><AddressAutoComplete  initialValue={this.getInitValue(to)} placeholder="Destination address" onSelect={this.onToAddressSelect} /></InputContainer>
+          <InputContainer><AddressAutoComplete  icon="circle-o" initialValue={this.getInitValue(from)} placeholder="Pick-up address" onSelect={this.onFromAddressSelect} /></InputContainer>
+          <InputContainer><AddressAutoComplete  initialValue={this.getInitValue(to)} placeholder="Delivery address" onSelect={this.onToAddressSelect} /></InputContainer>
         </InputsContainer>
       </Container>
     );

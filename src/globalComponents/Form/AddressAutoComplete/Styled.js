@@ -10,8 +10,9 @@ export const FocusBorder = styled.div`
 height: 2px;
 width: 100%;
 background: ${props=>props.theme.colors.primary};
-margin-top: -2px;
+margin-top: -3px;
 transition: .3s;
+margin-left: 20px;
 ${props => {
   if(props.focused) {
     return `
@@ -22,33 +23,30 @@ ${props => {
 }}
 `;
 
+export const IconContainer = styled.span`
+  width: 20px;
+  display: inline-block;
+  text-align: center;
+  color: ${props=>props.theme.colors.textLight};
+`;
+
 
 export const GeosuggestStyled = styled(Geosuggest)`
   position: relative;
-  padding-left: 30px;
   line-height: 40px;
-
-  &::before {
-    font-family: 'FontAwesome';
-    content: '\f041';
-    font-size: 1.2rem;
-    position: absolute;
-    top:0;
-    left: 10px;
-    line-height: 40px;
-  }
-
+  padding-left: 10px;
+  display: inline-block;
+  width: calc(100% - 20px);
   text-align: left;
   .geosuggest__input {
-    outline: none;
+    outline: 0;
     font-size: 1.2rem;
     width: 100%;
     box-sizing: border-box;
     padding: .5rem;
-    border: 0;
+    border: solid ${props=>props.theme.colors.border};
+    border-width: 0 0 1px 0;
     color: ${props => props.theme.colors.textDark};
-
-
   }
 
   .geosuggest__input:focus {

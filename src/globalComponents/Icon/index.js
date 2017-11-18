@@ -1,6 +1,6 @@
 import React from 'react';
 import { string } from 'prop-types';
-const Icon = ({ className, icon, tag, size, spin, ...rest }) => {
+const Icon = ({ className='', icon, tag, size, spin, ...rest }) => {
   let innerClassName = `${className} fa fa-${icon}`;
   if(size){innerClassName = `${innerClassName} fa-${size}`};
   if(spin){innerClassName = `${innerClassName} fa-spin`}
