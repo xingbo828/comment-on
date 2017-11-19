@@ -4,9 +4,10 @@ import Icon from '../../Icon';
 
 import { StyledButton } from './Styled';
 
-const Button = ({ children, small, icon, loading, disabled, primary, danger }) => {
+const Button = ({ children, small, icon, loading, disabled, primary, danger, style={} }) => {
   return (
     <StyledButton
+      style={style}
       small={small}
       primary={primary}
       danger={danger}

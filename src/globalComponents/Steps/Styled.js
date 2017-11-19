@@ -3,7 +3,14 @@ import styled from 'styled-components';
 export const StepsContainer = styled.ul`
   display: flex;
   padding: 0;
-  font-size: .75rem;
+  font-size: .875rem;
+`;
+
+export const StepTitle = styled.span`
+  display: none;
+  ${props=>props.theme.media.greaterThan('md')`
+    display: inline;
+  `}
 `;
 
 export const StepContainer = styled.li`
@@ -11,7 +18,11 @@ export const StepContainer = styled.li`
   flex: 1;
   list-style: none;
   text-align: center;
-  padding: ${props=>props.theme.spaces.base} 0;
+  padding: .5rem 0;
+  ${props=>props.theme.media.greaterThan('md')`
+    padding: 2.5rem 0;
+    border-top: 1px solid ${props=>props.theme.colors.border};
+  `}
   border-bottom-width: 1px;
   border-bottom-style: solid;
   text-transform: uppercase;
@@ -44,7 +55,6 @@ export const StepLabel = styled.span`
 `;
 
 export const StepSeperatorWrapper = styled.span`
-  padding-right: ${props=>props.theme.spaces.xTight};
 
 `;
 

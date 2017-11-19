@@ -106,13 +106,7 @@ class Map extends Component {
       streetViewControl: false
     });
     const directionsService = new google.maps.DirectionsService();
-    const directionsDisplay = new google.maps.DirectionsRenderer({
-      polylineOptions: {
-        strokeColor: '#42b56b',
-        strokeWeight: 5,
-        strokeOpacity: 0.8
-      }
-    });
+    const directionsDisplay = new google.maps.DirectionsRenderer();
     directionsDisplay.setMap(map);
     const from = first(markers);
     const to = last(markers);

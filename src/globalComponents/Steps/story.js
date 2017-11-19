@@ -9,7 +9,7 @@ import Steps from '../../globalComponents/Steps';
 const Step = Steps.Step;
 
 const StepsDemo = () => (
-  <div style={{width: '700px'}}>
+  <div style={{width: '100%'}}>
     <Steps current={number('curent', 1)}>
       <Step
         title="Login"

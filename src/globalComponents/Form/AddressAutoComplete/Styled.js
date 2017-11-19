@@ -27,7 +27,7 @@ export const IconContainer = styled.span`
   width: 20px;
   display: inline-block;
   text-align: center;
-  color: ${props=>props.theme.colors.textLight};
+  color: #8a8a8a;
 `;
 
 

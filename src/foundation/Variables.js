@@ -33,7 +33,8 @@ const spaces = {
   get base() { return `${this._baseInRem}rem` },
   get xTight(){ return `${this._baseInRem * .25}rem` },
   get tight(){ return `${this._baseInRem * .5}rem` },
-  get wide(){ return `${this._baseInRem * 2}rem` }
+  get wide(){ return `${this._baseInRem * 2}rem` },
+  get xWide(){ return `${this._baseInRem * 4}rem` }
 }
 
 const fontWeights = {

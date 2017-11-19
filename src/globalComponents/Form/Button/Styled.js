@@ -92,7 +92,7 @@ const getPadding = props => {
   }
   return `
     padding: 1rem 0;
-    ${props.theme.media.greaterThan('md')`padding: 1rem 2rem;`.join('')}
+    ${props.theme.media.greaterThan('md')`padding: 1rem;`.join('')}
   `;
 }
 
