@@ -9,7 +9,6 @@ import AddressAutoComplete from './AddressAutoComplete';
 import DateTime from './DateTime';
 import Switch from './Switch';
 import Select from './Select';
-import FormLayout from './FormLayout';
 
 export {
   Button,
@@ -22,6 +21,5 @@ export {
   Checkbox,
   Switch,
   Select,
-  ImgUpload,
-  FormLayout
+  ImgUpload
 };

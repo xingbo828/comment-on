@@ -6,10 +6,20 @@ export const StepsContainer = styled.ul`
   font-size: .875rem;
 `;
 
-export const StepTitle = styled.span`
+export const StepDot = styled.span`
   display: none;
   ${props=>props.theme.media.greaterThan('md')`
     display: inline;
+    padding-right: 5px;
+    ${props => {
+      if(!props.completed){
+        return `
+          &:after{
+            content: '. '
+          }
+        `;
+      }
+    }}
   `}
 `;
 

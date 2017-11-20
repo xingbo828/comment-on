@@ -6,6 +6,11 @@ import has from 'lodash/has';
 import last from 'lodash/last';
 import MapContainer from './Styles';
 
+
+const defaultMapConfig = {
+  streetViewControl: false,
+  mapTypeControl: false
+};
 class Map extends Component {
   shouldComponentUpdate(nextProps) {
     return (
@@ -72,8 +77,8 @@ class Map extends Component {
     const center = new maps.LatLng(marker.lat, marker.lng);
     const map = new maps.Map(container, {
       zoom: zoom,
-      streetViewControl: false,
-      center
+      center,
+      ...defaultMapConfig
     });
     new google.maps.Marker({
       position: center,
@@ -85,9 +90,7 @@ class Map extends Component {
   renderMultipleMarkers = (container, google, markers) => {
     const bounds = new google.maps.LatLngBounds();
     const maps = google.maps;
-    const map = new maps.Map(container, {
-      streetViewControl: false
-    });
+    const map = new maps.Map(container, defaultMapConfig);
     const mapMarkers = markers.map(m => {
       const markerPos = new maps.LatLng(m.lat, m.lng);
       bounds.extend(markerPos);
@@ -102,9 +105,7 @@ class Map extends Component {
 
   renderRoute = (container, google, markers, onRouteChange) => {
     const maps = google.maps;
-    const map = new maps.Map(container, {
-      streetViewControl: false
-    });
+    const map = new maps.Map(container, defaultMapConfig);
     const directionsService = new google.maps.DirectionsService();
     const directionsDisplay = new google.maps.DirectionsRenderer();
     directionsDisplay.setMap(map);
@@ -139,8 +140,8 @@ class Map extends Component {
     const center = new maps.LatLng(49.246292, -123.116226);
     const map = new maps.Map(container, {
       zoom: 9,
-      streetViewControl: false,
-      center
+      center,
+      ...defaultMapConfig
     });
   };
 

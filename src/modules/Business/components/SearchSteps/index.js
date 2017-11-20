@@ -8,7 +8,7 @@ const SearchSteps = ({current, history}) => {
   console.log(history);
   const stepClickHandler = (step) => {
     history.push({
-      pathname: `/business/search/steps/${step}`,
+      pathname: `/business/search/configurations/${step}`,
       search: history.location.search
     });
   };
@@ -17,27 +17,25 @@ const SearchSteps = ({current, history}) => {
     <Steps current={current}>
 
       <Step
-        icon={<Icon icon="map-marker" />}
         title="addresses"
         onStepClick={stepClickHandler.bind(this, 'address')}
       />
 
       <Step
-        icon={<Icon icon="truck" />}
-        title="vehicle size"
-        onStepClick={stepClickHandler.bind(this, 'vehicle')}
-      />
-
-      <Step
-        icon={<Icon icon="calendar" />}
         title="date"
         onStepClick={stepClickHandler.bind(this, 'date')}
       />
 
+
+
       <Step
-        icon={<Icon icon="users" />}
         title="logistics"
         onStepClick={stepClickHandler.bind(this, 'logistics')}
+      />
+
+      <Step
+        title="items"
+        onStepClick={stepClickHandler.bind(this, 'items')}
       />
 
     </Steps>

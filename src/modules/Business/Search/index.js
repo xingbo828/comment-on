@@ -2,14 +2,14 @@ import React from 'react';
 import { Switch, withRouter, Route } from 'react-router-dom';
 
 import SearchResult from './Result';
-import SearchSteps from './Steps';
+import SearchConfigurations from './Configurations';
 
 const Search = ({ match: { isExact } }) => {
   return (
       <Switch>
         <Route
-          path="/business/search/steps"
-          component={SearchSteps}
+          path="/business/search/configurations"
+          component={SearchConfigurations}
         />
 
         {<Route

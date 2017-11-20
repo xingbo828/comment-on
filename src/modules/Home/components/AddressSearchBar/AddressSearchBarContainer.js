@@ -9,11 +9,11 @@ import {
 } from '../../../Business/Search/searchActions';
 
 const validate = validateFunc([{
-  field: 'homeAddress',
+  field: 'pickUpAddress',
   validator: 'isRequired',
   message: 'Required'
 }, {
-  field: 'destAddress',
+  field: 'deliveryAddress',
   validator: 'isRequired',
   message: 'Required'
 }] , validators);
@@ -24,7 +24,7 @@ const enhance = compose(
   withProps(props => ({
     navToSearch: () => {
       props.history.push({
-        pathname: '/business/search/steps/address'
+        pathname: '/business/search/configurations/address'
       });
     }
   })),
@@ -35,8 +35,8 @@ const enhance = compose(
       const rawAddresses = values.toJS();
       const newAddress = {
         addresses: {
-          from: rawAddresses.homeAddress.placeId,
-          to: rawAddresses.destAddress.placeId
+          pickUpAddress: rawAddresses.pickUpAddress.placeId,
+          deliveryAddress: rawAddresses.deliveryAddress.placeId
         }
       };
       return localSaveAddresses(newAddress);
@@ -44,7 +44,7 @@ const enhance = compose(
     onSubmitSuccess: (result, dispatch, props) => {
       // send user to next step
       props.history.push({
-        pathname: '/business/search/steps/vehicle'
+        pathname: '/business/search/configurations/vehicle'
       });
     }
   })

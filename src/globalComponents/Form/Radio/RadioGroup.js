@@ -70,7 +70,7 @@ class RadioGroup extends Component {
         <RadioGroupLabel>
           {this.props.label}
         </RadioGroupLabel>
-        <RadioList>{this.renderChildren(this.props.childType, this.props.children)}</RadioList>
+        <RadioList childType={this.props.childType}>{this.renderChildren(this.props.childType, this.props.children)}</RadioList>
       </Container>
     );
   }
