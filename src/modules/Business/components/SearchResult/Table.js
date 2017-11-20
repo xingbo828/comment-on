@@ -1,8 +1,8 @@
 import React from 'react';
 import { number, string, oneOf, func, bool, array } from 'prop-types';
+import { Link } from 'react-router-dom'
 import Grid from '../../../../globalComponents/Grid';
 import SearchResultItem from './Item';
-import {withRouter} from 'react-router-dom';
 import {
   LogoContainer,
   ItemRow,
@@ -12,13 +12,13 @@ import {
 const {Row, Col} = Grid;
 
 
-const SearchResultTable = ({searchResult, onItemClick, history}) => {
-  const clickHandler = (id) => {
-    history.push({
-      pathname: `/business/profile/${id}`
-    });
-  };
+const SearchResultTable = ({searchResult, searchParams}) => {
+
   const listings = searchResult.map((item) =>
+  <Link to={{
+    pathname: `/business/profile/${item.id}`,
+    search: searchParams
+  }}>
     <SearchResultItem
       key={item.id}
       price={249}
@@ -27,8 +27,8 @@ const SearchResultTable = ({searchResult, onItemClick, history}) => {
       rate={3.5}
       rateCount={6}
       logo={item.logo}
-      onClick={clickHandler}
     />
+  </Link>
   );
   return (
     <div>
@@ -44,114 +44,10 @@ const SearchResultTable = ({searchResult, onItemClick, history}) => {
 
 SearchResultTable.propTypes = {
   searchResult: array,
-  onItemClick: func,
 };
 
 SearchResultTable.defaultProps = {
-  onItemClick: () => { },
-  searchResult: [
-      {
-        businessServiceArea: {
-          'bc-burnaby': true,
-          'bc-richmond': true,
-          'bc-vancouver': true
-        },
-        businessHour: [
-          {
-            day: 'mon',
-            endTime: 17,
-            startTime: 8
-          },
-          {
-            day: 'tue',
-            endTime: 17,
-            startTime: 8
-          },
-          {
-            day: 'wed',
-            endTime: 17,
-            startTime: 8
-          },
-          {
-            day: 'fri',
-            endTime: 17,
-            startTime: 8
-          },
-          {
-            day: 'sun',
-            endTime: 17,
-            startTime: 8
-          }
-        ],
-        logo: 'https://s3.amazonaws.com/vancouver-bbb/abpages2/images/smallimage61064-000-107557.png',
-        businessName: 'Edgemont Moving &amp; Storage Ltd',
-        businessImgs: [
-          'https://s3.amazonaws.com/vancouver-bbb/abpages2/images/smallimage61064-000-107557.png'
-        ],
-        vehiclesInfo: {
-          large: 1,
-          medium: 0,
-          small: 1,
-          xLarge: 1
-        },
-        businessPhoneNumber: '(604) 984-9101',
-        id: '-KxZWhA2lpCruVPGtR7G',
-        businessDescription: 'Edgemont Moving &amp; Storage Ltd'
-      },
-      {
-        businessServiceArea: {
-          'bc-burnaby': true,
-          'bc-richmond': true,
-          'bc-vancouver': true
-        },
-        businessHour: [
-          {
-            day: 'mon',
-            endTime: 17,
-            startTime: 8
-          },
-          {
-            day: 'tue',
-            endTime: 17,
-            startTime: 8
-          },
-          {
-            day: 'wed',
-            endTime: 17,
-            startTime: 8
-          },
-          {
-            day: 'fri',
-            endTime: 17,
-            startTime: 8
-          },
-          {
-            day: 'sat',
-            endTime: 17,
-            startTime: 8
-          },
-          {
-            day: 'sun',
-            endTime: 17,
-            startTime: 8
-          }
-        ],
-        logo: 'https://s3.amazonaws.com/vancouver-bbb/abpages2/images/smallimage61064-000-1228748.png',
-        businessName: 'Paul&apos;s Moving and Labour Services Ltd.',
-        businessImgs: [
-          'https://s3.amazonaws.com/vancouver-bbb/abpages2/images/smallimage61064-000-1228748.png'
-        ],
-        vehiclesInfo: {
-          large: 1,
-          medium: 1,
-          small: 0,
-          xLarge: 0
-        },
-        businessPhoneNumber: '(778) 808-2398',
-        id: '-KxZWhA3L9wolL0S3WlG',
-        businessDescription: 'Paul&apos;s Moving and Labour Services Ltd.'
-      }
-    ]
+  searchResult: []
 };
 
-export default withRouter(SearchResultTable);
+export default SearchResultTable;

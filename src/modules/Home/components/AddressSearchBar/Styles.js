@@ -21,8 +21,10 @@ export const Form = styled.form`
 
 
 export const InputWrapper = styled.div`
-  line-height: 100px;
-  padding: 0;
+  height: 100px;
+  display: flex;
+  align-items: center;
+
 `;
 
 export const MobileCtaWrapper = styled.div`

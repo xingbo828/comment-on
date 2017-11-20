@@ -25,6 +25,7 @@ class Steps extends Component {
       }
       const props = {
         key: index,
+        index,
         status,
         onStepClick: child.props.onStepClick,
         ...child.props

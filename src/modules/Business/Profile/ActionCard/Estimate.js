@@ -45,7 +45,7 @@ const Estimate = () => (
   <EstimateContainer>
     <PricingContainer>
       <span>Estimate</span>
-      <Pricing><sup>$</sup>295<sub>CDN</sub></Pricing>
+      <Pricing><sup>$</sup>269<sub>CDN</sub></Pricing>
     </PricingContainer>
 
   </EstimateContainer>

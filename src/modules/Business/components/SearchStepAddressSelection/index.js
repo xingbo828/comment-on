@@ -1,147 +1,145 @@
 import React, { Component } from 'react';
 import { string, object, func, number } from 'prop-types';
 import isNull from 'lodash/isNull';
+import isObject from 'lodash/isObject';
 import Map from '../../../../globalComponents/Map';
 import { Paragraph } from '../../../../globalComponents/Typography';
+import Icon from '../../../../globalComponents/Icon';
 import AddressAutoComplete from '../../../../globalComponents/Form/AddressAutoComplete';
 import Grid from '../../../../globalComponents/Grid';
-
 import {
-  AddressSelectionContainer,
+  Container,
   MapContainer,
-  MapInnerContainer,
-  Label,
-  AddressSelectionInner,
+  RouteInfoContainer,
+  InputsContainer,
   InputContainer
 } from './Styled';
-
-const { Row, Col } = Grid;
 
 class AddressSelection extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      address: null,
-      zoom: this.props.zoom
+      from: props.from,
+      to: props.to,
+      route: null
     };
-    this.onAddressSelect = this.onAddressSelect.bind(this);
-    this.renderMap = this.renderMap.bind(this);
-    this.renderInput = this.renderInput.bind(this);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if(nextProps.placeId !== this.props.placeId) {
-      console.log(nextProps.placeId);
-      this.updateAddress(nextProps.placeId);
-    }
   }
 
   componentDidMount() {
-    this.updateAddress(this.props.placeId);
+    Promise.all([
+      this.convertPlaceIdToAddr(this.state.from),
+      this.convertPlaceIdToAddr(this.state.to)
+    ]).then(([from, to]) => {
+      this.setState({
+        from: this.formatAddr(from),
+        to: this.formatAddr(to)
+      });
+    });
   }
 
-
-  updateAddress(placeId) {
-    if(!!placeId) {
-      const geoCoder = new this.props.google.maps.Geocoder();
-      geoCoder.geocode({'placeId': placeId}, (result, status) => {
-        if(status === 'OK') {
-          const address = result[0];
-          this.setState({
-            address: {
-              location: {
-                lat: address.geometry.location.lat(),
-                lng: address.geometry.location.lng(),
-              },
-              label: address.formatted_address,
-              placeId: this.props.placeId
-            }
-          })
-        }
-      });
+  formatAddr = (addr) => {
+    if(isNull(addr)) {
+      return addr;
     }
+    return {
+      location: {
+        lat: addr.geometry.location.lat(),
+        lng: addr.geometry.location.lng(),
+      },
+      formattedAddress: addr.formatted_address,
+      placeId: addr.place_id
+    };
   }
 
-  onAddressSelect(address) {
-    if(!isNull(address)) {
-      this.setState({
-        address: {
-          location: {
-            lat: address.location.lat,
-            lng: address.location.lng
-          },
-          label: address.label,
-          placeId: address.placeId
-        }
-      })
-      this.props.onChange(address.placeId);
-    }
-    else {
-      this.setState({
-        address: null
-      });
-      this.props.onChange('');
-    }
+  onFromAddressSelect = ({ gmaps }) => {
+    this.setState({
+      from: this.formatAddr(gmaps)
+    });
+  }
+
+  onToAddressSelect = ({gmaps}) => {
+    this.setState({
+      to: this.formatAddr(gmaps)
+    });
   };
 
-  renderMap(address, google, zoom) {
+  convertPlaceIdToAddr = (placeId) => {
+    if(!placeId) {
+      return Promise.resolve(null);
+    }
+    if(isObject(placeId)) {
+      return Promise.resolve(placeId);
+    }
+    const geocoder = new this.props.google.maps.Geocoder;
+    return new Promise((resolve, reject)=> {
+      geocoder.geocode({placeId}, (results, status) => {
+        if (status === 'OK') {
+          if (results[0]) {
+            resolve(results[0]);
+          }
+        }
+        reject(status)
+      });
+    });
+
+  }
+
+  onRouteChange = (result) => {
+    this.setState({
+      route: result.routes[0].legs[0]
+    });
+    const { from, to } = this.state;
+    this.props.onChange({
+      from: from.placeId,
+      to: to.placeId
+    });
+  };
+
+  renderRouteInfo = (routeInfo) => {
     return (
-      <Col xs={0} sm={0} md={12} lg={12}>
-        <MapContainer>
-          <MapInnerContainer showMapPlaceHolder={!address}>
-          {address && <Map google={google} lat={address.location.lat} lng={address.location.lng} zoom={zoom} />}
-          </MapInnerContainer>
-        </MapContainer>
-      </Col>
+      <RouteInfoContainer visible={routeInfo}>
+          <Icon icon="truck" /> {routeInfo && routeInfo.distance.text}
+      </RouteInfoContainer>
     );
   }
 
-  renderInput(initialValue, desc) {
-    const isLoading = this.props.placeId !== '' && !initialValue;
-    return (
-      <Col xs={24} sm={24} md={12} lg={12}>
-        <InputContainer isLoading={isLoading}>
-          <AddressAutoComplete initialValue={initialValue} placeholder="Address" onSelect={this.onAddressSelect} />
-          <Paragraph>{desc}</Paragraph>
-        </InputContainer>
-      </Col>
-    );
+  getInitValue = (addr) => {
+    if(!addr) {
+      return '';
+    }
+    return addr.formattedAddress;
   }
-
 
   render() {
-    const { address, zoom } = this.state;
-    const { google, label, desc } = this.props;
-    const initialValue = address ? address.label : undefined;
+    const { google } = this.props;
+    const { from, to, route, fromInputValue, toInputValue} = this.state;
+    const markers = [from, to].filter(i=> !isNull(i)).filter(t => isObject(t)).map(x => x.location);
     return (
-      <AddressSelectionContainer>
-        <Label>{label}</Label>
-
-        <AddressSelectionInner>
-          <Row>
-          {this.renderMap(address, google, zoom)}
-          {this.renderInput(initialValue, desc)}
-          </Row>
-        </AddressSelectionInner>
-      </AddressSelectionContainer>
+      <Container>
+        <MapContainer>
+          <Map google={google} markers={markers} direction onRouteChange={this.onRouteChange}/>
+        </MapContainer>
+        {this.renderRouteInfo(route)}
+        <InputsContainer>
+          <InputContainer><AddressAutoComplete  icon="circle-o" initialValue={this.getInitValue(from)} placeholder="Pick-up address" onSelect={this.onFromAddressSelect} /></InputContainer>
+          <InputContainer><AddressAutoComplete  initialValue={this.getInitValue(to)} placeholder="Delivery address" onSelect={this.onToAddressSelect} /></InputContainer>
+        </InputsContainer>
+      </Container>
     );
   }
 }
 
 AddressSelection.propTypes = {
-  google: object.isRequired,
   onChange: func.isRequired,
-  zoom: number,
-  placeId: string,
-  label: string,
-  desc: string
+  google: object.isRequired,
+  from: string,
+  to: string
 };
 
 AddressSelection.defaultProps = {
-  zoom: 15,
-  label: 'Address',
-  desc: '',
-  placeId: null
+  from: null,
+  to: null
 };
+
 
 export default AddressSelection;

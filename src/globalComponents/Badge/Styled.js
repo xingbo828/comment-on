@@ -11,7 +11,7 @@ const BadgeSup = styled.sup`
   position: absolute;
   height: 100%;
   border-radius: 100%;
-  background-color: ${props => props.theme.colors.dangerAction};
+  background-color: ${props => props.theme.colors.danger};
   z-index: 10;
   transform: translateX(-50%);
 `;

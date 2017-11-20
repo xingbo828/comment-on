@@ -6,7 +6,7 @@ const PanelDiv = Styled.div`
   padding: 2rem;
 
   ${props=>props.theme.media.greaterThan('md') `
-    border: 1px solid ${props => props.theme.colors.borderPrimary};
+    border: 1px solid ${props => props.theme.colors.border};
   `}
 `;
 

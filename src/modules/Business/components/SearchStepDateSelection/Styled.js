@@ -12,11 +12,8 @@ export const Label = styled.label`
 `;
 
 export const DateTimeSelectionInner = styled.div`
-  border-bottom: 1px solid ${props=>props.theme.borderPrimary};
+  ${props=>props.theme.media.greaterThan('sm')`
+    border-bottom: 1px solid ${props=>props.theme.borderPrimary};
+  `}
 `;
 
-export const DateTimeBtnWrapper = styled.span`
-  max-width: 500px;
-  width: 100%;
-  display: inline-block;
-`;

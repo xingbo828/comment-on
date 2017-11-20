@@ -67,8 +67,8 @@ class AccountNav extends React.Component {
             <Menu active={active}>
               <DisplayName>{user.displayName}</DisplayName>
               <MenuList onClick={this.handleClick}>
-                <MenuItem><Link to="/account">Settings</Link></MenuItem>
-                {myBusiness && <MenuItem><Link to={`/business/profile/${myBusiness}`}>Company profile</Link></MenuItem>}
+                <MenuItem><Link to="/account">My Profile</Link></MenuItem>
+                {myBusiness && <MenuItem><Link to={`/business/profile/${myBusiness}`}>Manage My Business</Link></MenuItem>}
                 <MenuItem><a href="" onClick={this.handleLogout}>Logout</a></MenuItem>
               </MenuList>
           </Menu>

@@ -1,53 +1,59 @@
 import React from 'react';
 import { Field } from 'redux-form/immutable';
-import { Button } from '../../../../globalComponents/Form';
+import Immutable from 'immutable';
+import { Button, FormLayout } from '../../../../globalComponents/Form';
 import Grid from '../../../../globalComponents/Grid';
 import AddressSelection from '../../components/SearchStepAddressSelection';
+import { Heading, Paragraph } from '../../../../globalComponents/Typography';
+import { HeadingInfo, HeadingParagraph } from './SharedStyles';
+
+const { Form, FormActions } = FormLayout;
 
 const renderAddressSelection = ({ input, label, desc }) => {
+  const value = Immutable.Iterable.isIterable(input.value)
+    ? input.value.toJS()
+    : input.value;
+  const from = value.from || null;
+  const to = value.to || null;
   return (
     <AddressSelection
       google={window.google}
-      desc={desc}
-      label={label}
       onChange={input.onChange}
-      placeId={input.value}
+      from={from}
+      to={to}
     />
   );
 };
 
 const Address = ({ handleSubmit, pristine, reset, valid, submitting }) => {
-  const homeAddressDesc = `Home address description`;
-  const destAddressDesc = `Destination address description`;
-
   return (
     <Grid.Container>
-      <form onSubmit={handleSubmit}>
+      <HeadingInfo>
+        <Heading wrapperTag="h1">Address Information</Heading>
+        <HeadingParagraph>
+          Contrary to popular belief, Lorem Ipsum is not simply random text. It
+          has roots in a piece of classical Latin literature from 45 BC, making
+          it over 2000 years old.
+        </HeadingParagraph>
+      </HeadingInfo>
+      <Form onSubmit={handleSubmit}>
         <Field
           component={renderAddressSelection}
-          name="homeAddress"
-          label="Home address"
-          desc={homeAddressDesc}
+          name="addresses"
+          desc={renderAddressSelection}
         />
-        <Field
-          component={renderAddressSelection}
-          name="destAddress"
-          label="Destination address"
-          desc={destAddressDesc}
-        />
-        <Grid.Row>
-          <Grid.Col xs={24} sm={24} md={5} lg={4} mdOffset={19} lgOffset={20}>
-            <Button
-              type="submit"
-              primary
-              icon="arrow-right"
-              disabled={submitting || !valid}
-            >
-              Next
-            </Button>
-          </Grid.Col>
-        </Grid.Row>
-      </form>
+        <FormActions>
+          <Button
+            style={{ float: 'right' }}
+            type="submit"
+            primary
+            icon="arrow-right"
+            disabled={submitting || !valid}
+          >
+            Next
+          </Button>
+        </FormActions>
+      </Form>
     </Grid.Container>
   );
 };

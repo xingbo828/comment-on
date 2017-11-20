@@ -4,8 +4,7 @@ import { DateTime } from '../../../../globalComponents/Form';
 import {
   DateTimeSelectionContainer,
   Label,
-  DateTimeSelectionInner,
-  DateTimeBtnWrapper
+  DateTimeSelectionInner
 } from './Styled';
 
 class DateSelection extends Component {
@@ -16,14 +15,12 @@ class DateSelection extends Component {
       <DateTimeSelectionContainer>
         <Label>{label}</Label>
         <DateTimeSelectionInner>
-          <DateTimeBtnWrapper>
             <DateTime
               value={value}
               onChange={onChange}
               disabledDate={disabledDate}
               placeholder={placeholder}
             />
-          </DateTimeBtnWrapper>
         </DateTimeSelectionInner>
       </DateTimeSelectionContainer>
     );

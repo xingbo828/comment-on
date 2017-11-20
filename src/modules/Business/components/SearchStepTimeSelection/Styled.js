@@ -2,9 +2,12 @@ import styled from 'styled-components';
 
 export const GroupWrapper = styled.div`
   padding: ${props => props.theme.spaces.wide} 0;
-  > div > div {
-    margin: 0 -15px;
-  }
+  ${props => props.theme.media.greaterThan('md')`
+    > div > div {
+      margin: 0 -15px;
+    }
+  `}
+
   > div > label {
     font-size: 1.5rem;
     margin-bottom: ${props => props.theme.spaces.base};

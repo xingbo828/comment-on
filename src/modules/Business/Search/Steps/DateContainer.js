@@ -53,7 +53,8 @@ const enhance = compose(
     onSubmitSuccess: (result, dispatch, props) => {
       // send user to next step
       props.history.push({
-        pathname: '/business/search/steps/logistics'
+        pathname: '/business/search/steps/logistics',
+        state: props.location.state
       });
     }
   }),

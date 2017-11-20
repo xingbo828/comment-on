@@ -45,7 +45,7 @@ const BasicInfo = ({ handleSubmit, pristine, reset, valid, submitting }) => {
               type="text"
               name="businessName"
               label="Business Name"
-              placeholder="StarBucks"
+              placeholder="My great moving company"
             />
           </Col>
         </Row>

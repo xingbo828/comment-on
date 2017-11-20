@@ -3,6 +3,7 @@ import { combineReducers } from 'redux-immutable';
 import {
   GET_ADDRESSES,
   LOADING_ADDRESSES,
+  RESET_ADDRESSES,
   GET_VEHICLE,
   LOADING_VEHICLE,
   GET_DATE_TIME,
@@ -15,8 +16,7 @@ import {
 
 // Addresses
 const initAddressesState = Immutable.fromJS({
-  homeAddress: null,
-  destAddress: null,
+  addresses: null,
   status: 'UNINIT'
 });
 
@@ -24,15 +24,22 @@ const searchAddressesStep = (state = initAddressesState, action) => {
   switch (action.type) {
     case GET_ADDRESSES: {
       return state.withMutations(st => {
-        st.set('homeAddress', action.data.homeAddress);
-        st.set('destAddress', action.data.destAddress);
+        st.set('addresses', Immutable.fromJS(action.data));
         st.set('status', 'LOADED');
+      });
+    }
+
+    case RESET_ADDRESSES: {
+      return state.withMutations(st => {
+        st.set('status', 'UNINIT');
+        st.set('addresses', null)
       });
     }
 
     case LOADING_ADDRESSES: {
       return state.withMutations(st => {
         st.set('status', 'PENDING');
+        st.set('addresses', null)
       });
     }
 

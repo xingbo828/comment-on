@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import variables from '../../../foundation/variables';
 
 export const InputContainer = styled.div`
   display: block;
@@ -15,12 +14,14 @@ export const InputErrorMsg = styled.span`
 export const Input = styled.textarea`
   display: block;
   width: 100%;
-  border: solid ${variables.colors.borderPrimary};
+  border: solid ${props=>props.theme.colors.border};
   border-width: 0 0 1px 0;
   font-size: 1rem;
   padding: 1rem 0;
   outline: none;
-
+  &::placeholder {
+    color: ${props=>props.theme.colors.textLight};
+  }
   &:focus + div{
     transform: scale(1);
   }
@@ -34,7 +35,7 @@ export const InputLabel = styled.label`
 export const FocusBorder = styled.div`
   height: 2px;
   width: 100%;
-  background: ${variables.colors.primary};
+  background: ${props=>props.theme.colors.primary};
   margin-top: -2px;
   transition: .3s;
   transform: scale(0);

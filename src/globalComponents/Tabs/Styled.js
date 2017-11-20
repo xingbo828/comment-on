@@ -8,7 +8,7 @@ export const TabBar = styled.ul`
   display: flex;
   padding: 0;
   margin: 0;
-  border-bottom: 1px solid ${props => props.theme.colors.borderPrimary};
+  border-bottom: 1px solid ${props => props.theme.colors.border};
 `;
 
 export const TabBarLinkContainer = styled.li`

@@ -5,12 +5,12 @@ const List = Styled.ul`
   list-style-type: none;
   margin: 0;
   padding: 0;
-  border-top: 1px solid ${props=>props.theme.colors.borderPrimary};
+  border-top: 1px solid ${props=>props.theme.colors.border};
 
   ${props=>props.theme.media.greaterThan('md')`
     padding: .75rem;
     border: none;
-    border: 1px solid ${props=>props.theme.colors.borderPrimary};
+    border: 1px solid ${props=>props.theme.colors.border};
     display: block;
   `}
 `;
@@ -19,7 +19,7 @@ const ListItem = Styled.li`
   margin: 0;
   position: relative;
   font-weight: bold;
-  border-bottom: 1px solid ${props=>props.theme.colors.borderPrimary};
+  border-bottom: 1px solid ${props=>props.theme.colors.border};
 
   ${props=>props.theme.media.greaterThan('md')`
     border: none;

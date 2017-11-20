@@ -3,13 +3,13 @@ import Styled from 'styled-components';
 const Footer = Styled.footer`
   margin: 4rem 0 0;
   padding: 4rem 0 0;
-  border-top: 1px solid ${props => props.theme.colors.borderPrimary};
+  border-top: 1px solid ${props => props.theme.colors.border};
 `;
 
 
 const OrgContainer = Styled.div`
   margin: 4rem 0 0;
-  border-top: 1px solid ${props => props.theme.colors.borderPrimary};
+  border-top: 1px solid ${props => props.theme.colors.border};
   line-height: 200px;
 `;
 

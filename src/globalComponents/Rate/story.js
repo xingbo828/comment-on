@@ -21,17 +21,29 @@ const RateWithCustomIcon = withInfo('Rate with custom icon')(() =>
     <Rate
       icon="heart"
       size="lg"
-      value={3.2}
+      value={4.2}
       onChange={action('Rate changed')}
       readOnly={false}
     />
   </div>
 );
 
+const RateWithCaption = withInfo('Rate with caption')(() =>
+<div style={{padding: '25px'}}>
+  <Rate
+    value={3.2}
+    caption="(122)"
+    onChange={action('Rate changed')}
+    readOnly
+  />
+</div>
+);
+
 
 const RateStory = storiesOf('Global/Rate', module)
 .addDecorator(withKnobs)
 .add('Basic rate', RateDemo)
+.add('Rate with caption', RateWithCaption)
 .add('Rate with custom icon', RateWithCustomIcon);
 
 export default RateStory;

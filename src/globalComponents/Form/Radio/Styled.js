@@ -54,7 +54,7 @@ export const StyledRadioReplacement = styled.span`
   width: 18px;
   height: 18px;
   border-radius: 16px;
-  border: 1px solid ${props => props.theme.colors.borderPrimary};
+  border: 1px solid ${props => props.theme.colors.border};
   background-color: #fff;
   transition: all .3s;
   margin-right: 1rem;

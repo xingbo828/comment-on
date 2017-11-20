@@ -1,17 +1,15 @@
 import React from 'react';
 import { oneOfType, string, node } from 'prop-types';
-import { StepContainer, StepWithIconWrapper, StepIconWrapper } from './Styled';
+import Icon from '../../globalComponents/Icon';
+import { StepContainer, StepLabel, StepSeperatorWrapper, StepHighLightBar, StepTitle } from './Styled';
 
-const Step = ({ title, icon, status, onStepClick, ...rest }) => {
-  const renderContent = (title, icon) => {
-    if (icon) {
+const Step = ({ index, title, status, onStepClick, ...rest }) => {
+  const renderContent = (title) => {
       return (
-        <StepWithIconWrapper {...rest}>
-          <StepIconWrapper>{icon}</StepIconWrapper> {title}
-        </StepWithIconWrapper>
+        <StepLabel>
+          <StepSeperatorWrapper>{status === 'completed' ? <Icon icon="check" />: `${(index + 1)}`}</StepSeperatorWrapper><StepTitle>. {title}</StepTitle>
+        </StepLabel>
       );
-    }
-    return title;
   }
 
   const handleClick = (e) => {
@@ -21,14 +19,14 @@ const Step = ({ title, icon, status, onStepClick, ...rest }) => {
   }
   return (
     <StepContainer status={status} onClick={handleClick}>
-      {renderContent(title, icon)}
+      {renderContent(title)}
+      <StepHighLightBar status={status} />
     </StepContainer>
   );
 };
 
 Step.propTypes = {
-  title: oneOfType([string, node]).isRequired,
-  icon: node
+  title: oneOfType([string, node]).isRequired
 };
 
 export default Step;

@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { number, string, oneOf, func, bool } from 'prop-types';
 import Icon from '../Icon';
 import {
+  RateContainer,
   RateIconList,
-  RateIcon
+  RateIcon,
+  RateCaption
 } from './Styled';
 
 class Rate extends Component {
@@ -93,12 +95,15 @@ class Rate extends Component {
 
   render() {
     const { value, isHovering, hoverValue } = this.state;
-    const { icon, size, readOnly } = this.props;
+    const { icon, size, readOnly, caption } = this.props;
     const renderValue = isHovering ? hoverValue : value;
     return (
-      <RateIconList>
-        {this.renderStars(renderValue, icon, size, readOnly)}
-      </RateIconList>
+      <RateContainer>
+        <RateIconList>
+          {this.renderStars(renderValue, icon, size, readOnly)}
+        </RateIconList>
+        {caption && <RateCaption>{caption}</RateCaption>}
+      </RateContainer>
     );
   }
 }
@@ -109,7 +114,8 @@ Rate.propTypes = {
   /** Size of the icons: sm or lg */
   size: oneOf(['sm', 'lg']),
   onChange: func,
-  readOnly: bool
+  readOnly: bool,
+  caption: string
 };
 
 Rate.defaultProps = {

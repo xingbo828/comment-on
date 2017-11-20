@@ -1,42 +1,75 @@
 import styled from 'styled-components';
 
-export const AddressSelectionContainer = styled.div`
-  padding-bottom: ${props=>props.theme.spaces.base};
-`;
-export const Label = styled.label`
-  font-size: 1.5rem;
-  margin-bottom: ${props=>props.theme.spaces.base};
-  display: inline-block;
-  font-weight: ${props=>props.theme.fontWeights.medium};
+export const Container = styled.div`
+  position: relative;
 `;
 
-export const AddressSelectionInner = styled.div`
-  border: 1px solid ${props=>props.theme.borderPrimary};
-  padding: ${props=>props.theme.spaces.base};
+export const MapContainer = styled.div`
+  width: 100%;
+
+  height: 250px;
+
+  ${props=>props.theme.media.between('sm','md')`
+      height: 400px;
+  `}
+
   ${props=>props.theme.media.greaterThan('md')`
-    padding: ${props=>props.theme.spaces.wide};
+      height: 500px;
   `}
 `;
 
+export const RouteInfoContainer = styled.div`
+  position: absolute;
+  right: 50px;
+  top: 180px;
+  ${props=>props.theme.media.between('sm','md')`
+    top: 330px;
+  `}
 
-export const MapContainer = styled.div`
+  ${props=>props.theme.media.greaterThan('md')`
+    top: 430px;
+  `}
+  background-color: white;
+  color: ${props=>props.theme.colors.primary};
+  border-radius: 3px;
+  font-weight: ${props=>props.theme.fontWeights.roman};
   text-align: center;
+  display: inline-block;
+  padding: 6px 10px;
+  transition: .5s cubic-bezier(0.720, -0.600, 0.370, 1.650);
+  transform: ${props=>props.visible ? 'translateX(0)' : 'translateX(1.5rem)'};
+  opacity: ${props=>props.visible ? 1 : 0};
+  text-transform: uppercase;
 `;
 
-export const MapInnerContainer = styled.div`
-  width: 100%;
-  max-width: 500px;
-  height: 300px;
-  margin: 0 auto;
-  ${props=>{
-    if(props.showMapPlaceHolder) {
-      return `
-        background-color: rgba(0,0,0,.15);
-      `;
-    }
-  }}
+
+
+export const InputsContainer = styled.div`
+  padding-top: ${props=>props.theme.spaces.wide};
+  padding-left: ${props=>props.theme.spaces.tight};
+  padding-right: ${props=>props.theme.spaces.tight};
+  ${props=>props.theme.media.greaterThan('sm')`
+    padding-top: ${props=>props.theme.spaces.wide};
+    padding-left: ${props=>props.theme.spaces.xWide};
+    padding-right: ${props=>props.theme.spaces.xWide};
+  `}
+  position: relative;
+  &:before {
+    font-family: 'FontAwesome';
+    content: "\f111\00a0\f111\00a0\f111";
+    position: absolute;
+    color: #d3d3d3;
+    top: 68px;
+    font-size: .5rem;
+    left: calc(${props=>props.theme.spaces.tight} + 7px);
+    ${props=>props.theme.media.greaterThan('sm')`
+      left: calc(${props=>props.theme.spaces.xWide} + 7px);
+    `}
+    width: 5px;
+    overflow-wrap: break-word;
+  }
 `;
 
 export const InputContainer = styled.div`
-  visibility: ${props=>props.isLoading ? 'hidden': 'visible'};
+  margin-bottom: ${props=>props.theme.spaces.wide};
 `;

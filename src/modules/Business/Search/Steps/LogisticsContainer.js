@@ -6,6 +6,9 @@ import LogisticsStep from './Logistics';
 import scrollToTopOnMount from '../../../Common/scrollToTopOnMount';
 import validators, { validateFunc } from '../../../Common/validators';
 import Spin from '../../../../globalComponents/Spin';
+import searchQueryValidator from '../../utils/searchQueryValidator';
+import urlQueryConstructor from '../../../Common/urlQueryConstructor';
+import message from '../../../../globalComponents/Message';
 
 import {
   localSaveLogistics,
@@ -66,16 +69,44 @@ const enhance = compose(
       return localSaveLogistics(values.toJS());
     },
     onSubmitSuccess: async (result, dispatch, props) => {
-      const {
-        origin,
-        destination,
-        dateTime,
-        vehicle
-      } = await getLocalStorageStepInfo();
-      const { date, time } = dateTime;
-      props.history.push({
+      const search = props.location.search;
+      const params = new URLSearchParams(search);
+      const { addresses, dateTime } = await getLocalStorageStepInfo();
+      debugger;
+      const searchParameters = urlQueryConstructor([
+        {
+          label: 'origin',
+          value: addresses.from
+        },
+        {
+          label: 'destination',
+          value: addresses.to
+        },
+        {
+          label: 'dateTime',
+          value: `${dateTime.date},${dateTime.time}`
+        }
+      ]);
+
+      const validator = searchQueryValidator(searchParameters);
+      if (!validator.status) {
+        message.error(validator.message);
+        return false;
+      }
+
+      if (
+        props.location.state &&
+        props.location.state.fromProfile &&
+        props.location.state.businessId
+      ) {
+        return props.history.push({
+          pathname: `/business/profile/${props.location.state.businessId}`,
+          search: searchParameters
+        });
+      }
+      return props.history.push({
         pathname: '/business/search/result',
-        search: `?origin=${origin}&destination=${destination}&datetime=${date},${time}`
+        search: searchParameters
       });
     }
   }),

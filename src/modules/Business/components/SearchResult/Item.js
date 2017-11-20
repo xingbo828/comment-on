@@ -8,10 +8,9 @@ import {
 } from './Styled';
 const {Col} = Grid;
 
-const SearchResultItem = ({logo, name, id, rate, rateCount, price, onClick}) => {
-  const clickHandler = () => onClick(id);
+const SearchResultItem = ({logo, name, id, rate, rateCount, price}) => {
   return (
-    <ItemRow onClick={clickHandler}>
+    <ItemRow>
       <Col xs={6} sm={6} md={4} lg={4}>
         <div>
           <LogoContainer src={logo} />
@@ -20,7 +19,7 @@ const SearchResultItem = ({logo, name, id, rate, rateCount, price, onClick}) => 
       <Col xs={18} sm={18} md={8} lg={8}>
         {name}
       </Col>
-      <Col xs={12} sm={12} md={6} lg={6}><Rate value={rate} readOnly /> ({rateCount})</Col>
+      <Col xs={12} sm={12} md={6} lg={6}><Rate value={rate} readOnly caption={`(${rateCount})`} /></Col>
       <Col xs={12} sm={12} md={6} lg={6}>${price}</Col>
     </ItemRow>
   );
@@ -34,7 +33,6 @@ SearchResultItem.propTypes = {
   rate: number,
   rateCount: number,
   price: number,
-  onClick: func,
 };
 
 SearchResultItem.defaultProps = {

@@ -50,7 +50,7 @@ const BusinessCreation = ({
               type="text"
               name="businessName"
               label="Business Name"
-              placeholder="StarBucks"
+              placeholder="My great moving company"
             />
           </Col>
         </Row>

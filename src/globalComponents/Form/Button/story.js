@@ -10,7 +10,7 @@ const DangerButton = withInfo('Danger button')(() => <Button danger>Hello world<
 const SmallButtons = withInfo('Small buttons')(() => (
   <div>
     <Button small primary>Hello world</Button>
-    <Button small danger>Hello world</Button>
+    <Button small danger icon="arrow-right">Hello world</Button>
     <Button small disabled>Hello world</Button>
   </div>
 ));
@@ -20,7 +20,7 @@ const IconButton = withInfo('With icon')(() =>
     <Button primary icon="arrow-right">Click</Button>
     <Button icon="plus">Click</Button>
     <Button icon="arrow-right" danger>Hello world</Button>
-    <Button icon="arrow-right" disabled>Hello world</Button>
+    <Button icon="arrow-right" disabled loading>Hello world</Button>
 </div>
 );
 

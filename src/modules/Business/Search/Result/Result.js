@@ -5,10 +5,16 @@ import Grid from '../../../../globalComponents/Grid';
 const { Container } = Grid;
 const {Table} = SearchResult;
 
-const Result = (props) => {
+const Result = ({result, location}) => {
+  // const handleOnItemClick = (businessId) => {
+  //   history.push({
+  //     pathname: `/business/profile/${businessId}`,
+  //     search: location.search
+  //   });
+  // };
     return (
       <Container>
-        <Table searchResult={props.result} />
+        <Table searchResult={result} searchParams={location.search}  />
       </Container>
     );
 }

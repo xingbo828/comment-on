@@ -8,9 +8,9 @@ import {
   SpinnerWrapperInner
 } from './Styles';
 
-const SpinContainer = ({ children, loading, theme }) => {
+const SpinContainer = ({ children, loading, style, theme }) => {
   return (
-    <StyleContainer>
+    <StyleContainer style={style}>
       {loading && <SpinnerWrapper>
         <SpinnerWrapperInner>
           <BounceLoading

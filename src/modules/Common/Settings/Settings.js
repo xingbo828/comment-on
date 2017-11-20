@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { PanelDiv, SidebarDiv } from './Styled';
 import SettingsContext from './SettingsContext';
 import withSettingsContext from './withSettingsContext';
-import Grid from '../../globalComponents/Grid';
+import Grid from '../../../globalComponents/Grid';
 
 const { Container, Row, Col } = Grid;
 const PanelDivWithSettingsContext = withSettingsContext(PanelDiv);
