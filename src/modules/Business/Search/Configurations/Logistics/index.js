@@ -3,20 +3,20 @@ import { connect } from 'react-redux';
 import { compose, lifecycle, branch, renderComponent } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import LogisticsStep from './Logistics';
-import scrollToTopOnMount from '../../../Common/scrollToTopOnMount';
-import validators, { validateFunc } from '../../../Common/validators';
-import Spin from '../../../../globalComponents/Spin';
-import searchQueryValidator from '../../utils/searchQueryValidator';
-import urlQueryConstructor from '../../../Common/urlQueryConstructor';
-import message from '../../../../globalComponents/Message';
+import scrollToTopOnMount from '../../../../Common/scrollToTopOnMount';
+import validators, { validateFunc } from '../../../../Common/validators';
+import Spin from '../../../../../globalComponents/Spin';
+import searchQueryValidator from '../../../utils/searchQueryValidator';
+import urlQueryConstructor from '../../../../Common/urlQueryConstructor';
+import message from '../../../../../globalComponents/Message';
 
 import {
   localSaveLogistics,
   loadLogistics,
   getLocalStorageStepInfo
-} from '../searchActions';
+} from '../../searchActions';
 
-import { getLogistics } from '../searchReducers';
+import { getLogistics } from '../../searchReducers';
 
 const validate = validateFunc(
   [

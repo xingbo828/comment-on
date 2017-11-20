@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import { compose, lifecycle, branch, renderComponent } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import AddressStep from './Address';
-import scrollToTopOnMount from '../../../Common/scrollToTopOnMount';
-import Spin from '../../../../globalComponents/Spin';
-import validators, { validateFunc } from '../../../Common/validators';
-import { localSaveAddresses, loadAddresses, resetAddresses } from '../searchActions';
+import scrollToTopOnMount from '../../../../Common/scrollToTopOnMount';
+import Spin from '../../../../../globalComponents/Spin';
+import validators, { validateFunc } from '../../../../Common/validators';
+import { localSaveAddresses, loadAddresses, resetAddresses } from '../../searchActions';
 
-import { getAddresses } from '../searchReducers';
+import { getAddresses } from '../../searchReducers';
 
 const validate = validateFunc(
   [

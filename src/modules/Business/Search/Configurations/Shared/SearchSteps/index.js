@@ -1,6 +1,6 @@
 import React from 'react';
-import Steps from '../../../../globalComponents/Steps';
-import Icon from '../../../../globalComponents/Icon';
+import Steps from '../../../../../../globalComponents/Steps';
+import Icon from '../../../../../../globalComponents/Icon';
 
 const Step = Steps.Step;
 
@@ -25,8 +25,6 @@ const SearchSteps = ({current, history}) => {
         title="date"
         onStepClick={stepClickHandler.bind(this, 'date')}
       />
-
-
 
       <Step
         title="logistics"

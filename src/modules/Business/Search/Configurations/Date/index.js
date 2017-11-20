@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { compose, lifecycle, branch, renderComponent } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import DateStep from './Date';
-import scrollToTopOnMount from '../../../Common/scrollToTopOnMount';
-import validators, { validateFunc } from '../../../Common/validators';
-import Spin from '../../../../globalComponents/Spin';
+import scrollToTopOnMount from '../../../../Common/scrollToTopOnMount';
+import validators, { validateFunc } from '../../../../Common/validators';
+import Spin from '../../../../../globalComponents/Spin';
 
-import { localSaveDateTime, loadDateTime } from '../searchActions';
+import { localSaveDateTime, loadDateTime } from '../../searchActions';
 
-import { getDateTime } from '../searchReducers';
+import { getDateTime } from '../../searchReducers';
 
 const validate = validateFunc(
   [

@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-export const Select = styled.select`
-    display: block;
+export const Container = styled.div``;
+
+export const StyledSelect = styled.select`
     height: 32px;
-    width: 100%;
     appearance: none;
     outline: 0;
     border: none;
@@ -31,4 +31,13 @@ export const Select = styled.select`
     color: transparent;
     text-shadow: 0 0 0 #000;
     }
+`;
+
+export const Label = styled.label`
+  display: inline-block;
+  padding-left: ${props=>props.theme.spaces.base};
+  white-space: nowrap;
+  cursor: pointer;
+  margin-right: 1rem;
+  line-height: 32px;
 `;

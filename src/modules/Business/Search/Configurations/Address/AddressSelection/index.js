@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { string, object, func, number } from 'prop-types';
 import isNull from 'lodash/isNull';
 import isObject from 'lodash/isObject';
-import Map from '../../../../../globalComponents/Map';
-import { Paragraph } from '../../../../../globalComponents/Typography';
-import Icon from '../../../../../globalComponents/Icon';
-import AddressAutoComplete from '../../../../../globalComponents/Form/AddressAutoComplete';
-import Grid from '../../../../../globalComponents/Grid';
+import Map from '../../../../../../globalComponents/Map';
+import { Paragraph } from '../../../../../../globalComponents/Typography';
+import Icon from '../../../../../../globalComponents/Icon';
+import AddressAutoComplete from '../../../../../../globalComponents/Form/AddressAutoComplete';
+import Grid from '../../../../../../globalComponents/Grid';
 import {
   Container,
   MapContainer,

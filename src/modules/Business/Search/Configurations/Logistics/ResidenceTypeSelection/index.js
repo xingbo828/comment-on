@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { func, string } from 'prop-types';
-import { Radio } from '../../../../../globalComponents/Form';
-import Animation from '../../../../../globalComponents/Animation';
+import { Radio } from '../../../../../../globalComponents/Form';
+import Animation from '../../../../../../globalComponents/Animation';
 
 import {
   ResidenceTypeSelectionContainer,

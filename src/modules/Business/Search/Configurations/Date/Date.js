@@ -1,12 +1,12 @@
 import React from 'react';
 import { Field } from 'redux-form/immutable';
-import { Button } from '../../../../globalComponents/Form';
-import Grid from '../../../../globalComponents/Grid';
-import DateSelection from '../../components/SearchConfigurations/DateSelection';
-import SearchStepTimeSelection from '../../components/SearchConfigurations/TimeSelection';
-import Layout from '../../../../globalComponents/Layout';
-import { Heading, Paragraph } from '../../../../globalComponents/Typography';
-import { HeadingInfo, HeadingParagraph } from './SharedStyles';
+import { Button } from '../../../../../globalComponents/Form';
+import Grid from '../../../../../globalComponents/Grid';
+import DateSelection from './DateSelection';
+import SearchStepTimeSelection from './TimeSelection';
+import Layout from '../../../../../globalComponents/Layout';
+import { Heading, Paragraph } from '../../../../../globalComponents/Typography';
+import { HeadingInfo, HeadingParagraph } from '../Shared/Styled';
 
 
 const { Form, FormActions, FormInner } = Layout.Form;

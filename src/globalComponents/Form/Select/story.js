@@ -7,8 +7,8 @@ import Select from './';
 
 
 const SelectDemo= withInfo('Basic checkbox group')(() =>
-  <div style={{padding: '25px', width: '400px'}}>
-    <Select>
+  <div style={{padding: '25px'}}>
+    <Select label="test" name="test">
       <option value="option1">option 1</option>
       <option value="option2">option 2</option>
       <option value="option3">option 3</option>

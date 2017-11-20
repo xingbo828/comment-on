@@ -1,7 +1,7 @@
 import React from 'react';
 import { number, string, oneOf, func, bool, array } from 'prop-types';
 import { Link } from 'react-router-dom'
-import Grid from '../../../../globalComponents/Grid';
+import Grid from '../../../../../globalComponents/Grid';
 import SearchResultItem from './Item';
 import {
   LogoContainer,

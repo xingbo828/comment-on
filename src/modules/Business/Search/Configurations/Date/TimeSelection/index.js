@@ -1,8 +1,8 @@
 import React from 'react';
-import { Radio } from '../../../../../globalComponents/Form';
+import { Radio } from '../../../../../../globalComponents/Form';
 import { GroupWrapper } from './Styled';
 import TimeRangeOption from './TimeRangeOption';
-import { MOVING_SEARCH_TIME_RANGE } from '../../../../../constants';
+import { MOVING_SEARCH_TIME_RANGE } from '../../../../../../constants';
 
 const SearchTimeRangeSelection = ({ value, onChange }) => {
   const renderOptions = options => {

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Field } from 'redux-form/immutable';
-import { Button, Radio } from '../../../../globalComponents/Form';
-import Grid from '../../../../globalComponents/Grid';
-import Layout from '../../../../globalComponents/Layout';
-import ResidenceTypeSelection from '../../components/SearchConfigurations/ResidenceTypeSelection';
-import { Heading, Paragraph } from '../../../../globalComponents/Typography';
-import { HeadingInfo, HeadingParagraph } from './SharedStyles';
+import { Button, Radio } from '../../../../../globalComponents/Form';
+import Grid from '../../../../../globalComponents/Grid';
+import Layout from '../../../../../globalComponents/Layout';
+import ResidenceTypeSelection from './ResidenceTypeSelection';
+import { Heading, Paragraph } from '../../../../../globalComponents/Typography';
+import { HeadingInfo, HeadingParagraph } from '../Shared/Styled';
 
 const { Form, FormActions, FormInner } = Layout.Form;
 

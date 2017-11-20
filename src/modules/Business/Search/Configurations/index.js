@@ -1,12 +1,11 @@
 import React from 'react';
 import { Switch, withRouter, Route } from 'react-router-dom';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
-import AddressStep from './AddressContainer';
-import Vehicle from './VehicleContainer';
-import DateStep from './DateContainer';
-import LogisticsStep from './LogisticsContainer';
-import SearchSteps from '../../components/SearchSteps';
-import StepsRouteTransition from './StepsRouteTransition';
+import AddressStep from './Address';
+import DateStep from './Date';
+import LogisticsStep from './Logistics';
+import SearchSteps from './Shared/SearchSteps';
+import StepsRouteTransition from './Shared/StepsRouteTransition';
 
 
 const Configurations = ({ location, history, match }) => {
@@ -14,10 +13,6 @@ const Configurations = ({ location, history, match }) => {
     {
       path: '/business/search/configurations/address',
       component: AddressStep
-    },
-    {
-      path: '/business/search/configurations/vehicle',
-      component: Vehicle
     },
     {
       path: '/business/search/configurations/date',

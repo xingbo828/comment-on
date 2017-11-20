@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Grid from '../../../../globalComponents/Grid';
+import Grid from '../../../../../globalComponents/Grid';
 
 export const LogoContainer = styled.img`
   width: 100%;
