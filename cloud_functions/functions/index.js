@@ -5,20 +5,25 @@ const googleMapsClient = require('@google/maps').createClient({
     key: 'AIzaSyDJjuf5Cli-bjDPh_lWLhPoSqy7UPCr0xM',
     Promise: Promise
 });
+const express = require('express');
 const moment = require('moment');
 const cors = require('cors')({origin: true});
 
 admin.initializeApp(functions.config().firebase);
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
-exports.hellowWorld = functions.https.onRequest((request, response) => {
-    response.send("hello~");
+const app = express();
+
+app.use(cors);
+
+app.get('/', (request, response) => {
+    businesses(request, response);
 });
+
+app.get('/:id', (request, response) => {
+    business(request, response);
+});
+
+exports.business = functions.https.onRequest(app);
 
 const extractCity = (placeData) => {
     const location = {};
@@ -38,17 +43,11 @@ const extractCity = (placeData) => {
     return `${location.province}-${location.city}`;
 }
 
-exports.business = functions.https.onRequest((request, response) => {
-    cors(request, response, () => {
-        business(request, response);
-    });
-})
-
-const filterByDestination = (destinationCity) => (business) => {
-    if (!destinationCity) {
+const filterByCity = (city) => (business) => {
+    if (!city) {
         return true;
     }
-    return business.businessServiceArea[destinationCity]
+    return business.businessServiceArea[city]
 };
 
 const filterByVehicle = (vehicle) => (business) => {
@@ -85,22 +84,55 @@ const filterByDateTime = (dateTime) => {
   }
 }
 
+const businessFilters = (parameters) => {
+  const filters = [filterByCity(parameters.destinationCity),
+    filterByCity(parameters.originCity),
+    filterByDateTime(parameters.dateTime),
+    filterByVehicle(parameters.vehicle)];
+
+  return (business) => {
+    return filters.every((filter) => filter(business));
+  };
+}
+
 const business = ((request, response) => {
+  const id = request.params.id;
+  if (!id) {
+    return response.json({});
+  }
+  admin.database().ref('/businesses/' + id)
+    .once('value')
+    .then((value)=> {
+      console.log(value.val());
+      value = value.val() || {};
+      value.id = id;
+      value.price = determinePrice();
+      return response.json(value);
+    });
+});
+
+const determinePrice = (dateTime, vehicle, buisness) => {
+  const price = 300 * (0.5 + Math.random());
+  return Number(Math.round(price+'e2')+'e-2');
+}
+
+const businesses = ((request, response) => {
     const origin = request.query.origin;
     const destination = request.query.destination;
     const dateTime = request.query.dateTime;
     const vehicle = request.query.vehicle;
 
-    let destinationCity;
+    let originCity,destinationCity;
 
+    console.log('here');
     if (!origin) {
-        return response.status(400).json({error: 'Empty origin'});
+        return response.status(200).json([]);
     }
 
     Promise.all([googleMapsClient.place({placeid: origin}).asPromise(),
         destination ? googleMapsClient.place({placeid: destination}).asPromise() : Promise.resolve()])
         .then((data) => {
-            const originCity = extractCity(data[0]);
+            originCity = extractCity(data[0]);
             destinationCity = extractCity(data[1]);
             return originCity;
         })
@@ -118,24 +150,21 @@ const business = ((request, response) => {
                 .map((businessId) => {
                     const result = businessData[businessId];
                     result.id = businessId;
+                    result.price = determinePrice();
                     return result;
                 });
             if (destinationCity || dateTime || vehicle) {
-                const cityFilter = filterByDestination(destinationCity);
-                const dateFilter = filterByDateTime(dateTime);
-                const vehicleFilter = filterByVehicle(vehicle);
+                const filters = businessFilters({
+                  originCity: originCity,
+                  destinationCity: destinationCity,
+                  dateTime: dateTime,
+                  vehicle: vehicle
+                });
                 businesses = businesses.filter((business) => {
-                    return cityFilter(business) && dateFilter(business) && vehicleFilter(business);
+                    return filters(business);
                 });
             }
 
             response.json(businesses);
         })
-
-    // admin.database().ref('/businesses')
-    //     .orderByChild('businessServiceArea/bc-vancouver').equalTo(true)
-    //     .once('value').then((value) => {
-
-    //         response.json(value.val());
-    //     });
 });
