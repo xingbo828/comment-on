@@ -26,7 +26,7 @@ export const RadioList = styled.div`
 
 
 export const StyledLabel = styled.label`
-  display: block;
+  display: inline-block;
   padding: .5rem 0;
   position: relative;
   white-space: nowrap;

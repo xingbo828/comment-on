@@ -17,7 +17,7 @@ export const StyledSelect = styled.select`
     cursor: pointer;
     color: rgba(0,0,0,.87);
     font-size: 1rem;
-    padding: 0 25px 0 0;
+    padding: 0 25px 0 15px;
 
     &:focus {
       outline: 0;

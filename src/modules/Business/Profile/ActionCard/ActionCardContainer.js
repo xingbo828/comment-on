@@ -3,7 +3,6 @@ import { compose, branch, renderComponent, lifecycle } from 'recompose';
 import { withRouter } from 'react-router-dom';
 import WithoutSearchParamsCard from './WithoutSearchParamsCard';
 import WithSearchParamsCard from './WithSearchParamsCard';
-import searchQueryValidator from '../../utils/searchQueryValidator';
 import isLoggedIn from '../../../Common/isLoggedIn';
 
 const EnhancedWithSearchParamsCard = compose(
@@ -21,7 +20,7 @@ const EnhancedWithSearchParamsCard = compose(
 
 
 const checkSearchParams = branch(
-  props => searchQueryValidator(props.location.search).status,
+  props => true,
   renderComponent(EnhancedWithSearchParamsCard)
 );
 

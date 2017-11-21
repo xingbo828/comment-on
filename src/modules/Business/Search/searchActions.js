@@ -6,14 +6,7 @@ import moment from 'moment';
 export const LOCALSTOREAGE_STEP_INFO_KEY = 'steps-info';
 
 export const getLocalStorageStepInfo = async () => {
-  const stepInfo = await localforge.getItem(LOCALSTOREAGE_STEP_INFO_KEY);
-
-  return {
-    origin: get(stepInfo, 'addresses.homeAddress'),
-    destination: get(stepInfo, 'addresses.destAddress'),
-    dateTime: get(stepInfo, 'dateTime'),
-    vehicle: get(stepInfo, 'vehicle.vehicle')
-  };
+  return await localforge.getItem(LOCALSTOREAGE_STEP_INFO_KEY);
 };
 
 // ADDRESS
@@ -141,13 +134,16 @@ export const loadLogistics = () => async dispatch => {
 export const GET_SEARCH_RESULT = 'GET_SEARCH_RESULT';
 export const SEARCH_BUSINESS = 'SEARCH_BUSINESS';
 
-export const searchBusiness = (searchParam) => async dispatch => {
+export const searchBusiness = (config) => async dispatch => {
   dispatch({
     type: SEARCH_BUSINESS
   });
-  const API = `https://us-central1-comment-on-85597.cloudfunctions.net/business${searchParam}`;
+  const API = `https://us-central1-comment-on-85597.cloudfunctions.net/business`;
   try {
-    const searchResult = await fetch(API).then(res => res.json());
+    const searchResult = await fetch(API, {
+      method: 'POST',
+      body: config
+    }).then(res => res.json());
     return dispatch({
       type: GET_SEARCH_RESULT,
       data: searchResult

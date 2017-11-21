@@ -3,12 +3,12 @@ import Styled from 'styled-components';
 import { withTheme } from 'styled-components';
 
 
-const Heading = ({ wrapperTag, children, underline, theme, size }) => {
+const Heading = ({ className, wrapperTag, children, underline, theme, size }) => {
 
 
 
   const HeadingContainer = Styled.div`
-    margin: 3rem 0 1rem;
+    margin: 2rem 0 1rem;
 
     ${size === 'xl' && `
       font-size: 4rem;
@@ -74,7 +74,7 @@ const Heading = ({ wrapperTag, children, underline, theme, size }) => {
   `;
 
   return (
-    <HeadingContainer>
+    <HeadingContainer className={className}>
       <Tag>{ children }</Tag>
     </HeadingContainer>
   );

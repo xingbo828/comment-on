@@ -15,7 +15,7 @@ const validate = validateFunc(
   [
     {
       field: 'addresses',
-      validator: 'isRequired',
+      validator: 'isValidAddressesInput',
       message: 'Required'
     }
   ],
@@ -55,10 +55,7 @@ const enhance = compose(
     onSubmit: (values, dispatch, props) => {
       props.resetAddresses();
       return localSaveAddresses({
-        addresses: {
-          pickUpAddress: values.get('addresses').from,
-          deliveryAddress: values.get('addresses').to
-        }
+        addresses: values.get('addresses')
       });
     },
     onSubmitSuccess: (result, dispatch, props) => {

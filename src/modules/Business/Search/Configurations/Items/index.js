@@ -8,31 +8,13 @@ import validators, { validateFunc } from '../../../../Common/validators';
 import Spin from '../../../../../globalComponents/Spin';
 
 import {
-  loadItems
+  loadItems,
+  localSaveItems,
+  getLocalStorageStepInfo
 } from '../../searchActions';
 
 import { getItems } from '../../searchReducers';
 
-const validate = validateFunc(
-  [
-    {
-      field: 'residenceType',
-      validator: 'isRequired',
-      message: 'Required'
-    },
-    {
-      field: 'deliveryAccess',
-      validator: 'isRequired',
-      message: 'Required'
-    },
-    {
-      field: 'ableToAssist',
-      validator: 'isRequired',
-      message: 'Required'
-    }
-  ],
-  validators
-);
 
 const mapDispatchToProps = dispatch => ({
   loadItems: () => dispatch(loadItems())
@@ -55,50 +37,29 @@ const enhance = compose(
   branch(isLoading, renderComponent(Spin.FullScreenSpinner)),
   reduxForm({
     form: 'search.configurations.items',
-    validate,
     onSubmit: (values, dispatch, props) => {
-      debugger
+      return localSaveItems(values.toJS());
     },
     onSubmitSuccess: async (result, dispatch, props) => {
-      // const search = props.location.search;
-      // const params = new URLSearchParams(search);
-      // const { addresses, dateTime } = await getLocalStorageStepInfo();
-      // debugger;
-      // const searchParameters = urlQueryConstructor([
-      //   {
-      //     label: 'origin',
-      //     value: addresses.from
-      //   },
-      //   {
-      //     label: 'destination',
-      //     value: addresses.to
-      //   },
-      //   {
-      //     label: 'dateTime',
-      //     value: `${dateTime.date},${dateTime.time}`
-      //   }
-      // ]);
+      const config = await getLocalStorageStepInfo();
+      const configInjson = JSON.stringify(config);
+      const configBase64 = btoa(configInjson);
+      const searchParameters = '?configuration=' + configBase64;
 
-      // const validator = searchQueryValidator(searchParameters);
-      // if (!validator.status) {
-      //   message.error(validator.message);
-      //   return false;
-      // }
-
-      // if (
-      //   props.location.state &&
-      //   props.location.state.fromProfile &&
-      //   props.location.state.businessId
-      // ) {
-      //   return props.history.push({
-      //     pathname: `/business/profile/${props.location.state.businessId}`,
-      //     search: searchParameters
-      //   });
-      // }
-      // return props.history.push({
-      //   pathname: '/business/search/result',
-      //   search: searchParameters
-      // });
+      if (
+        props.location.state &&
+        props.location.state.fromProfile &&
+        props.location.state.businessId
+      ) {
+        return props.history.push({
+          pathname: `/business/profile/${props.location.state.businessId}`,
+          search: searchParameters
+        });
+      }
+      return props.history.push({
+        pathname: '/business/search/result',
+        search: searchParameters
+      });
     }
   }),
   scrollToTopOnMount

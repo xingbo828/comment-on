@@ -90,8 +90,8 @@ class AddressSelection extends Component {
     });
     const { from, to } = this.state;
     this.props.onChange({
-      from: from.placeId,
-      to: to.placeId
+      pickUpAddress: from.placeId,
+      deliveryAddress: to.placeId
     });
   };
 

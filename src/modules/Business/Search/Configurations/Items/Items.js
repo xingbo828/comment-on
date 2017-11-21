@@ -5,9 +5,23 @@ import Grid from '../../../../../globalComponents/Grid';
 import Layout from '../../../../../globalComponents/Layout';
 import { Heading, Paragraph } from '../../../../../globalComponents/Typography';
 import { HeadingInfo, HeadingParagraph } from '../Shared/Styled';
+import ItemsCount from './ItemsCount';
+import configs from './ItemsCount/configs';
 
 const { Form, FormActions, FormInner } = Layout.Form;
 
+const renderItemsCounts =  ({ input, name, label, desc, configs }) => {
+  // debugger;
+  return (
+    <ItemsCount
+      onChange={input.onChange}
+      value={input.value}
+      label={label}
+      desc={desc}
+      configs={configs}
+    />
+  );
+};
 
 const Items = ({ handleSubmit, pristine, reset, valid, submitting }) => {
   return (
@@ -22,7 +36,29 @@ const Items = ({ handleSubmit, pristine, reset, valid, submitting }) => {
       </HeadingInfo>
       <Form onSubmit={handleSubmit}>
         <FormInner>
+          <Field
+            component={renderItemsCounts}
+            name="speciality"
+            label="Speciality Items"
+            desc="Special items"
+            configs={configs.speciality}
+          />
 
+          <Field
+            component={renderItemsCounts}
+            name="large"
+            label="Large Items"
+            desc="Anything that doesn't fit in a regular size sedan."
+            configs={configs.large}
+          />
+
+          <Field
+            component={renderItemsCounts}
+            name="medium"
+            label="Medium Items"
+            desc="Anything that fits in a regular size sedan"
+            configs={configs.medium}
+          />
         </FormInner>
         <FormActions>
           <Button

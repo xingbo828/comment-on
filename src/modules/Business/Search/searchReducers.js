@@ -50,7 +50,9 @@ const searchAddressesStep = (state = initAddressesState, action) => {
 
 // Items
 const initItemsState = Immutable.fromJS({
-  something: null,
+  speciality: {},
+  large: {},
+  medium: {},
   status: 'UNINIT'
 });
 
@@ -58,7 +60,9 @@ const searchItemsStep = (state = initItemsState, action) => {
   switch (action.type) {
     case GET_ITEMS: {
       return state.withMutations(st => {
-        st.set('something', action.data.something);
+        st.set('speciality', action.data.speciality || {});
+        st.set('large', action.data.large || {});
+        st.set('medium', action.data.medium || {});
         st.set('status', 'LOADED');
       });
     }

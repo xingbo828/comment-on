@@ -7,7 +7,7 @@ export const StyledContainer = styled.div`
 
 export const Label = styled.label`
   font-size: 1.5rem;
-  display: inline-block;
+  display: block;
   font-weight: ${props=>props.theme.fontWeights.medium};
   margin-bottom: ${props=>props.theme.spaces.wide};
 `;
