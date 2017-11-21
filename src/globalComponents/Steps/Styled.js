@@ -3,12 +3,15 @@ import styled from 'styled-components';
 export const StepsContainer = styled.ul`
   display: flex;
   padding: 0;
-  font-size: .875rem;
+  font-size: .7rem;
+  ${props=>props.theme.media.greaterThan('sm')`
+    font-size: .875rem;
+  `}
 `;
 
 export const StepDot = styled.span`
   display: none;
-  ${props=>props.theme.media.greaterThan('md')`
+  ${props=>props.theme.media.greaterThan('sm')`
     display: inline;
     padding-right: 5px;
     ${props => {
@@ -29,7 +32,7 @@ export const StepContainer = styled.li`
   list-style: none;
   text-align: center;
   padding: .5rem 0;
-  ${props=>props.theme.media.greaterThan('md')`
+  ${props=>props.theme.media.greaterThan('sm')`
     padding: 2.5rem 0;
     border-top: 1px solid ${props=>props.theme.colors.border};
   `}
@@ -65,7 +68,10 @@ export const StepLabel = styled.span`
 `;
 
 export const StepSeperatorWrapper = styled.span`
-
+  display: none;
+  ${props=>props.theme.media.greaterThan('sm')`
+    display: inline;
+  `}
 `;
 
 export const StepHighLightBar = styled.span`

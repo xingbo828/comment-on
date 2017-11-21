@@ -52,29 +52,29 @@ export const loadAddresses = () => async dispatch => {
   });
 };
 
-// VEHICLE
+// ITEMS
 
-export const GET_VEHICLE = 'GET_VEHICLE';
+export const GET_ITEMS = 'GET_ITEMS';
 
-export const LOADING_VEHICLE = 'LOADING_VEHICLE';
+export const LOADING_ITEMS = 'LOADING_ITEMS';
 
-export const localSaveVehicle = async (vehicle)  => {
+export const localSaveItems = async (items)  => {
   const stepInfo = await localforge.getItem(LOCALSTOREAGE_STEP_INFO_KEY);
   return await localforge.setItem(
     LOCALSTOREAGE_STEP_INFO_KEY,
-    Object.assign(stepInfo || {}, { vehicle: omit(vehicle, ['status']) })
+    Object.assign(stepInfo || {}, { items: omit(items, ['status']) })
   );
 };
 
-export const loadVehicle = () => async dispatch => {
+export const loadItems = () => async dispatch => {
   dispatch({
-    type: LOADING_VEHICLE
+    type: LOADING_ITEMS
   });
   const stepInfo = await localforge.getItem(LOCALSTOREAGE_STEP_INFO_KEY);
-  const vehicle = stepInfo && stepInfo.vehicle ? stepInfo.vehicle : {};
+  const items = stepInfo && stepInfo.items ? stepInfo.items : {};
   dispatch({
-    type: GET_VEHICLE,
-    data: vehicle
+    type: GET_ITEMS,
+    data: items
   });
 };
 

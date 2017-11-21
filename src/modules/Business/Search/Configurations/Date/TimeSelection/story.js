@@ -10,7 +10,7 @@ const TimeSelectionDemo = withInfo('Search Time Range Selection')(() => {
   return <TimeSelection value="" onChange={action('changed')} />;
 });
 
-const TimeSelectionStory = storiesOf('Mover/Search/TimeSelection', module)
+const TimeSelectionStory = storiesOf('Mover/Search/Date/TimeSelection', module)
   .addDecorator(withKnobs)
   .add('Usage', TimeSelectionDemo);
 

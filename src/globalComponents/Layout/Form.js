@@ -28,9 +28,9 @@ const FormActions = styled.div`
 `;
 
 const FormInner = styled.div`
-  padding: ${props=>props.theme.spaces.base} 0;
+  padding: ${props=>props.theme.spaces.base} ${props=>props.theme.spaces.tight};
   ${props=>props.theme.media.greaterThan('md')`
-    padding: ${props=>props.theme.spaces.wide} ${props=>props.theme.spaces.xWide};
+    padding: ${props=>props.theme.spaces.wide} ${props=>props.theme.spaces.xWide} 0 ;
   `}
 `;
 

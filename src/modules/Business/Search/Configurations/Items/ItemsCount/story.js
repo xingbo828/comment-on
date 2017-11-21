@@ -4,18 +4,18 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, text, boolean, number } from '@storybook/addon-knobs';
-import ResidenceTypeSelection from './';
+import ItemsCount from './';
 
-const Demo = withInfo('ResidenceType Selection')(() =>
-  <ResidenceTypeSelection
+const Demo = withInfo('Items Count')(() =>
+  <ItemsCount
     onChange={action('changed')}
-    value="condo | 1000 sqft"
-    label="Pick-up residence"
+    value="test"
+    label="Speciality Items"
   />
 );
 
 
-const Story = storiesOf('Mover/Search/Logistics/ResidenceTypeSelection', module)
+const Story = storiesOf('Mover/Search/Items/ItemsCount', module)
 .addDecorator(withKnobs)
 .add('Usage', Demo);
 

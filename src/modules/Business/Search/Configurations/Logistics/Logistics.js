@@ -4,6 +4,8 @@ import { Button, Radio } from '../../../../../globalComponents/Form';
 import Grid from '../../../../../globalComponents/Grid';
 import Layout from '../../../../../globalComponents/Layout';
 import ResidenceTypeSelection from './ResidenceTypeSelection';
+import DeliveryAccess from './DeliveryAccess';
+import WillYouBeAssisting from './WillYouBeAssisting';
 import { Heading, Paragraph } from '../../../../../globalComponents/Typography';
 import { HeadingInfo, HeadingParagraph } from '../Shared/Styled';
 
@@ -20,19 +22,24 @@ const renderResidenceTypeSelection =  ({ input, name, label, desc }) => {
   );
 };
 
-const renderAbleToAssist = ({ input, name, label, desc }) => {
-  const placeholdertext = `Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.`;
+const renderDeliveryAccess = ({ input, name, label, desc }) => {
   return (
-    <Radio.RadioGroup
-      childType="wild"
+    <DeliveryAccess
+      onChange={input.onChange}
+      value={input.value}
+      label={label}
+    />
+  );
+};
+
+const renderAbleToAssist = ({ input, name, label, desc }) => {
+  return (
+    <WillYouBeAssisting
+      onChange={input.onChange}
+      value={input.value}
       label={label}
       name={name}
-      value={input.value || 'yes'}
-      onChange={input.onChange}
-    >
-      <Radio.RadioBlock desc={placeholdertext} value="yes" label="Yes" />
-      <Radio.RadioBlock desc={placeholdertext} value="no" label="No" />
-    </Radio.RadioGroup>
+    />
   );
 };
 
@@ -54,6 +61,12 @@ const Logistics = ({ handleSubmit, pristine, reset, valid, submitting }) => {
             component={renderResidenceTypeSelection}
             name="residenceType"
             label="Pick-up residence"
+          />
+
+          <Field
+            component={renderDeliveryAccess}
+            name="deliveryAccess"
+            label="Delivery access"
           />
 
           <Field

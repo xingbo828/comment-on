@@ -47,9 +47,14 @@ class RadioGroup extends Component {
 
   renderWildChildren(children) {
     return React.Children.map(children, (C) => {
+      const {
+        value,
+        ...other
+      } = C.props;
       return React.cloneElement(C, {
         onCheck: this.handleChange,
-        checked: C.props.value === this.state.selected
+        checked: value === this.state.selected,
+        ...other
       })
     }, this);
   }

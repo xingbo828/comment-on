@@ -4,8 +4,8 @@ import {
   GET_ADDRESSES,
   LOADING_ADDRESSES,
   RESET_ADDRESSES,
-  GET_VEHICLE,
-  LOADING_VEHICLE,
+  GET_ITEMS,
+  LOADING_ITEMS,
   GET_DATE_TIME,
   LOADING_DATE_TIME,
   LOADING_LOGISTICS,
@@ -48,22 +48,22 @@ const searchAddressesStep = (state = initAddressesState, action) => {
   }
 };
 
-// Vehicle
-const initVehicleState = Immutable.fromJS({
-  vehicle: null,
+// Items
+const initItemsState = Immutable.fromJS({
+  something: null,
   status: 'UNINIT'
 });
 
-const searchVehicleStep = (state = initVehicleState, action) => {
+const searchItemsStep = (state = initItemsState, action) => {
   switch (action.type) {
-    case GET_VEHICLE: {
+    case GET_ITEMS: {
       return state.withMutations(st => {
-        st.set('vehicle', action.data.vehicle);
+        st.set('something', action.data.something);
         st.set('status', 'LOADED');
       });
     }
 
-    case LOADING_VEHICLE: {
+    case LOADING_ITEMS: {
       return state.withMutations(st => {
         st.set('status', 'PENDING');
       });
@@ -104,8 +104,9 @@ const searchDateTimeStep = (state = initDateTimeState, action) => {
 
 // Logistics
 const initLogisticsState = Immutable.fromJS({
-  havePiano: null,
+  deliveryAccess: null,
   ableToAssist: null,
+  residenceType: null,
   status: 'UNINIT'
 });
 
@@ -113,7 +114,8 @@ const searchLogisticsStep = (state = initLogisticsState, action) => {
   switch (action.type) {
     case GET_LOGISTICS: {
       return state.withMutations(st => {
-        st.set('havePiano', action.data.havePiano);
+        st.set('residenceType', action.data.residenceType);
+        st.set('deliveryAccess', action.data.deliveryAccess);
         st.set('ableToAssist', action.data.ableToAssist);
         st.set('status', 'LOADED');
       });
@@ -158,7 +160,7 @@ const searchResult = (state = initResultState, action) => {
 
 export default combineReducers({
   addressesStep: searchAddressesStep,
-  vehicleStep: searchVehicleStep,
+  itemsStep: searchItemsStep,
   dateTimeStep: searchDateTimeStep,
   logisticsStep: searchLogisticsStep,
   searchResult: searchResult
@@ -167,8 +169,8 @@ export default combineReducers({
 // Selectors
 export const getAddresses = state =>
   state.getIn(['business', 'search', 'addressesStep']);
-export const getVehicle = state =>
-  state.getIn(['business', 'search', 'vehicleStep']);
+export const getItems = state =>
+  state.getIn(['business', 'search', 'itemsStep']);
 export const getDateTime = state =>
   state.getIn(['business', 'search', 'dateTimeStep']);
 export const getLogistics = state =>

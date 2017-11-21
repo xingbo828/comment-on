@@ -7,10 +7,10 @@ import {
   StyledSelect
 } from './Styled';
 
-const Select = ({children, label, name, ...rest}) => {
+const Select = ({children, value, onChange, label, name, ...rest}) => {
   return (
     <Container {...rest}>
-      <StyledSelect name={name}>
+      <StyledSelect value={value} name={name} onChange={onChange}>
         {children}
       </StyledSelect>
       {label && <Label htmlFor={name}>{label}</Label>}

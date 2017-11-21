@@ -4,6 +4,7 @@ import TransitionGroup from 'react-transition-group/TransitionGroup';
 import AddressStep from './Address';
 import DateStep from './Date';
 import LogisticsStep from './Logistics';
+import Items from './Items';
 import SearchSteps from './Shared/SearchSteps';
 import StepsRouteTransition from './Shared/StepsRouteTransition';
 
@@ -21,6 +22,10 @@ const Configurations = ({ location, history, match }) => {
     {
       path: '/business/search/configurations/logistics',
       component: LogisticsStep
+    },
+    {
+      path: '/business/search/configurations/items',
+      component: Items
     }
   ];
 

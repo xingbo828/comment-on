@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { func, string } from 'prop-types';
 import { Radio } from '../../../../../../globalComponents/Form';
 import Animation from '../../../../../../globalComponents/Animation';
+import configs from './configs';
 
 import {
   ResidenceTypeSelectionContainer,
@@ -15,44 +16,7 @@ import {
 class ResidenceTypeSelection extends Component {
   constructor(props) {
     super(props);
-    this.configs = [
-      {
-        label: 'Apartment',
-        value: 'apartment',
-        children: [
-          {
-            label: 'Up to 500 sqft',
-            value: 'apartment | 500 sqft'
-          },
-          {
-            label: 'Up to 750 sqft',
-            value: 'apartment | 750 sqft'
-          },
-          {
-            label: 'Up to 1000 sqft',
-            value: 'apartment | 1000 sqft'
-          }
-        ]
-      },
-      {
-        label: 'Loft/Multi-Level Condo',
-        value: 'condo',
-        children: [
-          {
-            label: 'Up to 500 sqft',
-            value: 'condo | 500 sqft'
-          },
-          {
-            label: 'Up to 750 sqft',
-            value: 'condo | 750 sqft'
-          },
-          {
-            label: 'Up to 1000 sqft',
-            value: 'condo | 1000 sqft'
-          }
-        ]
-      }
-    ];
+    this.configs = configs;
 
     this.state = this.initState(this.configs, this.props.value);
   }

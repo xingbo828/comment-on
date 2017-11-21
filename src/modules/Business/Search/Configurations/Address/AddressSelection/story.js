@@ -16,7 +16,7 @@ const AddressSelectionDemo = withInfo('Address Selection')(() =>
 );
 
 
-const AddressSelectionStory = storiesOf('Mover/Search/AddressSelection', module)
+const AddressSelectionStory = storiesOf('Mover/Search/Address/AddressSelection', module)
 .addDecorator(withKnobs)
 .add('Usage', AddressSelectionDemo);
 
