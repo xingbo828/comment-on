@@ -12,4 +12,8 @@ export const Banner = styled.div`
   `};
 `;
 
+export const InnerContainer = styled.div`
+  flex: 1
+`;
+
 
