@@ -4,7 +4,6 @@ import Steps from '../../../../../../globalComponents/Steps';
 const Step = Steps.Step;
 
 const SearchSteps = ({current, history}) => {
-  console.log(history);
   const stepClickHandler = (step) => {
     history.push({
       pathname: `/business/search/configurations/${step}`,

@@ -22,7 +22,6 @@ const enhance = compose(
   withRouter,
   withProps(props => ({
     navToSearch: () => {
-      console.log('test')
       props.history.push({
         pathname: '/business/search/configurations/address'
       });
