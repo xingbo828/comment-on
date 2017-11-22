@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { instanceOf, string, bool, func } from 'prop-types';
+import { instanceOf, func } from 'prop-types';
 
 import Calendar from './Calendar';
 
 class DateTime extends Component {
   constructor(props) {
     super(props);
-    const format = 'MMM DD, YYYY ';
     this.state = {
       selectedDate: this.props.value,
     };

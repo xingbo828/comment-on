@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Heading, Paragraph } from '../../../../../globalComponents/Typography';
+import { Paragraph } from '../../../../../globalComponents/Typography';
 
 export const HeadingInfo = styled.div`
   width: 100%;

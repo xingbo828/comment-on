@@ -1,9 +1,7 @@
 import React from 'react';
 import Transition, {
   ENTERING,
-  ENTERED,
-  EXITING,
-  EXITED
+  ENTERED
 } from 'react-transition-group/Transition';
 
 const StepsRouteTransition = ({ timeout=250, in: inProp, children}) => {

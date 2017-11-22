@@ -3,7 +3,6 @@ import {
   InputContainer,
   Input,
   FocusBorder,
-  InputErrorMsg,
   InputWrapper,
   PlusNumberHandler,
   MinusNumberHandler,

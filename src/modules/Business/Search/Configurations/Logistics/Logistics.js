@@ -1,12 +1,12 @@
 import React from 'react';
 import { Field } from 'redux-form/immutable';
-import { Button, Radio } from '../../../../../globalComponents/Form';
+import { Button } from '../../../../../globalComponents/Form';
 import Grid from '../../../../../globalComponents/Grid';
 import Layout from '../../../../../globalComponents/Layout';
 import ResidenceTypeSelection from './ResidenceTypeSelection';
 import DeliveryAccess from './DeliveryAccess';
 import WillYouBeAssisting from './WillYouBeAssisting';
-import { Heading, Paragraph } from '../../../../../globalComponents/Typography';
+import { Heading } from '../../../../../globalComponents/Typography';
 import { HeadingInfo, HeadingParagraph } from '../Shared/Styled';
 
 const { Form, FormActions, FormInner } = Layout.Form;

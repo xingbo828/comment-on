@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { array, func, bool, string, number, object } from 'prop-types';
+import { array, func, bool, number, object } from 'prop-types';
 import isEqual from 'lodash/isEqual';
 import first from 'lodash/first';
 import has from 'lodash/has';
@@ -21,7 +21,7 @@ class Map extends Component {
 
   async componentDidMount() {
     const { google, markers, zoom, direction, onRouteChange } = this.props;
-      this.placeIdConverter = this._placeIdToAddress(new google.maps.Geocoder);
+      this.placeIdConverter = this._placeIdToAddress(new google.maps.Geocoder());
       const processedMarkers = await this.convertMarkersFromPlaceIdToAddress(markers, this.placeIdConverter);
       this.renderMap(
         this.mapContainer,
@@ -91,7 +91,7 @@ class Map extends Component {
     const bounds = new google.maps.LatLngBounds();
     const maps = google.maps;
     const map = new maps.Map(container, defaultMapConfig);
-    const mapMarkers = markers.map(m => {
+    markers.map(m => {
       const markerPos = new maps.LatLng(m.lat, m.lng);
       bounds.extend(markerPos);
       return new google.maps.Marker({
@@ -138,7 +138,7 @@ class Map extends Component {
   renderDefaultMap = (container, google) => {
     const maps = google.maps;
     const center = new maps.LatLng(49.246292, -123.116226);
-    const map = new maps.Map(container, {
+    new maps.Map(container, {
       zoom: 9,
       center,
       ...defaultMapConfig

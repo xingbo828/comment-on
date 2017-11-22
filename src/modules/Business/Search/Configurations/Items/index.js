@@ -4,7 +4,6 @@ import { compose, lifecycle, branch, renderComponent } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import Items from './Items';
 import scrollToTopOnMount from '../../../../Common/scrollToTopOnMount';
-import validators, { validateFunc } from '../../../../Common/validators';
 import Spin from '../../../../../globalComponents/Spin';
 
 import {

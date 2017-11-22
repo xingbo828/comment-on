@@ -1,16 +1,13 @@
 import React from 'react';
-import { number, string, oneOf, func, bool, array } from 'prop-types';
+import { array } from 'prop-types';
 import { Link } from 'react-router-dom'
 import Grid from '../../../../../globalComponents/Grid';
 import SearchResultItem from './Item';
 import {
-  LogoContainer,
-  ItemRow,
   HeaderRow
 } from './Styled';
 
-const {Row, Col} = Grid;
-
+const { Col } = Grid;
 
 const SearchResultTable = ({searchResult, searchParams}) => {
 

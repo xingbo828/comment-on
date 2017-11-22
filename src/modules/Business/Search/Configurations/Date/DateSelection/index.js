@@ -8,7 +8,7 @@ import {
 
 class DateSelection extends Component {
   render() {
-    const { value, label, placeholder, onChange } = this.props;
+    const { value, label, onChange } = this.props;
     const disabledDate = date => date.diff(moment(), 'days') < 1;
     return (
       <DateTimeSelectionContainer>

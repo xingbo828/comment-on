@@ -1,6 +1,5 @@
 import React from 'react';
 import Steps from '../../../../../../globalComponents/Steps';
-import Icon from '../../../../../../globalComponents/Icon';
 
 const Step = Steps.Step;
 

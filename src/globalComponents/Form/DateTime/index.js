@@ -10,9 +10,6 @@ class DateTime extends Component {
   constructor(props) {
     super(props);
     const m = moment;
-    const currentDateTime = m()
-      .add(1, 'hour')
-      .minute(0);
     const getCurrentDateTime = inclueTime => {
       if (inclueTime) {
         return m()

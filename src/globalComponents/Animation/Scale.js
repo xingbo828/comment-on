@@ -9,7 +9,7 @@ const defaultStyle = (timeout, timingFunction) => ({
 
 const transitionStyles = (abscissa, ordinate) => {
   const styles = {
-    transform: `scale(${abscissa, ordinate || abscissa})`,
+    transform: `scale(${abscissa}, ${ordinate || abscissa})`,
   }
 
   return {

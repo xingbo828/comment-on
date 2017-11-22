@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { string, object, func, number } from 'prop-types';
+import { string, object, func } from 'prop-types';
 import isNull from 'lodash/isNull';
 import isObject from 'lodash/isObject';
 import Map from '../../../../../../globalComponents/Map';
-import { Paragraph } from '../../../../../../globalComponents/Typography';
 import Icon from '../../../../../../globalComponents/Icon';
 import AddressAutoComplete from '../../../../../../globalComponents/Form/AddressAutoComplete';
-import Grid from '../../../../../../globalComponents/Grid';
 import {
   Container,
   MapContainer,
@@ -70,7 +68,7 @@ class AddressSelection extends Component {
     if(isObject(placeId)) {
       return Promise.resolve(placeId);
     }
-    const geocoder = new this.props.google.maps.Geocoder;
+    const geocoder = new this.props.google.maps.Geocoder();
     return new Promise((resolve, reject)=> {
       geocoder.geocode({placeId}, (results, status) => {
         if (status === 'OK') {
@@ -112,7 +110,7 @@ class AddressSelection extends Component {
 
   render() {
     const { google } = this.props;
-    const { from, to, route, fromInputValue, toInputValue} = this.state;
+    const { from, to, route } = this.state;
     const markers = [from, to].filter(i=> !isNull(i)).filter(t => isObject(t)).map(x => x.location);
     return (
       <Container>

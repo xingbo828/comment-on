@@ -45,14 +45,14 @@ const ContextHeaderLinks = styled.ul`
   display: flex;
 `;
 
-const ContextHeaderLink = styled.li`
-  list-style: none;
-  line-height: 30px;
-> a {
-    color: ${fromTheme('offWhite')};
-    text-decoration: none;
-  }
-`;
+// const ContextHeaderLink = styled.li`
+//   list-style: none;
+//   line-height: 30px;
+// > a {
+//     color: ${fromTheme('offWhite')};
+//     text-decoration: none;
+//   }
+// `;
 
 const NavRoot = styled.nav`
   display: block;

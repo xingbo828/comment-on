@@ -1,4 +1,3 @@
-import React from 'react';
 import { compose, branch, renderComponent, lifecycle } from 'recompose';
 import { withRouter } from 'react-router-dom';
 import WithoutSearchParamsCard from './WithoutSearchParamsCard';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { number, string, oneOf, func, bool } from 'prop-types';
+import { number, string } from 'prop-types';
 import Grid from '../../../../../globalComponents/Grid';
 import Rate from '../../../../../globalComponents/Rate';
 import {

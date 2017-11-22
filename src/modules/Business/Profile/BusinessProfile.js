@@ -1,6 +1,5 @@
 import React from 'react';
 import Grid from '../../../globalComponents/Grid';
-import SecondaryNav from '../../Common/SecondaryNav';
 import { Heading, Paragraph } from '../../../globalComponents/Typography';
 import Comment from '../../../globalComponents/Comment';
 import ActionCard from './ActionCard';

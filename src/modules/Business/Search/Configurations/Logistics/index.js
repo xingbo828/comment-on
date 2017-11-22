@@ -9,8 +9,7 @@ import Spin from '../../../../../globalComponents/Spin';
 
 import {
   localSaveLogistics,
-  loadLogistics,
-  getLocalStorageStepInfo
+  loadLogistics
 } from '../../searchActions';
 
 import { getLogistics } from '../../searchReducers';

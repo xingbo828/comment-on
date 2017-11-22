@@ -5,7 +5,7 @@ import { Button } from '../../../../../globalComponents/Form';
 import Layout from '../../../../../globalComponents/Layout';
 import Grid from '../../../../../globalComponents/Grid';
 import AddressSelection from './AddressSelection';
-import { Heading, Paragraph } from '../../../../../globalComponents/Typography';
+import { Heading } from '../../../../../globalComponents/Typography';
 import { HeadingInfo, HeadingParagraph } from '../Shared/Styled';
 
 

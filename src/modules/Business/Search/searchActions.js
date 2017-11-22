@@ -1,6 +1,5 @@
 import localforge from 'localforage';
 import omit from 'lodash/omit';
-import get from 'lodash/get';
 import moment from 'moment';
 
 export const LOCALSTOREAGE_STEP_INFO_KEY = 'steps-info';

@@ -1,4 +1,4 @@
-import { auth, storage, database } from '../../firebaseClient';
+import { database } from '../../firebaseClient';
 
 const businessDbRef = database.ref().child('businesses');
 

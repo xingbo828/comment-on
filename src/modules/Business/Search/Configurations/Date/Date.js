@@ -5,7 +5,7 @@ import Grid from '../../../../../globalComponents/Grid';
 import DateSelection from './DateSelection';
 import SearchStepTimeSelection from './TimeSelection';
 import Layout from '../../../../../globalComponents/Layout';
-import { Heading, Paragraph } from '../../../../../globalComponents/Typography';
+import { Heading } from '../../../../../globalComponents/Typography';
 import { HeadingInfo, HeadingParagraph } from '../Shared/Styled';
 
 
