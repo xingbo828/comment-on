@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchResult from '../../components/SearchResult';
+import SearchResult from './SearchResult';
 import Grid from '../../../../globalComponents/Grid';
 
 const { Container } = Grid;

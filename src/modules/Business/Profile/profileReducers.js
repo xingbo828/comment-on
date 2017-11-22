@@ -1,5 +1,4 @@
 import Immutable from 'immutable';
-import { combineReducers } from 'redux-immutable';
 
 import {
   LOADED_PROFILE,

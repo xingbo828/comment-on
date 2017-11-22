@@ -1,10 +1,10 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import queryString from 'query-string';
 import { compose, lifecycle, branch, renderComponent } from 'recompose';
 import SearchResult from './Result';
 import scrollToTopOnMount from '../../../Common/scrollToTopOnMount';
 import Spin from '../../../../globalComponents/Spin';
-import message from '../../../../globalComponents/Message';
 import mapImmutablePropsToPlainProps from '../../../Common/mapImmutablePropsToPlainProps';
 import {
   searchBusiness
@@ -14,7 +14,6 @@ import {
   getSearchResult
 } from '../searchReducers';
 
-import searchQueryValidator from '../../utils/searchQueryValidator';
 
 
 const isLoading = (props) => props.status !== 'LOADED';
@@ -38,12 +37,14 @@ export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
     componentDidMount() {
-      const search = this.props.location.search;
-      const validator = searchQueryValidator(search);
-      if (!validator.status) {
-        message.error(validator.message);
+      try {
+        const parsedSearch = queryString.parse(this.props.location.search);
+        const { configuration={} } = parsedSearch;
+        const configurationDecoded = atob(configuration);
+        this.props.searchBusiness(configurationDecoded);
+      } catch(err) {
+        throw err;
       }
-      this.props.searchBusiness(search);
     }
   }),
   branch(

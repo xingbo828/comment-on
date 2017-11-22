@@ -2,11 +2,15 @@
   "name": "functions",
   "description": "Cloud Functions for Firebase",
   "dependencies": {
+    "express": "latest",
     "firebase-admin": "~4.2.1",
     "firebase-functions": "^0.5.7",
     "cors": "latest",
     "moment": "latest",
-    "@google/maps": "latest"
+    "@google/maps": "latest",
+    "swagger-ui": "latest",
+    "swagger-tools": "latest",
+    "yamljs": "latest"
   },
   "scripts": {
     "serve": "firebase serve --only=functions",

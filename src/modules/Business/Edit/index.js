@@ -5,7 +5,7 @@ import ProfilePictureContainer from './ProfilePictureContainer';
 import BasicInfoContainer from './BasicInfoContainer';
 import CrewMemberContainer from './CrewMemberContainer';
 import VehiclesContainer from './VehiclesContainer';
-import Settings from '../../../globalComponents/Settings';
+import Settings from '../../Common/Settings';
 
 
 

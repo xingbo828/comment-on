@@ -37,15 +37,15 @@ const AddressSearchBar = ({
           <Col xs={24} lgOffset={1} sm={24} md={24} lg={9}>
             <Field
               component={renderMoveAddress}
-              name="homeAddress"
-              placeholder="Start address"
+              name="pickUpAddress"
+              placeholder="Pick-up address"
             />
           </Col>
           <Col xs={24} sm={24} md={24} lg={8}>
             <Field
               component={renderMoveAddress}
-              placeholder="Destination address"
-              name="destAddress"
+              placeholder="Delivery address"
+              name="deliveryAddress"
             />
           </Col>
           <Col xs={24} sm={24} md={24} lg={6}>

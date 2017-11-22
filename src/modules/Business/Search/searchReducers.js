@@ -3,8 +3,9 @@ import { combineReducers } from 'redux-immutable';
 import {
   GET_ADDRESSES,
   LOADING_ADDRESSES,
-  GET_VEHICLE,
-  LOADING_VEHICLE,
+  RESET_ADDRESSES,
+  GET_ITEMS,
+  LOADING_ITEMS,
   GET_DATE_TIME,
   LOADING_DATE_TIME,
   LOADING_LOGISTICS,
@@ -15,8 +16,7 @@ import {
 
 // Addresses
 const initAddressesState = Immutable.fromJS({
-  homeAddress: null,
-  destAddress: null,
+  addresses: null,
   status: 'UNINIT'
 });
 
@@ -24,15 +24,22 @@ const searchAddressesStep = (state = initAddressesState, action) => {
   switch (action.type) {
     case GET_ADDRESSES: {
       return state.withMutations(st => {
-        st.set('homeAddress', action.data.homeAddress);
-        st.set('destAddress', action.data.destAddress);
+        st.set('addresses', Immutable.fromJS(action.data));
         st.set('status', 'LOADED');
+      });
+    }
+
+    case RESET_ADDRESSES: {
+      return state.withMutations(st => {
+        st.set('status', 'UNINIT');
+        st.set('addresses', null)
       });
     }
 
     case LOADING_ADDRESSES: {
       return state.withMutations(st => {
         st.set('status', 'PENDING');
+        st.set('addresses', null)
       });
     }
 
@@ -41,22 +48,26 @@ const searchAddressesStep = (state = initAddressesState, action) => {
   }
 };
 
-// Vehicle
-const initVehicleState = Immutable.fromJS({
-  vehicle: null,
+// Items
+const initItemsState = Immutable.fromJS({
+  speciality: {},
+  large: {},
+  medium: {},
   status: 'UNINIT'
 });
 
-const searchVehicleStep = (state = initVehicleState, action) => {
+const searchItemsStep = (state = initItemsState, action) => {
   switch (action.type) {
-    case GET_VEHICLE: {
+    case GET_ITEMS: {
       return state.withMutations(st => {
-        st.set('vehicle', action.data.vehicle);
+        st.set('speciality', action.data.speciality || {});
+        st.set('large', action.data.large || {});
+        st.set('medium', action.data.medium || {});
         st.set('status', 'LOADED');
       });
     }
 
-    case LOADING_VEHICLE: {
+    case LOADING_ITEMS: {
       return state.withMutations(st => {
         st.set('status', 'PENDING');
       });
@@ -97,8 +108,9 @@ const searchDateTimeStep = (state = initDateTimeState, action) => {
 
 // Logistics
 const initLogisticsState = Immutable.fromJS({
-  havePiano: null,
+  deliveryAccess: null,
   ableToAssist: null,
+  residenceType: null,
   status: 'UNINIT'
 });
 
@@ -106,7 +118,8 @@ const searchLogisticsStep = (state = initLogisticsState, action) => {
   switch (action.type) {
     case GET_LOGISTICS: {
       return state.withMutations(st => {
-        st.set('havePiano', action.data.havePiano);
+        st.set('residenceType', action.data.residenceType);
+        st.set('deliveryAccess', action.data.deliveryAccess);
         st.set('ableToAssist', action.data.ableToAssist);
         st.set('status', 'LOADED');
       });
@@ -151,7 +164,7 @@ const searchResult = (state = initResultState, action) => {
 
 export default combineReducers({
   addressesStep: searchAddressesStep,
-  vehicleStep: searchVehicleStep,
+  itemsStep: searchItemsStep,
   dateTimeStep: searchDateTimeStep,
   logisticsStep: searchLogisticsStep,
   searchResult: searchResult
@@ -160,8 +173,8 @@ export default combineReducers({
 // Selectors
 export const getAddresses = state =>
   state.getIn(['business', 'search', 'addressesStep']);
-export const getVehicle = state =>
-  state.getIn(['business', 'search', 'vehicleStep']);
+export const getItems = state =>
+  state.getIn(['business', 'search', 'itemsStep']);
 export const getDateTime = state =>
   state.getIn(['business', 'search', 'dateTimeStep']);
 export const getLogistics = state =>

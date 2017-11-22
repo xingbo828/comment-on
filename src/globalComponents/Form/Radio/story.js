@@ -13,7 +13,7 @@ const BasicRadioGroup = withInfo('Basic radio group')(() =>
     value="male"
     onChange={action('changed')}
   >
-    <Radio.Radio value="male" label="Male" />
+    <Radio.Radio value="male" label="Male" color="#1d407f"/>
     <Radio.Radio value="female" label="Female" />
   </Radio.RadioGroup>
 );

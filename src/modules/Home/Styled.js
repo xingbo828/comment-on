@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Button } from '../../globalComponents/Form';
 
 
 export const Banner = styled.div`

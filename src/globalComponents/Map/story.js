@@ -11,13 +11,17 @@ const singleMarker = [{
   lng: -122.419416
 }];
 
+const singleMarkerWithPlaceId = [{
+  placeId: 'ChIJd8BlQ2BZwokRAFUEcm_qrcA'
+}];
+
 const multipleMarkers = [{
   lat: 37.774929,
   lng: -122.419416,
   label: 'A'
 },
 {
-  lat: 38.774929,
+  lat: 36.774929,
   lng: -121.419416,
   label: 'B'
 },
@@ -27,7 +31,7 @@ const multipleMarkers = [{
   label: 'C'
 }];
 
-const twoMarkers = [{
+const withDirection = [{
   lat: 37.774929,
   lng: -122.419416
 },
@@ -46,11 +50,32 @@ const SingleMarkerMapDemo = () => (
   </div>
 );
 
-const TwoMarkerMapDemo = () => (
+const SingleMarkerWithPlaceIdMapDemo = () => (
   <div style={{width: '800px', height: '600px', border: '1px solid black'}}>
     <Map
       google={window.google}
-      markers={twoMarkers}
+      markers={singleMarkerWithPlaceId}
+      zoom={number('zoom',11)}
+    />
+  </div>
+);
+
+const DirectionMapDemo = () => (
+  <div style={{width: '800px', height: '600px', border: '1px solid black'}}>
+    <Map
+      google={window.google}
+      markers={withDirection}
+      direction
+    />
+  </div>
+);
+
+const DirectionWithWayPointsMapDemo = () => (
+  <div style={{width: '800px', height: '600px', border: '1px solid black'}}>
+    <Map
+      google={window.google}
+      markers={multipleMarkers}
+      direction
     />
   </div>
 );
@@ -68,6 +93,9 @@ const MultipleMarkerMapDemo = () => (
 const MapStory = storiesOf('Global/Map', module)
 .addDecorator(withKnobs)
 .add('single marker map', withInfo('Map with single marker')(SingleMarkerMapDemo))
-.add('two markers map as route', withInfo('Map with two markers')(TwoMarkerMapDemo))
+.add('single marker with placeid on map', withInfo('placeId marker')(SingleMarkerWithPlaceIdMapDemo))
+.add('map with direction', withInfo('Map with direction')(DirectionMapDemo))
+.add('map with direction and waypoints', withInfo('Map with direction and Waypoints')(DirectionWithWayPointsMapDemo))
 .add('multiple markers map', withInfo('Map with more than 3 markers')(MultipleMarkerMapDemo));
+;
 export default MapStory;

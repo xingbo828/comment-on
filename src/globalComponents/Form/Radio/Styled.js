@@ -5,40 +5,43 @@ export const Container = styled.div`
 `;
 
 export const RadioGroupLabel = styled.label`
-  font-size: 1.2rem;
+  font-size: 1.5rem;
+  font-weight: ${props=>props.theme.fontWeights.medium};
 `;
 
 export const RadioList = styled.div`
-  display: flex;
+  ${props => () => {if(props.childType === 'wild') {
+    return `
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      `
+  }}}
   width: 100%;
   font-size: 1rem;
   padding: 1rem 0;
   outline: none;
-  flex-wrap: wrap;
-  flex-direction: row;
+
 `;
 
 
 export const StyledLabel = styled.label`
-  display: block;
+  display: inline-block;
   padding: .5rem 0;
   position: relative;
   white-space: nowrap;
   cursor: pointer;
   margin-right: 1rem;
-
-  ${props=>props.theme.media.greaterThan('md')`
-    display: inline-block;
-    padding: auto;
-  `}
+  line-height: 23px;
 `;
 
 export const StyledRadio = styled.input`
   opacity: 0;
   position: absolute;
-  height: 18px;
-  width: 18px;
+  height: 20px;
+  width: 20px;
   z-index: 1;
+  cursor: pointer;
 `;
 
 export const StyledRadioReplacementContainer = styled.div`
@@ -46,30 +49,37 @@ export const StyledRadioReplacementContainer = styled.div`
 `;
 
 export const StyledRadioReplacement = styled.span`
-  border-color: ${props => props.theme.colors.primary};
+  border-color: ${props => () => {
+    if(props.checked) {
+      return props.color || props.theme.colors.border;
+    }
+    return props.theme.colors.border;
+  }};
   position: relative;
   top: 0;
   left: 0;
   display: block;
-  width: 18px;
-  height: 18px;
+  width: 23px;
+  height: 23px;
   border-radius: 16px;
-  border: 1px solid ${props => props.theme.colors.borderPrimary};
+  border-width: 1px;
+  border-style: solid;
   background-color: #fff;
   transition: all .3s;
   margin-right: 1rem;
+
   ::after {
     position: absolute;
-    width: 6px;
-    height: 6px;
+    width: 11px;
+    height: 11px;
     left: 5px;
     top: 5px;
-    border-radius: 4px;
+    border-radius: 50%;
     display: table;
     border-top: 0;
     border-left: 0;
     content: " ";
-    background-color: ${props => props.theme.colors.primary};
+    background-color: ${props => props.color ? props.color : props.theme.colors.primary};
     opacity: ${props => props.checked ? '1' : '0' };
     transform: scale(${props => props.checked ? '1.2' : '0' });
     transition: all .3s cubic-bezier(.78,.14,.15,.86);

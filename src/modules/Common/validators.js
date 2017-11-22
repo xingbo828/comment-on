@@ -37,7 +37,14 @@ export const isValidPostalCode = (value) => {
     return true;
   }
   return !(formattedValue && !/^[ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1} *\d{1}[A-Z]{1}\d{1}$/i.test(formattedValue));
-}
+};
+
+// Specific validators
+export const isValidAddressesInput = (value) => {
+  const pickUpAddress = value.pickUpAddress || value.get('pickUpAddress');
+  const deliveryAddress = value.deliveryAddress || value.get('deliveryAddress');
+  return (pickUpAddress && deliveryAddress);
+};
 
 const validators = {
   isRequired,
@@ -45,7 +52,8 @@ const validators = {
   isValidBirthDate,
   isValidBusinessHours,
   isValidPhoneNumber,
-  isValidPostalCode
+  isValidPostalCode,
+  isValidAddressesInput
 };
 export default validators;
 

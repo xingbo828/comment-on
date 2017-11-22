@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const VehOptionContainer = styled.div`
   padding: 1rem;
   border-radius: 5px;
-  border: 1px solid ${props=>props.theme.colors.borderPrimary};
+  border: 1px solid ${props=>props.theme.colors.border};
   margin-bottom: 1rem;
 `;
 

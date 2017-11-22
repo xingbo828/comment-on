@@ -23,7 +23,7 @@ export const MOVING_SEARCH_TIME_RANGE = [
       value: '12,17'
     },
     {
-      label: 'Dusk (5:00PM - 9:00PM)',
+      label: 'Night (5:00PM - 9:00PM)',
       value: '17,21'
     }
   ];

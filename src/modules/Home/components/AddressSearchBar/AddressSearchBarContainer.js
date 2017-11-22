@@ -1,5 +1,4 @@
 import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
 import { compose, withProps } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import AddressSearchBar from './AddressSearchBar';
@@ -9,11 +8,11 @@ import {
 } from '../../../Business/Search/searchActions';
 
 const validate = validateFunc([{
-  field: 'homeAddress',
+  field: 'pickUpAddress',
   validator: 'isRequired',
   message: 'Required'
 }, {
-  field: 'destAddress',
+  field: 'deliveryAddress',
   validator: 'isRequired',
   message: 'Required'
 }] , validators);
@@ -24,7 +23,7 @@ const enhance = compose(
   withProps(props => ({
     navToSearch: () => {
       props.history.push({
-        pathname: '/business/search/steps/address'
+        pathname: '/business/search/configurations/address'
       });
     }
   })),
@@ -34,15 +33,17 @@ const enhance = compose(
     onSubmit: (values, dispatch, props) => {
       const rawAddresses = values.toJS();
       const newAddress = {
-        homeAddress: rawAddresses.homeAddress.placeId,
-        destAddress: rawAddresses.destAddress.placeId
+        addresses: {
+          pickUpAddress: rawAddresses.pickUpAddress.placeId,
+          deliveryAddress: rawAddresses.deliveryAddress.placeId
+        }
       };
       return localSaveAddresses(newAddress);
     },
     onSubmitSuccess: (result, dispatch, props) => {
       // send user to next step
       props.history.push({
-        pathname: '/business/search/steps/vehicle'
+        pathname: '/business/search/configurations/date'
       });
     }
   })

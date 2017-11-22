@@ -5,7 +5,7 @@ import { reduxForm } from 'redux-form/immutable'
 import ProfilePicture from './ProfilePicture';
 import { uploadProfileImg } from '../accountAction';
 import { getUser } from  '../accountReducer';
-import { withSettingsContext } from '../../../globalComponents/Settings';
+import { withSettingsContext } from '../../Common/Settings';
 
 import validators, { validateFunc } from '../../Common/validators';
 

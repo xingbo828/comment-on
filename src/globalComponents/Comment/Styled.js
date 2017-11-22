@@ -46,8 +46,8 @@ const NameSpan = Styled.span`
 const RatingContainer = Styled.div`
   position: absolute;
   right: 0;
-  top: 0;
-  line-height: 40px;
+  top: 10px;
+  // line-height: 40px;
 `;
 
 export {

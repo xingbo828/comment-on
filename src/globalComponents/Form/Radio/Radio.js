@@ -7,7 +7,7 @@ import {
   StyledRadioReplacement
 } from './Styled';
 
-const Radio = ({ label, value, checked = false, onCheck }) => {
+const Radio = ({ label, value, color, checked = false, onCheck }) => {
   return (
     <StyledLabel>
       <StyledRadio
@@ -17,7 +17,7 @@ const Radio = ({ label, value, checked = false, onCheck }) => {
         checked={checked}
       />
       <StyledRadioReplacementContainer>
-        <StyledRadioReplacement checked={checked} />
+        <StyledRadioReplacement checked={checked} color={color}/>
         {label}
       </StyledRadioReplacementContainer>
     </StyledLabel>

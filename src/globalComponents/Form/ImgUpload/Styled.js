@@ -66,7 +66,7 @@ export const StyledImgRemove = styled.div`
     font-family: FontAwesome;
     content: '\f1f8';
     font-size: 2.0rem;
-    color: ${props => props.theme.colors.buttonPrimary};
+    color: ${props => props.theme.colors.danger};
   }
   :hover {
     background-color: rgba(0,0,0,.6);
@@ -94,7 +94,7 @@ export const StyledUpLoadBtn = styled.button`
   cursor: pointer;
   font-weight: bold;
   :hover {
-    background-color: ${props => props.theme.colors.borderPrimary};
+    background-color: ${props => props.theme.colors.border};
     border: 1px dashed ${props => props.theme.colors.textDark};
   }
   :focus {
