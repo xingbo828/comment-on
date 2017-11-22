@@ -4,15 +4,15 @@ import Icon from '../../Icon';
 
 import { StyledButton } from './Styled';
 
-const Button = ({ children, small, icon, loading, disabled, primary, danger, style={} }) => {
+const Button = ({ children, small, icon, loading, disabled, primary, danger, ...rest }) => {
   return (
     <StyledButton
-      style={style}
       small={small}
       primary={primary}
       danger={danger}
       loading={loading}
       disabled={disabled}
+      {...rest}
     >
       {children}
       {icon && <Icon
