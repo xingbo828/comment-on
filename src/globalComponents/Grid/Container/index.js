@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 
 export default styled.div`
-  margin: 0 auto;
-  ${props=>props.theme.media.greaterThan('sm')`
-    padding: 0 5.5%;
-  `}
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  padding-right: 15px;
+  padding-left: 15px;
   ${props => {
     if(!props.fluid) {
       return `
