@@ -65,7 +65,8 @@ const enhance = compose(
     }
   }),
   withProps((props)=> ({
-    goBack: () => {
+    goBack: (e) => {
+      e.preventDefault();
       props.history.push({
         pathname: '/business/search/configurations/logistics',
         state: props.location.state
