@@ -3,6 +3,7 @@ import { Field } from 'redux-form/immutable';
 import { Button } from '../../../../../globalComponents/Form';
 import Grid from '../../../../../globalComponents/Grid';
 import Layout from '../../../../../globalComponents/Layout';
+import Icon from '../../../../../globalComponents/Icon';
 import ResidenceTypeSelection from './ResidenceTypeSelection';
 import DeliveryAccess from './DeliveryAccess';
 import WillYouBeAssisting from './WillYouBeAssisting';
@@ -11,8 +12,7 @@ import { HeadingInfo, HeadingParagraph } from '../Shared/Styled';
 
 const { Form, FormActions, FormInner } = Layout.Form;
 
-
-const renderResidenceTypeSelection =  ({ input, name, label, desc }) => {
+const renderResidenceTypeSelection = ({ input, name, label, desc }) => {
   return (
     <ResidenceTypeSelection
       onChange={input.onChange}
@@ -43,8 +43,14 @@ const renderAbleToAssist = ({ input, name, label, desc }) => {
   );
 };
 
-
-const Logistics = ({ handleSubmit, pristine, reset, valid, submitting }) => {
+const Logistics = ({
+  handleSubmit,
+  pristine,
+  reset,
+  valid,
+  submitting,
+  goBack
+}) => {
   return (
     <Grid.Container>
       <HeadingInfo>
@@ -80,10 +86,12 @@ const Logistics = ({ handleSubmit, pristine, reset, valid, submitting }) => {
             style={{ float: 'right' }}
             type="submit"
             primary
-            icon="arrow-right"
             disabled={submitting || !valid}
           >
-            Next
+            Next <Icon icon="arrow-right" />
+          </Button>
+          <Button onClick={goBack} ghost style={{ float: 'left' }}>
+            <Icon icon="arrow-left" /> Back
           </Button>
         </FormActions>
       </Form>

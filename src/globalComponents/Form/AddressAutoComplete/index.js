@@ -15,10 +15,12 @@ class AddressAutoComplete extends Component {
   }
 
   handleFocus(event) {
-    this.setState({
+    this.setState(() => ({
       focused: true
+    }), () => {
+      this._geoSuggest.input.input.select();
     });
-    this._geoSuggest.input.input.select();
+
   }
 
   handleBlur() {

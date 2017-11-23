@@ -2,6 +2,7 @@ import React from 'react';
 import { Field } from 'redux-form/immutable';
 import { Button } from '../../../../../globalComponents/Form';
 import Grid from '../../../../../globalComponents/Grid';
+import Icon from '../../../../../globalComponents/Icon';
 import DateSelection from './DateSelection';
 import SearchStepTimeSelection from './TimeSelection';
 import Layout from '../../../../../globalComponents/Layout';
@@ -27,7 +28,7 @@ const renderTimeRangeSelection = ({ input }) => {
   );
 };
 
-const DateTime = ({ handleSubmit, pristine, reset, valid, submitting }) => {
+const DateTime = ({ handleSubmit, pristine, reset, valid, submitting, goBack }) => {
   return (
     <Grid.Container>
       <HeadingInfo>
@@ -56,10 +57,16 @@ const DateTime = ({ handleSubmit, pristine, reset, valid, submitting }) => {
             style={{ float: 'right' }}
             type="submit"
             primary
-            icon="arrow-right"
             disabled={submitting || !valid}
           >
-            Next
+            Next <Icon icon="arrow-right" />
+          </Button>
+          <Button
+            onClick={goBack}
+            style={{ float: 'left' }}
+            ghost
+          >
+            <Icon icon="arrow-left" /> Back
           </Button>
         </FormActions>
       </Form>

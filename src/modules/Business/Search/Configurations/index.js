@@ -6,8 +6,7 @@ import DateStep from './Date';
 import LogisticsStep from './Logistics';
 import Items from './Items';
 import SearchSteps from './Shared/SearchSteps';
-import StepsRouteTransition from './Shared/StepsRouteTransition';
-
+import FadeInRouteTransition from '../../../Common/RouteTransitions/FadeInRouteTransition';
 
 const Configurations = ({ location, history, match }) => {
   const paths = [
@@ -33,9 +32,11 @@ const Configurations = ({ location, history, match }) => {
   return (
     <div>
       <SearchSteps current={getCurrentStep(history)} history={history} />
+
       <TransitionGroup>
-        <StepsRouteTransition key={location.key}>
-          {() => <Switch location={location}>
+        <FadeInRouteTransition key={location.key}>
+          {() => (
+            <Switch location={location}>
               {
                 paths.map(p =>
                   <Route
@@ -45,8 +46,9 @@ const Configurations = ({ location, history, match }) => {
                   />
                 )
               }
-            </Switch>}
-        </StepsRouteTransition>
+            </Switch>
+          )}
+        </FadeInRouteTransition>
       </TransitionGroup>
     </div>
   );

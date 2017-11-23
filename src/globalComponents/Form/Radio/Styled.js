@@ -51,7 +51,7 @@ export const StyledRadioReplacementContainer = styled.div`
 export const StyledRadioReplacement = styled.span`
   border-color: ${props => () => {
     if(props.checked) {
-      return props.color || props.theme.colors.border;
+      return props.color || props.theme.colors.primary;
     }
     return props.theme.colors.border;
   }};

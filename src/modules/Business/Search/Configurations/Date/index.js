@@ -1,6 +1,6 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { compose, lifecycle, branch, renderComponent } from 'recompose';
+import { compose, lifecycle, branch, renderComponent, withProps } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import DateStep from './Date';
 import scrollToTopOnMount from '../../../../Common/scrollToTopOnMount';
@@ -43,7 +43,10 @@ const enhance = compose(
       this.props.loadDateTime();
     }
   }),
-  branch(isLoading, renderComponent(Spin.FullScreenSpinner)),
+  branch(isLoading, renderComponent(
+    withProps({
+      delay: 500
+    })(Spin.FullScreenSpinner))),
   reduxForm({
     form: 'search.configurations.date',
     validate,
@@ -58,6 +61,14 @@ const enhance = compose(
       });
     }
   }),
+  withProps((props)=> ({
+    goBack: () => {
+      props.history.push({
+        pathname: '/business/search/configurations/address',
+        state: props.location.state
+      });
+    }
+  })),
   scrollToTopOnMount
 );
 

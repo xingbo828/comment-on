@@ -18,12 +18,18 @@ const Form = styled.form`
 const FormActions = styled.div`
   width: 100%;
   padding: ${props=>props.theme.spaces.tight};
+  > button:not(:last-child) {
+    margin-bottom: ${props=>props.theme.spaces.wide};
+  }
   ${props=>props.theme.media.greaterThan('md')`
-    padding: ${props=>props.theme.spaces.wide};
+    padding: ${props=>props.theme.spaces.wide} ${props=>props.theme.spaces.xWide} 0;
     border-top: 1px solid #e3e3e3;
     position: absolute;
     bottom: 0;
     height:130px;
+    > button:not(:last-child) {
+      margin-bottom: 0;
+    }
   `}
 `;
 

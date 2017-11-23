@@ -7,7 +7,7 @@ import { withKnobs, text, boolean, number } from '@storybook/addon-knobs';
 import Spin from '../../globalComponents/Spin';
 
 const FullScreenSpinDemo = withInfo('Full Screen Spinner')(() => (
-  <Spin.FullScreenSpinner />
+  <Spin.FullScreenSpinner delay={300} />
 ));
 
 const ContainerModeDemo = withInfo('Spinner in container mode')(() => (

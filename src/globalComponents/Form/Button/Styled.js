@@ -77,7 +77,6 @@ const getIconSize = props => {
     padding: .5rem;
     width: 2rem;
     height: 2rem;
-    margin-left: .5rem;
   `;
 }
 
@@ -114,10 +113,10 @@ export const StyledButton = styled.button`
   user-select: none;
   transition: all .3s cubic-bezier(.645,.045,.355,1);
   position: relative;
-  color: ${getForeColor};
-  background-color:  ${getBackColor};
-  border-color: ${getBorderColor};
-  cursor: ${props => props.disabled || props.loading ? 'not-allowed' : 'pointer'};
+  color: ${props=>props.ghost ? getBackColor(props) : getForeColor(props)};
+  background-color:  ${props=> props.ghost ? 'transparent' : getBackColor(props)};
+  border-color: ${props=>props.ghost ? getBackColor(props) : getBorderColor(props)};
+  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
 
   ${getPadding}
   > i {
@@ -125,11 +124,11 @@ export const StyledButton = styled.button`
       display: inline-block;
       border-radius: 50%;
       color: ${props=>getBackColor(props)};
-      background: ${props=>getForeColor(props)};
+      background: ${props=>props.ghost ? 'transparent' : getForeColor(props)};
       ${getIconSize}
     }
   &:hover {
-    background-color: ${getHoverBackgroundColor};
+    background-color: ${props=>props.ghost ? 'transparent' : getHoverBackgroundColor(props)};
     color: ${getHoverFontColor};
     border-color: ${getHoverBorderColor};
     > i {

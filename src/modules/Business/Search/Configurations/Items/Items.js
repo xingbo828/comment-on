@@ -2,6 +2,7 @@ import React from 'react';
 import { Field } from 'redux-form/immutable';
 import { Button } from '../../../../../globalComponents/Form';
 import Grid from '../../../../../globalComponents/Grid';
+import Icon from '../../../../../globalComponents/Icon';
 import Layout from '../../../../../globalComponents/Layout';
 import { Heading } from '../../../../../globalComponents/Typography';
 import { HeadingInfo, HeadingParagraph } from '../Shared/Styled';
@@ -10,7 +11,7 @@ import configs from './ItemsCount/configs';
 
 const { Form, FormActions, FormInner } = Layout.Form;
 
-const renderItemsCounts =  ({ input, name, label, desc, configs }) => {
+const renderItemsCounts = ({ input, name, label, desc, configs }) => {
   // debugger;
   return (
     <ItemsCount
@@ -23,7 +24,14 @@ const renderItemsCounts =  ({ input, name, label, desc, configs }) => {
   );
 };
 
-const Items = ({ handleSubmit, pristine, reset, valid, submitting }) => {
+const Items = ({
+  handleSubmit,
+  pristine,
+  reset,
+  valid,
+  submitting,
+  goBack
+}) => {
   return (
     <Grid.Container>
       <HeadingInfo>
@@ -65,10 +73,12 @@ const Items = ({ handleSubmit, pristine, reset, valid, submitting }) => {
             style={{ float: 'right' }}
             type="submit"
             primary
-            icon="arrow-right"
             disabled={submitting || !valid}
           >
-            Next
+            Next <Icon icon="arrow-right" />
+          </Button>
+          <Button style={{ float: 'left' }} ghost onClick={goBack}>
+            <Icon icon="arrow-left" /> Back
           </Button>
         </FormActions>
       </Form>
