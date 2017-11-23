@@ -6,8 +6,9 @@ import Transition, {
 
 const FadeInTransition = ({ timeout=300, in: inProp, children}) => {
   const defaultStyle = {
-    transition: `all ${timeout}ms ease-out`,
-  }
+    transition: `all ${timeout}ms`,
+    opacity: 0,
+  };
 
   const transitionStyles = {
     [ENTERING]: {

@@ -18,7 +18,7 @@ class AddressAutoComplete extends Component {
     this.setState(() => ({
       focused: true
     }), () => {
-      this._geoSuggest.input.input.select();
+      this._geoSuggest.input.input.setSelectionRange(0, 9999);
     });
 
   }
