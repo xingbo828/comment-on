@@ -6,7 +6,7 @@
       "destination": "/component-lib/index.html"
     },
       {
-      "source": "**",
+      "source": "!/component-lib",
       "destination": "/index.html"
     } ]
   }
