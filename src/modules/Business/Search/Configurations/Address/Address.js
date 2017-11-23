@@ -4,6 +4,7 @@ import Immutable from 'immutable';
 import { Button } from '../../../../../globalComponents/Form';
 import Layout from '../../../../../globalComponents/Layout';
 import Grid from '../../../../../globalComponents/Grid';
+import Icon from '../../../../../globalComponents/Icon';
 import AddressSelection from './AddressSelection';
 import { Heading } from '../../../../../globalComponents/Typography';
 import { HeadingInfo, HeadingParagraph } from '../Shared/Styled';
@@ -49,12 +50,11 @@ const Address = ({ handleSubmit, pristine, reset, valid, submitting }) => {
             style={{ float: 'right' }}
             type="submit"
             primary
-            icon="arrow-right"
             disabled={submitting || !valid}
           >
-            Next
+            Next <Icon icon="arrow-right" />
           </Button>
-        </FormActions>
+      </FormActions>
       </Form>
     </Grid.Container>
   );

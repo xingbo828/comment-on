@@ -15,6 +15,8 @@ export const Input = Styled.input`
   font-size: 1rem;
   padding: 1rem 0;
   outline: none;
+  margin: 0;
+  border-radius: 0;
   &::placeholder {
     color: ${props=>props.theme.colors.textLight};
   }

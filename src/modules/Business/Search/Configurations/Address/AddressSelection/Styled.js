@@ -21,13 +21,13 @@ export const MapContainer = styled.div`
 export const RouteInfoContainer = styled.div`
   position: absolute;
   right: 50px;
-  top: 180px;
+  top: 190px;
   ${props=>props.theme.media.between('sm','md')`
-    top: 330px;
+    top: 340px;
   `}
 
   ${props=>props.theme.media.greaterThan('md')`
-    top: 430px;
+    top: 440px;
   `}
   background-color: white;
   color: ${props=>props.theme.colors.primary};

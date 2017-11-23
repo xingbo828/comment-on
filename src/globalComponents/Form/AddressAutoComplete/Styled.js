@@ -8,11 +8,12 @@ export const Label = styled.label`
 
 export const FocusBorder = styled.div`
 height: 2px;
-width: 100%;
+display: block;
+padding-left: 10px;
 background: ${props=>props.theme.colors.primary};
 margin-top: -3px;
 transition: .3s;
-margin-left: 20px;
+margin-left: 30px;
 ${props => {
   if(props.focused) {
     return `
@@ -39,6 +40,7 @@ export const GeosuggestStyled = styled(Geosuggest)`
   width: calc(100% - 20px);
   text-align: left;
   .geosuggest__input {
+    border-radius: 0;
     outline: 0;
     font-size: 1.2rem;
     width: 100%;

@@ -1,7 +1,7 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { compose, lifecycle, branch, renderComponent } from 'recompose';
+import { compose, lifecycle, branch, renderComponent, withProps } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import AddressStep from './Address';
 import scrollToTopOnMount from '../../../../Common/scrollToTopOnMount';
@@ -43,7 +43,10 @@ const enhance = compose(
       this.props.loadAddresses();
     }
   }),
-  branch(notLoaded, renderComponent(Spin.FullScreenSpinner)),
+  branch(notLoaded, renderComponent(
+    withProps({
+      delay: 500
+    })(Spin.FullScreenSpinner))),
   lifecycle({
     shouldComponentUpdate(nextProps) {
       return this.props.initialValues.get('addresses') !== nextProps.initialValues.get('addresses');

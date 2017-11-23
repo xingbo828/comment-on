@@ -4,21 +4,19 @@ import Transition, {
   ENTERED
 } from 'react-transition-group/Transition';
 
-const StepsRouteTransition = ({ timeout=250, in: inProp, children}) => {
+const FadeInTransition = ({ timeout=300, in: inProp, children}) => {
   const defaultStyle = {
     transition: `all ${timeout}ms ease-out`,
-    opacity: 0,
-    padding: '1rem 0'
   }
 
   const transitionStyles = {
     [ENTERING]: {
       opacity: 0,
-      transform: `translateX(30px)`
+      transform: `scale(0.98)`
     },
     [ENTERED]:  {
       opacity: 1,
-      transform: `translateX(0)`
+      transform: `none`
     }
   };
 
@@ -37,4 +35,4 @@ const StepsRouteTransition = ({ timeout=250, in: inProp, children}) => {
 };
 
 
-export default StepsRouteTransition;
+export default FadeInTransition;

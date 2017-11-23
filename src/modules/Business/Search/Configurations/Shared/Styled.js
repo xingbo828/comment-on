@@ -9,6 +9,7 @@ export const HeadingInfo = styled.div`
 
   ${props=>props.theme.media.greaterThan('md')`
     width: 600px;
+    padding-top: ${props=>props.theme.spaces.base};
   `}
 `;
 
