@@ -80,8 +80,9 @@ const searchItemsStep = (state = initItemsState, action) => {
 
 // Date time
 const initDateTimeState = Immutable.fromJS({
-  date: null,
-  time: null,
+  pickUpDate: null,
+  pickUpTime: null,
+  deliveryDate: null,
   status: 'UNINIT'
 });
 
@@ -89,8 +90,9 @@ const searchDateTimeStep = (state = initDateTimeState, action) => {
   switch (action.type) {
     case GET_DATE_TIME: {
       return state.withMutations(st => {
-        st.set('date', action.data.date);
-        st.set('time', action.data.time);
+        st.set('pickUpDate', action.data.pickUpDate);
+        st.set('pickUpTime', action.data.pickUpTime);
+        st.set('deliveryDate', action.data.deliveryDate);
         st.set('status', 'LOADED');
       });
     }

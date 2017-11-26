@@ -4,21 +4,21 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, text, boolean, number } from '@storybook/addon-knobs';
-import DateSelection from './';
+import DeliveryDateSelection from './';
 
-const DateSelectionDemo = withInfo('Date Selection')(() =>
+const DeliveryDateSelectionDemo = withInfo('Date Selection')(() =>
 <div style={{padding: '25px'}}>
-  <DateSelection
-    label="Delivery date"
+  <DeliveryDateSelection
+    label="When do you want to move?"
     onChange={action('Date changed')}
   />
 </div>
 );
 
 
-const DateSelectionStory = storiesOf('Mover/Search/Date/DateSelection', module)
+const DeliveryDateSelectionStory = storiesOf('Mover/Search/Date/DeliveryDateSelection', module)
 .addDecorator(withKnobs)
-.add('Usage', DateSelectionDemo);
+.add('Usage', DeliveryDateSelectionDemo);
 
 
-export default DateSelectionStory;
+export default DeliveryDateSelectionStory;

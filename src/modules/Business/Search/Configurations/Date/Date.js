@@ -5,6 +5,7 @@ import Grid from '../../../../../globalComponents/Grid';
 import Icon from '../../../../../globalComponents/Icon';
 import DateSelection from './DateSelection';
 import SearchStepTimeSelection from './TimeSelection';
+import DeliveryDateSelection from './DeliveryDateSelection';
 import Layout from '../../../../../globalComponents/Layout';
 import { Heading } from '../../../../../globalComponents/Typography';
 import { HeadingInfo, HeadingParagraph } from '../Shared/Styled';
@@ -28,6 +29,12 @@ const renderTimeRangeSelection = ({ input }) => {
   );
 };
 
+const renderDeliveryDateSelection = ({ input, label }) => {
+  return (
+    <DeliveryDateSelection value={input.value || undefined} label={label} onChange={input.onChange} />
+  );
+};
+
 const DateTime = ({ handleSubmit, pristine, reset, valid, submitting, goBack }) => {
   return (
     <Grid.Container>
@@ -43,14 +50,21 @@ const DateTime = ({ handleSubmit, pristine, reset, valid, submitting, goBack }) 
         <FormInner>
           <Field
             component={renderDateSelection}
-            name="date"
+            name="pickUpDate"
             label="Pick-up date"
           />
 
           <Field
             component={renderTimeRangeSelection}
-            name="time"
+            name="pickUpTime"
           />
+
+          <Field
+            component={renderDeliveryDateSelection}
+            name="deliveryDate"
+            label="Delivery date"
+          />
+
         </FormInner>
         <FormActions>
           <Button

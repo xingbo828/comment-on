@@ -16,6 +16,8 @@ const facebookLogin = () => {
 
 const googleLogin = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
+  provider.addScope('https://www.googleapis.com/auth/userinfo.profile');
+  provider.addScope('https://www.googleapis.com/auth/userinfo.email');
   firebaseAuth.signInWithRedirect(provider);
 };
 

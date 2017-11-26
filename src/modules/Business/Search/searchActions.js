@@ -1,6 +1,7 @@
 import localforge from 'localforage';
 import omit from 'lodash/omit';
 import moment from 'moment';
+import isObject from 'lodash/isObject';
 
 export const LOCALSTOREAGE_STEP_INFO_KEY = 'steps-info';
 
@@ -81,8 +82,9 @@ export const localSaveDateTime = async dateTime => {
     LOCALSTOREAGE_STEP_INFO_KEY,
     Object.assign(stepInfo || {}, {
       dateTime: {
-        date: dateTime.date.format('YYYYMMDD'),
-        time: dateTime.time
+        pickUpDate: dateTime.pickUpDate.format('YYYYMMDD'),
+        pickUpTime: dateTime.pickUpTime,
+        deliveryDate: isObject(dateTime.deliveryDate) ? dateTime.deliveryDate.format('YYYYMMDD') : dateTime.deliveryDate
       }
     })
   );
@@ -97,8 +99,9 @@ export const loadDateTime = () => async dispatch => {
   dispatch({
     type: GET_DATE_TIME,
     data: {
-      date: dateTime ? moment(dateTime.date) : null,
-      time: dateTime ? dateTime.time : null
+      pickUpDate: dateTime ? moment(dateTime.pickUpDate) : null,
+      pickUpTime: dateTime ? dateTime.pickUpTime : null,
+      deliveryDate: dateTime ? (dateTime.deliveryDate === 'sameDayDelivery' ? dateTime.deliveryDate : moment(dateTime.deliveryDate)) : null
     }
   });
 };

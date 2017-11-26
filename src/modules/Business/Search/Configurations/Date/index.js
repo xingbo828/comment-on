@@ -14,12 +14,17 @@ import { getDateTime } from '../../searchReducers';
 const validate = validateFunc(
   [
     {
-      field: 'date',
+      field: 'pickUpDate',
       validator: 'isRequired',
       message: 'Required'
     },
     {
-      field: 'time',
+      field: 'pickUpTime',
+      validator: 'isRequired',
+      message: 'Required'
+    },
+    {
+      field: 'deliveryDate',
       validator: 'isRequired',
       message: 'Required'
     }
