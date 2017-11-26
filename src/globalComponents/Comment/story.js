@@ -32,7 +32,7 @@ const WithReview = () => {
   );
 };
 
-const CommentStory = storiesOf('Global/Comment', module)
+const CommentStory = storiesOf('Global/Data Display/Comment', module)
   .addDecorator(withKnobs)
   .add('Default', withInfo('')(DefaultComment))
   .add('Review', withInfo('')(WithReview))

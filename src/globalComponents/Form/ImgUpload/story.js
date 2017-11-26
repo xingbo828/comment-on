@@ -39,7 +39,7 @@ const MultiImgUploadDemo = withInfo('Multiple images upload')(() =>
   />
 );
 
-const ImageUploadStory = storiesOf('Global/Form/ImgUpload', module)
+const ImageUploadStory = storiesOf('Global/Data Entry/ImgUpload', module)
   .add('Single image upload', SingleImgUploadDemo)
   .add('Multiple images upload', MultiImgUploadDemo);
 

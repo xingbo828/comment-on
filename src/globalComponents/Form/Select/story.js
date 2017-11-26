@@ -23,6 +23,6 @@ const SelectDemo= withInfo('Basic checkbox group')(() =>
 );
 
 
-const SelectStory = storiesOf('Global/Form/Select', module)
+const SelectStory = storiesOf('Global/Data Entry/Select', module)
   .add('Basic usage', SelectDemo);
 export default SelectStory;

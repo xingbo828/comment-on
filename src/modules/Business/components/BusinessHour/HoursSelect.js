@@ -7,6 +7,7 @@ import {
   HoursSelectButtonWrapper
 } from './Styled';
 import { Button, Select } from '../../../../globalComponents/Form';
+import Icon from '../../../../globalComponents/Icon';
 import moment from 'moment';
 
 class HoursSelect extends Component {
@@ -95,7 +96,7 @@ class HoursSelect extends Component {
             secondary
             onClick={this.handleAddHours}
           >
-            add
+            <Icon icon="plus" />
           </Button>
         </HoursSelectButtonWrapper>
       </HoursSelectContainer>

@@ -22,7 +22,7 @@ const ListOfIconsWithDifferenceSize = () => (
     <Icon size="5x" icon="user" />
   </div>
 );
-const IconStory = storiesOf('Global/Icon', module)
+const IconStory = storiesOf('Global/General/Icon', module)
   .add('basic icon', withInfo('Basic usage')(BasicIcon))
   .add('with different size',withInfo('Icon with sizes(lg/3x/5x)')(ListOfIconsWithDifferenceSize))
   .add('spinning icon', withInfo('Spinning icon')(SpinningIcon));

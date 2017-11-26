@@ -24,7 +24,7 @@ const SingleCheckbox = withInfo('Single checkbox usage')(() =>{
   }
 );
 
-const CheckBoxStory = storiesOf('Global/Form/Checkbox', module)
+const CheckBoxStory = storiesOf('Global/Data Entry/Checkbox', module)
   .add('Basic group usage', BasicCheckBoxGroup)
   .add('Single checkbox usage', SingleCheckbox);
 export default CheckBoxStory;

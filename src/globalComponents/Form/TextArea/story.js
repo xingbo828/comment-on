@@ -33,7 +33,7 @@ const TextAreaWithError = withInfo('With error message')(()=>
   />
 );
 
-const TextAreaStory = storiesOf('Global/Form/TextArea', module)
+const TextAreaStory = storiesOf('Global/Data Entry/TextArea', module)
   .add('Basic text Area', BasicTextArea)
   .add('With error message', TextAreaWithError);
 export default TextAreaStory;

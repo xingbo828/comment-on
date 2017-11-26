@@ -90,7 +90,7 @@ const MultipleMarkerMapDemo = () => (
 );
 
 
-const MapStory = storiesOf('Global/Map', module)
+const MapStory = storiesOf('Global/Data Display/Map', module)
 .addDecorator(withKnobs)
 .add('single marker map', withInfo('Map with single marker')(SingleMarkerMapDemo))
 .add('single marker with placeid on map', withInfo('placeId marker')(SingleMarkerWithPlaceIdMapDemo))

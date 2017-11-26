@@ -40,7 +40,7 @@ const RateWithCaption = withInfo('Rate with caption')(() =>
 );
 
 
-const RateStory = storiesOf('Global/Rate', module)
+const RateStory = storiesOf('Global/Data Entry/Rate', module)
 .addDecorator(withKnobs)
 .add('Basic rate', RateDemo)
 .add('Rate with caption', RateWithCaption)

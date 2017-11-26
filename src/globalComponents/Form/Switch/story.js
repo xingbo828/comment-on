@@ -13,6 +13,6 @@ const SwitchDemo= withInfo('Basic checkbox group')(() =>
 );
 
 
-const SwitchStory = storiesOf('Global/Form/Switch', module)
+const SwitchStory = storiesOf('Global/Data Entry/Switch', module)
   .add('Basic usage', SwitchDemo);
 export default SwitchStory;

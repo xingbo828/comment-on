@@ -12,7 +12,7 @@ const AvatarWithIcon = withInfo('Avatar with icon')(()=><Avatar style={{backgrou
 
 const AvatarWithIconAndSize = withInfo('Avatar with icon and size')(()=><Avatar style={{backgroundColor: '#87d068', color: 'white'}} size="lg" iconSize="2x" icon="user-o" />);
 
-const AvatarStory = storiesOf('Global/Avatar', module)
+const AvatarStory = storiesOf('Global/Data Display/Avatar', module)
   .add('with img src', AvatarWithImg)
   .add('with img src and size', AvatarWithImgAndSize)
   .add('with icon', AvatarWithIcon)

@@ -33,7 +33,7 @@ const ParagraphDemo = () => (
   </div>
 );
 
-const TypographyStory = storiesOf('Global/Typography', module)
+const TypographyStory = storiesOf('Global/General/Typography', module)
   .add('Heading', withInfo('Heading')(HeadingDemo))
   .add('Paragraph', withInfo('Paragraph')(ParagraphDemo));
 

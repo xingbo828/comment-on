@@ -35,7 +35,7 @@ const TabsWithReactEleHeader = () => (
   );
 
 
-const TabsStory = storiesOf('Global/Tabs', module)
+const TabsStory = storiesOf('Global/Data Display/Tabs', module)
 .add('basic tabs', withInfo('Basic Tabs')(BasicTabs))
 .add('custom header link', withInfo('React element header links')(TabsWithReactEleHeader));
 

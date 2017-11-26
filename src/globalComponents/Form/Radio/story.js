@@ -33,7 +33,7 @@ const RadioBlocksGroup = withInfo('Radio blocks in group')(() => {
 }
 );
 
-const RadioStory = storiesOf('Global/Form/Radio', module)
+const RadioStory = storiesOf('Global/Data Entry/Radio', module)
   .add('Basic usage', BasicRadioGroup)
   .add('Radio blocks in group', RadioBlocksGroup);
 export default RadioStory;

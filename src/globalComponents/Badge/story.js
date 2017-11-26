@@ -23,7 +23,7 @@ const NumberBadge = withInfo('Badge with counter')(() =>
 );
 
 
-const BadgeStory = storiesOf('Global/Badge', module)
+const BadgeStory = storiesOf('Global/Data Display/Badge', module)
 .addDecorator(withKnobs)
 .add('Dot badge', DotBadge)
 .add('Number badge', NumberBadge);

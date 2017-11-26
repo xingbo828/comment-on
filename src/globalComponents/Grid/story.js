@@ -88,7 +88,7 @@ const WithOffsetGrid = () => {
     </Row>
   </Container>);
 };
-const GridStory = storiesOf('Global/Grid', module)
+const GridStory = storiesOf('Global/Layout/Grid', module)
   .add('basic usage', withInfo('')(BasicGrid))
   .add('withOffset', withInfo('')(WithOffsetGrid));
 

@@ -66,11 +66,10 @@ const getHoverFontColor = props => {
 const getIconSize = props => {
   if (props.small) {
     return `
-      width: 15px;
-      height: 15px;
-      line-height: 15px;
-      margin-left: 5px;
-      font-size: .7rem;
+      width: 1.2rem;
+      height: 1.2rem;
+      line-height: 1.2rem;
+      font-size: 1rem;
     `;
   }
   return `
@@ -97,7 +96,6 @@ const getPadding = props => {
 
 export const StyledButton = styled.button`
   border-radius: 99em;
-  box-sizing: content-box;
   margin-bottom: 0;
   font-weight: bold;
   text-align: center;
@@ -108,7 +106,7 @@ export const StyledButton = styled.button`
   ${props=>props.theme.media.greaterThan('md')`
     width: auto;
   `};
-  min-width: 80px;
+  min-width: 40px;
   font-size: 1rem;
   user-select: none;
   transition: all .3s cubic-bezier(.645,.045,.355,1);

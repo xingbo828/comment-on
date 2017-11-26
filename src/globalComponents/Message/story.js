@@ -22,7 +22,7 @@ const MessageDemo = () => {
   );
 }
 
-const MessageStory = storiesOf('Global/Message', module)
+const MessageStory = storiesOf('Global/Feedback/Message', module)
 .add('messages', withInfo({
   text:
   `

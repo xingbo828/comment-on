@@ -137,12 +137,9 @@ export const searchBusiness = (config) => async dispatch => {
   dispatch({
     type: SEARCH_BUSINESS
   });
-  const API = `https://us-central1-comment-on-85597.cloudfunctions.net/business`;
+  const API = `https://us-central1-comment-on-85597.cloudfunctions.net/business?configuration=${config}`;
   try {
-    const searchResult = await fetch(API, {
-      method: 'POST',
-      body: config
-    }).then(res => res.json());
+    const searchResult = await fetch(API).then(res => res.json());
     return dispatch({
       type: GET_SEARCH_RESULT,
       data: searchResult

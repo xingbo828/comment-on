@@ -12,7 +12,7 @@ const BasicCard = () => (
     </Card>
   </div>
 );
-const IconStory = storiesOf('Global/Card', module)
+const IconStory = storiesOf('Global/Data Display/Card', module)
   .add('basic card', withInfo('Basic usage')(BasicCard));
 
 export default IconStory;

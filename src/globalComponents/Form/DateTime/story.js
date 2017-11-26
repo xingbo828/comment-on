@@ -43,7 +43,7 @@ const DateWithDisabledDates = withInfo('Date and time with disabled dates')(() =
 </div>
 );
 
-const DateTimeStory = storiesOf('Global/Form/DateTime', module)
+const DateTimeStory = storiesOf('Global/Data Entry/DateTime', module)
   .add('Date only', DateOnly)
   .add('With disabled dates', DateWithDisabledDates)
   .add('With time', DateAndTime);

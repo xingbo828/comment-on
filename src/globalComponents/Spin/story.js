@@ -27,7 +27,7 @@ const ContainerModeDemo = withInfo('Spinner in container mode')(() => (
   </div>
 ));
 
-const SpinStory = storiesOf('Global/Spin', module)
+const SpinStory = storiesOf('Global/Feedback/Spin', module)
   .addDecorator(withKnobs)
   .add('full screen spinner', withInfo('fullscreen')(FullScreenSpinDemo))
   .add('spinner as container', withInfo('container mode')(ContainerModeDemo));

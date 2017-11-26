@@ -19,7 +19,7 @@ const BasicNumberField = withInfo('Basic NumberField')(() =>
 );
 
 
-const NumberFieldStory = storiesOf('Global/Form/NumberField', module)
+const NumberFieldStory = storiesOf('Global/Data Entry/NumberField', module)
   .addDecorator(withKnobs)
   .add('Basic number field', BasicNumberField);
 export default NumberFieldStory;

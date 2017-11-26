@@ -19,7 +19,7 @@ const FormDemo = () => (
 );
 
 
-const FormStory = storiesOf('Global/Layout', module)
+const FormStory = storiesOf('Global/Layout/Layout', module)
   .add('Form', FormDemo);
 
 export default FormStory;

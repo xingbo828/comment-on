@@ -11,7 +11,7 @@ const DangerButton = withInfo('Danger button')(() => <Button danger>Hello world<
 const SmallButtons = withInfo('Small buttons')(() => (
   <div>
     <Button small primary>Hello world</Button>
-    <Button small danger>Hello world</Button>
+    <Button small><Icon icon="plus" /></Button>
     <Button small disabled>Hello world</Button>
   </div>
 ));
@@ -34,7 +34,7 @@ const GhostButton = withInfo('With icon')(() =>
 </div>
 );
 
-const ButtonStory = storiesOf('Global/Form/Button', module)
+const ButtonStory = storiesOf('Global/General/Button', module)
   .add('Basic primary button', BasicButton)
   .add('Danger button', DangerButton)
   .add('Disabled button', DisabledButton)

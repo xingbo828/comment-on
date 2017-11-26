@@ -40,8 +40,8 @@ export default compose(
       try {
         const parsedSearch = queryString.parse(this.props.location.search);
         const { configuration={} } = parsedSearch;
-        const configurationDecoded = atob(configuration);
-        this.props.searchBusiness(configurationDecoded);
+        // const configurationDecoded = atob(configuration);
+        this.props.searchBusiness(configuration);
       } catch(err) {
         throw err;
       }

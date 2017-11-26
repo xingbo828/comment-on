@@ -15,6 +15,6 @@ const AddressAutoCompleteDemo = withInfo('Basic radio group')(() =>
   </div>
 );
 
-const AddressAutoCompleteStory = storiesOf('Global/Form/AddressAutoComplete', module)
+const AddressAutoCompleteStory = storiesOf('Global/Data Entry/AddressAutoComplete', module)
 .add('Address auto complete', AddressAutoCompleteDemo);
 export default AddressAutoCompleteStory;

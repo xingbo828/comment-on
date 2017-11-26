@@ -31,7 +31,7 @@ const StepsDemo = () => (
   </div>
 );
 
-const StepsStory = storiesOf('Global/Steps', module)
+const StepsStory = storiesOf('Global/Navigation/Steps', module)
 .addDecorator(withKnobs)
 .add('Steps', withInfo('Default')(StepsDemo));
 

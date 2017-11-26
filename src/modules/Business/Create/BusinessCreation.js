@@ -6,11 +6,15 @@ import {
   TextArea,
   Checkbox
 } from '../../../globalComponents/Form';
+import Layout from '../../../globalComponents/Layout';
 
 import Grid from '../../../globalComponents/Grid';
 import { SERVICE_AREAS } from '../../../constants';
 
 import BusinessHour from '../components/BusinessHour';
+
+
+const { Form, FormInner, FormActions } = Layout.Form;
 
 const renderDescriptionTextArea = ({ input, ...rest }) => (
   <TextArea input={input} {...rest} />
@@ -42,9 +46,8 @@ const BusinessCreation = ({
 }) => {
   return (
     <Container>
-      <form onSubmit={handleSubmit}>
-        <Row>
-          <Col xs={24} sm={24} md={24} lg={24}>
+      <Form onSubmit={handleSubmit}>
+      <FormInner>
             <Field
               component={TextField}
               type="text"
@@ -52,10 +55,8 @@ const BusinessCreation = ({
               label="Business Name"
               placeholder="My great moving company"
             />
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={24} sm={24} md={24} lg={24}>
+
+
             <Field
               component={TextField}
               type="text"
@@ -63,10 +64,8 @@ const BusinessCreation = ({
               label="Address 1"
               placeholder="123 Main St"
             />
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={24} sm={24} md={24} lg={24}>
+
+
             <Field
               component={TextField}
               type="text"
@@ -74,8 +73,7 @@ const BusinessCreation = ({
               label="Address 2"
               placeholder="Ste 200"
             />
-          </Col>
-        </Row>
+
         <Row>
           <Col xs={24} sm={24} md={10} lg={10}>
             <Field
@@ -105,8 +103,7 @@ const BusinessCreation = ({
             />
           </Col>
         </Row>
-        <Row>
-          <Col xs={24} sm={24} md={24} lg={24}>
+
             <Field
               component={TextField}
               type="tel"
@@ -114,10 +111,8 @@ const BusinessCreation = ({
               label="Business Phone Number"
               placeholder="(555)555-5555"
             />
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={24} sm={24} md={24} lg={24}>
+
+
             <Field
               component={TextField}
               type="email"
@@ -125,19 +120,15 @@ const BusinessCreation = ({
               label="Business Email Address"
               placeholder="xyz@email.com"
             />
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={24} sm={24} md={24} lg={24}>
+
+
             <Field
               component={renderDescriptionTextArea}
               name="businessDescription"
               label="Description"
             />
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={24} sm={24} md={24} lg={24}>
+
+
             <Field
               component={renderBusinessServiceAreas}
               name="businessServiceArea"
@@ -150,25 +141,25 @@ const BusinessCreation = ({
                 />
               ))}
             </Field>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={24} sm={24} md={24} lg={24}>
+
+
             <Field
               component={renderBusinessHour}
               name="businessHour"
               label="Business hours"
             />
-          </Col>
-        </Row>
-        <Button
-          type="submit"
-          primary
-          disabled={pristine || submitting || !valid}
-        >
-          Submit
-        </Button>
-      </form>
+       </FormInner>
+        <FormActions>
+          <Button
+            type="submit"
+            style={{ float: 'right' }}
+            primary
+            disabled={pristine || submitting || !valid}
+          >
+            Submit
+          </Button>
+        </FormActions>
+      </Form>
     </Container>
   );
 };
