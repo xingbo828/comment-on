@@ -137,7 +137,7 @@ export const searchBusiness = (config) => async dispatch => {
   dispatch({
     type: SEARCH_BUSINESS
   });
-  const API = `https://us-central1-comment-on-85597.cloudfunctions.net/business?configuration=${config}`;
+  const API = `https://us-central1-comment-on-85597.cloudfunctions.net/business/?configuration=${config}`;
   try {
     const searchResult = await fetch(API).then(res => res.json());
     return dispatch({
