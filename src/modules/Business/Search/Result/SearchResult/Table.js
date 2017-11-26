@@ -18,7 +18,7 @@ const SearchResultTable = ({searchResult, searchParams}) => {
   }}>
     <SearchResultItem
       key={item.id}
-      price={249}
+      price={item.price}
       name={item.businessName}
       id={item.id}
       rate={3.5}
