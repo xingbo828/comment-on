@@ -15,12 +15,12 @@ const app = express();
 
 app.use(cors);
 
-app.get('/', (request, response) => {
-    businesses(request, response);
-});
-
 app.get('/:id', (request, response) => {
     business(request, response);
+});
+
+app.get('*', (request, response) => {
+    businesses(request, response);
 });
 
 exports.business = functions.https.onRequest(app);
@@ -61,10 +61,10 @@ const filterByDateTime = (dateTime) => {
   if (!dateTime) {
     return () => true;
   }
-  const dateTimeArr = dateTime.split(',');
-  const date = dateTimeArr.shift();
-  const startHour = Number(dateTimeArr.shift());
-  let endHour = Number(dateTimeArr.shift());
+  const timeArr = dateTime.time.split(',');
+  const date = dateTime.date;
+  const startHour = Number(timeArr.shift());
+  let endHour = Number(timeArr.shift());
 
   if (isNaN(date) || isNaN(startHour)) {
     return () => false;
@@ -87,8 +87,7 @@ const filterByDateTime = (dateTime) => {
 const businessFilters = (parameters) => {
   const filters = [filterByCity(parameters.destinationCity),
     filterByCity(parameters.originCity),
-    filterByDateTime(parameters.dateTime),
-    filterByVehicle(parameters.vehicle)];
+    filterByDateTime(parameters.dateTime)];
 
   return (business) => {
     return filters.every((filter) => filter(business));
@@ -117,14 +116,22 @@ const determinePrice = (dateTime, vehicle, buisness) => {
 }
 
 const businesses = ((request, response) => {
-    const origin = request.query.origin;
-    const destination = request.query.destination;
-    const dateTime = request.query.dateTime;
-    const vehicle = request.query.vehicle;
+    const configuration = request.query.configuration;
+    if (!configuration) {
+      return response.status(200).json([]);
+    }
+    const query = JSON.parse(Buffer.from(configuration, 'base64').toString());
+
+    if (!query || !query.addresses) {
+      return response.status(200).json([]);
+    }
+
+    const origin = query.addresses.pickUpAddress;
+    const destination = query.addresses.deliveryAddress;
+    const dateTime = query.dateTime;
 
     let originCity,destinationCity;
 
-    console.log('here');
     if (!origin) {
         return response.status(200).json([]);
     }
@@ -153,12 +160,11 @@ const businesses = ((request, response) => {
                     result.price = determinePrice();
                     return result;
                 });
-            if (destinationCity || dateTime || vehicle) {
+            if (destinationCity || dateTime) {
                 const filters = businessFilters({
                   originCity: originCity,
                   destinationCity: destinationCity,
                   dateTime: dateTime,
-                  vehicle: vehicle
                 });
                 businesses = businesses.filter((business) => {
                     return filters(business);
