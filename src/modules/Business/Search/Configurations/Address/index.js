@@ -1,11 +1,10 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { compose, lifecycle, branch, renderComponent, withProps } from 'recompose';
+import { compose, lifecycle, branch, renderNothing } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import AddressStep from './Address';
 import scrollToTopOnMount from '../../../../Common/scrollToTopOnMount';
-import Spin from '../../../../../globalComponents/Spin';
 import validators, { validateFunc } from '../../../../Common/validators';
 import { localSaveAddresses, loadAddresses, resetAddresses } from '../../searchActions';
 
@@ -43,10 +42,7 @@ const enhance = compose(
       this.props.loadAddresses();
     }
   }),
-  branch(notLoaded, renderComponent(
-    withProps({
-      delay: 500
-    })(Spin.FullScreenSpinner))),
+  branch(notLoaded, renderNothing),
   lifecycle({
     shouldComponentUpdate(nextProps) {
       return this.props.initialValues.get('addresses') !== nextProps.initialValues.get('addresses');

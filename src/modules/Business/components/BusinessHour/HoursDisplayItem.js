@@ -1,5 +1,5 @@
 import React from 'react';
-import { HoursListItem, HoursListItemText, HoursListItemLink } from './Styled';
+import { HoursListItem, HoursListItemText, HoursListItemLink, RemoveLink } from './Styled';
 import moment from 'moment';
 
 const HoursDisplayItem = ({ content, removeHours, hourIndex }) => {
@@ -18,7 +18,7 @@ const HoursDisplayItem = ({ content, removeHours, hourIndex }) => {
       {`${content.day[0].toUpperCase() + content.day.slice(1)} ${formatTime(content.startTime)} - ${formatTime(content.endTime)}`}
       </HoursListItemText>
       <HoursListItemLink>
-        <a href="" onClick={removeHandler}>Remove</a>
+        <RemoveLink href="" onClick={removeHandler}>Remove</RemoveLink>
       </HoursListItemLink>
     </HoursListItem>
   );

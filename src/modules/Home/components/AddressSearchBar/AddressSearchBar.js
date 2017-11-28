@@ -2,7 +2,7 @@ import React from 'react';
 import { Field } from 'redux-form/immutable';
 import { Button, AddressAutoComplete } from '../../../../globalComponents/Form';
 import Grid from '../../../../globalComponents/Grid';
-
+import Icon from '../../../../globalComponents/Icon';
 import {
   AddressSearchBarContainer,
   InputWrapper,
@@ -34,7 +34,7 @@ const AddressSearchBar = ({
     <AddressSearchBarContainer>
       <Form onSubmit={handleSubmit}>
         <Row>
-          <Col xs={24} lgOffset={1} sm={24} md={24} lg={9}>
+          <Col xs={24} lgOffset={1} sm={24} md={24} lg={8}>
             <Field
               component={renderMoveAddress}
               name="pickUpAddress"
@@ -51,7 +51,7 @@ const AddressSearchBar = ({
           <Col xs={24} sm={24} md={24} lg={6}>
           <InputWrapper>
             <Button primary icon="arrow-right" disabled={pristine || submitting || !valid}>
-              Get Started
+              Get Started <Icon icon="magic" />
             </Button>
           </InputWrapper>
           </Col>
@@ -59,7 +59,7 @@ const AddressSearchBar = ({
       </Form>
       <MobileCtaWrapper>
         <Button primary icon="arrow-right" onClick={navToSearch}>
-          Get Started
+          Get Started <Icon icon="magic" />
         </Button>
       </MobileCtaWrapper>
     </AddressSearchBarContainer>

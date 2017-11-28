@@ -6,11 +6,10 @@ import Layout from '../../../../../globalComponents/Layout';
 import Grid from '../../../../../globalComponents/Grid';
 import Icon from '../../../../../globalComponents/Icon';
 import AddressSelection from './AddressSelection';
-import { Heading } from '../../../../../globalComponents/Typography';
-import { HeadingInfo, HeadingParagraph } from '../Shared/Styled';
+import { Heading, Paragraph } from '../../../../../globalComponents/Typography';
 
 
-const { Form, FormActions } = Layout.Form;
+const { Form, FormActions, FormHeading } = Layout.Form;
 
 const renderAddressSelection = ({ input, label, desc }) => {
   const value = Immutable.Iterable.isIterable(input.value)
@@ -31,14 +30,14 @@ const renderAddressSelection = ({ input, label, desc }) => {
 const Address = ({ handleSubmit, pristine, reset, valid, submitting }) => {
   return (
     <Grid.Container>
-      <HeadingInfo>
+      <FormHeading>
         <Heading wrapperTag="h1">Address Information</Heading>
-        <HeadingParagraph>
+        <Paragraph>
           Contrary to popular belief, Lorem Ipsum is not simply random text. It
           has roots in a piece of classical Latin literature from 45 BC, making
           it over 2000 years old.
-        </HeadingParagraph>
-      </HeadingInfo>
+        </Paragraph>
+      </FormHeading>
       <Form onSubmit={handleSubmit}>
         <Field
           component={renderAddressSelection}

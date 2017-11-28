@@ -7,10 +7,9 @@ import Icon from '../../../../../globalComponents/Icon';
 import ResidenceTypeSelection from './ResidenceTypeSelection';
 import DeliveryAccess from './DeliveryAccess';
 import WillYouBeAssisting from './WillYouBeAssisting';
-import { Heading } from '../../../../../globalComponents/Typography';
-import { HeadingInfo, HeadingParagraph } from '../Shared/Styled';
+import { Heading, Paragraph } from '../../../../../globalComponents/Typography';
 
-const { Form, FormActions, FormInner } = Layout.Form;
+const { Form, FormActions, FormHeading, FormInner } = Layout.Form;
 
 const renderResidenceTypeSelection = ({ input, name, label, desc }) => {
   return (
@@ -53,14 +52,14 @@ const Logistics = ({
 }) => {
   return (
     <Grid.Container>
-      <HeadingInfo>
+      <FormHeading>
         <Heading wrapperTag="h1">Logistics</Heading>
-        <HeadingParagraph>
+        <Paragraph>
           Contrary to popular belief, Lorem Ipsum is not simply random text. It
           has roots in a piece of classical Latin literature from 45 BC, making
           it over 2000 years old.
-        </HeadingParagraph>
-      </HeadingInfo>
+        </Paragraph>
+      </FormHeading>
       <Form onSubmit={handleSubmit}>
         <FormInner>
           <Field

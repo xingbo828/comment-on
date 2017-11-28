@@ -24,7 +24,7 @@ export const InputWrapper = styled.div`
   height: 100px;
   display: flex;
   align-items: center;
-
+  justify-content: flex-end;
 `;
 
 export const MobileCtaWrapper = styled.div`

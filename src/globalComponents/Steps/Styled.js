@@ -1,4 +1,11 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const tailEffect = keyframes`
+  to {
+    box-shadow: 0 0 3px 3px transparent;
+  }
+`;
+
 
 export const StepsContainer = styled.ul`
   display: flex;
@@ -51,7 +58,7 @@ export const StepContainer = styled.li`
       `;
     } else if (props.status === 'inProgress') {
       return `
-        border-bottom-color: transparent;
+        border-bottom-color: ${props.theme.colors.border};
       `;
     } else {
       return `
@@ -75,14 +82,17 @@ export const StepSeperatorWrapper = styled.span`
 `;
 
 export const StepHighLightBar = styled.span`
-  transition: .3s;
+  transition: transform .7s;
   position: absolute;
   width: 100%;
   height: 1px;
   background-color: ${props=>props.theme.colors.primary};
+  box-shadow: 0 0 0 0 ${props=>props.theme.colors.primary};
   bottom: -1px;
   left: 0;
   transform-origin: 0 0;
   transform: ${props=>props.status === 'inProgress' ? 'scale(1)' : 'scale(0)'};
+  animation: ${props=>props.status === 'inProgress' ? tailEffect : 'none'} .7s;
 `;
+
 

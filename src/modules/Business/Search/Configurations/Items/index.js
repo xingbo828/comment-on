@@ -1,10 +1,9 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { compose, lifecycle, branch, renderComponent, withProps } from 'recompose';
+import { compose, lifecycle, branch, renderNothing, withProps } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import Items from './Items';
 import scrollToTopOnMount from '../../../../Common/scrollToTopOnMount';
-import Spin from '../../../../../globalComponents/Spin';
 
 import {
   loadItems,
@@ -33,10 +32,7 @@ const enhance = compose(
       this.props.loadItems();
     }
   }),
-  branch(isLoading, renderComponent(
-    withProps({
-      delay: 500
-    })(Spin.FullScreenSpinner))),
+  branch(isLoading, renderNothing),
   reduxForm({
     form: 'search.configurations.items',
     onSubmit: (values, dispatch, props) => {

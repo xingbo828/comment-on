@@ -4,10 +4,11 @@ import Transition, {
   ENTERED
 } from 'react-transition-group/Transition';
 
-const FadeInTransition = ({ timeout=300, in: inProp, children}) => {
+const FadeInTransition = ({ timeout=300, in: inProp, minHeight=0, children}) => {
   const defaultStyle = {
     transition: `all ${timeout}ms`,
     opacity: 0,
+    minHeight
   };
 
   const transitionStyles = {

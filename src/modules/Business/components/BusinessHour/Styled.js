@@ -10,27 +10,35 @@ export const BusinessHourHeading = styled.label`
 `;
 
 export const HoursSelectContainer = styled.div`
+
+`;
+
+export const HoursSelectInner = styled.div`
   display: flex;
+  margin-bottom: ${props=>props.theme.spaces.base};
+  ${props=>props.theme.media.greaterThan('sm')`
+    width: 60%;
+    float: left;
+  `}
 `;
 
 export const WeekDaySelect = styled.div`
   flex: 1;
   padding-right: 10px;
-  > select {
-    width: 100%;
-  }
 `;
 
 export const TimeSelect = styled.div`
   flex: 1;
   padding-right: 10px;
-  > select {
-    width: 100%;
-  }
 `;
 
 export const HoursSelectButtonWrapper = styled.div`
-  flex: 1;
+  width: 100%;
+  padding: 0 ${props=>props.theme.spaces.tight};
+  ${props=>props.theme.media.greaterThan('sm')`
+    width: 15%;
+    float: left;
+  `}
 `;
 
 export const HoursList = styled.ul`
@@ -49,4 +57,12 @@ export const HoursListItemText = styled.span`
 
 export const HoursListItemLink = styled.span`
 
+`;
+
+export const RemoveLink = styled.a`
+  color: ${props=>props.theme.colors.danger};
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
 `;

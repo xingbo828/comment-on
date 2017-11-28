@@ -4,10 +4,10 @@ import {
   HoursSelectContainer,
   WeekDaySelect,
   TimeSelect,
-  HoursSelectButtonWrapper
+  HoursSelectButtonWrapper,
+  HoursSelectInner
 } from './Styled';
 import { Button, Select } from '../../../../globalComponents/Form';
-import Icon from '../../../../globalComponents/Icon';
 import moment from 'moment';
 
 class HoursSelect extends Component {
@@ -68,6 +68,7 @@ class HoursSelect extends Component {
   render() {
     return (
       <HoursSelectContainer>
+      <HoursSelectInner>
         <WeekDaySelect>
           <Select name="day" onChange={this.handleDayChange}>
             {weekdays.map(day =>
@@ -89,14 +90,14 @@ class HoursSelect extends Component {
             {time.map(t => this.generateEndTimeOption(t))}
           </Select>
         </TimeSelect>
-
+        </HoursSelectInner>
         <HoursSelectButtonWrapper>
           <Button
             small
             secondary
             onClick={this.handleAddHours}
           >
-            <Icon icon="plus" />
+            Add hour
           </Button>
         </HoursSelectButtonWrapper>
       </HoursSelectContainer>

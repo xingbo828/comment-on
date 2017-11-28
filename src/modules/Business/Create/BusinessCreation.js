@@ -12,9 +12,9 @@ import Grid from '../../../globalComponents/Grid';
 import { SERVICE_AREAS } from '../../../constants';
 
 import BusinessHour from '../components/BusinessHour';
+import { Heading, Paragraph } from '../../../globalComponents/Typography';
 
-
-const { Form, FormInner, FormActions } = Layout.Form;
+const { Form, FormInner, FormHeading, FormActions } = Layout.Form;
 
 const renderDescriptionTextArea = ({ input, ...rest }) => (
   <TextArea input={input} {...rest} />
@@ -46,6 +46,12 @@ const BusinessCreation = ({
 }) => {
   return (
     <Container>
+      <FormHeading>
+      <Heading wrapperTag="h1">Mover Profile</Heading>
+      <Paragraph>
+        Let's create the profile for your business.
+      </Paragraph>
+    </FormHeading>
       <Form onSubmit={handleSubmit}>
       <FormInner>
             <Field
@@ -56,7 +62,6 @@ const BusinessCreation = ({
               placeholder="My great moving company"
             />
 
-
             <Field
               component={TextField}
               type="text"
@@ -64,7 +69,6 @@ const BusinessCreation = ({
               label="Address 1"
               placeholder="123 Main St"
             />
-
 
             <Field
               component={TextField}

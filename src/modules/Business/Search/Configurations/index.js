@@ -32,9 +32,8 @@ const Configurations = ({ location, history, match }) => {
   return (
     <div>
       <SearchSteps current={getCurrentStep(history)} history={history} />
-
       <TransitionGroup>
-        <FadeInRouteTransition key={location.key}>
+        <FadeInRouteTransition minHeight={800} key={location.key}>
           {() => (
             <Switch location={location}>
               {

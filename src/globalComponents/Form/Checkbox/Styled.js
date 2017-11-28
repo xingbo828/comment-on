@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  border: solid ${props => props.theme.borderPrimary};
+  border: solid ${props => props.theme.colors.border};
   border-width: 0 0 1px 0;
   margin: 0 0 1rem;
 `;
