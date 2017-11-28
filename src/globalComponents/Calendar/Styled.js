@@ -90,10 +90,11 @@ export const CalendarCell = styled.td`
       `;
     } else if (!props.isCurrentMonth) {
       return `
-        color: ${props.theme.colors.border};
+        color: ${props.theme.colors.textLight} !important;
+        background-color: transparent !important;
         :hover {
-          background-color: ${props.theme.colors.primary};
-          color: white;
+          background-color: ${props.theme.colors.primary} !important;
+          color: white !important;
         }
       `;
     } else {

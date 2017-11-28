@@ -18,7 +18,8 @@ const FadeInTransition = ({ timeout=300, in: inProp, minHeight=0, children}) => 
     },
     [ENTERED]:  {
       opacity: 1,
-      transform: `none`
+      transform: `none`,
+      minHeight: 0
     }
   };
 

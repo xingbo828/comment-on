@@ -4,7 +4,7 @@ import { compose } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import BusinessCreation from './BusinessCreation';
 import { addBusiness } from '../businessAction';
-
+import scrollToTopOnMount from '../../Common/scrollToTopOnMount';
 import validators, { validateFunc } from '../../Common/validators';
 
 const mapDispatchToProps = dispatch => ({
@@ -66,7 +66,8 @@ const enhance = compose(
       });
     },
     validate
-  })
+  }),
+  scrollToTopOnMount
 );
 
 export default enhance(BusinessCreation);

@@ -13,7 +13,6 @@ import {
   CalendarCell
 } from './Styled';
 
-
 class Calendar extends Component {
   constructor(props, context) {
     super(props, context);
@@ -42,29 +41,42 @@ class Calendar extends Component {
   handleKeyboardEvent(e) {
     if (e.code === 'ArrowLeft') {
       this.prevMonth(e);
-    } else if(e.code === 'ArrowRight') {
+    } else if (e.code === 'ArrowRight') {
       this.nextMonth(e);
     }
   }
 
   isSelectedDate(d, w) {
-    const {selectedDate, currentDisplayDate} = this.state;
-    return this.isCurrentMonth(d, w) && selectedDate.month() === currentDisplayDate.month() && d === this.state.currentDisplayDate.date()
+    const { selectedDate, currentDisplayDate } = this.state;
+
+    if(this.isCurrentMonth(d, w) &&
+    selectedDate.month() === currentDisplayDate.month() &&
+    d === this.state.currentDisplayDate.date()) {
+      console.log(d, w);
+    }
+
+    return (
+      this.isCurrentMonth(d, w) &&
+      selectedDate.month() === currentDisplayDate.month() &&
+      d === this.state.currentDisplayDate.date()
+    );
   }
 
   prevMonth(e) {
     e.preventDefault();
     this.setState({
-      currentDisplayDate: this.state.currentDisplayDate.clone().subtract(1, 'month')
+      currentDisplayDate: this.state.currentDisplayDate
+        .clone()
+        .subtract(1, 'month')
     });
-  };
+  }
 
   nextMonth(e) {
     e.preventDefault();
     this.setState({
       currentDisplayDate: this.state.currentDisplayDate.clone().add(1, 'month')
     });
-  };
+  }
 
   isCurrentMonth(d, w) {
     const prevMonth = w === 0 && d > 7;
@@ -83,11 +95,9 @@ class Calendar extends Component {
     const m = this.state.currentDisplayDate.clone();
     if (prevMonth) {
       m.date(d).subtract(1, 'month');
-    }
-    else if (nextMonth) {
+    } else if (nextMonth) {
       m.date(d).add(1, 'month');
-    }
-    else {
+    } else {
       m.date(d);
     }
     return m;
@@ -95,12 +105,14 @@ class Calendar extends Component {
 
   selectDate(d, w) {
     const m = this.getSelectedDate(d, w);
-    if(!this.isDateDisabled(d, w)) {
-      this.setState({
+    if (!this.isDateDisabled(d, w)) {
+      this.setState(() => ({
         currentDisplayDate: m,
         selectedDate: m
+      }), () => {
+        this.props.onSelectionComplete(m);
       });
-      this.props.onSelectionComplete(m);
+
     }
   }
 
@@ -108,9 +120,19 @@ class Calendar extends Component {
     const { visible } = this.props;
     const { currentDisplayDate: m } = this.state;
     const weeks = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    const d1 = m.clone().subtract(1, 'month').endOf('month').date();
-    const d2 = m.clone().date(1).day();
-    const d3 = m.clone().endOf('month').date();
+    const d1 = m
+      .clone()
+      .subtract(1, 'month')
+      .endOf('month')
+      .date();
+    const d2 = m
+      .clone()
+      .date(1)
+      .day();
+    const d3 = m
+      .clone()
+      .endOf('month')
+      .date();
     const days = [].concat(
       range(d1 - d2 + 1, d1 + 1),
       range(1, d3 + 1),
@@ -120,37 +142,40 @@ class Calendar extends Component {
       <CalendarContainer visible={visible}>
         <CalendarToolbar>
           <PrevMonthBtn onClick={this.prevMonth} />
-          <CurrentDate>{this.state.currentDisplayDate.format('MMM, YYYY')}</CurrentDate>
+          <CurrentDate>
+            {this.state.currentDisplayDate.format('MMM, YYYY')}
+          </CurrentDate>
           <NextMonthBtn onClick={this.nextMonth} />
         </CalendarToolbar>
         <CalenderTable>
           <thead>
-            <tr>
-              {weeks.map((w, i) => <td key={i}>{w}</td>)}
-            </tr>
+            <tr>{weeks.map((w, i) => <td key={i}>{w}</td>)}</tr>
           </thead>
           <tbody>
-            {chunk(days, 7).map((row, w) =>
+            {chunk(days, 7).map((row, w) => (
               <tr key={w}>
-                {row.map(d =>
+                {row.map(d => (
                   <CalendarCell
                     key={d}
                     isDisabled={this.isDateDisabled(d, w)}
                     isCurrentMonth={this.isCurrentMonth(d, w)}
                     isSelectedDate={this.isSelectedDate(d, w)}
-                    onClick={(e) => {e.preventDefault(); this.selectDate(d, w)}}
+                    onClick={e => {
+                      e.preventDefault();
+                      this.selectDate(d, w);
+                    }}
                   >
                     {d}
                   </CalendarCell>
-                )}
+                ))}
               </tr>
-            )}
+            ))}
           </tbody>
         </CalenderTable>
       </CalendarContainer>
     );
   }
-};
+}
 
 Calendar.propTypes = {
   selectedDate: instanceOf(Moment),

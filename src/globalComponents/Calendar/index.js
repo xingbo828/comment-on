@@ -21,9 +21,9 @@ class DateTime extends Component {
   }
 
   onSelect = (value) => {
-    this.setState({
+    this.setState(() => ({
       selectedDate: value
-    });
+    }));
     this.props.onChange(value);
   }
 
