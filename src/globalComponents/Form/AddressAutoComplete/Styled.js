@@ -11,7 +11,7 @@ height: 2px;
 display: block;
 padding-left: 10px;
 background: ${props=>props.theme.colors.primary};
-margin-top: -3px;
+margin-top: -4px;
 transition: .3s;
 margin-left: 30px;
 ${props => {
@@ -67,12 +67,13 @@ export const GeosuggestStyled = styled(Geosuggest)`
     padding: 0;
     margin-top: -5px;
     background: #fff;
-    border-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
     border-top-width: 0;
     overflow-x: hidden;
     overflow-y: auto;
     list-style: none;
-    box-shadow: 0 5px 32px 0 rgba(0,0,0,0.07);
+    box-shadow: 0 25px 32px 0 rgba(0,0,0,0.25);
   }
 
   .geosuggest__suggests--hidden {
