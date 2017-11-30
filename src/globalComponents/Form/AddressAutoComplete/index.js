@@ -47,12 +47,14 @@ class AddressAutoComplete extends Component {
         <GeosuggestStyled
           innerRef={el => (this._geoSuggest = el)}
           country="ca"
+          maxFixtures={3}
+          minLength={3}
           placeholder={placeholder}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
           onSuggestSelect={onSelect}
           onChange={this.handleOnChange}
-          initialValue={initialValue}
+          initialValue={initialValue.replace(', Canada', '')}
           getSuggestLabel={this.mapSuggestDescription}
         />
         <FocusBorder focused={this.state.focused} />

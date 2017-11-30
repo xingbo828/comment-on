@@ -42,13 +42,17 @@ export const GeosuggestStyled = styled(Geosuggest)`
   .geosuggest__input {
     border-radius: 0;
     outline: 0;
-    font-size: 1.2rem;
+    font-size: .825rem;
     width: 100%;
     box-sizing: border-box;
     padding: .5rem;
     border: solid ${props=>props.theme.colors.border};
     border-width: 0 0 1px 0;
     color: ${props => props.theme.colors.textDark};
+
+    ${props=>props.theme.media.greaterThan('md')`
+      font-size: 1rem;
+    `}
   }
 
   .geosuggest__input:focus {
@@ -58,16 +62,17 @@ export const GeosuggestStyled = styled(Geosuggest)`
     z-index: ${props => props.theme.zIndex.dropdown};
     position: absolute;
     top: 100%;
-    left: -1px;
-    right: -1px;
+    left: 10px;
+    right: 0px;
     padding: 0;
-    margin-top: -1px;
+    margin-top: -5px;
     background: #fff;
-    border: 1px solid ${props => props.theme.colors.border};
+    border-radius: 5px;
     border-top-width: 0;
     overflow-x: hidden;
     overflow-y: auto;
     list-style: none;
+    box-shadow: 0 5px 32px 0 rgba(0,0,0,0.07);
   }
 
   .geosuggest__suggests--hidden {
@@ -75,9 +80,14 @@ export const GeosuggestStyled = styled(Geosuggest)`
   }
 
   .geosuggest__item {
-    font-size: 18px;
-    font-size: .9rem;
-    padding: 1rem .5rem;
+    font-size: .825rem;
+    ${props=>props.theme.media.greaterThan('md')`
+      font-size: 1rem;
+    `}
+    padding: ${props => props.theme.spaces.xTight};
+    ${props=>props.theme.media.greaterThan('md')`
+      padding: ${props.theme.spaces.tight};
+    `}
     cursor: pointer;
   }
   .geosuggest__item:hover,

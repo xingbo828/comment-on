@@ -40,7 +40,7 @@ const spaces = {
 const fontWeights = {
   thin: 300,
   light: 400,
-  roman: 500,
+  roman: 600,
   medium: 700
 }
 

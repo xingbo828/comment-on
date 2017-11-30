@@ -9,6 +9,7 @@ const Form = styled.form`
   box-shadow: 0 2px 32px 0 rgba(0, 0, 0, 0.07);
   width: 100%;
   margin: 0 auto;
+  z-index: 1;
   ${props=>props.theme.media.greaterThan('md')`
     width: calc(1000%/12);
     padding-bottom: 160px;

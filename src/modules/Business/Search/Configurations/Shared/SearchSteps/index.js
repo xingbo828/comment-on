@@ -34,6 +34,11 @@ const SearchSteps = ({current, history}) => {
         onStepClick={stepClickHandler.bind(this, 'items')}
       />
 
+      <Step
+        title="overview"
+        onStepClick={stepClickHandler.bind(this, 'overview')}
+      />
+
     </Steps>
   );
 };

@@ -5,6 +5,7 @@ import AddressStep from './Address';
 import DateStep from './Date';
 import LogisticsStep from './Logistics';
 import Items from './Items';
+import Overview from './Overview';
 import SearchSteps from './Shared/SearchSteps';
 import FadeInRouteTransition from '../../../Common/RouteTransitions/FadeInRouteTransition';
 
@@ -25,6 +26,10 @@ const Configurations = ({ location, history, match }) => {
     {
       path: '/business/search/configurations/items',
       component: Items
+    },
+    {
+      path: '/business/search/configurations/overview',
+      component: Overview
     }
   ];
 

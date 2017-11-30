@@ -1,7 +1,7 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { compose, lifecycle, branch, renderNothing } from 'recompose';
+import { compose, lifecycle, branch, renderNothing, shouldUpdate } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import AddressStep from './Address';
 import scrollToTopOnMount from '../../../../Common/scrollToTopOnMount';
@@ -39,15 +39,12 @@ const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
     componentDidMount() {
-      this.props.loadAddresses();
+      if(this.props.initialValues.get('status')==='UNINIT'){
+        this.props.loadAddresses();
+      }
     }
   }),
   branch(notLoaded, renderNothing),
-  lifecycle({
-    shouldComponentUpdate(nextProps) {
-      return this.props.initialValues.get('addresses') !== nextProps.initialValues.get('addresses');
-    }
-  }),
   reduxForm({
     form: 'search.configurations.address',
     validate,
@@ -64,7 +61,10 @@ const enhance = compose(
       });
     }
   }),
-  scrollToTopOnMount
+  scrollToTopOnMount,
+  shouldUpdate((props, nextProps) => {
+    return false;
+  })
 );
 
 export default enhance(AddressStep);

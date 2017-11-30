@@ -7,8 +7,7 @@ import scrollToTopOnMount from '../../../../Common/scrollToTopOnMount';
 
 import {
   loadItems,
-  localSaveItems,
-  getLocalStorageStepInfo
+  localSaveItems
 } from '../../searchActions';
 
 import { getItems } from '../../searchReducers';
@@ -39,24 +38,9 @@ const enhance = compose(
       return localSaveItems(values.toJS());
     },
     onSubmitSuccess: async (result, dispatch, props) => {
-      const config = await getLocalStorageStepInfo();
-      const configInjson = JSON.stringify(config);
-      const configBase64 = btoa(configInjson);
-      const searchParameters = '?configuration=' + configBase64;
-
-      if (
-        props.location.state &&
-        props.location.state.fromProfile &&
-        props.location.state.businessId
-      ) {
-        return props.history.push({
-          pathname: `/business/profile/${props.location.state.businessId}`,
-          search: searchParameters
-        });
-      }
-      return props.history.push({
-        pathname: '/business/search/result',
-        search: searchParameters
+      props.history.push({
+        pathname: '/business/search/configurations/overview',
+        state: props.location.state
       });
     }
   }),

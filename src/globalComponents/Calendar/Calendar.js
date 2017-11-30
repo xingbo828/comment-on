@@ -52,7 +52,6 @@ class Calendar extends Component {
     if(this.isCurrentMonth(d, w) &&
     selectedDate.month() === currentDisplayDate.month() &&
     d === this.state.currentDisplayDate.date()) {
-      console.log(d, w);
     }
 
     return (

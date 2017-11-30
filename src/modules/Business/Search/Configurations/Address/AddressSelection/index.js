@@ -49,15 +49,15 @@ class AddressSelection extends Component {
     };
   }
 
-  onFromAddressSelect = ({ gmaps }) => {
+  onFromAddressSelect = (v) => {
     this.setState({
-      from: this.formatAddr(gmaps)
+      from: v === null ? v : this.formatAddr(v.gmaps)
     });
   }
 
-  onToAddressSelect = ({gmaps}) => {
+  onToAddressSelect = (v) => {
     this.setState({
-      to: this.formatAddr(gmaps)
+      to: v === null ? v : this.formatAddr(v.gmaps)
     });
   };
 
