@@ -36,16 +36,23 @@ export const SectionBody = styled.ul`
 `;
 
 export const SectionBodyItem = styled.li`
-  display: flex;
-  justify-content: space-between;
+  ${props=>props.theme.media.greaterThan('sm')`
+    display: flex;
+    justify-content: space-between;
+  `}
+
   padding: ${props=>props.theme.spaces.tight} 0;
 `;
 
 export const SectionBodyItemLabel = styled.span`
+  display: block;
+  margin-bottom: ${props=>props.theme.spaces.tight};
   font-weight: ${props=>props.theme.fontWeights.roman};
 `;
 
-export const SectionBodyItemContent = styled.span``;
+export const SectionBodyItemContent = styled.span`
+  display: block;
+`;
 
 export const SectionInvalid = styled.div`
   color: ${props=>props.theme.colors.danger};
