@@ -11,7 +11,7 @@ export const ContainerDiv = Styled.div`
   position: relative;
   background: white;
   transition: .3s;
-  
+
   box-shadow: ${props => props.active ? '0 2px 15px 0px rgba(0,0,0,.2)' : '0 2px 15px 0px rgba(0,0,0,0)'};
   transform: ${props => props.active ? 'scale(1)' : 'scale(.97)'};
 
@@ -44,10 +44,10 @@ export const MenuList = Styled.ul`
 
 export const MenuItem = Styled.li`
   list-style-type: none;
-  border-top: 1px solid ${fromTheme('borderPrimary')};
+  border-top: 1px solid ${fromTheme('border')};
   :hover {
     color: white;
-    background-color: ${fromTheme('primaryAction')};
+    background-color: ${fromTheme('primary')};
   }
   a {
     text-decoration: none;

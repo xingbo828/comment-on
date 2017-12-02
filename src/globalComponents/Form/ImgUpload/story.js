@@ -35,7 +35,7 @@ const MultiImgUploadDemo = withInfo('Multiple images upload')(() =>
     images={images}
     limit={3}
     label="Profile Images"
-    input={multiImgUploadInput}
+    onChange={input.onChange}
   />
 );
 

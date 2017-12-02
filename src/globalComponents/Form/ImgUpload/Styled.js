@@ -15,38 +15,41 @@ export const StyledInput = styled.span`
 
 
 export const InputLabel = styled.label`
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 `;
 
 export const StyledImgList = styled.ul`
   padding: 0;
   display: flex;
   margin: 0;
+  flex-wrap: wrap;
 `;
 export const StyledImgListItem = styled.li`
   list-style: none;
   flex: 1;
   position: relative;
   margin-right: 1rem;
+  margin-bottom: 1rem;
 `;
 
 export const StyleImgReplace = styled.div`
 opacity: 0;
-width: 100px;
-height: 100px;
+width: 110px;
+height: 110px;
 position: absolute;
 cursor: pointer;
 display: flex;
+border-radius: 5px;
 align-items: center;
 justify-content: center;
 ::after {
   font-family: FontAwesome;
   content: '\f093';
   font-size: 2.0rem;
-  color: ${props => props.theme.buttonPrimary};
+  color: ${props => props.theme.colors.primary};
 }
 :hover {
-  background-color: rgba(0,0,0,.6);
+  background-color: rgba(0,0,0,.5);
   opacity: .7;
 }
 
@@ -76,18 +79,23 @@ export const StyledImgRemove = styled.div`
   transition: opacity 0.3s;
 `;
 
-export const StyleImg = styled.img`
+export const StyleImg = styled.div`
   box-sizing: border-box;
-  width: 100px;
-  height: 100px;
+  width: 110px;
+  height: 110px;
   border: 1px solid lightgrey;
   padding: 5px;
   border-radius: 5px;
+  line-height: 100px;
+  > img {
+    width: 100%;
+    vertical-align: middle;
+  }
 `;
 
 export const StyledUpLoadBtn = styled.button`
-  width: 100px;
-  height: 100px;
+  width: 110px;
+  height: 110px;
   background-color: ${props => props.theme.colors.offWhite};
   border: none;
   border-radius: 5px;

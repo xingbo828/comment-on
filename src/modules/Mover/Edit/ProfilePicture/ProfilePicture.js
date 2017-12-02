@@ -72,9 +72,9 @@ const ProfilePicture = ({
             primary
             disabled={submitting || !valid}
           >
-            Update <Icon icon="pencil" />
+            Update <Icon icon={submitting ? 'refresh' : 'pencil'} spin={submitting}/>
           </Button>
-          <Button style={{ float: 'right' }} ghost onClick={handleSkip}>
+          <Button disabled={submitting} style={{ float: 'right' }} ghost onClick={handleSkip}>
             Skip <Icon icon="angle-double-right" />
           </Button>
         </FormActions>

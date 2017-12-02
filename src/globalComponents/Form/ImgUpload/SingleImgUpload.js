@@ -76,7 +76,7 @@ class SingleImageUpload extends Component {
       <StyledContainer>
         <InputLabel>{label}</InputLabel>
         <StyledSubContainer>
-          {this.state.imageUrl && <StyleImg src={this.state.imageUrl} alt={input.name} />}
+          {this.state.imageUrl && <StyleImg><img src={this.state.imageUrl} alt={input.name} /></StyleImg>}
           {this.state.imageUrl && <StyleImgReplace onClick={this.handleClick} />}
           <StyledInput>
             <input type="file" name={input.name} onChange={this.handleOnChange} ref={(input) => { this.inputElement = input; }} />

@@ -39,7 +39,7 @@ const Profile = ({ handleSubmit, pristine, reset, valid, submitting }) => {
             primary
             disabled={submitting || !valid}
           >
-           <Icon icon="pencil" /> Update
+           Update <Icon icon="pencil" />
           </Button>
         </FormActions>
       </Form>

@@ -49,7 +49,6 @@ class AccountNav extends React.Component {
   render() {
     const { user, loginStatus } = this.props;
     const active = this.state.active;
-    const myBusiness = user.businesses ? Object.keys(user.businesses)[0] : null;
     if (loginStatus === 'NOT_AUTHENTICATED') {
       return <Link to="/login">Sign up / Login</Link>;
     }
@@ -67,8 +66,8 @@ class AccountNav extends React.Component {
             <Menu active={active}>
               <DisplayName>{user.displayName}</DisplayName>
               <MenuList onClick={this.handleClick}>
-                <MenuItem><Link to="/account">My Profile</Link></MenuItem>
-                {myBusiness && <MenuItem><Link to={`/business/profile/${myBusiness}`}>Manage My Business</Link></MenuItem>}
+                <MenuItem><Link to="/account">Manage my account</Link></MenuItem>
+                {user.moverId && <MenuItem><Link to={`/mover/edit/${user.moverId}/basic-profile`}>Manage my mover account</Link></MenuItem>}
                 <MenuItem><a href="" onClick={this.handleLogout}>Logout</a></MenuItem>
               </MenuList>
           </Menu>

@@ -72,7 +72,7 @@ class MultiImgUpload extends Component {
       return (
         <StyledImgListItem key={index}>
           <StyledImgRemove onClick={(e)=>{this.handleRemove(e, index)}} />
-          <StyleImg src={img.imageUrl} />
+          <StyleImg><img src={img.imageUrl} alt=""/></StyleImg>
         </StyledImgListItem>
       );
     });
