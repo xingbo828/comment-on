@@ -39,6 +39,7 @@ const { Container} = Grid;
 const { Form, FormActions, FormHeading, FormInner } = Layout.Form;
 
 const ProfilePicture = ({
+  handleSkip,
   handleSubmit,
   pristine,
   reset,
@@ -65,13 +66,16 @@ const ProfilePicture = ({
         />
         </FormInner>
         <FormActions>
-          <Button
-            style={{ float: 'right' }}
+        <Button
+            style={{ float: 'right', marginLeft: '1rem' }}
             type="submit"
             primary
             disabled={submitting || !valid}
           >
-           <Icon icon="pencil" /> Update
+            Update <Icon icon="pencil" />
+          </Button>
+          <Button style={{ float: 'right' }} ghost onClick={handleSkip}>
+            Skip <Icon icon="angle-double-right" />
           </Button>
         </FormActions>
       </Form>

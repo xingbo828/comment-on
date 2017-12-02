@@ -1,12 +1,26 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { compose, lifecycle, branch, renderNothing } from 'recompose';
+import { compose, lifecycle, branch, renderNothing, withProps } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import ProfilePicture from './ProfilePicture';
 import { getMover, updateProfilePictures } from '../../moverAction';
 import { getProfile } from '../../Profile/profileReducers';
 import message from '../../../../globalComponents/Message';
 import scrollToTopOnMount from '../../../Common/scrollToTopOnMount';
+import validators, { validateFunc } from '../../../Common/validators';
+
+
+const validate = validateFunc(
+  [
+    {
+      field: 'logo',
+      validator: 'isRequired',
+      message: 'Required'
+    }
+  ],
+  validators
+);
+
 
 const mapDispatchToProps = dispatch => ({
   getMover: (moverId) => dispatch(getMover(moverId)),
@@ -19,6 +33,12 @@ const mapStateToProps = state => ({
 });
 
 const isLoading = props => props.status !== 'LOADED';
+
+const goToNextStep = (props, step) => {
+  props.history.push({
+    pathname: `/mover/edit/${props.match.params.moverId}/${step}`,
+  });
+};
 
 const enhance = compose(
   withRouter,
@@ -33,16 +53,21 @@ const enhance = compose(
 
   reduxForm({
     form: 'mover.edit.profilePicture',
+    validate,
     onSubmit: (values, dispatch, props) => {
       return props.updateProfilePictures(values.toJS(), props.match.params.moverId);
     },
     onSubmitSuccess: (values, dispatch, props) => {
       message.success('Profile images saved.');
-      props.history.push({
-        pathname: `/mover/edit/${props.match.params.moverId}/crew-member`,
-      });
+      goToNextStep(props, 'crew-member');
     }
   }),
+  withProps((props)=> ({
+    handleSkip: (e) => {
+      e.preventDefault();
+      goToNextStep(props, 'crew-member');
+    }
+  })),
   scrollToTopOnMount
 );
 

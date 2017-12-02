@@ -34,13 +34,13 @@ export const MessageContainer = styled.li`
 
 export const MessageContent = styled.div`
   cursor: pointer;
-  padding: 5px 12px;
+  padding: 10px 16px;
   border-radius: 2px;
   background-color: white;
   box-shadow: 0 2px 8px rgba(0,0,0,.2);
   display: inline-block;
   pointer-events: all;
-  font-size: 1rem;
+  font-size: 1.2rem;
 `
 
 const MessageContentIcon = styled.span`

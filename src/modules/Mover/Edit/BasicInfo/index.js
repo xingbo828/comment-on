@@ -1,6 +1,6 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { compose, lifecycle, branch, renderNothing } from 'recompose';
+import { compose, lifecycle, branch, renderNothing, withProps } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import BasicInfo from './BasicInfo';
 import { getMover, updateBasicInfo } from '../../moverAction';
@@ -21,6 +21,13 @@ const mapStateToProps = state => ({
 
 const isLoading = props => props.status !== 'LOADED';
 
+const goToNextStep = (props, step) => {
+  props.history.push({
+    pathname: `/mover/edit/${props.match.params.moverId}/${step}`,
+  });
+};
+
+
 const enhance = compose(
   withRouter,
   connect(mapStateToProps, mapDispatchToProps),
@@ -38,11 +45,15 @@ const enhance = compose(
     },
     onSubmitSuccess: (values, dispatch, props) => {
       message.success('Basic information saved.');
-      props.history.push({
-        pathname: `/mover/edit/${props.match.params.moverId}/profile-picture`,
-      });
+      goToNextStep(props, 'profile-picture');
     }
   }),
+  withProps((props)=> ({
+    handleSkip: (e) => {
+      e.preventDefault();
+      goToNextStep(props, 'profile-picture');
+    }
+  })),
   scrollToTopOnMount
 );
 

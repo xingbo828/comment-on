@@ -3,11 +3,10 @@ import Steps from '../../../../globalComponents/Steps';
 
 const Step = Steps.Step;
 
-const SearchSteps = ({current, history}) => {
+const MoverEditSteps = ({current, history, moverId}) => {
   const stepClickHandler = (step) => {
     history.push({
-      pathname: `/mover/configurations/${step}`,
-      search: history.location.search
+      pathname: `/mover/edit/${moverId}/${step}`
     });
   };
 
@@ -15,35 +14,30 @@ const SearchSteps = ({current, history}) => {
     <Steps current={current}>
 
       <Step
-        title="addresses"
-        onStepClick={stepClickHandler.bind(this, 'address')}
+        title="basic profile"
+        onStepClick={stepClickHandler.bind(this, 'basic-profile')}
       />
 
       <Step
-        title="date"
-        onStepClick={stepClickHandler.bind(this, 'date')}
+        title="profile pictures"
+        onStepClick={stepClickHandler.bind(this, 'profile-picture')}
       />
 
       <Step
-        title="logistics"
-        onStepClick={stepClickHandler.bind(this, 'logistics')}
+        title="crew members"
+        onStepClick={stepClickHandler.bind(this, 'crew-member')}
       />
 
       <Step
-        title="items"
-        onStepClick={stepClickHandler.bind(this, 'items')}
-      />
-
-      <Step
-        title="overview"
-        onStepClick={stepClickHandler.bind(this, 'overview')}
+        title="vehicles"
+        onStepClick={stepClickHandler.bind(this, 'vehicles')}
       />
 
     </Steps>
   );
 };
 
-export default SearchSteps;
+export default MoverEditSteps;
 
 
 

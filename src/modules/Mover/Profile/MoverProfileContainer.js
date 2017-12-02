@@ -2,27 +2,30 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose, lifecycle, branch, renderComponent } from 'recompose';
 import MoverProfile from './MoverProfile';
-import { loadBusinessProfile } from './profileActions';
+import { getMover } from '../moverAction';
 import { getProfile } from './profileReducers';
 import mapImmutablePropsToPlainProps from '../../Common/mapImmutablePropsToPlainProps';
 import Spin from '../../../globalComponents/Spin';
 
 const mapDispatchToProps = dispatch => ({
-  loadBusinessProfile: (businessId) => dispatch(loadBusinessProfile(businessId))
+  getMover: (moverId) => dispatch(getMover(moverId))
 });
 
-const mapStateToProps = (state, ownProps) => getProfile(state, ownProps.match.params.businessId)
+const mapStateToProps = state => ({
+  profile: getProfile(state).get('profile'),
+  status: getProfile(state).get('status')
+});
 
 
-const isLoading = (props) => (!props.profileState || props.profileState.get('status') !== 'LOADED');
+const isLoading = props => props.status !== 'LOADED';
 
 const enhance = compose(
   withRouter,
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
     componentDidMount() {
-      const businessId = this.props.match.params.businessId;
-      this.props.loadBusinessProfile(businessId);
+      const moverId = this.props.match.params.moverId;
+      this.props.getMover(moverId);
     }
   }),
   branch(

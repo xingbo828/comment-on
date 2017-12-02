@@ -38,7 +38,7 @@ const mapCrew = (Crew) => (
   ))
 );
 
-const BusinessProfile = ({ profileState: { profile }, location }) => (
+const MoverProfile = ({ profile, location }) => (
   <div>
     <HeroDiv />
     {/* <SecondaryNav /> */}
@@ -61,4 +61,4 @@ const BusinessProfile = ({ profileState: { profile }, location }) => (
 );
 
 
-export default BusinessProfile;
+export default MoverProfile;

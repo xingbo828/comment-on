@@ -33,7 +33,7 @@ export const TabBarLinkInk = styled.div`
   height: 2px;
   width: 100%;
   background: ${props => props.theme.colors.primary};
-  transition: .3s;
+  transition: .5s;
   position: absolute;
   left: 0;
   bottom: -1px;
@@ -53,11 +53,11 @@ export const TabPanelsContainer = styled.div`
 `;
 
 export const TabPanelContainer = styled.div`
-  transition: .3s;
+  transition: .5s;
   width: 100%;
   opacity: 0;
   position: absolute;
-  transform: translateX(20px);
+  transform: translateX(32px);
   visibility: hidden;
   ${props => {
     if(props.isActive){

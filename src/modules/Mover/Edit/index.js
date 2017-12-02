@@ -6,35 +6,38 @@ import BasicInfo from './BasicInfo';
 import CrewMember from './CrewMember';
 import Vehicles from './Vehicles';
 import ProtectedRoute from '../../Common/ProtectedRoute';
-// import Steps from './Shared/Steps';
+import MoverEditSteps from './Shared/Steps';
 import FadeInRouteTransition from '../../Common/RouteTransitions/FadeInRouteTransition';
 
 const MoverEdit = ({ location, history, match }) => {
   const paths = [
     {
-      path: '/mover/edit/:moverId/basic-profile',
+      path: `/mover/edit/:moverId/basic-profile`,
       component: BasicInfo
     },
     {
-      path: '/mover/edit/:moverId/profile-picture',
+      path: `/mover/edit/:moverId/profile-picture`,
       component: ProfilePicture
     },
     {
-      path: '/mover/edit/:moverId/crew-member',
+      path: `/mover/edit/:moverId/crew-member`,
       component: CrewMember
     },
     {
-      path: '/mover/edit/:moverId/vehicles',
+      path: `/mover/edit/:moverId/vehicles`,
       component: Vehicles
     }
   ];
 
-  // const getCurrentStep = (history) => paths.findIndex((p)=>p.path === history.location.pathname);
+  const getCurrentStep = (history, moverId) => {
+    return paths.findIndex((p)=>p.path.replace(':moverId', moverId) === history.location.pathname);
+  }
+
   return (
     <div>
-      {/* <SearchSteps current={getCurrentStep(history)} history={history} /> */}
+      <MoverEditSteps current={getCurrentStep(history, match.params.moverId)} moverId={match.params.moverId} history={history} />
       <TransitionGroup>
-        <FadeInRouteTransition minHeight={800} key={location.key}>
+        <FadeInRouteTransition minHeight={500} key={location.key}>
           {() => (
             <Switch location={location}>
               {

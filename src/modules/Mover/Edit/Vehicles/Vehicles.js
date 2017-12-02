@@ -19,6 +19,7 @@ const { Container} = Grid;
 const { Form, FormActions, FormHeading, FormInner } = Layout.Form;
 
 const Vehicles = ({
+  handleSkip,
   handleSubmit,
   pristine,
   reset,
@@ -28,20 +29,23 @@ const Vehicles = ({
   return (
     <Container>
       <FormHeading>
-        <Heading wrapperTag="h1">Profile Pictures</Heading>
+        <Heading wrapperTag="h1">Vehicles</Heading>
       </FormHeading>
       <Form onSubmit={handleSubmit}>
       <FormInner>
         <Field component={renderVehiclesInfoManagement} name="vehiclesInfo" />
         </FormInner>
         <FormActions>
-          <Button
-            style={{ float: 'right' }}
+        <Button
+            style={{ float: 'right', marginLeft: '1rem' }}
             type="submit"
             primary
             disabled={submitting || !valid}
           >
-           <Icon icon="pencil" /> Update
+            Update <Icon icon="pencil" />
+          </Button>
+          <Button style={{ float: 'right' }} ghost onClick={handleSkip}>
+            Skip <Icon icon="angle-double-right" />
           </Button>
         </FormActions>
       </Form>

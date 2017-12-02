@@ -1,6 +1,6 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { compose, lifecycle, branch, renderNothing } from 'recompose';
+import { compose, lifecycle, branch, renderNothing, withProps } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import Vehicles from './Vehicles';
 import { getMover, updateVehicles } from '../../moverAction';
@@ -20,6 +20,12 @@ const mapStateToProps = state => ({
 
 const isLoading = props => props.status !== 'LOADED';
 
+const goToNextStep = (props) => {
+  props.history.push({
+    pathname: `/mover/profile/${props.match.params.moverId}`,
+  });
+};
+
 const enhance = compose(
   withRouter,
   connect(mapStateToProps, mapDispatchToProps),
@@ -38,11 +44,15 @@ const enhance = compose(
     },
     onSubmitSuccess: (values, dispatch, props) => {
       message.success('Vehicle information saved.');
-      // props.history.push({
-      //   pathname: `/mover/edit/${props.match.params.moverId}/crew-member`,
-      // });
+      goToNextStep(props);
     }
   }),
+  withProps((props)=> ({
+    handleSkip: (e) => {
+      e.preventDefault();
+      goToNextStep(props);
+    }
+  })),
   scrollToTopOnMount
 );
 
