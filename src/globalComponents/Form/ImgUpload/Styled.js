@@ -34,8 +34,8 @@ export const StyledImgListItem = styled.li`
 
 export const StyleImgReplace = styled.div`
 opacity: 0;
-width: 110px;
-height: 110px;
+width: 100px;
+height: 100px;
 position: absolute;
 cursor: pointer;
 display: flex;
@@ -81,21 +81,23 @@ export const StyledImgRemove = styled.div`
 
 export const StyleImg = styled.div`
   box-sizing: border-box;
-  width: 110px;
-  height: 110px;
+  width: 100px;
+  height: 100px;
   border: 1px solid lightgrey;
-  padding: 5px;
   border-radius: 5px;
-  line-height: 100px;
+  text-align: center;
+  padding: 5px;
+  line-height: 90px;
   > img {
-    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
     vertical-align: middle;
   }
 `;
 
 export const StyledUpLoadBtn = styled.button`
-  width: 110px;
-  height: 110px;
+  width: 100px;
+  height: 100px;
   background-color: ${props => props.theme.colors.offWhite};
   border: none;
   border-radius: 5px;

@@ -79,7 +79,7 @@ class EditMember extends Component {
         <ImgUpload.SingleImgUpload input={avatarInput} name="avatar"  />
         <TextField input={nameInput} name="name" label="Name"  />
         <TextArea input={descInput} name="desc" label="Description"  />
-        <Button small primary onClick={this.updateMember} style={{marginRight: '20px'}}>Save</Button>
+        <Button small primary onClick={this.updateMember} style={{marginRight: '20px', marginBottom: '10px'}}>Save</Button>
         <Button small danger onClick={this.removeMember}>Remove</Button>
       </div>
     );

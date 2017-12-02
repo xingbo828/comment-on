@@ -54,7 +54,8 @@ export const TabPanelsContainer = styled.div`
 
 export const TabPanelContainer = styled.div`
   transition: .5s;
-  width: 100%;
+  left: ${props=>props.theme.spaces.base};
+  right: ${props=>props.theme.spaces.base};
   opacity: 0;
   position: absolute;
   transform: translateX(32px);
