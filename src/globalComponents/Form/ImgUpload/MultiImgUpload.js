@@ -25,7 +25,7 @@ class MultiImgUpload extends Component {
   }
 
   componentDidUpdate() {
-    this.props.input.onChange(this.state.files);
+    this.props.onChange(this.state.files);
   }
 
   getBase64(img, callback) {

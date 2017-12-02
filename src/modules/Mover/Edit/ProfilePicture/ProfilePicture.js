@@ -5,11 +5,15 @@ import {
   ImgUpload,
 } from '../../../../globalComponents/Form';
 import Grid from '../../../../globalComponents/Grid';
+import Icon from '../../../../globalComponents/Icon';
+import Layout from '../../../../globalComponents/Layout';
+import { Heading } from '../../../../globalComponents/Typography';
+
 
 const MultiImgUpload = ImgUpload.MultiImgUpload;
 const SingleImgUpload = ImgUpload.SingleImgUpload;
 
-const renderBusinessLogo = ({ input, ...rest }) => {
+const renderLogo = ({ input, ...rest }) => {
   return <SingleImgUpload
   input={input}
   {...rest}
@@ -19,17 +23,21 @@ const renderBusinessLogo = ({ input, ...rest }) => {
 
 
 
-const renderBusinessImgs = ({ input, ...rest }) =>{
+const renderProfileImgs = ({ input, ...rest }) => {
+  const pureValue = (input.value.toJS && input.value.toJS()) || input.value;
   return <MultiImgUpload
-  input={input}
-  images={input.value}
+  onChange={input.onChange}
+  images={pureValue || []}
   {...rest}
   limit={3}
   actionText="Upload profile images(s)"
 />;
 }
 
-const { Container } = Grid;
+const { Container} = Grid;
+
+const { Form, FormActions, FormHeading, FormInner } = Layout.Form;
+
 const ProfilePicture = ({
   handleSubmit,
   pristine,
@@ -40,25 +48,33 @@ const ProfilePicture = ({
 }) => {
   return (
     <Container>
-      <form onSubmit={handleSubmit}>
+      <FormHeading>
+        <Heading wrapperTag="h1">Profile Pictures</Heading>
+      </FormHeading>
+      <Form onSubmit={handleSubmit}>
+      <FormInner>
         <Field
-          component={renderBusinessLogo}
+          component={renderLogo}
           name="logo"
           label="Business Logo"
           />
         <Field
-          component={renderBusinessImgs}
-          name="businessImgs"
-          label="Business profile images"
+          component={renderProfileImgs}
+          name="profileImgs"
+          label="Profile images"
         />
-        <Button
-          type="submit"
-          primary
-          disabled={pristine || submitting || !valid}
-        >
-          Submit
-        </Button>
-      </form>
+        </FormInner>
+        <FormActions>
+          <Button
+            style={{ float: 'right' }}
+            type="submit"
+            primary
+            disabled={submitting || !valid}
+          >
+           <Icon icon="pencil" /> Update
+          </Button>
+        </FormActions>
+      </Form>
     </Container>
   );
 };

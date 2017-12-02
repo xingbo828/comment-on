@@ -5,7 +5,6 @@ import Grid from '../../../globalComponents/Grid';
 import Icon from '../../../globalComponents/Icon';
 import Layout from '../../../globalComponents/Layout';
 import { Heading } from '../../../globalComponents/Typography';
-import { withTheme } from 'styled-components';
 
 const { Form, FormActions, FormHeading, FormInner } = Layout.Form;
 
@@ -15,7 +14,6 @@ const Profile = ({ handleSubmit, pristine, reset, valid, submitting }) => {
     <Grid.Container>
       <FormHeading>
         <Heading wrapperTag="h1">Account Profile</Heading>
-
       </FormHeading>
       <Form onSubmit={handleSubmit}>
         <FormInner>
@@ -49,4 +47,4 @@ const Profile = ({ handleSubmit, pristine, reset, valid, submitting }) => {
   );
 };
 
-export default withTheme(Profile);
+export default Profile;

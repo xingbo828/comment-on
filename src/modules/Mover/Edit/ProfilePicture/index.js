@@ -3,43 +3,44 @@ import { connect } from 'react-redux';
 import { compose, lifecycle, branch, renderNothing } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import ProfilePicture from './ProfilePicture';
-import { editBusinessImages, getBusinessInfo } from '../../moverAction';
+import { getMover, updateProfilePictures } from '../../moverAction';
+import { getProfile } from '../../Profile/profileReducers';
 import message from '../../../../globalComponents/Message';
+import scrollToTopOnMount from '../../../Common/scrollToTopOnMount';
 
 const mapDispatchToProps = dispatch => ({
-  editBusinessImages: (values, businessId) => dispatch(editBusinessImages(values, businessId))
+  getMover: (moverId) => dispatch(getMover(moverId)),
+  updateProfilePictures: (moverInfo, moverId) => dispatch(updateProfilePictures(moverInfo, moverId))
 });
+
+const mapStateToProps = state => ({
+  initialValues: getProfile(state).get('profile'),
+  status: getProfile(state).get('status')
+});
+
+const isLoading = props => props.status !== 'LOADED';
 
 const enhance = compose(
   withRouter,
-  connect(null, mapDispatchToProps),
+  connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
     componentDidMount() {
-      const businessId = this.props.match.params.businessId;
-      this.setState({
-        doneLoading: false
-      });
-      getBusinessInfo(businessId)
-      .then((businessInfo) => {
-        this.setState({
-          initialValues: Object.assign(businessInfo, {
-            businessImgs: (businessInfo && businessInfo.businessImgs) ? Object.values(businessInfo.businessImgs) : []
-          }),
-          doneLoading: true
-        });
-      })
+      const moverId = this.props.match.params.moverId;
+      this.props.getMover(moverId);
     }
   }),
-  branch(({doneLoading}) => !doneLoading, renderNothing),
+  branch(isLoading, renderNothing),
+
   reduxForm({
-    form: 'mover.edit.profilePictures',
+    form: 'mover.edit.profilePicture',
     onSubmit: (values, dispatch, props) => {
-      return props.editBusinessImages(values, props.match.params.businessId);
+      return props.updateProfilePictures(values.toJS(), props.match.params.moverId);
     },
     onSubmitSuccess: () => {
-      message.success('Profile pictures saved');
+      message.success('Profile images saved.');
     }
-  })
+  }),
+  scrollToTopOnMount
 );
 
 export default enhance(ProfilePicture);

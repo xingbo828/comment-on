@@ -1,21 +1,17 @@
-/*
-  TODO: Refactor business level actions into sub module actions
-*/
-
 import {
   auth,
-  //storage,
-  database } from '../../firebaseClient';
+  storage,
+  database
+} from '../../firebaseClient';
 import { updateUserMoverRef } from '../Account/accountAction';
 
-// const imgStorageRef = storage.ref();
+const imgStorageRef = storage.ref();
 const moverDbRef = database.ref().child('movers');
-
 
 export const LOADING_MOVER_PROFILE = 'LOADING_MOVER_PROFILE';
 export const LOADED_MOVER_PROFILE = 'LOADED_MOVER_PROFILE';
 
-export const getMover = (moverId) => async (dispatch) => {
+export const getMover = moverId => async dispatch => {
   dispatch({
     type: LOADING_MOVER_PROFILE,
     data: {
@@ -23,7 +19,7 @@ export const getMover = (moverId) => async (dispatch) => {
     }
   });
   const moverRef = moverDbRef.child(moverId);
-  const moverProfile =  await moverRef.once('value');
+  const moverProfile = await moverRef.once('value');
   dispatch({
     type: LOADED_MOVER_PROFILE,
     data: {
@@ -31,10 +27,10 @@ export const getMover = (moverId) => async (dispatch) => {
       profile: moverProfile.toJSON()
     }
   });
-}
+};
 
-export const addMover = (moverInfo) => async (dispatch) => {
-  try{
+export const addMover = moverInfo => async dispatch => {
+  try {
     moverInfo = moverInfo.toJS();
     const uid = auth.currentUser.uid;
     moverInfo.owner = uid;
@@ -46,29 +42,75 @@ export const addMover = (moverInfo) => async (dispatch) => {
     // Update user with mover id
     await updateUserMoverRef(moverId, uid)(dispatch);
     return moverInfo;
-  } catch(err) {
+  } catch (err) {
     console.log(err);
   }
+};
+
+export const updateBasicInfo = (moverInfo, moverId) => async dispatch => {
+  const moverRef = moverDbRef.child(moverId);
+  await moverRef.set(moverInfo);
+  return dispatch({
+    type: LOADED_MOVER_PROFILE,
+    data: {
+      key: moverId,
+      profile: moverInfo
+    }
+  });
+};
+
+export const updateCrewMember = () => async dispatch => {};
+
+
+
+const _uploadLogo = async (logo, moverId) => {
+  if (typeof logo === 'string') {
+    return logo;
+  }
+  const imgRef = imgStorageRef.child(`images/mover/${moverId}/${logo.name}`);
+  const result = await imgRef.put(logo);
+  return result.downloadURL;
+};
+
+const _uploadProfileImgs = (profileImgs, moverId) => {
+  if (Array.isArray(profileImgs) && profileImgs.length) {
+    const storagePromises = profileImgs.map(img => {
+      if (typeof img === 'string') {
+        return Promise.resolve(img);
+      }
+      const imgRef = imgStorageRef.child(`images/mover/${moverId}/${img.name}`);
+      return imgRef.put(img)
+      .then((result) => {
+        return result.downloadURL;
+      });
+    });
+    return Promise.all(storagePromises);
+  }
+  return Promise.resolve([]);
 }
 
-export const updateBasicInfo = () => async (dispatch) => {
-
-  };
-
-export const updateCrewMember = () => async (dispatch) => {
-
+export const updateProfilePictures = (moverInfo, moverId) => async dispatch => {
+    const { logo, profileImgs } = moverInfo;
+    const uploadProfileImgsPromise = _uploadProfileImgs(profileImgs, moverId);
+    const uploadLogoPromise = _uploadLogo(logo, moverId);
+    const images = await Promise.all([uploadLogoPromise, uploadProfileImgsPromise]);
+    const [logoUrl, profileImgsUrl] = images;
+    const moverRef = moverDbRef.child(moverId);
+    const updatedMoverProfile = Object.assign({}, moverInfo, {
+      logo: logoUrl,
+      profileImgs: profileImgsUrl
+    });
+    await moverRef.set(updatedMoverProfile);
+    return dispatch({
+      type: LOADED_MOVER_PROFILE,
+      data: {
+        key: moverId,
+        profile: updatedMoverProfile
+      }
+    });
 };
 
-export const updateProfilePictures = () => async (dispatch) => {
-
-};
-
-
-
-export const updateVehicles = () => async (dispatch) => {
-
-};
-
+export const updateVehicles = () => async dispatch => {};
 
 // export const editBusinessImages = (businessInfo, businessId) => (dispatch) => {
 //   const businessInfoRaw = businessInfo.toJS();
@@ -135,29 +177,3 @@ export const updateVehicles = () => async (dispatch) => {
 // }
 
 
-// const uploadBusinessLogo = (businessLogo, businessId) => {
-//   if (typeof businessLogo === 'string') {
-//     return Promise.resolve(businessLogo);
-//   }
-//   const imgRef = imgStorageRef.child(`images/business/${businessId}/${businessLogo.name}`);
-//   return imgRef.put(businessLogo)
-//   .then((result) => result.downloadURL);
-// };
-
-
-// const uploadBusinessImgs = (businessImgs, businessId) => {
-//   if (Array.isArray(businessImgs) && businessImgs.length) {
-//     const storagePromises = businessImgs.map(img => {
-//       if (typeof img === 'string') {
-//         return Promise.resolve(img);
-//       }
-//       const imgRef = imgStorageRef.child(`images/business/${businessId}/${img.name}`);
-//       return imgRef.put(img)
-//       .then((result) => {
-//         return result.downloadURL;
-//       });
-//     });
-//     return Promise.all(storagePromises);
-//   }
-//   return Promise.resolve([]);
-// }
