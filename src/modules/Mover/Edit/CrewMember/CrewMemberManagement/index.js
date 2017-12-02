@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Tabs from '../../../../globalComponents/Tabs';
+import Tabs from '../../../../../globalComponents/Tabs';
 import NewMemberForm from './NewMemberForm';
 import EditMember from './EditMember';
-import mapImmutablePropsToPlainProps from '../../../Common/mapImmutablePropsToPlainProps'
+import mapImmutablePropsToPlainProps from '../../../../Common/mapImmutablePropsToPlainProps'
 import {NewMemberHeader} from './Styles';
 
 const TabPanel = Tabs.TabPanel;

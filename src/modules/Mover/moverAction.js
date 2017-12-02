@@ -59,7 +59,35 @@ export const updateBasicInfo = (moverInfo, moverId) => async dispatch => {
   });
 };
 
-export const updateCrewMember = () => async dispatch => {};
+export const updateCrewMember = (moverInfo, moverId) => async dispatch => {
+  const { crewMembers } = moverInfo;
+  const crewMemberAvatars = await Promise.all(crewMembers.map(async (c) => {
+    if (typeof c.avatar === 'string') {
+      return Promise.resolve(c.avatar);
+    }
+    const imgRef = imgStorageRef.child(`images/mover/${moverId}/${c.avatar.name}`);
+    const result = await imgRef.put(c.avatar)
+    return result.downloadURL;
+  }));
+
+  const moverRef = moverDbRef.child(moverId);
+  const mappedCrewMembers = crewMembers.map((c, index) => {
+    c.avatar = crewMemberAvatars[index];
+    return c;
+  });
+
+  const updatedMoverInfo = Object.assign({}, moverInfo, {
+    crewMembers: mappedCrewMembers
+  });
+  await moverRef.set(updatedMoverInfo);
+  return dispatch({
+    type: LOADED_MOVER_PROFILE,
+    data: {
+      key: moverId,
+      profile: updatedMoverInfo
+    }
+  });
+};
 
 
 

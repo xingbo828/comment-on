@@ -3,7 +3,7 @@ import { Switch, withRouter } from 'react-router-dom';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
 import ProfilePicture from './ProfilePicture';
 import BasicInfo from './BasicInfo';
-// import CrewMember from './CrewMember';
+import CrewMember from './CrewMember';
 // import Vehicles from './Vehicles';
 import ProtectedRoute from '../../Common/ProtectedRoute';
 // import Steps from './Shared/Steps';
@@ -19,10 +19,10 @@ const MoverEdit = ({ location, history, match }) => {
       path: '/mover/edit/:moverId/profile-picture',
       component: ProfilePicture
     },
-    // {
-    //   path: '/mover/edit/:moverId/crew-member',
-    //   component: CrewMember
-    // },
+    {
+      path: '/mover/edit/:moverId/crew-member',
+      component: CrewMember
+    },
     // {
     //   path: '/mover/edit/:moverId/vehicle',
     //   component: Vehicles

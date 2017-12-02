@@ -4,34 +4,22 @@ import {
   TextArea,
   Button,
   ImgUpload
-} from '../../../../globalComponents/Form';
+} from '../../../../../globalComponents/Form';
 
 
-class EditMember extends Component {
+class NewMemberForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      avatar: this.props.avatar,
-      name: this.props.name,
-      description: this.props.description
+      avatar: '',
+      name: '',
+      description: ''
     };
     this.updateDesc = this.updateDesc.bind(this);
     this.updateName = this.updateName.bind(this);
-    this.updateMember = this.updateMember.bind(this);
+    this.addNewMember = this.addNewMember.bind(this);
     this.updateAvatar = this.updateAvatar.bind(this);
-    this.removeMember = this.removeMember.bind(this);
   }
-
-  componentWillReceiveProps(nextProps) {
-    const { avatar, name, description } = nextProps;
-    this.setState({
-      avatar,
-      name,
-      description
-    });
-  }
-
-
   updateName(e) {
     this.setState({
       name: e.target.value
@@ -50,14 +38,9 @@ class EditMember extends Component {
     });
   }
 
-  updateMember(e) {
+  addNewMember(e) {
     e.preventDefault();
-    this.props.updateMember(this.state, this.props.index);
-  }
-
-  removeMember(e) {
-    e.preventDefault();
-    this.props.removeMember(this.props.index);
+    this.props.addNewMember(this.state);
   }
 
   render() {
@@ -72,15 +55,14 @@ class EditMember extends Component {
 
     const avatarInput = {
       onChange: this.updateAvatar,
-      value: this.state.avatar
+      value: null
     };
     return (
       <div>
-        <ImgUpload.SingleImgUpload input={avatarInput} name="avatar"  />
+        <ImgUpload.SingleImgUpload input={avatarInput} name="avatar" label="Profile picture" actionText="Upload"/>
         <TextField input={nameInput} name="name" label="Name"  />
         <TextArea input={descInput} name="desc" label="Description"  />
-        <Button small primary onClick={this.updateMember}>Save</Button>
-        <Button small danger onClick={this.removeMember}>Remove</Button>
+        <Button small primary onClick={this.addNewMember}>Create</Button>
       </div>
     );
   }
@@ -88,4 +70,4 @@ class EditMember extends Component {
 
 
 
-export default EditMember;
+export default NewMemberForm;
