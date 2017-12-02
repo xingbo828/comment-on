@@ -27,14 +27,15 @@ export const CheckboxContainer = styled.label`
   display: flex;
   padding-right: 20px;
   cursor: pointer;
+  line-height: 20px;
 `;
 
 export const CheckboxLabel = styled.span`
-  padding-left: 5px;
+  padding-left: ${props=>props.theme.spaces.tight};
+
 `;
 export const CheckboxWrapper = styled.span`
   position: relative;
-  margin-top: 1px;
 `;
 
 export const CheckboxInput = styled.input`
@@ -46,13 +47,16 @@ export const CheckboxInput = styled.input`
   top: 0;
   bottom: 0;
   right: 0;
+  margin: 0;
+  width: 20px;
+  height: 20px;
 `;
 export const CheckboxInner = styled.span`
   top: 0;
   left: 0;
   display: block;
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   border: 1px solid ${props => props.checked ? props.theme.colors.primary : props.theme.colors.border};
   border-radius: 2px;
   transition: all .3s;
@@ -75,9 +79,9 @@ export const CheckboxInner = styled.span`
     position: absolute;
     content: "";
     left: 6px;
-    top: 2px;
-    width: 3px;
-    height: 8px;
+    top: 1px;
+    width: 6px;
+    height: 11px;
     ${props => {
       if(props.checked){
         return `

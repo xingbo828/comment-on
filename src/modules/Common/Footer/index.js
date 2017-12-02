@@ -18,7 +18,7 @@ const FooterNav = props => {
             </Heading>
             <List>
               <ListItem>
-                <Link to="/business/create">Become Mover</Link>
+                <Link to="/mover/create">Become Mover</Link>
               </ListItem>
             </List>
           </Col>

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { func, string, shape, array, bool } from 'prop-types';
 import Checkbox from './Checkbox';
 import { Container, CheckboxList, InputErrorMsg, CheckboxGroupLabel } from './Styled';
-import mapImmutablePropsToPlainProps from '../../../modules/Common/mapImmutablePropsToPlainProps'
 
 class CheckboxGroup extends Component {
   constructor(props){
@@ -20,6 +19,7 @@ class CheckboxGroup extends Component {
 
   handleChange(e) {
     let newState;
+
     if(this.state.checked.includes(e.target.value)){
       // remove
       newState = this.state.checked.filter((item) => item !== e.target.value)
@@ -86,4 +86,4 @@ CheckboxGroup.propTypes = {
   })
 };
 
-export default mapImmutablePropsToPlainProps(CheckboxGroup);
+export default CheckboxGroup;

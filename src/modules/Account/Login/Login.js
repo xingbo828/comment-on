@@ -10,6 +10,10 @@ import {
   InnerDiv
 } from './Styled';
 
+const _isProfileCompleted = (profile) => {
+  return !!profile.email;
+};
+
 
 const Login = ({ location, account, facebookLogin, googleLogin, logout }) => {
 
@@ -18,7 +22,7 @@ const Login = ({ location, account, facebookLogin, googleLogin, logout }) => {
       const redirectTo = location.search.replace('?redirect=', '');
       return <Redirect to={redirectTo} />;
     }
-    return account.user.hasProfile ? <Redirect to="/" /> : <Redirect to="/account/profile-basic" />;
+    return _isProfileCompleted(account.user) ? <Redirect to="/" /> : <Redirect to="/account/profile" />;
   };
 
   const renderLoginOptions = () => {

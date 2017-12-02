@@ -1,73 +1,40 @@
-import { auth, storage, database } from '../../firebaseClient';
-
-const storageRef = storage.ref();
+import { auth, database } from '../../firebaseClient';
+const userDbRef = database.ref().child('users');
 
 export const UPDATE_PROFILE = 'UPDATE_PROFILE';
-export const UPDATE_PROFILE_PICTURE = 'UPDATE_PROFILE_PICTURE';
 
-const _extractAdditionalProfile = ({ gender, birthdate, displayName, email, photoURL }) => {
-  return {
-    gender: gender || null,
-    birthdate: birthdate || null,
-    displayName: displayName || null,
-    email: email || null,
-    photoURL: photoURL || null
-  }
-};
-
-const updateUserEmail = (user, updatedEmail) => {
-  if(user.email !== updatedEmail && !!updatedEmail) {
+const _updateUserEmail = (user, updatedEmail) => {
+  if(!!updatedEmail && user.email !== updatedEmail) {
     return user.updateEmail(updatedEmail);
   }
   return Promise.resolve(true);
 };
-export const updateProfile = profile => (dispatch) => {
+
+export const updateProfile = immuProfile => (dispatch) => {
   const user = auth.currentUser;
-  return user.updateProfile(profile.toJS())
+  const profile = immuProfile.toJS();
+  return user.updateProfile(profile)
+  .then(() => _updateUserEmail(user, profile.email))
   .then(() => {
-    return updateUserEmail(user, profile.toJS().email);
-  })
-  .then(() => {
-    const userRef = database.ref("users/" + user.uid);
-    return userRef.set(_extractAdditionalProfile(profile.toJS()));
-  }).then(() => {
     dispatch({
       type: UPDATE_PROFILE,
-      data: profile.toJSON()
+      data: profile
     });
+    return profile;
   }).catch((error) => {
     console.log(error);
   });
 };
 
-export const updateUserBusiness = (businessId, uid) => {
-  const ownedBusinessesRef = database.ref().child('users').child(uid).child('businesses');
-  console.log(ownedBusinessesRef);
-  return ownedBusinessesRef.once('value')
-    .then((data) => {
-      data = data.toJSON();
-      if (!data) {
-        data = {};
-      }
-      if (!data[businessId]) {
-        data[businessId] = true;
-        return ownedBusinessesRef.set(data);
-      }
-    });
-}
-
-export const uploadProfileImg = (file, uid) => (dispatch) => {
-  const profileImageRef = storageRef.child(`images/profile/${uid}/${file.name}`);
-  return profileImageRef.put(file)
-  .then((result) => {
-    const updatedProfileImageUrl = result.downloadURL;
-    const user = auth.currentUser;
+export const updateUserMoverRef = (moverId, uid) => (dispatch) => {
+  const userRef = userDbRef.child(uid);
+  return userRef.set({
+    moverId
+  }).then(() => {
     dispatch({
-      type: UPDATE_PROFILE_PICTURE,
-      data: updatedProfileImageUrl
-    });
-    return user.updateProfile({
-      photoURL: updatedProfileImageUrl
+      type: UPDATE_PROFILE,
+      data: { moverId }
     });
   });
-};
+} ;
+

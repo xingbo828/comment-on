@@ -42,7 +42,7 @@ export const GeosuggestStyled = styled(Geosuggest)`
   .geosuggest__input {
     border-radius: 0;
     outline: 0;
-    font-size: .825rem;
+    font-size: .875rem;
     width: 100%;
     box-sizing: border-box;
     padding: .5rem;

@@ -12,7 +12,7 @@ export const onAuthChange = () => (dispatch) => {
       .then((data) => {
         dispatch({
           type: USER_LOGIN,
-          data: {...user.toJSON(), ...data.toJSON(), hasProfile: data.exists()}
+          data: {...user.toJSON(), ...data.toJSON()}
         });
       }).catch((error) => {
         console.log(error);
