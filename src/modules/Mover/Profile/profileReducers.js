@@ -21,6 +21,9 @@ const profile = (state = initProfileState, action) => {
           if(action.data.profile.profileImgs) {
             pr.set('profileImgs', Immutable.fromJS((Object.values(action.data.profile.profileImgs))));
           }
+          if(action.data.profile.crewMembers) {
+            pr.set('crewMembers', Immutable.fromJS((Object.values(action.data.profile.crewMembers))));
+          }
         });
         st.set('profile', profile);
         st.set('status', 'LOADED');

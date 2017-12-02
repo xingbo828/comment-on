@@ -4,13 +4,19 @@ import {
   Button
 } from '../../../../globalComponents/Form';
 import Grid from '../../../../globalComponents/Grid';
-import VehiclesInfoManagement from '../../components/VehiclesInfoManagement';
+import Icon from '../../../../globalComponents/Icon';
+import Layout from '../../../../globalComponents/Layout';
+import { Heading } from '../../../../globalComponents/Typography';
+import VehiclesInfoManagement from './VehiclesInfoManagement';
 
 const renderVehiclesInfoManagement = ({ input, ...rest }) => {
   const pureValue = (input.value.toJS && input.value.toJS()) || input.value;
   return <VehiclesInfoManagement vehicles={pureValue} onChange={input.onChange} {...rest} />;
 }
 
+const { Container} = Grid;
+
+const { Form, FormActions, FormHeading, FormInner } = Layout.Form;
 
 const Vehicles = ({
   handleSubmit,
@@ -20,18 +26,26 @@ const Vehicles = ({
   submitting
 }) => {
   return (
-    <Grid.Container>
-      <form onSubmit={handleSubmit}>
+    <Container>
+      <FormHeading>
+        <Heading wrapperTag="h1">Profile Pictures</Heading>
+      </FormHeading>
+      <Form onSubmit={handleSubmit}>
+      <FormInner>
         <Field component={renderVehiclesInfoManagement} name="vehiclesInfo" />
-        <Button
-          type="submit"
-          primary
-          disabled={pristine || submitting || !valid}
-        >
-          Submit
-        </Button>
-      </form>
-    </Grid.Container>
+        </FormInner>
+        <FormActions>
+          <Button
+            style={{ float: 'right' }}
+            type="submit"
+            primary
+            disabled={submitting || !valid}
+          >
+           <Icon icon="pencil" /> Update
+          </Button>
+        </FormActions>
+      </Form>
+    </Container>
   );
 };
 

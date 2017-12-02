@@ -41,7 +41,7 @@ export const addMover = moverInfo => async dispatch => {
     await moverRef.set(moverInfo);
     // Update user with mover id
     await updateUserMoverRef(moverId, uid)(dispatch);
-    return moverInfo;
+    return moverId;
   } catch (err) {
     console.log(err);
   }
@@ -138,7 +138,18 @@ export const updateProfilePictures = (moverInfo, moverId) => async dispatch => {
     });
 };
 
-export const updateVehicles = () => async dispatch => {};
+export const updateVehicles = (moverInfo, moverId) => async dispatch => {
+  // const { vehiclesInfo } = moverInfo;
+    const moverRef = moverDbRef.child(moverId);
+    await moverRef.set(moverInfo);
+    return dispatch({
+      type: LOADED_MOVER_PROFILE,
+      data: {
+        key: moverId,
+        profile: moverInfo
+      }
+    });
+};
 
 // export const editBusinessImages = (businessInfo, businessId) => (dispatch) => {
 //   const businessInfoRaw = businessInfo.toJS();

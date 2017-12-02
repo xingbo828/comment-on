@@ -11,7 +11,7 @@ import Layout from '../../../globalComponents/Layout';
 import Grid from '../../../globalComponents/Grid';
 import { SERVICE_AREAS } from '../../../constants';
 
-import BusinessHour from '../components/BusinessHour';
+import BusinessHour from './BusinessHour';
 import { Heading, Paragraph } from '../../../globalComponents/Typography';
 
 const { Form, FormInner, FormHeading, FormActions } = Layout.Form;

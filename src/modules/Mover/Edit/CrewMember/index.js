@@ -30,14 +30,16 @@ const enhance = compose(
     }
   }),
   branch(isLoading, renderNothing),
-
   reduxForm({
     form: 'mover.edit.crewMember',
     onSubmit: (values, dispatch, props) => {
       return props.updateCrewMember(values.toJS(), props.match.params.moverId);
     },
-    onSubmitSuccess: () => {
+    onSubmitSuccess: (values, dispatch, props) => {
       message.success('Crew members saved.');
+      props.history.push({
+        pathname: `/mover/edit/${props.match.params.moverId}/vehicles`,
+      });
     }
   }),
   scrollToTopOnMount

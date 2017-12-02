@@ -4,7 +4,7 @@ import TransitionGroup from 'react-transition-group/TransitionGroup';
 import ProfilePicture from './ProfilePicture';
 import BasicInfo from './BasicInfo';
 import CrewMember from './CrewMember';
-// import Vehicles from './Vehicles';
+import Vehicles from './Vehicles';
 import ProtectedRoute from '../../Common/ProtectedRoute';
 // import Steps from './Shared/Steps';
 import FadeInRouteTransition from '../../Common/RouteTransitions/FadeInRouteTransition';
@@ -23,10 +23,10 @@ const MoverEdit = ({ location, history, match }) => {
       path: '/mover/edit/:moverId/crew-member',
       component: CrewMember
     },
-    // {
-    //   path: '/mover/edit/:moverId/vehicle',
-    //   component: Vehicles
-    // }
+    {
+      path: '/mover/edit/:moverId/vehicles',
+      component: Vehicles
+    }
   ];
 
   // const getCurrentStep = (history) => paths.findIndex((p)=>p.path === history.location.pathname);

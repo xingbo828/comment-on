@@ -60,9 +60,9 @@ const enhance = compose(
     onSubmit: (values, dispatch, props) => {
       return props.addMover(values);
     },
-    onSubmitSuccess: (result, dispatch, props) => {
+    onSubmitSuccess: (moverId, dispatch, props) => {
       props.history.push({
-        pathname: `/mover/edit/${result}/pictures`
+        pathname: `/mover/edit/${moverId}/profile-picture`
       });
     },
     validate

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import isEmpty from 'lodash/isEmpty';
-import Grid from '../../../../globalComponents/Grid';
-import { NumberField } from '../../../../globalComponents/Form';
-import { Paragraph } from '../../../../globalComponents/Typography';
+import Grid from '../../../../../globalComponents/Grid';
+import { NumberField } from '../../../../../globalComponents/Form';
+import { Paragraph } from '../../../../../globalComponents/Typography';
 import {
   InputWrapper,
   ImgWrapperInner,

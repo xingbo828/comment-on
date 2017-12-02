@@ -36,8 +36,11 @@ const enhance = compose(
     onSubmit: (values, dispatch, props) => {
       return props.updateProfilePictures(values.toJS(), props.match.params.moverId);
     },
-    onSubmitSuccess: () => {
+    onSubmitSuccess: (values, dispatch, props) => {
       message.success('Profile images saved.');
+      props.history.push({
+        pathname: `/mover/edit/${props.match.params.moverId}/crew-member`,
+      });
     }
   }),
   scrollToTopOnMount

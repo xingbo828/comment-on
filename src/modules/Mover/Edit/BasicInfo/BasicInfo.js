@@ -14,7 +14,7 @@ import { Heading } from '../../../../globalComponents/Typography';
 import Grid from '../../../../globalComponents/Grid';
 import { SERVICE_AREAS } from '../../../../constants';
 
-import BusinessHour from '../../components/BusinessHour';
+import BusinessHour from '../../Create/BusinessHour';
 
 const renderDescriptionTextArea = ({ input, ...rest }) => (
   <TextArea input={input} {...rest} rows="4" />
