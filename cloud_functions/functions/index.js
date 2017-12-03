@@ -25,6 +25,10 @@ app.get('*', (request, response) => {
 
 exports.business = functions.https.onRequest(app);
 
+const leads = require('./lead');
+
+Object.assign(exports, leads);
+
 const extractCity = (placeData) => {
     const location = {};
     if (!placeData) {
@@ -83,6 +87,13 @@ const filterByDateTime = (dateTime) => {
     });
   }
 }
+
+const getUTCStartDateTime = (dateTime) => {
+  const result = moment.utc(dateTime.date);
+  const timeArr = dateTime.time.split(',');
+  const startHour = Number(timeArr.shift());
+  return result.add(startHour, 'h').unix();
+};
 
 const businessFilters = (parameters) => {
   const filters = [filterByCity(parameters.destinationCity),
@@ -149,6 +160,7 @@ const businesses = ((request, response) => {
                 .once('value')
         })
         .then((value) => {
+            const avgPrice = determinePrice();
             const businessData = value.val();
             if (!businessData) {
                 return response.json([]);
@@ -157,7 +169,7 @@ const businesses = ((request, response) => {
                 .map((businessId) => {
                     const result = businessData[businessId];
                     result.id = businessId;
-                    result.price = determinePrice();
+                    result.price = avgPrice;
                     return result;
                 });
             if (destinationCity || dateTime) {
@@ -170,7 +182,24 @@ const businesses = ((request, response) => {
                     return filters(business);
                 });
             }
-
-            response.json(businesses);
-        })
+            const promiseArr = businesses.map((business) => {
+              return googleMapsClient.directions({
+                origin: business.businessAddr1 + ',' + business.businessAddrCity + ',' + business.businessAddrProv,
+                destination: 'place_id:' + origin,
+                arrival_time: getUTCStartDateTime(dateTime)
+              }).asPromise()
+              .then((direction) => {
+                business.travelTime = direction.json.routes[0].legs[0].duration.value;
+                business.price += (business.travelTime/3600) * 100;
+                business.price = Number(Math.round(business.price+'e2')+'e-2');
+                return business;
+              });
+            });
+            return Promise.all(promiseArr);
+        }).then((businesses) => {
+            console.log(businesses);
+            return response.json(businesses);
+        }).catch((err) => {
+          console.log(err);
+        });
 });
