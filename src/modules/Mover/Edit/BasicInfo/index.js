@@ -7,6 +7,53 @@ import { getMover, updateBasicInfo } from '../../moverAction';
 import { getProfile } from '../../Profile/profileReducers';
 import message from '../../../../globalComponents/Message';
 import scrollToTopOnMount from '../../../Common/scrollToTopOnMount';
+import validators, { validateFunc } from '../../../Common/validators';
+
+const validate = validateFunc(
+  [
+    {
+      field: 'businessName',
+      validator: 'isRequired',
+      message: 'Required'
+    },
+    {
+      field: 'businessAddrCity',
+      validator: 'isRequired',
+      message: 'Required'
+    },
+    {
+      field: 'businessAddrProv',
+      validator: 'isRequired',
+      message: 'Required'
+    },
+    {
+      field: 'businessAddrPostalCode',
+      validator: 'isRequired',
+      message: 'Required'
+    },
+    {
+      field: 'businessPhoneNumber',
+      validator: 'isValidPhoneNumber',
+      message: 'Invalid phone number'
+    },
+    {
+      field: 'businessHour',
+      validator: 'isNotEmpty',
+      message: 'Invalid business hours'
+    },
+    {
+      field: 'businessEmail',
+      validator: 'isValidEmail',
+      message: 'Invalid business email'
+    },
+    {
+      field: 'businessServiceArea',
+      validator: 'isNotEmpty',
+      message: 'Business service area cannot be empty'
+    }
+  ],
+  validators
+);
 
 
 const mapDispatchToProps = dispatch => ({
@@ -40,6 +87,7 @@ const enhance = compose(
   branch(isLoading, renderNothing),
   reduxForm({
     form: 'mover.edit.basicInfo',
+    validate,
     onSubmit: (values, dispatch, props) => {
       return props.updateBasicInfo(values.toJS(), props.match.params.moverId);
     },

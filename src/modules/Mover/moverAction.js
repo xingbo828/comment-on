@@ -33,17 +33,24 @@ export const addMover = moverInfo => async dispatch => {
   try {
     moverInfo = moverInfo.toJS();
     const uid = auth.currentUser.uid;
+    const rawUserData = await database.ref('users/' + uid).once('value');
+    // If mover account already exist
+    const userData = rawUserData.toJSON();
+    if(userData && userData.moverId) {
+      return Promise.reject({
+        message: 'Already have mover account registered.'
+      });
+    }
     moverInfo.owner = uid;
     const moverId = moverDbRef.push().key;
-
     // Create mover
     const moverRef = moverDbRef.child(moverId);
     await moverRef.set(moverInfo);
     // Update user with mover id
     await updateUserMoverRef(moverId, uid)(dispatch);
     return moverId;
-  } catch (err) {
-    console.log(err);
+  } catch(error) {
+    console.log(error);
   }
 };
 

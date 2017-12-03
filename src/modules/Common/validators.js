@@ -3,7 +3,8 @@ import moment from 'moment';
 export const isRequired = value => !(typeof value === 'string' ? !value.trim() : !value);
 
 // need more logic
-export const isValidBusinessHours = value => Array.isArray(value) ? value.length > 0 : false;
+export const isNotEmpty = value => Array.isArray(value) ? value.length > 0 : false;
+
 
 export const isValidEmail = value => {
   const formattedValue = value ? value.trim() : '';
@@ -50,7 +51,7 @@ const validators = {
   isRequired,
   isValidEmail,
   isValidBirthDate,
-  isValidBusinessHours,
+  isNotEmpty,
   isValidPhoneNumber,
   isValidPostalCode,
   isValidAddressesInput
