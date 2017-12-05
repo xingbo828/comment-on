@@ -4,7 +4,7 @@ import {
   Button,
   TextField,
   TextArea,
-  Checkbox
+  // Checkbox
 } from '../../../../globalComponents/Form';
 import Icon from '../../../../globalComponents/Icon';
 import Layout from '../../../../globalComponents/Layout';
@@ -12,7 +12,7 @@ import { Heading } from '../../../../globalComponents/Typography';
 
 
 import Grid from '../../../../globalComponents/Grid';
-import { SERVICE_AREAS } from '../../../../constants';
+// import { SERVICE_AREAS } from '../../../../constants';
 
 import BusinessHour from '../../Create/BusinessHour';
 
@@ -25,18 +25,18 @@ const renderBusinessHour = ({ input, ...rest }) => {
   return <BusinessHour value={pureValue} onChange={input.onChange} {...rest} />;
 };
 
-const renderBusinessServiceAreas = ({ input, ...rest }) => {
-  const pureValue = (input.value.toJS && input.value.toJS()) || input.value;
-  return (
-    <Checkbox.CheckboxGroup
-      name={input.name}
-      value={pureValue}
-      onChange={input.onChange}
-      {...rest}
-      label="Service Areas"
-    />
-  );
-};
+// const renderBusinessServiceAreas = ({ input, ...rest }) => {
+//   const pureValue = (input.value.toJS && input.value.toJS()) || input.value;
+//   return (
+//     <Checkbox.CheckboxGroup
+//       name={input.name}
+//       value={pureValue}
+//       onChange={input.onChange}
+//       {...rest}
+//       label="Service Areas"
+//     />
+//   );
+// };
 
 const { Container, Row, Col } = Grid;
 
@@ -143,7 +143,7 @@ const BasicInfo = ({ handleSkip, handleSubmit, pristine, reset, valid, submittin
             />
           </Col>
         </Row>
-        <Row>
+        {/* <Row>
           <Col xs={24} sm={24} md={24} lg={24}>
             <Field
               component={renderBusinessServiceAreas}
@@ -158,7 +158,7 @@ const BasicInfo = ({ handleSkip, handleSubmit, pristine, reset, valid, submittin
               ))}
             </Field>
           </Col>
-        </Row>
+        </Row> */}
         <Row>
           <Col xs={24} sm={24} md={24} lg={24}>
             <Field

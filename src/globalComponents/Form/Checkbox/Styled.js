@@ -20,12 +20,13 @@ export const CheckboxList = styled.div`
   width: 100%;
   font-size: 1rem;
   padding: 1rem 0;
+  flex-wrap: wrap;
   outline: none;
 `;
 
 export const CheckboxContainer = styled.label`
   display: flex;
-  padding-right: 20px;
+  padding: ${props=>props.theme.spaces.tight} ${props=>props.theme.spaces.base} ${props=>props.theme.spaces.tight} 0;
   cursor: pointer;
   line-height: 20px;
 `;

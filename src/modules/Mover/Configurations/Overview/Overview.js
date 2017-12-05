@@ -77,7 +77,7 @@ const ConfigurationOverview = ({
           <Heading wrapperTag="h2" size="sm">
             Addresses
           </Heading>
-          <SectionHeaderEditLink to="/mover/configurations/address">
+          <SectionHeaderEditLink to={{pathname:"/mover/configurations/address", fromOverview: true}}>
             Edit
           </SectionHeaderEditLink>
         </SectionHeader>
@@ -128,7 +128,7 @@ const ConfigurationOverview = ({
           <Heading wrapperTag="h2" size="sm">
             Date & Time
           </Heading>
-          <SectionHeaderEditLink to="/mover/configurations/date">
+          <SectionHeaderEditLink to={{pathname:"/mover/configurations/date", fromOverview: true}}>
             Edit
           </SectionHeaderEditLink>
         </SectionHeader>
@@ -184,7 +184,7 @@ const ConfigurationOverview = ({
           <Heading wrapperTag="h2" size="sm">
             Logistics
           </Heading>
-          <SectionHeaderEditLink to="/mover/configurations/logistics">
+          <SectionHeaderEditLink to={{pathname:"/mover/configurations/logistics", fromOverview: true}}>
             Edit
           </SectionHeaderEditLink>
         </SectionHeader>
@@ -232,7 +232,7 @@ const ConfigurationOverview = ({
           <Heading wrapperTag="h2" size="sm">
             Items
           </Heading>
-          <SectionHeaderEditLink to="/mover/configurations/items">
+          <SectionHeaderEditLink to={{pathname:"/mover/configurations/items", fromOverview: true}}>
             Edit
           </SectionHeaderEditLink>
         </SectionHeader>

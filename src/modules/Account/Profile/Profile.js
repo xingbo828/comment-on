@@ -16,17 +16,20 @@ const Profile = ({
   valid,
   submitting,
   sendEmailConfirmation,
-  initialValues
+  initialValues,
+  currentEmailValue
 }) => {
+
   const sendConfirmationEmail = e => {
     e.preventDefault();
     sendEmailConfirmation();
   };
-  const renderEmailSection = isEmailVerified => {
-    if (!isEmailVerified) {
+
+  const renderEmailSection = (isEmailVerified, email) => {
+    if (!isEmailVerified && email && (currentEmailValue===email)) {
       return (
         <Button ghost onClick={sendConfirmationEmail}>
-          Re-send confirmation Email <Icon icon="envelope" />
+          Re-send verification Email to {email} <Icon icon="envelope" />
         </Button>
       );
     }
@@ -52,7 +55,7 @@ const Profile = ({
             name="email"
             label="Email"
           />
-          {renderEmailSection(initialValues.get('emailVerified'))}
+          {renderEmailSection(initialValues.get('emailVerified'), initialValues.get('email'))}
         </FormInner>
         <FormActions>
           <Button
