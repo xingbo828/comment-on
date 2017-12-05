@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Tabs from '../../../../../globalComponents/Tabs';
+import Icon from '../../../../../globalComponents/Icon'
 import NewMemberForm from './NewMemberForm';
 import EditMember from './EditMember';
 import mapImmutablePropsToPlainProps from '../../../../Common/mapImmutablePropsToPlainProps'
-import {NewMemberHeader} from './Styles';
 
 const TabPanel = Tabs.TabPanel;
 
@@ -64,7 +64,7 @@ class CrewmemberManagement extends Component {
                 />
               </TabPanel>
             ))}
-            <TabPanel header={<NewMemberHeader> new member</NewMemberHeader>} panelKey="new-member">
+            <TabPanel header={<span><Icon icon="user-plus" /> New member</span>} panelKey="new-member">
               <NewMemberForm addNewMember={this.addNewMember}/>
             </TabPanel>
           </Tabs>

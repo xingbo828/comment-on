@@ -9,11 +9,15 @@ export const TabBar = styled.ul`
   padding: 0;
   margin: 0;
   border-bottom: 1px solid ${props => props.theme.colors.border};
+  flex-wrap: wrap;
 `;
 
 export const TabBarLinkContainer = styled.li`
   list-style: none;
-  padding: 10px 15px;
+  padding: ${props=>props.theme.spaces.tight} ${props=>props.theme.spaces.base};
+  ${props=>props.theme.media.greaterThan('md')`
+    padding: ${props=>props.theme.spaces.base} ${props=>props.theme.spaces.wide};
+  `}
   position: relative;
   cursor: pointer;
   ${props => {

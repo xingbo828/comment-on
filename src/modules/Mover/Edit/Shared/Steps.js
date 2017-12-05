@@ -11,7 +11,7 @@ const MoverEditSteps = ({current, history, moverId}) => {
   };
 
   return (
-    <Steps current={current}>
+    <Steps current={current} mode="free">
 
       <Step
         title="basic profile"

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose, lifecycle } from 'recompose';
-import { reduxForm } from 'redux-form/immutable';
+import { reduxForm, formValues } from 'redux-form/immutable';
 import Profile from './Profile';
 import {
   updateProfile,
@@ -17,6 +17,7 @@ const mapStateToProps = state => ({
   initialValues: getUser(state).user,
   isEmailConfirmationVisible: getEmailConfirmationVisible(state)
 });
+
 
 const mapDispatchToProps = dispatch => ({
   updateProfile: profile => dispatch(updateProfile(profile)),
@@ -63,8 +64,12 @@ const enhance = compose(
     validate,
     onSubmitSuccess: (values, dispatch, props) => {
       message.success(`Account profile successfully updated.`);
+    },
+    onSubmitFail: (submitErr, dispatch, error) => {
+      message.error(error.message, 0);
     }
-  })
+  }),
+  formValues({'currentEmailValue': 'email'})
 );
 
 export default enhance(Profile);

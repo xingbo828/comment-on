@@ -4,12 +4,12 @@ import {
   Button,
   TextField,
   TextArea,
-  Checkbox
+  // Checkbox
 } from '../../../globalComponents/Form';
 import Layout from '../../../globalComponents/Layout';
 
 import Grid from '../../../globalComponents/Grid';
-import { SERVICE_AREAS } from '../../../constants';
+// import { SERVICE_AREAS } from '../../../constants';
 
 import BusinessHour from './BusinessHour';
 import { Heading, Paragraph } from '../../../globalComponents/Typography';
@@ -24,17 +24,17 @@ const renderBusinessHour = ({ input, ...rest }) => (
   <BusinessHour value={input.value || []} onChange={input.onChange} {...rest} />
 );
 
-const renderBusinessServiceAreas = ({ input, ...rest }) => {
-  return (
-    <Checkbox.CheckboxGroup
-      value={input.value || []}
-      onChange={input.onChange}
-      name={input.name}
-      label="Service Areas"
-      {...rest}
-    />
-  );
-};
+// const renderBusinessServiceAreas = ({ input, ...rest }) => {
+//   return (
+//     <Checkbox.CheckboxGroup
+//       value={input.value || []}
+//       onChange={input.onChange}
+//       name={input.name}
+//       label="Service Areas"
+//       {...rest}
+//     />
+//   );
+// };
 
 const { Container, Row, Col } = Grid;
 const Creation = ({
@@ -133,7 +133,7 @@ const Creation = ({
             />
 
 
-            <Field
+            {/* <Field
               component={renderBusinessServiceAreas}
               name="businessServiceArea"
             >
@@ -144,7 +144,7 @@ const Creation = ({
                   label={s.label}
                 />
               ))}
-            </Field>
+            </Field> */}
 
 
             <Field

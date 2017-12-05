@@ -60,6 +60,11 @@ const enhance = compose(
       return localSaveLogistics(values.toJS());
     },
     onSubmitSuccess: async (result, dispatch, props) => {
+      if(props.location.fromOverview) {
+        return props.history.push({
+          pathname: '/mover/configurations/overview'
+        });
+      }
       props.history.push({
         pathname: '/mover/configurations/items',
         state: props.location.state

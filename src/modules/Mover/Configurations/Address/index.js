@@ -55,6 +55,11 @@ const enhance = compose(
       });
     },
     onSubmitSuccess: (result, dispatch, props) => {
+      if(props.location.fromOverview) {
+        return props.history.push({
+          pathname: '/mover/configurations/overview'
+        });
+      }
       props.history.push({
         pathname: '/mover/configurations/date',
         state: props.location.state

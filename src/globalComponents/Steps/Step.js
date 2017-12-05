@@ -9,26 +9,26 @@ import {
   StepDot
 } from './Styled';
 
-const Step = ({ index, title, status, onStepClick, ...rest }) => {
+const Step = ({ index, title, status, mode, onStepClick, ...rest }) => {
   const renderContent = title => {
     return (
       <StepLabel>
-        <StepSeperatorWrapper>
+        {mode==='guided' && <StepSeperatorWrapper>
           {status === 'completed' ? <Icon icon="check" /> : `${index + 1}`}
-        </StepSeperatorWrapper>
-        <StepDot completed={status==='completed'}/>
+        </StepSeperatorWrapper>}
+        {mode==='guided' && <StepDot completed={status==='completed'}/>}
         {title}
       </StepLabel>
     );
   };
 
   const handleClick = e => {
-    if (status === 'completed') {
+    if (status === 'completed' || (mode==='free' && status !=='inProgress')) {
       onStepClick(e);
     }
   };
   return (
-    <StepContainer status={status} onClick={handleClick}>
+    <StepContainer status={status} mode={mode} onClick={handleClick}>
       {renderContent(title)}
       <StepHighLightBar status={status} />
     </StepContainer>
