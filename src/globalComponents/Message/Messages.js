@@ -21,7 +21,7 @@ class Messages extends Component {
       const messages = previousState.messages;
       if (!messages.filter(v => v.key === key).length) {
         return {
-          messages: messages.concat(message),
+          messages: messages.concat(message)
         };
       }
     });
@@ -31,8 +31,8 @@ class Messages extends Component {
   removeMessage(messagekey) {
     this.setState(previousState => {
       return {
-        messages:  previousState.messages.filter( m=> m.key !== messagekey)
-      }
+        messages: previousState.messages.filter(m => m.key !== messagekey)
+      };
     });
   }
 
@@ -40,9 +40,18 @@ class Messages extends Component {
     return messages.map(m => {
       return (
         <MessageTransition key={m.key} unmountOnExit>
-          {() => <Message removeMessage={this.removeMessage.bind(this, m.key)} key={m.key} content={m.content} type={m.type} duration={m.duration} />}
+          {() => (
+            <Message
+              removeMessage={this.removeMessage.bind(this, m.key)}
+              key={m.key}
+              content={m.content}
+              type={m.type}
+              duration={m.duration}
+              onRemove={m.onRemove}
+            />
+          )}
         </MessageTransition>
-        );
+      );
     });
   }
 
@@ -58,5 +67,3 @@ class Messages extends Component {
 }
 
 export default Messages;
-
-

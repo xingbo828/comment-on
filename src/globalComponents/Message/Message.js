@@ -33,6 +33,9 @@ class Message extends Component {
     if(this.removeRef) {
       clearTimeout(this.removeRef);
     }
+    if(this.props.onRemove && typeof this.props.onRemove === 'function') {
+        this.props.onRemove(this);
+    }
     this.props.removeMessage();
   }
 

@@ -174,7 +174,7 @@ const BasicInfo = ({ handleSkip, handleSubmit, pristine, reset, valid, submittin
             style={{ float: 'right', marginLeft: '1rem' }}
             type="submit"
             primary
-            disabled={submitting || !valid}
+            disabled={submitting || pristine || !valid}
           >
            Update <Icon icon="pencil" />
           </Button>

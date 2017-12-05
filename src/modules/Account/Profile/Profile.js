@@ -7,11 +7,33 @@ import Layout from '../../../globalComponents/Layout';
 import { Heading } from '../../../globalComponents/Typography';
 
 const { Form, FormActions, FormHeading, FormInner } = Layout.Form;
+const { Container } = Grid;
 
-const Profile = ({ handleSubmit, pristine, reset, valid, submitting }) => {
+const Profile = ({
+  handleSubmit,
+  pristine,
+  reset,
+  valid,
+  submitting,
+  sendEmailConfirmation,
+  initialValues
+}) => {
+  const sendConfirmationEmail = e => {
+    e.preventDefault();
+    sendEmailConfirmation();
+  };
+  const renderEmailSection = isEmailVerified => {
+    if (!isEmailVerified) {
+      return (
+        <Button ghost onClick={sendConfirmationEmail}>
+          Re-send confirmation Email <Icon icon="envelope" />
+        </Button>
+      );
+    }
+  };
 
   return (
-    <Grid.Container>
+    <Container>
       <FormHeading>
         <Heading wrapperTag="h1">Account Profile</Heading>
       </FormHeading>
@@ -30,20 +52,20 @@ const Profile = ({ handleSubmit, pristine, reset, valid, submitting }) => {
             name="email"
             label="Email"
           />
-
+          {renderEmailSection(initialValues.get('emailVerified'))}
         </FormInner>
         <FormActions>
           <Button
             style={{ float: 'right' }}
             type="submit"
             primary
-            disabled={submitting || !valid}
+            disabled={submitting || pristine || !valid}
           >
-           Update <Icon icon="pencil" />
+            Update <Icon icon="pencil" />
           </Button>
         </FormActions>
       </Form>
-    </Grid.Container>
+    </Container>
   );
 };
 

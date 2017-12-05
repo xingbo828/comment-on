@@ -70,7 +70,7 @@ const ProfilePicture = ({
             style={{ float: 'right', marginLeft: '1rem' }}
             type="submit"
             primary
-            disabled={submitting || !valid}
+            disabled={submitting || pristine || !valid}
           >
             Update <Icon icon={submitting ? 'refresh' : 'pencil'} spin={submitting}/>
           </Button>

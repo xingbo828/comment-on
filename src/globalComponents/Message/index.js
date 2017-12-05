@@ -11,39 +11,43 @@ document.body.appendChild(container);
 const messages = ReactDOM.render(<Messages />, container);
 
 
-const success = (content, duration = defaultDuration) => {
+const success = (content, duration = defaultDuration, onRemove) => {
   return messages.addMessage({
     key: seed++,
     type: 'success',
     duration,
-    content
+    content,
+    onRemove
   });
 }
 
-const info = (content, duration = defaultDuration) => {
+const info = (content, duration = defaultDuration, onRemove) => {
   return messages.addMessage({
     key: seed++,
     type: 'info',
     duration,
-    content
+    content,
+    onRemove
   });
 }
 
-const error = (content, duration = defaultDuration) => {
+const error = (content, duration = defaultDuration, onRemove) => {
   return messages.addMessage({
     key: seed++,
     type: 'error',
     duration,
-    content
+    content,
+    onRemove
   });
 }
 
-const loading = (content) => {
+const loading = (content, onRemove) => {
   return messages.addMessage({
     key: seed++,
     type: 'loading',
     duration: 0,
-    content
+    content,
+    onRemove
   });
 }
 

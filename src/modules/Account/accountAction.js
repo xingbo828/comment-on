@@ -2,19 +2,20 @@ import { auth, database } from '../../firebaseClient';
 const userDbRef = database.ref().child('users');
 
 export const UPDATE_PROFILE = 'UPDATE_PROFILE';
+export const EMAIL_CONFIRMATION = 'EMAIL_CONFIRMATION';
 
-const _updateUserEmail = (user, updatedEmail) => {
+const _updateUserEmail = (user, updatedEmail) => async dispatch => {
   if(!!updatedEmail && user.email !== updatedEmail) {
-    return user.updateEmail(updatedEmail);
+    await user.updateEmail(updatedEmail)
+    sendEmailConfirmation()(dispatch);
   }
-  return Promise.resolve(true);
 };
 
 export const updateProfile = immuProfile => (dispatch) => {
   const user = auth.currentUser;
   const profile = immuProfile.toJS();
   return user.updateProfile(profile)
-  .then(() => _updateUserEmail(user, profile.email))
+  .then(() => _updateUserEmail(user, profile.email)(dispatch))
   .then(() => {
     dispatch({
       type: UPDATE_PROFILE,
@@ -23,6 +24,22 @@ export const updateProfile = immuProfile => (dispatch) => {
     return profile;
   }).catch((error) => {
     console.log(error);
+  });
+};
+
+export const sendEmailConfirmation = () => async (dispatch) => {
+  const user = auth.currentUser;
+  await user.sendEmailVerification();
+  dispatch({
+    type: EMAIL_CONFIRMATION,
+    data: true
+  });
+};
+
+export const dismissEmailConfirmation = () => dispatch => {
+  dispatch({
+    type: EMAIL_CONFIRMATION,
+    data: false
   });
 };
 
