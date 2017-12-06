@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
+import { number, oneOf, oneOfType, node, string, func, array } from 'prop-types';
 import {
   StyledContainer,
-  StyledSubContainer,
   StyledImgRemove,
   StyledImgList,
   StyledImgListItem,
   StyleImg,
   StyledInput,
-  StyledUpLoadBtn,
-  InputLabel
+  StyledUpLoadBtn
 } from './Styled';
 
 class MultiImgUpload extends Component {
@@ -67,38 +66,35 @@ class MultiImgUpload extends Component {
     });
   }
 
-  renderImges(imgs) {
+  renderImges(imgs, shape, size) {
     return imgs.map((img, index) => {
       return (
         <StyledImgListItem key={index}>
-          <StyledImgRemove onClick={(e)=>{this.handleRemove(e, index)}} />
-          <StyleImg><img src={img.imageUrl} alt=""/></StyleImg>
+          <StyledImgRemove shape={shape} size={size} onClick={(e)=>{this.handleRemove(e, index)}} />
+          <StyleImg shape={shape} size={size}><img src={img.imageUrl} alt=""/></StyleImg>
         </StyledImgListItem>
       );
     });
   }
 
-  renderActionBtn(limit, actionText) {
+  renderActionBtn(limit, actionText, shape, size) {
     if ( limit!==0 && this.state.images.length >= limit){
       return null;
     }
-    return <StyledUpLoadBtn onClick={this.handleClick}>{actionText}</StyledUpLoadBtn>;
+    return <StyledUpLoadBtn shape={shape} size={size} onClick={this.handleClick}>{actionText}</StyledUpLoadBtn>;
   }
 
   render() {
-    const { input, label, actionText, limit, name } = this.props;
+    const { input, actionText, limit, name, shape, size } = this.props;
     return (
       <StyledContainer>
-        <InputLabel>{label}</InputLabel>
-        <StyledSubContainer>
           <StyledImgList>
-            {this.renderImges(this.state.images)}
+            {this.renderImges(this.state.images, shape, size)}
           </StyledImgList>
           <StyledInput>
             <input type="file" name={name} onChange={this.handleAdd} ref={(input) => { this.inputElement = input; }} />
           </StyledInput>
-          {this.renderActionBtn(limit, actionText)}
-        </StyledSubContainer>
+          {this.renderActionBtn(limit, actionText, shape, size)}
       </StyledContainer>
     );
   }
@@ -106,6 +102,19 @@ class MultiImgUpload extends Component {
 MultiImgUpload.defaultProps = {
   limit: 0,
   actionText: 'Upload',
-  images: []
+  images: [],
+  onChange: () => {},
+  shape: 'square',
+  size: 100
 };
+
+MultiImgUpload.propTypes = {
+  limit: number.isRequired,
+  actionText: oneOfType([string, node]),
+  images: array.isRequired,
+  onChange: func.isRequired,
+  shape: oneOf(['circle', 'square']),
+  size: number
+};
+
 export default MultiImgUpload;

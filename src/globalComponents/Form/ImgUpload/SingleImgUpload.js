@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import {
+  oneOfType,
+  oneOf,
+  node,
+  string,
+  func,
+  object,
+  number
+} from 'prop-types';
+import {
   StyledContainer,
-  StyledSubContainer,
-  InputLabel,
   StyleImg,
   StyleImgReplace,
   StyledInput,
@@ -17,7 +24,7 @@ class SingleImageUpload extends Component {
     this.getInputValue = this.getInputValue.bind(this);
 
     this.state = {
-      imageUrl: this.getInputValue(this.props.input.value),
+      imageUrl: this.getInputValue(this.props.value),
       touched: false
     };
     this.getBase64 = this.getBase64.bind(this);
@@ -35,16 +42,16 @@ class SingleImageUpload extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.input.value !== nextProps.input.value && !this.state.touched) {
+    if (this.props.value !== nextProps.value && !this.state.touched) {
       this.state = {
-        imageUrl: this.getInputValue(nextProps.input.value)
+        imageUrl: this.getInputValue(nextProps.value)
       };
     }
   }
 
   getInputValue(value) {
-    if(value && value.constructor.name === 'File') {
-      const updateImageUrlInState = (imgData) => {
+    if (value && value.constructor.name === 'File') {
+      const updateImageUrlInState = imgData => {
         this.setState({
           imageUrl: imgData
         });
@@ -57,35 +64,77 @@ class SingleImageUpload extends Component {
 
   handleOnChange(event) {
     const img = event.target.files[0];
-    const updateImageUrlInState = (imgData) => {
+    const updateImageUrlInState = imgData => {
       this.setState({
         imageUrl: imgData,
         touched: true
       });
-      this.props.input.onChange(img);
+      this.props.onChange(img);
     };
-    if(!img) {
+    if (!img) {
       return;
     }
     this.getBase64(img, updateImageUrlInState.bind(this));
   }
 
   render() {
-    const { input, label, actionText } = this.props;
+    const { name, actionText, shape, size, style } = this.props;
     return (
-      <StyledContainer>
-        <InputLabel>{label}</InputLabel>
-        <StyledSubContainer>
-          {this.state.imageUrl && <StyleImg><img src={this.state.imageUrl} alt={input.name} /></StyleImg>}
-          {this.state.imageUrl && <StyleImgReplace onClick={this.handleClick} />}
+      <StyledContainer style={style}>
+          {this.state.imageUrl && (
+            <StyleImg shape={shape} size={size}>
+              <img src={this.state.imageUrl} alt={name} />
+            </StyleImg>
+          )}
+          {this.state.imageUrl && (
+            <StyleImgReplace
+              shape={shape}
+              size={size}
+              onClick={this.handleClick}
+            />
+          )}
           <StyledInput>
-            <input type="file" name={input.name} onChange={this.handleOnChange} ref={(input) => { this.inputElement = input; }} />
+            <input
+              type="file"
+              name={name}
+              onChange={this.handleOnChange}
+              ref={input => {
+                this.inputElement = input;
+              }}
+            />
           </StyledInput>
-          {!this.state.imageUrl && <StyledUpLoadBtn onClick={this.handleClick}>{actionText}</StyledUpLoadBtn>}
-        </StyledSubContainer>
+          {!this.state.imageUrl && (
+            <StyledUpLoadBtn
+              shape={shape}
+              size={size}
+              onClick={this.handleClick}
+            >
+              {actionText}
+            </StyledUpLoadBtn>
+          )}
       </StyledContainer>
     );
   }
+}
+
+SingleImageUpload.propTypes = {
+  value: oneOfType([object, string]),
+  onChange: func.isRequired,
+  name: string,
+  actionText: oneOfType([node, string]),
+  shape: oneOf(['circle', 'square']),
+  size: number,
+  style: object
+};
+
+SingleImageUpload.defaultProps = {
+  actionText: 'Upload',
+  onChange: () => {},
+  value: '',
+  name: '',
+  shape: 'square',
+  size: 100,
+  style: {}
 };
 
 export default SingleImageUpload;
