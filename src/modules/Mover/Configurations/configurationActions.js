@@ -128,3 +128,28 @@ export const loadLogistics = () => async dispatch => {
   });
 };
 
+
+// Overview
+export const SET_ADDITIONAL_NOTES = 'SET_ADDITIONAL_NOTES';
+export const GET_ADDITIONAL_NOTES = 'GET_ADDITIONAL_NOTES'
+
+export const getAdditionalNotes = () => async dispatch => {
+  const stepInfo = await localforge.getItem(LOCALSTOREAGE_STEP_INFO_KEY);
+  const additionalNotes = stepInfo && stepInfo.additionalNotes || '';
+  dispatch({
+    type: GET_ADDITIONAL_NOTES,
+    data: additionalNotes
+  });
+};
+
+export const setAdditionalNotes = (additionalNotes) => async dispatch => {
+  const stepInfo = await localforge.getItem(LOCALSTOREAGE_STEP_INFO_KEY);
+  await localforge.setItem(
+    LOCALSTOREAGE_STEP_INFO_KEY,
+    Object.assign(stepInfo || {}, { additionalNotes })
+  );
+  dispatch({
+    type: GET_ADDITIONAL_NOTES,
+    data: additionalNotes
+  });
+};

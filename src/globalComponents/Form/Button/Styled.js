@@ -135,6 +135,7 @@ export const StyledButton = styled.button`
     }
   }
   &:active {
+    transition: .1s;
     transform: translateY(3px);
   }
 `;
