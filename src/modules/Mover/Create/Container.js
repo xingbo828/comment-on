@@ -64,11 +64,11 @@ const enhance = compose(
   reduxForm({
     form: 'mover.create',
     onSubmit: (values, dispatch, props) => {
-      return props.addMover(values);
+      return props.addMover(values.toJS());
     },
     onSubmitSuccess: (moverId, dispatch, props) => {
       props.history.push({
-        pathname: `/mover/edit/${moverId}/profile-picture`
+        pathname: `/mover/edit/${moverId}/crew-member`
       });
     },
     onSubmitFail: (errors, dispatch, submitError) => {

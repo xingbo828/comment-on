@@ -4,6 +4,8 @@ import {
   Button,
   TextField,
   TextArea,
+  ImgUpload,
+  Label
   // Checkbox
 } from '../../../../globalComponents/Form';
 import Icon from '../../../../globalComponents/Icon';
@@ -16,9 +18,25 @@ import Grid from '../../../../globalComponents/Grid';
 
 import BusinessHour from '../../Create/BusinessHour';
 
+const SingleImgUpload = ImgUpload.SingleImgUpload;
+
 const renderDescriptionTextArea = ({ input, ...rest }) => (
   <TextArea input={input} {...rest} rows="4" />
 );
+
+const renderLogo = ({ input, ...rest }) => {
+  return (
+    <div style={{padding: '1rem 0'}}>
+      <Label style={{paddingBottom: '1rem'}} htmlFor={input.name}>Business Logo</Label>
+      <SingleImgUpload
+        value={input.value}
+        onChange={input.onChange}
+        {...rest}
+        actionText={<Icon icon="upload" size="lg" />}
+      />
+    </div>
+  );
+};
 
 const renderBusinessHour = ({ input, ...rest }) => {
   const pureValue = (input.value.toJS && input.value.toJS()) || input.value;
@@ -50,8 +68,6 @@ const BasicInfo = ({ handleSkip, handleSubmit, pristine, reset, valid, submittin
       </FormHeading>
       <Form onSubmit={handleSubmit}>
       <FormInner>
-        <Row>
-          <Col xs={24} sm={24} md={24} lg={24}>
             <Field
               component={TextField}
               type="text"
@@ -59,10 +75,7 @@ const BasicInfo = ({ handleSkip, handleSubmit, pristine, reset, valid, submittin
               label="Business Name"
               placeholder="My great moving company"
             />
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={24} sm={24} md={24} lg={24}>
+        <Field component={renderLogo} name="logo" label="Business Logo" />
             <Field
               component={TextField}
               type="text"
@@ -70,10 +83,6 @@ const BasicInfo = ({ handleSkip, handleSubmit, pristine, reset, valid, submittin
               label="Address 1"
               placeholder="123 Main St"
             />
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={24} sm={24} md={24} lg={24}>
             <Field
               component={TextField}
               type="text"
@@ -81,8 +90,6 @@ const BasicInfo = ({ handleSkip, handleSubmit, pristine, reset, valid, submittin
               label="Address 2"
               placeholder="Ste 200"
             />
-          </Col>
-        </Row>
         <Row>
           <Col xs={24} sm={24} md={10} lg={10}>
             <Field
@@ -112,8 +119,6 @@ const BasicInfo = ({ handleSkip, handleSubmit, pristine, reset, valid, submittin
             />
           </Col>
         </Row>
-        <Row>
-          <Col xs={24} sm={24} md={24} lg={24}>
             <Field
               component={TextField}
               type="tel"
@@ -121,10 +126,6 @@ const BasicInfo = ({ handleSkip, handleSubmit, pristine, reset, valid, submittin
               label="Business Phone Number"
               placeholder="(555)555-5555"
             />
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={24} sm={24} md={24} lg={24}>
             <Field
               component={TextField}
               type="email"
@@ -132,17 +133,11 @@ const BasicInfo = ({ handleSkip, handleSubmit, pristine, reset, valid, submittin
               label="Business Email Address"
               placeholder="xyz@email.com"
             />
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={24} sm={24} md={24} lg={24}>
             <Field
               component={renderDescriptionTextArea}
               name="businessDescription"
               label="Description"
             />
-          </Col>
-        </Row>
         {/* <Row>
           <Col xs={24} sm={24} md={24} lg={24}>
             <Field
@@ -159,15 +154,11 @@ const BasicInfo = ({ handleSkip, handleSubmit, pristine, reset, valid, submittin
             </Field>
           </Col>
         </Row> */}
-        <Row>
-          <Col xs={24} sm={24} md={24} lg={24}>
             <Field
               component={renderBusinessHour}
               name="businessHour"
               label="Business hours"
             />
-          </Col>
-        </Row>
         </FormInner>
         <FormActions>
         <Button
@@ -176,7 +167,7 @@ const BasicInfo = ({ handleSkip, handleSubmit, pristine, reset, valid, submittin
             primary
             disabled={submitting || pristine || !valid}
           >
-           Update <Icon icon="pencil" />
+           Update <Icon icon={submitting ? 'refresh' : 'pencil'} spin={submitting} />
           </Button>
         <Button
             style={{ float: 'right' }}

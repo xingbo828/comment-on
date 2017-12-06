@@ -35,7 +35,7 @@ const Profile = ({
             <Icon style={{color: 'red'}} icon="exclamation-triangle" /> Your email hasn't been verificated yet. Click the button below to resend the verification email to {email}.
           </Paragraph>
             <Button ghost small onClick={sendConfirmationEmail}>
-              Re-send <Icon icon="envelope" />
+              Send <Icon icon="envelope" />
             </Button>
         </div>
       );
@@ -81,7 +81,7 @@ const Profile = ({
             primary
             disabled={submitting || pristine || !valid}
           >
-            Update <Icon icon="pencil" />
+            Update <Icon icon={submitting ? 'refresh' : 'pencil'} spin={submitting} />
           </Button>
         </FormActions>
       </Form>

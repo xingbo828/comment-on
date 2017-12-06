@@ -93,13 +93,13 @@ const enhance = compose(
     },
     onSubmitSuccess: (values, dispatch, props) => {
       message.success('Basic information saved.');
-      goToNextStep(props, 'profile-picture');
+      goToNextStep(props, 'crew-member');
     }
   }),
   withProps((props)=> ({
     handleSkip: (e) => {
       e.preventDefault();
-      goToNextStep(props, 'profile-picture');
+      goToNextStep(props, 'crew-member');
     }
   })),
   scrollToTopOnMount

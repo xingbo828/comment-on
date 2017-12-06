@@ -5,9 +5,6 @@ export const BusinessHourContainer = styled.div`
   margin: 0 0 1rem;
 `;
 
-export const BusinessHourHeading = styled.label`
-  font-size: 1.2rem;
-`;
 
 export const HoursSelectContainer = styled.div`
 

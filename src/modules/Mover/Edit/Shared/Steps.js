@@ -19,11 +19,6 @@ const MoverEditSteps = ({current, history, moverId}) => {
       />
 
       <Step
-        title="profile pictures"
-        onStepClick={stepClickHandler.bind(this, 'profile-picture')}
-      />
-
-      <Step
         title="crew members"
         onStepClick={stepClickHandler.bind(this, 'crew-member')}
       />

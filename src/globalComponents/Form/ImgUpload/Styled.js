@@ -76,8 +76,7 @@ export const StyleImg = styled.div`
   width: ${props=>props.size}px;
   height: ${props=>props.size}px;
   border-radius: ${props=>props.shape=== 'circle' ? '50%' : '5px'};
-  background-color: rgba(0,0,0,.1);
-  line-height: ${props=>props.size}px;
+  background-color: rgba(0,0,0,.3);
   ${props => {
     if(props.shape === 'square') {
       return `
@@ -85,12 +84,13 @@ export const StyleImg = styled.div`
       `;
     }
   }}
-  text-align: center;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   > img {
     max-width: 100%;
     max-height: 100%;
-    vertical-align: middle;
   }
 `;
 

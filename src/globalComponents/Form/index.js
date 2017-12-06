@@ -9,6 +9,7 @@ import AddressAutoComplete from './AddressAutoComplete';
 import DateTime from './DateTime';
 import Switch from './Switch';
 import Select from './Select';
+import { Label, SubLabel } from './Label';
 
 export {
   Button,
@@ -21,5 +22,7 @@ export {
   Checkbox,
   Switch,
   Select,
-  ImgUpload
+  ImgUpload,
+  Label,
+  SubLabel
 };

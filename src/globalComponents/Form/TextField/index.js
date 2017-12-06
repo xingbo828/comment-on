@@ -1,7 +1,7 @@
 import React from 'react';
+import { Label } from '../Label';
 import {
   InputContainer,
-  InputLabel,
   Input,
   FocusBorder,
   InputErrorMsg
@@ -10,9 +10,9 @@ import {
 const TextField = ({ label, type, placeholder, input, meta: { touched, error, warning }}) => {
   return (
     <InputContainer>
-      <InputLabel>
+      {label && <Label>
         {label}
-      </InputLabel>
+      </Label>}
       <Input {...input} type={type} placeholder={placeholder}/>
       <FocusBorder />
       {touched &&

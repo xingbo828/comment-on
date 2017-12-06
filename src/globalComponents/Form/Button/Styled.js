@@ -66,10 +66,10 @@ const getHoverFontColor = props => {
 const getIconSize = props => {
   if (props.small) {
     return `
-      width: 1.3rem;
-      height: 1.3rem;
-      line-height: 1.3rem;
-      font-size: .825rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      line-height: 1.5rem;
+      font-size: .9rem;
     `;
   }
   return `
@@ -84,7 +84,7 @@ const getIconSize = props => {
 const getPadding = props => {
   if (props.small) {
     return `
-      padding: 5px 5px;
+      padding: ${props.theme.spaces.tight};
       ${props.theme.media.greaterThan('md')`padding: 5px 10px;`.join('')}
     `;
   }

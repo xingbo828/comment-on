@@ -4,17 +4,21 @@ import {
   Button,
   TextField,
   TextArea,
+  ImgUpload,
+  Label
   // Checkbox
 } from '../../../globalComponents/Form';
 import Layout from '../../../globalComponents/Layout';
 
 import Grid from '../../../globalComponents/Grid';
+import Icon from '../../../globalComponents/Icon';
 // import { SERVICE_AREAS } from '../../../constants';
 
 import BusinessHour from './BusinessHour';
 import { Heading, Paragraph } from '../../../globalComponents/Typography';
 
 const { Form, FormInner, FormHeading, FormActions } = Layout.Form;
+const SingleImgUpload = ImgUpload.SingleImgUpload;
 
 const renderDescriptionTextArea = ({ input, ...rest }) => (
   <TextArea input={input} {...rest} />
@@ -23,6 +27,20 @@ const renderDescriptionTextArea = ({ input, ...rest }) => (
 const renderBusinessHour = ({ input, ...rest }) => (
   <BusinessHour value={input.value || []} onChange={input.onChange} {...rest} />
 );
+
+const renderLogo = ({ input, ...rest }) => {
+  return (
+    <div style={{padding: '1rem 0'}}>
+      <Label style={{paddingBottom: '1rem'}} htmlFor={input.name}>Business Logo</Label>
+      <SingleImgUpload
+        value={input.value}
+        onChange={input.onChange}
+        {...rest}
+        actionText={<Icon icon="upload" size="lg" />}
+      />
+    </div>
+  );
+};
 
 // const renderBusinessServiceAreas = ({ input, ...rest }) => {
 //   return (
@@ -61,6 +79,8 @@ const Creation = ({
               label="Business Name"
               placeholder="My great moving company"
             />
+
+            <Field component={renderLogo} name="logo" label="Business Logo" />
 
             <Field
               component={TextField}
@@ -160,7 +180,7 @@ const Creation = ({
             primary
             disabled={pristine || submitting || !valid}
           >
-            Submit
+            Submit <Icon icon={submitting ? 'refresh' : 'pencil'} spin={submitting} />
           </Button>
         </FormActions>
       </Form>

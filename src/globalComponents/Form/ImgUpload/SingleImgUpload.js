@@ -78,9 +78,9 @@ class SingleImageUpload extends Component {
   }
 
   render() {
-    const { name, actionText, shape, size, style } = this.props;
+    const { name, actionText, shape, size, className } = this.props;
     return (
-      <StyledContainer style={style}>
+      <StyledContainer className={className}>
           {this.state.imageUrl && (
             <StyleImg shape={shape} size={size}>
               <img src={this.state.imageUrl} alt={name} />

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Switch, withRouter } from 'react-router-dom';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
-import ProfilePicture from './ProfilePicture';
 import BasicInfo from './BasicInfo';
 import CrewMember from './CrewMember';
 import Vehicles from './Vehicles';
@@ -14,10 +13,6 @@ const MoverEdit = ({ location, history, match }) => {
     {
       path: `/mover/edit/:moverId/basic-profile`,
       component: BasicInfo
-    },
-    {
-      path: `/mover/edit/:moverId/profile-picture`,
-      component: ProfilePicture
     },
     {
       path: `/mover/edit/:moverId/crew-member`,

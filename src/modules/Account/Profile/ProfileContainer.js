@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { compose, lifecycle } from 'recompose';
+import { compose, lifecycle, shouldUpdate } from 'recompose';
 import { reduxForm, formValues } from 'redux-form/immutable';
 import Profile from './Profile';
 import {
@@ -56,10 +56,13 @@ const enhance = compose(
       }
     }
   }),
+  shouldUpdate((props, nextProps) => {
+    return props.initialValues !== nextProps.initialValues;
+  }),
   reduxForm({
     form: 'account.profile',
     onSubmit: (values, dispatch, props) => {
-      return props.updateProfile(values);
+      return props.updateProfile(values.toJS());
     },
     validate,
     onSubmitSuccess: (values, dispatch, props) => {

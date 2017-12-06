@@ -1,5 +1,6 @@
-import { auth, database } from '../../firebaseClient';
+import { auth, database, storage } from '../../firebaseClient';
 const userDbRef = database.ref().child('users');
+const storageRef = storage.ref();
 
 export const UPDATE_PROFILE = 'UPDATE_PROFILE';
 export const EMAIL_CONFIRMATION = 'EMAIL_CONFIRMATION';
@@ -12,16 +13,26 @@ const _updateUserEmail = (user, updatedEmail) => async dispatch => {
   }
 };
 
-export const updateProfile = immuProfile => async dispatch => {
-    const user = auth.currentUser;
-    const profile = immuProfile.toJS();
-    await user.updateProfile(profile);
+const _uploadProfileImg = async (img, uid) => {
+  if (typeof img === 'string') {
+    return img;
+  }
+  const profileImgRef = storageRef.child(`images/profile/${uid}/${img.name}`);
+  const result = await profileImgRef.put(img);
+  return result.downloadURL;
+};
+
+export const updateProfile = profile => async dispatch => {
+  const user = auth.currentUser;
+    const photoURL = await _uploadProfileImg(profile.photoURL, user.uid);
+    const updatedProfile = Object.assign({}, profile, { photoURL });
+    await user.updateProfile(updatedProfile);
     await _updateUserEmail(user, profile.email)(dispatch);
     dispatch({
       type: UPDATE_PROFILE,
-      data: profile
+      data: updatedProfile
     });
-    return profile;
+    return updatedProfile;
 };
 
 export const sendEmailConfirmation = () => async dispatch => {
