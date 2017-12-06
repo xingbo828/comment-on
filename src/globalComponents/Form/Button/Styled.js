@@ -84,8 +84,7 @@ const getIconSize = props => {
 const getPadding = props => {
   if (props.small) {
     return `
-      padding: ${props.theme.spaces.tight};
-      ${props.theme.media.greaterThan('md')`padding: 5px 10px;`.join('')}
+      padding: ${props.theme.spaces.tight} ${props.theme.spaces.base};
     `;
   }
   return `
@@ -102,7 +101,7 @@ export const StyledButton = styled.button`
   background-image: none;
   border: 1px solid transparent;
   white-space: nowrap;
-  width: 100%;
+  width: ${props=>props.small ? 'auto' : '100%'};
   ${props=>props.theme.media.greaterThan('md')`
     width: auto;
   `};

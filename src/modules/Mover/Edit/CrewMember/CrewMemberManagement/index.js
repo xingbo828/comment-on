@@ -4,6 +4,7 @@ import Icon from '../../../../../globalComponents/Icon'
 import NewMemberForm from './NewMemberForm';
 import EditMember from './EditMember';
 import mapImmutablePropsToPlainProps from '../../../../Common/mapImmutablePropsToPlainProps'
+import { CrewMemberContainer } from './Styles';
 
 const TabPanel = Tabs.TabPanel;
 
@@ -48,9 +49,7 @@ class CrewmemberManagement extends Component {
 
   render() {
     return (
-      <div>
-        <h2>Introduce your team</h2>
-        <div>
+      <CrewMemberContainer>
           <Tabs activeKey={this.state.activeTabKey}>
             {this.state.members.map((m, index) => (
               <TabPanel key={m.name} header={m.name} panelKey={index.toString()}>
@@ -68,8 +67,7 @@ class CrewmemberManagement extends Component {
               <NewMemberForm addNewMember={this.addNewMember}/>
             </TabPanel>
           </Tabs>
-        </div>
-      </div>
+      </CrewMemberContainer>
     );
   }
 }

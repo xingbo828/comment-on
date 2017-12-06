@@ -16,7 +16,7 @@ const DateSelectionDemo = withInfo('Date Selection')(() =>
 );
 
 
-const DateSelectionStory = storiesOf('Mover/configurations/Date/DateSelection', module)
+const DateSelectionStory = storiesOf('Mover/Configurations/Date/DateSelection', module)
 .addDecorator(withKnobs)
 .add('Usage', DateSelectionDemo);
 
