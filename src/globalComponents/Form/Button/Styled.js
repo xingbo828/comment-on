@@ -101,6 +101,7 @@ export const StyledButton = styled.button`
   background-image: none;
   border: 1px solid transparent;
   white-space: nowrap;
+
   width: ${props=>props.small ? 'auto' : '100%'};
   ${props=>props.theme.media.greaterThan('md')`
     width: auto;
@@ -132,6 +133,9 @@ export const StyledButton = styled.button`
       color: ${props=>props.disabled ? getBackColor(props) : getForeColor(props)};
       background: ${props=> props.disabled ? getForeColor(props) : getBackColor(props)};
     }
+  }
+  &:active {
+    transform: translateY(3px);
   }
 `;
 

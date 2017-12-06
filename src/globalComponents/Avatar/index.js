@@ -9,7 +9,7 @@ import {
 const Avatar = ({src, icon, size, iconSize,...rest}) => {
   const renderAvatar = ({ src, icon, size }) => {
     if(src) {
-      return <AvatarImg src={src} size={size}/>;
+      return <AvatarImg src={src} />;
     } else if(icon) {
       return <Icon size={iconSize} icon={icon} />;
     } else {

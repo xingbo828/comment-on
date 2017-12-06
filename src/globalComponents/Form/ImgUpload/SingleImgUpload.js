@@ -8,7 +8,6 @@ import {
   object,
   number
 } from 'prop-types';
-import EXIF from 'exif-js';
 import {
   StyledContainer,
   StyleImg,
@@ -16,7 +15,6 @@ import {
   StyledInput,
   StyledUpLoadBtn
 } from './Styled';
-import { setTimeout } from 'timers';
 
 class SingleImageUpload extends Component {
   constructor(props) {
@@ -27,24 +25,12 @@ class SingleImageUpload extends Component {
 
     this.state = {
       imageUrl: this.getInputValue(this.props.value),
-      orientation: 1,
       touched: false
     };
     this.getBase64 = this.getBase64.bind(this);
   }
 
   getBase64(img, callback) {
-    const self = this;
-    EXIF.getData(img, function () {
-      const orientation = EXIF(this).EXIFwrapped.exifdata.Orientation || 1;
-      if(orientation) {
-        setTimeout(() => {
-          self.setState({
-            orientation
-          });
-        }, 0);
-      }
-    });
     const reader = new FileReader();
     reader.addEventListener('load', () => callback(reader.result));
     reader.readAsDataURL(img);
@@ -91,24 +77,13 @@ class SingleImageUpload extends Component {
     this.getBase64(img, updateImageUrlInState.bind(this));
   }
 
-  calculateRotate = (orientation) => {
-    if(orientation === 1) {
-      return 'rotate(0deg)';
-    }
-    else if(orientation === 6) {
-      return 'rotate(90deg)';
-    }
-    return 'rotate(0deg)';
-  }
-
   render() {
     const { name, actionText, shape, size, className } = this.props;
-    const { orientation } = this.state;
     return (
       <StyledContainer className={className}>
           {this.state.imageUrl && (
             <StyleImg shape={shape} size={size}>
-              <img style={{transform: this.calculateRotate(orientation)}} src={this.state.imageUrl} alt={name} />
+              <img src={this.state.imageUrl} alt={name} />
             </StyleImg>
           )}
           {this.state.imageUrl && (
