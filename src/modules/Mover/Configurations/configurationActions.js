@@ -135,7 +135,7 @@ export const GET_ADDITIONAL_NOTES = 'GET_ADDITIONAL_NOTES'
 
 export const getAdditionalNotes = () => async dispatch => {
   const stepInfo = await localforge.getItem(LOCALSTOREAGE_STEP_INFO_KEY);
-  const additionalNotes = stepInfo && stepInfo.additionalNotes || '';
+  const additionalNotes = stepInfo && (stepInfo.additionalNotes || '');
   dispatch({
     type: GET_ADDITIONAL_NOTES,
     data: additionalNotes
