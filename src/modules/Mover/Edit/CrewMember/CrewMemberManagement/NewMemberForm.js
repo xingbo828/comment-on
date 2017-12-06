@@ -5,7 +5,7 @@ import {
   Button,
   ImgUpload
 } from '../../../../../globalComponents/Form';
-
+import Icon from '../../../../../globalComponents/Icon';
 
 class NewMemberForm extends Component {
   constructor(props) {
@@ -53,21 +53,24 @@ class NewMemberForm extends Component {
       value: this.state.description
     };
 
-    const avatarInput = {
-      onChange: this.updateAvatar,
-      value: null
-    };
     return (
       <div>
-        <ImgUpload.SingleImgUpload input={avatarInput} name="avatar" label="Avatar" actionText="Upload"/>
-        <TextField input={nameInput} name="name" label="Name"  />
-        <TextArea input={descInput} name="desc" label="Description"  />
-        <Button small primary onClick={this.addNewMember}>Create</Button>
+        <ImgUpload.SingleImgUpload
+          shape="circle"
+          size={120}
+          value={null}
+          onChange={this.updateAvatar}
+          name="avatar"
+          actionText={<Icon icon="upload" size="lg" />}
+        />
+        <TextField input={nameInput} name="name" label="Name" />
+        <TextArea input={descInput} name="desc" label="Description" />
+        <Button small primary onClick={this.addNewMember}>
+          Create
+        </Button>
       </div>
     );
   }
 }
-
-
 
 export default NewMemberForm;

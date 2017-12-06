@@ -4,10 +4,12 @@ import { Button, TextField } from '../../../globalComponents/Form';
 import Grid from '../../../globalComponents/Grid';
 import Icon from '../../../globalComponents/Icon';
 import Layout from '../../../globalComponents/Layout';
-import { Heading } from '../../../globalComponents/Typography';
+import { Paragraph } from '../../../globalComponents/Typography';
+import ProfilePhoto from './ProfilePhoto';
 
-const { Form, FormActions, FormHeading, FormInner } = Layout.Form;
+const { Form, FormActions, FormInner } = Layout.Form;
 const { Container } = Grid;
+
 
 const Profile = ({
   handleSubmit,
@@ -28,19 +30,34 @@ const Profile = ({
   const renderEmailSection = (isEmailVerified, email) => {
     if (!isEmailVerified && email && (currentEmailValue===email)) {
       return (
-        <Button ghost onClick={sendConfirmationEmail}>
-          Re-send verification Email to {email} <Icon icon="envelope" />
-        </Button>
+        <div>
+          <Paragraph>
+            <Icon style={{color: 'red'}} icon="exclamation-triangle" /> Your email hasn't been verificated yet. Click the button below to resend the verification email to {email}.
+          </Paragraph>
+            <Button ghost small onClick={sendConfirmationEmail}>
+              Re-send <Icon icon="envelope" />
+            </Button>
+        </div>
       );
     }
   };
 
+  const renderProfilePhoto = ({ input, ...rest }) => {
+    return (
+      <ProfilePhoto
+        value={input.value}
+        onChange={input.onChange}
+      />
+    );
+  };
+
   return (
     <Container>
-      <FormHeading>
-        <Heading wrapperTag="h1">Account Profile</Heading>
-      </FormHeading>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} style={{marginTop: 120}}>
+        <Field
+            component={renderProfilePhoto}
+            name="photoURL"
+          />
         <FormInner>
           <Field
             component={TextField}

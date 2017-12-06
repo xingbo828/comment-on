@@ -6,7 +6,6 @@ import {
   ImgUpload
 } from '../../../../../globalComponents/Form';
 
-
 class EditMember extends Component {
   constructor(props) {
     super(props);
@@ -30,7 +29,6 @@ class EditMember extends Component {
       description
     });
   }
-
 
   updateName(e) {
     this.setState({
@@ -70,22 +68,31 @@ class EditMember extends Component {
       value: this.state.description
     };
 
-    const avatarInput = {
-      onChange: this.updateAvatar,
-      value: this.state.avatar
-    };
     return (
       <div>
-        <ImgUpload.SingleImgUpload input={avatarInput} name="avatar"  />
-        <TextField input={nameInput} name="name" label="Name"  />
-        <TextArea input={descInput} name="desc" label="Description"  />
-        <Button small primary onClick={this.updateMember} style={{marginRight: '20px', marginBottom: '10px'}}>Save</Button>
-        <Button small danger onClick={this.removeMember}>Remove</Button>
+        <ImgUpload.SingleImgUpload
+          shape="circle"
+          size={120}
+          value={this.state.avatar}
+          onChange={this.updateAvatar}
+          name="avatar"
+        />
+        <TextField input={nameInput} name="name" label="Name" />
+        <TextArea input={descInput} name="desc" label="Description" />
+        <Button
+          small
+          primary
+          onClick={this.updateMember}
+          style={{ marginRight: '20px', marginBottom: '10px' }}
+        >
+          Save
+        </Button>
+        <Button small danger onClick={this.removeMember}>
+          Remove
+        </Button>
       </div>
     );
   }
 }
-
-
 
 export default EditMember;

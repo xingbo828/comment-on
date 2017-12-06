@@ -66,10 +66,10 @@ const getHoverFontColor = props => {
 const getIconSize = props => {
   if (props.small) {
     return `
-      width: 1.2rem;
-      height: 1.2rem;
-      line-height: 1.2rem;
-      font-size: 1rem;
+      width: 1.3rem;
+      height: 1.3rem;
+      line-height: 1.3rem;
+      font-size: .825rem;
     `;
   }
   return `

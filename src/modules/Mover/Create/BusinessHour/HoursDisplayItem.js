@@ -6,7 +6,7 @@ const HoursDisplayItem = ({ content, removeHours, hourIndex }) => {
   const formatTime = (time) => {
     const hour = Math.floor(time);
     const minute = (time - hour) * 60;
-    return moment().hour(time).minutes(minute).format('h:mm a');
+    return moment().hour(time).minutes(minute).format('H:mm');
   }
   const removeHandler = (e) => {
     e.preventDefault();
