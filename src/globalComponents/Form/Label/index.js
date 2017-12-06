@@ -7,7 +7,7 @@ export const Label = styled.label`
 
 export const SubLabel = styled.span`
   color: ${props=>props.theme.colors.textLight};
-  font-weight: .825rem;
+  font-size: .875rem;
   display: block;
   padding-top: ${props=>props.theme.spaces.tight};
 `;

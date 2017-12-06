@@ -2,14 +2,13 @@ import React from 'react';
 import Icon from '../Icon';
 import { string } from 'prop-types';
 import {
-  AvatarContainer,
   AvatarImg
 } from './Styles';
 
 const Avatar = ({src, icon, size, iconSize,...rest}) => {
   const renderAvatar = ({ src, icon, size }) => {
     if(src) {
-      return <AvatarImg src={src} />;
+      return <AvatarImg src={src} size={size} {...rest} />;
     } else if(icon) {
       return <Icon size={iconSize} icon={icon} />;
     } else {
@@ -17,11 +16,7 @@ const Avatar = ({src, icon, size, iconSize,...rest}) => {
     }
   };
 
-  return (
-    <AvatarContainer {...rest} size={size}>
-      {renderAvatar({src, icon, size})}
-    </AvatarContainer>
-  );
+  return renderAvatar({src, icon, size});
 };
 
 Avatar.propTypes = {

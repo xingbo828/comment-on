@@ -16,28 +16,34 @@ import {
   loadItems,
   loadDateTime,
   loadLogistics,
-  loadAddresses
+  loadAddresses,
+  setAdditionalNotes,
+  getAdditionalNotes
 } from '../configurationActions';
 
 import {
   getItems,
   getLogistics,
   getDateTime,
-  getAddresses
+  getAddresses,
+  getOverview
 } from '../configurationReducers';
 
 const mapDispatchToProps = dispatch => ({
   loadAddresses: () => dispatch(loadAddresses()),
   loadDateTime: () => dispatch(loadDateTime()),
   loadLogistics: () => dispatch(loadLogistics()),
-  loadItems: () => dispatch(loadItems())
+  loadItems: () => dispatch(loadItems()),
+  getAdditionalNotes: () => dispatch(getAdditionalNotes()),
+  setAdditionalNotes: (notes) => dispatch(setAdditionalNotes(notes)),
 });
 
 const mapStateToProps = state => ({
   addresses: getAddresses(state),
   dateTime: getDateTime(state),
   logistics: getLogistics(state),
-  items: getItems(state)
+  items: getItems(state),
+  additionalNotes: getOverview(state).get('additionalNotes')
 });
 
 const isLoading = props => {
@@ -97,12 +103,14 @@ const enhance = compose(
         loadAddresses,
         loadDateTime,
         loadLogistics,
-        loadItems
+        loadItems,
+        getAdditionalNotes
       } = this.props;
         loadAddresses();
         loadDateTime();
         loadLogistics();
         loadItems();
+        getAdditionalNotes();
     }
   }),
   branch(isLoading, renderNothing),
