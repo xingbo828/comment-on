@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { compose, lifecycle, shouldUpdate } from 'recompose';
+import { compose, lifecycle } from 'recompose';
 import { reduxForm, formValues } from 'redux-form/immutable';
 import Profile from './Profile';
 import {
@@ -56,9 +56,6 @@ const enhance = compose(
       }
     }
   }),
-  shouldUpdate((props, nextProps) => {
-    return props.initialValues !== nextProps.initialValues;
-  }),
   reduxForm({
     form: 'account.profile',
     onSubmit: (values, dispatch, props) => {
@@ -72,7 +69,8 @@ const enhance = compose(
       message.error(error.message, 0);
     }
   }),
-  formValues({'currentEmailValue': 'email'})
+  formValues({'currentEmailValue': 'email'}),
+
 );
 
 export default enhance(Profile);

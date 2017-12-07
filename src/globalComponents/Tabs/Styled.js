@@ -52,7 +52,7 @@ export const TabBarLinkInk = styled.div`
 `;
 
 export const TabPanelsContainer = styled.div`
-  padding: 10px 15px;
+
   position: relative;
 `;
 
@@ -64,6 +64,10 @@ export const TabPanelContainer = styled.div`
   position: absolute;
   transform: translateX(32px);
   visibility: hidden;
+  padding: ${props=>props.theme.spaces.tight};
+  ${props=>props.theme.media.greaterThan('md')`
+    padding: ${props=>props.theme.spaces.wide} ${props=>props.theme.spaces.base};
+  `}
   ${props => {
     if(props.isActive){
       return `

@@ -6,11 +6,22 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, text, boolean, number } from '@storybook/addon-knobs';
 import CrewMemberManagement from './';
 
-
+const member = [
+  {
+    name: 'Bo',
+    avatar: '',
+    description: 'Developer'
+  },
+  {
+    name: 'Tim',
+    avatar: '',
+    description: 'QA'
+  }
+];
 
 const CrewMemberManagementDemo = withInfo('Vehicles Info Management Component')(() =>
   <CrewMemberManagement
-    members={[]}
+    members={member}
     onUpdate={action('changed')}
   />
 );
