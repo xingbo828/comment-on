@@ -9,11 +9,15 @@ export const TabBar = styled.ul`
   padding: 0;
   margin: 0;
   border-bottom: 1px solid ${props => props.theme.colors.border};
+  flex-wrap: wrap;
 `;
 
 export const TabBarLinkContainer = styled.li`
   list-style: none;
-  padding: 10px 15px;
+  padding: ${props=>props.theme.spaces.tight} ${props=>props.theme.spaces.base};
+  ${props=>props.theme.media.greaterThan('md')`
+    padding: ${props=>props.theme.spaces.base} ${props=>props.theme.spaces.wide};
+  `}
   position: relative;
   cursor: pointer;
   ${props => {
@@ -54,8 +58,8 @@ export const TabPanelsContainer = styled.div`
 
 export const TabPanelContainer = styled.div`
   transition: .5s;
-  left: ${props=>props.theme.spaces.base};
-  right: ${props=>props.theme.spaces.base};
+  left: 0;
+  right: 0;
   opacity: 0;
   position: absolute;
   transform: translateX(32px);

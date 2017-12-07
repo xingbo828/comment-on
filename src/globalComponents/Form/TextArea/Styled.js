@@ -12,10 +12,12 @@ export const InputErrorMsg = styled.span`
 `;
 
 export const Input = styled.textarea`
+  margin: 0;
   display: block;
   width: 100%;
   border: solid ${props=>props.theme.colors.border};
   border-width: 0 0 1px 0;
+  border-radius: 0;
   font-size: 1rem;
   padding: 1rem 0;
   outline: none;

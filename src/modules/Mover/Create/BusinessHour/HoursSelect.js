@@ -53,7 +53,7 @@ class HoursSelect extends Component {
     const minute = (time - hour) * 60;
     return (
       <option key={time} value={time}>
-        {moment().hour(time).minutes(minute).format('h:mm a')}
+        {moment().hour(time).minutes(minute).format('H:mm')}
       </option>
     );
   }
@@ -66,11 +66,12 @@ class HoursSelect extends Component {
 
 
   render() {
+    const { day, startTime, endTime } = this.state;
     return (
       <HoursSelectContainer>
       <HoursSelectInner>
         <WeekDaySelect>
-          <Select name="day" value="" onChange={this.handleDayChange}>
+          <Select name="day" value={day} onChange={this.handleDayChange}>
             {weekdays.map(day =>
               <option key={day} value={day}>
                 {day[0].toUpperCase() + day.slice(1)}
@@ -80,13 +81,13 @@ class HoursSelect extends Component {
         </WeekDaySelect>
 
         <TimeSelect>
-          <Select name="startTime" value="" onChange={this.handleStartTimeChange}>
+          <Select name="startTime" value={startTime} onChange={this.handleStartTimeChange}>
             {time.map(t => this.generateTimeOption(t))}
           </Select>
         </TimeSelect>
 
         <TimeSelect>
-          <Select name="endTime" value="" onChange={this.handleEndTimeChange}>
+          <Select name="endTime" value={endTime} onChange={this.handleEndTimeChange}>
             {time.map(t => this.generateEndTimeOption(t))}
           </Select>
         </TimeSelect>

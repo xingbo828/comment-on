@@ -6,7 +6,7 @@ import startCase from 'lodash/startCase';
 import Grid from '../../../../globalComponents/Grid';
 import Layout from '../../../../globalComponents/Layout';
 import { Heading, Paragraph } from '../../../../globalComponents/Typography';
-import { Button } from '../../../../globalComponents/Form';
+import { Button, SubLabel, TextArea } from '../../../../globalComponents/Form';
 import Icon from '../../../../globalComponents/Icon';
 import PlaceIdToAddress from './PlaceIdToAddress';
 import { MOVING_SEARCH_TIME_RANGE } from '../../../../constants';
@@ -24,6 +24,8 @@ import {
 const { Form, FormActions, FormHeading, FormInner } = Layout.Form;
 
 const ConfigurationOverview = ({
+  setAdditionalNotes,
+  additionalNotes,
   addresses: rootAddresses,
   dateTime,
   logistics,
@@ -33,11 +35,10 @@ const ConfigurationOverview = ({
   goBack
 }) => {
   const areFieldsValidate = (addresses, dateTime, logistics, validators) => {
-    const isValid = (
+    const isValid =
       validators.addressesValidator(addresses) &&
       validators.dateTimeValidator(dateTime) &&
-      validators.logisticsValidator(logistics)
-    );
+      validators.logisticsValidator(logistics);
     return isValid;
   };
 
@@ -77,7 +78,12 @@ const ConfigurationOverview = ({
           <Heading wrapperTag="h2" size="sm">
             Addresses
           </Heading>
-          <SectionHeaderEditLink to="/mover/configurations/address">
+          <SectionHeaderEditLink
+            to={{
+              pathname: '/mover/configurations/address',
+              fromOverview: true
+            }}
+          >
             Edit
           </SectionHeaderEditLink>
         </SectionHeader>
@@ -89,7 +95,9 @@ const ConfigurationOverview = ({
   const renderdateTimeSection = (dateTime, validator) => {
     const renderInner = (dateTime, validator) => {
       if (!validator(dateTime)) {
-        return <SectionInvalid>Invalid date & time configuration.</SectionInvalid>;
+        return (
+          <SectionInvalid>Invalid date & time configuration.</SectionInvalid>
+        );
       }
       const { pickUpDate, pickUpTime, deliveryDate } = dateTime;
       const mappedPickUpTime = MOVING_SEARCH_TIME_RANGE.find(
@@ -128,7 +136,9 @@ const ConfigurationOverview = ({
           <Heading wrapperTag="h2" size="sm">
             Date & Time
           </Heading>
-          <SectionHeaderEditLink to="/mover/configurations/date">
+          <SectionHeaderEditLink
+            to={{ pathname: '/mover/configurations/date', fromOverview: true }}
+          >
             Edit
           </SectionHeaderEditLink>
         </SectionHeader>
@@ -140,7 +150,9 @@ const ConfigurationOverview = ({
   const renderLogistics = (logistics, validator) => {
     const renderInner = (logistics, validator) => {
       if (!validator(logistics)) {
-        return <SectionInvalid>Invalid logistics configuration.</SectionInvalid>;
+        return (
+          <SectionInvalid>Invalid logistics configuration.</SectionInvalid>
+        );
       }
       const { residenceType, deliveryAccess, ableToAssist } = logistics;
       return (
@@ -154,11 +166,14 @@ const ConfigurationOverview = ({
           <SectionBodyItem>
             <SectionBodyItemLabel>Pick-up residence size</SectionBodyItemLabel>
             <SectionBodyItemContent>
-              {residenceType.split(' | ')[0] === 'apartment'? '' : 'Up to'} {residenceType.split(' | ')[1]}
+              {residenceType.split(' | ')[0] === 'apartment' ? '' : 'Up to'}{' '}
+              {residenceType.split(' | ')[1]}
             </SectionBodyItemContent>
           </SectionBodyItem>
           <SectionBodyItem>
-            <SectionBodyItemLabel>Delivery location access</SectionBodyItemLabel>
+            <SectionBodyItemLabel>
+              Delivery location access
+            </SectionBodyItemLabel>
             <SectionBodyItemContent>
               {deliveryAccess.startsWith('elevator')
                 ? deliveryAccess
@@ -184,7 +199,12 @@ const ConfigurationOverview = ({
           <Heading wrapperTag="h2" size="sm">
             Logistics
           </Heading>
-          <SectionHeaderEditLink to="/mover/configurations/logistics">
+          <SectionHeaderEditLink
+            to={{
+              pathname: '/mover/configurations/logistics',
+              fromOverview: true
+            }}
+          >
             Edit
           </SectionHeaderEditLink>
         </SectionHeader>
@@ -232,7 +252,9 @@ const ConfigurationOverview = ({
           <Heading wrapperTag="h2" size="sm">
             Items
           </Heading>
-          <SectionHeaderEditLink to="/mover/configurations/items">
+          <SectionHeaderEditLink
+            to={{ pathname: '/mover/configurations/items', fromOverview: true }}
+          >
             Edit
           </SectionHeaderEditLink>
         </SectionHeader>
@@ -241,13 +263,37 @@ const ConfigurationOverview = ({
     );
   };
 
+  const renderAdditionalNoteSection = (notes, onChange) => {
+    const onChangeHandler = (e) => {
+      onChange(e.target.value);
+    };
+
+    const input = {
+      value: notes,
+      onChange: onChangeHandler
+    };
+    return (
+      <Section noBorder>
+        <SectionHeader>
+          <Heading wrapperTag="h2" size="sm">
+            Additional Notes
+          </Heading>
+        </SectionHeader>
+        <SubLabel>
+            Please do not enter your personal contact information.
+          </SubLabel>
+        <SectionBody>
+          <TextArea input={input} />
+        </SectionBody>
+      </Section>
+    );
+  };
+
   return (
     <Grid.Container>
       <FormHeading>
         <Heading wrapperTag="h1">Overview</Heading>
-        <Paragraph>
-          Here is an overview of your move.
-        </Paragraph>
+        <Paragraph>Here is an overview of your move.</Paragraph>
       </FormHeading>
       <Form onSubmit={handleSubmit}>
         <FormInner>
@@ -255,13 +301,21 @@ const ConfigurationOverview = ({
           {renderdateTimeSection(dateTime, validators.dateTimeValidator)}
           {renderLogistics(logistics, validators.logisticsValidator)}
           {renderItemsSection(items)}
+          {renderAdditionalNoteSection(additionalNotes, setAdditionalNotes)}
         </FormInner>
         <FormActions>
           <Button
             style={{ float: 'right' }}
             type="submit"
             primary
-            disabled={!areFieldsValidate(rootAddresses.addresses, dateTime, logistics, validators)}
+            disabled={
+              !areFieldsValidate(
+                rootAddresses.addresses,
+                dateTime,
+                logistics,
+                validators
+              )
+            }
           >
             Submit <Icon icon="arrow-right" />
           </Button>

@@ -4,17 +4,21 @@ import {
   Button,
   TextField,
   TextArea,
-  Checkbox
+  ImgUpload,
+  Label
+  // Checkbox
 } from '../../../globalComponents/Form';
 import Layout from '../../../globalComponents/Layout';
 
 import Grid from '../../../globalComponents/Grid';
-import { SERVICE_AREAS } from '../../../constants';
+import Icon from '../../../globalComponents/Icon';
+// import { SERVICE_AREAS } from '../../../constants';
 
 import BusinessHour from './BusinessHour';
 import { Heading, Paragraph } from '../../../globalComponents/Typography';
 
 const { Form, FormInner, FormHeading, FormActions } = Layout.Form;
+const SingleImgUpload = ImgUpload.SingleImgUpload;
 
 const renderDescriptionTextArea = ({ input, ...rest }) => (
   <TextArea input={input} {...rest} />
@@ -24,17 +28,31 @@ const renderBusinessHour = ({ input, ...rest }) => (
   <BusinessHour value={input.value || []} onChange={input.onChange} {...rest} />
 );
 
-const renderBusinessServiceAreas = ({ input, ...rest }) => {
+const renderLogo = ({ input, ...rest }) => {
   return (
-    <Checkbox.CheckboxGroup
-      value={input.value || []}
-      onChange={input.onChange}
-      name={input.name}
-      label="Service Areas"
-      {...rest}
-    />
+    <div style={{padding: '1rem 0'}}>
+      <Label style={{paddingBottom: '1rem'}} htmlFor={input.name}>Business Logo</Label>
+      <SingleImgUpload
+        value={input.value}
+        onChange={input.onChange}
+        {...rest}
+        actionText={<Icon icon="upload" size="lg" />}
+      />
+    </div>
   );
 };
+
+// const renderBusinessServiceAreas = ({ input, ...rest }) => {
+//   return (
+//     <Checkbox.CheckboxGroup
+//       value={input.value || []}
+//       onChange={input.onChange}
+//       name={input.name}
+//       label="Service Areas"
+//       {...rest}
+//     />
+//   );
+// };
 
 const { Container, Row, Col } = Grid;
 const Creation = ({
@@ -61,6 +79,8 @@ const Creation = ({
               label="Business Name"
               placeholder="My great moving company"
             />
+
+            <Field component={renderLogo} name="logo" label="Business Logo" />
 
             <Field
               component={TextField}
@@ -133,7 +153,7 @@ const Creation = ({
             />
 
 
-            <Field
+            {/* <Field
               component={renderBusinessServiceAreas}
               name="businessServiceArea"
             >
@@ -144,7 +164,7 @@ const Creation = ({
                   label={s.label}
                 />
               ))}
-            </Field>
+            </Field> */}
 
 
             <Field
@@ -160,7 +180,7 @@ const Creation = ({
             primary
             disabled={pristine || submitting || !valid}
           >
-            Submit
+            Submit <Icon icon={submitting ? 'refresh' : 'pencil'} spin={submitting} />
           </Button>
         </FormActions>
       </Form>

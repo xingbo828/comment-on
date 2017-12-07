@@ -5,8 +5,10 @@ import {
   Button,
   ImgUpload
 } from '../../../../../globalComponents/Form';
+import Grid from '../../../../../globalComponents/Grid';
+import { StyledCol } from './Styles';
 
-
+const { Container, Row, Col } = Grid;
 class EditMember extends Component {
   constructor(props) {
     super(props);
@@ -30,7 +32,6 @@ class EditMember extends Component {
       description
     });
   }
-
 
   updateName(e) {
     this.setState({
@@ -70,22 +71,42 @@ class EditMember extends Component {
       value: this.state.description
     };
 
-    const avatarInput = {
-      onChange: this.updateAvatar,
-      value: this.state.avatar
-    };
     return (
-      <div>
-        <ImgUpload.SingleImgUpload input={avatarInput} name="avatar"  />
-        <TextField input={nameInput} name="name" label="Name"  />
-        <TextArea input={descInput} name="desc" label="Description"  />
-        <Button small primary onClick={this.updateMember} style={{marginRight: '20px', marginBottom: '10px'}}>Save</Button>
-        <Button small danger onClick={this.removeMember}>Remove</Button>
-      </div>
+      <Container>
+        <Row>
+          <StyledCol xs={24} sm={8} md={8} lg={8}>
+            <ImgUpload.SingleImgUpload
+              shape="circle"
+              size={150}
+              value={this.state.avatar}
+              onChange={this.updateAvatar}
+              name="avatar"
+            />
+          </StyledCol>
+          <Col xs={24} sm={16} md={16} lg={16}>
+            <TextField input={nameInput} name="name" label="Name" />
+            <TextArea input={descInput} name="desc" label="Description" />
+          </Col>
+        </Row>
+        <Button
+          small
+          danger
+          style={{ float: 'right' }}
+          onClick={this.removeMember}
+        >
+          Remove
+        </Button>
+        <Button
+          small
+          primary
+          onClick={this.updateMember}
+          style={{ marginRight: '20px', float: 'right' }}
+        >
+          Save
+        </Button>
+      </Container>
     );
   }
 }
-
-
 
 export default EditMember;

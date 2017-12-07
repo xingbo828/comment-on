@@ -55,6 +55,11 @@ const enhance = compose(
       return localSaveDateTime(values.toJS());
     },
     onSubmitSuccess: (result, dispatch, props) => {
+      if(props.location.fromOverview) {
+        return props.history.push({
+          pathname: '/mover/configurations/overview'
+        });
+      }
       // send user to next step
       props.history.push({
         pathname: '/mover/configurations/logistics',

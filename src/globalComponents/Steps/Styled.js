@@ -48,7 +48,7 @@ export const StepContainer = styled.li`
   text-transform: uppercase;
   font-weight: ${props=>props.theme.fontWeights.medium};
   ${props => {
-    if (props.status === 'completed') {
+    if (props.status === 'completed' ) {
       return `
         cursor: pointer;
         border-bottom-color: ${props.theme.colors.success};
@@ -61,10 +61,21 @@ export const StepContainer = styled.li`
         border-bottom-color: ${props.theme.colors.border};
       `;
     } else {
-      return `
-        color: ${props.theme.colors.textLight};
-        border-bottom-color: ${props.theme.colors.border};
-      `;
+      if(props.mode === 'guided') {
+        return `
+          color: ${props.theme.colors.textLight};
+          border-bottom-color: ${props.theme.colors.border};
+        `;
+      } else if(props.mode === 'free') {
+        return `
+          cursor: pointer;
+          border-bottom-color: ${props.theme.colors.success};
+          i {
+            color: ${props.theme.colors.success};
+          }
+        `;
+      }
+
     }
   }}
 `;

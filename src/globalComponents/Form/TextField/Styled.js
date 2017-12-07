@@ -34,9 +34,6 @@ export const FocusBorder = Styled.div`
   transform: scale(0);
 `;
 
-export const InputLabel = Styled.label`
-  font-size: 1.2rem;
-`;
 
 export const InputErrorMsg = Styled.span`
   color: red;

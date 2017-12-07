@@ -1,8 +1,15 @@
 import styled from 'styled-components';
+import Grid from '../../../../../globalComponents/Grid';
 
-export const NewMemberHeader = styled.span`
-  ::before {
-    font: normal normal 0.9rem 'FontAwesome';
-    content: '\f007';
-  }
+const { Col } = Grid;
+
+export const StyledCol = Col.extend`
+  justify-content: center;
+  display: flex;
+  padding-top: ${props=>props.theme.spaces.base};
+`;
+
+
+export const CrewMemberContainer = styled.div`
+  padding: ${props=>props.theme.spaces.base} 0;
 `;

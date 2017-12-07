@@ -16,7 +16,7 @@ const profile = (state = initProfileState, action) => {
       return state.withMutations((st) => {
         // formatting
         const profile = Immutable.fromJS(action.data.profile).withMutations((pr) => {
-          pr.set('businessServiceArea', Immutable.fromJS((Object.values(action.data.profile.businessServiceArea))));
+          // pr.set('businessServiceArea', Immutable.fromJS((Object.values(action.data.profile.businessServiceArea))));
           pr.set('businessHour', Immutable.fromJS((Object.values(action.data.profile.businessHour))));
           if(action.data.profile.profileImgs) {
             pr.set('profileImgs', Immutable.fromJS((Object.values(action.data.profile.profileImgs))));

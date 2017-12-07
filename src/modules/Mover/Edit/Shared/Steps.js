@@ -11,16 +11,11 @@ const MoverEditSteps = ({current, history, moverId}) => {
   };
 
   return (
-    <Steps current={current}>
+    <Steps current={current} mode="free">
 
       <Step
         title="basic profile"
         onStepClick={stepClickHandler.bind(this, 'basic-profile')}
-      />
-
-      <Step
-        title="profile pictures"
-        onStepClick={stepClickHandler.bind(this, 'profile-picture')}
       />
 
       <Step

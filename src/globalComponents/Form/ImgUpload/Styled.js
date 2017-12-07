@@ -1,22 +1,13 @@
 import styled from 'styled-components';
 
 export const StyledContainer = styled.div`
-  margin: 0 0 1rem;
-  padding: 0.5rem 0;
-`;
-export const StyledSubContainer = styled.div`
   display: flex;
-  margin-top: 1rem;
 `;
 
 export const StyledInput = styled.span`
   display: none;
 `;
 
-
-export const InputLabel = styled.label`
-  font-size: 1.2rem;
-`;
 
 export const StyledImgList = styled.ul`
   padding: 0;
@@ -33,27 +24,27 @@ export const StyledImgListItem = styled.li`
 `;
 
 export const StyleImgReplace = styled.div`
-opacity: 0;
-width: 100px;
-height: 100px;
-position: absolute;
-cursor: pointer;
-display: flex;
-border-radius: 5px;
-align-items: center;
-justify-content: center;
-::after {
-  font-family: FontAwesome;
-  content: '\f093';
-  font-size: 2.0rem;
-  color: ${props => props.theme.colors.primary};
-}
-:hover {
-  background-color: rgba(0,0,0,.5);
-  opacity: .7;
-}
+  opacity: 0;
+  width: ${props=>props.size}px;
+  height: ${props=>props.size}px;
+  position: absolute;
+  cursor: pointer;
+  display: flex;
+  border-radius: ${props=>props.shape=== 'circle' ? '50%' : '5px'};
+  align-items: center;
+  justify-content: center;
+  ::after {
+    font-family: FontAwesome;
+    content: '\f093';
+    font-size: 2.0rem;
+    color: ${props => props.theme.colors.primary};
+  }
+  :hover {
+    background-color: rgba(0,0,0,.5);
+    opacity: .7;
+  }
 
-transition: opacity 0.3s;
+  transition: opacity 0.3s;
 `;
 
 export const StyledImgRemove = styled.div`
@@ -65,6 +56,7 @@ export const StyledImgRemove = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: ${props=>props.shape=== 'circle' ? '50%' : '5px'};
   ::after {
     font-family: FontAwesome;
     content: '\f1f8';
@@ -81,31 +73,39 @@ export const StyledImgRemove = styled.div`
 
 export const StyleImg = styled.div`
   box-sizing: border-box;
-  width: 100px;
-  height: 100px;
-  border: 1px solid lightgrey;
-  border-radius: 5px;
-  text-align: center;
-  padding: 5px;
-  line-height: 90px;
+  width: ${props=>props.size}px;
+  height: ${props=>props.size}px;
+  border-radius: ${props=>props.shape=== 'circle' ? '50%' : '5px'};
+  background-color: rgba(0,0,0,.3);
+  ${props => {
+    if(props.shape === 'square') {
+      return `
+        box-shadow: inset 0 0 1px 0 ${props.theme.colors.textDark};
+      `;
+    }
+  }}
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   > img {
     max-width: 100%;
     max-height: 100%;
-    vertical-align: middle;
   }
 `;
 
 export const StyledUpLoadBtn = styled.button`
-  width: 100px;
-  height: 100px;
-  background-color: ${props => props.theme.colors.offWhite};
-  border: none;
-  border-radius: 5px;
+  width: ${props=>props.size}px;
+  height: ${props=>props.size}px;
+  border: 1px dashed ${props => props.theme.colors.border};
+  border-radius: ${props=>props.shape=== 'circle' ? '50%' : '5px'};
+  background-color: transparent;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: ${props=>props.theme.fontWeights.roman};
+  font-size: 1rem;
+  color: ${props=>props.theme.colors.textLight};
   :hover {
-    background-color: ${props => props.theme.colors.border};
-    border: 1px dashed ${props => props.theme.colors.textDark};
+    color: ${props => props.theme.colors.primary};
   }
   :focus {
     outline: 0;

@@ -6,6 +6,7 @@ import { getMover } from '../moverAction';
 import { getProfile } from './profileReducers';
 import mapImmutablePropsToPlainProps from '../../Common/mapImmutablePropsToPlainProps';
 import Spin from '../../../globalComponents/Spin';
+import scrollToTopOnMount from '../../Common/scrollToTopOnMount';
 
 const mapDispatchToProps = dispatch => ({
   getMover: (moverId) => dispatch(getMover(moverId))
@@ -32,7 +33,8 @@ const enhance = compose(
     isLoading,
     renderComponent(Spin.FullScreenSpinner)
   ),
-  mapImmutablePropsToPlainProps
+  mapImmutablePropsToPlainProps,
+  scrollToTopOnMount
 );
 
 export default enhance(MoverProfile);

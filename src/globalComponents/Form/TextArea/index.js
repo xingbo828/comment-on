@@ -10,7 +10,7 @@ import {
 const TextArea = ({ label, placeholder, rows, input, meta: { touched, error, warning }}) => {
   return (
     <InputContainer>
-      <InputLabel>{label}</InputLabel>
+      {label && <InputLabel>{label}</InputLabel>}
       <Input {...input} rows={rows} placeholder={placeholder} />
       <FocusBorder />
       {touched &&

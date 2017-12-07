@@ -23,6 +23,7 @@ class App extends Component {
               <Route exact path="/" component={asyncLoad(() => import('./modules/Home'))} />
               <ProtectedRoute path="/account" component={asyncLoad(() => import('./modules/Account'))} />
               <Route path="/mover" component={asyncLoad(() => import('./modules/Mover'))} />
+              <Route path="/project" component={asyncLoad(() => import('./modules/Project'))} />
               <Route path="/login" component={asyncLoad(() => import('./modules/Account/Login'))} />
             </Switch>
             <Footer />

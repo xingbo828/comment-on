@@ -16,28 +16,41 @@ import {
   loadItems,
   loadDateTime,
   loadLogistics,
-  loadAddresses
+  loadAddresses,
+  setAdditionalNotes,
+  getAdditionalNotes,
+  getLocalstorageStepInfo,
+  deleteStepInfo
 } from '../configurationActions';
+import {
+  addLead
+} from '../../../Project/projectAction';
 
 import {
   getItems,
   getLogistics,
   getDateTime,
-  getAddresses
+  getAddresses,
+  getOverview
 } from '../configurationReducers';
+import message from '../../../../globalComponents/Message';
 
 const mapDispatchToProps = dispatch => ({
   loadAddresses: () => dispatch(loadAddresses()),
   loadDateTime: () => dispatch(loadDateTime()),
   loadLogistics: () => dispatch(loadLogistics()),
-  loadItems: () => dispatch(loadItems())
+  loadItems: () => dispatch(loadItems()),
+  getAdditionalNotes: () => dispatch(getAdditionalNotes()),
+  setAdditionalNotes: (notes) => dispatch(setAdditionalNotes(notes)),
+  addLead: (config) => dispatch(addLead(config)),
 });
 
 const mapStateToProps = state => ({
   addresses: getAddresses(state),
   dateTime: getDateTime(state),
   logistics: getLogistics(state),
-  items: getItems(state)
+  items: getItems(state),
+  additionalNotes: getOverview(state).get('additionalNotes')
 });
 
 const isLoading = props => {
@@ -97,38 +110,28 @@ const enhance = compose(
         loadAddresses,
         loadDateTime,
         loadLogistics,
-        loadItems
+        loadItems,
+        getAdditionalNotes
       } = this.props;
         loadAddresses();
         loadDateTime();
         loadLogistics();
         loadItems();
+        getAdditionalNotes();
     }
   }),
   branch(isLoading, renderNothing),
   withProps(props => ({
     validators,
-    handleSubmit: e => {
+    handleSubmit: async e => {
       e.preventDefault();
-      // const config = await getLocalStorageStepInfo();
-      // const configInjson = JSON.stringify(config);
-      // const configBase64 = btoa(configInjson);
-      // const searchParameters = '?configuration=' + configBase64;
-
-      // if (
-      //   props.location.state &&
-      //   props.location.state.fromProfile &&
-      //   props.location.state.businessId
-      // ) {
-      //   return props.history.push({
-      //     pathname: `/business/profile/${props.location.state.businessId}`,
-      //     search: searchParameters
-      //   });
-      // }
-      // return props.history.push({
-      //   pathname: '/business/search/result',
-      //   search: searchParameters
-      // });
+      const config = await getLocalstorageStepInfo();
+      const leadId = await props.addLead(config);
+      await deleteStepInfo();
+      message.success(`Project ${leadId} has been created.`);
+      props.history.push({
+        pathname: `/project/${leadId}/management`,
+      });
     },
     goBack: e => {
       e.preventDefault();

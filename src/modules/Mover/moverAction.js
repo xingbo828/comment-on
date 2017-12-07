@@ -31,7 +31,6 @@ export const getMover = moverId => async dispatch => {
 
 export const addMover = moverInfo => async dispatch => {
   try {
-    moverInfo = moverInfo.toJS();
     const uid = auth.currentUser.uid;
     const rawUserData = await database.ref('users/' + uid).once('value');
     // If mover account already exist
@@ -43,9 +42,12 @@ export const addMover = moverInfo => async dispatch => {
     }
     moverInfo.owner = uid;
     const moverId = moverDbRef.push().key;
+    // Upload logo
+    const logo = await _uploadLogo(moverInfo.logo, moverId);
     // Create mover
     const moverRef = moverDbRef.child(moverId);
-    await moverRef.set(moverInfo);
+    const updatedMoverInfo = Object.assign({}, moverInfo, { logo });
+    await moverRef.set(updatedMoverInfo);
     // Update user with mover id
     await updateUserMoverRef(moverId, uid)(dispatch);
     return moverId;
@@ -55,13 +57,15 @@ export const addMover = moverInfo => async dispatch => {
 };
 
 export const updateBasicInfo = (moverInfo, moverId) => async dispatch => {
+  const logo = await _uploadLogo(moverInfo.logo, moverId);
   const moverRef = moverDbRef.child(moverId);
-  await moverRef.set(moverInfo);
+  const updatedMoverInfo = Object.assign({}, moverInfo, { logo });
+  await moverRef.set(updatedMoverInfo);
   return dispatch({
     type: LOADED_MOVER_PROFILE,
     data: {
       key: moverId,
-      profile: moverInfo
+      profile: updatedMoverInfo
     }
   });
 };
@@ -97,7 +101,6 @@ export const updateCrewMember = (moverInfo, moverId) => async dispatch => {
 };
 
 
-
 const _uploadLogo = async (logo, moverId) => {
   if (typeof logo === 'string') {
     return logo;
@@ -107,43 +110,6 @@ const _uploadLogo = async (logo, moverId) => {
   return result.downloadURL;
 };
 
-const _uploadProfileImgs = (profileImgs, moverId) => {
-  if (Array.isArray(profileImgs) && profileImgs.length) {
-    const storagePromises = profileImgs.map(img => {
-      if (typeof img === 'string') {
-        return Promise.resolve(img);
-      }
-      const imgRef = imgStorageRef.child(`images/mover/${moverId}/${img.name}`);
-      return imgRef.put(img)
-      .then((result) => {
-        return result.downloadURL;
-      });
-    });
-    return Promise.all(storagePromises);
-  }
-  return Promise.resolve([]);
-}
-
-export const updateProfilePictures = (moverInfo, moverId) => async dispatch => {
-    const { logo, profileImgs } = moverInfo;
-    const uploadProfileImgsPromise = _uploadProfileImgs(profileImgs, moverId);
-    const uploadLogoPromise = _uploadLogo(logo, moverId);
-    const images = await Promise.all([uploadLogoPromise, uploadProfileImgsPromise]);
-    const [logoUrl, profileImgsUrl] = images;
-    const moverRef = moverDbRef.child(moverId);
-    const updatedMoverProfile = Object.assign({}, moverInfo, {
-      logo: logoUrl,
-      profileImgs: profileImgsUrl
-    });
-    await moverRef.set(updatedMoverProfile);
-    return dispatch({
-      type: LOADED_MOVER_PROFILE,
-      data: {
-        key: moverId,
-        profile: updatedMoverProfile
-      }
-    });
-};
 
 export const updateVehicles = (moverInfo, moverId) => async dispatch => {
   // const { vehiclesInfo } = moverInfo;
@@ -158,68 +124,5 @@ export const updateVehicles = (moverInfo, moverId) => async dispatch => {
     });
 };
 
-// export const editBusinessImages = (businessInfo, businessId) => (dispatch) => {
-//   const businessInfoRaw = businessInfo.toJS();
-//   const { logo, businessImgs } = businessInfoRaw;
-//   const uploadBusinessImgsPromise = uploadBusinessImgs(businessImgs, businessId);
-//   const uploadBusinessLogoPromise = uploadBusinessLogo(logo, businessId);
-//   return Promise.all([uploadBusinessLogoPromise, uploadBusinessImgsPromise])
-//   .then(([imgLogoUrl, imgProfileUrls]) => {
-//     const businessRef = businessDbRef.child(businessId);
-//     return businessRef.set(Object.assign({}, businessInfoRaw, {
-//       logo: imgLogoUrl,
-//       businessImgs: imgProfileUrls
-//     }));
-//   });
-// }
-
-// export const updateBusinessCrewMember = (crewMembers, businessId) => {
-//   const crewMemberAvatarPromises = Promise.all(crewMembers.map(c => {
-//     if (typeof c.avatar === 'string') {
-//       return Promise.resolve(c.avatar);
-//     }
-//     const imgRef = imgStorageRef.child(`images/business/${businessId}/${c.avatar.name}`);
-//     return imgRef.put(c.avatar)
-//     .then((result) => result.downloadURL);
-//   }));
-
-//   const businessRef = businessDbRef.child(businessId);
-//   const businessInfoPromise = businessRef.once('value').then(obj => obj.toJSON());
-
-//   return Promise
-//   .all([crewMemberAvatarPromises, businessInfoPromise])
-//   .then(([crewMemberMemberImages, businessInfo]) => {
-//     crewMembers = crewMembers.map((c, index) => {
-//       c.avatar = crewMemberMemberImages[index];
-//       return c;
-//     });
-//     return businessRef.set(Object.assign({}, businessInfo, {
-//       crewMembers
-//     }));
-//   })
-// }
-
-// export const updateVehiclesInfo = (businessInfo, businessId) => {
-//   const businessInfoRaw = businessInfo.toJS();
-//   const { vehiclesInfo } = businessInfoRaw;
-//   const businessRef = businessDbRef.child(businessId);
-//   return businessRef.set(Object.assign({}, businessInfoRaw, {
-//     vehiclesInfo
-//   }));
-// };
-
-// export const updateBusiness = (businessInfo, businessId) => {
-//   businessInfo = (businessInfo.toJS && businessInfo.toJS()) || businessInfo;
-//   businessInfo.businessServiceArea = reduceServiceArea(businessInfo.businessServiceArea);
-//   const businessRef = businessDbRef.child(businessId);
-//   return businessRef.set(businessInfo);
-// }
-
-// const reduceServiceArea = (serviceAreas) => {
-//   return serviceAreas && serviceAreas.reduce((result, serviceArea) => {
-//     result[serviceArea] = true;
-//     return result;
-//   }, {})
-// }
 
 

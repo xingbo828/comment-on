@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const BadgeContainer = styled.span`
   position: relative;
-  line-height: 1;
   display: inline-block;
 `;
 

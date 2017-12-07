@@ -1,9 +1,18 @@
 import moment from 'moment';
+import Immutable from 'immutable';
 
 export const isRequired = value => !(typeof value === 'string' ? !value.trim() : !value);
 
 // need more logic
-export const isNotEmpty = value => Array.isArray(value) ? value.length > 0 : false;
+export const isNotEmpty = value => {
+  if(Array.isArray(value)) {
+    return value.length > 0;
+  }
+  else if (Immutable.isImmutable(value) && Immutable.List.isList(value)) {
+    return value.size;
+  }
+  return false;
+}
 
 
 export const isValidEmail = value => {

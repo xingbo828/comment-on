@@ -3,7 +3,6 @@ import styled from 'styled-components';
 const Form = styled.form`
   position: relative;
   padding-bottom: ${props=>props.theme.spaces.tight};
-  overflow: hidden;
   border-radius: 8px;
   background-color: white;
   box-shadow: 0 2px 32px 0 rgba(0, 0, 0, 0.07);
@@ -19,6 +18,7 @@ const Form = styled.form`
 const FormActions = styled.div`
   width: 100%;
   margin-top: ${props=>props.theme.spaces.base};
+  overflow: hidden;
   padding: ${props=>props.theme.spaces.base};
   > button:not(:last-child) {
     margin-bottom: ${props=>props.theme.spaces.wide};

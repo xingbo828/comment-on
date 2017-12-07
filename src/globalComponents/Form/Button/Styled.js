@@ -66,10 +66,10 @@ const getHoverFontColor = props => {
 const getIconSize = props => {
   if (props.small) {
     return `
-      width: 1.2rem;
-      height: 1.2rem;
-      line-height: 1.2rem;
-      font-size: 1rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      line-height: 1.5rem;
+      font-size: .9rem;
     `;
   }
   return `
@@ -84,8 +84,7 @@ const getIconSize = props => {
 const getPadding = props => {
   if (props.small) {
     return `
-      padding: 5px 5px;
-      ${props.theme.media.greaterThan('md')`padding: 5px 10px;`.join('')}
+      padding: ${props.theme.spaces.tight} ${props.theme.spaces.base};
     `;
   }
   return `
@@ -102,7 +101,8 @@ export const StyledButton = styled.button`
   background-image: none;
   border: 1px solid transparent;
   white-space: nowrap;
-  width: 100%;
+
+  width: ${props=>props.small ? 'auto' : '100%'};
   ${props=>props.theme.media.greaterThan('md')`
     width: auto;
   `};
@@ -133,6 +133,10 @@ export const StyledButton = styled.button`
       color: ${props=>props.disabled ? getBackColor(props) : getForeColor(props)};
       background: ${props=> props.disabled ? getForeColor(props) : getBackColor(props)};
     }
+  }
+  &:active {
+    transition: .1s;
+    transform: translateY(3px);
   }
 `;
 

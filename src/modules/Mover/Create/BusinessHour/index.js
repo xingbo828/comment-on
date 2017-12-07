@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { array, func } from 'prop-types';
+import { Label } from '../../../../globalComponents/Form';
 import HoursDisplay from './HoursDisplay';
 import HoursSelect from './HoursSelect';
-import { BusinessHourContainer, BusinessHourHeading } from './Styled';
+import { BusinessHourContainer } from './Styled';
 import { weekdays } from './constants';
 
 class BusinessHour extends Component {
@@ -41,7 +42,7 @@ class BusinessHour extends Component {
   render() {
     return (
       <BusinessHourContainer>
-        <BusinessHourHeading>Business Hours</BusinessHourHeading>
+        <Label>Business Hours</Label>
         <HoursDisplay removeHours={this.removeHours} hoursList={this.state.hoursList}/>
         <HoursSelect addHours={this.addHours}/>
       </BusinessHourContainer>

@@ -9,7 +9,9 @@ import {
   GET_DATE_TIME,
   LOADING_DATE_TIME,
   LOADING_LOGISTICS,
-  GET_LOGISTICS
+  GET_LOGISTICS,
+  GET_ADDITIONAL_NOTES,
+  SET_ADDITIONAL_NOTES
 } from './configurationActions';
 
 // Addresses
@@ -136,12 +138,33 @@ const searchLogisticsStep = (state = initLogisticsState, action) => {
   }
 };
 
+// Overview
+const initOverviewState = Immutable.fromJS({
+  additionalNotes: ''
+});
+
+const searchOverviewStep = (state = initOverviewState, action) => {
+  switch (action.type) {
+    case GET_ADDITIONAL_NOTES:
+    case SET_ADDITIONAL_NOTES: {
+      return state.withMutations(st => {
+        st.set('additionalNotes', action.data || '');
+      });
+    }
+
+
+    default:
+      return state;
+  }
+};
+
 
 export default combineReducers({
   addressesStep: searchAddressesStep,
   itemsStep: searchItemsStep,
   dateTimeStep: searchDateTimeStep,
-  logisticsStep: searchLogisticsStep
+  logisticsStep: searchLogisticsStep,
+  overviewStep: searchOverviewStep
 });
 
 // Selectors
@@ -153,3 +176,5 @@ export const getDateTime = state =>
   state.getIn(['mover', 'configurations', 'dateTimeStep']);
 export const getLogistics = state =>
   state.getIn(['mover', 'configurations', 'logisticsStep']);
+export const getOverview = state =>
+  state.getIn(['mover', 'configurations', 'overviewStep']);
