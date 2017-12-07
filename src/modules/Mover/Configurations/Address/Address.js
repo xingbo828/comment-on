@@ -38,7 +38,7 @@ const Address = ({ handleSubmit, pristine, reset, valid, submitting }) => {
           it over 2000 years old.
         </Paragraph>
       </FormHeading>
-      <Form onSubmit={handleSubmit}>
+      <Form style={{overflow: 'hidden'}} onSubmit={handleSubmit}>
         <Field
           component={renderAddressSelection}
           name="addresses"

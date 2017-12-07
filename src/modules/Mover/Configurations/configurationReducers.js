@@ -148,7 +148,7 @@ const searchOverviewStep = (state = initOverviewState, action) => {
     case GET_ADDITIONAL_NOTES:
     case SET_ADDITIONAL_NOTES: {
       return state.withMutations(st => {
-        st.set('additionalNotes', action.data);
+        st.set('additionalNotes', action.data || '');
       });
     }
 

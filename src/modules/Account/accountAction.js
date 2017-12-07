@@ -64,3 +64,19 @@ export const updateUserMoverRef = (moverId, uid) => dispatch => {
       });
     });
 };
+
+export const updateUserLeadIds = (leadId, uid) => async dispatch => {
+  const userRef = userDbRef.child(uid);
+  const rawUserInfo = await userRef.once('value');
+  const userInfo = rawUserInfo.toJSON();
+  const currentLeads = userInfo.leads ? Object.values(userInfo.leads) : [];
+  const newLeadCollection = currentLeads.concat([leadId]);
+  await userRef.set({
+    leads: newLeadCollection
+  });
+  const udpatedLeads = await userRef.child('leads').once('value');
+  dispatch({
+    type: UPDATE_PROFILE,
+    data: { leads: udpatedLeads.toJSON() }
+  });
+};

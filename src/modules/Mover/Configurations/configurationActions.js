@@ -5,6 +5,13 @@ import isObject from 'lodash/isObject';
 
 export const LOCALSTOREAGE_STEP_INFO_KEY = 'steps-info';
 
+export const getLocalstorageStepInfo = async () => {
+  return await localforge.getItem(LOCALSTOREAGE_STEP_INFO_KEY);
+}
+
+export const deleteStepInfo = async () => {
+  return await localforge.removeItem(LOCALSTOREAGE_STEP_INFO_KEY);
+}
 
 // ADDRESS
 export const GET_ADDRESSES = 'GET_ADDRESSES';

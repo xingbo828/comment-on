@@ -4,8 +4,8 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import Avatar from '../../globalComponents/Avatar';
 
-const avatarSrc =
-  'https://weneedfun.com/wp-content/uploads/2015/10/Steve-Jobs-Photos-18.jpg';
+const avatarSrc = 'https://weneedfun.com/wp-content/uploads/2015/10/Steve-Jobs-Photos-18.jpg';
+
 const AvatarWithImg = withInfo('Avatar with image src')(() => (
   <Avatar src={avatarSrc} />
 ));

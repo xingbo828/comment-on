@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 
-export const AvatarImg = styled.img`
+export const AvatarImg = styled.div`
+  display: inline-block;
   border-radius: 50%;
   cursor: pointer;
+  background-size: cover;
+  background-position: center center;
+  background-image: url(${props=>props.src});
   ${props=> {
     if(props.size === 'sm'){
       return `

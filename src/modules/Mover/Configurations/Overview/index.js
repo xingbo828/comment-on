@@ -18,8 +18,13 @@ import {
   loadLogistics,
   loadAddresses,
   setAdditionalNotes,
-  getAdditionalNotes
+  getAdditionalNotes,
+  getLocalstorageStepInfo,
+  deleteStepInfo
 } from '../configurationActions';
+import {
+  addLead
+} from '../../../Project/projectAction';
 
 import {
   getItems,
@@ -28,6 +33,7 @@ import {
   getAddresses,
   getOverview
 } from '../configurationReducers';
+import message from '../../../../globalComponents/Message';
 
 const mapDispatchToProps = dispatch => ({
   loadAddresses: () => dispatch(loadAddresses()),
@@ -36,6 +42,7 @@ const mapDispatchToProps = dispatch => ({
   loadItems: () => dispatch(loadItems()),
   getAdditionalNotes: () => dispatch(getAdditionalNotes()),
   setAdditionalNotes: (notes) => dispatch(setAdditionalNotes(notes)),
+  addLead: (config) => dispatch(addLead(config)),
 });
 
 const mapStateToProps = state => ({
@@ -116,27 +123,15 @@ const enhance = compose(
   branch(isLoading, renderNothing),
   withProps(props => ({
     validators,
-    handleSubmit: e => {
+    handleSubmit: async e => {
       e.preventDefault();
-      // const config = await getLocalStorageStepInfo();
-      // const configInjson = JSON.stringify(config);
-      // const configBase64 = btoa(configInjson);
-      // const searchParameters = '?configuration=' + configBase64;
-
-      // if (
-      //   props.location.state &&
-      //   props.location.state.fromProfile &&
-      //   props.location.state.businessId
-      // ) {
-      //   return props.history.push({
-      //     pathname: `/business/profile/${props.location.state.businessId}`,
-      //     search: searchParameters
-      //   });
-      // }
-      // return props.history.push({
-      //   pathname: '/business/search/result',
-      //   search: searchParameters
-      // });
+      const config = await getLocalstorageStepInfo();
+      const leadId = await props.addLead(config);
+      await deleteStepInfo();
+      message.success(`Project ${leadId} has been created.`);
+      props.history.push({
+        pathname: `/project/${leadId}/management`,
+      });
     },
     goBack: e => {
       e.preventDefault();
