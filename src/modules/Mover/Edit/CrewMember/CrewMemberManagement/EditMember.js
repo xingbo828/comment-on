@@ -70,14 +70,6 @@ class EditMember extends Component {
         >
           Remove
         </Button>
-        {/* <Button
-          small
-          primary
-          onClick={this.updateMember}
-          style={{ marginRight: '20px', float: 'right' }}
-        >
-          Save
-        </Button> */}
       </Container>
     );
   }
