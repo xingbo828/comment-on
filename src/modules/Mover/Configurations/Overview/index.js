@@ -23,7 +23,7 @@ import {
   deleteStepInfo
 } from '../configurationActions';
 import {
-  addLead
+  addProject
 } from '../../../Project/projectAction';
 
 import {
@@ -42,7 +42,7 @@ const mapDispatchToProps = dispatch => ({
   loadItems: () => dispatch(loadItems()),
   getAdditionalNotes: () => dispatch(getAdditionalNotes()),
   setAdditionalNotes: (notes) => dispatch(setAdditionalNotes(notes)),
-  addLead: (config) => dispatch(addLead(config)),
+  addProject: (config) => dispatch(addProject(config)),
 });
 
 const mapStateToProps = state => ({
@@ -126,11 +126,11 @@ const enhance = compose(
     handleSubmit: async e => {
       e.preventDefault();
       const config = await getLocalstorageStepInfo();
-      const leadId = await props.addLead(config);
+      const projectId = await props.addProject(config);
       await deleteStepInfo();
-      message.success(`Project ${leadId} has been created.`);
+      message.success(`Project ${projectId} has been created.`);
       props.history.push({
-        pathname: `/project/${leadId}/management`,
+        pathname: `/project/${projectId}/management`,
       });
     },
     goBack: e => {

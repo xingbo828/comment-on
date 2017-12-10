@@ -1,19 +1,19 @@
 import {
   auth,
-  database
+  firestore
 } from '../../firebaseClient';
-import { updateUserLeadIds } from '../Account/accountAction';
+import { updateUserProjectIds } from '../Account/accountAction';
 
-const leadDbRef = database.ref().child('leads');
+const projectCollectionRef = firestore.collection('projects');
 
-export const LEAD_CREATED = 'LEAD_CREATED';
 
-export const addLead = (configuration) => async dispatch => {
+export const PROJECT_CREATED = 'PROJECT_CREATED';
+
+export const addProject = (configuration) => async dispatch => {
     const uid = auth.currentUser.uid;
-    const leadId = leadDbRef.push().key;
-    const leadRef = leadDbRef.child(leadId);
-    const lead = Object.assign({}, { configuration, owner: uid });
-    await leadRef.set(lead);
-    await updateUserLeadIds(leadId, uid)(dispatch);
-    return leadId;
+    const project = Object.assign({}, { configuration, owner: uid });
+    const projectRef = await projectCollectionRef.add(project);
+    const projectId = projectRef.id;
+    await updateUserProjectIds(projectId, uid)(dispatch);
+    return projectId;
 };
