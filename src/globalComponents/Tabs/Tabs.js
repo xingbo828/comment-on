@@ -20,12 +20,13 @@ class Tabs extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.activeKey !== this.state.activekey) {
+    if(!!nextProps.activeKey && nextProps.activeKey !== this.state.activekey) {
       this.setState({
         activekey: nextProps.activeKey
       });
     }
   }
+
 
   onSelect(panelKey) {
     this.setState({

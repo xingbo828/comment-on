@@ -6,55 +6,28 @@ import {
   ImgUpload
 } from '../../../../../globalComponents/Form';
 import Grid from '../../../../../globalComponents/Grid';
+import Icon from '../../../../../globalComponents/Icon';
 import { StyledCol } from './Styles';
 
 const { Container, Row, Col } = Grid;
 class EditMember extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      avatar: this.props.avatar,
-      name: this.props.name,
-      description: this.props.description
-    };
-    this.updateDesc = this.updateDesc.bind(this);
-    this.updateName = this.updateName.bind(this);
-    this.updateMember = this.updateMember.bind(this);
-    this.updateAvatar = this.updateAvatar.bind(this);
     this.removeMember = this.removeMember.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { avatar, name, description } = nextProps;
-    this.setState({
-      avatar,
-      name,
-      description
-    });
+
+
+  update = (value, field) => {
+    const updatedMember = Object.assign({
+      name: this.props.name,
+      description: this.props.description,
+      avatar: this.props.avatar
+    }, { [field]: value});
+    this.props.updateMember(updatedMember, this.props.index);
   }
 
-  updateName(e) {
-    this.setState({
-      name: e.target.value
-    });
-  }
 
-  updateDesc(e) {
-    this.setState({
-      description: e.target.value
-    });
-  }
-
-  updateAvatar(e) {
-    this.setState({
-      avatar: e
-    });
-  }
-
-  updateMember(e) {
-    e.preventDefault();
-    this.props.updateMember(this.state, this.props.index);
-  }
 
   removeMember(e) {
     e.preventDefault();
@@ -63,12 +36,12 @@ class EditMember extends Component {
 
   render() {
     const nameInput = {
-      onChange: this.updateName,
-      value: this.state.name
+      onChange: (e) => this.update(e.target.value, 'name'),
+      value: this.props.name
     };
     const descInput = {
-      onChange: this.updateDesc,
-      value: this.state.description
+      onChange: (e) => this.update(e.target.value, 'description'),
+      value: this.props.description
     };
 
     return (
@@ -78,9 +51,10 @@ class EditMember extends Component {
             <ImgUpload.SingleImgUpload
               shape="circle"
               size={150}
-              value={this.state.avatar}
-              onChange={this.updateAvatar}
+              value={this.props.avatar}
+              onChange={(e) => this.update(e, 'avatar')}
               name="avatar"
+              actionText={<Icon icon="upload" size="lg" />}
             />
           </StyledCol>
           <Col xs={24} sm={16} md={16} lg={16}>
@@ -95,14 +69,6 @@ class EditMember extends Component {
           onClick={this.removeMember}
         >
           Remove
-        </Button>
-        <Button
-          small
-          primary
-          onClick={this.updateMember}
-          style={{ marginRight: '20px', float: 'right' }}
-        >
-          Save
         </Button>
       </Container>
     );

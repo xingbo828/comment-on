@@ -12,8 +12,8 @@ class CrewmemberManagement extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeTabKey: '0',
-      members: this.props.members || []
+      members: this.props.members || [],
+      activeKey: null
     };
     this.addNewMember = this.addNewMember.bind(this);
     this.removeMember = this.removeMember.bind(this);
@@ -24,25 +24,27 @@ class CrewmemberManagement extends Component {
   addNewMember(member) {
     const members = this.state.members.concat([member]);
     this.setState({
-      members
+      members,
+      activeKey: (members.length-1).toString()
     });
     this.props.onUpdate(members);
   }
 
   updateMember(member, index) {
     const members = this.state.members;
-    members[index] = member;
+    const updatedMembers= [].concat(members);
+    updatedMembers[index] = member;
     this.setState({
-      members
+      members: updatedMembers
     });
-    this.props.onUpdate(members);
+    this.props.onUpdate(updatedMembers);
   }
 
   removeMember(index) {
     const members = this.state.members.filter((m,i)=>i!==index);
     this.setState({
       members,
-      activeTabKey: '0'
+      activeKey: (members.length-1).toString()
     });
     this.props.onUpdate(members);
   }
@@ -50,7 +52,7 @@ class CrewmemberManagement extends Component {
   render() {
     return (
       <CrewMemberContainer>
-          <Tabs activeKey={this.state.activeTabKey}>
+          <Tabs activeKey={this.state.activeKey}>
             {this.state.members.map((m, index) => (
               <TabPanel key={m.name} header={m.name} panelKey={index.toString()}>
                 <EditMember

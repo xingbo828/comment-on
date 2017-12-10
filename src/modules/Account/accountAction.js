@@ -1,6 +1,7 @@
-import { auth, database, storage } from '../../firebaseClient';
-const userDbRef = database.ref().child('users');
+import { auth, storage, firestore } from '../../firebaseClient';
+import { randomFileName } from '../Common/utils/file';
 const storageRef = storage.ref();
+const userCollectionRef = firestore.collection('users');
 
 export const UPDATE_PROFILE = 'UPDATE_PROFILE';
 export const EMAIL_CONFIRMATION = 'EMAIL_CONFIRMATION';
@@ -17,7 +18,7 @@ const _uploadProfileImg = async (img, uid) => {
   if (typeof img === 'string') {
     return img;
   }
-  const profileImgRef = storageRef.child(`images/profile/${uid}/${img.name}`);
+  const profileImgRef = storageRef.child(`images/profile/${uid}/${randomFileName(img.name)}`);
   const result = await profileImgRef.put(img);
   return result.downloadURL;
 };
@@ -51,32 +52,41 @@ export const dismissEmailConfirmation = () => dispatch => {
   });
 };
 
-export const updateUserMoverRef = (moverId, uid) => dispatch => {
-  const userRef = userDbRef.child(uid);
-  return userRef
-    .set({
-      moverId
-    })
-    .then(() => {
-      dispatch({
-        type: UPDATE_PROFILE,
-        data: { moverId }
+export const updateUserMoverRef = (moverId, uid) => async dispatch => {
+    const userDocRef = userCollectionRef.doc(uid);
+    const userDoc = await userDocRef.get();
+    if(!userDoc.exists){
+      await userDocRef.set({
+        moverId
       });
+    } else {
+      await userDocRef.update({moverId});
+    }
+    return dispatch({
+      type: UPDATE_PROFILE,
+      data: { moverId }
     });
 };
 
-export const updateUserLeadIds = (leadId, uid) => async dispatch => {
-  const userRef = userDbRef.child(uid);
-  const rawUserInfo = await userRef.once('value');
-  const userInfo = rawUserInfo.toJSON();
-  const currentLeads = userInfo.leads ? Object.values(userInfo.leads) : [];
-  const newLeadCollection = currentLeads.concat([leadId]);
-  await userRef.set({
-    leads: newLeadCollection
-  });
-  const udpatedLeads = await userRef.child('leads').once('value');
-  dispatch({
-    type: UPDATE_PROFILE,
-    data: { leads: udpatedLeads.toJSON() }
-  });
+export const updateUserProjectIds = (projectId, uid) => async dispatch => {
+  const userDocRef = userCollectionRef.doc(uid);
+  const userDoc = await userDocRef.get();
+  if(!userDoc.exists){
+    await userDocRef.set({
+      projects: [projectId]
+    });
+    return dispatch({
+      type: UPDATE_PROFILE,
+      data: { projects: [projectId] }
+    });
+  } else {
+    const userData = await userDoc.data();
+    const newProjects = userData.projects ? userData.projects.concat([projectId]) : [projectId];
+    await userDocRef.update({projects: newProjects});
+    return dispatch({
+      type: UPDATE_PROFILE,
+      data: { projects: newProjects }
+    });
+  }
+
 };
