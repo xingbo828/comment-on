@@ -10,7 +10,9 @@
     "@google/maps": "latest",
     "swagger-ui": "latest",
     "swagger-tools": "latest",
-    "yamljs": "latest"
+    "yamljs": "latest",
+    "@google-cloud/storage": "latest",
+    "child-process-promise": "latest"
   },
   "scripts": {
     "serve": "firebase serve --only=functions",

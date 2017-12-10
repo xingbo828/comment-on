@@ -18,5 +18,4 @@ module.exports = functions.database.ref("leads/{leadId}")
     lead.updateTimestamp = moment.utc().unix();
 
     event.data.ref.set(lead);
-
   });
