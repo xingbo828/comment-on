@@ -9,7 +9,7 @@ import Avatar from '../../globalComponents/Avatar';
 const DotBadge = withInfo('Badge as a dot')(() =>
   <div style={{padding: '25px'}}>
     <Badge dot={boolean('dot', true)}>
-      <Avatar style={{backgroundColor: '#87d068', color: 'white'}} icon="user-o" />
+      <Avatar iconSize="2x" style={{backgroundColor: '#87d068', color: 'white'}} icon="user-o" />
     </Badge>
   </div>
 );
@@ -17,7 +17,7 @@ const DotBadge = withInfo('Badge as a dot')(() =>
 const NumberBadge = withInfo('Badge with counter')(() =>
   <div style={{padding: '25px'}}>
     <Badge count={number('count', 1)}>
-      <Avatar style={{backgroundColor: '#87d068', color: 'white'}} icon="user-o" />
+      <Avatar iconSize="2x" style={{backgroundColor: '#87d068', color: 'white'}} icon="user-o" />
     </Badge>
   </div>
 );

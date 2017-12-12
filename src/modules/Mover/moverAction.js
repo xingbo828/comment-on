@@ -1,12 +1,14 @@
 import {
   auth,
   storage,
-  database
+  firestore
 } from '../../firebaseClient';
+import { randomFileName } from '../Common/utils/file';
 import { updateUserMoverRef } from '../Account/accountAction';
 
+const moverCollectionRef = firestore.collection('movers');
+
 const imgStorageRef = storage.ref();
-const moverDbRef = database.ref().child('movers');
 
 export const LOADING_MOVER_PROFILE = 'LOADING_MOVER_PROFILE';
 export const LOADED_MOVER_PROFILE = 'LOADED_MOVER_PROFILE';
@@ -18,49 +20,50 @@ export const getMover = moverId => async dispatch => {
       key: moverId
     }
   });
-  const moverRef = moverDbRef.child(moverId);
-  const moverProfile = await moverRef.once('value');
-  dispatch({
-    type: LOADED_MOVER_PROFILE,
-    data: {
-      key: moverId,
-      profile: moverProfile.toJSON()
-    }
-  });
+
+  const moverDocRef = await moverCollectionRef.doc(moverId);
+  const moverDoc = await moverDocRef.get();
+  if(moverDoc.exists) {
+    const moverData = await  moverDoc.data();
+    dispatch({
+      type: LOADED_MOVER_PROFILE,
+      data: {
+        key: moverId,
+        profile: moverData
+      }
+    });
+  } else {
+    dispatch({
+      type: LOADED_MOVER_PROFILE,
+      data: {
+        key: moverId,
+        profile: {}
+      }
+    });
+  }
 };
 
 export const addMover = moverInfo => async dispatch => {
-  try {
-    const uid = auth.currentUser.uid;
-    const rawUserData = await database.ref('users/' + uid).once('value');
-    // If mover account already exist
-    const userData = rawUserData.toJSON();
-    if(userData && userData.moverId) {
-      return Promise.reject({
-        message: 'Already have mover account registered.'
-      });
-    }
-    moverInfo.owner = uid;
-    const moverId = moverDbRef.push().key;
-    // Upload logo
-    const logo = await _uploadLogo(moverInfo.logo, moverId);
-    // Create mover
-    const moverRef = moverDbRef.child(moverId);
-    const updatedMoverInfo = Object.assign({}, moverInfo, { logo });
-    await moverRef.set(updatedMoverInfo);
-    // Update user with mover id
-    await updateUserMoverRef(moverId, uid)(dispatch);
-    return moverId;
-  } catch(error) {
-    console.log(error);
-  }
+  // TODO: query to find if user already has moverID
+
+  const moverDocRef = await moverCollectionRef.add({});
+  const moverId = moverDocRef.id;
+  const uid = auth.currentUser.uid;
+  const logo = await _uploadLogo(moverInfo.logo, moverId);
+  await updateUserMoverRef(moverId, uid)(dispatch);
+  await moverDocRef.update(Object.assign(moverInfo, {
+    logo
+  }));
+  return moverId;
 };
 
 export const updateBasicInfo = (moverInfo, moverId) => async dispatch => {
   const logo = await _uploadLogo(moverInfo.logo, moverId);
-  const moverRef = moverDbRef.child(moverId);
-  const updatedMoverInfo = Object.assign({}, moverInfo, { logo });
-  await moverRef.set(updatedMoverInfo);
+  const moverDocRef = await moverCollectionRef.doc(moverId);
+  const updatedMoverInfo = Object.assign(moverInfo, {
+    logo
+  });
+  await moverDocRef.update(updatedMoverInfo);
   return dispatch({
     type: LOADED_MOVER_PROFILE,
     data: {
@@ -76,12 +79,13 @@ export const updateCrewMember = (moverInfo, moverId) => async dispatch => {
     if (typeof c.avatar === 'string') {
       return Promise.resolve(c.avatar);
     }
-    const imgRef = imgStorageRef.child(`images/mover/${moverId}/${c.avatar.name}`);
+    const imageName = randomFileName(c.avatar.name);
+    const imgRef = imgStorageRef.child(`images/mover/${moverId}/${imageName}`);
     const result = await imgRef.put(c.avatar)
-    return result.downloadURL;
+    return result.downloadURL.replace(imageName, `thumb_${imageName}`);
   }));
 
-  const moverRef = moverDbRef.child(moverId);
+  // const moverRef = moverDbRef.child(moverId);
   const mappedCrewMembers = crewMembers.map((c, index) => {
     c.avatar = crewMemberAvatars[index];
     return c;
@@ -90,7 +94,8 @@ export const updateCrewMember = (moverInfo, moverId) => async dispatch => {
   const updatedMoverInfo = Object.assign({}, moverInfo, {
     crewMembers: mappedCrewMembers
   });
-  await moverRef.set(updatedMoverInfo);
+  const moverDocRef = await moverCollectionRef.doc(moverId);
+  await moverDocRef.update(updatedMoverInfo);
   return dispatch({
     type: LOADED_MOVER_PROFILE,
     data: {
@@ -105,16 +110,21 @@ const _uploadLogo = async (logo, moverId) => {
   if (typeof logo === 'string') {
     return logo;
   }
-  const imgRef = imgStorageRef.child(`images/mover/${moverId}/${logo.name}`);
+  const imageName = randomFileName(logo.name);
+  const imgRef = imgStorageRef.child(`images/mover/${moverId}/${imageName}`);
   const result = await imgRef.put(logo);
-  return result.downloadURL;
+  return result.downloadURL.replace(imageName, `thumb_${imageName}`);
 };
 
 
 export const updateVehicles = (moverInfo, moverId) => async dispatch => {
   // const { vehiclesInfo } = moverInfo;
-    const moverRef = moverDbRef.child(moverId);
-    await moverRef.set(moverInfo);
+    // const moverRef = moverDbRef.child(moverId);
+    // await moverRef.set(moverInfo);
+
+    const moverDocRef = await moverCollectionRef.doc(moverId);
+    await moverDocRef.update(moverInfo);
+
     return dispatch({
       type: LOADED_MOVER_PROFILE,
       data: {

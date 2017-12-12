@@ -1,11 +1,3 @@
-import React from 'react';
+import Management from './Management';
 
-const ProjectManagement = () => {
-  return (
-    <div>
-      This is management page
-    </div>
-  );
-};
-
-export default ProjectManagement;
+export default Management;

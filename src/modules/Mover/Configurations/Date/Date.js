@@ -1,4 +1,5 @@
 import React from 'react';
+import isNull from 'lodash/isNull';
 import { Field } from 'redux-form/immutable';
 import { Button } from '../../../../globalComponents/Form';
 import Grid from '../../../../globalComponents/Grid';
@@ -8,7 +9,6 @@ import SearchStepTimeSelection from './TimeSelection';
 import DeliveryDateSelection from './DeliveryDateSelection';
 import Layout from '../../../../globalComponents/Layout';
 import { Heading, Paragraph } from '../../../../globalComponents/Typography';
-
 
 const { Form, FormActions, FormHeading, FormInner } = Layout.Form;
 
@@ -22,19 +22,37 @@ const renderDateSelection = ({ input, label }) => {
   );
 };
 
-const renderTimeRangeSelection = ({ input }) => {
+const renderTimeRangeSelection = ({ input, label }) => {
   return (
-    <SearchStepTimeSelection value={input.value} onChange={input.onChange} />
+    <SearchStepTimeSelection
+      label={label}
+      value={input.value}
+      onChange={input.onChange}
+    />
   );
 };
 
 const renderDeliveryDateSelection = ({ input, label }) => {
   return (
-    <DeliveryDateSelection value={input.value || undefined} label={label} onChange={input.onChange} />
+    <DeliveryDateSelection
+      value={input.value || undefined}
+      label={label}
+      onChange={input.onChange}
+    />
   );
 };
 
-const DateTime = ({ handleSubmit, pristine, reset, valid, submitting, goBack }) => {
+const DateTime = ({
+  handleSubmit,
+  pristine,
+  reset,
+  valid,
+  submitting,
+  goBack,
+  selectedPickUpDate,
+  selectedDeliveryDate
+}) => {
+  console.log('selected', selectedDeliveryDate);
   return (
     <Grid.Container>
       <FormHeading>
@@ -56,6 +74,7 @@ const DateTime = ({ handleSubmit, pristine, reset, valid, submitting, goBack }) 
           <Field
             component={renderTimeRangeSelection}
             name="pickUpTime"
+            label="Pick-up time"
           />
 
           <Field
@@ -64,6 +83,11 @@ const DateTime = ({ handleSubmit, pristine, reset, valid, submitting, goBack }) 
             label="Delivery date"
           />
 
+          {selectedDeliveryDate!== 'sameDayDelivery' && !isNull(selectedDeliveryDate) && <Field
+            component={renderTimeRangeSelection}
+            name="deliveryTime"
+            label="Delivery time"
+          />}
         </FormInner>
         <FormActions>
           <Button
@@ -74,11 +98,7 @@ const DateTime = ({ handleSubmit, pristine, reset, valid, submitting, goBack }) 
           >
             Next <Icon icon="arrow-right" />
           </Button>
-          <Button
-            onClick={goBack}
-            style={{ float: 'left' }}
-            ghost
-          >
+          <Button onClick={goBack} style={{ float: 'left' }} ghost>
             <Icon icon="arrow-left" /> Back
           </Button>
         </FormActions>

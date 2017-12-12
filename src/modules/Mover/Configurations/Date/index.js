@@ -1,7 +1,13 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { compose, lifecycle, branch, renderNothing, withProps } from 'recompose';
-import { reduxForm } from 'redux-form/immutable';
+import {
+  compose,
+  lifecycle,
+  branch,
+  renderNothing,
+  withProps
+} from 'recompose';
+import { reduxForm, formValues } from 'redux-form/immutable';
 import DateStep from './Date';
 import scrollToTopOnMount from '../../../Common/scrollToTopOnMount';
 import validators, { validateFunc } from '../../../Common/validators';
@@ -24,6 +30,11 @@ const validate = validateFunc(
     },
     {
       field: 'deliveryDate',
+      validator: 'isRequired',
+      message: 'Required'
+    },
+    {
+      field: 'deliveryTime',
       validator: 'isRequired',
       message: 'Required'
     }
@@ -55,7 +66,7 @@ const enhance = compose(
       return localSaveDateTime(values.toJS());
     },
     onSubmitSuccess: (result, dispatch, props) => {
-      if(props.location.fromOverview) {
+      if (props.location.fromOverview) {
         return props.history.push({
           pathname: '/mover/configurations/overview'
         });
@@ -67,8 +78,8 @@ const enhance = compose(
       });
     }
   }),
-  withProps((props)=> ({
-    goBack: (e) => {
+  withProps(props => ({
+    goBack: e => {
       e.preventDefault();
       props.history.push({
         pathname: '/mover/configurations/address',
@@ -76,6 +87,10 @@ const enhance = compose(
       });
     }
   })),
+  formValues({
+    selectedPickUpDate: 'pickUpDate',
+    selectedDeliveryDate: 'deliveryDate'
+  }),
   scrollToTopOnMount
 );
 
