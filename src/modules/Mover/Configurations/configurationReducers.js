@@ -83,6 +83,7 @@ const initDateTimeState = Immutable.fromJS({
   pickUpDate: null,
   pickUpTime: null,
   deliveryDate: null,
+  deliveryTime: null,
   status: 'UNINIT'
 });
 
@@ -93,6 +94,7 @@ const searchDateTimeStep = (state = initDateTimeState, action) => {
         st.set('pickUpDate', action.data.pickUpDate);
         st.set('pickUpTime', action.data.pickUpTime);
         st.set('deliveryDate', action.data.deliveryDate);
+        st.set('deliveryTime', action.data.deliveryTime);
         st.set('status', 'LOADED');
       });
     }

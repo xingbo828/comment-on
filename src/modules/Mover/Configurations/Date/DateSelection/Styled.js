@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const DateTimeSelectionContainer = styled.div`
-  padding: ${props=>props.theme.spaces.tight};
+  padding: ${props=>props.theme.spaces.base} ${props=>props.theme.spaces.tight};
 `;
 
 export const Label = styled.label`

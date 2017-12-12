@@ -8,7 +8,7 @@ import Layout from '../../../../globalComponents/Layout';
 import { Heading, Paragraph } from '../../../../globalComponents/Typography';
 import { Button, SubLabel, TextArea } from '../../../../globalComponents/Form';
 import Icon from '../../../../globalComponents/Icon';
-import PlaceIdToAddress from './PlaceIdToAddress';
+import PlaceIdToAddress from '../../../../globalComponents/GooglePlaceIdToAddress';
 import { MOVING_SEARCH_TIME_RANGE } from '../../../../constants';
 import {
   Section,
@@ -99,9 +99,12 @@ const ConfigurationOverview = ({
           <SectionInvalid>Invalid date & time configuration.</SectionInvalid>
         );
       }
-      const { pickUpDate, pickUpTime, deliveryDate } = dateTime;
+      const { pickUpDate, pickUpTime, deliveryDate, deliveryTime } = dateTime;
       const mappedPickUpTime = MOVING_SEARCH_TIME_RANGE.find(
         i => i.value === pickUpTime
+      );
+      const mappedDeliveryTime = MOVING_SEARCH_TIME_RANGE.find(
+        i => i.value === deliveryTime
       );
 
       return (
@@ -126,6 +129,12 @@ const ConfigurationOverview = ({
                 : startCase(deliveryDate)}
             </SectionBodyItemContent>
           </SectionBodyItem>
+          {deliveryDate !== 'sameDayDelivery' && <SectionBodyItem>
+            <SectionBodyItemLabel>Delivery time</SectionBodyItemLabel>
+            <SectionBodyItemContent>
+              {mappedDeliveryTime && mappedDeliveryTime.label}
+            </SectionBodyItemContent>
+          </SectionBodyItem>}
         </SectionBody>
       );
     };
@@ -247,7 +256,7 @@ const ConfigurationOverview = ({
       );
     };
     return (
-      <Section noBorder>
+      <Section>
         <SectionHeader>
           <Heading wrapperTag="h2" size="sm">
             Items

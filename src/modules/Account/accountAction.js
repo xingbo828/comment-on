@@ -18,20 +18,22 @@ const _uploadProfileImg = async (img, uid) => {
   if (typeof img === 'string') {
     return img;
   }
-  const profileImgRef = storageRef.child(`images/profile/${uid}/${randomFileName(img.name)}`);
+  const imageName = randomFileName(img.name);
+  const profileImgRef = storageRef.child(`images/profile/${uid}/${imageName}`);
   const result = await profileImgRef.put(img);
-  return result.downloadURL;
+  const downloadUrl = result.downloadURL.replace(imageName, `thumb_${imageName}`);
+  return { downloadUrl, originalUrl: result.downloadURL };
 };
 
 export const updateProfile = profile => async dispatch => {
   const user = auth.currentUser;
-    const photoURL = await _uploadProfileImg(profile.photoURL, user.uid);
-    const updatedProfile = Object.assign({}, profile, { photoURL });
+    const { downloadUrl, originalUrl } = await _uploadProfileImg(profile.photoURL, user.uid);
+    const updatedProfile = Object.assign({}, profile, { photoURL: downloadUrl });
     await user.updateProfile(updatedProfile);
     await _updateUserEmail(user, profile.email)(dispatch);
     dispatch({
       type: UPDATE_PROFILE,
-      data: updatedProfile
+      data: Object.assign({}, profile, { photoURL: originalUrl })
     });
     return updatedProfile;
 };

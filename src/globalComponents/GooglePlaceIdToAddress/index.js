@@ -27,10 +27,11 @@ class PlaceIdToAddress extends Component {
 
   render() {
     const { address } = this.state;
+    const { placeId, google, ...rest } = this.props;
     if (!address) {
       return null;
     }
-    return <span>{address}</span>;
+    return <span {...rest}>{address}</span>;
   }
 }
 

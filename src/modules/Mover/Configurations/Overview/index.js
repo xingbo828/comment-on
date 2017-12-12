@@ -10,6 +10,7 @@ import {
   withProps
 } from 'recompose';
 import Overview from './Overview';
+import { PROJECT_TYPES } from '../../../../constants';
 import scrollToTopOnMount from '../../../Common/scrollToTopOnMount';
 import mapImmutablePropsToPlainProps from '../../../Common/mapImmutablePropsToPlainProps';
 import {
@@ -42,7 +43,7 @@ const mapDispatchToProps = dispatch => ({
   loadItems: () => dispatch(loadItems()),
   getAdditionalNotes: () => dispatch(getAdditionalNotes()),
   setAdditionalNotes: (notes) => dispatch(setAdditionalNotes(notes)),
-  addProject: (config) => dispatch(addProject(config)),
+  addProject: (type, config) => dispatch(addProject(type, config)),
 });
 
 const mapStateToProps = state => ({
@@ -126,7 +127,7 @@ const enhance = compose(
     handleSubmit: async e => {
       e.preventDefault();
       const config = await getLocalstorageStepInfo();
-      const projectId = await props.addProject(config);
+      const projectId = await props.addProject(PROJECT_TYPES.MOVE, config);
       await deleteStepInfo();
       message.success(`Project ${projectId} has been created.`);
       props.history.push({

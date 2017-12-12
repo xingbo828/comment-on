@@ -87,7 +87,8 @@ export const localSaveDateTime = async dateTime => {
       dateTime: {
         pickUpDate: dateTime.pickUpDate.format('YYYYMMDD'),
         pickUpTime: dateTime.pickUpTime,
-        deliveryDate: isObject(dateTime.deliveryDate) ? dateTime.deliveryDate.format('YYYYMMDD') : dateTime.deliveryDate
+        deliveryDate: isObject(dateTime.deliveryDate) ? dateTime.deliveryDate.format('YYYYMMDD') : dateTime.deliveryDate,
+        deliveryTime: dateTime.deliveryTime,
       }
     })
   );
@@ -104,7 +105,8 @@ export const loadDateTime = () => async dispatch => {
     data: {
       pickUpDate: dateTime ? moment(dateTime.pickUpDate) : null,
       pickUpTime: dateTime ? dateTime.pickUpTime : null,
-      deliveryDate: dateTime ? (dateTime.deliveryDate === 'sameDayDelivery' ? dateTime.deliveryDate : moment(dateTime.deliveryDate)) : null
+      deliveryDate: dateTime ? (dateTime.deliveryDate === 'sameDayDelivery' ? dateTime.deliveryDate : moment(dateTime.deliveryDate)) : null,
+      deliveryTime: dateTime ? dateTime.deliveryTime : null
     }
   });
 };

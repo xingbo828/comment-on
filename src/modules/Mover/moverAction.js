@@ -79,9 +79,10 @@ export const updateCrewMember = (moverInfo, moverId) => async dispatch => {
     if (typeof c.avatar === 'string') {
       return Promise.resolve(c.avatar);
     }
-    const imgRef = imgStorageRef.child(`images/mover/${moverId}/${randomFileName(c.avatar.name)}`);
+    const imageName = randomFileName(c.avatar.name);
+    const imgRef = imgStorageRef.child(`images/mover/${moverId}/${imageName}`);
     const result = await imgRef.put(c.avatar)
-    return result.downloadURL;
+    return result.downloadURL.replace(imageName, `thumb_${imageName}`);
   }));
 
   // const moverRef = moverDbRef.child(moverId);
@@ -109,9 +110,10 @@ const _uploadLogo = async (logo, moverId) => {
   if (typeof logo === 'string') {
     return logo;
   }
-  const imgRef = imgStorageRef.child(`images/mover/${moverId}/${randomFileName(logo.name)}`);
+  const imageName = randomFileName(logo.name);
+  const imgRef = imgStorageRef.child(`images/mover/${moverId}/${imageName}`);
   const result = await imgRef.put(logo);
-  return result.downloadURL;
+  return result.downloadURL.replace(imageName, `thumb_${imageName}`);
 };
 
 

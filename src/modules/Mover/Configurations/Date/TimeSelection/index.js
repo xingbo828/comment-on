@@ -4,7 +4,7 @@ import { GroupWrapper } from './Styled';
 import TimeRangeOption from './TimeRangeOption';
 import { MOVING_SEARCH_TIME_RANGE } from '../../../../../constants';
 
-const SearchTimeRangeSelection = ({ value, onChange }) => {
+const SearchTimeRangeSelection = ({ label, value, onChange }) => {
   const renderOptions = options => {
     return options.map(s => (
       <TimeRangeOption key={s.value} label={s.label} value={s.value} />
@@ -15,7 +15,7 @@ const SearchTimeRangeSelection = ({ value, onChange }) => {
     <GroupWrapper>
       <Radio.RadioGroup
         childType="wild"
-        label="Pick-up time"
+        label={label}
         name="vehicle"
         value={value}
         onChange={onChange}

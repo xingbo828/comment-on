@@ -83,7 +83,7 @@ class SingleImageUpload extends Component {
       <StyledContainer className={className}>
           {this.state.imageUrl && (
             <StyleImg shape={shape} size={size}>
-              <img src={this.state.imageUrl} alt={name} />
+                <img src={this.state.imageUrl} alt={name} />
             </StyleImg>
           )}
           {this.state.imageUrl && (

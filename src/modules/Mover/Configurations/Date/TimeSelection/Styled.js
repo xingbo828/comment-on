@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const GroupWrapper = styled.div`
-  padding: ${props=>props.theme.spaces.tight};
+  padding: ${props=>props.theme.spaces.base} ${props=>props.theme.spaces.tight};
   ${props => props.theme.media.greaterThan('md')`
     > div > div {
       margin: 0 -15px;

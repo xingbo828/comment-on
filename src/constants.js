@@ -27,3 +27,8 @@ export const MOVING_SEARCH_TIME_RANGE = [
       value: '17,21'
     }
   ];
+
+
+  export const PROJECT_TYPES = {
+    MOVE: 'MOVE'
+  };
