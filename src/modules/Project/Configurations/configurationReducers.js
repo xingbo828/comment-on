@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux-immutable';
-import configurations from './Configurations/configurationReducers';
+import move from './Move/moveReducers';
 
 
 export default combineReducers({
-  configurations
+  move
 });

@@ -7,8 +7,8 @@ import Dashboard from './Dashboard';
 const MoverProject = ({ match: { isExact } }) => {
   return (
     <Switch>
-      <ProtectedRoute path="/mover/project/:projectId/overview" component={Overview} />
-      <ProtectedRoute path="/mover/project/dashboard" component={Dashboard} />
+      <ProtectedRoute exact path="/mover/project" component={Dashboard} />
+      <ProtectedRoute path="/mover/project/:projectId" component={Overview} />
     </Switch>
   );
 };

@@ -1,14 +1,16 @@
 import React from 'react';
-import { Switch, withRouter } from 'react-router-dom';
+import { Switch, withRouter, Route } from 'react-router-dom';
 import ProtectedRoute from '../Common/ProtectedRoute';
 import Overview from './Overview';
 import Management from './Management';
+import Configurations from './Configurations';
 
 const Project = ({ match: { isExact } }) => {
   return (
     <Switch>
-      <ProtectedRoute path="/project/overview" component={Overview} />
-      <ProtectedRoute path="/project/:projectId/management" component={Management} />
+      <Route path="/project/configurations" component={Configurations} />
+      <ProtectedRoute exact path="/project" component={Overview} />
+      <ProtectedRoute path="/project/:projectId" component={Management} />
     </Switch>
   );
 };

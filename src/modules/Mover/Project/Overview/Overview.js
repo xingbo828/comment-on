@@ -17,7 +17,7 @@ import {
   SectionBodyItem,
   SectionBodyItemLabel,
   SectionBodyItemContent
-} from '../../Configurations/Overview/Styled';
+} from '../../../Project/Configurations/Move/Overview/Styled';
 import { MOVING_SEARCH_TIME_RANGE } from '../../../../constants';
 
 const { Form, FormActions, FormHeading, FormInner } = Layout.Form;

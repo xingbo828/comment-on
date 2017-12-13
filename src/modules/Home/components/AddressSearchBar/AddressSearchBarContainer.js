@@ -5,7 +5,7 @@ import AddressSearchBar from './AddressSearchBar';
 import validators, { validateFunc } from '../../../Common/validators';
 import {
   localSaveAddresses
-} from '../../../Mover/Configurations/configurationActions';
+} from '../../../Project/Configurations/Move/moveActions';
 
 const validate = validateFunc([{
   field: 'pickUpAddress',
@@ -23,7 +23,7 @@ const enhance = compose(
   withProps(props => ({
     navToSearch: () => {
       props.history.push({
-        pathname: '/mover/configurations/address'
+        pathname: '/project/configurations/move/address'
       });
     }
   })),
@@ -43,7 +43,7 @@ const enhance = compose(
     onSubmitSuccess: (result, dispatch, props) => {
       // send user to next step
       props.history.push({
-        pathname: '/mover/configurations/date'
+        pathname: '/project/configurations/move/date'
       });
     }
   })
