@@ -19,6 +19,7 @@ export const SpinWrapper = styled.div`
 export const FullScreenDrop = styled.div`
   background-color: ${props=>props.theme.colors.offWhite};
   opacity: .7;
+  filter: blur(2.5px);
   position: absolute;
   top:0;
   left:0;

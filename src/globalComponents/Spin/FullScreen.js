@@ -57,7 +57,7 @@ FullScreenSpinner.propTypes = {
 };
 
 FullScreenSpinner.defaultProps = {
-  delay: 300
+  delay: 0
 };
 
 export default withTheme(FullScreenSpinner);
