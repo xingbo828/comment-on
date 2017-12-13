@@ -1,3 +1,4 @@
-import MoverProfileContainer from './MoverProfileContainer';
+import MoverProfile from './MoverProfileContainer';
+import MyMoverProfile from './MyMoverProfileContainer';
 
-export default MoverProfileContainer;
+export default { MoverProfile, MyMoverProfile };

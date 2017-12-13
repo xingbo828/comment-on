@@ -3,10 +3,10 @@ import Steps from '../../../../globalComponents/Steps';
 
 const Step = Steps.Step;
 
-const MoverEditSteps = ({current, history, moverId}) => {
+const MoverEditSteps = ({current, history}) => {
   const stepClickHandler = (step) => {
     history.push({
-      pathname: `/mover/edit/${moverId}/${step}`
+      pathname: `/mover/edit/${step}`
     });
   };
 

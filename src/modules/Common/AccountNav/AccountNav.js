@@ -67,7 +67,7 @@ class AccountNav extends React.Component {
               <DisplayName>{user.displayName}</DisplayName>
               <MenuList onClick={this.handleClick}>
                 <MenuItem><Link to="/account">Manage my account</Link></MenuItem>
-                {user.moverId && <MenuItem><Link to={`/mover/edit/${user.moverId}/basic-profile`}>Manage my mover account</Link></MenuItem>}
+                {user.moverId && <MenuItem><Link to={`/mover/edit/basic-profile`}>Manage my mover account</Link></MenuItem>}
                 <MenuItem><a href="" onClick={this.handleLogout}>Logout</a></MenuItem>
               </MenuList>
           </Menu>

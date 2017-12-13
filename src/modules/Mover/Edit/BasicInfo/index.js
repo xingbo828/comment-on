@@ -57,8 +57,8 @@ const validate = validateFunc(
 
 
 const mapDispatchToProps = dispatch => ({
-  getMover: (moverId) => dispatch(getMover(moverId)),
-  updateBasicInfo: (moverInfo, moverId) => dispatch(updateBasicInfo(moverInfo, moverId))
+  getMover: () => dispatch(getMover()),
+  updateBasicInfo: (moverInfo) => dispatch(updateBasicInfo(moverInfo))
 });
 
 const mapStateToProps = state => ({
@@ -70,7 +70,7 @@ const isLoading = props => props.status !== 'LOADED';
 
 const goToNextStep = (props, step) => {
   props.history.push({
-    pathname: `/mover/edit/${props.match.params.moverId}/${step}`,
+    pathname: `/mover/edit/${step}`,
   });
 };
 
@@ -80,8 +80,9 @@ const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
     componentDidMount() {
-      const moverId = this.props.match.params.moverId;
-      this.props.getMover(moverId);
+      if(this.props.status === 'UNINIT') {
+        this.props.getMover();
+      }
     }
   }),
   branch(isLoading, renderNothing),
@@ -89,7 +90,7 @@ const enhance = compose(
     form: 'mover.edit.basicInfo',
     validate,
     onSubmit: (values, dispatch, props) => {
-      return props.updateBasicInfo(values.toJS(), props.match.params.moverId);
+      return props.updateBasicInfo(values.toJS());
     },
     onSubmitSuccess: (values, dispatch, props) => {
       message.success('Basic information saved.');

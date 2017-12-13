@@ -11,28 +11,28 @@ import FadeInRouteTransition from '../../Common/RouteTransitions/FadeInRouteTran
 const MoverEdit = ({ location, history, match }) => {
   const paths = [
     {
-      path: `/mover/edit/:moverId/basic-profile`,
+      path: `${match.url}/basic-profile`,
       component: BasicInfo
     },
     {
-      path: `/mover/edit/:moverId/crew-member`,
+      path: `${match.url}/crew-member`,
       component: CrewMember
     },
     {
-      path: `/mover/edit/:moverId/vehicles`,
+      path: `${match.url}/vehicles`,
       component: Vehicles
     }
   ];
 
   const getCurrentStep = (history, moverId) => {
-    return paths.findIndex((p)=>p.path.replace(':moverId', moverId) === history.location.pathname);
+    return paths.findIndex(p => p.path === history.location.pathname);
   }
 
   return (
     <div>
-      <MoverEditSteps current={getCurrentStep(history, match.params.moverId)} moverId={match.params.moverId} history={history} />
+      <MoverEditSteps current={getCurrentStep(history)} history={history} />
       <TransitionGroup>
-        <FadeInRouteTransition minHeight={500} key={location.key}>
+        <FadeInRouteTransition minHeight={800} key={location.key}>
           {() => (
             <Switch location={location}>
               {

@@ -12,23 +12,23 @@ import FadeInRouteTransition from '../../../Common/RouteTransitions/FadeInRouteT
 const MoveConfigurations = ({ location, history, match }) => {
   const paths = [
     {
-      path: '/project/configurations/move/address',
+      path: `${match.url}/address`,
       component: AddressStep
     },
     {
-      path: '/project/configurations/move/date',
+      path: `${match.url}/date`,
       component: DateStep
     },
     {
-      path: '/project/configurations/move/logistics',
+      path: `${match.url}/logistics`,
       component: LogisticsStep
     },
     {
-      path: '/project/configurations/move/items',
+      path: `${match.url}/items`,
       component: Items
     },
     {
-      path: '/project/configurations/move/overview',
+      path: `${match.url}/overview`,
       component: Overview
     }
   ];

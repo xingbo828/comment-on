@@ -9,8 +9,8 @@ import message from '../../../../globalComponents/Message';
 import scrollToTopOnMount from '../../../Common/scrollToTopOnMount';
 
 const mapDispatchToProps = dispatch => ({
-  getMover: (moverId) => dispatch(getMover(moverId)),
-  updateVehicles: (moverInfo, moverId) => dispatch(updateVehicles(moverInfo, moverId))
+  getMover: () => dispatch(getMover()),
+  updateVehicles: (moverInfo) => dispatch(updateVehicles(moverInfo))
 });
 
 const mapStateToProps = state => ({
@@ -22,7 +22,7 @@ const isLoading = props => props.status !== 'LOADED';
 
 const goToNextStep = (props) => {
   props.history.push({
-    pathname: `/mover/profile/${props.match.params.moverId}`,
+    pathname: `/mover/my-profile`,
   });
 };
 
@@ -31,8 +31,9 @@ const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
     componentDidMount() {
-      const moverId = this.props.match.params.moverId;
-      this.props.getMover(moverId);
+      if(this.props.status === 'UNINIT') {
+        this.props.getMover();
+      }
     }
   }),
   branch(isLoading, renderNothing),
@@ -40,7 +41,7 @@ const enhance = compose(
   reduxForm({
     form: 'mover.edit.vehicles',
     onSubmit: (values, dispatch, props) => {
-      return props.updateVehicles(values.toJS(), props.match.params.moverId);
+      return props.updateVehicles(values.toJS());
     },
     onSubmitSuccess: (values, dispatch, props) => {
       message.success('Vehicle information saved.');

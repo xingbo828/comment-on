@@ -9,8 +9,8 @@ import message from '../../../../globalComponents/Message';
 import scrollToTopOnMount from '../../../Common/scrollToTopOnMount';
 
 const mapDispatchToProps = dispatch => ({
-  getMover: (moverId) => dispatch(getMover(moverId)),
-  updateCrewMember: (moverInfo, moverId) => dispatch(updateCrewMember(moverInfo, moverId))
+  getMover: () => dispatch(getMover()),
+  updateCrewMember: (moverInfo) => dispatch(updateCrewMember(moverInfo))
 });
 
 const mapStateToProps = state => ({
@@ -20,7 +20,7 @@ const mapStateToProps = state => ({
 
 const goToNextStep = (props, step) => {
   props.history.push({
-    pathname: `/mover/edit/${props.match.params.moverId}/${step}`,
+    pathname: `/mover/edit/${step}`,
   });
 };
 
@@ -31,15 +31,16 @@ const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
     componentDidMount() {
-      const moverId = this.props.match.params.moverId;
-      this.props.getMover(moverId);
+      if(this.props.status === 'UNINIT') {
+        this.props.getMover();
+      }
     }
   }),
   branch(isLoading, renderNothing),
   reduxForm({
     form: 'mover.edit.crewMember',
     onSubmit: (values, dispatch, props) => {
-      return props.updateCrewMember(values.toJS(), props.match.params.moverId);
+      return props.updateCrewMember(values.toJS());
     },
     onSubmitSuccess: (values, dispatch, props) => {
       message.success('Crew members saved.');

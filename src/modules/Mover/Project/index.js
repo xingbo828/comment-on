@@ -4,11 +4,11 @@ import ProtectedRoute from '../../Common/ProtectedRoute';
 import Overview from './Overview';
 import Dashboard from './Dashboard';
 
-const MoverProject = ({ match: { isExact } }) => {
+const MoverProject = ({ match }) => {
   return (
     <Switch>
-      <ProtectedRoute exact path="/mover/project" component={Dashboard} />
-      <ProtectedRoute path="/mover/project/:projectId" component={Overview} />
+      <ProtectedRoute exact path={`${match.url}`} component={Dashboard} />
+      <ProtectedRoute path={`${match.url}/:projectId`} component={Overview} />
     </Switch>
   );
 };
