@@ -212,7 +212,7 @@ const MoverProjectOverview = ({
     return (<Section noBorder>
       <SectionHeader>
         <Heading wrapperTag="h2" size="sm">
-          Additional Notes
+          Customer notes
         </Heading>
       </SectionHeader>
       <SectionBody>

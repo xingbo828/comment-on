@@ -24,6 +24,7 @@ import {
 const { Form, FormActions, FormHeading, FormInner } = Layout.Form;
 
 const ConfigurationOverview = ({
+  loginStatus,
   setAdditionalNotes,
   additionalNotes,
   addresses: rootAddresses,
@@ -32,7 +33,8 @@ const ConfigurationOverview = ({
   items,
   validators,
   handleSubmit,
-  goBack
+  goBack,
+  signIn
 }) => {
   const areFieldsValidate = (addresses, dateTime, logistics, validators) => {
     const isValid =
@@ -313,7 +315,7 @@ const ConfigurationOverview = ({
           {renderAdditionalNoteSection(additionalNotes, setAdditionalNotes)}
         </FormInner>
         <FormActions>
-          <Button
+          {loginStatus === 'AUTHENTICATED' && <Button
             style={{ float: 'right' }}
             type="submit"
             primary
@@ -327,7 +329,22 @@ const ConfigurationOverview = ({
             }
           >
             Submit <Icon icon="arrow-right" />
-          </Button>
+          </Button>}
+          {loginStatus === 'NOT_AUTHENTICATED' && <Button
+            style={{ float: 'right' }}
+            primary
+            onClick={signIn}
+            disabled={
+              !areFieldsValidate(
+                rootAddresses.addresses,
+                dateTime,
+                logistics,
+                validators
+              )
+            }
+          >
+            Sign in <Icon icon="sign-in" />
+          </Button>}
           <Button style={{ float: 'left' }} ghost onClick={goBack}>
             <Icon icon="arrow-left" /> Back
           </Button>

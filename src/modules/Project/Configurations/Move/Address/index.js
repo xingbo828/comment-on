@@ -1,7 +1,7 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { compose, lifecycle, branch, renderNothing, shouldUpdate } from 'recompose';
+import { compose, lifecycle, branch, renderNothing } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import AddressStep from './Address';
 import scrollToTopOnMount from '../../../../Common/scrollToTopOnMount';
@@ -66,10 +66,7 @@ const enhance = compose(
       });
     }
   }),
-  scrollToTopOnMount,
-  shouldUpdate((props, nextProps) => {
-    return false;
-  })
+  scrollToTopOnMount
 );
 
 export default enhance(AddressStep);

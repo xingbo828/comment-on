@@ -51,6 +51,7 @@ export const isValidPostalCode = (value) => {
 
 // Specific validators
 export const isValidAddressesInput = (value) => {
+  console.log('wtf');
   const pickUpAddress = value.pickUpAddress || value.get('pickUpAddress');
   const deliveryAddress = value.deliveryAddress || value.get('deliveryAddress');
   return (pickUpAddress && deliveryAddress);

@@ -7,13 +7,12 @@ export const PROJECT_CREATED = 'PROJECT_CREATED';
 
 export const addProject = (projectType, configuration) => async dispatch => {
   const uid = auth.currentUser.uid;
-  const name = auth.currentUser.displayName;
   const project = Object.assign(
     {},
-    { type: projectType, configuration, owner: { uid, name } }
+    { type: projectType, configuration, owner: uid }
   );
   const projectRef = await projectCollectionRef.add(project);
   const projectId = projectRef.id;
-  await updateUserProjectIds(projectId, uid)(dispatch);
+  await updateUserProjectIds(projectId)(dispatch);
   return projectId;
 };

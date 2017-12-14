@@ -1,28 +1,23 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { compose, lifecycle } from 'recompose';
-import { reduxForm, formValues } from 'redux-form/immutable';
+import { compose } from 'recompose';
+import { reduxForm } from 'redux-form/immutable';
 import Profile from './Profile';
 import {
-  updateProfile,
-  sendEmailConfirmation,
-  dismissEmailConfirmation
+  updateProfile
 } from '../accountAction';
-import { getUser, getEmailConfirmationVisible } from '../accountReducer';
+import { getUser } from '../accountReducer';
 import { withSettingsContext } from '../../Common/Settings';
 import validators, { validateFunc } from '../../Common/validators';
 import message from '../../../globalComponents/Message';
 
 const mapStateToProps = state => ({
-  initialValues: getUser(state).user,
-  isEmailConfirmationVisible: getEmailConfirmationVisible(state)
+  initialValues: getUser(state).user
 });
 
 
 const mapDispatchToProps = dispatch => ({
-  updateProfile: profile => dispatch(updateProfile(profile)),
-  sendEmailConfirmation: () => dispatch(sendEmailConfirmation()),
-  dismissEmailConfirmation: () => dispatch(dismissEmailConfirmation())
+  updateProfile: profile => dispatch(updateProfile(profile))
 });
 
 const validate = validateFunc(
@@ -45,17 +40,6 @@ const enhance = compose(
   withRouter,
   withSettingsContext,
   connect(mapStateToProps, mapDispatchToProps),
-  lifecycle({
-    componentWillReceiveProps(nextProps) {
-      if (nextProps.isEmailConfirmationVisible) {
-        message.info(
-          `A confirmation email has been sent to your inbox.`,
-          0,
-          this.props.dismissEmailConfirmation
-        );
-      }
-    }
-  }),
   reduxForm({
     form: 'account.profile',
     onSubmit: (values, dispatch, props) => {
@@ -68,9 +52,7 @@ const enhance = compose(
     onSubmitFail: (submitErr, dispatch, error) => {
       message.error(error.message, 0);
     }
-  }),
-  formValues({'currentEmailValue': 'email'}),
-
+  })
 );
 
 export default enhance(Profile);

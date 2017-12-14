@@ -11,7 +11,7 @@ import { Heading, Paragraph } from '../../../../../globalComponents/Typography';
 
 const { Form, FormActions, FormHeading } = Layout.Form;
 
-const renderAddressSelection = ({ input, label, desc }) => {
+const renderAddressSelection = ({ input, label, desc, ...rest }) => {
   const value = Immutable.Iterable.isIterable(input.value)
     ? input.value.toJS()
     : input.value;
