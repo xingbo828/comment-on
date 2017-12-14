@@ -5,7 +5,6 @@ const userCollectionRef = firestore.collection('users');
 
 export const UPDATE_PROFILE = 'UPDATE_PROFILE';
 
-
 const _uploadProfileImg = async (img, uid) => {
   if (typeof img === 'string') {
     return { originalUrl : img, photoURLUpdated: false };
