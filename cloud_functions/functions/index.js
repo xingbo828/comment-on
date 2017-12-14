@@ -26,9 +26,10 @@ app.get('*', (request, response) => {
 exports.business = functions.https.onRequest(app);
 
 const leads = require('./lead');
+const users = require('./user');
 const storage = require('./storage');
 
-Object.assign(exports, leads, storage);
+Object.assign(exports, leads, users, storage);
 
 const extractCity = (placeData) => {
     const location = {};

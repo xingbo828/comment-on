@@ -84,9 +84,8 @@ export const addMover = moverInfo => async dispatch => {
 
   const moverDocRef = await moverCollectionRef.add({});
   const moverId = moverDocRef.id;
-  const uid = auth.currentUser.uid;
   const logo = await _uploadLogo(moverInfo.logo, moverId);
-  await updateUserMoverRef(moverId, uid)(dispatch);
+  await updateUserMoverRef(moverId)(dispatch);
   await moverDocRef.update(Object.assign(moverInfo, {
     logo
   }));

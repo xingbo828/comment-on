@@ -13,6 +13,7 @@ import Overview from './Overview';
 import { PROJECT_TYPES } from '../../../../../constants';
 import scrollToTopOnMount from '../../../../Common/scrollToTopOnMount';
 import mapImmutablePropsToPlainProps from '../../../../Common/mapImmutablePropsToPlainProps';
+import isLoggedIn from '../../../../Common/isLoggedIn';
 import {
   loadItems,
   loadDateTime,
@@ -134,6 +135,13 @@ const enhance = compose(
         pathname: `/project/${projectId}`,
       });
     },
+    signIn: e => {
+      e.preventDefault();
+      props.history.push({
+        pathname: '/login',
+        search: `?redirect=${props.location.pathname}${props.location.search}`
+      });
+    },
     goBack: e => {
       e.preventDefault();
       props.history.push({
@@ -142,6 +150,7 @@ const enhance = compose(
       });
     }
   })),
+  isLoggedIn,
   mapImmutablePropsToPlainProps,
   scrollToTopOnMount
 );

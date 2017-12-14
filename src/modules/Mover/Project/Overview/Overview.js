@@ -212,7 +212,7 @@ const MoverProjectOverview = ({
     return (<Section noBorder>
       <SectionHeader>
         <Heading wrapperTag="h2" size="sm">
-          Additional Notes
+          Customer notes
         </Heading>
       </SectionHeader>
       <SectionBody>
@@ -224,7 +224,7 @@ const MoverProjectOverview = ({
   return (
     <Grid.Container>
       <FormHeading>
-        <Heading wrapperTag="h1">{overviewData.owner.name}</Heading>
+        <Heading wrapperTag="h1">{overviewData.owner.displayName}</Heading>
       </FormHeading>
       <Form onSubmit={handleReply}>
         <FormInner>
