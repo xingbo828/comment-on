@@ -4,7 +4,7 @@ import { Button, TextField } from '../../../globalComponents/Form';
 import { FormContainer } from './Styled';
 
 const renderTextArea = ({ input, ...rest }) => {
-  return <TextField input={input} {...rest} />;
+  return <TextField autoComplete="off" input={input} {...rest} />;
 };
 const ConversationForm = ({ handleSubmit, pristine, valid, submitting }) => {
   return (

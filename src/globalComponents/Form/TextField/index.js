@@ -7,13 +7,13 @@ import {
   InputErrorMsg
 } from './Styled'
 
-const TextField = ({ label, type, placeholder, input, meta: { touched, error, warning }}) => {
+const TextField = ({ label, type, autoComplete, placeholder, input, meta: { touched, error, warning }}) => {
   return (
     <InputContainer>
       {label && <Label>
         {label}
       </Label>}
-      <Input {...input} type={type} placeholder={placeholder}/>
+      <Input {...input} type={type} autoComplete={autoComplete} placeholder={placeholder}/>
       <FocusBorder />
       {touched &&
       ((error &&
@@ -29,7 +29,8 @@ TextField.defaultProps = {
   meta: {},
   placeholder: '',
   label: '',
-  type: 'text'
+  type: 'text',
+  autoComplete: 'on'
 };
 
 export default TextField;
