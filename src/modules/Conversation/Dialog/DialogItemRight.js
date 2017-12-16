@@ -12,9 +12,6 @@ import {
 
 const DialogItemRight = ({msg}) => {
   const getTime = (timestamp) => {
-    if(!timestamp) {
-      return 'Now';
-    }
     return moment(timestamp).calendar();
   };
   return (
@@ -23,7 +20,7 @@ const DialogItemRight = ({msg}) => {
         <ContentWrapper>
           <SenderName>Me</SenderName>
           <DislogItemRightContent>{msg.text}</DislogItemRightContent>
-          <MsgTime>{getTime(msg.timestamp)}</MsgTime>
+          {msg.timestamp && <MsgTime>{getTime(msg.timestamp)}</MsgTime>}
         </ContentWrapper>
       </DialogItemRightContainer>
   );

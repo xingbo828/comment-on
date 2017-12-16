@@ -23,27 +23,21 @@ class Dialog extends Component {
     return msgs.map(msg => {
       if (msg.from.uid === uid) {
         return (
-          <Animation.Translate
-            origin="-7rem"
-            dest="0"
-            direction="x"
-            timeout={350}
+          <Animation.Fade
+            timeout={300}
             key={msg.id}
           >
             {() => <DialogItemRight msg={msg} />}
-          </Animation.Translate>
+          </Animation.Fade>
         );
       }
       return (
-        <Animation.Translate
-            origin="7rem"
-            dest="0"
-            direction="x"
-            timeout={350}
+        <Animation.Fade
+            timeout={300}
             key={msg.id}
           >
             {() => <DialogItemLeft msg={msg} />}
-          </Animation.Translate>
+          </Animation.Fade>
       );
 
     });
