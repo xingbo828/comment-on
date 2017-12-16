@@ -65,7 +65,7 @@ export const subscribeToMessages = (conversationId) => async dispatch => {
   const messageCollectionRef = conversationCollectionRef.doc(conversationId).collection('messages');
   messageCollectionRef.orderBy('timestamp').onSnapshot(async (msgCollectionSnapShot) => {
     const unFilteredmessages = await Promise.all(msgCollectionSnapShot.docChanges.map(async change => {
-      if(change.type !== 'added') {
+      if(change.doc.metadata.hasPendingWrites) {
         return null;
       }
       const message = change.doc.data();

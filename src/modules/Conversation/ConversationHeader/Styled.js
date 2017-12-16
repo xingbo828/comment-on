@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 
 export const ConversationHeaderCloseBtn = styled.button`
+  z-index: ${props=>props.theme.zIndex.popover};
   position: absolute;
   top: 1rem;
   left: 1rem;

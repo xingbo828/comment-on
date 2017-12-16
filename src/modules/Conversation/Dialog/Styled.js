@@ -24,11 +24,46 @@ export const DislogItemContent = styled.span`
   padding: ${props=>props.theme.spaces.tight} ${props=>props.theme.spaces.base};
   color: white;
   border-radius: 5px;
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: 0.313em solid transparent;
+    border-right-color: ${props=>props.theme.colors.secondary};;
+    border-left: 0;
+    border-top: 0;
+    margin-top: -0.156em;
+    margin-left: -0.312em;
+  }
+
+
+
 `;
 
 export const DislogItemRightContent = DislogItemContent.extend`
   background-color: ${props=>props.theme.colors.primary};
-`;
+  &:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: 0.313em solid transparent;
+    border-left-color: ${props=>props.theme.colors.primary};
+    border-right: 0;
+    border-top: 0;
+    margin-left: auto;
+    left: auto;
+    margin-top: -0.156em;
+    margin-right: -0.312em;
+  }
+ `;
 
 export const ContentWrapper = styled.div`
   display: flex;
