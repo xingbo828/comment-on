@@ -11,7 +11,7 @@ const ConversationHeader = ({
   return (
     <ConversationHeaderContainer>
       <ConversationHeaderCloseBtn onClick={closeConversation}>
-        <Icon icon="times" />
+        <Icon icon="times" size="lg" />
       </ConversationHeaderCloseBtn>
     </ConversationHeaderContainer>
   );

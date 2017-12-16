@@ -52,5 +52,10 @@ injectGlobal`
     * {
       box-sizing: border-box;
     }
+
+    &.is-locked {
+      overflow-y: hidden;
+    }
+
   }
 `;
