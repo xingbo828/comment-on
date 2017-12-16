@@ -23,7 +23,17 @@ const enhance = compose(
   lifecycle({
     componentWillReceiveProps(nextProps) {
       const isVisible = nextProps.conversation.get('visible');
-      document.body.classList.toggle('is-locked', isVisible);
+      const preventMobileScroll = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+      };
+
+      if(isVisible) {
+        document.body.addEventListener('touchmove', preventMobileScroll);
+      } else {
+        document.body.removeEventListener('touchmove', preventMobileScroll);
+      }
+
 
       const newConversationId = nextProps.conversation.get('conversationId');
       const currentConversationId = this.props.conversation.get('conversationId');
