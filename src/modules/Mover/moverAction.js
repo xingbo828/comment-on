@@ -3,6 +3,8 @@ import {
   storage,
   firestore
 } from '../../firebaseClient';
+import isUndefined from 'lodash/isUndefined';
+import omit from 'lodash/omit';
 import { randomFileName } from '../Common/utils/file';
 import { updateUserMoverRef } from '../Account/accountAction';
 
@@ -86,9 +88,10 @@ export const addMover = moverInfo => async dispatch => {
   const moverId = moverDocRef.id;
   const logo = await _uploadLogo(moverInfo.logo, moverId);
   await updateUserMoverRef(moverId)(dispatch);
-  await moverDocRef.update(Object.assign(moverInfo, {
+  const updatedMoverInfo = isUndefined(logo) ? omit(moverInfo, ['logo']) : Object.assign(moverInfo, {
     logo
-  }));
+  });
+  await moverDocRef.update(updatedMoverInfo);
   return moverId;
 };
 
@@ -96,9 +99,11 @@ export const updateBasicInfo = (moverInfo) => async dispatch => {
   const moverId = await _getMyMoverId();
   const logo = await _uploadLogo(moverInfo.logo, moverId);
   const moverDocRef = await moverCollectionRef.doc(moverId);
-  const updatedMoverInfo = Object.assign(moverInfo, {
+
+  const updatedMoverInfo = isUndefined(logo) ? omit(moverInfo, ['logo']) : Object.assign(moverInfo, {
     logo
   });
+
   await moverDocRef.update(updatedMoverInfo);
   return dispatch({
     type: LOADED_MOVER_PROFILE,
@@ -144,7 +149,7 @@ export const updateCrewMember = (moverInfo) => async dispatch => {
 
 
 const _uploadLogo = async (logo, moverId) => {
-  if (typeof logo === 'string') {
+  if (isUndefined(logo) || typeof logo === 'string') {
     return logo;
   }
   const imageName = randomFileName(logo.name);

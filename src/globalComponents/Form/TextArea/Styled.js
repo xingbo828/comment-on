@@ -12,6 +12,7 @@ export const InputErrorMsg = styled.span`
 `;
 
 export const Input = styled.textarea`
+  resize: ${props=>props.resizable ? 'auto' : 'none'};
   margin: 0;
   display: block;
   width: 100%;

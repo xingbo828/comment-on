@@ -7,7 +7,7 @@ import {
   InputErrorMsg
 } from './Styled';
 
-const TextArea = ({ label, placeholder, rows, input, meta: { touched, error, warning }}) => {
+const TextArea = ({ resizable, label, placeholder, rows, input, meta: { touched, error, warning }}) => {
   return (
     <InputContainer>
       {label && <InputLabel>{label}</InputLabel>}
@@ -26,7 +26,8 @@ TextArea.defaultProps = {
   meta: {},
   placeholder: '',
   label: '',
-  type: 'text'
+  type: 'text',
+  resizable: true
 };
 
 export default TextArea;

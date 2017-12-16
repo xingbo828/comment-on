@@ -68,7 +68,7 @@ const enhance = compose(
     },
     onSubmitSuccess: (moverId, dispatch, props) => {
       props.history.push({
-        pathname: `/mover/edit/${moverId}/crew-member`
+        pathname: `/mover/edit/crew-member`
       });
     },
     onSubmitFail: (errors, dispatch, submitError) => {
