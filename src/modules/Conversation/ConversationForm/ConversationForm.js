@@ -1,10 +1,10 @@
 import React from 'react';
 import { Field } from 'redux-form/immutable';
-import { Button, TextArea } from '../../../globalComponents/Form';
+import { Button, TextField } from '../../../globalComponents/Form';
 import { FormContainer } from './Styled';
 
 const renderTextArea = ({ input, ...rest }) => {
-  return <TextArea input={input} resizable={false} {...rest} />;
+  return <TextField input={input} {...rest} />;
 };
 const ConversationForm = ({ handleSubmit, pristine, valid, submitting }) => {
   return (

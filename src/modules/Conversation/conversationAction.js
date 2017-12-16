@@ -68,6 +68,7 @@ export const subscribeToMessages = (conversationId) => async dispatch => {
       if(change.type !== 'added') {
         return null;
       }
+      debugger;
       const message = change.doc.data();
       const fromUid = message.from;
       const fromRef = await userCollectionRef.doc(fromUid).get();

@@ -7,6 +7,7 @@ export const FormContainer = styled.form`
   height: 70px;
   display: flex;
   justify-content: space-around;
+  border-top: 1px solid ${props=>props.theme.colors.border};
   align-items: center;
 
   > div {

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const DialogContainer = styled.ul`
   padding: 0;
   margin: 0;
-  height: calc(100vh - 140px);
+  height: calc(100vh - 160px);
   overflow-y: scroll;
 `;
 
