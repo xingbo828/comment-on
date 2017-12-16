@@ -11,7 +11,6 @@ import Nav from './modules/Common/Nav';
 import Footer from './modules/Common/Footer';
 import asyncLoad from './modules/Common/asyncLoad';
 import Conversation from './modules/Conversation';
-import ChatTester from './modules/Conversation/ChatTester';
 import './foundation/base.js';
 
 class App extends Component {
@@ -29,7 +28,6 @@ class App extends Component {
               <Route path="/login" component={asyncLoad(() => import('./modules/Account/Login'))} />
             </Switch>
             <Footer />
-            <ChatTester />
             <Conversation />
           </main>
         </ThemeProvider>

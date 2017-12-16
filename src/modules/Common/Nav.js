@@ -5,6 +5,9 @@ import { compose, withProps, branch, renderNothing } from 'recompose';
 import { auth } from '../../firebaseClient';
 import isLoggedIn from './isLoggedIn';
 import AccountNav from './AccountNav';
+import withOpenConversation from '../Conversation/withOpenConversation';
+
+const OpenConversationBtn = withOpenConversation('button');
 
 const fromTheme = (prop) => ({ theme }) => theme.colors[prop]
 
@@ -140,6 +143,7 @@ export const Nav = ({ user, isLoggedIn, logout }) => {
         {/* <Location>Vancouver</Location> */}
         <ContextHeaderLinks>
         </ContextHeaderLinks>
+        <OpenConversationBtn  conversationId="test">My messages</OpenConversationBtn>
         <AccountNav />
       </ContextHeader>
       {/* <NavList>
