@@ -5,6 +5,7 @@ const initState = Immutable.fromJS({
   visible: false,
   conversationId: null,
   status: 'UNINIT',
+  inputFocused: false,
   messages: []
 });
 

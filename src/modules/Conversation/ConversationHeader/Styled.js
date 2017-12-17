@@ -7,6 +7,7 @@ export const ConversationHeaderCloseBtn = styled.button`
   top: 1rem;
   left: 1rem;
   background-image: none;
+  background-color: white;
   border: 1px solid ${props=>props.theme.colors.border};
   border-radius: 50%;
   height: 35px;
