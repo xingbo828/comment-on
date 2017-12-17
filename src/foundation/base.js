@@ -52,10 +52,13 @@ injectGlobal`
     * {
       box-sizing: border-box;
     }
-    ${variables.media.lessThan('sm')`
+    ${variables.media.lessThan('md')`
       &.is-locked {
-        overflow-y: hidden;
-        height: 100%;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        top: 0;
+        left: 0;
     `}
   }
 `;
