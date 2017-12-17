@@ -80,10 +80,11 @@ export const subscribeToMessages = (conversationId) => async dispatch => {
     }));
 
     const messages = unFilteredmessages.filter(a=>a !== null)
-
-    dispatch({
-      type: CONVERSATION__LOADED,
-      data: messages
-    });
+    if(messages.length > 0) {
+      dispatch({
+        type: CONVERSATION__LOADED,
+        data: messages
+      });
+    }
   });
 };
