@@ -41,7 +41,8 @@ const RevealDemo = () => (
 
 const TranslateDemo = () => (
   <Animation.Translate
-    distance={text('distance', '-10rem')}
+    dest={text('dest', '-10rem')}
+    origin={text('origin', '0')}
     direction={text('direction', 'x')}
     timeout={number('timeout', 300)}
     in={boolean('In', true)}

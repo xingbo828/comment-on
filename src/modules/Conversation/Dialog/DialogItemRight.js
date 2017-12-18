@@ -11,13 +11,16 @@ import {
 } from './Styled';
 
 const DialogItemRight = ({msg}) => {
+  const getTime = (timestamp) => {
+    return moment(timestamp).calendar();
+  };
   return (
     <DialogItemRightContainer>
         <Avatar src={msg.from.photoURL} />
         <ContentWrapper>
           <SenderName>Me</SenderName>
           <DislogItemRightContent>{msg.text}</DislogItemRightContent>
-          <MsgTime>{moment().calendar(msg.timestamp)}</MsgTime>
+          {msg.timestamp && <MsgTime>{getTime(msg.timestamp)}</MsgTime>}
         </ContentWrapper>
       </DialogItemRightContainer>
   );

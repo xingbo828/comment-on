@@ -3,8 +3,9 @@ import styled from 'styled-components';
 export const DialogContainer = styled.ul`
   padding: 0;
   margin: 0;
-  height: calc(100vh - 150px);
+  height: calc(100% - 150px);
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 `;
 
 export const DialogItemContainer = styled.li`
@@ -33,6 +34,7 @@ export const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 ${props=>props.theme.spaces.tight};
+  max-width: 80vw;
 `;
 
 

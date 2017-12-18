@@ -1,13 +1,19 @@
 import styled from 'styled-components';
 
-export const ConversationHeaderContainer = styled.div`
-  height: 50px;
-  display: flex;
-  flex-direction: row-reverse;
-  padding: 0 ${props=>props.theme.spaces.wide};
-`;
-
 
 export const ConversationHeaderCloseBtn = styled.button`
-
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-image: none;
+  border: 1px solid ${props=>props.theme.colors.border};
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
+  cursor: pointer;
+  transition: .3s;
+  &:hover {
+    background-color: ${props=>props.theme.colors.secondary};
+    color: white;
+  }
 `;

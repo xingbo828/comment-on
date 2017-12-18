@@ -52,5 +52,9 @@ injectGlobal`
     * {
       box-sizing: border-box;
     }
+    ${variables.media.lessThan('sm')`
+      &.is-locked {
+        overflow-y: hidden;
+    `}
   }
 `;

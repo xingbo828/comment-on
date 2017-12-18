@@ -22,6 +22,9 @@ const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
     componentWillReceiveProps(nextProps) {
+      const isVisible = nextProps.conversation.get('visible');
+      document.body.classList.toggle('is-locked', isVisible);
+
       const newConversationId = nextProps.conversation.get('conversationId');
       const currentConversationId = this.props.conversation.get('conversationId');
       if (
