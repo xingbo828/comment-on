@@ -1,6 +1,7 @@
 const functions = require('firebase-functions');
 const constants = require('../constants');
-const moment = require('moment');
+const admin = require('firebase-admin');
+
 
 module.exports = functions.firestore
   .document("projects/{projectId}")
@@ -10,13 +11,48 @@ module.exports = functions.firestore
     if (typeof(lead) !== 'object') {
       lead = {};
     }
-    lead.lead_status = constants.lead_status.created;
+    lead.status = constants.project_status.created;
     if (!lead.owner || !lead.configuration) {
-      lead.lead_status = constants.lead_status.invalid;
+      lead.status = constants.project_status.invalid;
     }
     lead.id = event.params.projectId;
-    lead.creationTimestamp = moment.utc().unix();
-    lead.updateTimestamp = moment.utc().unix();
+    lead.creationTimestamp = admin.firestore.FieldValue.serverTimestamp();
+    lead.updateTimestamp = admin.firestore.FieldValue.serverTimestamp();
 
-    return event.data.ref.set(lead);
+    const batch = event.data.ref.firestore.batch();
+    return getProviders(lead.configuration, event.data.ref, batch)
+    .then((providerRefPaths) => {
+      lead.receivers = {};
+
+      providerRefPaths.forEach((doc) => {
+        const data = doc.data();
+        lead.receivers[doc.ref.id] = {
+          status: constants.receiver_status.created,
+          provider: doc.ref,
+          email: data.email || 'invalid@invalid.in',
+          status: 'sent'
+        }
+      });
+      batch.set(event.data.ref, lead);
+      return batch.commit();
+    })
+    .then(()=>{
+      console.log('success');
+    }).catch((e)=>{
+      console.log('error: ', e);
+    });
   });
+
+  const getProviders = (configuration, projectRef, batch) => {
+    return admin.firestore().collection('providers').get().then((querySnapshot) => {
+      let result = [];
+      const projectUpdateKey = `projects.${projectRef.id}`;
+      let updateObj = {};
+      updateObj[projectUpdateKey] = projectRef;
+      querySnapshot.forEach((doc)=>{
+        result.push(doc);
+        batch.update(doc.ref, updateObj);
+      });
+      return result;
+    });
+  };

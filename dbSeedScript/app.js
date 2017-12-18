@@ -2,6 +2,7 @@
 
 const bbb = require('./bbbSeedScript');
 const firebase = require('firebase');
+require("firebase/firestore");
 
 const config = {
   apiKey: "AIzaSyD-_qTEnH7-6KSLKtCPHLgdodwBTS45xus",
@@ -12,8 +13,8 @@ const config = {
   messagingSenderId: "177107431871"
 };
 
-const database = firebase.initializeApp(config).database();
-const businessRef = database.ref().child('businesses');
+const database = firebase.initializeApp(config).firestore();
+const businessRef = database.collection('providers');
 
 const supportedServiceArea = ['bc-burnaby', 'bc-vancouver', 'bc-richmond'];
 const standardWeek = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
@@ -85,7 +86,7 @@ bbb.fetch('https://www.bbb.org/mbc/accredited-business-directory/moving-and-stor
 .then((listings) => {
 
   Promise.all(listings.map((listing) => {
-    return businessRef.push(listing)
+    return businessRef.add(listing)
   }))
   .then((success)=> {
     console.log(success);
