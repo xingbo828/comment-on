@@ -7,6 +7,7 @@ import { DialogContainer } from './Styled';
 
 class Dialog extends Component {
   componentDidMount() {
+    console.log(2);
     this.scrollToBottom();
   }
 
@@ -20,27 +21,17 @@ class Dialog extends Component {
 
   renderMessages = msgs => {
     const { uid } = this.props.user;
-    return msgs.map(msg => {
-      if (msg.from.uid === uid) {
-        return (
-          <Animation.Fade
-            timeout={300}
-            key={msg.id}
-          >
-            {() => <DialogItemRight msg={msg} />}
-          </Animation.Fade>
-        );
-      }
-      return (
-        <Animation.Fade
-            timeout={300}
-            key={msg.id}
-          >
-            {() => <DialogItemLeft msg={msg} />}
-          </Animation.Fade>
-      );
-
-    });
+    return msgs.map(msg => (
+      <Animation.Fade timeout={300} key={msg.id}>
+        {() =>
+          msg.from.uid === uid ? (
+            <DialogItemRight msg={msg} />
+          ) : (
+            <DialogItemLeft msg={msg} />
+          )
+        }
+      </Animation.Fade>
+    ));
   };
 
   render() {
@@ -52,7 +43,7 @@ class Dialog extends Component {
           ref={el => {
             this.el = el;
           }}
-          style={{ clear: 'both' }}
+          style={{ height: 100, clear: 'both' }}
         />
       </DialogContainer>
     );

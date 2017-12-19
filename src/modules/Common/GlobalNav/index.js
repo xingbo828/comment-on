@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link, withRouter } from 'react-router-dom';
 import { compose, withProps, branch, renderNothing } from 'recompose';
-import { auth } from '../../firebaseClient';
-import isLoggedIn from './isLoggedIn';
+import { auth } from '../../../firebaseClient';
+import isLoggedIn from '../isLoggedIn';
 import AccountNav from './AccountNav';
-
+import globalNavHiddenList from './globalNavHiddenList.json';
 
 const fromTheme = (prop) => ({ theme }) => theme.colors[prop]
 
@@ -157,6 +157,13 @@ const logout = () => {
   auth.signOut();
 };
 
+const pathMatchesHiddenList = (pathname) => {
+  return globalNavHiddenList.some(pathItem => {
+    const reg = new RegExp(pathItem);
+    return reg.test(pathname)
+  });
+};
+
 const NavContainer = compose(
   withRouter,
   isLoggedIn,
@@ -164,7 +171,7 @@ const NavContainer = compose(
     logout
   })),
   branch(
-    props => props.location.pathname === '/login',
+    props => pathMatchesHiddenList(props.location.pathname),
     renderNothing
   )
 )(Nav);

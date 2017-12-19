@@ -4,6 +4,7 @@ import { compose, renderNothing, branch } from 'recompose';
 import { Footer, OrgContainer, List, ListItem } from './Styled';
 import Grid from '../../../globalComponents/Grid';
 import { Heading } from '../../../globalComponents/Typography';
+import footerHiddenList from './footerHiddenList.json';
 
 const { Container, Row, Col } = Grid;
 
@@ -59,7 +60,14 @@ const FooterNav = props => {
   );
 };
 
+const pathMatchesHiddenList = (pathname) => {
+  return footerHiddenList.some(pathItem => {
+    const reg = new RegExp(pathItem);
+    return reg.test(pathname)
+  });
+};
+
 export default compose(
   withRouter,
-  branch(props => props.location.pathname === '/login', renderNothing)
+  branch(props => pathMatchesHiddenList(props.location.pathname), renderNothing)
 )(FooterNav);

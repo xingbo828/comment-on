@@ -1,7 +1,7 @@
 import { compose, withProps, renderNothing, branch } from 'recompose';
 import AccountNav from './AccountNav';
-import isLoggedIn from '../isLoggedIn';
-import { auth } from '../../../firebaseClient';
+import isLoggedIn from '../../isLoggedIn';
+import { auth } from '../../../../firebaseClient';
 
 const logout = () => {
   auth.signOut();

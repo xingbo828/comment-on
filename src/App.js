@@ -7,10 +7,9 @@ import {
   Route
 } from 'react-router-dom';
 import ProtectedRoute from './modules/Common/ProtectedRoute';
-import Nav from './modules/Common/Nav';
+import GlobalNav from './modules/Common/GlobalNav';
 import Footer from './modules/Common/Footer';
 import asyncLoad from './modules/Common/asyncLoad';
-import Conversation from './modules/Conversation';
 import './foundation/base.js';
 
 class App extends Component {
@@ -19,16 +18,16 @@ class App extends Component {
       <Router>
         <ThemeProvider theme={theme}>
           <main>
-            <Nav />
+            <GlobalNav />
             <Switch>
               <Route exact path="/" component={asyncLoad(() => import('./modules/Home'))} />
               <ProtectedRoute path="/account" component={asyncLoad(() => import('./modules/Account'))} />
               <Route path="/mover" component={asyncLoad(() => import('./modules/Mover'))} />
               <Route path="/project" component={asyncLoad(() => import('./modules/Project'))} />
+              <Route path="/conversation" component={asyncLoad(() => import('./modules/Conversation'))} />
               <Route path="/login" component={asyncLoad(() => import('./modules/Account/Login'))} />
             </Switch>
             <Footer />
-            <Conversation />
           </main>
         </ThemeProvider>
       </Router>

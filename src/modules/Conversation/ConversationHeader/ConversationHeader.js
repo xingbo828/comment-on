@@ -5,11 +5,11 @@ import {
 } from './Styled';
 
 const ConversationHeader = ({
-  closeConversation
+  goBack
 }) => {
   return (
-      <ConversationHeaderCloseBtn onClick={closeConversation}>
-        <Icon icon="times" size="lg" />
+      <ConversationHeaderCloseBtn onClick={goBack}>
+        <Icon icon="arrow-left" size="lg" />
       </ConversationHeaderCloseBtn>
   );
 };

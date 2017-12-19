@@ -1,19 +1,16 @@
+import { withRouter } from 'react-router-dom';
+import { compose, withProps } from 'recompose';
 
-import { connect } from 'react-redux';
-import { compose } from 'recompose';
-
-import { closeConversation } from '../conversationAction';
 import ConversationHeader from './ConversationHeader';
 
-
-
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  closeConversation: () => dispatch(closeConversation()),
-});
-
-
 const enhance = compose(
-  connect(null, mapDispatchToProps)
+  withRouter,
+  withProps(props => ({
+    goBack: e => {
+      e.preventDefault();
+      props.history.goBack();
+    }
+  })),
 );
 
 export default enhance(ConversationHeader);

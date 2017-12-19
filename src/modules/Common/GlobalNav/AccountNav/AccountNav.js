@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Avatar from '../../../globalComponents/Avatar';
+import Avatar from '../../../../globalComponents/Avatar';
 import {
   ContainerDiv,
   Menu,
@@ -9,7 +9,7 @@ import {
   DisplayName
 } from './Styled';
 import DropDownTransition from './DropDownTransition';
-import Badge from '../../../globalComponents/Badge';
+import Badge from '../../../../globalComponents/Badge';
 
 class AccountNav extends React.Component {
 

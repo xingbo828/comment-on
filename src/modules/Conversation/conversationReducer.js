@@ -1,28 +1,13 @@
 import Immutable from 'immutable';
-import { CONVERSATION__OPEN, CONVERSATION__CLOSE,  CONVERSATION__LOADED } from './conversationAction';
+import { CONVERSATION__LOADED } from './conversationAction';
 
 const initState = Immutable.fromJS({
-  visible: false,
-  conversationId: null,
   status: 'UNINIT',
-  inputFocused: false,
   messages: []
 });
 
 export default (state = initState, action) => {
   switch (action.type) {
-    case CONVERSATION__OPEN: {
-      return state.withMutations(st => {
-        st.set('visible', true);
-        st.set('conversationId', action.data);
-      });
-    }
-
-    case CONVERSATION__CLOSE: {
-      return state.withMutations(st => {
-        st.set('visible', false);
-      });
-    }
 
     case CONVERSATION__LOADED: {
       return state.withMutations(st => {
