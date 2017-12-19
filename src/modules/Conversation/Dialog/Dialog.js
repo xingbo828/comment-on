@@ -3,11 +3,10 @@ import { TransitionGroup } from 'react-transition-group';
 import Animation from '../../../globalComponents/Animation';
 import DialogItemLeft from './DialogItemLeft';
 import DialogItemRight from './DialogItemRight';
-import { DialogContainer } from './Styled';
+import { DialogContainer, ContainerWrapper } from './Styled';
 
 class Dialog extends Component {
   componentDidMount() {
-    console.log(2);
     this.scrollToBottom();
   }
 
@@ -16,13 +15,13 @@ class Dialog extends Component {
   }
 
   scrollToBottom = () => {
-    this.el.scrollIntoView({ behavior: 'smooth' });
+    this.wrapper.scroll(0, this.el.offsetTop);
   };
 
   renderMessages = msgs => {
     const { uid } = this.props.user;
     return msgs.map(msg => (
-      <Animation.Fade timeout={300} key={msg.id}>
+      <Animation.Fade component="li" timeout={350} key={msg.id}>
         {() =>
           msg.from.uid === uid ? (
             <DialogItemRight msg={msg} />
@@ -37,15 +36,21 @@ class Dialog extends Component {
   render() {
     const { conversation: { messages } } = this.props;
     return (
-      <DialogContainer>
-        <TransitionGroup>{this.renderMessages(messages)}</TransitionGroup>
-        <div
-          ref={el => {
-            this.el = el;
+      <ContainerWrapper>
+        <DialogContainer
+          innerRef={el => {
+            this.wrapper = el;
           }}
-          style={{ height: 100, clear: 'both' }}
-        />
-      </DialogContainer>
+        >
+          <TransitionGroup>{this.renderMessages(messages)}</TransitionGroup>
+          <div
+            ref={el => {
+              this.el = el;
+            }}
+            style={{ clear: 'both' }}
+          />
+        </DialogContainer>
+      </ContainerWrapper>
     );
   }
 }

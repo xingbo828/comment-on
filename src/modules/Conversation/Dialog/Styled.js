@@ -1,14 +1,21 @@
 import styled from 'styled-components';
 
-export const DialogContainer = styled.ul`
-  padding: 0;
-  margin: 0;
-  height: calc(100% - 70px);
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
+export const ContainerWrapper = styled.div`
+    overflow-y: hidden;
+    display: flex;
+    margin-top: auto;
 `;
 
-export const DialogItemContainer = styled.li`
+
+export const DialogContainer = styled.ul`
+  padding: 16px 8px 0;
+  list-style: none;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+`;
+
+export const DialogItemContainer = styled.div`
   list-style: none;
   display: flex;
   padding: ${props=>props.theme.spaces.base};

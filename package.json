@@ -28,7 +28,6 @@
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",
     "respinner": "^2.2.1",
-    "smoothscroll-polyfill": "^0.4.0",
     "source-map-explorer": "^1.4.0",
     "styled-components": "^2.1.1",
     "styled-media-query": "^2.0.1"

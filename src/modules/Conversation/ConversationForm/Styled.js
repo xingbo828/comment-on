@@ -1,10 +1,13 @@
 import styled from 'styled-components';
 
+
+export const Container = styled.div`
+  background: #f3f6f8;
+`;
+
+
 export const FormContainer = styled.form`
   background-color: white;
-  width: 100%;
-  position: fixed;
-  bottom: 0;
   height: 70px;
   display: flex;
   justify-content: space-around;

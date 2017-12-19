@@ -6,5 +6,8 @@ export const ConversationContainer = styled.section`
   height: 100vh;
   width: 100vw;
   margin: 0 auto;
-
+  display: flex;
+  flex-direction: column;
 `;
+
+

@@ -5,9 +5,6 @@ import App from './App';
 import configureStore from './store/configure-store';
 import registerServiceWorker from './registerServiceWorker';
 import { onAuthChange } from './modules/Account/onAuthChangeAction';
-import smoothscroll from 'smoothscroll-polyfill';
-
-smoothscroll.polyfill();
 
 const store = configureStore();
 ReactDOM.render(

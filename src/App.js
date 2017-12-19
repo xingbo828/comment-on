@@ -24,7 +24,7 @@ class App extends Component {
               <ProtectedRoute path="/account" component={asyncLoad(() => import('./modules/Account'))} />
               <Route path="/mover" component={asyncLoad(() => import('./modules/Mover'))} />
               <Route path="/project" component={asyncLoad(() => import('./modules/Project'))} />
-              <Route path="/conversation" component={asyncLoad(() => import('./modules/Conversation'))} />
+              <ProtectedRoute path="/conversation" component={asyncLoad(() => import('./modules/Conversation'))} />
               <Route path="/login" component={asyncLoad(() => import('./modules/Account/Login'))} />
             </Switch>
             <Footer />

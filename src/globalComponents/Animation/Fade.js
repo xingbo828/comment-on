@@ -14,23 +14,26 @@ const transitionStyles = {
   entered: { opacity: 1 },
 };
 
-const Fade = ({ children, ...rest }) => (
-  <Transition {...rest}>
-    {status => (
-      <div
-        style={{
-          ...defaultStyle(rest.timeout),
-          ...transitionStyles[status],
-        }}
-      >
-        {children(status)}
-      </div>
-    )}
-  </Transition>
-);
+const Fade = ({ children, component, ...rest }) => {
+  const C = component;
+  return (
+    <Transition {...rest}>
+      {status => (
+        <C
+          style={{
+            ...defaultStyle(rest.timeout),
+            ...transitionStyles[status],
+          }}
+        >
+          {children(status)}
+        </C>
+      )}
+    </Transition>
+  );
+}
 Fade.propTypes = {
   timeout: PropTypes.number.isRequired,
-  children: PropTypes.func.isRequired,
+  children: PropTypes.func.isRequired
 };
 
 export default Fade;
