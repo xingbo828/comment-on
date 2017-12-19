@@ -9,6 +9,7 @@ export const ContainerWrapper = styled.div`
 
 export const DialogContainer = styled.ul`
   padding: 16px 8px 0;
+  margin: 0;
   list-style: none;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
@@ -32,6 +33,10 @@ export const DislogItemContent = styled.span`
   color: white;
   border-radius: 5px;
   position: relative;
+
+  ${props=>props.theme.media.greaterThan('md')`
+    max-width: 400px;
+  `}
 
   &:after {
     content: '';

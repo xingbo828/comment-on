@@ -23,7 +23,12 @@ const enhance = compose(
   lifecycle({
     componentDidMount() {
       const conversationId = this.props.match.params.conversationId;
-      this.props.subscribeToMessages(conversationId);
+      this.unsubscribe = this.props.subscribeToMessages(conversationId);
+    },
+    componentWillUnmount() {
+      if(this.unsubscribe) {
+        this.unsubscribe();
+      }
     }
   }),
   mapImmutablePropsToPlainProps

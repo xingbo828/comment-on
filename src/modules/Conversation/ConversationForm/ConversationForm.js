@@ -15,6 +15,7 @@ const ConversationForm = ({
       <Field name="message" component={renderTextArea} />
       <Button
         type="submit"
+        small
         primary
         disabled={submitting || pristine || !valid}>
         Send

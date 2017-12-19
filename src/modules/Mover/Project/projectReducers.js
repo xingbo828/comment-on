@@ -7,31 +7,31 @@ import {
 } from './projectActions';
 
 // Addresses
-const initMoverProjectOverviewState = Immutable.fromJS({
-  overviewData: null,
+const initMoverProjectSummaryState = Immutable.fromJS({
+  summaryData: null,
   status: 'UNINIT'
 });
 
-const overview = (state = initMoverProjectOverviewState, action) => {
+const summary = (state = initMoverProjectSummaryState, action) => {
   switch (action.type) {
     case GET_PROJECT_PENDING: {
       return state.withMutations(st => {
         st.set('status', 'PENDING');
-        st.set('overviewData', null);
+        st.set('summaryData', null);
       });
     }
 
     case GET_PROJECT_SUCCESS: {
       return state.withMutations(st => {
         st.set('status', 'LOADED');
-        st.set('overviewData', Immutable.fromJS(action.data))
+        st.set('summaryData', Immutable.fromJS(action.data))
       });
     }
 
     case GET_PROJECT_FAIL: {
       return state.withMutations(st => {
         st.set('status', 'FAILED');
-        st.set('overviewData', null);
+        st.set('summaryData', null);
       });
     }
 
@@ -42,8 +42,8 @@ const overview = (state = initMoverProjectOverviewState, action) => {
 
 
 export default combineReducers({
-  overview
+  summary
 });
 
 // Selectors
-export const getMoverProjectOverview = (state) => state.getIn(['mover', 'project', 'overview']);
+export const getMoverProjectSummary = (state) => state.getIn(['mover', 'project', 'summary']);

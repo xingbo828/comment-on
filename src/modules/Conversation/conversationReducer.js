@@ -1,5 +1,5 @@
 import Immutable from 'immutable';
-import { CONVERSATION__LOADED } from './conversationAction';
+import { CONVERSATION__INIT, CONVERSATION__LOADED } from './conversationAction';
 
 const initState = Immutable.fromJS({
   status: 'UNINIT',
@@ -8,7 +8,9 @@ const initState = Immutable.fromJS({
 
 export default (state = initState, action) => {
   switch (action.type) {
-
+    case CONVERSATION__INIT: {
+      return initState;
+    }
     case CONVERSATION__LOADED: {
       return state.withMutations(st => {
         st.set('status', 'LOADED');

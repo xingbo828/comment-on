@@ -4,10 +4,7 @@ import isEmpty from 'lodash/isEmpty';
 import capitalize from 'lodash/capitalize';
 import startCase from 'lodash/startCase';
 import Grid from '../../../../globalComponents/Grid';
-import Layout from '../../../../globalComponents/Layout';
 import { Heading, Paragraph } from '../../../../globalComponents/Typography';
-import { Button } from '../../../../globalComponents/Form';
-import Icon from '../../../../globalComponents/Icon';
 import PlaceIdToAddress from '../../../../globalComponents/GooglePlaceIdToAddress';
 import RouteToDistance from './RouteToDistance';
 import {
@@ -18,12 +15,18 @@ import {
   SectionBodyItemLabel,
   SectionBodyItemContent
 } from '../../../Project/Configurations/Move/Overview/Styled';
+
+import {
+  HeadingContainer,
+  HeadingContainerInner,
+  SummaryBody,
+  SummaryReportContainer,
+  SummaryActionFormContainer
+} from './Styled';
 import { MOVING_SEARCH_TIME_RANGE } from '../../../../constants';
 
-const { Form, FormActions, FormHeading, FormInner } = Layout.Form;
-
-const MoverProjectOverview = ({
-  overview: { overviewData },
+const MoverProjectSummary = ({
+  summary: { summaryData },
   handleReply,
   handleDecline
 }) => {
@@ -107,12 +110,14 @@ const MoverProjectOverview = ({
                 : moment(deliveryDate).format('MMMM, D, YYYY')}
             </SectionBodyItemContent>
           </SectionBodyItem>
-          {deliveryDate !== 'sameDayDelivery' && <SectionBodyItem>
-            <SectionBodyItemLabel>Delivery time</SectionBodyItemLabel>
-            <SectionBodyItemContent>
-              {mappedDeliveryTime && mappedDeliveryTime.label}
-            </SectionBodyItemContent>
-          </SectionBodyItem>}
+          {deliveryDate !== 'sameDayDelivery' && (
+            <SectionBodyItem>
+              <SectionBodyItemLabel>Delivery time</SectionBodyItemLabel>
+              <SectionBodyItemContent>
+                {mappedDeliveryTime && mappedDeliveryTime.label}
+              </SectionBodyItemContent>
+            </SectionBodyItem>
+          )}
         </SectionBody>
       </Section>
     );
@@ -206,56 +211,41 @@ const MoverProjectOverview = ({
   };
 
   const renderAdditionalNoteSection = notes => {
-    if (!notes) {
-      return null;
-    }
-    return (<Section noBorder>
-      <SectionHeader>
-        <Heading wrapperTag="h2" size="sm">
-          Customer notes
-        </Heading>
-      </SectionHeader>
-      <SectionBody>
-        <Paragraph>{notes}</Paragraph>
-      </SectionBody>
-    </Section>);
+    return (
+      <Section noBorder>
+        <SectionHeader>
+          <Heading wrapperTag="h2" size="sm">
+            Customer notes
+          </Heading>
+        </SectionHeader>
+        <SectionBody>
+          <Paragraph>{notes || 'No customer notes'}</Paragraph>
+        </SectionBody>
+      </Section>
+    );
   };
 
   return (
-    <Grid.Container>
-      <FormHeading>
-        <Heading wrapperTag="h1">{overviewData.owner.displayName}</Heading>
-      </FormHeading>
-      <Form onSubmit={handleReply}>
-        <FormInner>
-          {renderAddressSection(overviewData.configuration.addresses)}
-          {renderdateTimeSection(overviewData.configuration.dateTime)}
-          {renderLogistics(overviewData.configuration.logistics)}
-          {renderItemsSection(overviewData.configuration.items)}
+    <Grid.Container fluid>
+      <HeadingContainer>
+        <HeadingContainerInner>
+          <Heading wrapperTag="h1">{summaryData.owner.displayName}</Heading>
+        </HeadingContainerInner>
+      </HeadingContainer>
+      <SummaryBody>
+        <SummaryReportContainer>
+          {renderAddressSection(summaryData.configuration.addresses)}
+          {renderdateTimeSection(summaryData.configuration.dateTime)}
+          {renderLogistics(summaryData.configuration.logistics)}
+          {renderItemsSection(summaryData.configuration.items)}
           {renderAdditionalNoteSection(
-            overviewData.configuration.additionalNotes
+            summaryData.configuration.additionalNotes
           )}
-        </FormInner>
-        <FormActions>
-          <Button
-            style={{ float: 'right', marginLeft: '1rem' }}
-            type="submit"
-            primary
-          >
-            Reply <Icon icon="reply" />
-          </Button>
-          <Button
-            onClick={handleDecline}
-            style={{ float: 'right' }}
-            ghost
-            danger
-          >
-            Decline <Icon icon="times" />
-          </Button>
-        </FormActions>
-      </Form>
+        </SummaryReportContainer>
+        <SummaryActionFormContainer></SummaryActionFormContainer>
+      </SummaryBody>
     </Grid.Container>
   );
 };
 
-export default MoverProjectOverview;
+export default MoverProjectSummary;

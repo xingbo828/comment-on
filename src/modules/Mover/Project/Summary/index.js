@@ -2,14 +2,14 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose, lifecycle, branch, renderNothing, withProps } from 'recompose';
 import { getProject } from '../projectActions';
-import { getMoverProjectOverview } from '../projectReducers';
+import { getMoverProjectSummary } from '../projectReducers';
 import scrollToTopOnMount from '../../../Common/scrollToTopOnMount';
 import mapImmutablePropsToPlainProps from '../../../Common/mapImmutablePropsToPlainProps';
-import MoverProjectOverview from './Overview';
+import MoverProjectSummary from './Summary';
 
 
 const mapStateToProps = state => ({
-  overview: getMoverProjectOverview(state),
+  summary: getMoverProjectSummary(state),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -17,7 +17,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const isLoading = props => {
-  const status  = props.overview.get('status');
+  const status  = props.summary.get('status');
   return (status === 'UNINIT' || status === 'PENDING');
 };
 
@@ -31,6 +31,7 @@ const enhance = compose(
     }
   }),
   branch(isLoading, renderNothing),
+
   withProps(props => ({
     handleReply: async e => {
       e.preventDefault();
@@ -45,4 +46,4 @@ const enhance = compose(
   scrollToTopOnMount
 );
 
-export default enhance(MoverProjectOverview);
+export default enhance(MoverProjectSummary);

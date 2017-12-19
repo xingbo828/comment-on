@@ -47,10 +47,13 @@ export const sendMessage = (conversationId, message) => async dispatch => {
 };
 
 export const CONVERSATION__LOADED = 'CONVERSATION__LOADED';
-
+export const CONVERSATION__INIT = 'CONVERSATION__INIT';
 export const subscribeToMessages = (conversationId) => async dispatch => {
+  dispatch({
+    type: CONVERSATION__INIT
+  });
   const messageCollectionRef = conversationCollectionRef.doc(conversationId).collection('messages');
-  messageCollectionRef.orderBy('timestamp').onSnapshot(async (msgCollectionSnapShot) => {
+  const unsubscribe = messageCollectionRef.orderBy('timestamp').onSnapshot(async (msgCollectionSnapShot) => {
     const unFilteredmessages = await Promise.all(msgCollectionSnapShot.docChanges.map(async change => {
       if(change.doc.metadata.hasPendingWrites) {
         return null;
@@ -74,4 +77,6 @@ export const subscribeToMessages = (conversationId) => async dispatch => {
       });
     }
   });
+  return unsubscribe;
 };
+
