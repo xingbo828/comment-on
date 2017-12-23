@@ -4,12 +4,12 @@ import styled, { keyframes } from 'styled-components';
 const fadeIn = keyframes`
   from {
     opacity: 0;
-    transform: transLateY(-2.5rem);
+    transform: transLateY(-3.5rem);
   }
 
   to {
     opacity: 1;
-    transform: transLateY(-3.5rem);
+    transform: transLateY(-4.5rem);
   }
 `;
 
@@ -52,10 +52,7 @@ export const SummaryActionFormContainer = styled.aside`
   ${props=>props.theme.media.greaterThan('md')`
     margin-left: ${props=>props.theme.spaces.xWide};
     flex:2;
-    height: 600px;
-    border-radius: 3px;
-    background-color: #ffffff;
-    box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.07);
+    height: fit-content;
     animation: ${fadeIn} .6s ease-in-out 1;
     animation-fill-mode: forwards;
   `}

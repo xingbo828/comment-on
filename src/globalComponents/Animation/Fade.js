@@ -36,4 +36,8 @@ Fade.propTypes = {
   children: PropTypes.func.isRequired
 };
 
+Fade.defaultProps = {
+  component:  'div'
+};
+
 export default Fade;

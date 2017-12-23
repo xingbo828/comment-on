@@ -7,6 +7,7 @@ import Grid from '../../../../globalComponents/Grid';
 import { Heading, Paragraph } from '../../../../globalComponents/Typography';
 import PlaceIdToAddress from '../../../../globalComponents/GooglePlaceIdToAddress';
 import RouteToDistance from './RouteToDistance';
+import Progress from './Progress';
 import {
   Section,
   SectionHeader,
@@ -242,7 +243,9 @@ const MoverProjectSummary = ({
             summaryData.configuration.additionalNotes
           )}
         </SummaryReportContainer>
-        <SummaryActionFormContainer></SummaryActionFormContainer>
+        <SummaryActionFormContainer>
+          <Progress />
+        </SummaryActionFormContainer>
       </SummaryBody>
     </Grid.Container>
   );
