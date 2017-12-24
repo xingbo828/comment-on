@@ -31,7 +31,6 @@ const enhance = compose(
     }
   }),
   branch(isLoading, renderNothing),
-
   withProps(props => ({
     handleReply: async e => {
       e.preventDefault();

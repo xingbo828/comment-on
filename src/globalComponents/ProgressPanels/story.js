@@ -35,7 +35,7 @@ const Assembled = () => (
       tertiaryText="Avg. response time: 15mins"
       panelKey="finding-movers"
     >
-      This is step 2
+      <div style={{height: 200}}>This is step 2</div>
     </ProgressPanels.Panel>
     <ProgressPanels.Panel header="select a mover" panelKey="select-mover" tertiaryText={<span><Icon icon="spinner" spin /> <strong style={{marginLeft: 5}}>2 found</strong></span>}>
       This is step 3

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import ProgressPanels from '../../../../../globalComponents/ProgressPanels';
 import Icon from '../../../../../globalComponents/Icon';
-
+import ReplyForm from './Reply';
 class SummaryProgress extends Component {
   render() {
     return (
@@ -11,7 +10,9 @@ class SummaryProgress extends Component {
           header="lead available"
           panelKey="lead-available"
         />
-        <ProgressPanels.Panel header="reply or decline" panelKey="reply" />
+        <ProgressPanels.Panel header="reply or decline" panelKey="reply">
+          <ReplyForm />
+        </ProgressPanels.Panel>
         <ProgressPanels.Panel
           header="await customer confirmation"
           inProgressIndexReplacement={<Icon icon="spinner" spin />}

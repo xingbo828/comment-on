@@ -130,9 +130,9 @@ const enhance = compose(
       const config = await getLocalstorageStepInfo();
       const projectId = await props.addProject(PROJECT_TYPES.MOVE, config);
       await deleteStepInfo();
-      message.success(`Project ${projectId} has been created.`);
       props.history.push({
-        pathname: `/project/${projectId}`,
+        pathname: `/project/configurations/success`,
+        search: `?projectId=${projectId}`
       });
     },
     signIn: e => {
