@@ -37,3 +37,11 @@ export const getProject = (projectId) => async dispatch => {
     })
   }
 };
+
+export const declineLead = () => async dispatch => {
+
+};
+
+export const replyToLead = () => async dispatcgh => {
+
+};

@@ -15,9 +15,11 @@ const fadeIn = keyframes`
 
 
 export const HeadingContainer = styled.header`
+  text-align: center;
   ${props=>props.theme.media.greaterThan('md')`
     padding: ${props=>props.theme.spaces.xWide};
     background-color: #fcfcfc;
+    text-align: left;
   `}
 
    h1 {
@@ -39,6 +41,7 @@ export const SummaryBody = styled.main`
     display: flex;
     max-width: 1200px;
     margin:0 auto;
+    flex-direction: row-reverse;
   `}
 `;
 

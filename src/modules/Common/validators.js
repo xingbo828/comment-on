@@ -49,9 +49,16 @@ export const isValidPostalCode = (value) => {
   return !(formattedValue && !/^[ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1} *\d{1}[A-Z]{1}\d{1}$/i.test(formattedValue));
 };
 
+export const isValidCurrency = (value) => {
+  const formattedValue = value ? value.trim() : '';
+  if (formattedValue === '') {
+    return true;
+  }
+  return !(formattedValue && !/^\d{0,8}(\.\d{1,4})?$/i.test(formattedValue));
+};
+
 // Specific validators
 export const isValidAddressesInput = (value) => {
-  console.log('wtf');
   const pickUpAddress = value.pickUpAddress || value.get('pickUpAddress');
   const deliveryAddress = value.deliveryAddress || value.get('deliveryAddress');
   return (pickUpAddress && deliveryAddress);
@@ -64,7 +71,8 @@ const validators = {
   isNotEmpty,
   isValidPhoneNumber,
   isValidPostalCode,
-  isValidAddressesInput
+  isValidAddressesInput,
+  isValidCurrency
 };
 export default validators;
 

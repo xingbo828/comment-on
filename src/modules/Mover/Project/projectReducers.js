@@ -1,5 +1,4 @@
 import Immutable from 'immutable';
-import { combineReducers } from 'redux-immutable';
 import {
   GET_PROJECT_PENDING,
   GET_PROJECT_SUCCESS,
@@ -12,7 +11,7 @@ const initMoverProjectSummaryState = Immutable.fromJS({
   status: 'UNINIT'
 });
 
-const summary = (state = initMoverProjectSummaryState, action) => {
+const projectSummary = (state = initMoverProjectSummaryState, action) => {
   switch (action.type) {
     case GET_PROJECT_PENDING: {
       return state.withMutations(st => {
@@ -41,9 +40,7 @@ const summary = (state = initMoverProjectSummaryState, action) => {
 };
 
 
-export default combineReducers({
-  summary
-});
+export default projectSummary;
 
 // Selectors
-export const getMoverProjectSummary = (state) => state.getIn(['mover', 'project', 'summary']);
+export const getMoverProjectSummary = (state) => state.getIn(['mover', 'project']);

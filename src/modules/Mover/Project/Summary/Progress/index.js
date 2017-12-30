@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import ProgressPanels from '../../../../../globalComponents/ProgressPanels';
 import Icon from '../../../../../globalComponents/Icon';
-import ReplyForm from './Reply';
+import ReplyForm from './ReplyForm';
 class SummaryProgress extends Component {
   render() {
     return (
-      <ProgressPanels current="reply">
+      <ProgressPanels current="reply" viewport="mobile">
         <ProgressPanels.Panel
           header="lead available"
           panelKey="lead-available"

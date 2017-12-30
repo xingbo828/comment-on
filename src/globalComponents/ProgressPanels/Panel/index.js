@@ -48,11 +48,12 @@ class ProgressPanel extends Component {
       header,
       tertiaryText,
       children,
-      inProgressIndexReplacement
+      inProgressIndexReplacement,
+      viewport
     } = this.props;
     return (
       <PanelContainer status={status}>
-        <PanelHeader>
+        <PanelHeader viewport={viewport}>
           <PanelHeaderTitle status={status}>
             <PanelHeaderTitleDeco>
               {this.renderTitleIcon(status, stepIndex, inProgressIndexReplacement)}
@@ -64,7 +65,7 @@ class ProgressPanel extends Component {
           )}
         </PanelHeader>
         <Animation.Reveal timeout={500} height={this.state.height} in={children && status === 'inProgress'}>
-          {() => <PanelBody innerRef={container => (this.container = container)}>{children}</PanelBody>}
+          {() => <PanelBody viewport={viewport} innerRef={container => (this.container = container)}>{children}</PanelBody>}
         </Animation.Reveal>
       </PanelContainer>
     );

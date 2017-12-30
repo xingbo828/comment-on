@@ -11,7 +11,7 @@ const AnimatedCheckmark = ({theme, style}) => {
           <circle
             viewBox
             cx="36"
-            strokeWidth="2"
+            strokeWidth="1"
             cy="36"
             r="35"
             style={{strokeDasharray:'240px, 240px', strokeDashoffset: '480px'}}

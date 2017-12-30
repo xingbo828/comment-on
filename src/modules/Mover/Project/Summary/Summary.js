@@ -234,6 +234,9 @@ const MoverProjectSummary = ({
         </HeadingContainerInner>
       </HeadingContainer>
       <SummaryBody>
+        <SummaryActionFormContainer>
+          <Progress />
+        </SummaryActionFormContainer>
         <SummaryReportContainer>
           {renderAddressSection(summaryData.configuration.addresses)}
           {renderdateTimeSection(summaryData.configuration.dateTime)}
@@ -243,9 +246,7 @@ const MoverProjectSummary = ({
             summaryData.configuration.additionalNotes
           )}
         </SummaryReportContainer>
-        <SummaryActionFormContainer>
-          <Progress />
-        </SummaryActionFormContainer>
+
       </SummaryBody>
     </Grid.Container>
   );

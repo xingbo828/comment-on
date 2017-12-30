@@ -1,5 +1,5 @@
 import React, { Component, Children } from 'react';
-import { string, node } from 'prop-types';
+import { string, node, oneOf } from 'prop-types';
 import PanelHeading from './PanelHeading';
 import Panel from './Panel';
 import { availableStatus } from './constants';
@@ -10,7 +10,7 @@ import {
 
 class ProgressPanels extends Component {
 
-  constructPanels = (current, children) => {
+  constructPanels = (current, viewport, children) => {
     const panelChildrens = children.filter(c => c.type.name === Panel.name);
     const currentIndex = panelChildrens.findIndex(e => e.props.panelKey === current);
 
@@ -32,13 +32,14 @@ class ProgressPanels extends Component {
         children,
         tertiaryText,
         inProgressIndexReplacement,
-        status: getStatus(currentIndex, index)
+        status: getStatus(currentIndex, index),
+        viewport
       };
       return React.cloneElement(child, props);
     });
   }
 
-  constructPanelHeading = (children) => {
+  constructPanelHeading = (viewport, children) => {
     const panelHeading = children.filter(c => c.type.name === PanelHeading.name);
     if(panelHeading.length > 0) {
       return panelHeading[0];
@@ -48,9 +49,9 @@ class ProgressPanels extends Component {
 
 
   render() {
-    const { current, children } = this.props;
-    const panelHeading = this.constructPanelHeading(children);
-    const pannels = this.constructPanels(current, children);
+    const { current, viewport, children } = this.props;
+    const panelHeading = this.constructPanelHeading(viewport, children);
+    const pannels = this.constructPanels(current, viewport, children);
     return (
       <ProgressPanelsContainer>
         {panelHeading}
@@ -61,8 +62,14 @@ class ProgressPanels extends Component {
 }
 
 ProgressPanels.propTypes = {
+  viewport: oneOf(['responsive', 'mobile', 'desktop']),
   current: string.isRequired,
   children: node.isRequired
+};
+
+ProgressPanels.defaultProps = {
+  current: '',
+  viewport: 'responsive'
 };
 
 export default ProgressPanels;

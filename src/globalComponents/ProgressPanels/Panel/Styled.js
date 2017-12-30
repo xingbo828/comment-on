@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 
 const getHeaderColor = (props) => {
@@ -14,6 +14,44 @@ const getHeaderColor = (props) => {
   }
 };
 
+const getHeaderPadding = (props) => {
+  const mobileStyle = `padding: ${props.theme.spaces.wide};`;
+  const desktopStyle = `padding: 2.5rem ${props.theme.spaces.xWide};`;
+  const desktopStyleWithMediaquery = props.theme.media.greaterThan('md')`
+    ${desktopStyle}
+  `;
+  const responsiveStyle = css`
+    ${mobileStyle}
+    ${desktopStyleWithMediaquery}
+  `;
+
+  if(props.viewport === 'mobile') {
+    return mobileStyle;
+  } else if(props.viewport === 'desktop') {
+    return desktopStyle;
+  }
+  return responsiveStyle;
+};
+
+const getBodyPadding = (props) => {
+  const mobileStyle = `padding: ${props.theme.spaces.base} ${props.theme.spaces.wide};`;
+  const desktopStyle = `padding: ${props.theme.spaces.wide} ${props.theme.spaces.xWide};`;
+  const desktopStyleWithMediaquery = props.theme.media.greaterThan('md')`
+    ${desktopStyle}
+  `;
+  const responsiveStyle = css`
+    ${mobileStyle}
+    ${desktopStyleWithMediaquery}
+  `;
+
+  if(props.viewport === 'mobile') {
+    return mobileStyle;
+  } else if(props.viewport === 'desktop') {
+    return desktopStyle;
+  }
+  return responsiveStyle;
+};
+
 
 export const PanelContainer = styled.li`
   list-style: none;
@@ -24,10 +62,7 @@ export const PanelHeader = styled.div`
   font-size: 0.875rem;
   display: flex;
   justify-content: space-between;
-  padding: ${props=>props.theme.spaces.wide};
-  ${props=>props.theme.media.greaterThan('md')`
-    padding: 2.5rem ${props=>props.theme.spaces.xWide};
-  `}
+  ${getHeaderPadding}
 `;
 
 export const PanelHeaderTitleDeco = styled.span`
@@ -46,8 +81,5 @@ export const PanelHeaderTertiaryText = styled.span`
 `;
 
 export const PanelBody = styled.div`
-  padding: ${props=>props.theme.spaces.base} ${props=>props.theme.spaces.wide};
-  ${props=>props.theme.media.greaterThan('md')`
-      padding: ${props=>props.theme.spaces.wide} ${props=>props.theme.spaces.xWide};
-  `}
+  ${getBodyPadding}
 `;

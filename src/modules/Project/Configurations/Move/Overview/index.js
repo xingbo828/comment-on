@@ -35,7 +35,6 @@ import {
   getAddresses,
   getOverview
 } from '../moveReducers';
-import message from '../../../../../globalComponents/Message';
 
 const mapDispatchToProps = dispatch => ({
   loadAddresses: () => dispatch(loadAddresses()),
@@ -132,7 +131,9 @@ const enhance = compose(
       await deleteStepInfo();
       props.history.push({
         pathname: `/project/configurations/success`,
-        search: `?projectId=${projectId}`
+        state: {
+          projectId: projectId
+        }
       });
     },
     signIn: e => {
