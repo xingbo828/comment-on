@@ -16,3 +16,22 @@ export const addProject = (projectType, configuration) => async dispatch => {
   await updateUserProjectIds(projectId)(dispatch);
   return projectId;
 };
+
+export const GET_MY_PROJECT_PENDING = 'GET_MY_PROJECT_PENDING';
+export const GET_MY_PROJECT_SUCCESS = 'GET_MY_PROJECT_SUCCESS';
+export const GET_MY_PROJECT_FAIL = 'GET_MY_PROJECT_FAIL';
+
+export const getMyProject = (projectId) => dispatch => {
+  dispatch({
+    type: GET_MY_PROJECT_PENDING,
+    projectId
+  });
+  projectCollectionRef.doc(projectId).onSnapshot(async (projectDoc) => {
+    const project = await projectDoc.data();
+    dispatch({
+      type: GET_MY_PROJECT_SUCCESS,
+      data: project,
+      projectId
+    });
+  });
+};
