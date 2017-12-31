@@ -28,9 +28,19 @@ export const getMyProject = (projectId) => dispatch => {
   });
   projectCollectionRef.doc(projectId).onSnapshot(async (projectDoc) => {
     const project = await projectDoc.data();
+    const receiversPromises = Object.values(project.receivers).map(async receiver => {
+      const resolvedProvider = await receiver.provider.get();
+      return Object.assign({}, receiver, {
+        provider: Object.assign(resolvedProvider.data(), { id: resolvedProvider.id })
+      });
+    });
+    const receivers = await Promise.all(receiversPromises);
+    const resolvedProject = Object.assign(project, {
+      receivers
+    });
     dispatch({
       type: GET_MY_PROJECT_SUCCESS,
-      data: project,
+      data: resolvedProject,
       projectId
     });
   });

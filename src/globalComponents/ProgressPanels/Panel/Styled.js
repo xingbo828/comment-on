@@ -61,7 +61,12 @@ export const PanelContainer = styled.li`
 export const PanelHeader = styled.div`
   font-size: 0.875rem;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+
+  ${props=> props.theme.media.greaterThan('md')`
+    flex-direction: row;
+    justify-content: space-between;
+  `};
   ${getHeaderPadding}
 `;
 
@@ -73,11 +78,15 @@ export const PanelHeaderTitle = styled.span`
   text-transform: uppercase;
   font-weight: ${props=>props.theme.fontWeights.medium};
   letter-spacing: 1px;
-  color: ${getHeaderColor}
+  color: ${getHeaderColor};
 `;
 
 export const PanelHeaderTertiaryText = styled.span`
   color: ${props=>props.theme.colors.textLight};
+  padding: ${props=>props.theme.spaces.tight} 0 0 ${props=>props.theme.spaces.wide};
+  ${props=> props.theme.media.greaterThan('md')`
+    padding: 0;
+  `};
 `;
 
 export const PanelBody = styled.div`

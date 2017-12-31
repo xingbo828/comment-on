@@ -25,8 +25,10 @@ const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
     componentDidMount() {
-      const projectId = this.props.match.params.projectId;
-      this.props.getMyProject(projectId);
+      if(this.props.status !== 'LOADED') {
+        const projectId = this.props.match.params.projectId;
+        this.props.getMyProject(projectId);
+      }
     }
   }),
   branch(isLoading, renderNothing),
