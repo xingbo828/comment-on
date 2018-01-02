@@ -167,14 +167,14 @@ const BasicInfo = ({ handleSkip, handleSubmit, pristine, reset, valid, submittin
             primary
             disabled={submitting || pristine || !valid}
           >
-           Update <Icon icon={submitting ? 'refresh' : 'pencil'} spin={submitting} />
+           Update<Icon icon={submitting ? 'refresh' : 'pencil'} spin={submitting} />
           </Button>
         <Button
             style={{ float: 'right' }}
             ghost
             onClick={handleSkip}
           >
-          Skip <Icon icon="angle-double-right" />
+          Skip<Icon icon="angle-double-right" />
           </Button>
         </FormActions>
       </Form>

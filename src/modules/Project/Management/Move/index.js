@@ -2,6 +2,7 @@ import React from 'react';
 import ProgressPanels from '../../../../globalComponents/ProgressPanels';
 import Icon from '../../../../globalComponents/Icon';
 import ManagementHeader from './Header';
+import SelectMover from './SelectMover';
 
 const MoveProjectManagement = ({ projectData }) => {
 
@@ -25,9 +26,11 @@ const MoveProjectManagement = ({ projectData }) => {
 
   const renderProvidersList = (providers) => {
     const providerAccepted = getAcceptedProviders(projectData.receivers);
-    return providerAccepted.map(p => (
-      <p key={p.provider.id}>{p.provider.businessName}</p>
-    ));
+    if(providerAccepted.length > 0){
+      const moversInfo = providerAccepted.map(p => p.provider);
+      return <SelectMover moversInfo={moversInfo} />
+    }
+    return null;
   }
 
   return (
@@ -39,7 +42,7 @@ const MoveProjectManagement = ({ projectData }) => {
       <ProgressPanels.Panel
         inProgressIndexReplacement={<Icon icon="spinner" spin />}
         header="finding movers"
-        tertiaryText="Avg. response time: 15mins"
+        tertiaryText="Avg. response time: 15 mins"
         panelKey="finding-movers"
       />
       <ProgressPanels.Panel

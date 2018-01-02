@@ -51,7 +51,7 @@ const AddressSearchBar = ({
           <Col xs={24} sm={24} md={24} lg={6}>
           <InputWrapper>
             <Button primary icon="arrow-right" disabled={pristine || submitting || !valid}>
-              Get Started <Icon icon="magic" />
+              Get Started<Icon icon="magic" />
             </Button>
           </InputWrapper>
           </Col>
@@ -59,7 +59,7 @@ const AddressSearchBar = ({
       </Form>
       <MobileCtaWrapper>
         <Button primary icon="arrow-right" onClick={navToSearch}>
-          Get Started <Icon icon="magic" />
+          Get Started<Icon icon="magic" />
         </Button>
       </MobileCtaWrapper>
     </AddressSearchBarContainer>

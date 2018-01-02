@@ -9,17 +9,17 @@ import {
 } from './Styled';
 
 class Badge extends Component {
-  renderSup(type, dot, count) {
+  renderSup(type, dot, count, offsetX, offsetY) {
     if(type === 'dot') {
       return (
         <BadgeTransition in={dot} type="dot">
-          {()=><BadgeDotSup />}
+          {()=><BadgeDotSup offsetX={offsetX} offsetY={offsetY} />}
         </BadgeTransition>
       );
     } else if(type === 'count') {
       return (
         <BadgeTransition in={count > 0}>
-          {()=><BadgeNumSup>
+          {()=><BadgeNumSup offsetX={offsetX} offsetY={offsetY}>
             {count > 0 ? (count > 99 ? '99+' : count) : null}
             </BadgeNumSup>}
         </BadgeTransition>
@@ -29,12 +29,12 @@ class Badge extends Component {
   }
 
   render() {
-    const { dot, children, count } = this.props;
+    const { dot, offsetX, offsetY, children, count } = this.props;
     const type = (typeof dot !== 'undefined') ? 'dot' : 'count';
     return (
       <BadgeContainer>
         {children}
-          {this.renderSup(type, dot, count)}
+          {this.renderSup(type, dot, count, offsetX, offsetY)}
       </BadgeContainer>
     );
   }
@@ -42,7 +42,13 @@ class Badge extends Component {
 
 Badge.propTypes = {
   dot: bool,
-  count: number
+  count: number,
+  offsetX: number.isRequired,
+  offsetY: number.isRequired
 };
 
+Badge.defaultProps = {
+  offsetX: 0,
+  offsetY: 0
+};
 export default Badge;

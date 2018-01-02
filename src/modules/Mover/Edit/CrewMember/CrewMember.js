@@ -47,10 +47,10 @@ const CrewMember = ({
             primary
             disabled={submitting || pristine || !valid}
           >
-            Update <Icon icon="pencil" />
+            Update<Icon icon="pencil" />
           </Button>
           <Button style={{ float: 'right' }} ghost onClick={handleSkip}>
-            Skip <Icon icon="angle-double-right" />
+            Skip<Icon icon="angle-double-right" />
           </Button>
         </FormActions>
       </Form>

@@ -17,12 +17,15 @@ const BadgeSup = styled.sup`
 
 export const BadgeDotSup = BadgeSup.extend`
   width: 100%;
+  top: ${props => props.offsetY -5}px;
+  left: ${props => props.offsetX + 0}px;
 `;
 
 export const BadgeNumSup = BadgeSup.extend`
   font-weight: bold;
   border-radius: 10px;
-  top: -5px;
+  top: ${props => props.offsetY -5}px;
+  left: ${props => props.offsetX + 0}px;
   height: 20px;
   padding: 0 6px;
   min-width: 20px;

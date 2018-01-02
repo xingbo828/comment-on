@@ -51,7 +51,7 @@ const Address = ({ handleSubmit, pristine, reset, valid, submitting }) => {
             primary
             disabled={submitting || !valid}
           >
-            Next <Icon icon="arrow-right" />
+            Next<Icon icon="arrow-right" />
           </Button>
       </FormActions>
       </Form>

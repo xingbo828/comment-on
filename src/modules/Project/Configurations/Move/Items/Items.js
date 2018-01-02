@@ -74,10 +74,10 @@ const Items = ({
             primary
             disabled={submitting || !valid}
           >
-            Next <Icon icon="arrow-right" />
+            Next<Icon icon="arrow-right" />
           </Button>
           <Button style={{ float: 'left' }} ghost onClick={goBack}>
-            <Icon icon="arrow-left" /> Back
+            <Icon icon="arrow-left" />Back
           </Button>
         </FormActions>
       </Form>

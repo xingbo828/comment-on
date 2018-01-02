@@ -180,7 +180,7 @@ const Creation = ({
             primary
             disabled={pristine || submitting || !valid}
           >
-            Submit <Icon icon={submitting ? 'refresh' : 'pencil'} spin={submitting} />
+            Submit<Icon icon={submitting ? 'refresh' : 'pencil'} spin={submitting} />
           </Button>
         </FormActions>
       </Form>

@@ -57,7 +57,7 @@ class Profile extends Component {
               primary
               disabled={submitting || pristine || !valid}
             >
-              Update <Icon icon={submitting ? 'refresh' : 'pencil'} spin={submitting} />
+              Update<Icon icon={submitting ? 'refresh' : 'pencil'} spin={submitting} />
             </Button>
           </FormActions>
         </Form>

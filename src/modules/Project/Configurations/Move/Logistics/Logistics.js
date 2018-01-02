@@ -87,10 +87,10 @@ const Logistics = ({
             primary
             disabled={submitting || !valid}
           >
-            Next <Icon icon="arrow-right" />
+            Next<Icon icon="arrow-right" />
           </Button>
           <Button onClick={goBack} ghost style={{ float: 'left' }}>
-            <Icon icon="arrow-left" /> Back
+            <Icon icon="arrow-left" />Back
           </Button>
         </FormActions>
       </Form>

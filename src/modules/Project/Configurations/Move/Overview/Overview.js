@@ -328,7 +328,7 @@ const ConfigurationOverview = ({
               )
             }
           >
-            Submit <Icon icon="arrow-right" />
+            Submit<Icon icon="arrow-right" />
           </Button>}
           {loginStatus === 'NOT_AUTHENTICATED' && <Button
             style={{ float: 'right' }}
@@ -343,10 +343,10 @@ const ConfigurationOverview = ({
               )
             }
           >
-            Sign in <Icon icon="sign-in" />
+            Sign in<Icon icon="sign-in" />
           </Button>}
           <Button style={{ float: 'left' }} ghost onClick={goBack}>
-            <Icon icon="arrow-left" /> Back
+            <Icon icon="arrow-left" />Back
           </Button>
         </FormActions>
       </Form>

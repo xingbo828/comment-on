@@ -7,6 +7,8 @@ const getBackColor = props => {
     return props.theme.colors.primary;
   } else if(props.danger) {
     return props.theme.colors.danger;
+  } else if(props.success) {
+    return props.theme.colors.success;
   }
   return props.theme.colors.secondary;
 };
@@ -18,6 +20,8 @@ const getBorderColor = props => {
     return props.theme.colors.primary;
   } else if(props.danger) {
     return props.theme.colors.danger;
+  } else if(props.success) {
+    return props.theme.colors.success;
   }
   return props.theme.colors.secondary;
 };
@@ -32,9 +36,7 @@ const getForeColor = props => {
 const getHoverBackgroundColor = props => {
   if (props.disabled) {
     return '';
-  } else if(props.primary) {
-    return 'white';
-  } else if(props.danger) {
+  } else if(props.primary || props.danger || props.success) {
     return 'white';
   }
   return 'white';
@@ -47,6 +49,8 @@ const getHoverBorderColor = props => {
     return props.theme.colors.primary;
   } else if(props.danger) {
     return props.theme.colors.danger;
+  } else if(props.success) {
+    return props.theme.colors.success;
   }
   return props.theme.colors.secondary;
 }
@@ -58,6 +62,8 @@ const getHoverFontColor = props => {
     return props.theme.colors.primary;
   } else if(props.danger) {
     return props.theme.colors.danger;
+  } else if(props.success) {
+    return props.theme.colors.success;
   }
   return props.theme.colors.secondary;
 }
@@ -79,6 +85,13 @@ const getIconSize = props => {
   `;
 }
 
+const getIconMargin = props => {
+  if(props.iconPosition === 'iconLeft') {
+    return `margin-right: ${props.theme.spaces.tight};`;
+  } else if(props.iconPosition === 'iconRight') {
+    return `margin-left: ${props.theme.spaces.tight};`;
+  }
+}
 
 
 const getPadding = props => {
@@ -121,6 +134,7 @@ export const StyledButton = styled.button`
       transition: .3s cubic-bezier(.645,.045,.355,1);
       display: inline-block;
       border-radius: 50%;
+      ${getIconMargin}
       color: ${props=>getBackColor(props)};
       background: ${props=>props.ghost ? 'transparent' : getForeColor(props)};
       ${getIconSize}

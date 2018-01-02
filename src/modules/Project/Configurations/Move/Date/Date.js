@@ -95,10 +95,10 @@ const DateTime = ({
             primary
             disabled={submitting || !valid}
           >
-            Next <Icon icon="arrow-right" />
+            Next<Icon icon="arrow-right" />
           </Button>
           <Button onClick={goBack} style={{ float: 'left' }} ghost>
-            <Icon icon="arrow-left" /> Back
+            <Icon icon="arrow-left" />Back
           </Button>
         </FormActions>
       </Form>
