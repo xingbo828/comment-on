@@ -9,7 +9,6 @@ import {
   DisplayName
 } from './Styled';
 import DropDownTransition from './DropDownTransition';
-import Badge from '../../../../globalComponents/Badge';
 
 class AccountNav extends React.Component {
 
@@ -58,9 +57,7 @@ class AccountNav extends React.Component {
         active={active}
         innerRef={(el) => { this.containerRef = el; }}
       >
-        <Badge count={99}>
-          <Avatar src={user.photoURL} onClick={this.handleClick} />
-        </Badge>
+        <Avatar src={user.photoURL} onClick={this.handleClick} />
         { active && <DropDownTransition in={active}>
           {() =>
             <Menu active={active}>

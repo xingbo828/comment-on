@@ -6,6 +6,8 @@ import { auth } from '../../../firebaseClient';
 import isLoggedIn from '../isLoggedIn';
 import AccountNav from './AccountNav';
 import globalNavHiddenList from './globalNavHiddenList.json';
+import NotificationCenter from '../NotificationCenter';
+
 
 const fromTheme = (prop) => ({ theme }) => theme.colors[prop]
 
@@ -141,6 +143,7 @@ export const Nav = ({ user, isLoggedIn, logout }) => {
         {/* <Location>Vancouver</Location> */}
         <ContextHeaderLinks>
         </ContextHeaderLinks>
+        <NotificationCenter />
         <AccountNav />
       </ContextHeader>
       {/* <NavList>

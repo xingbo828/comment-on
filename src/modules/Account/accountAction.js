@@ -19,10 +19,11 @@ const _uploadProfileImg = async (img, uid) => {
 export const updateProfile = profile => async dispatch => {
     const uid = auth.currentUser.uid;
     const userDocRef = userCollectionRef.doc(uid);
-    const { displayName, email } = profile;
+
+    const { displayName, email, phoneNumber } = profile;
     const { downloadUrl, originalUrl, photoURLUpdated } = await _uploadProfileImg(profile.photoURL, uid);
-    const updatedProfile = Object.assign({ displayName, email }, { photoURL: photoURLUpdated ? downloadUrl : originalUrl });
-    await userDocRef.update(updatedProfile);
+    const updatedProfile = Object.assign({ displayName, email, phoneNumber }, { photoURL: photoURLUpdated ? downloadUrl : originalUrl });
+    await userDocRef.set(updatedProfile);
     const tempProfile = Object.assign({}, updatedProfile, { photoURL: originalUrl });
 
     dispatch({
@@ -51,21 +52,24 @@ export const updateUserMoverRef = (moverId) => async dispatch => {
     });
 };
 
-export const updateUserProjectIds = (projectId) => async dispatch => {
+export const updateUserProjects = (projectRef) => async dispatch => {
   const uid = auth.currentUser.uid;
   const userDocRef = userCollectionRef.doc(uid);
   const userDoc = await userDocRef.get();
+  const projectId = projectRef.id;
   if(!userDoc.exists){
     await userDocRef.set({
-      projects: [projectId]
+      projects: {
+        [projectId]: projectRef
+      }
     });
     return dispatch({
       type: UPDATE_PROFILE,
-      data: { projects: [projectId] }
+      data: { projects: { [projectId]: projectRef } }
     });
   } else {
     const userData = await userDoc.data();
-    const newProjects = userData.projects ? userData.projects.concat([projectId]) : [projectId];
+    const newProjects = userData.projects ? Object.assign(userData.projects, { [projectId]: projectRef }) : { [projectId]: projectRef };
     await userDocRef.update({projects: newProjects});
     return dispatch({
       type: UPDATE_PROFILE,

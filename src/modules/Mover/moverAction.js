@@ -8,7 +8,7 @@ import omit from 'lodash/omit';
 import { randomFileName } from '../Common/utils/file';
 import { updateUserMoverRef } from '../Account/accountAction';
 
-const moverCollectionRef = firestore.collection('movers');
+const moverCollectionRef = firestore.collection('providers');
 const userCollectionRef = firestore.collection('users');
 
 const imgStorageRef = storage.ref();

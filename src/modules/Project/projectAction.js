@@ -1,5 +1,5 @@
 import { auth, firestore } from '../../firebaseClient';
-import { updateUserProjectIds } from '../Account/accountAction';
+import { updateUserProjects } from '../Account/accountAction';
 
 const projectCollectionRef = firestore.collection('projects');
 
@@ -13,7 +13,7 @@ export const addProject = (projectType, configuration) => async dispatch => {
   );
   const projectRef = await projectCollectionRef.add(project);
   const projectId = projectRef.id;
-  await updateUserProjectIds(projectId)(dispatch);
+  await updateUserProjects(projectRef)(dispatch);
   return projectId;
 };
 
