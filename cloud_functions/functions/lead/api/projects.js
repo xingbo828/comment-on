@@ -36,18 +36,21 @@ app.put('/:projectId/providers/:providerId', (request, response) => {
 });
 
 const handleAcceptLead = (body, projectId, providerId, response) => {
+  console.log(body);
   if (body.estimatedPrice) {
-    admin.firestore().collection('projects').doc(projectId).get.then((doc) => {
+    return admin.firestore().collection('projects').doc(projectId).get().then((doc) => {
       const data = doc.data();
       if (data) {
         const receiver = data.receivers[providerId];
         receiver.status = 'accept';
-        receiver.estimatedPrice = body.estimatedPrice;
+        receiver.estimatedPrice = body.estimatedPrice || null;
       }
-      return doc.ref.update({receivers: data.receivers});
+      return doc.ref.set(data);
 
     }).then(()=>{
       response.json({status: 'success'});
+    }).catch((err) => {
+      console.log(err);
     });
   }
   return response.status(400).json({error: 'missing price'});
