@@ -3,6 +3,7 @@
   "description": "Cloud Functions for Firebase",
   "dependencies": {
     "express": "latest",
+    "body-parser": "latest",
     "firebase-admin": "latest",
     "firebase-functions": "latest",
     "cors": "latest",

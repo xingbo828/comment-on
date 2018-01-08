@@ -25,7 +25,7 @@ app.get('*', (request, response) => {
 
 exports.business = functions.https.onRequest(app);
 
-const leads = require('./lead');
+const leads = require('./lead')(app);
 const users = require('./user');
 const storage = require('./storage');
 
