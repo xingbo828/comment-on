@@ -42,7 +42,12 @@ class Profile extends Component {
               name="displayName"
               label="Display Name"
             />
-
+            <Field
+              component={TextField}
+              type="tel"
+              name="phoneNumber"
+              label="Phone number"
+            />
             <Field
               component={TextField}
               type="email"

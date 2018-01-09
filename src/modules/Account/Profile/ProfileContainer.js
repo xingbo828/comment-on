@@ -28,6 +28,11 @@ const validate = validateFunc(
       message: 'Required'
     },
     {
+      field: 'phoneNumber',
+      validator: 'isValidPhoneNumber',
+      message: 'Invalid phone number'
+    },
+    {
       field: 'email',
       validator: 'isValidEmail',
       message: 'Invalid email address'
@@ -50,6 +55,7 @@ const enhance = compose(
       message.success(`Account profile successfully updated.`);
     },
     onSubmitFail: (submitErr, dispatch, error) => {
+      console.error(error);
       message.error(error.message, 0);
     }
   })

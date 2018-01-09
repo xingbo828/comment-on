@@ -10,7 +10,8 @@ import Spin from '../../../globalComponents/Spin';
 
 const facebookLogin = () => {
   const provider = new firebase.auth.FacebookAuthProvider();
-  provider.addScope('public_profile, email');
+  provider.addScope('public_profile');
+  provider.addScope('email');
   firebaseAuth.signInWithRedirect(provider);
 };
 
