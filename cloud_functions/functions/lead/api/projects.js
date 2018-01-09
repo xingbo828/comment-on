@@ -19,55 +19,97 @@ app.use((err, req, res, next) => {
   }
 });
 
-app.put('/:projectId/providers/:providerId', (request, response) => {
+app.put('/:projectId/', (request, response) => {
   const body = request.body;
   const projectId = request.params.projectId;
-  const providerId = request.params.providerId;
   if (!body.action) {
     return response.status(400).json({error: 'missing action'});
   }
   switch(body.action) {
     case 'accept':
-      return handleAcceptLead(body, projectId, providerId, response);
+      return getProviderId(request)
+      .then(providerId => {
+        return handleAcceptLead(body, projectId, providerId, response);
+      });
     case 'reject':
-      return handleRejectLead(body, projectId, providerId, response);
+      return getProviderId(request)
+      .then(providerId => {
+        return handleRejectLead(body, projectId, providerId, response);
+      });
   }
   return response.json(request.body);
 });
 
+const getProviderId = (request) =>{
+  let idToken;
+  if (request.headers.authorization && request.headers.authorization.startsWith('Bearer ')) {
+    // Read the ID Token from the Authorization header.
+    idToken = request.headers.authorization.split('Bearer ')[1];
+  } else {
+    // Read the ID Token from cookie.
+    idToken = request.cookies && request.cookies.__session;
+  }
+  if(!idToken) {
+    return Promise.resolve('');
+  }
+  return admin.auth().verifyIdToken(idToken)
+  .then((decodedToken) => {
+    const uid = decodedToken.uid;
+    return admin.firestore().collection('users').doc(uid).get();
+  })
+  .then((user) => {
+    return user.data().moverId;
+  })
+  .catch(()=> {
+    return Promise.resolve('');
+  });
+};
+
 const handleAcceptLead = (body, projectId, providerId, response) => {
-  console.log(body);
+  if (!providerId) {
+    return response.status(400).json({error: 'invalid provider'});
+  }
   if (body.estimatedPrice) {
     return admin.firestore().collection('projects').doc(projectId).get().then((doc) => {
       const data = doc.data();
-      if (data) {
-        const receiver = data.receivers[providerId];
-        receiver.status = 'accept';
-        receiver.estimatedPrice = body.estimatedPrice || null;
+      if (!data) {
+        return Promise.reject('invalid project');
       }
+      const receiver = data.receivers[providerId];
+      if (!receiver) {
+        return Promise.reject('invalid provider');
+      }
+      receiver.status = 'accept';
+      receiver.estimatedPrice = body.estimatedPrice || null;
       return doc.ref.set(data);
 
     }).then(()=>{
       response.json({status: 'success'});
     }).catch((err) => {
-      console.log(err);
+      return response.status(400).json({error: err});
     });
   }
   return response.status(400).json({error: 'missing price'});
 };
 const handleRejectLead = (body, projectId, providerId, response) => {
-  admin.firestore().collection('projects').doc(projectId).get().then((doc) => {
+  if (!providerId) {
+    return response.status(400).json({error: 'invalid provider'});
+  }
+  return admin.firestore().collection('projects').doc(projectId).get().then((doc) => {
     const data = doc.data();
-    if (data) {
-      const receiver = data.receivers[providerId];
-      receiver.status = 'reject';
+    if (!data) {
+      return Promise.reject('invalid project');
     }
-    console.log(data);
+    const receiver = data.receivers[providerId];
+    if (!receiver) {
+      return Promise.reject('invalid provider');
+    }
+    receiver.status = 'reject';
     return doc.ref.set(data);
   }).then(()=>{
     response.json({status: 'success'});
   }).catch((err) => {
-    console.log(err);
+    return response.status(400).json({error: err});
   });
 };
 
