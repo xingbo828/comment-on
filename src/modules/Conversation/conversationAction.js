@@ -9,6 +9,7 @@ const MSG_STATUS__READ = 'READ';
 
 export const CONVERSATION__LOADED = 'CONVERSATION__LOADED';
 export const CONVERSATION__INIT = 'CONVERSATION__INIT';
+export const CONVERSATION__CLEAR = 'CONVERSATION__CLEAR';
 export const CONVERSATION__SEND_MESSAGE = 'CONVERSATION__SEND_MESSAGE';
 
 export const sendMessage = (conversationId, message) => async dispatch => {
@@ -27,10 +28,18 @@ export const sendMessage = (conversationId, message) => async dispatch => {
   });
 };
 
+export const clearConversationMessages = (conversationId) => async dispatch => {
+  dispatch({
+    type: CONVERSATION__CLEAR,
+    conversationId
+  });
+};
+
 
 export const subscribeToMessages = (conversationId) => async dispatch => {
   dispatch({
-    type: CONVERSATION__INIT
+    type: CONVERSATION__INIT,
+    conversationId
   });
   const unsubscribe = messageCollectionRef.where("conversation", "==", conversationCollectionRef.doc(conversationId)).orderBy('timestamp').onSnapshot(async (msgCollectionSnapShot) => {
     const unFilteredmessages = await Promise.all(msgCollectionSnapShot.docChanges.map(async change => {
@@ -54,6 +63,7 @@ export const subscribeToMessages = (conversationId) => async dispatch => {
     if(messages.length > 0) {
       dispatch({
         type: CONVERSATION__LOADED,
+        conversationId,
         data: messages
       });
     }

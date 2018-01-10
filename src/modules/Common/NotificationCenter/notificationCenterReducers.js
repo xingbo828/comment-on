@@ -25,3 +25,7 @@ export default notificationCenter;
 const _sum = (collection) => collection.reduce((sum, x) => sum + x, 0);
 // Selectors
 export const getTotalUnread = (state) => state.getIn(['common', 'notificationCenter']).map(convs => convs.update(_sum)).update(_sum);
+
+export const getConversationUnread = (state, projectId, conversationId) => {
+  return state.getIn(['common', 'notificationCenter', projectId, conversationId]);
+} ;

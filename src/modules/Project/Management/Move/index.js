@@ -10,7 +10,7 @@ const MoveProjectManagement = ({ projectData }) => {
     if(!providers) {
       return [];
     }
-    return providers.filter(p => p.status === 'completed');
+    return providers.filter(p => p.status === 'accept');
   };
 
   const getCurrentStep = (projectData) => {
@@ -24,11 +24,10 @@ const MoveProjectManagement = ({ projectData }) => {
     return 'finding-movers';
   };
 
-  const renderProvidersList = (providers) => {
+  const renderProvidersList = (providers, projectId) => {
     const providerAccepted = getAcceptedProviders(projectData.receivers);
     if(providerAccepted.length > 0){
-      const moversInfo = providerAccepted.map(p => p.provider);
-      return <SelectMover moversInfo={moversInfo} />
+      return <SelectMover projectId={projectId} moversInfo={providerAccepted} />
     }
     return null;
   }
@@ -36,7 +35,7 @@ const MoveProjectManagement = ({ projectData }) => {
   return (
     <ProgressPanels current={getCurrentStep(projectData)}>
       <ProgressPanels.PanelHeading>
-        <ManagementHeader projectData={projectData} />
+        <ManagementHeader projectData={projectData} current={getCurrentStep(projectData)} />
       </ProgressPanels.PanelHeading>
       <ProgressPanels.Panel header="completed form" panelKey="completed-form" />
       <ProgressPanels.Panel
@@ -54,7 +53,7 @@ const MoveProjectManagement = ({ projectData }) => {
           </span>
         }
       >
-        {renderProvidersList(projectData.receivers)}
+        {renderProvidersList(projectData.receivers, projectData.id)}
       </ProgressPanels.Panel>
       <ProgressPanels.Panel header="confirmation" panelKey="confirmation">
         This is step 4

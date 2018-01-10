@@ -1,5 +1,5 @@
 import React from 'react';
-import SelectMoverItem from './Item';
+import SelectMoverItem from './ItemContainer';
 import {
   SelectMoverList,
   SelectMoverListHeading,
@@ -9,7 +9,7 @@ import {
 } from './Styled';
 
 
-const SelectMover = ({ moversInfo }) => {
+const SelectMover = ({ moversInfo, projectId }) => {
   return (
     <SelectMoverList>
       <SelectMoverListHeading>
@@ -17,7 +17,7 @@ const SelectMover = ({ moversInfo }) => {
         <SelectMoverListHeadingEst>Estimate</SelectMoverListHeadingEst>
         <SelectMoverListHeadingAction>Actions</SelectMoverListHeadingAction>
       </SelectMoverListHeading>
-      {moversInfo.map(mover => <SelectMoverItem moverInfo={mover} key={mover.id}/>)}
+      {moversInfo.map(mover => <SelectMoverItem moverInfo={mover} projectId={projectId} key={mover.provider.id}/>)}
     </SelectMoverList>
   );
 };

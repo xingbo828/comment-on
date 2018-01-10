@@ -2,9 +2,7 @@ import React from 'react';
 import Icon from '../../../globalComponents/Icon';
 import {
   ConversationHeaderContainer,
-  GoBackBtn,
-  HeaderTitleWrapper,
-  HeaderTitle
+  GoBackBtn
 } from './Styled';
 
 const ConversationHeader = ({ goBack }) => {
@@ -13,9 +11,6 @@ const ConversationHeader = ({ goBack }) => {
       <GoBackBtn onClick={goBack}>
         <Icon icon="arrow-left" size="lg" />
       </GoBackBtn>
-      <HeaderTitleWrapper>
-        <HeaderTitle>Project: L1XjIuZw3DreKbjP6xKL</HeaderTitle>
-      </HeaderTitleWrapper>
     </ConversationHeaderContainer>
   );
 };

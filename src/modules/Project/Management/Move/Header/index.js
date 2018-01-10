@@ -13,8 +13,17 @@ import {
 
 
 const ManagementHeader = ({
-  projectData
+  projectData,
+  current
 }) => {
+  const getStatus = (current) => {
+    if(current === 'finding-movers') {
+      return 'Pending';
+    } else if(current === 'select-mover') {
+      return 'Action required';
+    }
+  };
+
   return (
     <ManagementHeaderContainer>
       <HeaderAddressesContainer>
@@ -33,7 +42,7 @@ const ManagementHeader = ({
       </HeaderAddressesContainer>
       <HeaderStatus>
         <HeaderLabel>Status</HeaderLabel>
-        <HeaderStatusContent>Pending</HeaderStatusContent>
+        <HeaderStatusContent>{getStatus(current)}</HeaderStatusContent>
       </HeaderStatus>
     </ManagementHeaderContainer>
   );

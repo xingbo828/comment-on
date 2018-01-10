@@ -1,5 +1,5 @@
 import { firestore } from '../../../firebaseClient';
-import createHttpClient from '../../../HttpClient';
+import createProjectHttpClient from './projectHttpClient';
 
 const projectCollectionRef = firestore.collection('projects');
 
@@ -21,6 +21,11 @@ export const getProject = projectId => async dispatch => {
     type: GET_PROJECT_PENDING
   });
   projectCollectionRef.doc(projectId).onSnapshot(async (projectDoc) => {
+    if(!projectDoc.exists) {
+      return dispatch({
+        type: GET_PROJECT_FAIL
+      });
+    }
     try {
       const projectData = projectDoc.data();
       const owner = await _getOwner(projectData.owner);
@@ -29,7 +34,6 @@ export const getProject = projectId => async dispatch => {
             data: Object.assign(projectData, { owner })
       });
     } catch(error) {
-      console.error(error);
       dispatch({
             type: GET_PROJECT_FAIL
       });
@@ -38,10 +42,8 @@ export const getProject = projectId => async dispatch => {
 };
 
 export const declineLead = (projectId) => async dispatch => {
-  const httpClient = await createHttpClient();
-  return await httpClient.put(`/projects/${projectId}`, {
-    action: 'reject'
-  });
+  const projectHttpClient = await createProjectHttpClient();
+  return await projectHttpClient.declineLead(projectId);
 };
 
 export const replyToLead = ({
@@ -49,9 +51,9 @@ export const replyToLead = ({
   estimatedPrice,
   notes
 }) => async dispatch => {
-  const httpClient = await createHttpClient();
-  return await httpClient.put(`/projects/${projectId}`, {
-    estimatedPrice: estimatedPrice,
-    action: 'accept'
+  const projectHttpClient = await createProjectHttpClient();
+  return await projectHttpClient.replyToLead(projectId, {
+    estimatedPrice,
+    notes
   });
 };

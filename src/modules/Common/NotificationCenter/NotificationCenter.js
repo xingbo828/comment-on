@@ -1,21 +1,24 @@
 import React from 'react';
 import Icon from '../../../globalComponents/Icon';
 import Badge from '../../../globalComponents/Badge';
+
 import {
   NotificationCenterContainer,
-  NotificationLink,
-  NotificationLinkText
+  NotificationLinkText,
+  NotificationIcon,
+  NotificationContentContainer
 } from './Styled';
 
-const NotificationCenter = ({ totalUnreadCount }) => {
+const NotificationCenter = ({ totalUnreadCount, toggle, isOpen }) => {
   return (
-    <NotificationCenterContainer>
-      <Badge count={totalUnreadCount} offsetY={18} offsetX={5} scale={0.8}>
-        <NotificationLink enabled={totalUnreadCount > 0}>
-          <Icon icon="bell-o" size="lg" />
-          <NotificationLinkText>Notifications</NotificationLinkText>
-        </NotificationLink>
+    <NotificationCenterContainer  isOpen={isOpen} enabled={totalUnreadCount > 0}>
+      <Badge count={totalUnreadCount} offsetY={25} offsetX={15}>
+        <NotificationIcon onClick={toggle}><Icon icon="bell-o" size="2x" /></NotificationIcon>
+        <NotificationLinkText onClick={toggle}>Notifications</NotificationLinkText>
       </Badge>
+      {isOpen && <NotificationContentContainer>
+      test
+      </NotificationContentContainer>}
     </NotificationCenterContainer>
   );
 };

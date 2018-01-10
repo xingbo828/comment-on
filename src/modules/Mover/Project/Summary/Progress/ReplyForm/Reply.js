@@ -47,6 +47,7 @@ const ReplyForm = ({ handleSubmit, pristine, reset, valid, submitting, decline }
           ghost
           danger
           onClick={decline}
+          disabled={submitting}
         >
           Decline
         </Button>

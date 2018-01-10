@@ -29,12 +29,15 @@ class SummaryProgress extends Component {
         return SummaryProgress.PanelKeys.leadClosed;
       }
     }
+    else {
+      console.log('UNKNOW');
+    }
 
   };
 
   renderPostReply = (moverStatus, ownerStatus, owner) => {
     if(ownerStatus === 'created') {
-      if(moverStatus === 'accept') {
+      if(moverStatus === 'accept' || moverStatus === 'sent') {
         return (
           <ProgressPanels.Panel
             header="await customer confirmation"
@@ -88,7 +91,7 @@ class SummaryProgress extends Component {
         <ProgressPanels.Panel header="reply or decline" panelKey={SummaryProgress.PanelKeys.reply}>
           <ReplyForm />
         </ProgressPanels.Panel>
-        {this.renderPostReply(projectSummary.myMoverInfo.status, projectSummary.status, projectSummary.owner)}
+         {this.renderPostReply(projectSummary.myMoverInfo.status, projectSummary.status, projectSummary.owner)}
       </ProgressPanels>
     );
   }
