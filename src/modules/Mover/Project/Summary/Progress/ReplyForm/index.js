@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
-import { compose } from 'recompose';
+import { withRouter } from 'react-router-dom';
+import { compose, withProps } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import ReplyForm from './Reply';
 import validators, { validateFunc } from '../../../../../Common/validators';
@@ -9,8 +10,8 @@ import {
 } from '../../../projectActions';
 
 const mapDispatchToProps = dispatch => ({
-  declineLead: () => dispatch(declineLead()),
-  replyToLead: () => dispatch(replyToLead())
+  declineLead: (projectId) => dispatch(declineLead(projectId)),
+  replyToLead: (data) => dispatch(replyToLead(data))
 });
 
 const validate = validateFunc(
@@ -30,11 +31,25 @@ const validate = validateFunc(
 );
 
 const enhance = compose(
+  withRouter,
   connect(null, mapDispatchToProps),
+  withProps((props) => ({
+    decline: (e) => {
+      e.preventDefault();
+      const projectId = props.match.params.projectId;
+      return props.declineLead(projectId);
+    }
+  })),
   reduxForm({
     form: 'mover.project.reply',
     validate,
     onSubmit: (values, dispatch, props) => {
+      const projectId = props.match.params.projectId;
+      return props.replyToLead({
+        projectId,
+        estimatedPrice: values.get('estimatedPrice'),
+        notes: values.get('notes')
+      });
     },
     onSubmitSuccess: (result, dispatch, props) => {
     },

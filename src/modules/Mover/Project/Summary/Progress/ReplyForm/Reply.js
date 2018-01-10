@@ -12,7 +12,7 @@ import {
   ActionContainer
 } from './Styled';
 
-const ReplyForm = ({ handleSubmit, pristine, reset, valid, submitting }) => {
+const ReplyForm = ({ handleSubmit, pristine, reset, valid, submitting, decline }) => {
   return (
     <form onSubmit={handleSubmit}>
       <Label
@@ -46,6 +46,7 @@ const ReplyForm = ({ handleSubmit, pristine, reset, valid, submitting }) => {
           small
           ghost
           danger
+          onClick={decline}
         >
           Decline
         </Button>

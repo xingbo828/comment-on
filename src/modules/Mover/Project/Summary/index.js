@@ -6,10 +6,11 @@ import { getMoverProjectSummary } from '../projectReducers';
 import scrollToTopOnMount from '../../../Common/scrollToTopOnMount';
 import mapImmutablePropsToPlainProps from '../../../Common/mapImmutablePropsToPlainProps';
 import MoverProjectSummary from './Summary';
+import isLoggedIn from '../../../Common/isLoggedIn';
 
 
-const mapStateToProps = state => ({
-  summary: getMoverProjectSummary(state),
+const mapStateToProps = (state, ownProps) => ({
+  summary: getMoverProjectSummary(state, ownProps.user.moverId),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -23,6 +24,7 @@ const isLoading = props => {
 
 const enhance = compose(
   withRouter,
+  isLoggedIn,
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
     componentDidMount() {
