@@ -1,8 +1,6 @@
 import React from 'react';
-import {
-  Button
-} from '../../../../../globalComponents/Form';
 import Badge from '../../../../../globalComponents/Badge';
+import { Radio } from '../../../../../globalComponents/Form';
 import {
   SelectMoverListItem,
   SelectMoverListItemName,
@@ -11,9 +9,10 @@ import {
   StyledLink
 } from './Styled';
 
-const SelectMoverItem = ({ moverInfo, unreadMsgsCount }) => {
+const SelectMoverItem = ({ value, moverInfo, unreadMsgsCount, checked, onCheck }) => {
   return (
-    <SelectMoverListItem>
+    <SelectMoverListItem checked={checked}>
+      <Radio.Radio value={value} checked={checked} onCheck={onCheck } />
       <SelectMoverListItemName>
         {moverInfo.provider.businessName}
       </SelectMoverListItemName>
@@ -25,10 +24,10 @@ const SelectMoverItem = ({ moverInfo, unreadMsgsCount }) => {
             <StyledLink to={`/conversation/${moverInfo.conversation.id}`}>Messages</StyledLink>
           </Badge>
           <StyledLink to={`/mover/profile/${moverInfo.provider.id}`}>View profile</StyledLink>
-          <Button small success>Accept</Button>
       </SelectMoverListItemAction>
     </SelectMoverListItem>
   );
 };
+
 
 export default SelectMoverItem;
