@@ -6,6 +6,7 @@ module.exports = {
     created: 'created',
     proccessed: 'proccessed',
     sent: 'sent',
+    accept: 'accept',
     completed: 'completed',
     abandoned: 'abandoned'
   },
@@ -15,6 +16,7 @@ module.exports = {
     proccessed: 'proccessed',
     sent: 'sent',
     accept: 'accept',
+    confirmed: 'confirmed',
     completed: 'completed',
     abandoned: 'abandoned'
   },
