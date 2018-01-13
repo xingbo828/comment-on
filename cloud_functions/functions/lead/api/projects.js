@@ -34,21 +34,20 @@ app.get('/:projectId', (request, response) => {
       if (data.receivers.length === 0) {
         return Promise.reject('invalid provider');
       }
-      if (data.receivers[0].status === constants.receiver_status.confirmed) {
         data.receivers[0].provider = data.receivers[0].provider.id;
         const ownerId = data.owner;
         return admin.firestore().collection('users').doc(ownerId).get()
         .then(ownerData => {
           ownerData = ownerData.data();
-          data.client = {
-            displayName: ownerData.displayName,
-            email: ownerData.email,
-            phone: ownerData.phone
+          data.owner = {
+            displayName: ownerData.displayName
           };
+          if (data.receivers[0].status === constants.receiver_status.confirmed) {
+            data.owner.email = ownerData.email;
+            data.owner.phone = ownerData.phone;
+          }
           return data;
         });
-      }
-      return data;
     }).then((data)=>{
       response.json(data);
     }).catch((err) => {
