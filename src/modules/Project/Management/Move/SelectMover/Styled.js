@@ -2,24 +2,24 @@ import styled from 'styled-components';
 import {
   Link
 } from 'react-router-dom';
-export const SelectMoverList = styled.ul`
-  padding: 0;
-  margin: 0;
+
+export const SelectMoverList = styled.div`
+  padding-bottom: ${props=> props.theme.spaces.base};
 `;
 
-export const SelectMoverListHeading = styled.li`
+export const SelectMoverListHeading = styled.div`
   display: none;
   ${props=> props.theme.media.greaterThan('md')`
     display: flex;
     list-style: none;
     font-size: .875rem;
     font-weight: ${props=>props.theme.fontWeights.roman};
-    padding: ${props=>props.theme.spaces.base} 0;
+    padding: 0 1rem 1rem 5rem;
   `};
 `;
 
 export const SelectMoverListHeadingName = styled.div`
-  flex: 2;
+  flex: 6;
 `;
 
 export const SelectMoverListHeadingEst = styled.div`
@@ -34,25 +34,29 @@ export const SelectMoverListHeadingAction = styled.div`
 `;
 
 
-export const SelectMoverListItem = styled.li`
+export const SelectMoverListItem = styled.label`
   list-style: none;
   display: flex;
   border-top: 1px dashed ${props=>props.theme.colors.border};
   flex-direction: column;
-  padding: ${props=>props.theme.spaces.base} 0;
+  padding: ${props=>props.theme.spaces.base};
+  flex-grow: 1;
   ${props=> props.theme.media.greaterThan('md')`
     flex-direction: row;
+    cursor: pointer;
     align-items: center;
-    padding: ${props=>props.theme.spaces.wide} 0;
+    padding: ${props=>props.theme.spaces.wide};
+    margin-bottom: ${props=>props.theme.spaces.tight};
+    border: ${props=>props.checked ? `2px solid ${props.theme.colors.primary}` : `1px solid ${props.theme.colors.border}`};
+    border-radius: 3px;
   `};
-
 `;
 
 export const SelectMoverListItemName = styled.div`
   padding: ${props=>props.theme.spaces.tight};
   font-weight: ${props=>props.theme.fontWeights.roman};
   ${props=> props.theme.media.greaterThan('md')`
-    flex: 2;
+    flex: 6;
     padding: 0;
   `};
 
@@ -98,5 +102,12 @@ export const SelectMoverListItemAction = styled.div`
     }
   `};
 `;
+
+export const SelectMoverFormAction = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+  padding-bottom: ${props=>props.theme.spaces.base};
+`;
+
 
 

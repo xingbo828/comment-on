@@ -6,11 +6,11 @@ import { ConversationContainer } from './Styled';
 
 class Conversation extends Component {
   render() {
-    const { match } = this.props;
+    const { match, conversation, user } = this.props;
     return (
       <ConversationContainer >
         <ConversationHeader />
-        <Dialog scrollToBottom={this.scrollToBottom}/>
+        <Dialog myUid={user.uid} conversation={conversation} scrollToBottom={this.scrollToBottom}/>
         <ConversationForm conversationId={match.params.conversationId} />
       </ConversationContainer>
     );

@@ -1,23 +1,25 @@
 import { connect } from 'react-redux';
-import { compose, lifecycle, branch, renderNothing, setDisplayName } from 'recompose';
+import {
+  compose,
+  lifecycle,
+  withStateHandlers,
+  branch,
+  renderNothing,
+  setDisplayName
+} from 'recompose';
 import isLoggedIn from '../isLoggedIn';
-import {
-  subscribeToNotifications
-} from './notificationCenterActions';
-import {
-  getTotalUnread
-} from './notificationCenterReducers';
+import { subscribeToNotifications } from './notificationCenterActions';
+import { getTotalUnreadCount } from './notificationCenterReducers';
 import NotificationCenter from './NotificationCenter';
 
-
 const mapStateToProps = state => ({
-  totalUnreadCount: getTotalUnread(state)
+  totalUnreadCount: getTotalUnreadCount(state)
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  subscribeToNotifications: (projectIds) => dispatch(subscribeToNotifications(projectIds))
+const mapDispatchToProps = dispatch => ({
+  subscribeToNotifications: projectIds =>
+    dispatch(subscribeToNotifications(projectIds))
 });
-
 
 const enhance = compose(
   isLoggedIn,
@@ -26,14 +28,29 @@ const enhance = compose(
   lifecycle({
     async componentDidMount() {
       const myProjectIds = Object.keys(this.props.user.projects);
-      this.unsubscribe = await this.props.subscribeToNotifications(myProjectIds);
+      this.unsubscribe = await this.props.subscribeToNotifications(
+        myProjectIds
+      );
     },
     componentWillUnmount() {
-      if(this.unsubscribe) {
+      if (this.unsubscribe) {
         this.unsubscribe();
       }
     }
   }),
+  withStateHandlers(
+    ({ initIsOpen = false }) => ({
+      isOpen: initIsOpen,
+    }),
+    {
+      toggle: ({ isOpen }) => () => ({
+        isOpen: !isOpen
+      }),
+      close: ({ isOpen }) => () => ({
+        isOpen: false
+      })
+    }
+  ),
   setDisplayName('NotificationCenter')
 );
 

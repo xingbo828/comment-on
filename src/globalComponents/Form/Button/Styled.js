@@ -123,7 +123,7 @@ export const StyledButton = styled.button`
   font-size: 1rem;
   user-select: none;
   transition: all .3s cubic-bezier(.645,.045,.355,1);
-  position: relative;
+  ${'' /* position: relative; */}
   color: ${props=>props.ghost ? getBackColor(props) : getForeColor(props)};
   background-color:  ${props=> props.ghost ? 'transparent' : getBackColor(props)};
   border-color: ${props=>props.ghost ? getBackColor(props) : getBorderColor(props)};

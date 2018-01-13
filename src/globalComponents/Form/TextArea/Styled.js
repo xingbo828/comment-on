@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const InputContainer = styled.div`
   display: block;
   padding: 0.5rem 0;
-  position: relative;
   margin: 0 0 1rem;
 `;
 

@@ -235,7 +235,7 @@ const MoverProjectSummary = ({
       </HeadingContainer>
       <SummaryBody>
         <SummaryActionFormContainer>
-          <Progress />
+          <Progress projectSummary={summaryData}/>
         </SummaryActionFormContainer>
         <SummaryReportContainer>
           {renderAddressSection(summaryData.configuration.addresses)}

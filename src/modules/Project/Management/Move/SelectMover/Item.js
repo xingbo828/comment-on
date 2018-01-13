@@ -1,8 +1,6 @@
 import React from 'react';
-import {
-  Button
-} from '../../../../../globalComponents/Form';
 import Badge from '../../../../../globalComponents/Badge';
+import { Radio } from '../../../../../globalComponents/Form';
 import {
   SelectMoverListItem,
   SelectMoverListItemName,
@@ -11,24 +9,25 @@ import {
   StyledLink
 } from './Styled';
 
-const SelectMoverItem = ({ moverInfo }) => {
+const SelectMoverItem = ({ value, moverInfo, unreadMsgsCount, checked, onCheck }) => {
   return (
-    <SelectMoverListItem>
+    <SelectMoverListItem checked={checked}>
+      <Radio.Radio value={value} checked={checked} onCheck={onCheck } />
       <SelectMoverListItemName>
-        {moverInfo.businessName}
+        {moverInfo.provider.businessName}
       </SelectMoverListItemName>
       <SelectMoverListItemEst>
-        ${moverInfo.estimatePrice}
+        ${moverInfo.estimatedPrice}
       </SelectMoverListItemEst>
       <SelectMoverListItemAction>
-          <Badge count={2} offsetX={8} offsetY={-3}>
-            <StyledLink to={`/mover/profile/${moverInfo.id}`}>Messages</StyledLink>
+          <Badge count={unreadMsgsCount} offsetX={8} offsetY={-3}>
+            <StyledLink to={`/conversation/${moverInfo.conversation.id}`}>Messages</StyledLink>
           </Badge>
-          <StyledLink to={`/mover/profile/${moverInfo.id}`}>View profile</StyledLink>
-          <Button small success>Accept</Button>
+          <StyledLink to={`/mover/profile/${moverInfo.provider.id}`}>View profile</StyledLink>
       </SelectMoverListItemAction>
     </SelectMoverListItem>
   );
 };
+
 
 export default SelectMoverItem;

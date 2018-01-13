@@ -18,12 +18,11 @@ class Dialog extends Component {
     this.wrapper.scroll(0, this.el.offsetTop);
   };
 
-  renderMessages = msgs => {
-    const { uid } = this.props.user;
+  renderMessages = (msgs, myUid) => {
     return msgs.map(msg => (
       <Animation.Fade component="li" timeout={350} key={msg.id}>
         {() =>
-          msg.from.uid === uid ? (
+          msg.from.uid === myUid ? (
             <DialogItemRight msg={msg} />
           ) : (
             <DialogItemLeft msg={msg} />
@@ -34,7 +33,7 @@ class Dialog extends Component {
   };
 
   render() {
-    const { conversation: { messages } } = this.props;
+    const { myUid, conversation: { messages } } = this.props;
     return (
       <ContainerWrapper>
         <DialogContainer
@@ -42,7 +41,7 @@ class Dialog extends Component {
             this.wrapper = el;
           }}
         >
-          <TransitionGroup>{this.renderMessages(messages)}</TransitionGroup>
+          <TransitionGroup>{this.renderMessages(messages, myUid)}</TransitionGroup>
           <div
             ref={el => {
               this.el = el;

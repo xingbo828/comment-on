@@ -60,6 +60,7 @@ const ContextHeaderLinks = styled.ul`
 const NavRoot = styled.nav`
   display: block;
   background: white;
+  border: 1px solid ${props=>props.theme.colors.offWhite};
 `;
 
 /*

@@ -1,17 +1,15 @@
 import styled from 'styled-components';
 
 const Form = styled.form`
-  position: relative;
-  padding-bottom: ${props=>props.theme.spaces.tight};
+  display: flex;
   border-radius: 3px;
   background-color: white;
   box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.07);
   width: 100%;
   margin: 0 auto;
-  z-index: 1;
+  flex-direction: column;
   ${props=>props.theme.media.greaterThan('md')`
     width: calc(1000%/12);
-    padding-bottom: 160px;
   `}
 `;
 
@@ -26,7 +24,6 @@ const FormActions = styled.div`
   border-top: 1px solid #e3e3e3;
   ${props=>props.theme.media.greaterThan('md')`
     padding: ${props=>props.theme.spaces.wide} ${props=>props.theme.spaces.xWide} 0;
-    position: absolute;
     bottom: 0;
     height:130px;
     > button:not(:last-child) {

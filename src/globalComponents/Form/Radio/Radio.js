@@ -25,7 +25,7 @@ const Radio = ({ label, value, color, checked = false, onCheck, style={} }) => {
 };
 
 Radio.propTypes = {
-  label: string.isRequired,
+  label: string,
   value: string.isRequired
 };
 
