@@ -14,7 +14,15 @@ module.exports = {
     created: 'created',
     proccessed: 'proccessed',
     sent: 'sent',
+    accept: 'accept',
     completed: 'completed',
     abandoned: 'abandoned'
+  },
+  message_status: {
+    unread: 'UNREAD',
+    read: 'READ'
+  },
+  message_type: {
+    text: 'text'
   }
 }
