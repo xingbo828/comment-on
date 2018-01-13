@@ -13,13 +13,14 @@ export const NotificationContentContainer = styled.ul`
   display: flex;
   flex-direction: column;
   padding: 0;
-  justify-content: center;
+
   align-items: center;
   > li:not(:last-child) {
     border-bottom: 1px solid ${props=>props.theme.colors.border};
   }
   ${props=>props.theme.media.greaterThan('sm')`
     position: absolute;
+    justify-content: center;
     left: auto;
     top: 60px;
     right: 0;
@@ -36,16 +37,27 @@ export const NotificationContentItemContainer = styled.li`
 `;
 
 export const NotificationContentItemLink = styled(Link)`
+  position: relative;
   display: inline-block;
   text-decoration: none;
   color: ${props=>props.theme.colors.textDark};
+  padding: ${props=>props.theme.spaces.base} ${props=>props.theme.spaces.xWide} ${props=>props.theme.spaces.base} ${props=>props.theme.spaces.base};
+  font-size: .875rem;
+  line-height: 250%;
+  &:after {
+    content:'\f054';
+    font-family: 'FontAwesome';
+    position: absolute;
+    right: ${props=>props.theme.spaces.wide};
+    top: 40%;
+  }
   ${props=>props.theme.media.greaterThan('sm')`
-    font-size: .875rem;
-    line-height: 250%;
     padding: ${props.theme.spaces.base};
-
-  `}
-    &:hover {
-      background-color: ${props=>props.theme.colors.offWhite};
+    &:after {
+      content:'';
     }
+  `}
+  &:hover {
+    background-color: ${props=>props.theme.colors.offWhite};
+  }
 `;
