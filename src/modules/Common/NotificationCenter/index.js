@@ -9,11 +9,11 @@ import {
 } from 'recompose';
 import isLoggedIn from '../isLoggedIn';
 import { subscribeToNotifications } from './notificationCenterActions';
-import { getTotalUnread } from './notificationCenterReducers';
+import { getTotalUnreadCount } from './notificationCenterReducers';
 import NotificationCenter from './NotificationCenter';
 
 const mapStateToProps = state => ({
-  totalUnreadCount: getTotalUnread(state)
+  totalUnreadCount: getTotalUnreadCount(state)
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -30,15 +30,26 @@ const _withConvos = async (myProjectIds) => await Promise.all(myProjectIds.map(a
 const _subscribeToConversations = (dispatch) => (projectwithConversations) => {
   const myUid = auth.currentUser.uid;
   return projectwithConversations.conversations.map((conversation) => {
-    return messageCollectionRef.where('conversation', '==', conversation).where('status', '==', 'UNREAD').onSnapshot((result) => {
-      const filtered = result.docs.map(d => d.data()).filter(t=>t.from.id !== myUid);
-      const unread = filtered.length;
+    return messageCollectionRef.where('conversation', '==', conversation).where('status', '==', 'UNREAD').onSnapshot(async (result) => {
+      const filteredMsgs = result.docs.map(d => Object.assign({id: d.id}, d.data())).filter(t=>t.from.id !== myUid);
+      const resolvedFilterMsgs = await Promise.all(filteredMsgs.map(m => _resolveMsgDetail(m, projectwithConversations.project)));
       dispatch({
         type: NOTIFICATION_CENTER__UPDATE,
         project: projectwithConversations.project,
         conversation: conversation.id,
-        unread
+        messags: resolvedFilterMsgs
       });
     });
+  });
+};
+
+const _resolveMsgDetail = async (msg, project) => {
+  const senderDetail = await msg.from.get();
+  const moverId = senderDetail.data().moverId;
+  const moverDetail = await firestore.collection('providers').doc(moverId).get();
+  return Object.assign({}, msg, {
+    from: senderDetail.data(),
+    provider: moverDetail.data(),
+    project
   });
 };
