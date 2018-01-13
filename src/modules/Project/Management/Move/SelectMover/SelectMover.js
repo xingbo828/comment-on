@@ -7,7 +7,8 @@ import {
   SelectMoverListHeadingName,
   SelectMoverListHeadingEst,
   SelectMoverListHeadingAction,
-  SelectMoverFormAction
+  SelectMoverFormAction,
+  RadioContainer
 } from './Styled';
 import SelectMoverItemList from './SelectMoverItemList';
 
@@ -34,6 +35,7 @@ const SelectMover = ({
   return (
     <SelectMoverList>
       <SelectMoverListHeading>
+        <RadioContainer />
         <SelectMoverListHeadingName>Name</SelectMoverListHeadingName>
         <SelectMoverListHeadingEst>Estimate</SelectMoverListHeadingEst>
         <SelectMoverListHeadingAction>Actions</SelectMoverListHeadingAction>

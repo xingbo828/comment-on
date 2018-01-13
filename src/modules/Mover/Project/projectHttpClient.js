@@ -13,7 +13,8 @@ const createProjectHttpClient = async () => {
     estimatedPrice,
     notes
   }) => projectHttpClient.put(`/projects/${projectId}`, {
-    estimatedPrice: estimatedPrice,
+    estimatedPrice,
+    notes,
     action: 'accept'
   });
 

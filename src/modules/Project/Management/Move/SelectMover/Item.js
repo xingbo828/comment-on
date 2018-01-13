@@ -6,14 +6,17 @@ import {
   SelectMoverListItemName,
   SelectMoverListItemEst,
   SelectMoverListItemAction,
-  StyledLink
+  StyledLink,
+  RadioContainer
 } from './Styled';
 
 const SelectMoverItem = ({ value, moverInfo, unreadMsgsCount, checked, onCheck }) => {
   return (
     <SelectMoverListItem checked={checked}>
-      <Radio.Radio value={value} checked={checked} onCheck={onCheck } />
-      <SelectMoverListItemName>
+      <RadioContainer>
+        <Radio.Radio value={value} checked={checked} onCheck={onCheck } />
+      </RadioContainer>
+      <SelectMoverListItemName checked={checked}>
         {moverInfo.provider.businessName}
       </SelectMoverListItemName>
       <SelectMoverListItemEst>

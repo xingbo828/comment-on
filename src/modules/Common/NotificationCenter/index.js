@@ -27,10 +27,12 @@ const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
     async componentDidMount() {
-      const myProjectIds = Object.keys(this.props.user.projects);
-      this.unsubscribe = await this.props.subscribeToNotifications(
-        myProjectIds
-      );
+      if(this.props.user.projects && this.props.user.projects.length > 0) {
+        const myProjectIds = Object.keys(this.props.user.projects);
+        this.unsubscribe = await this.props.subscribeToNotifications(
+          myProjectIds
+        );
+      }
     },
     componentWillUnmount() {
       if (this.unsubscribe) {
