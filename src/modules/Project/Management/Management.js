@@ -3,7 +3,8 @@ import Grid from '../../../globalComponents/Grid';
 import asyncLoad from '../../Common/asyncLoad';
 
 const ProjectManagement = ({
-  projectData
+  projectData,
+  selectedProvider
 }) => {
 
   const getTypedProjectManagement = (type) => {
@@ -20,7 +21,7 @@ const ProjectManagement = ({
 
   return (
     <Grid.Container>
-      <TypedProjectManagement projectData={projectData} />
+      <TypedProjectManagement selectedProvider={selectedProvider} projectData={projectData} />
     </Grid.Container>
   );
 };

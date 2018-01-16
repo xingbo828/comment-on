@@ -22,13 +22,14 @@ export const NotificationContentContainer = styled.ul`
     position: absolute;
     justify-content: center;
     left: auto;
-    top: 60px;
+    top: 70px;
+    display: block;
     right: 0;
-    width: 365px;
-    height: 250px;
+    width: 400px;
+    height: 350px;
     box-shadow: 0 2px 15px 0px rgba(0,0,0,.2);
     background-color: white;
-    overflow-y: scroll;
+    overflow-y: auto;
   `}
 `;
 
@@ -38,7 +39,7 @@ export const NotificationContentItemContainer = styled.li`
 
 export const NotificationContentItemLink = styled(Link)`
   position: relative;
-  display: inline-block;
+  display: block;
   text-decoration: none;
   color: ${props=>props.theme.colors.textDark};
   padding: ${props=>props.theme.spaces.base} ${props=>props.theme.spaces.xWide} ${props=>props.theme.spaces.base} ${props=>props.theme.spaces.base};

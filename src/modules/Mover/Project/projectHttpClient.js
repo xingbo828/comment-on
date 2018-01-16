@@ -9,6 +9,8 @@ const createProjectHttpClient = async () => {
     'Authorization'
   ] = `Bearer ${myToken}`;
 
+  const getProject = (projectId) => projectHttpClient.get(`/projects/${projectId}`);
+
   const replyToLead = (projectId, {
     estimatedPrice,
     notes
@@ -24,6 +26,7 @@ const createProjectHttpClient = async () => {
     });
 
   return {
+    getProject,
     replyToLead,
     declineLead
   };

@@ -4,8 +4,7 @@ import Icon from '../../../../globalComponents/Icon';
 import ManagementHeader from './Header';
 import SelectMover from './SelectMover';
 
-const MoveProjectManagement = ({ projectData }) => {
-
+const MoveProjectManagement = ({ projectData, selectedProvider }) => {
   const getAcceptedProviders = (providers) => {
     if(!providers) {
       return [];
@@ -14,14 +13,23 @@ const MoveProjectManagement = ({ projectData }) => {
   };
 
   const getCurrentStep = (projectData) => {
-    if(!projectData.receivers) {
+    if(projectData.status === 'created') {
+      if(!projectData.receivers) {
+        return 'finding-movers';
+      }
+      const providerAccepted = getAcceptedProviders(projectData.receivers);
+      if(providerAccepted.length > 0) {
+        if(selectedProvider) {
+          return 'share-contact-info';
+        }
+        return 'select-mover';
+      }
       return 'finding-movers';
+    } else if(projectData.status === 'accept') {
+      return 'confirmation';
     }
-    const providerAccepted = getAcceptedProviders(projectData.receivers);
-    if(providerAccepted.length > 0) {
-      return 'select-mover';
-    }
-    return 'finding-movers';
+
+
   };
 
   const renderProvidersList = (providers, projectId) => {
@@ -54,6 +62,9 @@ const MoveProjectManagement = ({ projectData }) => {
         }
       >
         {renderProvidersList(projectData.receivers, projectData.id)}
+      </ProgressPanels.Panel>
+      <ProgressPanels.Panel header="share contact info with mover" panelKey="share-contact-info">
+        share contact info
       </ProgressPanels.Panel>
       <ProgressPanels.Panel header="confirmation" panelKey="confirmation">
         This is step 4

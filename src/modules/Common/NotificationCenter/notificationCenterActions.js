@@ -9,7 +9,7 @@ const conversationCollectionRef = firestore.collection('conversations');
 export const NOTIFICATION_CENTER__UPDATE = 'NOTIFICATION_CENTER__UPDATE';
 
 export const subscribeToNotifications =  (myProjectIds) => async dispatch =>{
-  const projectswithConversations = await _withConvos(myProjectIds)
+  const projectswithConversations = await _withConvos(myProjectIds);
   const unsubscribes = flatten(projectswithConversations.map( p => _subscribeToConversations(dispatch)(p)));
 
   const unsubscribeAll = fns => () => {

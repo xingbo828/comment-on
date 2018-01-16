@@ -16,10 +16,12 @@ const createHttpClient = () => {
   // attach response interceptors
   const onSuccess = (response) => {
     console.info('Response', response);
+    return response.data;
   };
 
   const onError = (error) => {
     console.error('Error', error);
+    return error;
   };
 
   client.interceptors.response.use(onSuccess, onError);

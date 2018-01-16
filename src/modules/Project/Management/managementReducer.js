@@ -5,6 +5,10 @@ import {
   GET_MY_PROJECT_FAIL
 } from '../projectAction';
 
+import {
+  PROJECT_MANAGEMENT__SELECT_MOVER
+} from './managementAction';
+
 const initMyProjectState = Immutable.fromJS({});
 
 const projectSummary = (state = initMyProjectState, action) => {
@@ -27,6 +31,11 @@ const projectSummary = (state = initMyProjectState, action) => {
       return state.withMutations(st => {
         st.setIn([action.projectId, 'status'], 'FAILED');
         st.setIn([action.projectId, 'projectData'], null);
+      });
+    }
+    case PROJECT_MANAGEMENT__SELECT_MOVER: {
+      return state.withMutations(st => {
+        st.setIn([action.projectId, 'selectedProvider'], action.providerId);
       });
     }
 
