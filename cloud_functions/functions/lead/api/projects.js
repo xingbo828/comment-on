@@ -20,6 +20,43 @@ app.use((err, req, res, next) => {
   }
 });
 
+app.get('/:projectId', (request, response) => {
+  const projectId = request.params.projectId;
+  return getProviderId(request)
+  .then(userData => {
+    return admin.firestore().collection('projects').doc(projectId).get().then((doc) => {
+      const data = doc.data();
+      if (!data) {
+        return Promise.reject('invalid project');
+      }
+      data.receivers = [data.receivers[userData.moverId]];
+
+      if (data.receivers.length === 0) {
+        return Promise.reject('invalid provider');
+      }
+        data.receivers[0].provider = data.receivers[0].provider.id;
+        const ownerId = data.owner;
+        return admin.firestore().collection('users').doc(ownerId).get()
+        .then(ownerData => {
+          ownerData = ownerData.data();
+          data.owner = {
+            displayName: ownerData.displayName
+          };
+          if (data.receivers[0].status === constants.receiver_status.confirmed) {
+            data.owner.email = ownerData.email;
+            data.owner.phone = ownerData.phone;
+          }
+          return data;
+        });
+    }).then((data)=>{
+      response.json(data);
+    }).catch((err) => {
+      return response.status(400).json({error: err});
+    });
+    response.json();
+  });
+});
+
 app.put('/:projectId/', (request, response) => {
   const body = request.body;
   const projectId = request.params.projectId;
