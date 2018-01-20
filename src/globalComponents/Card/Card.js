@@ -1,5 +1,5 @@
 import React from 'react';
-import { bool } from 'prop-types';
+import { bool, node, func } from 'prop-types';
 import Spin from '../Spin';
 import {
   CardContainer,
@@ -8,9 +8,9 @@ import {
 
 const { SpinContainer } = Spin;
 
-const Card = ({ loading, children, primaryAction, style }) => {
+const Card = ({ loading, onClick, children, primaryAction, style }) => {
   return(
-    <CardContainer style={style}>
+    <CardContainer style={style} onClick={onClick}>
       <SpinContainer loading={loading}>
         {children}
         {primaryAction && <PrimaryCardAction>{primaryAction}</PrimaryCardAction>}
@@ -20,11 +20,14 @@ const Card = ({ loading, children, primaryAction, style }) => {
 };
 
 Card.propTypes = {
-  loading: bool
+  loading: bool,
+  onClick: func,
+  children: node
 };
 
 Card.defaultProps = {
-  loading: false
+  loading: false,
+  onClick: () => {}
 };
 
 export default Card;

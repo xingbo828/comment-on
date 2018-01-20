@@ -26,14 +26,13 @@ const CardWithMap = () => {
   return (
     <div style={{margin: '0 auto', padding: '200px 0', width: '376px'}}>
       <Card
-        primaryAction={<Button small>Click</Button>}
+        primaryAction={<Button small>Choose</Button>}
       >
           <Map
             style={{ height: 225, width: '100%' }}
             google={window.google}
             markers={withDirection}
-            zoom={12}
-            mapOptions={{draggable: false, fullscreenControl: false }}
+            mapOptions={{mapTypeControl: false, draggable: false, fullscreenControl: false, streetViewControl: false, zoomControl: false }}
             direction
           />
       </Card>
