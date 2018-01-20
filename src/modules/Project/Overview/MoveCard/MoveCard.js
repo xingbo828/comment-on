@@ -3,10 +3,12 @@ import Card from '../../../../globalComponents/Card';
 import Map from '../../../../globalComponents/Map';
 import Badge from '../../../../globalComponents/Badge';
 import Grid from '../../../../globalComponents/Grid';
-import {CardContainer} from './Styled';
+import moment from 'moment';
+import {CardContainer, CardMetaItem} from './Styled';
 
-const MoveCard = ({ project, unreads }) => {
-  const { addresses: { pickUpAddress, deliveryAddress } } = project.configuration;
+
+const MoveCard = ({ project }) => {
+  const { addresses: { pickUpAddress, deliveryAddress }, dateTime: {pickUpDate}} = project.configuration;
   const direction = [
     {
       placeId: pickUpAddress
@@ -16,11 +18,15 @@ const MoveCard = ({ project, unreads }) => {
       placeId: deliveryAddress
     }
   ];
+  const status = project.status !== 'complete' ? 'In Progress': 'Complete';
+
+  const name = project.configuration.name || `My ${moment(pickUpDate).format('ll')} move`;
+
   return (
     <Card>
-      <Badge count={unreads} offsetY={-5}>
+      <Badge count={7}>
           <Map
-            style={{ height: 225, width: '100%', display: 'inline-block' }}
+            style={{ height: 225, width: '100%' }}
             google={window.google}
             markers={direction}
             mapOptions={{
@@ -33,6 +39,8 @@ const MoveCard = ({ project, unreads }) => {
             direction
           />
           </Badge>
+          <CardMetaItem>{name}</CardMetaItem>
+          <CardMetaItem>{status}</CardMetaItem>
       </Card>
   );
 };
