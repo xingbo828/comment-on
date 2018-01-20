@@ -6,3 +6,7 @@ export const CardContainer = Grid.Col.extend `
   padding: 0;
   max-width: 376px;
 `;
+
+export const CardMetaItem = styled.p `
+  text-align: center;
+`;
