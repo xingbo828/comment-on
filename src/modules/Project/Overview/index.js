@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { compose, lifecycle, branch, renderNothing } from 'recompose';
+import { compose, lifecycle, branch, renderNothing, withProps} from 'recompose';
 import isLoggedIn from '../../Common/isLoggedIn';
 import {
   getMyProjects
@@ -22,6 +22,13 @@ const mapDispatchToProps = dispatch => ({
 const enhance = compose(
   isLoggedIn,
   connect(mapStateToProps, mapDispatchToProps),
+  withProps(props => ({
+    navToProject: (projectId) => {
+      props.history.push({
+        pathname: `/projects/${projectId}`
+      });
+    }
+  })),
   lifecycle({
     componentDidMount() {
       const {user: { projects }} = this.props;

@@ -6,7 +6,7 @@ import Grid from '../../../../globalComponents/Grid';
 import moment from 'moment';
 import {CardContainer, CardMetaItem} from './Styled';
 
-const MoveCard = ({ project }) => {
+const MoveCard = ({ project, navToProject}) => {
   const { addresses: { pickUpAddress, deliveryAddress }, dateTime: {pickUpDate}} = project.configuration;
   const direction = [
     {
@@ -22,7 +22,7 @@ const MoveCard = ({ project }) => {
   const name = project.configuration.name || `My ${moment(pickUpDate).format('ll')} move`;
 
   return (
-    <Card>
+    <Card onClick={navToProject}>
       <Badge count={7}>
           <Map
             style={{ height: 225, width: '100%' }}

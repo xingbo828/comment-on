@@ -19,7 +19,8 @@ const ProjectOverview = ({
   status,
   myProjectsData,
   user,
-  selectedProvider
+  selectedProvider,
+  navToProject
 }) => {
   console.log(status, myProjectsData)
   // const numberOfProjects = Object.keys(user.projects).length;
@@ -33,7 +34,7 @@ const ProjectOverview = ({
 
   const renderLoadedProjectsCards = (projects) => {
     return projects.map(p => (
-      <Grid.Col key={p.id} xs={24} sm={24} md={8} lg={8}><MoveCard project={p} /></Grid.Col>
+      <Grid.Col key={p.id} xs={24} sm={24} md={8} lg={8}><MoveCard project={p} navToProject={navToProject.bind(this, p.id)} /></Grid.Col>
   ));
   };
 
