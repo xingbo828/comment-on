@@ -10,6 +10,7 @@ export const CardContainer = styled.div`
   position: relative;
   cursor: pointer;
   width: 100%;
+  min-height: 300px;
   &:hover {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.14);
     border-color: rgba(0, 0, 0, 0.14);

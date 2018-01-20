@@ -45,3 +45,24 @@ export const getMyProject = (projectId) => dispatch => {
     });
   });
 };
+
+
+export const GET_MY_PROJECTS_PENDING = 'GET_MY_PROJECTS_PENDING';
+export const GET_MY_PROJECTS_SUCCESS = 'GET_MY_PROJECTS_SUCCESS';
+export const GET_MY_PROJECTS_FAIL = 'GET_MY_PROJECTS_FAIL';
+
+export const getMyProjects = (projectRefs) => async dispatch => {
+  dispatch({
+    type: GET_MY_PROJECTS_PENDING
+  });
+  const projectPromises = projectRefs.map(async (pRef) => {
+    const project = await pRef.get();
+    return project.data();
+  });
+
+  const projects = await Promise.all(projectPromises);
+  dispatch({
+    type: GET_MY_PROJECTS_SUCCESS,
+    data: projects,
+  });
+};

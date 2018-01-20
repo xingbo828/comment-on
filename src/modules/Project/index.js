@@ -8,9 +8,9 @@ import Configurations from './Configurations';
 const Project = ({ match: { isExact } }) => {
   return (
     <Switch>
-      <Route path="/project/configurations" component={Configurations} />
-      <ProtectedRoute exact path="/project" component={Overview} />
-      <ProtectedRoute path="/project/:projectId" component={Management} />
+      <Route path="/projects/configurations" component={Configurations} />
+      <ProtectedRoute exact path="/projects" component={Overview} />
+      <ProtectedRoute path="/projects/:projectId" component={Management} />
     </Switch>
   );
 };

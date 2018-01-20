@@ -5,7 +5,7 @@ import Button from '../../../../globalComponents/Form/Button';
 import Grid from '../../../../globalComponents/Grid';
 import {CardContainer} from './Styled';
 
-const moveCard = () => {
+const MoveCard = ({ project }) => {
   const withDirection = [{
     lat: 49.2812054,
     lng: -123.11837050000003
@@ -32,4 +32,4 @@ const moveCard = () => {
   );
 };
 
-export default moveCard;
+export default MoveCard;
