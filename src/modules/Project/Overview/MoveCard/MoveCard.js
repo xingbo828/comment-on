@@ -24,9 +24,9 @@ const MoveCard = ({ project }) => {
 
   return (
     <Card>
-      <Badge count={7}>
+      <Badge count={7} offsetY={-5}>
           <Map
-            style={{ height: 225, width: '100%' }}
+            style={{ height: 225, width: '100%', display: 'inline-block'}}
             google={window.google}
             markers={direction}
             mapOptions={{
