@@ -1,11 +1,4 @@
 import React from 'react';
+import Overview from './Overview';
 
-const ProjectOverview = () => {
-  return (
-    <div>
-      Overview page
-    </div>
-  );
-};
-
-export default ProjectOverview;
+export default Overview;
