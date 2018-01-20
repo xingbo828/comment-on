@@ -1,15 +1,30 @@
 import React from 'react';
+import { bool } from 'prop-types';
+import Spin from '../Spin';
 import {
-  CardDiv
+  CardContainer,
+  PrimaryCardAction
 } from './Styled';
 
+const { SpinContainer } = Spin;
 
-const Card = ({ children, offset, style }) => {
+const Card = ({ loading, children, primaryAction, style }) => {
   return(
-    <CardDiv offset={offset} style={style}>
-      {children}
-    </CardDiv>
+    <CardContainer style={style}>
+      <SpinContainer loading={loading}>
+        {children}
+        {primaryAction && <PrimaryCardAction>{primaryAction}</PrimaryCardAction>}
+      </SpinContainer>
+    </CardContainer>
   );
-}
+};
+
+Card.propTypes = {
+  loading: bool
+};
+
+Card.defaultProps = {
+  loading: false
+};
 
 export default Card;

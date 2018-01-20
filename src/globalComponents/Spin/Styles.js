@@ -31,7 +31,7 @@ export const FullScreenDrop = styled.div`
 
 // Spin container
 export const StyleContainer = styled.div`
-  position: relative;
+  ${'' /* position: relative; */}
 `;
 
 export const ChildrenBlurWrapper = styled.div`

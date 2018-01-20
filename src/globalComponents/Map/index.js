@@ -6,11 +6,6 @@ import has from 'lodash/has';
 import last from 'lodash/last';
 import MapContainer from './Styles';
 
-
-const defaultMapConfig = {
-  streetViewControl: false,
-  mapTypeControl: false
-};
 class Map extends Component {
   shouldComponentUpdate(nextProps) {
     return (
@@ -21,21 +16,11 @@ class Map extends Component {
 
   async componentDidMount() {
     const { google, markers, zoom, direction, onRouteChange } = this.props;
-      this.placeIdConverter = this._placeIdToAddress(new google.maps.Geocoder());
-      const processedMarkers = await this.convertMarkersFromPlaceIdToAddress(markers, this.placeIdConverter);
-      this.renderMap(
-        this.mapContainer,
-        google,
-        processedMarkers,
-        zoom,
-        direction,
-        onRouteChange
-      );
-  }
-
-  async componentWillUpdate(nextProps) {
-    const { google, markers, zoom, direction, onRouteChange } = nextProps;
-    const processedMarkers = await this.convertMarkersFromPlaceIdToAddress(markers, this.placeIdConverter);
+    this.placeIdConverter = this._placeIdToAddress(new google.maps.Geocoder());
+    const processedMarkers = await this.convertMarkersFromPlaceIdToAddress(
+      markers,
+      this.placeIdConverter
+    );
     this.renderMap(
       this.mapContainer,
       google,
@@ -46,39 +31,59 @@ class Map extends Component {
     );
   }
 
-  _placeIdToAddress = (geocoder) => (markerWithPlaceId) => {
-    return new Promise((resolve, reject)=> {
+  async componentWillUpdate(nextProps) {
+    const { google, markers, zoom, direction, onRouteChange } = nextProps;
+    const processedMarkers = await this.convertMarkersFromPlaceIdToAddress(
+      markers,
+      this.placeIdConverter
+    );
+    this.renderMap(
+      this.mapContainer,
+      google,
+      processedMarkers,
+      zoom,
+      direction,
+      onRouteChange
+    );
+  }
+
+  _placeIdToAddress = geocoder => markerWithPlaceId => {
+    return new Promise((resolve, reject) => {
       geocoder.geocode(markerWithPlaceId, (results, status) => {
         if (status === 'OK') {
           if (results[0]) {
-            resolve(Object.assign({}, markerWithPlaceId, {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()}));
+            resolve(
+              Object.assign({}, markerWithPlaceId, {
+                lat: results[0].geometry.location.lat(),
+                lng: results[0].geometry.location.lng()
+              })
+            );
           }
         }
-        reject(status)
+        reject(status);
       });
     });
-  }
+  };
 
   convertMarkersFromPlaceIdToAddress = (markers, converter) => {
     const markerPromises = markers.map(marker => {
-      if(has(marker, 'placeId')) {
+      if (has(marker, 'placeId')) {
         return converter(marker);
       }
       return Promise.resolve(marker);
     });
 
     return Promise.all(markerPromises);
-  }
-
-
+  };
 
   renderSingleMarker = (container, google, marker, zoom) => {
+    const { mapOptions } = this.props;
     const maps = google.maps;
     const center = new maps.LatLng(marker.lat, marker.lng);
     const map = new maps.Map(container, {
       zoom: zoom,
       center,
-      ...defaultMapConfig
+      ...mapOptions
     });
     new google.maps.Marker({
       position: center,
@@ -88,9 +93,10 @@ class Map extends Component {
   };
 
   renderMultipleMarkers = (container, google, markers) => {
+    const { mapOptions } = this.props;
     const bounds = new google.maps.LatLngBounds();
     const maps = google.maps;
-    const map = new maps.Map(container, defaultMapConfig);
+    const map = new maps.Map(container, mapOptions);
     markers.map(m => {
       const markerPos = new maps.LatLng(m.lat, m.lng);
       bounds.extend(markerPos);
@@ -104,10 +110,15 @@ class Map extends Component {
   };
 
   renderRoute = (container, google, markers, onRouteChange) => {
+    const { mapOptions } = this.props;
     const maps = google.maps;
-    const map = new maps.Map(container, defaultMapConfig);
+    const map = new maps.Map(container, {
+      ...mapOptions
+    });
     const directionsService = new google.maps.DirectionsService();
-    const directionsDisplay = new google.maps.DirectionsRenderer();
+    const directionsDisplay = new google.maps.DirectionsRenderer({
+      suppressMarkers: true
+    });
     directionsDisplay.setMap(map);
     const from = first(markers);
     const to = last(markers);
@@ -135,19 +146,20 @@ class Map extends Component {
     });
   };
 
-  renderDefaultMap = (container, google) => {
+  renderDefaultMap = (container, google, zoom) => {
+    const { mapOptions } = this.props;
     const maps = google.maps;
     const center = new maps.LatLng(49.246292, -123.116226);
     new maps.Map(container, {
-      zoom: 9,
+      zoom: zoom,
       center,
-      ...defaultMapConfig
+      ...mapOptions
     });
   };
 
   renderMap = (container, google, markers, zoom, direction, onRouteChange) => {
     if (markers.length === 0) {
-      this.renderDefaultMap(container, google);
+      this.renderDefaultMap(container, google, zoom);
     } else if (markers.length === 1) {
       this.renderSingleMarker(container, google, markers[0], zoom);
     } else if (direction && markers.length >= 2) {
@@ -160,6 +172,7 @@ class Map extends Component {
   render() {
     return (
       <MapContainer
+        style={this.props.style}
         innerRef={c => {
           this.mapContainer = c;
         }}
@@ -170,16 +183,23 @@ class Map extends Component {
 
 Map.propTypes = {
   markers: array,
+  mapOptions: object,
   zoom: number,
   google: object.isRequired,
   onRouteChange: func,
-  direction: bool
+  direction: bool,
+  style: object
 };
 
 Map.defaultProps = {
   zoom: 11,
   onRouteChange: () => {},
-  direction: false
+  direction: false,
+  mapOptions: {
+    streetViewControl: false,
+    mapTypeControl: false,
+    fullscreenControl: true
+  }
 };
 
 export default Map;

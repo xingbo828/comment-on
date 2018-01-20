@@ -1,14 +1,25 @@
-import Styled from 'styled-components';
+import styled from 'styled-components';
 
-const CardDiv = Styled.div`
-  z-index: 99;
-  transform: translateY(${props => props.offset}px);
-  box-shadow: 0 2px 15px 0px rgba(0,0,0,.07);
-  border-radius: 3px;
-  padding: 2rem;
+export const CardContainer = styled.div`
+  border: 1px solid ${props=>props.theme.colors.border};
   background: white;
+  margin: 0;
+  padding: 0;
+  transition: all .3s;
+  border-radius: 2px;
+  position: relative;
+  cursor: pointer;
+  width: 100%;
+  &:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.14);
+    border-color: rgba(0, 0, 0, 0.14);
+  }
 `;
 
-export {
-  CardDiv
-};
+export const PrimaryCardAction = styled.div`
+  display: flex;
+  justify-content: center;
+  transform: translateY(50%);
+`;
+
+
