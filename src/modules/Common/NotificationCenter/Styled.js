@@ -7,7 +7,7 @@ export const NotificationCenterContainer = styled.div`
   position: relative;
   transition: .3s;
   background-color: ${props => props.isOpen ? props.theme.colors.offWhite : 'white'};
-
+  z-index: ${props=>props.theme.zIndex.dropdown};
   margin: 0 10px;
   ${props=>props.theme.media.greaterThan('sm')`
 

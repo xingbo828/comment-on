@@ -1,47 +1,16 @@
-import React from 'react';
-import Card from '../../../../globalComponents/Card';
-import Map from '../../../../globalComponents/Map';
-import Badge from '../../../../globalComponents/Badge';
-import Grid from '../../../../globalComponents/Grid';
-import moment from 'moment';
-import {CardContainer, CardMetaItem} from './Styled';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
+import MoveCard from './MoveCard'
+import {
+  getProjectUnreadCount
+} from '../../../Common/NotificationCenter/notificationCenterReducers';
 
-const MoveCard = ({ project, navToProject}) => {
-  const { addresses: { pickUpAddress, deliveryAddress }, dateTime: {pickUpDate}} = project.configuration;
-  const direction = [
-    {
-      placeId: pickUpAddress
+const mapStateToProps = (state, ownProps) =>  ({
+  unreads: getProjectUnreadCount(state, ownProps.project.id),
+});
 
-    },
-    {
-      placeId: deliveryAddress
-    }
-  ];
-  const status = project.status !== 'complete' ? 'In Progress': 'Complete';
+const enhance = compose(
+  connect(mapStateToProps)
+);
 
-  const name = project.configuration.name || `My ${moment(pickUpDate).format('ll')} move`;
-
-  return (
-    <Card onClick={navToProject}>
-      <Badge count={7}>
-          <Map
-            style={{ height: 225, width: '100%' }}
-            google={window.google}
-            markers={direction}
-            mapOptions={{
-              mapTypeControl: false,
-              draggable: false,
-              fullscreenControl: false,
-              streetViewControl: false,
-              zoomControl: false
-            }}
-            direction
-          />
-          </Badge>
-          <CardMetaItem>{name}</CardMetaItem>
-          <CardMetaItem>{status}</CardMetaItem>
-      </Card>
-  );
-};
-
-export default MoveCard;
+export default enhance(MoveCard);
