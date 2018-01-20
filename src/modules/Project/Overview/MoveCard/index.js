@@ -1,40 +1,16 @@
-import React from 'react';
-import Card from '../../../../globalComponents/Card';
-import Map from '../../../../globalComponents/Map';
-import Badge from '../../../../globalComponents/Badge';
-import Grid from '../../../../globalComponents/Grid';
-import {CardContainer} from './Styled';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
+import MoveCard from './MoveCard'
+import {
+  getProjectUnreadCount
+} from '../../../Common/NotificationCenter/notificationCenterReducers';
 
-const MoveCard = ({ project }) => {
-  const { addresses: { pickUpAddress, deliveryAddress } } = project.configuration;
-  const direction = [
-    {
-      placeId: pickUpAddress
+const mapStateToProps = (state, ownProps) =>  ({
+  unreads: getProjectUnreadCount(state, ownProps.project.id),
+});
 
-    },
-    {
-      placeId: deliveryAddress
-    }
-  ];
-  return (
-    <Card>
-      <Badge count={7}>
-          <Map
-            style={{ height: 225, width: '100%' }}
-            google={window.google}
-            markers={direction}
-            mapOptions={{
-              mapTypeControl: false,
-              draggable: false,
-              fullscreenControl: false,
-              streetViewControl: false,
-              zoomControl: false
-            }}
-            direction
-          />
-          </Badge>
-      </Card>
-  );
-};
+const enhance = compose(
+  connect(mapStateToProps)
+);
 
-export default MoveCard;
+export default enhance(MoveCard);

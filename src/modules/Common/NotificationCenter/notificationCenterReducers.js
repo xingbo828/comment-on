@@ -34,6 +34,19 @@ export const getConversationUnread = (state, projectId, conversationId) => {
   return 0;
 };
 
+export const getProjectUnreadCount = (state, projectId) => {
+  const exists = state.hasIn(['common', 'notificationCenter', projectId]);
+  if(exists) {
+    const conversations = state.getIn(['common', 'notificationCenter', projectId]);
+    const total = conversations.map((v, k) => {
+      const conversationUnread = getConversationUnread(state, projectId, k);
+      return conversationUnread;
+    }).update(_sum);
+    return total;
+  }
+  return 0;
+};
+
 export const getUnreadMsgs = (state) => {
   const projects = state.getIn(['common', 'notificationCenter']);
   return projects.reduce((prevproject, currentProject) => {
