@@ -1,8 +1,11 @@
 import React from 'react';
 import ProgressPanels from '../../../../globalComponents/ProgressPanels';
+import Grid from '../../../../globalComponents/Grid';
 import Icon from '../../../../globalComponents/Icon';
-import ManagementHeader from './Header';
+import OverviewCard from './OverviewCard';
 import SelectMover from './SelectMover';
+
+const { Container, Row, Col } = Grid;
 
 const MoveProjectManagement = ({ projectData, selectedProvider }) => {
   const getAcceptedProviders = (providers) => {
@@ -41,35 +44,41 @@ const MoveProjectManagement = ({ projectData, selectedProvider }) => {
   }
 
   return (
-    <ProgressPanels current={getCurrentStep(projectData)}>
-      <ProgressPanels.PanelHeading>
-        <ManagementHeader projectData={projectData} current={getCurrentStep(projectData)} />
-      </ProgressPanels.PanelHeading>
-      <ProgressPanels.Panel header="completed form" panelKey="completed-form" />
-      <ProgressPanels.Panel
-        inProgressIndexReplacement={<Icon icon="spinner" spin />}
-        header="finding movers"
-        tertiaryText="Avg. response time: 15 mins"
-        panelKey="finding-movers"
-      />
-      <ProgressPanels.Panel
-        header="select a mover"
-        panelKey="select-mover"
-        tertiaryText={
-          <span>
-            <Icon icon="spinner" spin />{' '}<strong style={{ marginLeft: 5 }}>{getAcceptedProviders(projectData.receivers).length} found</strong>
-          </span>
-        }
-      >
-        {renderProvidersList(projectData.receivers, projectData.id)}
-      </ProgressPanels.Panel>
-      <ProgressPanels.Panel header="share contact info with mover" panelKey="share-contact-info">
-        share contact info
-      </ProgressPanels.Panel>
-      <ProgressPanels.Panel header="confirmation" panelKey="confirmation">
-        This is step 4
-      </ProgressPanels.Panel>
-    </ProgressPanels>
+    <Container>
+      <Row>
+        <Col xm={24} sm={24} md={24} lg={16}>
+          <ProgressPanels current={getCurrentStep(projectData)}>
+            {/* <ProgressPanels.PanelHeading>
+              <ManagementHeader projectData={projectData} current={getCurrentStep(projectData)} />
+            </ProgressPanels.PanelHeading> */}
+            <ProgressPanels.Panel header="completed form" panelKey="completed-form" />
+            <ProgressPanels.Panel
+              inProgressIndexReplacement={<Icon icon="spinner" spin />}
+              header="finding movers"
+              tertiaryText="Avg. response time: 15 mins"
+              panelKey="finding-movers"
+            />
+            <ProgressPanels.Panel
+              header="select a mover"
+              panelKey="select-mover"
+              tertiaryText={
+                <span>
+                  <Icon icon="spinner" spin />{' '}<strong style={{ marginLeft: 5 }}>{getAcceptedProviders(projectData.receivers).length} found</strong>
+                </span>
+              }
+            >
+              {renderProvidersList(projectData.receivers, projectData.id)}
+            </ProgressPanels.Panel>
+            <ProgressPanels.Panel header="confirmation" panelKey="confirmation">
+              This is step 4
+            </ProgressPanels.Panel>
+          </ProgressPanels>
+        </Col>
+        <Col xm={24} sm={24} md={24} lg={8}>
+          <OverviewCard configuration={projectData.configuration} />
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

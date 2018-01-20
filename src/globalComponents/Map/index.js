@@ -117,7 +117,12 @@ class Map extends Component {
     });
     const directionsService = new google.maps.DirectionsService();
     const directionsDisplay = new google.maps.DirectionsRenderer({
-      suppressMarkers: true
+      suppressMarkers: true,
+      polylineOptions: {
+          strokeColor: '#207dc7',
+          strokeOpacity: 1.0,
+          strokeWeight: 4
+      }
     });
     directionsDisplay.setMap(map);
     const from = first(markers);
