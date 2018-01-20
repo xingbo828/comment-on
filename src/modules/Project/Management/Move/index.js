@@ -46,7 +46,7 @@ const MoveProjectManagement = ({ projectData, selectedProvider }) => {
   return (
     <Container>
       <Row>
-        <Col xm={24} sm={24} md={16} lg={16}>
+        <Col xm={24} sm={24} md={24} lg={16}>
           <ProgressPanels current={getCurrentStep(projectData)}>
             {/* <ProgressPanels.PanelHeading>
               <ManagementHeader projectData={projectData} current={getCurrentStep(projectData)} />
@@ -69,15 +69,12 @@ const MoveProjectManagement = ({ projectData, selectedProvider }) => {
             >
               {renderProvidersList(projectData.receivers, projectData.id)}
             </ProgressPanels.Panel>
-            <ProgressPanels.Panel header="share contact info with mover" panelKey="share-contact-info">
-              share contact info
-            </ProgressPanels.Panel>
             <ProgressPanels.Panel header="confirmation" panelKey="confirmation">
               This is step 4
             </ProgressPanels.Panel>
           </ProgressPanels>
         </Col>
-        <Col xm={24} sm={24} md={8} lg={8}>
+        <Col xm={24} sm={24} md={24} lg={8}>
           <OverviewCard configuration={projectData.configuration} />
         </Col>
       </Row>

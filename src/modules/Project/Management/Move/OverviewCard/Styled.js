@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 
-export const OverviewCardContainer = styled.div``;
+export const OverviewCardContainer = styled.div`
+  margin-top: ${props=>props.theme.spaces.xWide};
+
+  ${props=> props.theme.media.greaterThan('md')`
+    margin-top: 0;
+  `};
+`;
 
 export const OverviewCardMeta = styled.ul`
   list-style: none;
