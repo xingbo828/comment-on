@@ -2,7 +2,7 @@ import React from 'react';
 import chunk from 'lodash/chunk';
 import Grid from '../../../globalComponents/Grid';
 import Card from '../../../globalComponents/Card';
-import asyncLoad from '../../Common/asyncLoad';
+// import asyncLoad from '../../Common/asyncLoad';
 import MoveCard from './MoveCard';
 
 // const getTypedProjectManagement = (type) => {
@@ -23,12 +23,6 @@ const ProjectOverview = ({
   selectedProvider,
   navToProject
 }) => {
-  console.log(status, myProjectsData)
-  // const numberOfProjects = Object.keys(user.projects).length;
-  // const TypedProjectCard = getTypedProjectManagement('Move');
-
-
-
   const renderUnLoadedProjectCards = (projects) => {
     const projectChunks = chunk(projects, 3);
     return projectChunks.map((projectChunk, index) => (

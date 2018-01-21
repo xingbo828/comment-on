@@ -46,16 +46,16 @@ const Heading = styled.h1`
 const ContextHeaderLinks = styled.ul`
   flex: 10;
   display: flex;
+  flex-direction: row-reverse;
 `;
 
-// const ContextHeaderLink = styled.li`
-//   list-style: none;
-//   line-height: 30px;
-// > a {
-//     color: ${fromTheme('offWhite')};
-//     text-decoration: none;
-//   }
-// `;
+const ContextHeaderLink = styled.li`
+  list-style: none;
+  line-height: 30px;
+> a {
+    text-decoration: none;
+  }
+`;
 
 const NavRoot = styled.nav`
   display: block;
@@ -143,6 +143,7 @@ export const Nav = ({ user, isLoggedIn, logout }) => {
         <Link to="/"><Heading>LOGO</Heading></Link>
         {/* <Location>Vancouver</Location> */}
         <ContextHeaderLinks>
+        <ContextHeaderLink><Link to="/projects">My moves</Link></ContextHeaderLink>
         </ContextHeaderLinks>
         <NotificationCenter />
         <AccountNav />

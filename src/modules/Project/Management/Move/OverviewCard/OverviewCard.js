@@ -12,7 +12,6 @@ import {
 } from './Styled';
 
 const OverviewCard = ({ configuration }) => {
-  console.log(configuration)
   const { addresses: { pickUpAddress, deliveryAddress }, dateTime: { pickUpDate } } = configuration;
   const pickUpDateMoment = moment(pickUpDate);
   const direction = [

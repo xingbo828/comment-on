@@ -1,6 +1,5 @@
-import React from 'react';
 import { connect } from 'react-redux';
-import { compose, lifecycle, branch, renderNothing, withProps} from 'recompose';
+import { compose, lifecycle, withProps} from 'recompose';
 import isLoggedIn from '../../Common/isLoggedIn';
 import {
   getMyProjects
@@ -33,7 +32,9 @@ const enhance = compose(
     componentDidMount() {
       const {user: { projects }} = this.props;
       const projectRefs = Object.values(projects)
-      this.props.getMyProjects(projectRefs);
+      if(this.props.status === 'UNINIT') {
+        this.props.getMyProjects(projectRefs);
+      }
     }
   })
 );
