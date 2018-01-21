@@ -7,7 +7,7 @@ import moment from 'moment';
 import { CardMetaItem } from './Styled';
 
 
-const MoveCard = ({ project,  navToProject}) => {
+const MoveCard = ({ project,  unreads, navToProject}) => {
   const { addresses: { pickUpAddress, deliveryAddress }, dateTime: {pickUpDate}} = project.configuration;
   const direction = [
     {
@@ -24,7 +24,7 @@ const MoveCard = ({ project,  navToProject}) => {
 
   return (
     <Card onClick={navToProject}>
-      <Badge count={7} offsetY={-8} scale={1.2}>
+      <Badge count={unreads} offsetY={-8} scale={1.2}>
           <Map
             style={{ height: 225, width: '100%', display: 'inline-block'}}
             google={window.google}
