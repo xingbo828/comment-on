@@ -1,4 +1,5 @@
 import React from 'react';
+import chunk from 'lodash/chunk';
 import Grid from '../../../globalComponents/Grid';
 import Card from '../../../globalComponents/Card';
 import asyncLoad from '../../Common/asyncLoad';
@@ -25,25 +26,39 @@ const ProjectOverview = ({
   // const numberOfProjects = Object.keys(user.projects).length;
   // const TypedProjectCard = getTypedProjectManagement('Move');
 
+
+
   const renderUnLoadedProjectCards = (projects) => {
-    return projects.map(p => (
-        <Grid.Col key={p.id} xs={24} sm={24} md={8} lg={8}><Card loading /></Grid.Col>
+    const projectChunks = chunk(projects, 3);
+    return projectChunks.map((projectChunk, index) => (
+      <Grid.Row key={index}>
+        {
+          projectChunk.map(p => (
+            <Grid.Col key={p.id} xs={24} sm={24} md={8} lg={8}><Card loading /></Grid.Col>
+        ))
+        }
+      </Grid.Row>
     ));
   };
 
   const renderLoadedProjectsCards = (projects) => {
-    return projects.map(p => (
-      <Grid.Col key={p.id} xs={24} sm={24} md={8} lg={8}><MoveCard project={p} /></Grid.Col>
-  ));
+    const projectChunks = chunk(projects, 3);
+    return projectChunks.map((projectChunk, index) => (
+      <Grid.Row key={index}>
+        {
+          projectChunk.map(p => (
+            <Grid.Col key={p.id} xs={24} sm={24} md={8} lg={8}><MoveCard project={p} /></Grid.Col>
+        ))
+        }
+      </Grid.Row>
+    ));
   };
 
   return (
     <Grid.Container>
-      <Grid.Row>
         {
           status==='LOADED' ? renderLoadedProjectsCards(myProjectsData) : renderUnLoadedProjectCards(Object.values(user.projects))
         }
-      </Grid.Row>
     </Grid.Container>
   );
 };
