@@ -23,13 +23,8 @@ const MoveCard = ({ project,  navToProject}) => {
   const name = project.configuration.name || `My ${moment(pickUpDate).format('ll')} move`;
 
   return (
-<<<<<<< HEAD
-    <Card>
-      <Badge count={7} offsetY={-8} scale={1.2}>
-=======
     <Card onClick={navToProject}>
-      <Badge count={7} offsetY={-5}>
->>>>>>> b54c1e6eafc0c276be49f4364e469bf780fd520b
+      <Badge count={7} offsetY={-8} scale={1.2}>
           <Map
             style={{ height: 225, width: '100%', display: 'inline-block'}}
             google={window.google}
