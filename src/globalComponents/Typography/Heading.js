@@ -19,7 +19,7 @@ const Heading = ({ className, wrapperTag, children, underline, theme, size }) =>
     `}
 
     ${size === 'md' && `
-      font-size: 2rem;
+      font-size: 2.5rem;
     `}
 
     ${size === 'sm' && `
@@ -47,7 +47,7 @@ const Heading = ({ className, wrapperTag, children, underline, theme, size }) =>
     `}
 
     ${size === 'md' && `
-      font-size: 2rem;
+      font-size: 2.5rem;
     `}
 
     ${size === 'sm' && `
