@@ -2,8 +2,10 @@ import React from 'react';
 import chunk from 'lodash/chunk';
 import Grid from '../../../globalComponents/Grid';
 import Card from '../../../globalComponents/Card';
+import {Heading} from '../../../globalComponents/Typography';
 // import asyncLoad from '../../Common/asyncLoad';
 import MoveCard from './MoveCard';
+import {HeadingWrapper} from './Styled';
 
 // const getTypedProjectManagement = (type) => {
 //   switch (type) {
@@ -50,10 +52,22 @@ const ProjectOverview = ({
   };
 
   return (
-    <Grid.Container>
+    <Grid.Container fluid>
+        <Grid.Row>
+        <HeadingWrapper>
+      <Grid.Container>
+          <Heading wrapperTag="h1" size="md">
+            My Moves
+          </Heading>
+      </Grid.Container>
+      </HeadingWrapper>
+      </Grid.Row>
+
+      <Grid.Container>
         {
           status==='LOADED' ? renderLoadedProjectsCards(myProjectsData) : renderUnLoadedProjectCards(Object.values(user.projects))
         }
+      </Grid.Container>
     </Grid.Container>
   );
 };
