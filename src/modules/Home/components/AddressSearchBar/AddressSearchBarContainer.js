@@ -23,7 +23,7 @@ const enhance = compose(
   withProps(props => ({
     navToSearch: () => {
       props.history.push({
-        pathname: '/project/configurations/move/address'
+        pathname: '/projects/configurations/move/address'
       });
     }
   })),
@@ -43,7 +43,7 @@ const enhance = compose(
     onSubmitSuccess: (result, dispatch, props) => {
       // send user to next step
       props.history.push({
-        pathname: '/project/configurations/move/date'
+        pathname: '/projects/configurations/move/date'
       });
     }
   })

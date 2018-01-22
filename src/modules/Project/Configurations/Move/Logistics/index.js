@@ -62,11 +62,11 @@ const enhance = compose(
     onSubmitSuccess: async (result, dispatch, props) => {
       if(props.location.fromOverview) {
         return props.history.push({
-          pathname: '/project/configurations/move/overview'
+          pathname: '/projects/configurations/move/overview'
         });
       }
       props.history.push({
-        pathname: '/project/configurations/move/items',
+        pathname: '/projects/configurations/move/items',
         state: props.location.state
       });
     }
@@ -75,7 +75,7 @@ const enhance = compose(
     goBack: (e) => {
       e.preventDefault();
       props.history.push({
-        pathname: '/project/configurations/move/date',
+        pathname: '/projects/configurations/move/date',
         state: props.location.state
       });
     }

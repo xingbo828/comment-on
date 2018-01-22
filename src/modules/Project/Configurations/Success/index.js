@@ -11,7 +11,7 @@ const enhance = compose(
       e.preventDefault();
       const projectId = props.location.state.projectId;
       props.history.push({
-        pathname: `/project/${projectId}`
+        pathname: `/projects/${projectId}`
       });
     }
   })),

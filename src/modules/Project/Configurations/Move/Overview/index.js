@@ -130,7 +130,7 @@ const enhance = compose(
       const projectId = await props.addProject(PROJECT_TYPES.MOVE, config);
       await deleteStepInfo();
       props.history.push({
-        pathname: `/project/configurations/success`,
+        pathname: `/projects/configurations/success`,
         state: {
           projectId: projectId
         }
@@ -146,7 +146,7 @@ const enhance = compose(
     goBack: e => {
       e.preventDefault();
       props.history.push({
-        pathname: '/project/configurations/move/items',
+        pathname: '/projects/configurations/move/items',
         state: props.location.state
       });
     }

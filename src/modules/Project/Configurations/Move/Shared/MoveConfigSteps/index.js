@@ -6,7 +6,7 @@ const Step = Steps.Step;
 const MoveConfigSteps = ({current, history}) => {
   const stepClickHandler = (step) => {
     history.push({
-      pathname: `/project/configurations/move/${step}`,
+      pathname: `/projects/configurations/move/${step}`,
       search: history.location.search
     });
   };

@@ -57,11 +57,11 @@ const enhance = compose(
     onSubmitSuccess: (result, dispatch, props) => {
       if(props.location.fromOverview) {
         return props.history.push({
-          pathname: '/project/configurations/move/overview'
+          pathname: '/projects/configurations/move/overview'
         });
       }
       props.history.push({
-        pathname: '/project/configurations/move/date',
+        pathname: '/projects/configurations/move/date',
         state: props.location.state
       });
     }

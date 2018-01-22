@@ -68,12 +68,12 @@ const enhance = compose(
     onSubmitSuccess: (result, dispatch, props) => {
       if (props.location.fromOverview) {
         return props.history.push({
-          pathname: '/project/configurations/move/overview'
+          pathname: '/projects/configurations/move/overview'
         });
       }
       // send user to next step
       props.history.push({
-        pathname: '/project/configurations/move/logistics',
+        pathname: '/projects/configurations/move/logistics',
         state: props.location.state
       });
     }
@@ -82,7 +82,7 @@ const enhance = compose(
     goBack: e => {
       e.preventDefault();
       props.history.push({
-        pathname: '/project/configurations/move/address',
+        pathname: '/projects/configurations/move/address',
         state: props.location.state
       });
     }

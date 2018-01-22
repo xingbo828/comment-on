@@ -39,7 +39,7 @@ const enhance = compose(
     },
     onSubmitSuccess: async (result, dispatch, props) => {
       props.history.push({
-        pathname: '/project/configurations/move/overview',
+        pathname: '/projects/configurations/move/overview',
         state: props.location.state
       });
     }
@@ -48,7 +48,7 @@ const enhance = compose(
     goBack: (e) => {
       e.preventDefault();
       props.history.push({
-        pathname: '/project/configurations/move/logistics',
+        pathname: '/projects/configurations/move/logistics',
         state: props.location.state
       });
     }

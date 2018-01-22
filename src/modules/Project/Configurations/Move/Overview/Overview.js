@@ -82,7 +82,7 @@ const ConfigurationOverview = ({
           </Heading>
           <SectionHeaderEditLink
             to={{
-              pathname: '/project/configurations/move/address',
+              pathname: '/projects/configurations/move/address',
               fromOverview: true
             }}
           >
@@ -148,7 +148,7 @@ const ConfigurationOverview = ({
             Date & Time
           </Heading>
           <SectionHeaderEditLink
-            to={{ pathname: '/project/configurations/move/date', fromOverview: true }}
+            to={{ pathname: '/projects/configurations/move/date', fromOverview: true }}
           >
             Edit
           </SectionHeaderEditLink>
@@ -212,7 +212,7 @@ const ConfigurationOverview = ({
           </Heading>
           <SectionHeaderEditLink
             to={{
-              pathname: '/project/configurations/move/logistics',
+              pathname: '/projects/configurations/move/logistics',
               fromOverview: true
             }}
           >
@@ -264,7 +264,7 @@ const ConfigurationOverview = ({
             Items
           </Heading>
           <SectionHeaderEditLink
-            to={{ pathname: '/project/configurations/move/items', fromOverview: true }}
+            to={{ pathname: '/projects/configurations/move/items', fromOverview: true }}
           >
             Edit
           </SectionHeaderEditLink>
