@@ -32,8 +32,8 @@ const enhance = compose(
   lifecycle({
     componentDidMount() {
       const {user: { projects }} = this.props;
-      const projectRefs = Object.values(projects)
-      if(this.props.status === 'UNINIT') {
+      if(projects && this.props.status === 'UNINIT') {
+        const projectRefs = Object.values(projects)
         this.props.getMyProjects(projectRefs);
       }
     }

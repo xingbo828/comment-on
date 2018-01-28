@@ -2,7 +2,7 @@ import React from 'react';
 import chunk from 'lodash/chunk';
 import Grid from '../../../globalComponents/Grid';
 import Card from '../../../globalComponents/Card';
-import { Heading } from '../../../globalComponents/Typography';
+import { Heading, Paragraph } from '../../../globalComponents/Typography';
 // import asyncLoad from '../../Common/asyncLoad';
 import MoveCard from './MoveCard';
 import { Container, CardContainer, HeadingWrapper } from './Styled';
@@ -57,6 +57,17 @@ const ProjectOverview = ({
     ));
   };
 
+  const renderCards = (status, myProjectsData, user) => {
+    if(!user.projects) {
+      // no project
+      return <Paragraph>No project yet...</Paragraph>
+    }
+
+    return status === 'LOADED'
+          ? renderLoadedProjectsCards(myProjectsData)
+          : renderUnLoadedProjectCards(Object.values(user.projects))
+  };
+
   return (
     <Container>
       <HeadingWrapper>
@@ -71,9 +82,7 @@ const ProjectOverview = ({
         </Grid.Container>
       </HeadingWrapper>
       <Grid.Container>
-        {status === 'LOADED'
-          ? renderLoadedProjectsCards(myProjectsData)
-          : renderUnLoadedProjectCards(Object.values(user.projects))}
+        {renderCards(status, myProjectsData, user)}
       </Grid.Container>
     </Container>
   );
