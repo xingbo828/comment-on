@@ -4,7 +4,8 @@ import theme from './foundation/variables';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from 'react-router-dom';
 import ProtectedRoute from './modules/Common/ProtectedRoute';
 import GlobalNav from './modules/Common/GlobalNav';
@@ -26,6 +27,8 @@ class App extends Component {
               <Route path="/projects" component={asyncLoad(() => import('./modules/Project'))} />
               <ProtectedRoute path="/conversation" component={asyncLoad(() => import('./modules/Conversation'))} />
               <Route path="/login" component={asyncLoad(() => import('./modules/Account/Login'))} />
+              <Route path="/404" component={asyncLoad(() => import('./modules/Errors/404'))} />
+              <Redirect from="*" to="/404" />
             </Switch>
             <Footer />
           </main>

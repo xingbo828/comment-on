@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, withRouter } from 'react-router-dom';
+import { Switch, withRouter, Redirect } from 'react-router-dom';
 import ProtectedRoute from '../Common/ProtectedRoute';
 import MoverCreation from './Create';
 import Profile from './Profile';
@@ -15,6 +15,7 @@ const Mover = ({ match: { isExact } }) => {
       <ProtectedRoute path="/mover/profile/:moverId" component={Profile.MoverProfile} />
       <ProtectedRoute path="/mover/my-profile" component={Profile.MyMoverProfile} />
       <ProtectedRoute path="/mover/project" component={MoverProject} />
+      <Redirect from="*" to="/404" />
     </Switch>
   );
 };
