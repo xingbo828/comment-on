@@ -20,6 +20,8 @@ import {
   loadLogistics,
   loadAddresses,
   setAdditionalNotes,
+  setProjectName,
+  getProjectName,
   getAdditionalNotes,
   getLocalstorageStepInfo,
   deleteStepInfo
@@ -43,6 +45,8 @@ const mapDispatchToProps = dispatch => ({
   loadItems: () => dispatch(loadItems()),
   getAdditionalNotes: () => dispatch(getAdditionalNotes()),
   setAdditionalNotes: (notes) => dispatch(setAdditionalNotes(notes)),
+  getProjectName: () => dispatch(getProjectName()),
+  setProjectName: (name) => dispatch(setProjectName(name)),
   addProject: (type, config) => dispatch(addProject(type, config)),
 });
 
@@ -51,6 +55,7 @@ const mapStateToProps = state => ({
   dateTime: getDateTime(state),
   logistics: getLogistics(state),
   items: getItems(state),
+  projectName: getOverview(state).get('projectName'),
   additionalNotes: getOverview(state).get('additionalNotes')
 });
 
@@ -112,13 +117,15 @@ const enhance = compose(
         loadDateTime,
         loadLogistics,
         loadItems,
-        getAdditionalNotes
+        getAdditionalNotes,
+        getProjectName
       } = this.props;
         loadAddresses();
         loadDateTime();
         loadLogistics();
         loadItems();
         getAdditionalNotes();
+        getProjectName();
     }
   }),
   branch(isLoading, renderNothing),

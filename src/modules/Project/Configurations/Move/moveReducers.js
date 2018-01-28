@@ -11,7 +11,9 @@ import {
   LOADING_LOGISTICS,
   GET_LOGISTICS,
   GET_ADDITIONAL_NOTES,
-  SET_ADDITIONAL_NOTES
+  SET_ADDITIONAL_NOTES,
+  GET_PROJECT_NAME,
+  SET_PROJECT_NAME
 } from './moveActions';
 
 // Addresses
@@ -142,7 +144,8 @@ const searchLogisticsStep = (state = initLogisticsState, action) => {
 
 // Overview
 const initOverviewState = Immutable.fromJS({
-  additionalNotes: ''
+  additionalNotes: '',
+  projectName: ''
 });
 
 const searchOverviewStep = (state = initOverviewState, action) => {
@@ -151,6 +154,13 @@ const searchOverviewStep = (state = initOverviewState, action) => {
     case SET_ADDITIONAL_NOTES: {
       return state.withMutations(st => {
         st.set('additionalNotes', action.data || '');
+      });
+    }
+
+    case GET_PROJECT_NAME:
+    case SET_PROJECT_NAME: {
+      return state.withMutations(st => {
+        st.set('projectName', action.data || '');
       });
     }
 

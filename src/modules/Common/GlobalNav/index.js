@@ -7,6 +7,7 @@ import isLoggedIn from '../isLoggedIn';
 import AccountNav from './AccountNav';
 import globalNavHiddenList from './globalNavHiddenList.json';
 import NotificationCenter from '../NotificationCenter';
+import { Button } from '../../../globalComponents/Form';
 
 
 const fromTheme = (prop) => ({ theme }) => theme.colors[prop]
@@ -46,7 +47,10 @@ const Heading = styled.h1`
 const ContextHeaderLinks = styled.ul`
   flex: 10;
   display: flex;
+  padding: 0;
   flex-direction: row-reverse;
+  margin: 0;
+  align-items: center;
 `;
 
 const ContextHeaderLink = styled.li`
@@ -136,14 +140,21 @@ const Pic = styled.div`
 //   }
 // `;
 
-export const Nav = ({ user, isLoggedIn, logout }) => {
+export const Nav = ({ user, isLoggedIn, logout, history }) => {
+  const sentToMyMovesPage = (e) => {
+    e.preventDefault();
+    history.push({
+      pathname: '/projects'
+    })
+  };
+
   return (
     <NavRoot>
       <ContextHeader>
         <Link to="/"><Heading>LOGO</Heading></Link>
         {/* <Location>Vancouver</Location> */}
         <ContextHeaderLinks>
-        <ContextHeaderLink><Link to="/projects">My moves</Link></ContextHeaderLink>
+        <ContextHeaderLink><Button small onClick={sentToMyMovesPage}>My moves</Button></ContextHeaderLink>
         </ContextHeaderLinks>
         <NotificationCenter />
         <AccountNav />

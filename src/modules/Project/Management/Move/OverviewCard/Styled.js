@@ -4,7 +4,7 @@ export const OverviewCardContainer = styled.div`
   margin-top: ${props=>props.theme.spaces.xWide};
 
   ${props=> props.theme.media.greaterThan('md')`
-    margin-top: 0;
+    margin-top: ${props=>props.theme.spaces.tight};
   `};
 `;
 
@@ -17,8 +17,10 @@ export const OverviewCardMeta = styled.ul`
 `;
 
 export const OverviewCardMetaItem = styled.li`
-  line-height: 250%;
+  padding: ${props=>props.theme.spaces.tight} 0;
+  display: flex;
 `;
+
 
 export const OverviewCardMetaItemIcon = styled.span`
   text-align: center;

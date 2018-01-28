@@ -2,6 +2,7 @@ import React from 'react';
 import { Radio } from '../../../../../globalComponents/Form';
 import SelectMoverItem from './ItemContainer';
 
+
 const SelectMoverItemList = ({ onChange, value, movers, projectId }) => {
   return (
     <Radio.RadioGroup
@@ -10,15 +11,14 @@ const SelectMoverItemList = ({ onChange, value, movers, projectId }) => {
       value={value}
       onChange={onChange}
     >
-
-      {movers.map(mover => (
-        <SelectMoverItem
-          value={mover.provider.id}
-          key={mover.provider.id}
-          moverInfo={mover}
-          projectId={projectId}
-        />
-      ))}
+        {movers.map(mover => (
+          <SelectMoverItem
+            value={mover.provider.id}
+            key={mover.provider.id}
+            moverInfo={mover}
+            projectId={projectId}
+          />
+        ))}
     </Radio.RadioGroup>
   );
 };

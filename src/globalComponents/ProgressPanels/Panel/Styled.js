@@ -16,7 +16,7 @@ const getHeaderColor = (props) => {
 
 const getHeaderPadding = (props) => {
   const mobileStyle = `padding: ${props.theme.spaces.wide};`;
-  const desktopStyle = `padding: 2.5rem ${props.theme.spaces.xWide};`;
+  const desktopStyle = `padding: 2.5rem ${props.theme.spaces.wide};`;
   const desktopStyleWithMediaquery = props.theme.media.greaterThan('md')`
     ${desktopStyle}
   `;
@@ -35,7 +35,7 @@ const getHeaderPadding = (props) => {
 
 const getBodyPadding = (props) => {
   const mobileStyle = `padding: ${props.theme.spaces.base} ${props.theme.spaces.wide};`;
-  const desktopStyle = `padding: 0 ${props.theme.spaces.xWide};`;
+  const desktopStyle = `padding: 0 ${props.theme.spaces.wide};`;
   const desktopStyleWithMediaquery = props.theme.media.greaterThan('md')`
     ${desktopStyle}
   `;

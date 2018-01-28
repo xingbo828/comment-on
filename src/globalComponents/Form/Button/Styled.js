@@ -106,6 +106,17 @@ const getPadding = props => {
   `;
 }
 
+const getFontSize = props => {
+  if (props.small) {
+    return `
+      font-size: .875rem;
+    `;
+  }
+  return `
+    font-size: 1rem;
+  `;
+}
+
 export const StyledButton = styled.button`
   border-radius: 99em;
   margin-bottom: 0;
@@ -120,7 +131,6 @@ export const StyledButton = styled.button`
     width: auto;
   `};
   min-width: 40px;
-  font-size: 1rem;
   user-select: none;
   transition: all .3s cubic-bezier(.645,.045,.355,1);
   ${'' /* position: relative; */}
@@ -129,14 +139,15 @@ export const StyledButton = styled.button`
   border-color: ${props=>props.ghost ? getBackColor(props) : getBorderColor(props)};
   cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
 
+  ${getFontSize}
   ${getPadding}
   > i {
       transition: .3s cubic-bezier(.645,.045,.355,1);
       display: inline-block;
       border-radius: 50%;
-      ${getIconMargin}
       color: ${props=>getBackColor(props)};
       background: ${props=>props.ghost ? 'transparent' : getForeColor(props)};
+      ${getIconMargin}
       ${getIconSize}
     }
   &:hover {

@@ -12,12 +12,14 @@ import {
 } from './Styled';
 
 const OverviewCard = ({ configuration }) => {
-  const { addresses: { pickUpAddress, deliveryAddress }, dateTime: { pickUpDate } } = configuration;
+  const {
+    addresses: { pickUpAddress, deliveryAddress },
+    dateTime: { pickUpDate }
+  } = configuration;
   const pickUpDateMoment = moment(pickUpDate);
   const direction = [
     {
       placeId: pickUpAddress
-
     },
     {
       placeId: deliveryAddress
@@ -44,19 +46,25 @@ const OverviewCard = ({ configuration }) => {
             <OverviewCardMetaItemIcon>
               <Icon icon="circle-o" />
             </OverviewCardMetaItemIcon>
-            <PlaceIdToAddress placeId={pickUpAddress} google={window.google}/>
+              <PlaceIdToAddress
+                placeId={pickUpAddress}
+                google={window.google}
+              />
           </OverviewCardMetaItem>
           <OverviewCardMetaItem>
             <OverviewCardMetaItemIcon>
               <Icon icon="map-marker" />
             </OverviewCardMetaItemIcon>
-            <PlaceIdToAddress placeId={deliveryAddress} google={window.google}/>
+              <PlaceIdToAddress
+                placeId={deliveryAddress}
+                google={window.google}
+              />
           </OverviewCardMetaItem>
           <OverviewCardMetaItem>
             <OverviewCardMetaItemIcon>
               <Icon icon="calendar" />
             </OverviewCardMetaItemIcon>
-            { pickUpDateMoment.format('MMMM, DD, Y') }
+            {pickUpDateMoment.format('MMMM, DD, Y')}
           </OverviewCardMetaItem>
         </OverviewCardMeta>
       </Card>

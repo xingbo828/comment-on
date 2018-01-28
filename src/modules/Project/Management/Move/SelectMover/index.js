@@ -21,6 +21,7 @@ const enhance = compose(
     form: 'project.management',
     validate,
     onSubmit: (values, dispatch, props) => {
+      console.log(values.toJS())
       // const { projectId } = props;
       // const providerId = values.get('selectedMover');
       // return props.selectMover(projectId, providerId);

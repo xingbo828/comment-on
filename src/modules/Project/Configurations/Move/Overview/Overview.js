@@ -6,7 +6,7 @@ import startCase from 'lodash/startCase';
 import Grid from '../../../../../globalComponents/Grid';
 import Layout from '../../../../../globalComponents/Layout';
 import { Heading, Paragraph } from '../../../../../globalComponents/Typography';
-import { Button, SubLabel, TextArea } from '../../../../../globalComponents/Form';
+import { Button, SubLabel, TextArea, TextField } from '../../../../../globalComponents/Form';
 import Icon from '../../../../../globalComponents/Icon';
 import PlaceIdToAddress from '../../../../../globalComponents/GooglePlaceIdToAddress';
 import { MOVING_SEARCH_TIME_RANGE } from '../../../../../constants';
@@ -26,6 +26,8 @@ const { Form, FormActions, FormHeading, FormInner } = Layout.Form;
 const ConfigurationOverview = ({
   loginStatus,
   setAdditionalNotes,
+  setProjectName,
+  projectName,
   additionalNotes,
   addresses: rootAddresses,
   dateTime,
@@ -274,6 +276,32 @@ const ConfigurationOverview = ({
     );
   };
 
+  const renderProjectName = (name, onChange) => {
+    const onChangeHandler = (e) => {
+      onChange(e.target.value);
+    };
+
+    const input = {
+      value: name,
+      onChange: onChangeHandler
+    };
+    return (
+      <Section noBorder>
+        <SectionHeader>
+          <Heading wrapperTag="h2" size="sm">
+            Project Name
+          </Heading>
+        </SectionHeader>
+        <SubLabel>
+            Please give your project a name.
+          </SubLabel>
+        <SectionBody>
+          <TextField input={input} />
+        </SectionBody>
+      </Section>
+    );
+  };
+
   const renderAdditionalNoteSection = (notes, onChange) => {
     const onChangeHandler = (e) => {
       onChange(e.target.value);
@@ -312,6 +340,7 @@ const ConfigurationOverview = ({
           {renderdateTimeSection(dateTime, validators.dateTimeValidator)}
           {renderLogistics(logistics, validators.logisticsValidator)}
           {renderItemsSection(items)}
+          {renderProjectName(projectName, setProjectName)}
           {renderAdditionalNoteSection(additionalNotes, setAdditionalNotes)}
         </FormInner>
         <FormActions>

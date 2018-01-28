@@ -162,3 +162,32 @@ export const setAdditionalNotes = (additionalNotes) => async dispatch => {
     data: additionalNotes
   });
 };
+
+ // Project Name
+export const SET_PROJECT_NAME = 'SET_PROJECT_NAME';
+export const GET_PROJECT_NAME = 'GET_PROJECT_NAME'
+
+export const getProjectName = () => async dispatch => {
+  const stepInfo = await localforge.getItem(LOCALSTOREAGE_STEP_INFO_KEY);
+  let projectName = stepInfo && (stepInfo.projectName || '');
+  if(projectName === ''){
+    projectName = `Move - ${moment().format('YY-M-DD')}`;
+    await setProjectName(projectName)(dispatch);
+  }
+  dispatch({
+    type: GET_PROJECT_NAME,
+    data: projectName
+  });
+};
+
+export const setProjectName = (projectName) => async dispatch => {
+  const stepInfo = await localforge.getItem(LOCALSTOREAGE_STEP_INFO_KEY);
+  await localforge.setItem(
+    LOCALSTOREAGE_STEP_INFO_KEY,
+    Object.assign(stepInfo || {}, { projectName })
+  );
+  dispatch({
+    type: GET_PROJECT_NAME,
+    data: projectName
+  });
+};

@@ -10,3 +10,10 @@ export const HeadingWrapper = styled.div `
     margin-bottom: ${prop=>prop.theme.spaces.xWide};
   `};
 `;
+
+export const CardContainer = styled.div`
+  margin-top: ${props=>props.theme.spaces.xWide};
+  ${props=> props.theme.media.greaterThan('sm')`
+    margin-top: ${props=>props.theme.spaces.wide};
+  `};
+`;

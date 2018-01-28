@@ -1,14 +1,9 @@
 import React from 'react';
 import { Field } from 'redux-form/immutable';
 import { Button } from '../../../../../globalComponents/Form';
+import Icon from '../../../../../globalComponents/Icon';
 import {
-  SelectMoverList,
-  SelectMoverListHeading,
-  SelectMoverListHeadingName,
-  SelectMoverListHeadingEst,
-  SelectMoverListHeadingAction,
-  SelectMoverFormAction,
-  RadioContainer
+  SelectMoverFormAction
 } from './Styled';
 import SelectMoverItemList from './SelectMoverItemList';
 
@@ -33,13 +28,6 @@ const SelectMover = ({
   submitting
 }) => {
   return (
-    <SelectMoverList>
-      <SelectMoverListHeading>
-        <RadioContainer />
-        <SelectMoverListHeadingName>Name</SelectMoverListHeadingName>
-        <SelectMoverListHeadingEst>Estimate</SelectMoverListHeadingEst>
-        <SelectMoverListHeadingAction>Actions</SelectMoverListHeadingAction>
-      </SelectMoverListHeading>
       <form onSubmit={handleSubmit}>
         <Field
           component={renderSelectMoverItemList}
@@ -49,11 +37,10 @@ const SelectMover = ({
         />
         <SelectMoverFormAction>
           <Button type="submit" primary disabled={submitting || !valid}>
-            Select this mover
+            Next<Icon icon="chevron-right" />
           </Button>
         </SelectMoverFormAction>
       </form>
-    </SelectMoverList>
   );
 };
 

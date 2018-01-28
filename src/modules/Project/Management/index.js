@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { compose, lifecycle, branch, renderNothing } from 'recompose';
 import Management from './Management';
 import mapImmutablePropsToPlainProps from '../../Common/mapImmutablePropsToPlainProps';
+import scrollToTopOnMount from '../../Common/scrollToTopOnMount';
 import {
   getMyProject
 } from '../projectAction';
@@ -33,7 +34,8 @@ const enhance = compose(
     }
   }),
   branch(isLoading, renderNothing),
-  mapImmutablePropsToPlainProps
+  mapImmutablePropsToPlainProps,
+  scrollToTopOnMount
 );
 
 export default enhance(Management);

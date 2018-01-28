@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { compose, lifecycle, withProps} from 'recompose';
 import isLoggedIn from '../../Common/isLoggedIn';
+import scrollToTopOnMount from '../../Common/scrollToTopOnMount';
 import {
   getMyProjects
 } from '../projectAction';
@@ -36,7 +37,8 @@ const enhance = compose(
         this.props.getMyProjects(projectRefs);
       }
     }
-  })
+  }),
+  scrollToTopOnMount
 );
 
 export default enhance(Overview);

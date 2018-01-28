@@ -1,125 +1,92 @@
-import styled from 'styled-components';
-import {
-  Link
-} from 'react-router-dom';
+import styled, { keyframes } from 'styled-components';
 
-export const SelectMoverList = styled.div`
-  padding-bottom: ${props=> props.theme.spaces.base};
-`;
-
-export const SelectMoverListHeading = styled.div`
-  display: none;
-  ${props=> props.theme.media.greaterThan('sm')`
-    display: flex;
-    list-style: none;
-    font-size: .875rem;
-    font-weight: ${props=>props.theme.fontWeights.roman};
-    padding: 0 ${props=>props.theme.spaces.wide} ${props=>props.theme.spaces.base} ${props=>props.theme.spaces.wide};
-  `};
-`;
-
-export const SelectMoverListHeadingName = styled.div`
-  flex: 6;
-`;
-
-export const SelectMoverListHeadingEst = styled.div`
-  flex: 1;
-`;
-
-export const SelectMoverListHeadingAction = styled.div`
-  flex: 3;
-  display: flex;
-  justify-content: flex-end;
-
-`;
-
-
-export const SelectMoverListItem = styled.label`
-  list-style: none;
-  display: flex;
-  border-top: 1px dashed ${props=>props.theme.colors.border};
-  flex-direction: column;
-  padding: ${props=>props.theme.spaces.base};
-  transition: .3s;
-  width: 100%;
-  border: ${props=>props.checked ? `1px solid ${props.theme.colors.primary}` : `1px solid ${props.theme.colors.border}`};
-  border-radius: 3px;
-  margin-bottom: ${props=>props.theme.spaces.tight};
-
-  ${props=> props.theme.media.greaterThan('sm')`
-    flex-direction: row;
-    cursor: pointer;
-    align-items: center;
-    padding: ${props=>props.theme.spaces.wide};
-
-  `};
-`;
-
-export const SelectMoverListItemName = styled.div`
-  padding: ${props=>props.theme.spaces.tight};
-  color: ${props=>props.checked ? props.theme.colors.primary : props.theme.colors.textDark};
-  font-weight: ${props=>props.theme.fontWeights.roman};
-  ${props=> props.theme.media.greaterThan('sm')`
-    flex: 6;
-    padding: 0;
-  `};
-
-`;
-
-export const SelectMoverListItemEst = styled.div`
-  padding: ${props=>props.theme.spaces.tight};
-  &:before {
-    content: 'Estimate: ';
+const appear = keyframes`
+  from {
+    transform: translateY(50%) scale(0);
   }
-  ${props=> props.theme.media.greaterThan('sm')`
-    flex: 1;
-    padding: 0;
-    &:before {
-      content: '';
-    }
-  `};
-`;
 
-export const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: ${props=>props.theme.colors.secondary};
-  font-weight: ${props=>props.theme.fontWeights.roman};
-  &:hover {
-    text-decoration: underline;
+  to {
+    transform: translateY(50%) scale(1);
   }
 `;
 
-export const RadioContainer = styled.div`
-  display: none;
+export const MoverCard = styled.div`
+  flex-basis: 100%;
+  margin: ${props=>props.theme.spaces.base} ${props=>props.theme.spaces.tight};
   ${props=> props.theme.media.greaterThan('sm')`
-    display: flex;
-    flex: 1;
+    flex-basis: 45%;
+  `};
+
+  ${props=> props.theme.media.greaterThan('lg')`
+    flex-basis: 30%;
   `};
 `;
 
-export const SelectMoverListItemAction = styled.div`
-  padding: ${props=>props.theme.spaces.tight};
+export const IsCheckedIndicator = styled.div`
+  width: 36px;
+  height: 36px;
+  color: white;
+  margin: 0 auto;
+  border-radius: 50%;
   display: flex;
   align-items: center;
+  justify-content: center;
+  background-color: ${props=>props.theme.colors.primary};
+  animation: ${appear} .3s cubic-bezier(0.720, -0.600, 0.370, 1.650) 1;
+  animation-fill-mode: forwards;
+`;
+
+export const InnerCardContainer = styled.div`
+  padding: ${props=>props.theme.spaces.base};
+`;
+
+export const MoverLogo = styled.div`
+  height: 130px;
+  border-bottom: 1px dashed ${props=>props.theme.colors.border};
+  padding-bottom: ${props=>props.theme.spaces.base};
+  display: flex;
+  align-items: center;
+`;
+
+export const MoverInfoBar = styled.div`
+  display: flex;
+  padding: ${props=>props.theme.spaces.base} 0;
   justify-content: space-between;
-  > * {
-    margin: ${props=>props.theme.spaces.tight} 0;
+`;
+
+export const MoverPrice = styled.span`
+  flex: 3;
+  font-weight: ${props=>props.theme.fontWeights.medium};
+  font-size: 1.5rem;
+  &:after {
+    content: ' / estimate';
+    font-size: .825rem;
+    color: ${props=>props.theme.colors.textLight};
   }
-  ${props=> props.theme.media.greaterThan('sm')`
-    padding: 0;
-    flex: 3;
-    justify-content: flex-end;
-    > * {
-      margin: 0 0 0 ${props=>props.theme.spaces.wide};
-    }
-  `};
+`;
+
+export const MoverMsg = styled.span`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  color: ${props=>props.theme.colors.textLight};
+  transition: .3s;
+  &:hover {
+    color: ${props=>props.theme.colors.textDark};
+    transform: scale(1.1);
+  }
+`;
+
+export const MoverCardList = styled.ul`
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  width: 100%;
 `;
 
 export const SelectMoverFormAction = styled.div`
   display: flex;
   flex-direction: row-reverse;
-  padding-bottom: ${props=>props.theme.spaces.base};
+  padding: ${props=>props.theme.spaces.wide} 0;
 `;
-
-
-
