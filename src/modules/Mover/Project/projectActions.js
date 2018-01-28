@@ -6,7 +6,7 @@ export const GET_PROJECT_FAIL = 'GET_PROJECT_FAIL';
 
 
 export const getProject = projectId => async dispatch => {
-  try {
+  // try {
     dispatch({
       type: GET_PROJECT_PENDING
     });
@@ -16,12 +16,12 @@ export const getProject = projectId => async dispatch => {
         type: GET_PROJECT_SUCCESS,
         data: projectData
     });
-  } catch (error) {
-    dispatch({
-      type: GET_PROJECT_FAIL,
-      error
-    });
-  }
+  // } catch (error) {
+  //   dispatch({
+  //     type: GET_PROJECT_FAIL,
+  //     error
+  //   });
+  // }
 };
 
 export const declineLead = (projectId) => async dispatch => {

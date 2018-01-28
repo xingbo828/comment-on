@@ -31,7 +31,7 @@ class SummaryProgress extends Component {
   };
 
   renderPostReply = (currentStep, owner) => {
-    if (currentStep === SummaryProgress.PanelKeys.awaitConfirmation) {
+    if (currentStep === SummaryProgress.PanelKeys.awaitConfirmation || currentStep === SummaryProgress.PanelKeys.reply) {
       return (
         <ProgressPanels.Panel
           header="await customer confirmation"
@@ -73,6 +73,7 @@ class SummaryProgress extends Component {
   render() {
     const { projectSummary } = this.props;
     const currentStep = this.getCurrentStep(projectSummary);
+    console.log(currentStep)
     return (
       <ProgressPanels current={currentStep} viewport="mobile">
         <ProgressPanels.Panel
