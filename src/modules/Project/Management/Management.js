@@ -3,6 +3,7 @@ import Grid from '../../../globalComponents/Grid';
 import { Heading } from '../../../globalComponents/Typography';
 import asyncLoad from '../../Common/asyncLoad';
 import {
+  Container,
   HeadingWrapper
 } from './Styled';
 
@@ -20,7 +21,7 @@ const ProjectManagement = ({ projectData, selectedProvider }) => {
   const TypedProjectManagement = getTypedProjectManagement(projectData.type);
 
   return (
-    <Grid.Container fluid>
+    <Container>
       <Grid.Row>
         <HeadingWrapper>
           <Grid.Container>
@@ -30,13 +31,11 @@ const ProjectManagement = ({ projectData, selectedProvider }) => {
           </Grid.Container>
         </HeadingWrapper>
       </Grid.Row>
-      <Grid.Container>
         <TypedProjectManagement
           selectedProvider={selectedProvider}
           projectData={projectData}
         />
-      </Grid.Container>
-    </Grid.Container>
+      </Container>
   );
 };
 

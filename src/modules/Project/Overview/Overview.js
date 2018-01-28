@@ -5,7 +5,7 @@ import Card from '../../../globalComponents/Card';
 import { Heading } from '../../../globalComponents/Typography';
 // import asyncLoad from '../../Common/asyncLoad';
 import MoveCard from './MoveCard';
-import { CardContainer, HeadingWrapper } from './Styled';
+import { Container, CardContainer, HeadingWrapper } from './Styled';
 
 // const getTypedProjectManagement = (type) => {
 //   switch (type) {
@@ -58,7 +58,7 @@ const ProjectOverview = ({
   };
 
   return (
-    <Grid.Container fluid>
+    <Container>
       <Grid.Row>
         <HeadingWrapper>
           <Grid.Container>
@@ -68,13 +68,12 @@ const ProjectOverview = ({
           </Grid.Container>
         </HeadingWrapper>
       </Grid.Row>
-
       <Grid.Container>
         {status === 'LOADED'
           ? renderLoadedProjectsCards(myProjectsData)
           : renderUnLoadedProjectCards(Object.values(user.projects))}
       </Grid.Container>
-    </Grid.Container>
+    </Container>
   );
 };
 
