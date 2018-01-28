@@ -12,72 +12,63 @@ class SummaryProgress extends Component {
     leadClosed: 'lead-closed'
   };
 
-  getCurrentStep = (projectSummary) => {
-    if(projectSummary.status === 'created') {
-      if (projectSummary.myMoverInfo.status === 'sent') {
+  getCurrentStep = projectSummary => {
+    if (projectSummary.status === 'created') {
+      if (projectSummary.receiver.status === 'sent') {
         return SummaryProgress.PanelKeys.reply;
-      } else if (projectSummary.myMoverInfo.status === 'accept') {
+      } else if (projectSummary.receiver.status === 'accept') {
         return SummaryProgress.PanelKeys.awaitConfirmation;
-      } else if (projectSummary.myMoverInfo.status === 'reject') {
+      } else if (projectSummary.receiver.status === 'reject') {
         return SummaryProgress.PanelKeys.declined;
       }
-    }
-    else if(projectSummary.status === 'accept') {
-      if (projectSummary.myMoverInfo.status === 'accept') {
+    } else if (projectSummary.status === 'completed') {
+      if (projectSummary.receiver.status === 'confirmed') {
         return SummaryProgress.PanelKeys.contactInfoReceived;
       } else {
         return SummaryProgress.PanelKeys.leadClosed;
       }
     }
-    else {
-      console.log('UNKNOW');
-    }
-
   };
 
-  renderPostReply = (moverStatus, ownerStatus, owner) => {
-    if(ownerStatus === 'created') {
-      if(moverStatus === 'accept' || moverStatus === 'sent') {
-        return (
-          <ProgressPanels.Panel
-            header="await customer confirmation"
-            inProgressIndexReplacement={<Icon icon="spinner" spin />}
-            panelKey={SummaryProgress.PanelKeys.awaitConfirmation}
-          />
-        );
-      } else if (moverStatus === 'reject') {
-        return (
-          <ProgressPanels.Panel
-            header="declined"
-            inProgressIndexReplacement={<Icon icon="lock" />}
-            panelKey={SummaryProgress.PanelKeys.declined}
-          />
-        );
-      }
+  renderPostReply = (currentStep, owner) => {
+    if (currentStep === SummaryProgress.PanelKeys.awaitConfirmation) {
+      return (
+        <ProgressPanels.Panel
+          header="await customer confirmation"
+          inProgressIndexReplacement={<Icon icon="spinner" spin />}
+          panelKey={SummaryProgress.PanelKeys.awaitConfirmation}
+        />
+      );
+    } else if (currentStep === SummaryProgress.PanelKeys.declined) {
+      return (
+        <ProgressPanels.Panel
+          header="declined"
+          inProgressIndexReplacement={<Icon icon="lock" />}
+          panelKey={SummaryProgress.PanelKeys.declined}
+        />
+      );
+    } else if (currentStep === SummaryProgress.PanelKeys.contactInfoReceived) {
+      return (
+        <ProgressPanels.Panel
+          header="contact info received"
+          panelKey={SummaryProgress.PanelKeys.contactInfoReceived}
+        >
+        <div style={{overflow: 'auto'}}>
+          <p>Email: {owner.email}</p>
+          <p>Phone number: {owner.phone}</p>
+        </div>
+        </ProgressPanels.Panel>
+      );
+    } else if (currentStep === SummaryProgress.PanelKeys.leadClosed) {
+      return (
+        <ProgressPanels.Panel
+          header="Lead closed"
+          inProgressIndexReplacement={<Icon icon="lock" />}
+          panelKey={SummaryProgress.PanelKeys.leadClosed}
+        />
+      );
     }
-    else if(ownerStatus === 'accept') {
-      if(moverStatus === 'accept') {
-        return (
-          <ProgressPanels.Panel
-            header="contact info received"
-            panelKey={SummaryProgress.PanelKeys.contactInfoReceived}
-          >
-            <p>Email: {owner.email}</p>
-            <p>Phone number: {owner.phoneNumber}</p>
-          </ProgressPanels.Panel>
-        );
-      } else {
-        return (
-          <ProgressPanels.Panel
-            header="Lead closed"
-            nProgressIndexReplacement={<Icon icon="lock" />}
-            panelKey={SummaryProgress.PanelKeys.leadClosed}
-          />
-        );
-      }
-    }
-  }
-
+  };
 
   render() {
     const { projectSummary } = this.props;
@@ -88,10 +79,13 @@ class SummaryProgress extends Component {
           header="lead available"
           panelKey={SummaryProgress.PanelKeys.leadAvailable}
         />
-        <ProgressPanels.Panel header="reply or decline" panelKey={SummaryProgress.PanelKeys.reply}>
-          <ReplyForm />
+        <ProgressPanels.Panel
+          header="reply or decline"
+          panelKey={SummaryProgress.PanelKeys.reply}
+        >
+          {currentStep === SummaryProgress.PanelKeys.reply && <ReplyForm />}
         </ProgressPanels.Panel>
-         {this.renderPostReply(projectSummary.myMoverInfo.status, projectSummary.status, projectSummary.owner)}
+        {this.renderPostReply(currentStep, projectSummary.owner)}
       </ProgressPanels>
     );
   }

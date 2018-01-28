@@ -45,9 +45,9 @@ export default projectSummary;
 // Selectors
 export const getMoverProjectSummary = (state, moverId) => {
   const summary = state.getIn(['mover', 'project']);
-  if(summary.get('status')==='LOADED') {
-    const myMoverInfo = summary.getIn(['summaryData', 'receivers']).find((r) => r.get('provider') === moverId);
-    return summary.deleteIn(['summaryData', 'receivers']).setIn(['summaryData', 'myMoverInfo'], myMoverInfo);
-  }
+  // if(summary.get('status')==='LOADED') {
+  //   const myMoverInfo = summary.getIn(['summaryData', 'receiver', 'provider']);
+  //   return summary.deleteIn(['summaryData', 'receivers']).setIn(['summaryData', 'myMoverInfo'], myMoverInfo);
+  // }
   return summary;
 }
