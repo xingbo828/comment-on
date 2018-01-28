@@ -46,7 +46,7 @@ app.get('/:projectId', (request, response) => {
         if (data.status === constants.project_status.completed) {
           if (data.receiver.status === constants.receiver_status.confirmed) {
             data.owner.email = ownerData.email;
-            data.owner.phone = ownerData.phone;
+            data.owner.phone = ownerData.phoneNumber;
           } else {
             data.status = constants.project_status.rejected;
           }
