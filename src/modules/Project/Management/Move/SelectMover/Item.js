@@ -9,7 +9,9 @@ import {
   MoverCard,
   InnerCardContainer,
   MoverLogo,
+  MoverLogoImg,
   MoverInfoBar,
+  MoverName,
   MoverPrice,
   MoverMsg,
   IsCheckedIndicator
@@ -71,8 +73,9 @@ const SelectMoverItem = ({
       >
         <InnerCardContainer>
           <MoverLogo>
-            <img src={moverInfo.provider.logo || noLogoImg} alt="Mover Logo" width="100%" />
+            <MoverLogoImg src={moverInfo.provider.logo || noLogoImg} alt="Mover Logo" />
           </MoverLogo>
+          <MoverName>{moverInfo.provider.businessName}</MoverName>
           <MoverInfoBar>
             <MoverPrice>${moverInfo.estimatedPrice}</MoverPrice>
             <MoverMsg onClick={conversationClickHandler}>

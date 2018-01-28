@@ -48,10 +48,25 @@ export const MoverLogo = styled.div`
   align-items: center;
 `;
 
+export const MoverLogoImg = styled.img`
+  max-height: 100%;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+`;
+
 export const MoverInfoBar = styled.div`
   display: flex;
   padding: ${props=>props.theme.spaces.base} 0;
   justify-content: space-between;
+`;
+
+export const MoverName = styled.p`
+  font-weight: ${props=>props.theme.fontWeights.roman};
+  text-align: center;
+  margin: ${props=>props.theme.spaces.base} 0 0 0;
+
 `;
 
 export const MoverPrice = styled.span`
