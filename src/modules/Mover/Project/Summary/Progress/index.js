@@ -24,9 +24,9 @@ class SummaryProgress extends Component {
     } else if (projectSummary.status === 'completed') {
       if (projectSummary.receiver.status === 'confirmed') {
         return SummaryProgress.PanelKeys.contactInfoReceived;
-      } else {
-        return SummaryProgress.PanelKeys.leadClosed;
       }
+    } else if (projectSummary.status === 'rejected') {
+      return SummaryProgress.PanelKeys.leadClosed;
     }
   };
 
@@ -73,7 +73,6 @@ class SummaryProgress extends Component {
   render() {
     const { projectSummary } = this.props;
     const currentStep = this.getCurrentStep(projectSummary);
-    console.log(currentStep)
     return (
       <ProgressPanels current={currentStep} viewport="mobile">
         <ProgressPanels.Panel
