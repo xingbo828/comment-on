@@ -59,15 +59,17 @@ const ProjectOverview = ({
 
   return (
     <Container>
-      <Grid.Row>
-        <HeadingWrapper>
-          <Grid.Container>
-            <Heading wrapperTag="h1" size="md">
-              My Moves
-            </Heading>
-          </Grid.Container>
-        </HeadingWrapper>
-      </Grid.Row>
+      <HeadingWrapper>
+        <Grid.Container>
+          <Grid.Row>
+            <Grid.Col xs={24} sm={24} md={24} lg={24}>
+              <Heading wrapperTag="h1" size="md">
+                My Moves
+              </Heading>
+            </Grid.Col>
+          </Grid.Row>
+        </Grid.Container>
+      </HeadingWrapper>
       <Grid.Container>
         {status === 'LOADED'
           ? renderLoadedProjectsCards(myProjectsData)

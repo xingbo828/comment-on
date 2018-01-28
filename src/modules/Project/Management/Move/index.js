@@ -55,7 +55,6 @@ const MoveProjectManagement = ({ projectData, selectedProvider }) => {
             <ProgressPanels.Panel
               inProgressIndexReplacement={<Icon icon="spinner" spin />}
               header="finding movers"
-              tertiaryText="Avg. response time: 15 mins"
               panelKey="finding-movers"
             />
             <ProgressPanels.Panel

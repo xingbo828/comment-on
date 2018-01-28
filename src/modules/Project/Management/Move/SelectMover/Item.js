@@ -51,7 +51,7 @@ const SelectMoverItem = ({
 
     return (
       <Button small onClick={chooseMover} style={{padding: 0}}>
-        <label style={{cursor: 'pointer', display: 'inline-block', padding: '.5rem 1rem'}}>
+        <label style={{cursor: 'pointer', display: 'inline-block', padding: '.875rem 1rem'}}>
           <Radio.Radio
             value={value}
             checked={checked}
@@ -85,7 +85,7 @@ const SelectMoverItem = ({
                 offsetX={12}
                 offsetY={5}
               >
-                <Icon icon="comments" />
+                <Icon size="lg" icon="comments" />
               </Badge>
             </MoverMsg>
           </MoverInfoBar>

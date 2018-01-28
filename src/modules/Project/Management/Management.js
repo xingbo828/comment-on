@@ -2,10 +2,7 @@ import React from 'react';
 import Grid from '../../../globalComponents/Grid';
 import { Heading } from '../../../globalComponents/Typography';
 import asyncLoad from '../../Common/asyncLoad';
-import {
-  Container,
-  HeadingWrapper
-} from './Styled';
+import { Container, HeadingWrapper } from './Styled';
 
 const ProjectManagement = ({ projectData, selectedProvider }) => {
   const getTypedProjectManagement = type => {
@@ -22,20 +19,22 @@ const ProjectManagement = ({ projectData, selectedProvider }) => {
 
   return (
     <Container>
-      <Grid.Row>
-        <HeadingWrapper>
-          <Grid.Container>
-            <Heading wrapperTag="h1" size="md">
-              {projectData.configuration.projectName}
-            </Heading>
-          </Grid.Container>
-        </HeadingWrapper>
-      </Grid.Row>
-        <TypedProjectManagement
-          selectedProvider={selectedProvider}
-          projectData={projectData}
-        />
-      </Container>
+      <HeadingWrapper>
+        <Grid.Container>
+          <Grid.Row>
+            <Grid.Col xs={24} sm={24} md={24} lg={24}>
+              <Heading wrapperTag="h1" size="md">
+                {projectData.configuration.projectName}
+              </Heading>
+            </Grid.Col>
+          </Grid.Row>
+        </Grid.Container>
+      </HeadingWrapper>
+      <TypedProjectManagement
+        selectedProvider={selectedProvider}
+        projectData={projectData}
+      />
+    </Container>
   );
 };
 

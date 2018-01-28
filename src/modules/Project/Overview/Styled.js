@@ -14,8 +14,8 @@ export const HeadingWrapper = styled.div `
 `;
 
 export const CardContainer = styled.div`
-  margin: ${props=>props.theme.spaces.base} 0;
+  margin-bottom: ${props=>props.theme.spaces.xWide};
   ${props=> props.theme.media.greaterThan('sm')`
-    margin: ${props=>props.theme.spaces.base} 0;
+    margin-bottom: ${props=>props.theme.spaces.wide};
   `};
 `;

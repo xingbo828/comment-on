@@ -17,7 +17,7 @@ export const OverviewCardMeta = styled.ul`
 `;
 
 export const OverviewCardMetaItem = styled.li`
-  padding: ${props=>props.theme.spaces.tight} 0;
+  padding: ${props=>props.theme.spaces.base} 0;
   display: flex;
 `;
 

@@ -34,7 +34,7 @@ const getHeaderPadding = (props) => {
 };
 
 const getBodyPadding = (props) => {
-  const mobileStyle = `padding: ${props.theme.spaces.base} ${props.theme.spaces.wide};`;
+  const mobileStyle = `padding: 0 ${props.theme.spaces.wide};`;
   const desktopStyle = `padding: 0 ${props.theme.spaces.wide};`;
   const desktopStyleWithMediaquery = props.theme.media.greaterThan('md')`
     ${desktopStyle}
@@ -61,12 +61,8 @@ export const PanelContainer = styled.li`
 export const PanelHeader = styled.div`
   font-size: 0.875rem;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
 
-  ${props=> props.theme.media.greaterThan('md')`
-    flex-direction: row;
-    justify-content: space-between;
-  `};
   ${getHeaderPadding}
 `;
 
@@ -83,10 +79,6 @@ export const PanelHeaderTitle = styled.span`
 
 export const PanelHeaderTertiaryText = styled.span`
   color: ${props=>props.theme.colors.textLight};
-  padding: ${props=>props.theme.spaces.tight} 0 0 ${props=>props.theme.spaces.wide};
-  ${props=> props.theme.media.greaterThan('md')`
-    padding: 0;
-  `};
 `;
 
 export const PanelBody = styled.div`

@@ -12,13 +12,9 @@ const appear = keyframes`
 
 export const MoverCard = styled.div`
   flex-basis: 100%;
-  margin: ${props=>props.theme.spaces.base} ${props=>props.theme.spaces.tight};
+  margin: ${props=>props.theme.spaces.wide} ${props=>props.theme.spaces.tight};
   ${props=> props.theme.media.greaterThan('sm')`
     flex-basis: 45%;
-  `};
-
-  ${props=> props.theme.media.greaterThan('lg')`
-    flex-basis: 30%;
   `};
 `;
 
@@ -37,7 +33,7 @@ export const IsCheckedIndicator = styled.div`
 `;
 
 export const InnerCardContainer = styled.div`
-  padding: ${props=>props.theme.spaces.base};
+  padding: ${props=>props.theme.spaces.base} ${props=>props.theme.spaces.base} 0 ${props=>props.theme.spaces.base};
 `;
 
 export const MoverLogo = styled.div`
@@ -59,18 +55,17 @@ export const MoverLogoImg = styled.img`
 export const MoverInfoBar = styled.div`
   display: flex;
   padding: ${props=>props.theme.spaces.base} 0;
-  justify-content: space-between;
+  justify-content: space-around;
 `;
 
 export const MoverName = styled.p`
   font-weight: ${props=>props.theme.fontWeights.roman};
   text-align: center;
-  margin: ${props=>props.theme.spaces.base} 0 0 0;
+  margin: ${props=>props.theme.spaces.base} 0;
 
 `;
 
 export const MoverPrice = styled.span`
-  flex: 3;
   font-weight: ${props=>props.theme.fontWeights.medium};
   font-size: 1.5rem;
   &:after {
@@ -81,7 +76,6 @@ export const MoverPrice = styled.span`
 `;
 
 export const MoverMsg = styled.span`
-  flex: 1;
   display: flex;
   align-items: center;
   color: ${props=>props.theme.colors.textLight};
@@ -103,5 +97,5 @@ export const MoverCardList = styled.ul`
 export const SelectMoverFormAction = styled.div`
   display: flex;
   flex-direction: row-reverse;
-  padding: ${props=>props.theme.spaces.wide} 0;
+  padding-bottom: ${props=>props.theme.spaces.base};
 `;
