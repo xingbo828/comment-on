@@ -29,31 +29,36 @@ app.get('/:projectId', (request, response) => {
       if (!data) {
         return Promise.reject('invalid project');
       }
-      data.receivers = [data.receivers[userData.moverId]];
+      data.receiver = data.receivers[userData.moverId];
+      delete data.receivers;
 
-      if (data.receivers.length === 0) {
+      if (!data.receiver) {
         return Promise.reject('invalid provider');
       }
-        data.receivers[0].provider = data.receivers[0].provider.id;
-        const ownerId = data.owner;
-        return admin.firestore().collection('users').doc(ownerId).get()
-        .then(ownerData => {
-          ownerData = ownerData.data();
-          data.owner = {
-            displayName: ownerData.displayName
-          };
-          if (data.receivers[0].status === constants.receiver_status.confirmed) {
+      data.receiver.provider = data.receiver.provider.id;
+      const ownerId = data.owner;
+      return admin.firestore().collection('users').doc(ownerId).get()
+      .then(ownerData => {
+        ownerData = ownerData.data();
+        data.owner = {
+          displayName: ownerData.displayName
+        };
+        if (data.status === constants.project_status.completed) {
+          if (data.receiver.status === constants.receiver_status.confirmed) {
             data.owner.email = ownerData.email;
-            data.owner.phone = ownerData.phone;
+            data.owner.phone = ownerData.phoneNumber;
+          } else {
+            data.status = constants.project_status.rejected;
           }
-          return data;
-        });
+        }
+
+        return data;
+      });
     }).then((data)=>{
       response.json(data);
     }).catch((err) => {
-      return response.status(400).json({error: err});
+      return response.status(400).json({error: err.message || err});
     });
-    response.json();
   });
 });
 

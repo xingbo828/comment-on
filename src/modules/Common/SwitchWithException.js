@@ -1,33 +1,19 @@
 import React from 'react';
 import { Switch, withRouter, Redirect } from 'react-router-dom';
-import { compose, branch, renderComponent } from 'recompose';
-import isLoggedIn from './isLoggedIn';
-import Spin from '../../globalComponents/Spin';
+import { compose } from 'recompose';
 
-const ProtectedRoute = ({
+const SwitchWithException = ({
+  children,
   ...rest
 }) => (
-  <Route
+  <Switch
     {...rest}
-    render={props =>
-      isLoggedIn ? (
-        <Component {...props} />
-      ) : (
-        <Redirect
-          to={{
-            pathname: '/login',
-            search: `?redirect=${location.pathname}${location.search}`
-          }}
-        />
-      )}
-  />
+  >
+    {children}
+    <Redirect from="*" to="/404" />
+  </Switch>
 );
 
 export default compose(
-  withRouter,
-  isLoggedIn,
-  branch(
-    props => props.loginStatus === 'UNINIT',
-    renderComponent(Spin.FullScreenSpinner)
-  )
-)(ProtectedRoute);
+  withRouter
+)(SwitchWithException);
