@@ -1,16 +1,17 @@
 import React from 'react';
-import { Switch, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import ProtectedRoute from '../Common/ProtectedRoute';
 import ConversationContainer from './ConversationContainer';
+import SwitchWithException from '../Common/SwitchWithException';
 
 const Conversation = ({ match }) => (
-  <Switch>
+  <SwitchWithException>
     <ProtectedRoute
       exact
       path={`${match.url}/:conversationId`}
       component={ConversationContainer}
     />
-  </Switch>
+  </SwitchWithException>
 );
 
 export default withRouter(Conversation);

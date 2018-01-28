@@ -8,6 +8,7 @@ module.exports = {
     sent: 'sent',
     accept: 'accept',
     completed: 'completed',
+    rejected: 'rejected',
     abandoned: 'abandoned'
   },
   receiver_status: {

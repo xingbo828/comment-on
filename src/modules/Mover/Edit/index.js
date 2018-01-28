@@ -1,10 +1,11 @@
 import React from 'react';
-import { Switch, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
 import BasicInfo from './BasicInfo';
 import CrewMember from './CrewMember';
 import Vehicles from './Vehicles';
 import ProtectedRoute from '../../Common/ProtectedRoute';
+import SwitchWithException from '../../Common/SwitchWithException';
 import MoverEditSteps from './Shared/Steps';
 import FadeInRouteTransition from '../../Common/RouteTransitions/FadeInRouteTransition';
 
@@ -34,7 +35,7 @@ const MoverEdit = ({ location, history, match }) => {
       <TransitionGroup>
         <FadeInRouteTransition minHeight={800} key={location.key}>
           {() => (
-            <Switch location={location}>
+            <SwitchWithException location={location}>
               {
                 paths.map(p =>
                   <ProtectedRoute
@@ -44,7 +45,7 @@ const MoverEdit = ({ location, history, match }) => {
                   />
                 )
               }
-            </Switch>
+            </SwitchWithException>
           )}
         </FadeInRouteTransition>
       </TransitionGroup>
