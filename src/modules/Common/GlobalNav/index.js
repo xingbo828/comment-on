@@ -152,9 +152,8 @@ export const Nav = ({ user, isLoggedIn, logout, history }) => {
     <NavRoot>
       <ContextHeader>
         <Link to="/"><Heading>LOGO</Heading></Link>
-        {/* <Location>Vancouver</Location> */}
         <ContextHeaderLinks>
-        <ContextHeaderLink><Button small onClick={sentToMyMovesPage}>My moves</Button></ContextHeaderLink>
+        {isLoggedIn && <ContextHeaderLink><Button small onClick={sentToMyMovesPage}>My moves</Button></ContextHeaderLink>}
         </ContextHeaderLinks>
         <NotificationCenter />
         <AccountNav />

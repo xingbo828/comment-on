@@ -4,6 +4,7 @@ import Grid from '../../../../globalComponents/Grid';
 import Icon from '../../../../globalComponents/Icon';
 import OverviewCard from './OverviewCard';
 import SelectMover from './SelectMover';
+import Confirmation from './Confirmation';
 
 const { Container, Row, Col } = Grid;
 
@@ -13,6 +14,10 @@ const MoveProjectManagement = ({ projectData, selectedProvider }) => {
       return [];
     }
     return providers.filter(p => p.status === 'accept');
+  };
+
+  const getConfirmedProvider = (providers) => {
+    return providers.find(p => p.status === 'confirmed');
   };
 
   const getCurrentStep = (projectData) => {
@@ -28,10 +33,9 @@ const MoveProjectManagement = ({ projectData, selectedProvider }) => {
         return 'select-mover';
       }
       return 'finding-movers';
-    } else if(projectData.status === 'accept') {
+    } else if(projectData.status === 'completed') {
       return 'confirmation';
     }
-
 
   };
 
@@ -48,9 +52,6 @@ const MoveProjectManagement = ({ projectData, selectedProvider }) => {
       <Row>
         <Col xm={24} sm={24} md={24} lg={16}>
           <ProgressPanels current={getCurrentStep(projectData)}>
-            {/* <ProgressPanels.PanelHeading>
-              <ManagementHeader projectData={projectData} current={getCurrentStep(projectData)} />
-            </ProgressPanels.PanelHeading> */}
             <ProgressPanels.Panel header="completed form" panelKey="completed-form" />
             <ProgressPanels.Panel
               inProgressIndexReplacement={<Icon icon="spinner" spin />}
@@ -68,8 +69,8 @@ const MoveProjectManagement = ({ projectData, selectedProvider }) => {
             >
               {renderProvidersList(projectData.receivers, projectData.id)}
             </ProgressPanels.Panel>
-            <ProgressPanels.Panel header="confirmation" panelKey="confirmation">
-              This is step 4
+            <ProgressPanels.Panel header="you're done!" panelKey="confirmation">
+              {projectData.status === 'completed' && <Confirmation receiver={getConfirmedProvider(projectData.receivers)}/>}
             </ProgressPanels.Panel>
           </ProgressPanels>
         </Col>

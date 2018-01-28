@@ -9,7 +9,7 @@ export const acceptProvider = (projectId, providerId) => async dispatch => {
     const updateReceivers = Object.assign({}, project.receivers);
     updateReceivers[providerId].status = 'confirmed';
     return await projectDocRef.update({
-      status: 'accept',
+      status: 'completed',
       receivers: updateReceivers
     });
 };
