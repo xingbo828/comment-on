@@ -1,17 +1,18 @@
 import React from 'react';
 import Grid from '../../../globalComponents/Grid';
 import { Heading } from '../../../globalComponents/Typography';
-import asyncLoad from '../../Common/asyncLoad';
+// import asyncLoad from '../../Common/asyncLoad';
 import { Container, HeadingWrapper } from './Styled';
+import Move from './Move';
 
 const ProjectManagement = ({ projectData, selectedProvider }) => {
   const getTypedProjectManagement = type => {
     switch (type) {
       case 'MOVE': {
-        return asyncLoad(() => import('./Move'));
+        return Move;
       }
       default:
-        return asyncLoad(() => import('./Move'));
+        return Move;
     }
   };
 

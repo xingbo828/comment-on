@@ -31,6 +31,12 @@ const enhance = compose(
         const projectId = this.props.match.params.projectId;
         this.props.getMyProject(projectId);
       }
+    },
+    componentWillReceiveProps(nextProps) {
+      if(nextProps.match.params.projectId !== this.props.match.params.projectId) {
+        const projectId = nextProps.match.params.projectId;
+        this.props.getMyProject(projectId);
+      }
     }
   }),
   branch(isLoading, renderNothing),
