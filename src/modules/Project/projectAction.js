@@ -51,6 +51,22 @@ export const GET_MY_PROJECTS_PENDING = 'GET_MY_PROJECTS_PENDING';
 export const GET_MY_PROJECTS_SUCCESS = 'GET_MY_PROJECTS_SUCCESS';
 export const GET_MY_PROJECTS_FAIL = 'GET_MY_PROJECTS_FAIL';
 
+const _placeIdToAddress = geocoder => markerWithPlaceId => {
+  return new Promise((resolve, reject) => {
+    geocoder.geocode(markerWithPlaceId, (results, status) => {
+      if (status === 'OK') {
+        if (results[0]) {
+          resolve({
+              lat: results[0].geometry.location.lat(),
+              lng: results[0].geometry.location.lng()
+          });
+        }
+      }
+      reject(status);
+    });
+  });
+};
+
 export const getMyProjects = (projectRefs) => async dispatch => {
   dispatch({
     type: GET_MY_PROJECTS_PENDING
@@ -61,8 +77,22 @@ export const getMyProjects = (projectRefs) => async dispatch => {
   });
 
   const projects = await Promise.all(projectPromises);
+  // convert placeId to lat/lng
+  const placeIdConverter = _placeIdToAddress(new window.google.maps.Geocoder());
+  const convertedProjects = await Promise.all(projects.map(async project => {
+    const { pickUpAddress, deliveryAddress } = project.configuration.addresses;
+    const convertedPickAddress = await placeIdConverter({ placeId: pickUpAddress });
+    const convertedDeliveryAddress = await placeIdConverter({ placeId: deliveryAddress });
+    const newProject = Object.assign({}, project);
+    newProject.configuration.addresses = {
+      pickUpAddress: convertedPickAddress,
+      deliveryAddress: convertedDeliveryAddress
+    };
+    return newProject;
+  }))
+
   dispatch({
     type: GET_MY_PROJECTS_SUCCESS,
-    data: projects,
+    data: convertedProjects,
   });
 };
