@@ -38,7 +38,6 @@ const enhance = compose(
     async componentWillReceiveProps(nextProps) {
 
       if(!isEqual(this.props.user.projects, nextProps.user.projects)) {
-        debugger;
         if (this.unsubscribe) {
           this.unsubscribe();
         }

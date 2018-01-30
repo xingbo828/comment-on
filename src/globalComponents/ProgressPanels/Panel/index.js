@@ -19,10 +19,19 @@ class ProgressPanel extends Component {
   };
 
   componentDidMount() {
-    this.setState({
-      height: this.getHeight()
-    });
+    this.setHeight(this.getHeight())
+  }
 
+  componentDidUpdate() {
+    this.setHeight(this.getHeight())
+  }
+
+  setHeight = (height) => {
+    if(height !== this.state.height) {
+      this.setState({
+        height
+      });
+    }
   }
 
   renderTitleIcon = (status, stepIndex, inProgressIndexReplacement) => {
@@ -49,7 +58,7 @@ class ProgressPanel extends Component {
       tertiaryText,
       children,
       inProgressIndexReplacement,
-      viewport
+      viewport,
     } = this.props;
     return (
       <PanelContainer status={status}>
@@ -74,7 +83,7 @@ class ProgressPanel extends Component {
 
 
 ProgressPanel.propTypes = {
-  header: string.isRequired,
+  header: oneOfType([string, node]).isRequired,
   tertiaryText: oneOfType([string, node]),
   children: node,
   inProgressIndexReplacement: oneOfType([string, node]),

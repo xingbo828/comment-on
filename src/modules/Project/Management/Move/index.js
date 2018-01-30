@@ -1,4 +1,5 @@
 import React from 'react';
+import { withTheme } from 'styled-components';
 import ProgressPanels from '../../../../globalComponents/ProgressPanels';
 import Grid from '../../../../globalComponents/Grid';
 import Icon from '../../../../globalComponents/Icon';
@@ -8,51 +9,53 @@ import Confirmation from './Confirmation';
 
 const { Container, Row, Col } = Grid;
 
-const MoveProjectManagement = ({ projectData, selectedProvider }) => {
-  const getAcceptedProviders = (providers) => {
-    if(!providers) {
+const MoveProjectManagement = ({ projectData, theme }) => {
+  const getAcceptedProviders = providers => {
+    if (!providers) {
       return [];
     }
     return providers.filter(p => p.status === 'accept');
   };
 
-  const getConfirmedProvider = (providers) => {
+  const getConfirmedProvider = providers => {
     return providers.find(p => p.status === 'confirmed');
   };
 
-  const getCurrentStep = (projectData) => {
-    if(projectData.status === 'created') {
-      if(!projectData.receivers) {
+  const getCurrentStep = projectData => {
+    if (projectData.status === 'created') {
+      if (!projectData.receivers) {
         return 'finding-movers';
       }
       const providerAccepted = getAcceptedProviders(projectData.receivers);
-      if(providerAccepted.length > 0) {
-        if(selectedProvider) {
-          return 'share-contact-info';
-        }
+      if (providerAccepted.length > 0) {
         return 'select-mover';
       }
       return 'finding-movers';
-    } else if(projectData.status === 'completed') {
+    } else if (projectData.status === 'completed') {
       return 'confirmation';
     }
-
   };
 
   const renderProvidersList = (providers, projectId) => {
     const providerAccepted = getAcceptedProviders(projectData.receivers);
-    if(providerAccepted.length > 0){
-      return <SelectMover projectId={projectId} moversInfo={providerAccepted} />
+    if (providerAccepted.length > 0) {
+      return (
+        <SelectMover projectId={projectId} moversInfo={providerAccepted} />
+      );
     }
     return null;
-  }
+  };
 
+  const current = getCurrentStep(projectData);
   return (
     <Container>
       <Row>
         <Col xm={24} sm={24} md={24} lg={16}>
-          <ProgressPanels current={getCurrentStep(projectData)}>
-            <ProgressPanels.Panel header="completed form" panelKey="completed-form" />
+          <ProgressPanels current={current}>
+            <ProgressPanels.Panel
+              header="completed form"
+              panelKey="completed-form"
+            />
             <ProgressPanels.Panel
               inProgressIndexReplacement={<Icon icon="spinner" spin />}
               header="finding movers"
@@ -63,14 +66,29 @@ const MoveProjectManagement = ({ projectData, selectedProvider }) => {
               panelKey="select-mover"
               tertiaryText={
                 <span>
-                  <Icon icon="spinner" spin />{' '}<strong style={{ marginLeft: 5 }}>{getAcceptedProviders(projectData.receivers).length} found</strong>
+                  <Icon icon="spinner" spin />{' '}
+                  <strong style={{ marginLeft: 5 }}>
+                    {getAcceptedProviders(projectData.receivers).length} found
+                  </strong>
                 </span>
               }
             >
               {renderProvidersList(projectData.receivers, projectData.id)}
             </ProgressPanels.Panel>
-            <ProgressPanels.Panel header="you're done!" panelKey="confirmation">
-              {projectData.status === 'completed' && <Confirmation receiver={getConfirmedProvider(projectData.receivers)}/>}
+            <ProgressPanels.Panel
+              header={
+                <span style={current === 'confirmation' ? { color: theme.colors.success } : {}}>
+                  you're done!
+                </span>
+              }
+              panelKey="confirmation"
+              inProgressIndexReplacement={<Icon style={{color: '#e31b23'}} icon="heart" />}
+            >
+              {projectData.status === 'completed' && (
+                <Confirmation
+                  receiver={getConfirmedProvider(projectData.receivers)}
+                />
+              )}
             </ProgressPanels.Panel>
           </ProgressPanels>
         </Col>
@@ -82,4 +100,4 @@ const MoveProjectManagement = ({ projectData, selectedProvider }) => {
   );
 };
 
-export default MoveProjectManagement;
+export default withTheme(MoveProjectManagement);

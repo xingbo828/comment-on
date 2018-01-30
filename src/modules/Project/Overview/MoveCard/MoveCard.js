@@ -9,7 +9,7 @@ import { CardMeta, CardMetaItemProjectName, CardMetaItemStatus } from './Styled'
 const MoveCard = ({ project,  unreads, navToProject}) => {
   const { addresses: { pickUpAddress, deliveryAddress }} = project.configuration;
   const direction = [pickUpAddress, deliveryAddress];
-  const status = project.status !== 'complete' ? 'In Progress': 'Complete';
+  const status = project.status !== 'completed' ? 'In Progress': 'Completed';
 
   const name = project.configuration.projectName;
 

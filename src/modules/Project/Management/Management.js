@@ -5,7 +5,7 @@ import { Heading } from '../../../globalComponents/Typography';
 import { Container, HeadingWrapper } from './Styled';
 import Move from './Move';
 
-const ProjectManagement = ({ projectData, selectedProvider }) => {
+const ProjectManagement = ({ projectData }) => {
   const getTypedProjectManagement = type => {
     switch (type) {
       case 'MOVE': {
@@ -32,7 +32,6 @@ const ProjectManagement = ({ projectData, selectedProvider }) => {
         </Grid.Container>
       </HeadingWrapper>
       <TypedProjectManagement
-        selectedProvider={selectedProvider}
         projectData={projectData}
       />
     </Container>

@@ -12,8 +12,7 @@ import {
 
 const mapStateToProps = (state, ownProps) =>  ({
   projectData: getMyProjectSelector(state, ownProps.match.params.projectId).get('projectData'),
-  status: getMyProjectSelector(state, ownProps.match.params.projectId).get('status'),
-  selectedProvider: getMyProjectSelector(state, ownProps.match.params.projectId).get('selectedProvider'),
+  status: getMyProjectSelector(state, ownProps.match.params.projectId).get('status')
 });
 
 
