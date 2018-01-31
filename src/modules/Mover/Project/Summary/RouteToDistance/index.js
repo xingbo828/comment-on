@@ -16,9 +16,11 @@ class RouteToDistance extends Component {
   }
 
   routeToDistance = (directionsService, from, to) => {
+    const fromLocation = new this.props.google.maps.LatLng(from);
+    const toLocation = new this.props.google.maps.LatLng(to);
     const request = {
-      origin: { placeId: from },
-      destination: { placeId: to },
+      origin: { location: fromLocation },
+      destination: { location: toLocation },
       travelMode: 'DRIVING'
     };
 

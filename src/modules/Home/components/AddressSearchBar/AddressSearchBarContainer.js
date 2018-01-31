@@ -34,8 +34,8 @@ const enhance = compose(
       const rawAddresses = values.toJS();
       const newAddress = {
         addresses: {
-          pickUpAddress: rawAddresses.pickUpAddress.placeId,
-          deliveryAddress: rawAddresses.deliveryAddress.placeId
+          pickUpAddress: rawAddresses.pickUpAddress.location,
+          deliveryAddress: rawAddresses.deliveryAddress.location
         }
       };
       return localSaveAddresses(newAddress);

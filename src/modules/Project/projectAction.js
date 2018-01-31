@@ -1,4 +1,4 @@
-import { auth, firestore } from '../../firebaseClient';
+import { auth, firestore, firebaseInstance } from '../../firebaseClient';
 import { updateUserProjects } from '../Account/accountAction';
 
 const projectCollectionRef = firestore.collection('projects');
@@ -7,9 +7,15 @@ export const PROJECT_CREATED = 'PROJECT_CREATED';
 
 export const addProject = (projectType, configuration) => async dispatch => {
   const uid = auth.currentUser.uid;
+  const configurationWithGeoPoint = Object.assign({}, configuration, {
+    addresses: {
+      pickUpAddress: new firebaseInstance.firestore.GeoPoint(configuration.addresses.pickUpAddress.lat, configuration.addresses.pickUpAddress.lng),
+      deliveryAddress:  new firebaseInstance.firestore.GeoPoint(configuration.addresses.deliveryAddress.lat, configuration.addresses.deliveryAddress.lng),
+    }
+  });
   const project = Object.assign(
     {},
-    { type: projectType, configuration, owner: uid }
+    { type: projectType, configuration: configurationWithGeoPoint, owner: uid }
   );
   const projectRef = await projectCollectionRef.add(project);
   const projectId = projectRef.id;
@@ -35,8 +41,21 @@ export const getMyProject = (projectId) => dispatch => {
       });
     });
     const receivers = await Promise.all(receiversPromises);
+    const mappedConfiguration = Object.assign({}, project.configuration, {
+      addresses: {
+        pickUpAddress: {
+          lat: project.configuration.addresses.pickUpAddress.latitude,
+          lng: project.configuration.addresses.pickUpAddress.longitude,
+        },
+        deliveryAddress: {
+          lat: project.configuration.addresses.deliveryAddress.latitude,
+          lng: project.configuration.addresses.deliveryAddress.longitude,
+        }
+      }
+    })
     const resolvedProject = Object.assign(project, {
-      receivers
+      receivers,
+      configuration: mappedConfiguration
     });
     dispatch({
       type: GET_MY_PROJECT_SUCCESS,
@@ -51,21 +70,6 @@ export const GET_MY_PROJECTS_PENDING = 'GET_MY_PROJECTS_PENDING';
 export const GET_MY_PROJECTS_SUCCESS = 'GET_MY_PROJECTS_SUCCESS';
 export const GET_MY_PROJECTS_FAIL = 'GET_MY_PROJECTS_FAIL';
 
-const _placeIdToAddress = geocoder => markerWithPlaceId => {
-  return new Promise((resolve, reject) => {
-    geocoder.geocode(markerWithPlaceId, (results, status) => {
-      if (status === 'OK') {
-        if (results[0]) {
-          resolve({
-              lat: results[0].geometry.location.lat(),
-              lng: results[0].geometry.location.lng()
-          });
-        }
-      }
-      reject(status);
-    });
-  });
-};
 
 export const getMyProjects = (projectRefs) => async dispatch => {
   dispatch({
@@ -77,22 +81,23 @@ export const getMyProjects = (projectRefs) => async dispatch => {
   });
 
   const projects = await Promise.all(projectPromises);
-  // convert placeId to lat/lng
-  const placeIdConverter = _placeIdToAddress(new window.google.maps.Geocoder());
-  const convertedProjects = await Promise.all(projects.map(async project => {
-    const { pickUpAddress, deliveryAddress } = project.configuration.addresses;
-    const convertedPickAddress = await placeIdConverter({ placeId: pickUpAddress });
-    const convertedDeliveryAddress = await placeIdConverter({ placeId: deliveryAddress });
-    const newProject = Object.assign({}, project);
-    newProject.configuration.addresses = {
-      pickUpAddress: convertedPickAddress,
-      deliveryAddress: convertedDeliveryAddress
-    };
-    return newProject;
-  }))
-
+  const mappedProjects = projects.map(p => {
+    const mappedConfiguration = Object.assign({}, p.configuration, {
+      addresses: {
+        pickUpAddress: {
+          lat: p.configuration.addresses.pickUpAddress.latitude,
+          lng: p.configuration.addresses.pickUpAddress.longitude,
+        },
+        deliveryAddress: {
+          lat: p.configuration.addresses.deliveryAddress.latitude,
+          lng: p.configuration.addresses.deliveryAddress.longitude,
+        }
+      }
+    });
+    return Object.assign({}, p, {configuration: mappedConfiguration});
+  })
   dispatch({
     type: GET_MY_PROJECTS_SUCCESS,
-    data: convertedProjects,
+    data: mappedProjects,
   });
 };

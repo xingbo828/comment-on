@@ -3,7 +3,7 @@ import moment from 'moment';
 import Card from '../../../../../globalComponents/Card';
 import Map from '../../../../../globalComponents/Map';
 import Icon from '../../../../../globalComponents/Icon';
-import PlaceIdToAddress from '../../../../../globalComponents/GooglePlaceIdToAddress';
+import LatLngToAddress from '../../../../../globalComponents/LatLngToAddress';
 import {
   OverviewCardContainer,
   OverviewCardMeta,
@@ -18,12 +18,8 @@ const OverviewCard = ({ configuration }) => {
   } = configuration;
   const pickUpDateMoment = moment(pickUpDate);
   const direction = [
-    {
-      placeId: pickUpAddress
-    },
-    {
-      placeId: deliveryAddress
-    }
+    pickUpAddress,
+    deliveryAddress
   ];
   return (
     <OverviewCardContainer>
@@ -46,8 +42,8 @@ const OverviewCard = ({ configuration }) => {
             <OverviewCardMetaItemIcon>
               <Icon icon="circle-o" />
             </OverviewCardMetaItemIcon>
-              <PlaceIdToAddress
-                placeId={pickUpAddress}
+              <LatLngToAddress
+                {...pickUpAddress}
                 google={window.google}
               />
           </OverviewCardMetaItem>
@@ -55,8 +51,8 @@ const OverviewCard = ({ configuration }) => {
             <OverviewCardMetaItemIcon>
               <Icon icon="map-marker" />
             </OverviewCardMetaItemIcon>
-              <PlaceIdToAddress
-                placeId={deliveryAddress}
+              <LatLngToAddress
+                {...deliveryAddress}
                 google={window.google}
               />
           </OverviewCardMetaItem>

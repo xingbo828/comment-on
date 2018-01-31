@@ -5,7 +5,7 @@ import capitalize from 'lodash/capitalize';
 import startCase from 'lodash/startCase';
 import Grid from '../../../../globalComponents/Grid';
 import { Heading, Paragraph } from '../../../../globalComponents/Typography';
-import PlaceIdToAddress from '../../../../globalComponents/GooglePlaceIdToAddress';
+import LatLngToAddress from '../../../../globalComponents/LatLngToAddress';
 import RouteToDistance from './RouteToDistance';
 import Progress from './Progress';
 import {
@@ -44,18 +44,18 @@ const MoverProjectSummary = ({
           <SectionBodyItem>
             <SectionBodyItemLabel>Pick-up address</SectionBodyItemLabel>
             <SectionBodyItemContent>
-              <PlaceIdToAddress
+              <LatLngToAddress
                 google={window.google}
-                placeId={pickUpAddress}
+                {...pickUpAddress}
               />
             </SectionBodyItemContent>
           </SectionBodyItem>
           <SectionBodyItem>
             <SectionBodyItemLabel>Delivery address</SectionBodyItemLabel>
             <SectionBodyItemContent>
-              <PlaceIdToAddress
+              <LatLngToAddress
                 google={window.google}
-                placeId={deliveryAddress}
+                {...deliveryAddress}
               />
             </SectionBodyItemContent>
           </SectionBodyItem>

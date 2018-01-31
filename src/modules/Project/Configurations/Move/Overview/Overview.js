@@ -8,7 +8,8 @@ import Layout from '../../../../../globalComponents/Layout';
 import { Heading, Paragraph } from '../../../../../globalComponents/Typography';
 import { Button, SubLabel, TextArea, TextField } from '../../../../../globalComponents/Form';
 import Icon from '../../../../../globalComponents/Icon';
-import PlaceIdToAddress from '../../../../../globalComponents/GooglePlaceIdToAddress';
+// import PlaceIdToAddress from '../../../../../globalComponents/GooglePlaceIdToAddress';
+import LatLngToAddress from '../../../../../globalComponents/LatLngToAddress';
 import { MOVING_SEARCH_TIME_RANGE } from '../../../../../constants';
 import {
   Section,
@@ -57,18 +58,20 @@ const ConfigurationOverview = ({
           <SectionBodyItem>
             <SectionBodyItemLabel>Pick-up address</SectionBodyItemLabel>
             <SectionBodyItemContent>
-              <PlaceIdToAddress
+              <LatLngToAddress
                 google={window.google}
-                placeId={pickUpAddress}
+                lat={pickUpAddress.lat}
+                lng={pickUpAddress.lng}
               />
             </SectionBodyItemContent>
           </SectionBodyItem>
           <SectionBodyItem>
             <SectionBodyItemLabel>Delivery address</SectionBodyItemLabel>
             <SectionBodyItemContent>
-              <PlaceIdToAddress
+              <LatLngToAddress
                 google={window.google}
-                placeId={deliveryAddress}
+                lat={deliveryAddress.lat}
+                lng={deliveryAddress.lng}
               />
             </SectionBodyItemContent>
           </SectionBodyItem>
@@ -228,7 +231,7 @@ const ConfigurationOverview = ({
 
   const renderItemsSubSection = v => {
     return Object.keys(v)
-      .filter(f => v[f] > 0)
+      .filter(f => v[f] !== '0' || v[f]=== '5+')
       .map(i => {
         return (
           <SectionBodyItem key={i}>

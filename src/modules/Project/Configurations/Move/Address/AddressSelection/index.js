@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { string, object, func } from 'prop-types';
+import { object, func } from 'prop-types';
 import isNull from 'lodash/isNull';
 import isObject from 'lodash/isObject';
 import Map from '../../../../../../globalComponents/Map';
@@ -25,13 +25,15 @@ class AddressSelection extends Component {
 
   componentDidMount() {
     Promise.all([
-      this.convertPlaceIdToAddr(this.state.from),
-      this.convertPlaceIdToAddr(this.state.to)
+      this.convertLocationToAddr(this.state.from),
+      this.convertLocationToAddr(this.state.to)
     ]).then(([from, to]) => {
       this.setState({
         from: this.formatAddr(from),
         to: this.formatAddr(to)
       });
+    }).catch(err => {
+      console.log(err);
     });
   }
 
@@ -40,12 +42,9 @@ class AddressSelection extends Component {
       return addr;
     }
     return {
-      location: {
-        lat: addr.geometry.location.lat(),
-        lng: addr.geometry.location.lng(),
-      },
-      formattedAddress: addr.formatted_address,
-      placeId: addr.place_id
+      lat: addr.geometry.location.lat(),
+      lng: addr.geometry.location.lng(),
+      formattedAddress: addr.formatted_address
     };
   }
 
@@ -61,16 +60,17 @@ class AddressSelection extends Component {
     });
   };
 
-  convertPlaceIdToAddr = (placeId) => {
-    if(!placeId) {
+  convertLocationToAddr = (location) => {
+    if(!location) {
       return Promise.resolve(null);
     }
-    if(isObject(placeId)) {
-      return Promise.resolve(placeId);
-    }
+    // if(isObject(placeId)) {
+    //   return Promise.resolve(placeId);
+    // }
     const geocoder = new this.props.google.maps.Geocoder();
     return new Promise((resolve, reject)=> {
-      geocoder.geocode({placeId}, (results, status) => {
+      const locationLatLng = new this.props.google.maps.LatLng(location.lat, location.lng);
+      geocoder.geocode({ location: locationLatLng }, (results, status) => {
         if (status === 'OK') {
           if (results[0]) {
             resolve(results[0]);
@@ -88,8 +88,8 @@ class AddressSelection extends Component {
     });
     const { from, to } = this.state;
     this.props.onChange({
-      pickUpAddress: from.placeId,
-      deliveryAddress: to.placeId
+      pickUpAddress: from,
+      deliveryAddress: to
     });
   };
 
@@ -111,7 +111,7 @@ class AddressSelection extends Component {
   render() {
     const { google } = this.props;
     const { from, to, route } = this.state;
-    const markers = [from, to].filter(i=> !isNull(i)).filter(t => isObject(t)).map(x => x.location);
+    const markers = [from, to].filter(i=> !isNull(i)).filter(t => isObject(t));
     return (
       <Container>
         <MapContainer>
@@ -130,8 +130,8 @@ class AddressSelection extends Component {
 AddressSelection.propTypes = {
   onChange: func.isRequired,
   google: object.isRequired,
-  from: string,
-  to: string
+  from: object,
+  to: object
 };
 
 AddressSelection.defaultProps = {

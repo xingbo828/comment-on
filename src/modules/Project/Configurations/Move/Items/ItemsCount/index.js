@@ -31,7 +31,7 @@ class ItemsCount extends Component {
 
   onOptionSelect = (e) => {
     const { value, name } = e.target;
-    const setState = (name, value) => (prevState, props) => ({[name]: parseInt(value, 10)});
+    const setState = (name, value) => (prevState, props) => ({[name]: value});
     this.setState(setState(name, value), () => {
       const output = reduce(this.state, (result, value, key) => {
         if(value === 0) {
@@ -55,11 +55,14 @@ class ItemsCount extends Component {
           name={camelCase(c)}
           onChange={this.onOptionSelect}
         >
-          {Array(5).fill('').map((e, index) => (
-            <option key={`${c}-${index}`} value={index}>
-              {index}
-            </option>
-          ))}
+          {Array(6).fill('').map((e, index) => {
+            const current = index === 5 ? '5+' : index;
+            return (
+              <option key={`${c}-${index}`} value={current}>
+                {current}
+              </option>
+            );
+          })}
         </Select>
       </StyledItem>
     );
