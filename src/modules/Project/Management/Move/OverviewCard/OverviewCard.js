@@ -11,7 +11,7 @@ import {
   OverviewCardMetaItemIcon
 } from './Styled';
 
-const OverviewCard = ({ configuration }) => {
+const OverviewCard = ({ configuration, history, projectId }) => {
   const {
     addresses: { pickUpAddress, deliveryAddress },
     dateTime: { pickUpDate }
@@ -21,9 +21,16 @@ const OverviewCard = ({ configuration }) => {
     pickUpAddress,
     deliveryAddress
   ];
+
+  const navToProjectSummary = () => {
+    history.push({
+      pathname: `/projects/${projectId}/summary`
+    });
+
+  };
   return (
     <OverviewCardContainer>
-      <Card>
+      <Card onClick={navToProjectSummary}>
         <Map
           style={{ height: 225, width: '100%' }}
           google={window.google}
