@@ -1,3 +1,5 @@
+import {isImmutable} from 'immutable';
+
 export const isProfileCompleted = (profile) => {
-  return !!profile.get('email') && !!profile.get('phoneNumber');
+  return isImmutable(profile) && !!profile.get('email') && !!profile.get('phoneNumber');
 };
