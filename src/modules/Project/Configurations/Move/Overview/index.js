@@ -14,6 +14,7 @@ import { PROJECT_TYPES } from '../../../../../constants';
 import scrollToTopOnMount from '../../../../Common/scrollToTopOnMount';
 import mapImmutablePropsToPlainProps from '../../../../Common/mapImmutablePropsToPlainProps';
 import isLoggedIn from '../../../../Common/isLoggedIn';
+import isCompletedProfile from '../../../../Common/isCompletedProfile';
 import {
   loadItems,
   loadDateTime,
@@ -109,6 +110,8 @@ const validators = ({
 
 const enhance = compose(
   withRouter,
+  isLoggedIn,
+  isCompletedProfile,
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
     componentDidMount() {
@@ -158,7 +161,6 @@ const enhance = compose(
       });
     }
   })),
-  isLoggedIn,
   mapImmutablePropsToPlainProps,
   scrollToTopOnMount
 );
