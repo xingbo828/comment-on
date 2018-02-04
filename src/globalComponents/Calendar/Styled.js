@@ -73,37 +73,30 @@ export const CalenderTable = styled.table`
   }
 `;
 
+const _getCalendarCellBackgroundColor = (props) => {
+  if (props.isDisabled) {
+    return props.theme.colors.offWhite;
+  } else if(props.isSelectedDate) {
+    return props.theme.colors.primary;
+  }
+  return 'transparent';
+}
+
+const _getCalendarCellTextColor = (props) => {
+  if (props.isDisabled) {
+    return props.theme.colors.border;
+  } else if(props.isSelectedDate) {
+    return props.theme.colors.offWhite;
+  } else if(!props.isCurrentMonth) {
+    return props.theme.colors.textLight;
+  }
+  return props.theme.colors.textDark;
+}
+
 export const CalendarCell = styled.td`
-  ${props => {
-    if (props.isDisabled) {
-      return `
-        background-color: ${props.theme.colors.offWhite};
-        color: ${props.theme.colors.border};
-        :hover {
-          cursor: not-allowed;
-        }
-      `;
-    } else if (props.isSelectedDate) {
-      return `
-        color: ${props.theme.colors.offWhite};
-        background-color: ${props.theme.colors.primary};
-      `;
-    } else if (!props.isCurrentMonth) {
-      return `
-        color: ${props.theme.colors.textLight} !important;
-        background-color: transparent !important;
-        :hover {
-          background-color: ${props.theme.colors.primary} !important;
-          color: white !important;
-        }
-      `;
-    } else {
-      return `
-        :hover {
-          background-color: ${props.theme.colors.primary};
-          color: white;
-        }
-      `;
-    }
-  }};
+  background-color: ${_getCalendarCellBackgroundColor};
+  color: ${_getCalendarCellTextColor};
+  &:hover {
+    cursor: ${props=>props.isDisabled ? 'not-allowed' : 'pointer'};
+  }
 `;
