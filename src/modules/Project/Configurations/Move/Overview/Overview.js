@@ -37,6 +37,8 @@ const ConfigurationOverview = ({
   validators,
   handleSubmit,
   goBack,
+  isCompletedProfile,
+  isLoggedIn,
   signIn
 }) => {
   const areFieldsValidate = (addresses, dateTime, logistics, validators) => {
@@ -330,7 +332,7 @@ const ConfigurationOverview = ({
       </Section>
     );
   };
-
+  debugger;
   return (
     <Grid.Container>
       <FormHeading>
@@ -347,7 +349,7 @@ const ConfigurationOverview = ({
           {renderAdditionalNoteSection(additionalNotes, setAdditionalNotes)}
         </FormInner>
         <FormActions>
-          {loginStatus === 'AUTHENTICATED' && <Button
+          {loginStatus === 'AUTHENTICATED' && isCompletedProfile && <Button
             style={{ float: 'right' }}
             type="submit"
             primary
@@ -376,6 +378,21 @@ const ConfigurationOverview = ({
             }
           >
             Sign in<Icon icon="sign-in" />
+          </Button>}
+          {loginStatus === 'AUTHENTICATED' && !isCompletedProfile && <Button
+            style={{ float: 'right' }}
+            primary
+            onClick={signIn}
+            disabled={
+              !areFieldsValidate(
+                rootAddresses.addresses,
+                dateTime,
+                logistics,
+                validators
+              )
+            }
+          >
+            Update Profile<Icon icon="sign-in" />
           </Button>}
           <Button style={{ float: 'left' }} ghost onClick={goBack}>
             <Icon icon="arrow-left" />Back

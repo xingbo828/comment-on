@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import Profile from './Profile';
+import includes from 'lodash/includes';
 import {
   updateProfile
 } from '../accountAction';
@@ -52,6 +53,12 @@ const enhance = compose(
     },
     validate,
     onSubmitSuccess: (values, dispatch, props) => {
+      debugger;
+      if(includes(props.location.search, '?redirect=')) {
+        const redirectTo = props.location.search.replace('?redirect=', '');
+        return props.history.push(redirectTo);
+      }
+
       message.success(`Account profile successfully updated.`);
     },
     onSubmitFail: (submitErr, dispatch, error) => {
