@@ -1,4 +1,3 @@
 export const isProfileCompleted = (profile) => {
-  debugger;
-  return !!profile.email && !!profile.phoneNumber;
+  return !!profile.get('email') && !!profile.get('phoneNumber');
 };

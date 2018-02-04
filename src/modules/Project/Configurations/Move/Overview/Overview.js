@@ -332,7 +332,6 @@ const ConfigurationOverview = ({
       </Section>
     );
   };
-  debugger;
   return (
     <Grid.Container>
       <FormHeading>

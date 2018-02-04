@@ -41,6 +41,7 @@ export const isLoggedin = createSelector(
   [ getAccount ], ({ account }) => ({ isLoggedIn: account.get('user').size > 0, user: account.get('user'), loginStatus: account.get('status')})
 );
 
-export const isCompletedProfile = createSelector(
-  [ getAccount ], ({ account }) => ({ isCompletedProfile: isProfileCompleted(account.get('user'))})
-);
+
+export const isCompletedProfile = (state) => {
+  return {isCompletedProfile: isProfileCompleted(getUser(state).user)}
+}
