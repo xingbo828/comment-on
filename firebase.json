@@ -3,11 +3,11 @@
     "public": "build",
     "rewrites": [ {
       "source": "/component-lib",
-      "destination": "/docs/index.html"
+      "destination": "/build/docs/index.html"
     },
       {
       "source": "!/component-lib",
-      "destination": "/index.html"
+      "destination": "/build/index.html"
     } ]
   }
 }
