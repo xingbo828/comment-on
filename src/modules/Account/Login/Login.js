@@ -1,6 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import includes from 'lodash/includes';
+import {isProfileCompleted} from '../utils';
 import {
   WrapperDiv,
   FacebookButton,
@@ -10,19 +11,15 @@ import {
   InnerDiv
 } from './Styled';
 
-const _isProfileCompleted = (profile) => {
-  return !!profile.email;
-};
-
-
 const Login = ({ location, account, facebookLogin, googleLogin, logout }) => {
 
   const redirectAfterLogin = () => {
+    let redirectTo = '/';
     if(includes(location.search, '?redirect=')) {
-      const redirectTo = location.search.replace('?redirect=', '');
-      return <Redirect to={redirectTo} />;
+      redirectTo = location.search.replace('?redirect=', '');
     }
-    return _isProfileCompleted(account.user) ? <Redirect to="/" /> : <Redirect to="/account/profile" />;
+    redirectTo = isProfileCompleted(account.user) ? redirectTo : "/account/profile?redirect=" + redirectTo;
+    return <Redirect to={redirectTo} />;
   };
 
   const renderLoginOptions = () => {
