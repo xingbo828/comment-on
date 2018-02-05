@@ -9,6 +9,7 @@ install:
 
 before_script:
 - npm run build
+- npm run build-storybook
 
 after_success:
 - firebase deploy --token $FIREBASE_TOKEN

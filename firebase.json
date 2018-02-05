@@ -3,7 +3,7 @@
     "public": "build",
     "rewrites": [ {
       "source": "/component-lib",
-      "destination": "/component-lib/index.html"
+      "destination": "/docs/index.html"
     },
       {
       "source": "!/component-lib",
