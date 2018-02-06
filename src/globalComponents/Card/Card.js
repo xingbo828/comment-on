@@ -3,6 +3,7 @@ import { bool, node, func } from 'prop-types';
 import Spin from '../Spin';
 import {
   CardContainer,
+  ChildrenContainer,
   PrimaryCardAction
 } from './Styled';
 
@@ -12,7 +13,7 @@ const Card = ({ loading, onClick, children, primaryAction, style }) => {
   return(
     <CardContainer style={style} onClick={onClick}>
       <SpinContainer loading={loading}>
-        {children}
+        <ChildrenContainer loading={loading}>{children}</ChildrenContainer>
         {primaryAction && <PrimaryCardAction>{primaryAction}</PrimaryCardAction>}
       </SpinContainer>
     </CardContainer>

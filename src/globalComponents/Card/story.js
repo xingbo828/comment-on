@@ -14,6 +14,12 @@ const BasicCard = () => (
   </div>
 );
 
+const LoadingCard = () => (
+  <div style={{margin: '0 auto', padding: '200px 0', width: '200px'}}>
+    <Card loading />
+  </div>
+);
+
 const CardWithMap = () => {
   const withDirection = [{
     lat: 49.2812054,
@@ -43,6 +49,7 @@ const CardWithMap = () => {
 
 const CardStory = storiesOf('Global/Data Display/Card', module)
   .add('basic card', BasicCard)
+  .add('loading card', LoadingCard)
   .add('card with map', CardWithMap);
 
 export default CardStory;

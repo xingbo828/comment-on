@@ -10,6 +10,7 @@ const tailEffect = keyframes`
 export const StepsContainer = styled.ul`
   display: flex;
   padding: 0;
+  margin: 0;
   font-size: .625rem;
   ${props=>props.theme.media.greaterThan('sm')`
     font-size: .875rem;
