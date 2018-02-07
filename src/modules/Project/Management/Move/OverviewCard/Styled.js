@@ -4,7 +4,7 @@ export const OverviewCardContainer = styled.div`
   margin-top: ${props=>props.theme.spaces.xWide};
 
   ${props=> props.theme.media.greaterThan('md')`
-    margin-top: ${props=>props.theme.spaces.tight};
+    margin-top: 0;
   `};
 `;
 
