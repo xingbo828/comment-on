@@ -2,17 +2,17 @@ import styled from 'styled-components';
 
 export const CardContainer = styled.div`
   background: white;
-  transition: transform 150ms ease-out;
+  transition: ${props=>props.clickable ? 'transform 150ms ease-out': 'none' };
   margin: 0;
   padding: 0;
   border-radius: 2px;
   position: relative;
-  cursor: pointer;
+  cursor: ${props=>props.clickable ? 'pointer': 'default' };
   width: 100%;
   min-height: 200px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.14);
   &:hover {
-    transform: scale(1.02);
+    transform: ${props=>props.clickable ? 'scale(1.02)': 'none' };
   }
 `;
 

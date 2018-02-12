@@ -3,6 +3,7 @@ import ProgressPanels from '../../../../globalComponents/ProgressPanels';
 import Grid from '../../../../globalComponents/Grid';
 import Icon from '../../../../globalComponents/Icon';
 import OverviewCard from './OverviewCard';
+import MessageCard from './MessageCard';
 import SelectMover from './SelectMover';
 import Confirmation from './Confirmation';
 
@@ -13,7 +14,7 @@ const MoveProjectManagement = ({ projectData, theme, history }) => {
     if (!providers) {
       return [];
     }
-    return providers.filter(p => p.status === 'accept');
+    return providers.filter(p => p.status === 'accept' || p.status === 'confirmed');
   };
 
   const getConfirmedProvider = providers => {
@@ -92,6 +93,7 @@ const MoveProjectManagement = ({ projectData, theme, history }) => {
           </ProgressPanels>
         </Col>
         <Col xm={24} sm={24} md={24} lg={8}>
+          <MessageCard projectId={projectData.id} receivers={getAcceptedProviders(projectData.receivers)}/>
           <OverviewCard projectId={projectData.id} configuration={projectData.configuration} history={history} />
         </Col>
       </Row>

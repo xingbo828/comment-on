@@ -11,7 +11,7 @@ const { SpinContainer } = Spin;
 
 const Card = ({ loading, onClick, children, primaryAction, style }) => {
   return(
-    <CardContainer style={style} onClick={onClick}>
+    <CardContainer clickable={!!onClick} style={style} onClick={onClick}>
       <SpinContainer loading={loading}>
         <ChildrenContainer loading={loading}>{children}</ChildrenContainer>
         {primaryAction && <PrimaryCardAction>{primaryAction}</PrimaryCardAction>}
@@ -27,8 +27,7 @@ Card.propTypes = {
 };
 
 Card.defaultProps = {
-  loading: false,
-  onClick: () => {}
+  loading: false
 };
 
 export default Card;

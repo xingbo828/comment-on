@@ -1,6 +1,6 @@
 import React from 'react';
 import { Radio } from '../../../../../globalComponents/Form';
-import SelectMoverItem from './ItemContainer';
+import SelectMoverItem from './SelectMoverItem';
 
 
 const SelectMoverItemList = ({ onChange, value, movers, projectId }) => {
