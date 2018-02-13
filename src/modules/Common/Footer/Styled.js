@@ -4,6 +4,7 @@ const Footer = Styled.footer`
   margin: 4rem 0 0;
   padding: 4rem 0 0;
   border-top: 1px solid ${props => props.theme.colors.border};
+  background: border-top: 1px solid ${props => props.theme.colors.offWhite};
 `;
 
 

@@ -3,18 +3,15 @@ import Grid from '../../../globalComponents/Grid';
 import { Heading } from '../../../globalComponents/Typography';
 import asyncLoad from '../../Common/asyncLoad';
 import PageHero from '../../../globalComponents/Layout/PageHero';
-import { Container } from './Styled';
 import Link from '../../../globalComponents/Link';
 import Icon from '../../../globalComponents/Icon';
 import { withRouter } from 'react-router-dom';
 import { compose, withProps, branch, renderNothing } from 'recompose';
-
-const ProjectManagement = ({ projectData, selectedProvider, history }) => {
-// import asyncLoad from '../../Common/asyncLoad';
 import { Container, HeadingWrapper } from './Styled';
 import Move from './Move';
 
-const ProjectManagement = ({ projectData }) => {
+const ProjectManagement = ({ projectData, selectedProvider, history }) => {
+
   const getTypedProjectManagement = type => {
     switch (type) {
       case 'MOVE': {
