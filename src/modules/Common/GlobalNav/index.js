@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { compose, withProps, branch, renderNothing } from 'recompose';
 import { auth } from '../../../firebaseClient';
 import isLoggedIn from '../isLoggedIn';
@@ -8,18 +8,32 @@ import AccountNav from './AccountNav';
 import globalNavHiddenList from './globalNavHiddenList.json';
 import NotificationCenter from '../NotificationCenter';
 import { Button } from '../../../globalComponents/Form';
+import Link from '../../../globalComponents/Link';
 
 
 const fromTheme = (prop) => ({ theme }) => theme.colors[prop]
 
+const ContextHeaderLink = styled.span`
+  padding: 0 1rem 0 0;
+
+  ${props=>props.theme.media.greaterThan('sm')`
+    display: none;
+  `}
+`
+
 const ContextHeader = styled.div`
   display: flex;
   box-sizing: border-box;
-  // background: ${fromTheme('primary')};
   height: 60px;
-  width: 100%;
   line-height: 60px;
-  padding: 0 2rem;
+  width: 100%;
+  padding: 0 0 0 1rem;
+
+  ${props=>props.theme.media.greaterThan('sm')`
+    padding: 0 0 0 1.5rem;
+    height: 80px;
+    line-height: 80px;
+  `}
 `;
 
 const Heading = styled.h1`
@@ -36,14 +50,6 @@ const Heading = styled.h1`
   color: ${fromTheme('primary')};
 `;
 
-// const Location = styled.span`
-//   flex: 1;
-//   font-size: 1rem;
-//   color: white;
-//   margin: 0;
-//   padding: 0;
-// `;
-
 const ContextHeaderLinks = styled.ul`
   flex: 10;
   display: flex;
@@ -53,92 +59,26 @@ const ContextHeaderLinks = styled.ul`
   align-items: center;
 `;
 
-const ContextHeaderLink = styled.li`
+const ContextHeaderButton = styled.li`
   list-style: none;
   line-height: 30px;
+  margin: 0 1.5rem 0 0;
+
 > a {
     text-decoration: none;
   }
+
+  ${props=>props.theme.media.lessThan('sm')`
+    display: none;
+  `}
 `;
 
 const NavRoot = styled.nav`
   display: block;
   background: white;
-  border: 1px solid ${props=>props.theme.colors.offWhite};
+  border: 1px solid ${props=>props.theme.colors.border};
+  border-top: none;
 `;
-
-/*
-const Account = styled.div`
-  float: right;
-  line-height: 60px;
-`;
-
-const Pic = styled.div`
-  vertical-align: middle;
-  width: 40px;
-  height: 40px;
-  border-radius: 999px;
-  background: white;
-  display: inline-block;
-`;
-*/
-
-// const NavList = styled.ul`
-//   display: flex;
-//   list-style-type: none;
-//   margin: 0;
-//   padding: 0;
-//   height: 60px;
-//   line-height: 60px;
-//   border-bottom: 1px solid ${fromTheme('borderPrimary')};
-
-//   ${media.greaterThan('md')`
-//       display: block;
-//     `
-//   }
-// `;
-
-// const NavListItem = styled.li`
-//   text-align: center;
-//   flex: 1;
-
-//   span {
-//     display: none;
-//   }
-
-//   a {
-//     text-decoration: none;
-//     height: 60px;
-//     display: block;
-//     color: inherit;
-//     cursor: pointer;
-//     font-weight: bold;
-//   }
-
-//   a::after {
-//     content: '\f015';
-//     font-family: FontAwesome;
-//     font-size: 1rem;
-//   }
-
-//   ${media.greaterThan('md')`
-//       border-right: 1px solid ${fromTheme('borderPrimary')};
-//       display: inline-block;
-
-//       span {
-//         display: inline;
-//       }
-
-//       a {
-//         padding: 0 2rem;
-//       }
-
-//       a::after {
-//         display: none;
-//       }
-//     `
-//   }
-// `;
 
 export const Nav = ({ user, isLoggedIn, logout, history }) => {
   const sentToMyMovesPage = (e) => {
@@ -151,19 +91,22 @@ export const Nav = ({ user, isLoggedIn, logout, history }) => {
   return (
     <NavRoot>
       <ContextHeader>
-        <Link to="/"><Heading>LOGO</Heading></Link>
+        <Heading>LOGO</Heading>
         <ContextHeaderLinks>
-        {isLoggedIn && <ContextHeaderLink><Button small onClick={sentToMyMovesPage}>My moves</Button></ContextHeaderLink>}
+        {isLoggedIn && (
+          <div>
+            <ContextHeaderButton>
+              <Button small onClick={sentToMyMovesPage}>My moves</Button>
+            </ContextHeaderButton>
+            <ContextHeaderLink>
+              <Link secondary onClick={sentToMyMovesPage}>My moves</Link>
+            </ContextHeaderLink>
+          </div>
+        )}
         </ContextHeaderLinks>
         <NotificationCenter />
         <AccountNav />
       </ContextHeader>
-      {/* <NavList>
-        <NavListItem><Link to="/"><span>Overview</span></Link></NavListItem>
-        <NavListItem><Link to="/"><span>Menu Item</span></Link></NavListItem>
-        <NavListItem><Link to="/"><span>Menu Item</span></Link></NavListItem>
-        <NavListItem><Link to="/"><span>Menu Item</span></Link></NavListItem>
-      </NavList> */}
     </NavRoot>
   );
 };

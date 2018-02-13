@@ -1,11 +1,12 @@
 import React from 'react';
 import chunk from 'lodash/chunk';
 import Grid from '../../../globalComponents/Grid';
+import PageHero from '../../../globalComponents/Layout/PageHero';
 import Card from '../../../globalComponents/Card';
 import { Heading, Paragraph } from '../../../globalComponents/Typography';
 // import asyncLoad from '../../Common/asyncLoad';
 import MoveCard from './MoveCard';
-import { Container, CardContainer, HeadingWrapper } from './Styled';
+import { Container, CardContainer } from './Styled';
 
 // const getTypedProjectManagement = (type) => {
 //   switch (type) {
@@ -70,7 +71,7 @@ const ProjectOverview = ({
 
   return (
     <Container>
-      <HeadingWrapper>
+      <PageHero>
         <Grid.Container>
           <Grid.Row>
             <Grid.Col xs={24} sm={24} md={24} lg={24}>
@@ -80,8 +81,8 @@ const ProjectOverview = ({
             </Grid.Col>
           </Grid.Row>
         </Grid.Container>
-      </HeadingWrapper>
-      <Grid.Container>
+      </PageHero>
+      <Grid.Container overlap>
         {renderCards(status, myProjectsData, user)}
       </Grid.Container>
     </Container>

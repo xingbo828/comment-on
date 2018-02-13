@@ -5,13 +5,13 @@ export default styled.div`
   margin-right: auto;
   padding-right: 15px;
   padding-left: 15px;
-  ${props => {
-    if(!props.fluid) {
-      return `
-        max-width: 1200px;
-      `;
-    }
-  }}
 
+  ${props => props.overlap && `
+    margin: -4rem auto;
+  `}
+
+  ${props => !props.fluid && `
+    max-width: 1200px;
+  `}
 `;
 

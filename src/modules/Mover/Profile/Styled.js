@@ -1,14 +1,9 @@
 import Styled from 'styled-components';
 
-const HeroDiv = Styled.div`
-  height: 200px;
-  background: url(http://images.huffingtonpost.com/2016-09-13-1473769006-9036433-Moving.jpg) center center;
-  background-size: cover;
-
-  ${props=>props.theme.media.greaterThan('md')`
-    height: 600px;
-  `}
-`;
+const HeadingContainer = Styled.div`
+  padding: 6rem 0 4rem;
+  background-color: ${prop=>prop.theme.colors.offWhite};
+`
 
 const ProfileContentContainer = Styled.div`
   display: flex;
@@ -16,7 +11,6 @@ const ProfileContentContainer = Styled.div`
 
   ${props=>props.theme.media.lessThan('md')`
     flex-direction: column;
-    margin: -2rem 0 0;
   `}
 `;
 
@@ -37,7 +31,7 @@ const Content = Styled.div`
 
 
 export {
-  HeroDiv,
+  HeadingContainer,
   ProfileContentContainer,
   Content,
   CommentContainer

@@ -97,7 +97,7 @@ const getIconMargin = props => {
 const getPadding = props => {
   if (props.small) {
     return `
-      padding: ${props.theme.spaces.tight} ${props.theme.spaces.base};
+      padding: 0.875rem 1.5rem;
     `;
   }
   return `

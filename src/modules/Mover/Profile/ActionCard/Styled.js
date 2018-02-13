@@ -5,7 +5,6 @@ export const Aside = Styled.aside`
   order: 1;
 
   ${props=>props.theme.media.greaterThan('md')`
-    margin: -4rem 0 0;
     order: 2;
     flex: 4;
     margin-left: 2.75%;

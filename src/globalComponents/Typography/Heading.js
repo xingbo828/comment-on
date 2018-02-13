@@ -32,6 +32,7 @@ const Heading = ({ className, wrapperTag, children, underline, theme, size }) =>
   `;
 
   const Tag = Styled[wrapperTag]`
+    position: relative;
     margin: 0;
     padding: 0;
     display: inline-block;

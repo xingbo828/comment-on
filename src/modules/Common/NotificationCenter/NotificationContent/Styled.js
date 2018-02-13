@@ -4,25 +4,26 @@ import { Link } from 'react-router-dom';
 export const NotificationContentContainer = styled.ul`
   position: fixed;
   margin: 0;
-  top: 60px;
+  top: 62px;
   left: 0;
   bottom: 0;
   right: 0;
   background-color: ${props => props.theme.colors.offWhite};
-  z-index: ${props=>props.theme.zIndex.dropdown};
+  z-index: 99;
   display: flex;
   flex-direction: column;
   padding: 0;
-
   align-items: center;
+
   > li:not(:last-child) {
     border-bottom: 1px solid ${props=>props.theme.colors.border};
   }
+
   ${props=>props.theme.media.greaterThan('sm')`
     position: absolute;
     justify-content: center;
     left: auto;
-    top: 70px;
+    top: 80px;
     display: block;
     right: 0;
     width: 400px;
@@ -45,6 +46,7 @@ export const NotificationContentItemLink = styled(Link)`
   padding: ${props=>props.theme.spaces.base} ${props=>props.theme.spaces.xWide} ${props=>props.theme.spaces.base} ${props=>props.theme.spaces.base};
   font-size: .875rem;
   line-height: 250%;
+
   &:after {
     content:'\f054';
     font-family: 'FontAwesome';
@@ -52,13 +54,15 @@ export const NotificationContentItemLink = styled(Link)`
     right: ${props=>props.theme.spaces.wide};
     top: 40%;
   }
+
+  &:hover {
+    background-color: ${props=>props.theme.colors.offWhite};
+  }
+
   ${props=>props.theme.media.greaterThan('sm')`
     padding: ${props.theme.spaces.base};
     &:after {
       content:'';
     }
   `}
-  &:hover {
-    background-color: ${props=>props.theme.colors.offWhite};
-  }
 `;

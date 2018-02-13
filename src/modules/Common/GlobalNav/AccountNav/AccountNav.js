@@ -1,12 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Avatar from '../../../../globalComponents/Avatar';
+import Icon from '../../../../globalComponents/Icon';
 import {
   ContainerDiv,
   Menu,
   MenuList,
   MenuItem,
-  DisplayName
+  DisplayName,
+  Account,
+  Username
 } from './Styled';
 import DropDownTransition from './DropDownTransition';
 
@@ -20,6 +23,7 @@ class AccountNav extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+    this.formatUserName = this.formatUserName.bind(this)
   }
 
   componentDidMount() {
@@ -45,6 +49,12 @@ class AccountNav extends React.Component {
     this.props.logout(e);
   }
 
+  formatUserName(_name){
+    const nameList = _name.split(' ')
+    nameList[nameList.length - 1] = `${nameList[nameList.length - 1].charAt(0)}.`
+    return nameList.join(' ')
+  }
+
   render() {
     const { user, loginStatus } = this.props;
     const active = this.state.active;
@@ -57,7 +67,10 @@ class AccountNav extends React.Component {
         active={active}
         innerRef={(el) => { this.containerRef = el; }}
       >
-        <Avatar src={user.photoURL} onClick={this.handleClick} />
+        <Account role="button" onClick={this.handleClick} >
+          <Username>{this.formatUserName(user.displayName)}&nbsp;&nbsp;<Icon icon="chevron-down" />&nbsp;&nbsp;</Username>
+          <Avatar src={user.photoURL} />
+        </Account>
         { active && <DropDownTransition in={active}>
           {() =>
             <Menu active={active}>

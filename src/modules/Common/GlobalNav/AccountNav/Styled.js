@@ -2,30 +2,52 @@ import Styled from 'styled-components';
 
 const fromTheme = props => ({ theme }) => theme.colors[props];
 
+export const Account = Styled.div`
+  cursor: pointer;
+  padding: 0 1rem;
+
+  img {
+    vertical-align: middle;
+  }
+
+  ${props=>props.theme.media.greaterThan('sm')`
+    padding: 0 1.5rem;
+  `}
+`
+
+export const Username = Styled.span`
+  padding: 0 0 0 0;
+  vertical-align: middle;
+  display: none;
+
+  ${props=>props.theme.media.greaterThan('sm')`
+    display: initial;
+  `}
+`
+
 export const ContainerDiv = Styled.div`
-  padding: 10px;
-  z-index: 99;
-  height: 60px;
-  width: 60px;
   float: right;
   position: relative;
   background: white;
   transition: .3s;
-
   box-shadow: ${props => props.active ? '0 2px 15px 0px rgba(0,0,0,.2)' : '0 2px 15px 0px rgba(0,0,0,0)'};
-  transform: ${props => props.active ? 'scale(1)' : 'scale(.97)'};
+  transform: ${props => props.active ? 'scale(1.01)' : 'scale(1)'};
+
+  ${props => props.active && `
+    z-index: 99;
 
     ::after {
       content: '';
       display: block;
       position: absolute;
       right: 0;
-      top: 50px;
+      top: 70px;
       height: 10px;
       left: 0;
       background: white;
-      z-index: 11;
+      z-index: 100;
     }
+  `}
 `;
 
 

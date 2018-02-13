@@ -7,7 +7,7 @@ const DropDownTransition = ({
   children
 }) => {
   const defaultStyle = {
-    top: '60px',
+    top: '80px',
     transition: `${timeout}ms`,
     transformOrigin: 'top right',
     opacity: 0,
