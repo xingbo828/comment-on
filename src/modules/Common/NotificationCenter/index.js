@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import isEqual from 'lodash/isEqual';
 import {
   compose,
   lifecycle,
@@ -33,6 +34,19 @@ const enhance = compose(
           myProjectIds
         );
       }
+    },
+    async componentWillReceiveProps(nextProps) {
+
+      if(!isEqual(this.props.user.projects, nextProps.user.projects)) {
+        if (this.unsubscribe) {
+          this.unsubscribe();
+        }
+        const myProjectIds = Object.keys(nextProps.user.projects);
+        this.unsubscribe = await this.props.subscribeToNotifications(
+          myProjectIds
+        );
+      }
+
     },
     componentWillUnmount() {
       if (this.unsubscribe) {

@@ -10,13 +10,18 @@ import { withRouter } from 'react-router-dom';
 import { compose, withProps, branch, renderNothing } from 'recompose';
 
 const ProjectManagement = ({ projectData, selectedProvider, history }) => {
+// import asyncLoad from '../../Common/asyncLoad';
+import { Container, HeadingWrapper } from './Styled';
+import Move from './Move';
+
+const ProjectManagement = ({ projectData }) => {
   const getTypedProjectManagement = type => {
     switch (type) {
       case 'MOVE': {
-        return asyncLoad(() => import('./Move'));
+        return Move;
       }
       default:
-        return asyncLoad(() => import('./Move'));
+        return Move;
     }
   };
 

@@ -8,7 +8,8 @@ import Layout from '../../../../../globalComponents/Layout';
 import { Heading, Paragraph } from '../../../../../globalComponents/Typography';
 import { Button, SubLabel, TextArea, TextField } from '../../../../../globalComponents/Form';
 import Icon from '../../../../../globalComponents/Icon';
-import PlaceIdToAddress from '../../../../../globalComponents/GooglePlaceIdToAddress';
+// import PlaceIdToAddress from '../../../../../globalComponents/GooglePlaceIdToAddress';
+import LatLngToAddress from '../../../../../globalComponents/LatLngToAddress';
 import { MOVING_SEARCH_TIME_RANGE } from '../../../../../constants';
 import {
   Section,
@@ -36,6 +37,8 @@ const ConfigurationOverview = ({
   validators,
   handleSubmit,
   goBack,
+  isCompletedProfile,
+  isLoggedIn,
   signIn
 }) => {
   const areFieldsValidate = (addresses, dateTime, logistics, validators) => {
@@ -57,18 +60,20 @@ const ConfigurationOverview = ({
           <SectionBodyItem>
             <SectionBodyItemLabel>Pick-up address</SectionBodyItemLabel>
             <SectionBodyItemContent>
-              <PlaceIdToAddress
+              <LatLngToAddress
                 google={window.google}
-                placeId={pickUpAddress}
+                lat={pickUpAddress.lat}
+                lng={pickUpAddress.lng}
               />
             </SectionBodyItemContent>
           </SectionBodyItem>
           <SectionBodyItem>
             <SectionBodyItemLabel>Delivery address</SectionBodyItemLabel>
             <SectionBodyItemContent>
-              <PlaceIdToAddress
+              <LatLngToAddress
                 google={window.google}
-                placeId={deliveryAddress}
+                lat={deliveryAddress.lat}
+                lng={deliveryAddress.lng}
               />
             </SectionBodyItemContent>
           </SectionBodyItem>
@@ -228,7 +233,7 @@ const ConfigurationOverview = ({
 
   const renderItemsSubSection = v => {
     return Object.keys(v)
-      .filter(f => v[f] > 0)
+      .filter(f => v[f] !== '0' || v[f]=== '5+')
       .map(i => {
         return (
           <SectionBodyItem key={i}>
@@ -327,7 +332,6 @@ const ConfigurationOverview = ({
       </Section>
     );
   };
-
   return (
     <Grid.Container>
       <FormHeading>
@@ -344,7 +348,7 @@ const ConfigurationOverview = ({
           {renderAdditionalNoteSection(additionalNotes, setAdditionalNotes)}
         </FormInner>
         <FormActions>
-          {loginStatus === 'AUTHENTICATED' && <Button
+          {loginStatus === 'AUTHENTICATED' && isCompletedProfile && <Button
             style={{ float: 'right' }}
             type="submit"
             primary
@@ -373,6 +377,21 @@ const ConfigurationOverview = ({
             }
           >
             Sign in<Icon icon="sign-in" />
+          </Button>}
+          {loginStatus === 'AUTHENTICATED' && !isCompletedProfile && <Button
+            style={{ float: 'right' }}
+            primary
+            onClick={signIn}
+            disabled={
+              !areFieldsValidate(
+                rootAddresses.addresses,
+                dateTime,
+                logistics,
+                validators
+              )
+            }
+          >
+            Update Profile<Icon icon="sign-in" />
           </Button>}
           <Button style={{ float: 'left' }} ghost onClick={goBack}>
             <Icon icon="arrow-left" />Back

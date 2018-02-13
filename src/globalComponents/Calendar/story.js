@@ -14,7 +14,7 @@ const CalendarDemo = withInfo('Full width calendar')(() =>
 
 
 
-const CalendarStory = storiesOf('Global/Data Display/Calendar', module)
+const CalendarStory = storiesOf('Global/Data Entry/Calendar', module)
   .add('Usage', CalendarDemo);
 
 export default CalendarStory;

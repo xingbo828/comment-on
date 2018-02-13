@@ -3,6 +3,7 @@ import { bool, node, func } from 'prop-types';
 import Spin from '../Spin';
 import {
   CardContainer,
+  ChildrenContainer,
   PrimaryCardAction
 } from './Styled';
 
@@ -10,9 +11,9 @@ const { SpinContainer } = Spin;
 
 const Card = ({ loading, onClick, children, primaryAction, style }) => {
   return(
-    <CardContainer style={style} onClick={onClick}>
+    <CardContainer clickable={!!onClick} style={style} onClick={onClick}>
       <SpinContainer loading={loading}>
-        {children}
+        <ChildrenContainer loading={loading}>{children}</ChildrenContainer>
         {primaryAction && <PrimaryCardAction>{primaryAction}</PrimaryCardAction>}
       </SpinContainer>
     </CardContainer>
@@ -26,8 +27,7 @@ Card.propTypes = {
 };
 
 Card.defaultProps = {
-  loading: false,
-  onClick: () => {}
+  loading: false
 };
 
 export default Card;

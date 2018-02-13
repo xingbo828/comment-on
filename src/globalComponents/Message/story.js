@@ -14,10 +14,10 @@ const triggerLoadingMessage = () => {
 const MessageDemo = () => {
   return (
     <div style={{padding: '200px 0 0 50px', width: '500px'}}>
-      <Button primary small onClick={()=>{message.success('this is success message', 3)}}>Success</Button>
+      <Button success small onClick={()=>{message.success('this is success message', 3)}}>Success</Button>
       <Button small onClick={()=>{message.info('this is info message', 3)}}>Info</Button>
       <Button danger small onClick={()=>{message.error('this is error message', 3)}}>Error</Button>
-      <Button small onClick={triggerLoadingMessage}>Loading</Button>
+      <Button primary small onClick={triggerLoadingMessage}>Loading</Button>
     </div>
   );
 }

@@ -1,13 +1,11 @@
 {
   "hosting": {
     "public": "build",
-    "rewrites": [ {
-      "source": "/component-lib",
-      "destination": "/component-lib/index.html"
-    },
+    "rewrites": [
       {
-      "source": "!/component-lib",
-      "destination": "/index.html"
-    } ]
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
   }
 }

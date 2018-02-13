@@ -13,14 +13,19 @@ const transitionStyles = height => {
     height: `${height}px`
   }
 
+  const enteredStyle = {
+    height: 'auto'
+  }
+
   return {
     entering: styles,
-    entered: styles,
+    entered: enteredStyle,
+    exiting: styles
   }
 };
 
-const Reveal = ({ height, children, ...rest }) => (
-  <Transition {...rest}>
+const Reveal = ({ height, children, exit, ...rest }) => (
+  <Transition exit={exit} {...rest}>
     {status => (
       <div
         style={{
@@ -37,6 +42,10 @@ Reveal.propTypes = {
   timeout: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   children: PropTypes.func.isRequired,
+}
+
+Reveal.defaultProps = {
+  exit: true
 }
 
 export default Reveal;

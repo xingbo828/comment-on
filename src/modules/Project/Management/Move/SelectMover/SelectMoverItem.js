@@ -1,6 +1,5 @@
 import React from 'react';
 import { withTheme } from 'styled-components';
-import Badge from '../../../../../globalComponents/Badge';
 import Card from '../../../../../globalComponents/Card';
 import Icon from '../../../../../globalComponents/Icon';
 import { Radio, Button } from '../../../../../globalComponents/Form';
@@ -13,38 +12,31 @@ import {
   MoverInfoBar,
   MoverName,
   MoverPrice,
-  MoverMsg,
+  MoverProfileLink,
   IsCheckedIndicator
 } from './Styled';
 
 const SelectMoverItem = ({
   value,
   moverInfo,
-  unreadMsgsCount,
   checked,
   onCheck,
   history,
   theme
 }) => {
-  const conversationClickHandler = e => {
-    e.stopPropagation();
-    history.push({
-      pathname: `/conversation/${moverInfo.conversation.id}`
-    });
-  };
-  const goToProfilePage = e => {
-    e.preventDefault();
-    history.push({
-      pathname: `/mover/profile/${moverInfo.provider.id}`
-    });
-  };
+  // const goToProfilePage = e => {
+  //   e.preventDefault();
+  //   history.push({
+  //     pathname: `/mover/profile/${moverInfo.provider.id}`
+  //   });
+  // };
 
   const chooseMover = e => {
     e.stopPropagation();
   };
 
   const cardStyle = checked =>
-    !!checked ? { border: `1px solid ${theme.colors.primary}` } : {};
+    !!checked ? { boxShadow: `inset 0 0 0 2px ${theme.colors.primary}` } : {};
 
   const renderPrimaryAction = checked => {
     if (!!checked) return null;
@@ -68,7 +60,6 @@ const SelectMoverItem = ({
     <MoverCard checked={checked}>
       <Card
         style={cardStyle(checked)}
-        onClick={goToProfilePage}
         primaryAction={renderPrimaryAction(checked)}
       >
         <InnerCardContainer>
@@ -78,16 +69,9 @@ const SelectMoverItem = ({
           <MoverName>{moverInfo.provider.businessName}</MoverName>
           <MoverInfoBar>
             <MoverPrice>${moverInfo.estimatedPrice}</MoverPrice>
-            <MoverMsg onClick={conversationClickHandler}>
-              <Badge
-                count={unreadMsgsCount}
-                scale={0.8}
-                offsetX={12}
-                offsetY={5}
-              >
-                <Icon size="lg" icon="comments" />
-              </Badge>
-            </MoverMsg>
+          </MoverInfoBar>
+          <MoverInfoBar>
+            <MoverProfileLink to={`/mover/profile/${moverInfo.provider.id}`}>View profile</MoverProfileLink>
           </MoverInfoBar>
         </InnerCardContainer>
         {checked && (

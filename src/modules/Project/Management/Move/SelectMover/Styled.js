@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const appear = keyframes`
   from {
@@ -19,8 +20,8 @@ export const MoverCard = styled.div`
 `;
 
 export const IsCheckedIndicator = styled.div`
-  width: 36px;
-  height: 36px;
+  width: 47px;
+  height: 47px;
   color: white;
   margin: 0 auto;
   border-radius: 50%;
@@ -54,7 +55,7 @@ export const MoverLogoImg = styled.img`
 
 export const MoverInfoBar = styled.div`
   display: flex;
-  padding: ${props=>props.theme.spaces.base} 0;
+  padding: ${props=>props.theme.spaces.tight} 0;
   justify-content: space-around;
 `;
 
@@ -75,16 +76,26 @@ export const MoverPrice = styled.span`
   }
 `;
 
-export const MoverMsg = styled.span`
-  display: flex;
-  align-items: center;
-  color: ${props=>props.theme.colors.textLight};
-  transition: .3s;
+export const MoverProfileLink = styled(Link)`
+  color: ${props=>props.theme.colors.secondary};
+  text-decoration: none;
+  font-size: .875rem;
+  font-weight: ${props=>props.theme.fontWeights.roman};
+  &:after {
+    transition: .3s;
+    font-family: FontAwesome;
+    content: '\f061';
+    position: relative;
+    left: 5px;
+  }
+
   &:hover {
-    color: ${props=>props.theme.colors.textDark};
-    transform: scale(1.1);
+    &:after {
+      left: 10px;
+    }
   }
 `;
+
 
 export const MoverCardList = styled.ul`
   padding: 0;

@@ -43,9 +43,9 @@ class SingleImageUpload extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.value !== nextProps.value && !this.state.touched) {
-      this.state = {
+      this.setState({
         imageUrl: this.getInputValue(nextProps.value)
-      };
+      });
     }
   }
 

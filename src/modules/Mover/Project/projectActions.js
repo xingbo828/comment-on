@@ -12,9 +12,21 @@ export const getProject = projectId => async dispatch => {
     });
     const projectHttpClient = await createProjectHttpClient();
     const projectData =  await projectHttpClient.getProject(projectId);
+    const mappedConfiguration = Object.assign({}, projectData.configuration, {
+      addresses: {
+        pickUpAddress: {
+          lat: projectData.configuration.addresses.pickUpAddress._latitude,
+          lng: projectData.configuration.addresses.pickUpAddress._longitude,
+        },
+        deliveryAddress: {
+          lat: projectData.configuration.addresses.deliveryAddress._latitude,
+          lng: projectData.configuration.addresses.deliveryAddress._longitude,
+        }
+      }
+    })
     dispatch({
         type: GET_PROJECT_SUCCESS,
-        data: projectData
+        data: Object.assign(projectData, { configuration: mappedConfiguration })
     });
   } catch (error) {
     dispatch({

@@ -93,9 +93,9 @@ class Calendar extends Component {
     const nextMonth = w >= 4 && d <= 14;
     const m = this.state.currentDisplayDate.clone();
     if (prevMonth) {
-      m.date(d).subtract(1, 'month');
+      m.subtract(1, 'month').date(d);
     } else if (nextMonth) {
-      m.date(d).add(1, 'month');
+      m.add(1, 'month').date(d);
     } else {
       m.date(d);
     }
@@ -163,9 +163,7 @@ class Calendar extends Component {
                       e.preventDefault();
                       this.selectDate(d, w);
                     }}
-                  >
-                    {d}
-                  </CalendarCell>
+                  >{d}</CalendarCell>
                 ))}
               </tr>
             ))}

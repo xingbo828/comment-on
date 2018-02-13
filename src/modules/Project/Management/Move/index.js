@@ -1,85 +1,12 @@
-import React from 'react';
-import ProgressPanels from '../../../../globalComponents/ProgressPanels';
-import Grid from '../../../../globalComponents/Grid';
-import Icon from '../../../../globalComponents/Icon';
-import OverviewCard from './OverviewCard';
-import SelectMover from './SelectMover';
-import Confirmation from './Confirmation';
+import { compose } from 'recompose';
+import { withRouter } from 'react-router-dom';
+import { withTheme } from 'styled-components';
 
-const { Container, Row, Col } = Grid;
+import Move from './Move';
 
-const MoveProjectManagement = ({ projectData, selectedProvider }) => {
-  const getAcceptedProviders = (providers) => {
-    if(!providers) {
-      return [];
-    }
-    return providers.filter(p => p.status === 'accept');
-  };
+const enhance = compose(
+  withRouter,
+  withTheme
+);
 
-  const getConfirmedProvider = (providers) => {
-    return providers.find(p => p.status === 'confirmed');
-  };
-
-  const getCurrentStep = (projectData) => {
-    if(projectData.status === 'created') {
-      if(!projectData.receivers) {
-        return 'finding-movers';
-      }
-      const providerAccepted = getAcceptedProviders(projectData.receivers);
-      if(providerAccepted.length > 0) {
-        if(selectedProvider) {
-          return 'share-contact-info';
-        }
-        return 'select-mover';
-      }
-      return 'finding-movers';
-    } else if(projectData.status === 'completed') {
-      return 'confirmation';
-    }
-
-  };
-
-  const renderProvidersList = (providers, projectId) => {
-    const providerAccepted = getAcceptedProviders(projectData.receivers);
-    if(providerAccepted.length > 0){
-      return <SelectMover projectId={projectId} moversInfo={providerAccepted} />
-    }
-    return null;
-  }
-
-  return (
-    <Container>
-      <Row>
-        <Col xm={24} sm={24} md={24} lg={16}>
-          <ProgressPanels current={getCurrentStep(projectData)}>
-            <ProgressPanels.Panel header="completed form" panelKey="completed-form" />
-            <ProgressPanels.Panel
-              inProgressIndexReplacement={<Icon icon="spinner" spin />}
-              header="finding movers"
-              panelKey="finding-movers"
-            />
-            <ProgressPanels.Panel
-              header="select a mover"
-              panelKey="select-mover"
-              tertiaryText={
-                <span>
-                  <Icon icon="spinner" spin />{' '}<strong style={{ marginLeft: 5 }}>{getAcceptedProviders(projectData.receivers).length} found</strong>
-                </span>
-              }
-            >
-              {renderProvidersList(projectData.receivers, projectData.id)}
-            </ProgressPanels.Panel>
-            <ProgressPanels.Panel header="you're done!" panelKey="confirmation">
-              {projectData.status === 'completed' && <Confirmation receiver={getConfirmedProvider(projectData.receivers)}/>}
-            </ProgressPanels.Panel>
-          </ProgressPanels>
-        </Col>
-        <Col xm={24} sm={24} md={24} lg={8}>
-          <OverviewCard configuration={projectData.configuration} />
-        </Col>
-      </Row>
-    </Container>
-  );
-};
-
-export default MoveProjectManagement;
+export default enhance(Move);

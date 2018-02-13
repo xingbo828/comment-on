@@ -9,7 +9,6 @@ const AnimatedCheckmark = ({theme, style}) => {
       <SvgWrapper xmlns="http://www.w3.org/2000/svg" style={style} viewBox="0 0 72 72">
         <g fill="none" stroke={theme.colors.success}>
           <circle
-            viewBox
             cx="36"
             strokeWidth="1"
             cy="36"

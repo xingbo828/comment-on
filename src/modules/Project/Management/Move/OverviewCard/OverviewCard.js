@@ -3,7 +3,7 @@ import moment from 'moment';
 import Card from '../../../../../globalComponents/Card';
 import Map from '../../../../../globalComponents/Map';
 import Icon from '../../../../../globalComponents/Icon';
-import PlaceIdToAddress from '../../../../../globalComponents/GooglePlaceIdToAddress';
+import LatLngToAddress from '../../../../../globalComponents/LatLngToAddress';
 import {
   OverviewCardContainer,
   OverviewCardMeta,
@@ -11,23 +11,26 @@ import {
   OverviewCardMetaItemIcon
 } from './Styled';
 
-const OverviewCard = ({ configuration }) => {
+const OverviewCard = ({ configuration, history, projectId }) => {
   const {
     addresses: { pickUpAddress, deliveryAddress },
     dateTime: { pickUpDate }
   } = configuration;
   const pickUpDateMoment = moment(pickUpDate);
   const direction = [
-    {
-      placeId: pickUpAddress
-    },
-    {
-      placeId: deliveryAddress
-    }
+    pickUpAddress,
+    deliveryAddress
   ];
+
+  const navToProjectSummary = () => {
+    history.push({
+      pathname: `/projects/${projectId}/summary`
+    });
+
+  };
   return (
     <OverviewCardContainer>
-      <Card>
+      <Card onClick={navToProjectSummary}>
         <Map
           style={{ height: 225, width: '100%' }}
           google={window.google}
@@ -46,8 +49,8 @@ const OverviewCard = ({ configuration }) => {
             <OverviewCardMetaItemIcon>
               <Icon icon="circle-o" />
             </OverviewCardMetaItemIcon>
-              <PlaceIdToAddress
-                placeId={pickUpAddress}
+              <LatLngToAddress
+                {...pickUpAddress}
                 google={window.google}
               />
           </OverviewCardMetaItem>
@@ -55,8 +58,8 @@ const OverviewCard = ({ configuration }) => {
             <OverviewCardMetaItemIcon>
               <Icon icon="map-marker" />
             </OverviewCardMetaItemIcon>
-              <PlaceIdToAddress
-                placeId={deliveryAddress}
+              <LatLngToAddress
+                {...deliveryAddress}
                 google={window.google}
               />
           </OverviewCardMetaItem>

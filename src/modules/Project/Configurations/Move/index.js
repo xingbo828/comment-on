@@ -39,7 +39,7 @@ const MoveConfigurations = ({ location, history, match }) => {
     <div>
       <MoveConfigSteps current={getCurrentStep(history)} history={history} />
       <TransitionGroup>
-        <FadeInRouteTransition minHeight={800} key={location.key}>
+        <FadeInRouteTransition minHeight={1800} key={location.key}>
           {() => (
             <SwitchWithException location={location}>
               {

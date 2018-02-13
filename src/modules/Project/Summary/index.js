@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { compose, lifecycle, branch, renderNothing } from 'recompose';
-import Management from './Management';
+import Summary from './Summary';
 import mapImmutablePropsToPlainProps from '../../Common/mapImmutablePropsToPlainProps';
 import scrollToTopOnMount from '../../Common/scrollToTopOnMount';
 import {
@@ -8,7 +8,7 @@ import {
 } from '../projectAction';
 import {
   getMyProjectSelector
-} from './managementReducer';
+} from '../Management/managementReducer';
 
 const mapStateToProps = (state, ownProps) =>  ({
   projectData: getMyProjectSelector(state, ownProps.match.params.projectId).get('projectData'),
@@ -30,12 +30,6 @@ const enhance = compose(
         const projectId = this.props.match.params.projectId;
         this.props.getMyProject(projectId);
       }
-    },
-    componentWillReceiveProps(nextProps) {
-      if(nextProps.match.params.projectId !== this.props.match.params.projectId) {
-        const projectId = nextProps.match.params.projectId;
-        this.props.getMyProject(projectId);
-      }
     }
   }),
   branch(isLoading, renderNothing),
@@ -43,4 +37,4 @@ const enhance = compose(
   scrollToTopOnMount
 );
 
-export default enhance(Management);
+export default enhance(Summary);
