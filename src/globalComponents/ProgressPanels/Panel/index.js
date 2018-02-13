@@ -73,7 +73,7 @@ class ProgressPanel extends Component {
             <PanelHeaderTertiaryText>{tertiaryText}</PanelHeaderTertiaryText>
           )}
         </PanelHeader>
-        <Animation.Reveal timeout={500} height={this.state.height} in={children && status === 'inProgress'}>
+        <Animation.Reveal exit={false} timeout={500} height={this.state.height} in={children && status === 'inProgress'}>
           {() => <PanelBody viewport={viewport} innerRef={container => (this.container = container)}>{children}</PanelBody>}
         </Animation.Reveal>
       </PanelContainer>
