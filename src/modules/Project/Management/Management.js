@@ -1,13 +1,12 @@
 import React from 'react';
 import Grid from '../../../globalComponents/Grid';
 import { Heading } from '../../../globalComponents/Typography';
-import asyncLoad from '../../Common/asyncLoad';
 import PageHero from '../../../globalComponents/Layout/PageHero';
 import Link from '../../../globalComponents/Link';
 import Icon from '../../../globalComponents/Icon';
 import { withRouter } from 'react-router-dom';
-import { compose, withProps, branch, renderNothing } from 'recompose';
-import { Container, HeadingWrapper } from './Styled';
+import { compose } from 'recompose';
+import { Container } from './Styled';
 import Move from './Move';
 
 const ProjectManagement = ({ projectData, selectedProvider, history }) => {

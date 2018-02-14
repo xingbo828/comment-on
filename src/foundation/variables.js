@@ -3,7 +3,7 @@ import { generateMedia } from 'styled-media-query';
 const colors = {
   brand: '#FFA500',
   secondary: '#1d407f',
-  border: '#dee0df',
+  border: '#d3d3d3',
   danger: '#f04134',
   success: '#42b56b',
   textDarkest: '#2d2d2d',
