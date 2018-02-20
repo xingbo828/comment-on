@@ -10,20 +10,17 @@ install:
 before_script:
 - npm run build
 
-deploy:
-  provider: firebase
-  token:
-    secure: $FIREBASE_TOKEN
-  project: "production"
-  message: "Production build"
-  on:
-    branch: master
 
 deploy:
-  provider: firebase
-  token:
-    secure: $FIREBASE_TOKEN
-   message: "Staging build"
-  on:
-    branch: qa
+  - provider: script
+    skip_cleanup: true
+    script: firebase deploy --token $FIREBASE_TOKEN
+    on:
+      branch: qa
+  - provider: script
+    skip_cleanup: true
+    script: firebase use production && firebase deploy --token $FIREBASE_TOKEN
+    on:
+      branch: master
+
 
