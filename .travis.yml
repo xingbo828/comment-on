@@ -10,10 +10,20 @@ install:
 before_script:
 - npm run build
 
-after_success:
-- firebase use production
-- firebase deploy --token $FIREBASE_TOKEN
+deploy:
+  provider: firebase
+  token:
+    secure: $FIREBASE_TOKEN
+  project: "production"
+  message: "Production build"
+  on:
+    branch: master
 
-branches:
-  only:
-    - master
+deploy:
+  provider: firebase
+  token:
+    secure: $FIREBASE_TOKEN
+   message: "Staging build"
+  on:
+    branch: qa
+
