@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "comment-on-85597"
+    "default": "comment-on-85597",
+    "production": "comment-on-prod-8c9aa"
   }
 }

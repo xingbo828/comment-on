@@ -11,9 +11,9 @@ before_script:
 - npm run build
 
 after_success:
+- firebase use production
 - firebase deploy --token $FIREBASE_TOKEN
 
 branches:
   only:
     - master
-    - qa
