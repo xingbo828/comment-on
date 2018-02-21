@@ -44,11 +44,7 @@ injectGlobal`
     font-family: 'Roboto', sans-serif;
     font-weight: normal;
     -webkit-font-smoothing: antialiased;
-    background: ${variables.colors.offWhite};
-
-    ${variables.media.greaterThan('md')`
-      background: white;
-    `}
+    
     * {
       box-sizing: border-box;
     }

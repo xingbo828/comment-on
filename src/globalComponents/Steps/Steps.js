@@ -1,7 +1,8 @@
 import React, { Component, Children } from 'react';
 import { number, oneOf } from 'prop-types';
+import Grid from '../../globalComponents/Grid';
 
-import { StepsContainer } from './Styled';
+import { StepsContainer, StepsInner } from './Styled';
 
 class Steps extends Component {
   constructor(props) {
@@ -40,8 +41,13 @@ class Steps extends Component {
   render() {
     return (
       <StepsContainer>
-        {this.construct()}
+        <Grid.Container>
+          <StepsInner>
+            {this.construct()}
+          </StepsInner>
+        </Grid.Container>
       </StepsContainer>
+
     );
   }
 }

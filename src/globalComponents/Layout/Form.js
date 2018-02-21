@@ -2,40 +2,45 @@ import styled from 'styled-components';
 
 const Form = styled.form`
   display: flex;
-  border-radius: 5px;
+  border-radius: 8px;
   background-color: white;
-  box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.07);
+  box-shadow: ${props=>props.theme.boxShadow.large};
   width: 100%;
-  margin: 0 auto;
+  margin: 0 auto 4rem;
   flex-direction: column;
+
   ${props=>props.theme.media.greaterThan('md')`
-    width: calc(1000%/12);
+    max-width: 768px;
+    margin: 0 auto 6rem;
   `}
 `;
 
 const FormActions = styled.div`
   width: 100%;
-  margin-top: ${props=>props.theme.spaces.base};
   overflow: hidden;
   padding: ${props=>props.theme.spaces.base};
-  > button:not(:last-child) {
-    margin-bottom: ${props=>props.theme.spaces.wide};
-  }
   border-top: 1px solid #e3e3e3;
+
   ${props=>props.theme.media.greaterThan('md')`
     padding: ${props=>props.theme.spaces.wide} ${props=>props.theme.spaces.xWide} 0;
     bottom: 0;
     height:130px;
+    
     > button:not(:last-child) {
       margin-bottom: 0;
     }
   `}
+
+  > button:not(:last-child) {
+    margin-bottom: ${props=>props.theme.spaces.wide};
+  }
 `;
 
 const FormInner = styled.div`
-  padding: ${props=>props.theme.spaces.base} ${props=>props.theme.spaces.tight};
+  padding: 1rem;
+
   ${props=>props.theme.media.greaterThan('md')`
-    padding: ${props=>props.theme.spaces.wide} ${props=>props.theme.spaces.xWide} 0 ;
+    padding: 2rem;
   `}
 `;
 

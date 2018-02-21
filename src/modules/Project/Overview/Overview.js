@@ -1,7 +1,7 @@
 import React from 'react';
 import chunk from 'lodash/chunk';
 import Grid from '../../../globalComponents/Grid';
-import PageHero from '../../../globalComponents/Layout/PageHero';
+import PageHeader from '../../../globalComponents/Layout/PageHeader';
 import Card from '../../../globalComponents/Card';
 import { Heading, Paragraph } from '../../../globalComponents/Typography';
 // import asyncLoad from '../../Common/asyncLoad';
@@ -71,7 +71,7 @@ const ProjectOverview = ({
 
   return (
     <Container>
-      <PageHero>
+      <PageHeader>
         <Grid.Container>
           <Grid.Row>
             <Grid.Col xs={24} sm={24} md={24} lg={24}>
@@ -81,7 +81,7 @@ const ProjectOverview = ({
             </Grid.Col>
           </Grid.Row>
         </Grid.Container>
-      </PageHero>
+      </PageHeader>
       <Grid.Container overlap>
         {renderCards(status, myProjectsData, user)}
       </Grid.Container>
