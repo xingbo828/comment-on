@@ -14,7 +14,7 @@ before_script:
 deploy:
   - provider: script
     skip_cleanup: true
-    script: firebase deploy --token $FIREBASE_TOKEN
+    script: firebase use default && firebase deploy --token $FIREBASE_TOKEN
     on:
       branch: qa
   - provider: script
