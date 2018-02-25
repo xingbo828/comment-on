@@ -3,7 +3,7 @@ import Styled from 'styled-components';
 export const InputContainer = Styled.div`
   display: block;
   padding: 0.5rem 0;
-  margin: 0 0 1rem;
+  margin: 0 0 1.5rem;
 `;
 
 export const Input = Styled.input`
@@ -16,11 +16,17 @@ export const Input = Styled.input`
   outline: none;
   margin: 0;
   border-radius: 0;
+
   &::placeholder {
     color: ${props=>props.theme.colors.textLight};
   }
-  &:focus + div{
+
+  &:focus + div {
     transform: scale(1);
+  }
+
+  &:focus !~ label {
+   color: ${props=>props.theme.colors.primary} !important;
   }
 `;
 
@@ -34,6 +40,10 @@ export const FocusBorder = Styled.div`
 `;
 
 
-export const InputErrorMsg = Styled.span`
-  color: red;
+export const InputErrorMsg = Styled.div`
+  padding: 1rem 0 0;
+  font-size: .75rem;
+  letter-spacing: .05em;
+  font-weight: 400;
+  color: ${props => props.theme.colors.danger};
 `;

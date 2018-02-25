@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter, Route } from 'react-router-dom';
+import { withRouter, Route, Switch } from 'react-router-dom';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
 import AddressStep from './Address';
 import DateStep from './Date';
@@ -8,7 +8,6 @@ import Items from './Items';
 import Overview from './Overview';
 import MoveConfigSteps from './Shared/MoveConfigSteps';
 import FadeInRouteTransition from '../../../Common/RouteTransitions/FadeInRouteTransition';
-import SwitchWithException from '../../../Common/SwitchWithException';
 
 const MoveConfigurations = ({ location, history, match }) => {
   const paths = [
@@ -41,7 +40,7 @@ const MoveConfigurations = ({ location, history, match }) => {
       <TransitionGroup>
         <FadeInRouteTransition minHeight={1800} key={location.key}>
           {() => (
-            <SwitchWithException location={location}>
+            <Switch location={location}>
               {
                 paths.map(p =>
                   <Route
@@ -51,7 +50,7 @@ const MoveConfigurations = ({ location, history, match }) => {
                   />
                 )
               }
-            </SwitchWithException>
+            </Switch>
           )}
         </FadeInRouteTransition>
       </TransitionGroup>

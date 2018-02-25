@@ -9,10 +9,10 @@ const calculateOffset = (offsetRatio) => {
   }
 };
 
-const calculateDisplay = (ratio) => (!isUndefined(ratio) && ratio === 0) ? 'display: none' : '';
+const calculateDisplay = (ratio) => (!isUndefined(ratio) && ratio === 0) && 'display: none';
 
 export default styled.div`
-  padding: 0 15px;
+  padding: 0 1rem;
   ${props=>props.theme.media.lessThan('xs')`
     ${calculateDisplay(props.xs)};
     ${calculateBasis(props.xs)};
