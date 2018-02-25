@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { compose, lifecycle, branch, renderNothing } from 'recompose';
 import Summary from './Summary';
 import mapImmutablePropsToPlainProps from '../../Common/mapImmutablePropsToPlainProps';
@@ -23,6 +24,7 @@ const mapDispatchToProps = dispatch => ({
 const isLoading = props => (props.status === 'UNINIT' || props.status === 'PENDING');
 
 const enhance = compose(
+  withRouter,
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
     componentDidMount() {

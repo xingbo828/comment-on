@@ -1,7 +1,6 @@
 import React from 'react';
-import { withRouter, Redirect } from 'react-router-dom';
+import { withRouter, Redirect, Switch } from 'react-router-dom';
 import ProtectedRoute from '../Common/ProtectedRoute';
-import SwitchWithException from '../Common/SwitchWithException';
 import Profile from './Profile';
 
 
@@ -10,12 +9,12 @@ const Account = ({ match: { isExact } }) => {
     return <Redirect to="/account/profile" />;
   }
   return (
-      <SwitchWithException>
+      <Switch>
         <ProtectedRoute
           path="/account/profile"
           component={Profile}
         />
-      </SwitchWithException>
+      </Switch>
   );
 };
 

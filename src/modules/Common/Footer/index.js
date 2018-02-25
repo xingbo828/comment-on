@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { compose, renderNothing, branch } from 'recompose';
 import { Footer, OrgContainer, List, ListItem, Copyright, ListHeading } from './Styled';
 import Grid from '../../../globalComponents/Grid';
