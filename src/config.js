@@ -17,7 +17,7 @@ const developmentConfig = {
 };
 
 const getConfig = () => {
-  if(process.env.NODE_ENV === 'production') {
+  if(process.env.REACT_APP_ENV === 'production') {
     return productionConfig;
   }
   return developmentConfig;
