@@ -8,10 +8,10 @@ import { Heading, Paragraph } from '../../../../../globalComponents/Typography';
 import ItemsCount from './ItemsCount';
 import configs from './ItemsCount/configs';
 
-const { Form, FormActions, FormHeading, FormInner, PageHeader } = Layout.Form;
+const { Form, FormActions, FormInner } = Layout.Form;
+const { PageHeader } = Layout;
 
 const renderItemsCounts = ({ input, name, label, desc, configs }) => {
-  // debugger;
   return (
     <ItemsCount
       onChange={input.onChange}

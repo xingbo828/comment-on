@@ -1,38 +1,53 @@
 import Styled from 'styled-components';
 
-const HeadingContainer = Styled.div`
-  padding: 6rem 0 4rem;
-  background-color: ${prop=>prop.theme.colors.offWhite};
-`
+export const Divider = Styled.hr`
+  margin: ${props=> props.theme.spaces.wide} 0;
+  border: none;
+  border-top: 1px dashed ${props=>props.theme.colors.border};
+`;
 
-const ProfileContentContainer = Styled.div`
-  display: flex;
-  justify-content: space-between;
+export const ContactInfoContainer = Styled.section`
+  padding-top: ${props=>props.theme.spaces.wide};
+  padding-bottom: ${props=>props.theme.spaces.base};
+`;
 
-  ${props=>props.theme.media.lessThan('md')`
-    flex-direction: column;
+
+export const ContactInfoList = Styled.ul`
+  padding: ${props=>props.theme.spaces.base} 0;
+  margin: 0;
+`;
+
+export const ContactInfoListItem = Styled.li`
+  list-style: none;
+  padding: ${props=>props.theme.spaces.tight} 0;
+`;
+
+export const ContactInfoListItemLink = Styled.a`
+  color: ${props=>props.theme.colors.textDark};
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+export const ImgContainer = Styled.div`
+  max-width: 200px;
+  width: 100%;
+  > img {
+    width: 100%;
+  }
+  ${props=>props.theme.media.greaterThan('lg')`
+    width: 60%;
   `}
 `;
 
-const CommentContainer = Styled.div`
-  margin: 2rem 0;
+export const CrewMemberContainer = Styled.ul`
+  padding: 0;
+  margin: 0;
 `;
 
-const Content = Styled.div`
-  flex: 1 100%;
-  order: 2;
-
-  ${props=>props.theme.media.greaterThan('md')`
-    order: 1;
-    flex: 8;
-    margin-right: 2.75%;
-  `}
+export const CrewMemberItemContainer = Styled.li`
+  list-style: none;
+  padding: ${props=>props.theme.spaces.base} 0;
 `;
 
-
-export {
-  HeadingContainer,
-  ProfileContentContainer,
-  Content,
-  CommentContainer
-}

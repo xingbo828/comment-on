@@ -3,10 +3,10 @@ import { ThemeProvider } from 'styled-components'
 import theme from './foundation/variables';
 import {
   BrowserRouter as Router,
-  Route
+  Route,
+  Switch
 } from 'react-router-dom';
 import ProtectedRoute from './modules/Common/ProtectedRoute';
-import SwitchWithException from './modules/Common/SwitchWithException';
 import GlobalNav from './modules/Common/GlobalNav';
 import Footer from './modules/Common/Footer';
 import asyncLoad from './modules/Common/asyncLoad';
@@ -19,15 +19,15 @@ class App extends Component {
         <ThemeProvider theme={theme}>
           <main>
             <GlobalNav />
-            <SwitchWithException>
+            <Switch>
               <Route exact path="/" component={asyncLoad(() => import('./modules/Home'))} />
               <ProtectedRoute path="/account" component={asyncLoad(() => import('./modules/Account'))} />
               <Route path="/mover" component={asyncLoad(() => import('./modules/Mover'))} />
               <Route path="/projects" component={asyncLoad(() => import('./modules/Project'))} />
               <ProtectedRoute path="/conversation" component={asyncLoad(() => import('./modules/Conversation'))} />
               <Route path="/login" component={asyncLoad(() => import('./modules/Account/Login'))} />
-              <Route path="/404" component={asyncLoad(() => import('./modules/Errors/404'))} />
-            </SwitchWithException>
+              <Route component={asyncLoad(() => import('./modules/Errors/404'))} />
+            </Switch>
             <Footer />
           </main>
         </ThemeProvider>

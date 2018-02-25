@@ -26,12 +26,12 @@ const getBackgroundColor = props => {
 //   return props.theme.colors.secondary;
 // };
 
-const getForeColor = props => {
-  if (props.disabled) {
-    return props.theme.colors.offWhite;
-  }
-  return 'white'
-};
+// const getForeColor = props => {
+//   if (props.disabled) {
+//     return props.theme.colors.offWhite;
+//   }
+//   return 'white'
+// };
 
 const getIconColor = props => {
 
@@ -47,7 +47,7 @@ const getHoverBackgroundColor = props => {
   if (props.ghost) {
     return props.theme.colors.offWhite
   }
-  
+
   if (props.disabled) {
     return '';
   }
@@ -55,7 +55,7 @@ const getHoverBackgroundColor = props => {
   if (props.primary) {
     return props.theme.colors.primaryDark
   }
-   
+
   if (props.danger || props.success) {
     return 'white';
   }
@@ -125,7 +125,7 @@ export const StyledButton = styled.button`
   background-image: none;
   border: 1px solid transparent;
   white-space: nowrap;
-  box-shadow: 
+  box-shadow:
   min-width: 120px;
   user-select: none;
   transition: all .3s cubic-bezier(.645,.045,.355,1);
