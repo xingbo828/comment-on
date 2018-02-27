@@ -38,12 +38,12 @@ const MoverProfile = ({ profile, history }) => (
     <ContactInfoContainer>
       <Container>
         <Row>
-          <Col xs={12} sm={12} md={12} lg={8}>
+          <Col xs={8} sm={10} md={10} lg={8}>
             <ImgContainer>
               <img src={profile.logo} alt="Logo" />
             </ImgContainer>
           </Col>
-          <Col xs={12} sm={12} md={12} lg={8}>
+          <Col xs={16} sm={14} md={14} lg={8}>
             <ContactInfoList>
               <ContactInfoListItem>
                 <ContactInfoListItemLink
@@ -93,7 +93,7 @@ const MoverProfile = ({ profile, history }) => (
             <CrewMemberContainer>
               {profile.crewMembers.map(member => {
                 return (
-                  <CrewMemberItemContainer>
+                  <CrewMemberItemContainer key={member.name}>
                     <Comment photo={member.avatar} name={member.name} copy={member.description} />
                   </CrewMemberItemContainer>
                 );
