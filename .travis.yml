@@ -5,7 +5,7 @@ before_install:
 - npm install -g firebase-tools
 
 install:
-- npm install && cd cloud_functions/functions && npm install
+- npm install && npm install --prefix cloud_functions/functions
 
 before_script:
 - npm run build
