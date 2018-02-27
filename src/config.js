@@ -4,7 +4,8 @@ const productionConfig = {
   databaseURL: "https://comment-on-prod-8c9aa.firebaseio.com",
   projectId: "comment-on-prod-8c9aa",
   storageBucket: "comment-on-prod-8c9aa.appspot.com",
-  messagingSenderId: "555648512993"
+  messagingSenderId: "555648512993",
+  cloudFunctionDomain: "https://us-central1-comment-on-prod-8c9aa.cloudfunctions.net"
 };
 
 const developmentConfig = {
@@ -13,7 +14,8 @@ const developmentConfig = {
   databaseURL: "https://comment-on-85597.firebaseio.com",
   projectId: "comment-on-85597",
   storageBucket: "comment-on-85597.appspot.com",
-  messagingSenderId: "177107431871"
+  messagingSenderId: "177107431871",
+  cloudFunctionDomain: "https://us-central1-comment-on-85597.cloudfunctions.net"
 };
 
 const getConfig = () => {
