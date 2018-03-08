@@ -13,18 +13,6 @@ const getBackgroundColor = props => {
   return props.theme.colors.secondary;
 };
 
-// const getBorderColor = props => {
-//   if (props.disabled) {
-//     return props.theme.colors.border;
-//   } else if (props.primary) {
-//     return props.theme.colors.primary;
-//   } else if(props.danger) {
-//     return props.theme.colors.danger;
-//   } else if(props.success) {
-//     return props.theme.colors.success;
-//   }
-//   return props.theme.colors.secondary;
-// };
 
 const getForeColor = props => {
   if (props.disabled) {
@@ -71,7 +59,7 @@ const getPadding = props => {
     if (props.small) {
       return `
         padding: 0.875rem 1.5rem;
-        margin: 0 -1.5;
+        margin: 0 -1.5rem;
       `;
     }
 
@@ -129,15 +117,20 @@ export const StyledButton = styled.button`
   min-width: 120px;
   user-select: none;
   transition: all .3s cubic-bezier(.645,.045,.355,1);
-  color: ${props=> props.ghost ? getBackgroundColor(props) : 'white'};
-  background-color:  ${props=> props.ghost ? 'transparent' : getBackgroundColor(props)};
+  color: ${props=> props.ghost || props.outline ? getBackgroundColor(props) : 'white'};
+  background-color:  ${props=> props.ghost || props.outline ? 'transparent' : getBackgroundColor(props)};
   cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
   width: ${props=>props.small ? 'auto' : '100%'};
   font-size: ${getFontSize};
 
   ${getPadding}
 
-  ${props => !props.disabled && !props.ghost && `
+  ${props => props.outline && `
+    background: none;
+    border-color: ${getBackgroundColor(props)};
+  `}
+
+  ${props => !props.disabled && !props.ghost && !props.outline && `
     box-shadow: ${props.theme.boxShadow.small};
   `}
 

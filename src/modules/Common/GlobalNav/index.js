@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
-import { compose, withProps, branch, renderNothing } from 'recompose';
+import { compose, withProps, branch, renderNothing, renderComponent } from 'recompose';
 import { auth } from '../../../firebaseClient';
 import isLoggedIn from '../isLoggedIn';
 import AccountNav from './AccountNav';
 import globalNavHiddenList from './globalNavHiddenList.json';
 import NotificationCenter from '../NotificationCenter';
 import { Button } from '../../../globalComponents/Form';
+import UnauthenticatedNav from '../UnauthenticatedNav'
 import Link from '../../../globalComponents/Link';
 
 
@@ -125,6 +126,10 @@ const pathMatchesHiddenList = (pathname) => {
 const NavContainer = compose(
   withRouter,
   isLoggedIn,
+  branch(
+    props => !props.isLoggedIn,
+    renderComponent(UnauthenticatedNav)
+  ),
   withProps(props => ({
     logout
   })),

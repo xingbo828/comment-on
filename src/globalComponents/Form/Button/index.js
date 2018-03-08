@@ -11,6 +11,7 @@ const Button = ({
   primary,
   danger,
   success,
+  outline,
   ...rest
 }) => {
   const getIconPosition = (children) => {
@@ -33,6 +34,7 @@ const Button = ({
       success={success}
       disabled={disabled}
       ghost={ghost}
+      outline={outline}
       {...rest}
     >
       {children}
@@ -47,6 +49,7 @@ Button.propTypes = {
   danger: bool,
   success: bool,
   small: bool,
+  outline: bool,
   /**
    * make background transparent and invert text and border colors
    */

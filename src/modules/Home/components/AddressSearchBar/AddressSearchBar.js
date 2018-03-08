@@ -50,9 +50,12 @@ const AddressSearchBar = ({
           </Col>
           <Col xs={24} sm={24} md={24} lg={6}>
           <InputWrapper>
-            <Button primary icon="arrow-right" disabled={pristine || submitting || !valid}>
-              Get Started<Icon icon="magic" />
+            <Button primary disabled={pristine || submitting || !valid}>
+              Get Started
             </Button>
+            {/* <Button primary disabled={pristine || submitting || !valid}>
+              Get Started
+            </Button> */}
           </InputWrapper>
           </Col>
         </Row>
