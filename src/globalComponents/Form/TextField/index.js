@@ -26,7 +26,7 @@ class TextField extends React.Component {
   }
 
   render() {
-    const { label, type, autoComplete, placeholder, input, meta: { touched, error, warning }} = this.props;
+    const { label, type, autoComplete, placeholder, input, meta: { touched, error }} = this.props;
 
     return (
       <InputContainer>

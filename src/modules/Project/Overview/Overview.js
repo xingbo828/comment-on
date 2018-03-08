@@ -6,7 +6,7 @@ import Card from '../../../globalComponents/Card';
 import { Heading, Paragraph } from '../../../globalComponents/Typography';
 // import asyncLoad from '../../Common/asyncLoad';
 import MoveCard from './MoveCard';
-import { Container, CardContainer } from './Styled';
+import { CardContainer } from './Styled';
 
 // const getTypedProjectManagement = (type) => {
 //   switch (type) {
@@ -28,11 +28,11 @@ const ProjectOverview = ({
   const renderUnLoadedProjectCards = projects => {
     const projectChunks = chunk(projects, 3);
     return projectChunks.map((projectChunk, index) => (
-      <Grid.Row key={index}>
+      <Grid.Row key={index} className="row">
         {projectChunk.map(p => (
           <Grid.Col key={p.id} xs={24} sm={24} md={8} lg={8}>
             <CardContainer>
-              <Card loading />
+              <Card loading style={{minHeight: 320}}/>
             </CardContainer>
           </Grid.Col>
         ))}
@@ -43,7 +43,7 @@ const ProjectOverview = ({
   const renderLoadedProjectsCards = projects => {
     const projectChunks = chunk(projects, 3);
     return projectChunks.map((projectChunk, index) => (
-      <Grid.Row key={index}>
+      <Grid.Row key={index} className="row">
         {projectChunk.map(p => (
           <Grid.Col key={p.id} xs={24} sm={24} md={8} lg={8}>
             <CardContainer>
@@ -70,8 +70,8 @@ const ProjectOverview = ({
   };
 
   return (
-    <Container>
-      <PageHeader>
+    <div>
+      <PageHeader centered>
         <Grid.Container>
           <Grid.Row>
             <Grid.Col xs={24} sm={24} md={24} lg={24}>
@@ -85,7 +85,7 @@ const ProjectOverview = ({
       <Grid.Container overlap>
         {renderCards(status, myProjectsData, user)}
       </Grid.Container>
-    </Container>
+    </div>
   );
 };
 

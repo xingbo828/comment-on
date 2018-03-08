@@ -11,7 +11,7 @@ import Grid from '../../../../../globalComponents/Grid';
 import DeliveryDateSelection from './DeliveryDateSelection';
 import PageHeader from '../../../../../globalComponents/Layout/PageHeader';
 
-const { Form, FormActions, FormHeading, FormInner } = Layout.Form;
+const { Form, FormActions, FormInner } = Layout.Form;
 
 const renderDateSelection = ({ input, label }) => {
   return (

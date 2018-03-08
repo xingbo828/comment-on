@@ -15,7 +15,7 @@ const Container = Styled.header`
 `
 const PageHeader = ({ centered, children }) => {
   return (
-    <Container centered>
+    <Container centered={centered}>
       {children}
     </Container>
   )

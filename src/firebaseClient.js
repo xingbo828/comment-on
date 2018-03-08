@@ -4,16 +4,10 @@ import 'firebase/auth';
 import 'firebase/storage';
 import 'firebase/firestore';
 
-const config = {
-  apiKey: "AIzaSyD-_qTEnH7-6KSLKtCPHLgdodwBTS45xus",
-  authDomain: "comment-on-85597.firebaseapp.com",
-  databaseURL: "https://comment-on-85597.firebaseio.com",
-  projectId: "comment-on-85597",
-  storageBucket: "comment-on-85597.appspot.com",
-  messagingSenderId: "177107431871"
-};
+import getConfig from './config';
 
-firebase.initializeApp(config);
+
+firebase.initializeApp(getConfig());
 
 export const firebaseInstance = firebase;
 export const auth = firebase.auth();

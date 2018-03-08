@@ -1,7 +1,7 @@
 import React from 'react';
 import Grid from '../../../globalComponents/Grid';
 import { Heading } from '../../../globalComponents/Typography';
-import asyncLoad from '../../Common/asyncLoad';
+// import asyncLoad from '../../Common/asyncLoad';
 import PageHeader from '../../../globalComponents/Layout/PageHeader';
 import Link from '../../../globalComponents/Link';
 import Icon from '../../../globalComponents/Icon';

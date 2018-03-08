@@ -1,4 +1,4 @@
-import React, { Component, Children } from 'react';
+import React, { Component } from 'react';
 
 const isInViewPort = options => WrappedComponent => {
   class InViewPort extends Component {
@@ -18,6 +18,13 @@ const isInViewPort = options => WrappedComponent => {
 
     componentWillUnmount() {
       this.stopObserver(this.node, this.observer);
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+      if(this.state.inViewPort === false && this.state.inViewPort !== nextState.inViewPort) {
+        return true;
+      }
+      return false;
     }
 
     initObserver = () => {
@@ -49,16 +56,18 @@ const isInViewPort = options => WrappedComponent => {
     };
 
     render() {
+      const { inViewPort } = this.state;
       return (
         <div
+          style={{minHeight: options.containerMinHeight}}
           ref={node => {
             this.node = node;
           }}
         >
-          <WrappedComponent
+          {inViewPort && <WrappedComponent
             {...this.props}
             inViewPort={this.state.inViewPort}
-          />
+          />}
         </div>
       );
     }

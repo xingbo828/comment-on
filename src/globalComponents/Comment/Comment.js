@@ -2,7 +2,7 @@
 import React from 'react';
 import Avatar from '../Avatar';
 import Rate from '../Rate';
-import { 
+import {
   ContainerDiv,
   Blockquote,
   AvatarContainer,
@@ -19,11 +19,11 @@ const Comment = ({ photo, stars, name, meta, copy }) => {
     <ContainerDiv>
       <User>
         <AvatarContainer>
-          <Avatar src="https://weneedfun.com/wp-content/uploads/2015/10/Steve-Jobs-Photos-18.jpg" />
+          <Avatar src={photo} size="lg"/>
         </AvatarContainer>
         <NameSpan>{name}</NameSpan>
-        <Context>{meta}</Context>
-        {stars && 
+        {meta && <Context>{meta}</Context>}
+        {stars &&
           <RatingContainer>
             <Rate value={stars} readOnly={true} />
           </RatingContainer>
