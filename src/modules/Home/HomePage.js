@@ -8,7 +8,7 @@ import {
 import { Tile, Tiled } from './components/StepTiles'
 import AddressSearchBar from './components/AddressSearchBar';
 import Grid from '../../globalComponents/Grid';
-import { Heading, Eyebrow, Paragraph } from '../../globalComponents/MarketingTypography';
+import { Heading, Eyebrow } from '../../globalComponents/MarketingTypography';
 
 const HomePage = () => (
   <div>
