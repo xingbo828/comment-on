@@ -10,9 +10,11 @@ import NotificationCenter from '../NotificationCenter';
 import { Button } from '../../../globalComponents/Form';
 import UnauthenticatedNav from '../UnauthenticatedNav'
 import Link from '../../../globalComponents/Link';
+import Logo from '../../../globalComponents/Logo';
 
 
-const fromTheme = (prop) => ({ theme }) => theme.colors[prop]
+
+// const fromTheme = (prop) => ({ theme }) => theme.colors[prop]
 
 const ContextHeaderLink = styled.span`
   padding: 0 1rem 0 0;
@@ -37,19 +39,19 @@ const ContextHeader = styled.div`
   `}
 `;
 
-const Heading = styled.h1`
-  text-decoration: none;
-  flex: 1;
-  display: inline;
-  font-size: 1rem;
-  color: white;
-  margin: 0 1rem 0 0;
-  padding: 0 1rem 0 0;
-  border-right: 1px solid white;
-  font-weight: 800;
-  letter-spacing: .1em;
-  color: ${fromTheme('primary')};
-`;
+// const Heading = styled.h1`
+//   text-decoration: none;
+//   flex: 1;
+//   display: inline;
+//   font-size: 1rem;
+//   color: white;
+//   margin: 0 1rem 0 0;
+//   padding: 0 1rem 0 0;
+//   border-right: 1px solid white;
+//   font-weight: 800;
+//   letter-spacing: .1em;
+//   color: ${fromTheme('primary')};
+// `;
 
 const ContextHeaderLinks = styled.ul`
   flex: 10;
@@ -75,11 +77,19 @@ const ContextHeaderButton = styled.li`
 `;
 
 const NavRoot = styled.nav`
+  position: relative;
+  z-index: 10;
   display: block;
   background: white;
   border: 1px solid ${props=>props.theme.colors.border};
   border-top: none;
 `;
+
+const LogoWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+`
 
 export const Nav = ({ user, isLoggedIn, logout, history }) => {
   const sentToMyMovesPage = (e) => {
@@ -92,7 +102,9 @@ export const Nav = ({ user, isLoggedIn, logout, history }) => {
   return (
     <NavRoot>
       <ContextHeader>
-        <Heading>LOGO</Heading>
+        <LogoWrapper>
+          <Logo />
+        </LogoWrapper>
         <ContextHeaderLinks>
         {isLoggedIn && (
           <div>

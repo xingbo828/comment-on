@@ -5,7 +5,7 @@ import {
   StepsContainer,
   Hero
 } from './Styled';
-import { Tile, Tiled } from './components/StepTiles'
+import { Tiled } from './components/StepTiles'
 import AddressSearchBar from './components/AddressSearchBar';
 import Grid from '../../globalComponents/Grid';
 import { Heading, Eyebrow } from '../../globalComponents/MarketingTypography';

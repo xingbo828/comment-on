@@ -10,7 +10,7 @@ import { Heading, Paragraph } from '../../../../../globalComponents/Typography';
 import PageHeader from '../../../../../globalComponents/Layout/PageHeader';
 
 
-const { Form, FormActions, FormHeading } = Layout.Form;
+const { Form, FormActions } = Layout.Form;
 
 const renderAddressSelection = ({ input, label, desc, ...rest }) => {
   const value = Immutable.Iterable.isIterable(input.value)
@@ -41,7 +41,7 @@ const Address = ({ handleSubmit, pristine, reset, valid, submitting }) => {
           </Paragraph>
         </Grid.Container>
       </PageHeader>
-      <Grid.Container>
+      <Grid.Container overlap>
         <Form style={{overflow: 'hidden'}} onSubmit={handleSubmit}>
           <Field
             component={renderAddressSelection}

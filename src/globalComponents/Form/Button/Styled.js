@@ -13,21 +13,26 @@ const getBackgroundColor = props => {
   return props.theme.colors.secondary;
 };
 
-
-// const getForeColor = props => {
-//   if (props.disabled) {
-//     return props.theme.colors.offWhite;
-//   }
-//   return 'white'
-// };
-
 const getIconColor = props => {
+
+  if (props.disabled) {
+    return 'white';
+  }
 
   if (props.primary) {
     return props => props.theme.colors.primaryLight
   }
 
   return props => props.theme.colors.secondary
+}
+
+const getHoverColor = props => {
+  
+  if (props.outline) {
+    return 'white';
+  }
+
+  return null;
 }
 
 const getHoverBackgroundColor = props => {
@@ -119,9 +124,9 @@ export const StyledButton = styled.button`
   transition: all .3s cubic-bezier(.645,.045,.355,1);
   color: ${props=> props.ghost || props.outline ? getBackgroundColor(props) : 'white'};
   background-color:  ${props=> props.ghost || props.outline ? 'transparent' : getBackgroundColor(props)};
-  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
   width: ${props=>props.small ? 'auto' : '100%'};
   font-size: ${getFontSize};
+  outline: none;
 
   ${getPadding}
 
@@ -141,6 +146,8 @@ export const StyledButton = styled.button`
   &:hover {
     background-color: ${getHoverBackgroundColor};
     border-color: ${getHoverBackgroundColor};
+    color: ${getHoverColor};
+    cursor: pointer;
   }
 
   &:active {

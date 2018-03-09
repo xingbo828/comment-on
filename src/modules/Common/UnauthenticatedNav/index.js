@@ -1,5 +1,6 @@
 import React from 'react'
 import Styled from 'styled-components'
+import { withRouter } from 'react-router-dom';
 import Button from '../../../globalComponents/Form/Button';
 import Sticky from '../../../globalComponents/Sticky';
 import Logo from '../../../globalComponents/Logo';
@@ -50,7 +51,22 @@ const LogoWrapper = Styled.div`
   align-items: center;
 `
 
-const UnauthenticatedNav = () => {
+const UnauthenticatedNav = ({ history }) => {
+
+  const goToLogin = (e) => {
+    e.preventDefault();
+    history.push({
+      pathname: '/login'
+    })
+  };
+
+  const goToConfigure = (e) => {
+    e.preventDefault();
+    history.push({
+      pathname: '/projects/configurations/move/address'
+    })
+  };
+
   return (
     <Sticky>
       <Container>
@@ -58,12 +74,12 @@ const UnauthenticatedNav = () => {
           <Logo />
         </LogoWrapper>
         <Menu>
-          <MenuItem><Button small outline>Login / Sign up</Button></MenuItem>
-          <MenuItem><Button small primary>Get started</Button></MenuItem>
+          <MenuItem><Button small outline onClick={goToLogin}>Login / Sign up</Button></MenuItem>
+          <MenuItem><Button small primary onClick={goToConfigure}>Get started</Button></MenuItem>
         </Menu>
       </Container>
     </Sticky>
   )
 }
 
-export default UnauthenticatedNav
+export default withRouter(UnauthenticatedNav)

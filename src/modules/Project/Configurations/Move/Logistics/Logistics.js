@@ -10,7 +10,7 @@ import WillYouBeAssisting from './WillYouBeAssisting';
 import { Heading, Paragraph } from '../../../../../globalComponents/Typography';
 import PageHeader from '../../../../../globalComponents/Layout/PageHeader';
 
-const { Form, FormActions, FormHeading, FormInner } = Layout.Form;
+const { Form, FormActions, FormInner } = Layout.Form;
 
 const renderResidenceTypeSelection = ({ input, name, label, desc }) => {
   return (
@@ -55,7 +55,7 @@ const Logistics = ({
     <section>
       <PageHeader centered>
         <Grid.Container small>
-          <Heading wrapperTag="h1">Address Information</Heading>
+          <Heading wrapperTag="h1">Logistics</Heading>
           <Paragraph light>
             Contrary to popular belief, Lorem Ipsum is not simply random text. It
             has roots in a piece of classical Latin literature from 45 BC, making
@@ -63,15 +63,7 @@ const Logistics = ({
           </Paragraph>
         </Grid.Container>
       </PageHeader>
-      <Grid.Container>
-        <FormHeading>
-          <Heading wrapperTag="h1">Logistics</Heading>
-          <Paragraph>
-            Contrary to popular belief, Lorem Ipsum is not simply random text. It
-            has roots in a piece of classical Latin literature from 45 BC, making
-            it over 2000 years old.
-          </Paragraph>
-        </FormHeading>
+      <Grid.Container overlap>
         <Form onSubmit={handleSubmit}>
           <FormInner>
             <Field
