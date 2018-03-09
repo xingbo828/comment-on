@@ -78,7 +78,7 @@ const Tiled = ({ children }) => {
       <Summary>
         <Eyebrow wrapperTag="h4" size="md">It's Easy!</Eyebrow>
         <MarketingHeading wrapperTag="h3" size="md">Here's how it works</MarketingHeading>
-        <MarketingParagraph>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </MarketingParagraph>
+        <MarketingParagraph>Here's how we help you find a mover that best fits your moving needs.</MarketingParagraph>
       </Summary>
 
       <Tile>
@@ -89,13 +89,13 @@ const Tiled = ({ children }) => {
 
       <Tile>
         <Number>2</Number>
-        <Heading>Provide us the details</Heading> 
+        <Heading>Get free estimates</Heading> 
         <Paragraph>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </Paragraph> 
       </Tile>
 
       <Tile>
         <Number>3</Number>
-        <Heading>Provide us the details</Heading> 
+        <Heading>Choose your mover</Heading> 
         <Paragraph>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </Paragraph> 
       </Tile>
 

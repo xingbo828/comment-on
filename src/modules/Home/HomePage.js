@@ -24,29 +24,11 @@ const HomePage = () => (
     <Grid.Container>
       <Grid.Row>
         <Grid.Col>
-
           <StepsContainer>
-
-            <Tiled>
-              <Tile>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-
-              </Tile>
-
-              <Tile>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-
-              </Tile>
-
-              <Tile>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-
-              </Tile>
-            </Tiled>
+            <Tiled/>
           </StepsContainer>
+            <Eyebrow wrapperTag="h4" size="md">Service availability</Eyebrow>
+            <Heading wrapperTag="h3" size="md">Where we operate</Heading>
         </Grid.Col>
       </Grid.Row>
     </Grid.Container>
