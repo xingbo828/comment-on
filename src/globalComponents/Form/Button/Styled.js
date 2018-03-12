@@ -13,6 +13,19 @@ const getBackgroundColor = props => {
   return props.theme.colors.secondary;
 };
 
+const getOutlineBorderColor = props => {
+  if (props.disabled) {
+    return props.theme.colors.border;
+  } else if(props.primary) {
+    return props.theme.colors.primaryLight;
+  } else if(props.danger) {
+    return props.theme.colors.danger;
+  } else if(props.success) {
+    return props.theme.colors.success;
+  }
+  return props.theme.colors.secondaryLight;
+};
+
 const getIconColor = props => {
 
   if (props.disabled) {
@@ -36,6 +49,15 @@ const getHoverColor = props => {
 }
 
 const getHoverBackgroundColor = props => {
+
+  if (props.outline) {
+
+    if (props.primary) {
+      return props.theme.colors.primaryLight
+    }
+
+    return props.theme.colors.secondaryLight
+  }
 
   if (props.ghost) {
     return props.theme.colors.offWhite
@@ -132,7 +154,7 @@ export const StyledButton = styled.button`
 
   ${props => props.outline && `
     background: none;
-    border-color: ${getBackgroundColor(props)};
+    border-color: ${getOutlineBorderColor(props)};
   `}
 
   ${props => !props.disabled && !props.ghost && !props.outline && `

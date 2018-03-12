@@ -6,7 +6,7 @@ const Container = Styled.header`
   background-color: ${props=>props.theme.colors.offWhite};
 
   ${props=>props.theme.media.greaterThan('md')`
-    padding: 6rem 0;
+    padding: 6rem 0 2rem;
   `}
 
   ${props=>props.centered && `

@@ -13,7 +13,7 @@ const colors = {
   textDark: '#525458',
   textLight: '#a6a7a9',
   // offWhite: '#f8f8f8',
-  offWhite: '#F4F5F7',
+  offWhite: '#f4f6f9',
   darkOffWhite: '#ecedf2',
   primaryDark: '#f6820c',
   primaryLight: '#FFD17B',

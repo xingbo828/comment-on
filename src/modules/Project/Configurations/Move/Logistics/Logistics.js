@@ -70,18 +70,21 @@ const Logistics = ({
               component={renderResidenceTypeSelection}
               name="residenceType"
               label="Pick-up residence"
+              desc="Choose the option that best describes the pick-up space"
             />
 
             <Field
               component={renderDeliveryAccess}
               name="deliveryAccess"
               label="Delivery access"
+              desc="How will the mover access the pick-up space"
             />
 
             <Field
               component={renderAbleToAssist}
               name="ableToAssist"
               label="Will you be assisting?"
+              desc="Would you like to assist with moving items"
             />
           </FormInner>
           <FormActions>

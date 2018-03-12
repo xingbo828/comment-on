@@ -5,12 +5,12 @@ export const CardContainer = styled.div`
   transition: ${props=>props.clickable ? 'transform 150ms ease-out': 'none' };
   margin: 0;
   padding: 0;
-  border-radius: 2px;
+  border-radius: 4px;
   position: relative;
   cursor: ${props=>props.clickable ? 'pointer': 'default' };
   width: 100%;
   min-height: 200px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.14);
+  box-shadow: ${props=>props.theme.boxShadow.large};
   &:hover {
     transform: ${props=>props.clickable ? 'scale(1.02)': 'none' };
   }

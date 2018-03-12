@@ -48,7 +48,7 @@ const MoveProjectManagement = ({ projectData, theme, history }) => {
 
   const current = getCurrentStep(projectData);
   return (
-    <Container>
+    <Container overlap>
       <Row>
         <Col xm={24} sm={24} md={24} lg={16}>
           <ProgressPanels current={current}>

@@ -45,12 +45,10 @@ const ProjectManagement = ({ projectData, selectedProvider, history }) => {
           </Grid.Row>
         </Grid.Container>
       </PageHeader>
-      <Grid.Container overlap>
-        <TypedProjectManagement
-          selectedProvider={selectedProvider}
-          projectData={projectData}
-        />
-      </Grid.Container>
+      <TypedProjectManagement
+        selectedProvider={selectedProvider}
+        projectData={projectData}
+      />
     </Container>
   );
 };

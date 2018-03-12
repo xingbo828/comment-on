@@ -8,7 +8,7 @@ const Heading = ({ className, wrapperTag, children, underline, theme, size }) =>
 
 
   const HeadingContainer = Styled.div`
-    margin: 2rem 0 1rem;
+    margin: 0 0 1rem;
 
     ${size === 'xl' && `
       font-size: 4rem;
@@ -27,7 +27,7 @@ const Heading = ({ className, wrapperTag, children, underline, theme, size }) =>
     `}
 
     ${size === 'xs' && `
-      margin: 1rem 0;
+      margin: 0 0 1rem;
     `}
   `;
 

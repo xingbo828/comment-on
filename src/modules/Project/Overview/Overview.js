@@ -71,7 +71,7 @@ const ProjectOverview = ({
 
   return (
     <div>
-      <PageHeader centered>
+      <PageHeader>
         <Grid.Container>
           <Grid.Row>
             <Grid.Col xs={24} sm={24} md={24} lg={24}>

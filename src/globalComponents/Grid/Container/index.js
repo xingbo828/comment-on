@@ -8,7 +8,15 @@ export default styled.div`
 
 
   ${props => props.overlap && `
-    margin: -4rem auto;
+    &:before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      left: 0;
+      right: 0;
+      height: 2rem;
+      background: ${props.theme.colors.offWhite};
+    }
   `}
 
   ${props => !props.fluid && `
