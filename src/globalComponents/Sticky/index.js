@@ -8,7 +8,6 @@ import ReactDOM from 'react-dom'
 const Element = Styled.div`
   width: 100%;
   z-index: 99;
-  background: red';
   transition: top .3s;
 `
 
