@@ -92,6 +92,7 @@ const getProviderId = (request) =>{
     // Read the ID Token from cookie.
     idToken = request.cookies && request.cookies.__session;
   }
+
   if(!idToken) {
     return Promise.resolve('');
   }
@@ -134,7 +135,7 @@ const handleAcceptLead = (body, projectId, userData, response) => {
       convoDoc.set({
         project: doc.ref
       });
-      receiver.conversation = convoDoc.ref;
+      receiver.conversation = convoDoc;
 
       if (body.notes) {
         admin.firestore().collection('messages').add({
@@ -146,12 +147,13 @@ const handleAcceptLead = (body, projectId, userData, response) => {
           type: constants.message_type.text
         });
       }
+      console.log(data);
       return doc.ref.set(data);
 
     }).then(()=>{
       response.json({status: 'success'});
     }).catch((err) => {
-      return response.status(400).json({error: err.toString()});
+      return response.status(400).json({error: err.toString(), stack: err.stack});
     });
   }
   return response.status(400).json({error: 'missing price'});
