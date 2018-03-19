@@ -20,46 +20,70 @@ app.use((err, req, res, next) => {
   }
 });
 
+app.get('/', (request, response) => {
+  return getProviderId(request)
+    .then(userData => {
+      const projectRef = admin.firestore().collection('projects');
+      return projectRef.where(`receivers.${userData.moverId}.exist`, '==', true).get()
+        .then((projects) => {
+
+          const resultPromise = projects.docs.map(project => {
+            return processProject(project, userData);
+          });
+          return Promise.all(resultPromise);
+        });
+    }).then((result) => {
+      console.log(result);
+      response.json(result);
+    }).catch((err) => {
+      console.log(err);
+    });
+});
+
+const processProject = (projectRef, moverData) => {
+  const data = projectRef.data();
+  if (!data) {
+    return Promise.reject('invalid project');
+  }
+  data.receiver = data.receivers[moverData.moverId];
+  delete data.receivers;
+
+  if (!data.receiver) {
+    return Promise.reject('invalid provider');
+  }
+  data.receiver.provider = data.receiver.provider.id;
+  const ownerId = data.owner;
+  return admin.firestore().collection('users').doc(ownerId).get()
+    .then(ownerData => {
+      ownerData = ownerData.data();
+      data.owner = {
+        displayName: ownerData.displayName
+      };
+      if (data.status === constants.project_status.completed) {
+        if (data.receiver.status === constants.receiver_status.confirmed) {
+          data.owner.email = ownerData.email;
+          data.owner.phone = ownerData.phoneNumber;
+        } else {
+          data.status = constants.project_status.rejected;
+        }
+      }
+
+      return data;
+    });
+};
+
 app.get('/:projectId', (request, response) => {
   const projectId = request.params.projectId;
   return getProviderId(request)
-  .then(userData => {
-    return admin.firestore().collection('projects').doc(projectId).get().then((doc) => {
-      const data = doc.data();
-      if (!data) {
-        return Promise.reject('invalid project');
-      }
-      data.receiver = data.receivers[userData.moverId];
-      delete data.receivers;
-
-      if (!data.receiver) {
-        return Promise.reject('invalid provider');
-      }
-      data.receiver.provider = data.receiver.provider.id;
-      const ownerId = data.owner;
-      return admin.firestore().collection('users').doc(ownerId).get()
-      .then(ownerData => {
-        ownerData = ownerData.data();
-        data.owner = {
-          displayName: ownerData.displayName
-        };
-        if (data.status === constants.project_status.completed) {
-          if (data.receiver.status === constants.receiver_status.confirmed) {
-            data.owner.email = ownerData.email;
-            data.owner.phone = ownerData.phoneNumber;
-          } else {
-            data.status = constants.project_status.rejected;
-          }
-        }
-
-        return data;
+    .then(userData => {
+      return admin.firestore().collection('projects').doc(projectId).get().then((doc) => {
+        return processProject(doc, userData);
+      }).then((data)=>{
+        response.json(data);
+      }).catch((err) => {
+        return response.status(400).json({error: err.message || err});
       });
-    }).then((data)=>{
-      response.json(data);
-    }).catch((err) => {
-      return response.status(400).json({error: err.message || err});
     });
-  });
 });
 
 app.put('/:projectId/', (request, response) => {
@@ -69,13 +93,13 @@ app.put('/:projectId/', (request, response) => {
     return response.status(400).json({error: 'missing action'});
   }
   switch(body.action) {
-    case 'accept':
-      return getProviderId(request)
+  case 'accept':
+    return getProviderId(request)
       .then( data => {
         return handleAcceptLead(body, projectId, data, response);
       });
-    case 'reject':
-      return getProviderId(request)
+  case 'reject':
+    return getProviderId(request)
       .then(data => {
         return handleRejectLead(body, projectId, data, response);
       });
@@ -97,20 +121,20 @@ const getProviderId = (request) =>{
     return Promise.resolve('');
   }
   return admin.auth().verifyIdToken(idToken)
-  .then((decodedToken) => {
-    const uid = decodedToken.uid;
-    return admin.firestore().collection('users').doc(uid).get();
-  })
-  .then((user) => {
-    return {
-      moverId: user.data().moverId,
-      userId: user.id
-    };
-  })
-  .catch((error)=> {
-    console.log(error);
-    return Promise.resolve('');
-  });
+    .then((decodedToken) => {
+      const uid = decodedToken.uid;
+      return admin.firestore().collection('users').doc(uid).get();
+    })
+    .then((user) => {
+      return {
+        moverId: user.data().moverId,
+        userId: user.id
+      };
+    })
+    .catch((error)=> {
+      console.log(error);
+      return Promise.resolve('');
+    });
 };
 
 const handleAcceptLead = (body, projectId, userData, response) => {
