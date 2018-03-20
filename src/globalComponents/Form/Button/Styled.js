@@ -146,7 +146,6 @@ export const StyledButton = styled.button`
   transition: all .3s cubic-bezier(.645,.045,.355,1);
   color: ${props=> props.ghost || props.outline ? getBackgroundColor(props) : 'white'};
   background-color:  ${props=> props.ghost || props.outline ? 'transparent' : getBackgroundColor(props)};
-  width: ${props=>props.small ? 'auto' : '100%'};
   font-size: ${getFontSize};
   outline: none;
 

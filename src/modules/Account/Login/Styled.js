@@ -12,10 +12,10 @@ const WrapperDiv = Styled.div`
 `;
 
 const InnerDiv = Styled.div`
-  width: 300px;
-  border: 1px solid #d3d3d3;
+  width: 400px;
   padding 2rem;
   border-radius: 3px;
+  box-shadow: ${props=>props.theme.boxShadow.large};
   text-align: center;
 `;
 
@@ -32,6 +32,7 @@ const FacebookButton = Styled.button`
   border-radius: 2px;
   position: relative;
   overflow: hidden;
+  box-shadow: ${props=>props.theme.boxShadow.small};
 
   &:before {
     width: 50px;
@@ -61,6 +62,7 @@ const GoogleButton = Styled.button`
   text-align: center;
   position: relative;
   border-radius: 2px;
+  box-shadow: ${props=>props.theme.boxShadow.small};
 
   &:before {
     width: 50px;
@@ -80,7 +82,7 @@ const GoogleButton = Styled.button`
 const StyledH1 = Styled.h1`
   position: relative;
   font-size: 1rem;
-  margin: 4rem 0 2rem;
+  margin: 0 0 2rem;
   z-index: 3;
 
   &:after {
@@ -93,7 +95,7 @@ const StyledH1 = Styled.h1`
     top: .5rem;
     width: 100px;
     z-index: -1;
-    left: 100px;
+    left: 117px;
   }
 
   &:before {
@@ -117,11 +119,16 @@ const LogoPlaceholder = Styled.div`
   margin: 2rem 0 0;
 `;
 
+const LogoWrapper = Styled.div`
+  margin: 2rem 0 3rem;
+`
+
 export {
     WrapperDiv,
     FacebookButton,
     GoogleButton,
     StyledH1,
     LogoPlaceholder,
-    InnerDiv
+    InnerDiv,
+    LogoWrapper
 };

@@ -2,12 +2,13 @@ import React from 'react';
 import {
   Banner,
   InnerContainer,
-  StepsContainer,
+  SectionContainer,
   Hero
 } from './Styled';
 import { Tiled } from './components/StepTiles'
 import AddressSearchBar from './components/AddressSearchBar';
 import Grid from '../../globalComponents/Grid';
+import ServiceLocation from '../../globalComponents/ServiceLocation';
 import { Heading, Eyebrow } from '../../globalComponents/MarketingTypography';
 
 const HomePage = () => (
@@ -24,11 +25,14 @@ const HomePage = () => (
     <Grid.Container>
       <Grid.Row>
         <Grid.Col>
-          <StepsContainer>
+          <SectionContainer>
             <Tiled/>
-          </StepsContainer>
-            <Eyebrow wrapperTag="h4" size="md">Service availability</Eyebrow>
-            <Heading wrapperTag="h3" size="md">Where we operate</Heading>
+          </SectionContainer>
+          <SectionContainer>
+            <Eyebrow wrapperTag="h4" centered size="md">Service availability</Eyebrow>
+            <Heading wrapperTag="h3" centered size="md">Where we operate</Heading>
+            <ServiceLocation />
+          </SectionContainer>
         </Grid.Col>
       </Grid.Row>
     </Grid.Container>

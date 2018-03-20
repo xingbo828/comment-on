@@ -3,11 +3,15 @@ import Styled from 'styled-components';
 import { withTheme } from 'styled-components';
 
 
-const MarketingHeading = ({ className, wrapperTag, children, theme, size }) => {
+const MarketingHeading = ({ className, wrapperTag, children, theme, size, centered }) => {
 
 
   const HeadingContainer = Styled.div`
     margin: 0 0 1rem;
+
+    ${centered && `
+      text-align: center;
+    `}
   `;
 
   const Tag = Styled[wrapperTag]`

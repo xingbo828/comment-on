@@ -2,13 +2,15 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import includes from 'lodash/includes';
 import {isProfileCompleted} from '../utils';
+import Logo from '../../../globalComponents/Logo';
 import {
   WrapperDiv,
   FacebookButton,
   GoogleButton,
   StyledH1,
   LogoPlaceholder,
-  InnerDiv
+  InnerDiv,
+  LogoWrapper
 } from './Styled';
 
 const Login = ({ location, account, facebookLogin, googleLogin, logout }) => {
@@ -26,7 +28,9 @@ const Login = ({ location, account, facebookLogin, googleLogin, logout }) => {
     return (
       <WrapperDiv>
         <InnerDiv>
-          <LogoPlaceholder>Logo Placeholder</LogoPlaceholder>
+          <LogoWrapper>
+            <Logo />
+          </LogoWrapper>
           <StyledH1>Login with</StyledH1>
           <FacebookButton onClick={facebookLogin}>Facebook</FacebookButton>
           <GoogleButton onClick={googleLogin}>Google</GoogleButton>

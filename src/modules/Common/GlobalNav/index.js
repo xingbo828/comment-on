@@ -112,7 +112,7 @@ export const Nav = ({ user, isLoggedIn, logout, history }) => {
               <Button small onClick={sentToMyMovesPage}>My moves</Button>
             </ContextHeaderButton>
             <ContextHeaderLink>
-              <Link secondary onClick={sentToMyMovesPage}>My moves</Link>
+              <Link inline secondary onClick={sentToMyMovesPage}>My moves</Link>
             </ContextHeaderLink>
           </div>
         )}
@@ -139,16 +139,16 @@ const NavContainer = compose(
   withRouter,
   isLoggedIn,
   branch(
+    props => pathMatchesHiddenList(props.location.pathname),
+    renderNothing
+  ),
+  branch(
     props => !props.isLoggedIn,
     renderComponent(UnauthenticatedNav)
   ),
   withProps(props => ({
     logout
-  })),
-  branch(
-    props => pathMatchesHiddenList(props.location.pathname),
-    renderNothing
-  )
+  }))
 )(Nav);
 
 export default NavContainer;

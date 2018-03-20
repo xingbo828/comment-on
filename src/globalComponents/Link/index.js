@@ -9,6 +9,10 @@ const Link = Styled.a`
   cursor: pointer;
   transition: .3s;
 
+  ${props => props.inline && `
+    display: inline;
+  `}
+
   ${props => props.secondary && `
     color: ${props.theme.colors.secondary};
   `}

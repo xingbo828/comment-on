@@ -17,11 +17,19 @@ const Form = styled.form`
 
 const FormActions = styled.div`
   width: 100%;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
   overflow: hidden;
   padding: ${props=>props.theme.spaces.base};
   border-top: 1px solid #e3e3e3;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: white;
 
   ${props=>props.theme.media.greaterThan('md')`
+    position: static;
     padding: ${props=>props.theme.spaces.wide} ${props=>props.theme.spaces.xWide} 0;
     bottom: 0;
     height:130px;
@@ -31,16 +39,16 @@ const FormActions = styled.div`
     }
   `}
 
-  > button:not(:last-child) {
-    margin-bottom: ${props=>props.theme.spaces.wide};
-  }
+  // > button:not(:last-child) {
+  //   margin-bottom: ${props=>props.theme.spaces.wide};
+  // }
 `;
 
 const FormInner = styled.div`
   padding: 1rem;
 
   ${props=>props.theme.media.greaterThan('md')`
-    padding: 2rem;
+    padding: 4rem;
   `}
 `;
 

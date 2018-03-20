@@ -3,11 +3,15 @@ import Styled from 'styled-components';
 import { withTheme } from 'styled-components';
 
 
-const Eyebrow = ({ className, wrapperTag, children, theme, size }) => {
+const Eyebrow = ({ className, wrapperTag, children, theme, size, centered }) => {
 
 
   const EyebrowContainer = Styled.div`
     margin: 0 0 .5rem;
+
+    ${centered && `
+      text-align: center;
+    `}
   `;
 
   const Tag = Styled[wrapperTag]`

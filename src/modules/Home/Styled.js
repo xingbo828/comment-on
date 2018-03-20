@@ -40,7 +40,7 @@ export const InnerContainer = styled.div`
 `;
 
 
-export const StepsContainer = styled.div`
-  padding: 20rem 0;
+export const SectionContainer = styled.div`
+  margin: 10rem 0;
 `
 
