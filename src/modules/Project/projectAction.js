@@ -9,6 +9,8 @@ export const addProject = (projectType, configuration) => async dispatch => {
   const uid = auth.currentUser.uid;
   const configurationWithGeoPoint = Object.assign({}, configuration, {
     addresses: {
+      formattedPickUpAddress: configuration.addresses.pickUpAddress.formattedAddress,
+      formattedDeliveryAddress: configuration.addresses.deliveryAddress.formattedAddress,
       pickUpAddress: new firebaseInstance.firestore.GeoPoint(configuration.addresses.pickUpAddress.lat, configuration.addresses.pickUpAddress.lng),
       deliveryAddress:  new firebaseInstance.firestore.GeoPoint(configuration.addresses.deliveryAddress.lat, configuration.addresses.deliveryAddress.lng),
     }
