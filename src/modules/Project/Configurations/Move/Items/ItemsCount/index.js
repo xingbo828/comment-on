@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import { array, string, object, func } from 'prop-types';
 import camelCase from 'lodash/camelCase';
 import reduce from 'lodash/reduce';
-import { Select } from '../../../../../../globalComponents/Form';
+import { Select, Legend } from '../../../../../../globalComponents/Form';
 import {
   StyledContainer,
-  Label,
   StyledItems,
-  StyledItem,
-  Desc
+  StyledItem
 } from './Styled';
 
 class ItemsCount extends Component {
@@ -68,15 +66,12 @@ class ItemsCount extends Component {
     );
   }
   render() {
-    const { label, desc, configs } = this.props;
+    const { label, configs } = this.props;
     return (
       <StyledContainer>
-        <Label>
+        <Legend>
           {label}
-        </Label>
-        {desc && <Desc>
-          {desc}
-        </Desc>}
+        </Legend>
         <StyledItems>
           {configs.map(c => this.renderChild(c))}
         </StyledItems>

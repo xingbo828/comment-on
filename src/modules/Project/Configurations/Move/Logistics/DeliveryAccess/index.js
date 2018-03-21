@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { func, string } from 'prop-types';
-import { Radio, Select } from '../../../../../../globalComponents/Form';
+import { Select, Legend } from '../../../../../../globalComponents/Form';
+import { RadioList, RadioListItem } from '../../../../../../globalComponents/Form/RadioNew';
 import Animation from '../../../../../../globalComponents/Animation';
 import { stairsConfig, elevatorNoStairConfig } from './configs';
-import { StyledContainer, Label, SelectContainer } from './Styled';
+import { StyledContainer } from './Styled';
 class DeliveryAccess extends Component {
   constructor(props) {
     super(props);
@@ -45,37 +46,38 @@ class DeliveryAccess extends Component {
     const { value, hasStairs } = this.state;
     return (
       <StyledContainer>
-        <Label>{label}</Label>
-        <Radio.Radio
-          label="Stairs"
-          value="stairs"
-          checked={hasStairs === true}
-          onCheck={this.selectStairs}
-        />
-        <Animation.Reveal timeout={300} height={50} in={hasStairs}>
-          {() => (
-            <SelectContainer>
-              <Select
-                label="Floors"
-                value={value}
-                name="Floors"
-                onChange={this.onOptionSelect}
-              >
-                {this.stairsConfig.map(c => (
-                  <option key={c.value} value={c.value}>
-                    {c.label}
-                  </option>
-                ))}
-              </Select>
-            </SelectContainer>
-          )}
-        </Animation.Reveal>
-        <Radio.Radio
-          label={this.elevatorNoStairConfig.label}
-          value={this.elevatorNoStairConfig.value}
-          checked={hasStairs === false}
-          onCheck={this.selectStairs}
-        />
+        <Legend>{label}</Legend>
+        <RadioList>
+          <RadioListItem
+            label="Stairs"
+            value="stairs"
+            checked={hasStairs === true}
+            onCheck={this.selectStairs}
+          >
+            <Animation.Reveal timeout={300} height={50} in={hasStairs}>
+              {() => (
+                <Select
+                  label="Floors"
+                  value={value}
+                  name="Floors"
+                  onChange={this.onOptionSelect}
+                >
+                  {this.stairsConfig.map(c => (
+                    <option key={c.value} value={c.value}>
+                      {c.label}
+                    </option>
+                  ))}
+                </Select>
+              )}
+            </Animation.Reveal>
+          </RadioListItem>
+          <RadioListItem
+            label={this.elevatorNoStairConfig.label}
+            value={this.elevatorNoStairConfig.value}
+            checked={hasStairs === false}
+            onCheck={this.selectStairs}
+          />
+        </RadioList>
       </StyledContainer>
     );
   }

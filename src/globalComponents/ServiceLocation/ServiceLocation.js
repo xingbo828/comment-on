@@ -4,8 +4,10 @@ import { withTheme } from 'styled-components'
 import {
   ProvinceHeading,
   CityList,
-  City
+  City,
+  ProvinceDetails
 } from './Styled'
+import availability from './availability.json'
 
 
 class ServiceLocation extends React.Component {
@@ -13,27 +15,48 @@ class ServiceLocation extends React.Component {
   constructor(props) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
+    this.mapProvinces = this.mapProvinces.bind(this)
+    this.mapCities = this.mapCities.bind(this)
+    this.state = {
+      selectedCity: 'bc'
+    }
   }
 
-  handleClick() {
+  handleClick(selectedCity) {
+    this.setState({selectedCity})
+  }
 
+  mapCities(cities) {
+    return cities.map(({comingSoon, name}) => {      
+      return (
+        <City comingSoon={comingSoon}>{name}</City>
+      )
+    })
+  }
+
+  mapProvinces(provinces) {
+    return Object.values(provinces).map((prov) => {
+      const isVisible = this.state.selectedCity === prov.key
+      return (
+        <ProvinceDetails visible={isVisible}>
+          <ProvinceHeading>{prov.name}</ProvinceHeading>
+          <CityList>
+            {
+              this.mapCities(prov.cities)
+            }
+          </CityList>
+        </ProvinceDetails>
+      )
+    })
   }
 
   render() {
-    const { theme } = this.props
     return (
       <div>
         <ServiceMap clickHandler={this.handleClick}/>
-        <ProvinceHeading>British Columbia</ProvinceHeading>
-        <CityList>
-          <City>Vancouver</City>
-          <City>North Vancouver</City>
-          <City>Burnaby</City>
-          <City>Abbotsford</City>
-          <City>Langley</City>
-          <City>Aldergrove</City>
-          <City>White Rock</City>
-        </CityList>
+        {
+          this.mapProvinces(availability)
+        }
       </div>
     )
   }

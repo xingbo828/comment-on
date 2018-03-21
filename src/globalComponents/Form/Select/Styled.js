@@ -1,15 +1,17 @@
 import styled from 'styled-components';
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  margin: 0 0 1rem;
+`;
 
 export const StyledSelect = styled.select`
+  background: white;
     height: 32px;
     appearance: none;
     outline: 0;
-    border: 2px solid ${props=>props.theme.colors.border};
+    border: 1px solid ${props=>props.theme.colors.border};
     border-radius: 4px;
     box-shadow: none;
-    background-color: transparent;
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iNiIgd2lkdGg9IjEwIj48cG9seWdvbiBwb2ludHM9IjAsMCAxMCwwIDUsNiIgc3R5bGU9ImZpbGw6cmdiYSgwLDAsMCwuMjQpOyIvPjwvc3ZnPg==);
     background-repeat: no-repeat;
     background-position: 40px center;

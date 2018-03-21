@@ -3,8 +3,6 @@ import styled from 'styled-components';
 const Form = styled.form`
   display: flex;
   border-radius: 8px;
-  background-color: white;
-  box-shadow: ${props=>props.theme.boxShadow.large};
   width: 100%;
   margin: 0 auto 4rem;
   flex-direction: column;
@@ -19,9 +17,7 @@ const FormActions = styled.div`
   width: 100%;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
-  overflow: hidden;
-  padding: ${props=>props.theme.spaces.base};
-  border-top: 1px solid #e3e3e3;
+  padding: 0 ${props=>props.theme.spaces.base};
   position: fixed;
   left: 0;
   right: 0;
@@ -30,7 +26,7 @@ const FormActions = styled.div`
 
   ${props=>props.theme.media.greaterThan('md')`
     position: static;
-    padding: ${props=>props.theme.spaces.wide} ${props=>props.theme.spaces.xWide} 0;
+    padding: 0 ${props=>props.theme.spaces.xWide};
     bottom: 0;
     height:130px;
     
@@ -45,10 +41,10 @@ const FormActions = styled.div`
 `;
 
 const FormInner = styled.div`
-  padding: 1rem;
+  padding: 4rem 1rem 0rem;
 
   ${props=>props.theme.media.greaterThan('md')`
-    padding: 4rem;
+    padding: 6rem 4rem 0rem;
   `}
 `;
 
@@ -68,10 +64,14 @@ const FormHeading = styled.div`
   }
 `;
 
+const FormFieldSet = styled.div`
+  margin: 0 0 6rem;
+`
 
 export default {
   Form,
   FormActions,
   FormInner,
-  FormHeading
+  FormHeading,
+  FormFieldSet
 };

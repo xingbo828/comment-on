@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  border-radius: 3px;
+  box-shadow: ${props=>props.theme.boxShadow.large};
   position: relative;
 `;
 
@@ -31,7 +33,6 @@ export const RouteInfoContainer = styled.div`
   `}
   background-color: white;
   color: ${props=>props.theme.colors.primary};
-  border-radius: 3px;
   font-weight: ${props=>props.theme.fontWeights.roman};
   text-align: center;
   display: inline-block;
@@ -46,14 +47,8 @@ export const RouteInfoContainer = styled.div`
 
 
 export const InputsContainer = styled.div`
-  padding-top: ${props=>props.theme.spaces.wide};
-  padding-left: ${props=>props.theme.spaces.tight};
-  padding-right: ${props=>props.theme.spaces.tight};
-  ${props=>props.theme.media.greaterThan('sm')`
-    padding-top: ${props=>props.theme.spaces.wide};
-    padding-left: ${props=>props.theme.spaces.xWide};
-    padding-right: ${props=>props.theme.spaces.xWide};
-  `}
+  padding: 3rem;
+
   position: relative;
   &:before {
     font-family: 'FontAwesome';

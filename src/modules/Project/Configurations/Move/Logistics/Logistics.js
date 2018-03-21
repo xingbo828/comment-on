@@ -7,10 +7,8 @@ import Icon from '../../../../../globalComponents/Icon';
 import ResidenceTypeSelection from './ResidenceTypeSelection';
 import DeliveryAccess from './DeliveryAccess';
 import WillYouBeAssisting from './WillYouBeAssisting';
-import { Heading, Paragraph } from '../../../../../globalComponents/Typography';
-import PageHeader from '../../../../../globalComponents/Layout/PageHeader';
 
-const { Form, FormActions, FormInner } = Layout.Form;
+const { Form, FormActions, FormInner, FormFieldSet } = Layout.Form;
 
 const renderResidenceTypeSelection = ({ input, name, label, desc }) => {
   return (
@@ -53,39 +51,30 @@ const Logistics = ({
 }) => {
   return (
     <section>
-      <PageHeader centered>
-        <Grid.Container small>
-          <Heading wrapperTag="h1">Logistics</Heading>
-          <Paragraph light>
-            Contrary to popular belief, Lorem Ipsum is not simply random text. It
-            has roots in a piece of classical Latin literature from 45 BC, making
-            it over 2000 years old.
-          </Paragraph>
-        </Grid.Container>
-      </PageHeader>
-      <Grid.Container overlap>
+      <Grid.Container>
         <Form onSubmit={handleSubmit}>
           <FormInner>
-            <Field
-              component={renderResidenceTypeSelection}
-              name="residenceType"
-              label="Pick-up residence"
-              desc="Choose the option that best describes the pick-up space"
-            />
-
-            <Field
-              component={renderDeliveryAccess}
-              name="deliveryAccess"
-              label="Delivery access"
-              desc="How will the mover access the pick-up space"
-            />
-
-            <Field
-              component={renderAbleToAssist}
-              name="ableToAssist"
-              label="Will you be assisting?"
-              desc="Would you like to assist with moving items"
-            />
+            <FormFieldSet>
+              <Field
+                component={renderResidenceTypeSelection}
+                name="residenceType"
+                label="Choose the option that best describes the pick-up space"
+              />
+            </FormFieldSet>
+            <FormFieldSet>
+              <Field
+                component={renderDeliveryAccess}
+                name="deliveryAccess"
+                label="How is the delivery space accessed?"
+              />
+            </FormFieldSet>
+            <FormFieldSet>
+              <Field
+                component={renderAbleToAssist}
+                name="ableToAssist"
+                label="Will you be assisting?"
+              />
+            </FormFieldSet>
           </FormInner>
           <FormActions>
             <Button

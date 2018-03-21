@@ -4,12 +4,10 @@ import { Button } from '../../../../../globalComponents/Form';
 import Grid from '../../../../../globalComponents/Grid';
 import Icon from '../../../../../globalComponents/Icon';
 import Layout from '../../../../../globalComponents/Layout';
-import { Heading, Paragraph } from '../../../../../globalComponents/Typography';
 import ItemsCount from './ItemsCount';
 import configs from './ItemsCount/configs';
 
-const { Form, FormActions, FormInner } = Layout.Form;
-const { PageHeader } = Layout;
+const { Form, FormActions, FormInner, FormFieldSet } = Layout.Form;
 
 const renderItemsCounts = ({ input, name, label, desc, configs }) => {
   return (
@@ -33,42 +31,33 @@ const Items = ({
 }) => {
   return (
     <section>
-      <PageHeader centered>
-        <Grid.Container small>
-          <Heading wrapperTag="h1">Items</Heading>
-          <Paragraph light>
-            Contrary to popular belief, Lorem Ipsum is not simply random text. It
-            has roots in a piece of classical Latin literature from 45 BC, making
-            it over 2000 years old.
-          </Paragraph>
-        </Grid.Container>
-      </PageHeader>
-      <Grid.Container overlap>
+      <Grid.Container>
         <Form onSubmit={handleSubmit}>
           <FormInner>
-            <Field
-              component={renderItemsCounts}
-              name="speciality"
-              label="Speciality Items"
-              desc="Special items"
-              configs={configs.speciality}
-            />
-
-            <Field
-              component={renderItemsCounts}
-              name="large"
-              label="Large Items"
-              desc="Anything that doesn't fit in a regular size sedan."
-              configs={configs.large}
-            />
-
-            <Field
-              component={renderItemsCounts}
-              name="medium"
-              label="Medium Items"
-              desc="Anything that fits in a regular size sedan"
-              configs={configs.medium}
-            />
+            <FormFieldSet>
+              <Field
+                component={renderItemsCounts}
+                name="speciality"
+                label="How many specialty items do you need moved? These items require special care when handling."
+                configs={configs.speciality}
+              />
+            </FormFieldSet>
+            <FormFieldSet>
+              <Field
+                component={renderItemsCounts}
+                name="large"
+                label="How many large sized items do you need moved? Typically items that won't fit in a regular size sedan."
+                configs={configs.large}
+              />
+            </FormFieldSet>
+            <FormFieldSet>
+              <Field
+                component={renderItemsCounts}
+                name="medium"
+                label="How many medium sized items do you need moved? These items should fit in a regular size sedan."
+                configs={configs.medium}
+              />
+            </FormFieldSet>
           </FormInner>
           <FormActions>
             <Button

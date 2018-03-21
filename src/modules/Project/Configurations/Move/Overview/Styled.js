@@ -3,9 +3,13 @@ import { Link } from 'react-router-dom';
 
 export const Section = styled.section`
   padding: ${props=>props.theme.spaces.base} ${props=>props.theme.spaces.tight};
+  background: ${props=>props.theme.colors.offWhite};
+  margin: 0 0 1rem;
+  text-decoration: none;
+
   ${props => {
     if(!props.noBorder) {
-      return `border-bottom: 1px solid ${props.theme.colors.border};`;
+      // return `border-bottom: 1px solid ${props.theme.colors.border};`;
     }
   }}
 

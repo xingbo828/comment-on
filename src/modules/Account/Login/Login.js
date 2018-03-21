@@ -8,7 +8,6 @@ import {
   FacebookButton,
   GoogleButton,
   StyledH1,
-  LogoPlaceholder,
   InnerDiv,
   LogoWrapper
 } from './Styled';

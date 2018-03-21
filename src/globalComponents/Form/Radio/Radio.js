@@ -7,7 +7,7 @@ import {
   StyledRadioReplacement
 } from './Styled';
 
-const Radio = ({ label, value, color, checked = false, onCheck, style={} }) => {
+const Radio = ({ label, description, value, color, checked = false, onCheck, style={} }) => {
   return (
     <StyledLabel style={style}>
       <StyledRadio

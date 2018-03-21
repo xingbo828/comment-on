@@ -5,8 +5,8 @@ import capitalize from 'lodash/capitalize';
 import startCase from 'lodash/startCase';
 import Grid from '../../../../../globalComponents/Grid';
 import Layout from '../../../../../globalComponents/Layout';
-import { Heading, Paragraph } from '../../../../../globalComponents/Typography';
-import { Button, SubLabel, TextArea, TextField } from '../../../../../globalComponents/Form';
+import { Heading } from '../../../../../globalComponents/Typography';
+import { Button, TextArea, TextField, Legend } from '../../../../../globalComponents/Form';
 import Icon from '../../../../../globalComponents/Icon';
 // import PlaceIdToAddress from '../../../../../globalComponents/GooglePlaceIdToAddress';
 import LatLngToAddress from '../../../../../globalComponents/LatLngToAddress';
@@ -22,7 +22,7 @@ import {
   SectionInvalid
 } from './Styled';
 
-const { Form, FormActions, FormHeading, FormInner } = Layout.Form;
+const { Form, FormActions, FormInner, FormFieldSet } = Layout.Form;
 
 const ConfigurationOverview = ({
   loginStatus,
@@ -291,19 +291,23 @@ const ConfigurationOverview = ({
       onChange: onChangeHandler
     };
     return (
-      <Section noBorder>
-        <SectionHeader>
-          <Heading wrapperTag="h2" size="sm">
-            Project Name
-          </Heading>
-        </SectionHeader>
-        <SubLabel>
-            Please give your project a name.
-          </SubLabel>
-        <SectionBody>
-          <TextField input={input} />
-        </SectionBody>
-      </Section>
+      <div>
+        <Legend>Enter a name for your project</Legend>
+        <TextField input={input} />
+      </div>
+      // <Section noBorder>
+      //   <SectionHeader>
+      //     <Heading wrapperTag="h2" size="sm">
+      //       Project Name
+      //     </Heading>
+      //   </SectionHeader>
+      //   <SubLabel>
+      //       Please give your project a name.
+      //     </SubLabel>
+      //   <SectionBody>
+      //     <TextField input={input} />
+      //   </SectionBody>
+      // </Section>
     );
   };
 
@@ -317,35 +321,42 @@ const ConfigurationOverview = ({
       onChange: onChangeHandler
     };
     return (
-      <Section noBorder>
-        <SectionHeader>
-          <Heading wrapperTag="h2" size="sm">
-            Additional Notes
-          </Heading>
-        </SectionHeader>
-        <SubLabel>
-            Please do not enter your personal contact information.
-          </SubLabel>
-        <SectionBody>
-          <TextArea input={input} />
-        </SectionBody>
-      </Section>
+      <div>
+        <Legend>Provide us with any additional notes. This is the place for any additional quetions, concerns or information pertaining to your move you feel we may have missed.</Legend>
+        <TextArea input={input} />
+      </div>
+      // <Section noBorder>
+      //   <SectionHeader>
+      //     <Heading wrapperTag="h2" size="sm">
+      //       Additional Notes
+      //     </Heading>
+      //   </SectionHeader>
+      //   <SubLabel>
+      //       Please do not enter your personal contact information.
+      //     </SubLabel>
+      //   <SectionBody>
+      //     <TextArea input={input} />
+      //   </SectionBody>
+      // </Section>
     );
   };
   return (
     <Grid.Container>
-      <FormHeading>
-        <Heading wrapperTag="h1">Overview</Heading>
-        <Paragraph>Here is an overview of your move.</Paragraph>
-      </FormHeading>
       <Form onSubmit={handleSubmit}>
         <FormInner>
-          {renderAddressSection(rootAddresses, validators.addressesValidator)}
-          {renderdateTimeSection(dateTime, validators.dateTimeValidator)}
-          {renderLogistics(logistics, validators.logisticsValidator)}
-          {renderItemsSection(items)}
-          {renderProjectName(projectName, setProjectName)}
-          {renderAdditionalNoteSection(additionalNotes, setAdditionalNotes)}
+          <FormFieldSet>
+            <Legend>Let's review everything so far. Feel free to go back and make any changes.</Legend>
+            {renderAddressSection(rootAddresses, validators.addressesValidator)}
+            {renderdateTimeSection(dateTime, validators.dateTimeValidator)}
+            {renderLogistics(logistics, validators.logisticsValidator)}
+            {renderItemsSection(items)}
+          </FormFieldSet>
+          <FormFieldSet>
+            {renderProjectName(projectName, setProjectName)}
+          </FormFieldSet>
+          <FormFieldSet>
+            {renderAdditionalNoteSection(additionalNotes, setAdditionalNotes)}
+          </FormFieldSet>
         </FormInner>
         <FormActions>
           {loginStatus === 'AUTHENTICATED' && isCompletedProfile && <Button
@@ -361,7 +372,7 @@ const ConfigurationOverview = ({
               )
             }
           >
-            Submit<Icon icon="arrow-right" />
+            Find a mover <Icon icon="arrow-right" />
           </Button>}
           {loginStatus === 'NOT_AUTHENTICATED' && <Button
             style={{ float: 'right' }}
@@ -376,7 +387,7 @@ const ConfigurationOverview = ({
               )
             }
           >
-            Sign in<Icon icon="sign-in" />
+            Sign in to continue
           </Button>}
           {loginStatus === 'AUTHENTICATED' && !isCompletedProfile && <Button
             style={{ float: 'right' }}
@@ -391,7 +402,7 @@ const ConfigurationOverview = ({
               )
             }
           >
-            Update Profile<Icon icon="sign-in" />
+            Update profile to continue
           </Button>}
           <Button style={{ float: 'left' }} ghost onClick={goBack}>
             <Icon icon="arrow-left" />Back

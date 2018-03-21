@@ -3,13 +3,18 @@ import moment from 'moment';
 import isUndefined from 'lodash/isUndefined';
 import isObject from 'lodash/isObject';
 import Calendar from '../../../../../../globalComponents/Calendar';
-import { Radio } from '../../../../../../globalComponents/Form';
-import Animation from '../../../../../../globalComponents/Animation';
+import { Legend } from '../../../../../../globalComponents/Form'
+import Layout from '../../../../../../globalComponents/Layout';
+import {
+  RadioListItem,
+  RadioList 
+} from '../../../../../../globalComponents/Form/RadioNew';
 import {
   DateTimeSelectionContainer,
-  Label,
-  CalendarContainer
 } from './Styled';
+
+const { FormFieldSet } = Layout.Form;
+
 
 class DeliveryDateSelection extends Component {
   constructor(props, context) {
@@ -53,33 +58,35 @@ class DeliveryDateSelection extends Component {
     const disabledDate = date => date.diff(moment(), 'days') < 1;
     return (
       <DateTimeSelectionContainer>
-        <Label>{label}</Label>
-        <Radio.Radio
-          style={{display: 'block'}}
-          label="Same day delivery"
-          value="true"
-          checked={sameDayDelivery === true}
-          onCheck={this.toggleSameDayDelivery}
-        />
-        <Radio.Radio
-          style={{display: 'block'}}
-          label="A later day"
-          value="false"
-          checked={sameDayDelivery === false}
-          onCheck={this.toggleSameDayDelivery}
-        />
-        {<Animation.Reveal timeout={300} height={this.getCalenderHeight()} in={sameDayDelivery===false}>
-          {() => (
-            <CalendarContainer innerRef={container => (this.calendarContainer = container)}>
-              <Calendar
-                value={isObject(value) ? value : undefined}
-                onChange={onChange}
-                disabledDate={disabledDate}
-              />
-            </CalendarContainer>
-          )}
-        </Animation.Reveal>}
-
+        <FormFieldSet>
+          <Legend>{label}</Legend>
+          <RadioList>
+            <RadioListItem
+              style={{display: 'block'}}
+              label="Same day delivery"
+              value="true"
+              checked={sameDayDelivery === true}
+              onCheck={this.toggleSameDayDelivery}
+            />
+            <RadioListItem
+              style={{display: 'block'}}
+              label="A later day"
+              value="false"
+              checked={sameDayDelivery === false}
+              onCheck={this.toggleSameDayDelivery}
+            />
+          </RadioList>
+        </FormFieldSet>
+        { !sameDayDelivery && 
+          <FormFieldSet>
+            <Legend>What day would you like your items delivered?</Legend>
+            <Calendar
+              value={isObject(value) ? value : undefined}
+              onChange={onChange}
+              disabledDate={disabledDate}
+            />
+          </FormFieldSet>
+        }
       </DateTimeSelectionContainer>
     );
   }

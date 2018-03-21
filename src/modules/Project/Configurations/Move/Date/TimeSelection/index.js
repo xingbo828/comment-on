@@ -1,27 +1,33 @@
 import React from 'react';
-import { Radio } from '../../../../../../globalComponents/Form';
+import { Legend } from '../../../../../../globalComponents/Form'
+import {
+  RadioListItem,
+  RadioList 
+} from '../../../../../../globalComponents/Form/RadioNew';
+
+
 import { GroupWrapper } from './Styled';
-import TimeRangeOption from './TimeRangeOption';
+// import TimeRangeOption from './TimeRangeOption';
 import { MOVING_SEARCH_TIME_RANGE } from '../../../../../../constants';
 
 const SearchTimeRangeSelection = ({ label, value, onChange }) => {
   const renderOptions = options => {
     return options.map(s => (
-      <TimeRangeOption key={s.value} label={s.label} value={s.value} />
+      <RadioListItem icon={s.icon} key={s.value} label={s.label} value={s.value} />
     ));
   };
 
   return (
     <GroupWrapper>
-      <Radio.RadioGroup
-        childType="wild"
+      <Legend>{label}</Legend>
+      <RadioList
         label={label}
         name="vehicle"
         value={value}
         onChange={onChange}
       >
         {renderOptions(MOVING_SEARCH_TIME_RANGE)}
-      </Radio.RadioGroup>
+      </RadioList>
     </GroupWrapper>
   );
 };

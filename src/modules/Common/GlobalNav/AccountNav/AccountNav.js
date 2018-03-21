@@ -13,7 +13,6 @@ import {
   Account,
   Username
 } from './Styled';
-import DropDownTransition from './DropDownTransition';
 
 class AccountNav extends React.Component {
 

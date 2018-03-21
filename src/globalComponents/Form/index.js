@@ -9,6 +9,7 @@ import AddressAutoComplete from './AddressAutoComplete';
 import DateTime from './DateTime';
 import Switch from './Switch';
 import Select from './Select';
+import Legend from './Legend';
 import { Label, SubLabel } from './Label';
 
 export {
@@ -24,5 +25,6 @@ export {
   Select,
   ImgUpload,
   Label,
-  SubLabel
+  SubLabel,
+  Legend
 };

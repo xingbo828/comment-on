@@ -1,5 +1,7 @@
 import React from 'react';
-import { Radio } from '../../../../../../globalComponents/Form';
+import { RadioList, RadioListItem } from '../../../../../../globalComponents/Form/RadioNew';
+import { Legend } from '../../../../../../globalComponents/Form';
+
 import {
   StyledContainer
 } from './Styled';
@@ -9,16 +11,15 @@ const WillYouBeAssisting = ({ onChange, value, label, name, desc }) => {
   const noDesc = `Contrary in literature from 45 BC old.`;
   return (
     <StyledContainer>
-      <Radio.RadioGroup
-        childType="wild"
-        label={label}
+      <Legend>{label}</Legend>
+      <RadioList
         name={name}
         value={value}
         onChange={onChange}
       >
-        <Radio.RadioBlock desc={yesDesc} value="yes" label="Yes" />
-        <Radio.RadioBlock desc={noDesc} value="no" label="No" />
-      </Radio.RadioGroup>
+        <RadioListItem description={yesDesc} value="yes" label="Yes" />
+        <RadioListItem description={noDesc} value="no" label="No" />
+      </RadioList>
     </StyledContainer>
   );
 };

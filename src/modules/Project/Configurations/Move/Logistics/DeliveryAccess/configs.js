@@ -22,6 +22,6 @@ export const stairsConfig =  [
 ];
 
 export const elevatorNoStairConfig = {
-  label: 'Elevator / No stairs',
+  label: 'Elevator',
   value: 'elevator/no-stair'
 };
