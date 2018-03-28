@@ -22,26 +22,25 @@ app.use((err, req, res, next) => {
 
 app.get('/', (request, response) => {
   return getProviderId(request)
-    .then(userData => {
-      const projectRef = admin.firestore().collection('projects');
-      return projectRef.where(`receivers.${userData.moverId}.exist`, '==', true).get()
-        .then((projects) => {
-
-          const resultPromise = projects.docs.map(project => {
-            return processProject(project, userData);
-          });
-          return Promise.all(resultPromise);
-        });
-    }).then((result) => {
-      console.log(result);
-      response.json(result);
-    }).catch((err) => {
-      console.log(err);
-    });
+  .then(userData =>
+    admin.firestore().collection('providers').doc(userData.moverId).get().then(d => ({userData, provider: d.data()}))
+  )
+  .then(({ userData, provider: { projects } }) =>
+    Promise.all(Object.keys(projects).map(key => projects[key].get())).then(projects => ({userData, projects}))
+  )
+  .then(({userData, projects}) => Promise.all(projects.map(p => processProject(p, userData))))
+  .then(result => {
+    response.json(result)
+  })
+  .catch(err => {
+    console.error(err)
+    response.send(err)
+  })
 });
 
 const processProject = (projectRef, moverData) => {
   const data = projectRef.data();
+
   if (!data) {
     return Promise.reject('invalid project');
   }
@@ -117,7 +116,7 @@ const getProviderId = (request) =>{
     idToken = request.cookies && request.cookies.__session;
   }
 
-  if(!idToken) {
+  if(!idToken || !request.headers.provider) {
     return Promise.resolve('');
   }
   return admin.auth().verifyIdToken(idToken)
@@ -125,9 +124,10 @@ const getProviderId = (request) =>{
       const uid = decodedToken.uid;
       return admin.firestore().collection('users').doc(uid).get();
     })
+    // TODO: check if provider belongs to user
     .then((user) => {
       return {
-        moverId: user.data().moverId,
+        moverId: request.headers.provider,
         userId: user.id
       };
     })
