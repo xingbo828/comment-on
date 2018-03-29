@@ -58,7 +58,6 @@ const FooterNav = props => {
 const pathMatchesHiddenList = (pathname) => {
   return footerHiddenList.some(pathItem => {
     const reg = new RegExp(pathItem);
-    console.log(pathname)
     return reg.test(pathname)
   });
 };

@@ -75,7 +75,7 @@ class AccountNav extends React.Component {
           <Username>{this.formatUserName(user.displayName)}&nbsp;&nbsp;<Icon icon="chevron-down" />&nbsp;&nbsp;</Username>
           <Avatar src={user.photoURL} />
         </Account>
-        { active && 
+        { active &&
           <Menu active={active}>
             <DisplayName active={active}>{user.displayName}</DisplayName>
             <MenuList onClick={this.handleClick}>
@@ -90,7 +90,7 @@ class AccountNav extends React.Component {
   }
 }
 
-const mapStateToProps = () => {}
+// const mapStateToProps = () => {}
 
 const mapDispatchToProps = (dispatch) => ({
   toggleMenuActiveState: (isActive) => {
@@ -98,4 +98,4 @@ const mapDispatchToProps = (dispatch) => ({
   }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(AccountNav);
+export default connect(null, mapDispatchToProps)(AccountNav);
