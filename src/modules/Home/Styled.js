@@ -1,27 +1,25 @@
 import styled from 'styled-components';
 
 export const Hero = styled.div`
-  min-height: 400px;
-  height: 100vh;
-  margin-top: -100px;
+  padding: 200px 0 100px;
   width: 100%;
   align-items: center;
   display: flex;
   position: relative;
   z-index: 1;
 
-  div::after {
-    content: "";
-    background: url('https://media.istockphoto.com/vectors/crossroad-graphic-black-white-landscape-sketch-illustration-vector-vector-id623666484') center center no-repeat;
-    background-size: contain;
-    opacity: .004;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    z-index: -1;   
-  }
+  // div::after {
+  //   content: "";
+  //   background: url('https://media.istockphoto.com/vectors/crossroad-graphic-black-white-landscape-sketch-illustration-vector-vector-id623666484') center center no-repeat;
+  //   background-size: contain;
+  //   opacity: .004;
+  //   top: 0;
+  //   left: 0;
+  //   bottom: 0;
+  //   right: 0;
+  //   position: absolute;
+  //   z-index: -1;   
+  // }
 `;
 
 

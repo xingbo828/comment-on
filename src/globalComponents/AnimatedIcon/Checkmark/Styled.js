@@ -19,6 +19,7 @@ const checkmarkCircle = keyframes`
 `;
 
 export const SvgWrapper = styled.svg`
+  margin: 0 0 1rem;
   path {
       animation: ${checkmark} 0.25s ease-in-out 1.2s backwards;
   }

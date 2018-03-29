@@ -2,7 +2,7 @@ import React from 'react'
 import Styled from 'styled-components'
 
 const Container = Styled.header`
-  padding: 4rem 0;
+  padding: 4rem 0 1rem;
   background-color: ${props=>props.theme.colors.offWhite};
 
   ${props=>props.theme.media.greaterThan('md')`

@@ -83,20 +83,20 @@ const Tiled = ({ children }) => {
 
       <Tile>
         <Number>1</Number>
-        <Heading>Provide us the details</Heading> 
-        <Paragraph>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </Paragraph> 
+        <Heading>Tell us about your move</Heading> 
+        <Paragraph>We give you all the tools you need to quickly determine the size and scope of your move.</Paragraph> 
       </Tile>
 
       <Tile>
         <Number>2</Number>
         <Heading>Get free estimates</Heading> 
-        <Paragraph>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </Paragraph> 
+        <Paragraph>We'll provide you with the estimated moving costs from a variety of Movers.</Paragraph> 
       </Tile>
 
       <Tile>
         <Number>3</Number>
         <Heading>Choose your mover</Heading> 
-        <Paragraph>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </Paragraph> 
+        <Paragraph>Once you're happy with your choice, we'll put you in touch. Easy as that!</Paragraph> 
       </Tile>
 
 

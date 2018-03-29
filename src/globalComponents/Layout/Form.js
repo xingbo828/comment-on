@@ -18,7 +18,7 @@ const FormActions = styled.div`
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
   padding: 0 ${props=>props.theme.spaces.base};
-  position: fixed;
+  position: static;
   left: 0;
   right: 0;
   bottom: 0;

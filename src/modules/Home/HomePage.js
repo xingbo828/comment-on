@@ -16,8 +16,8 @@ const HomePage = () => (
     <Hero>
       <InnerContainer>
         <Banner>
-          <Eyebrow wrapperTag="h3" size="lg">Hey Vancouver!</Eyebrow>
-          <Heading wrapperTag="h1" size="xl">We’ve made moving easy</Heading>
+          <Eyebrow wrapperTag="h3" size="lg">Finding a mover should be easy</Eyebrow>
+          <Heading wrapperTag="h1" size="xl">So we made it easy!</Heading>
         </Banner>
         <AddressSearchBar />
       </InnerContainer>

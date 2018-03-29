@@ -1,7 +1,6 @@
 import React from 'react';
 import AnimatedIcon from '../../../../globalComponents/AnimatedIcon';
 import Grid from '../../../../globalComponents/Grid';
-import Layout from '../../../../globalComponents/Layout';
 import {
   Button
 } from '../../../../globalComponents/Form';
@@ -13,25 +12,21 @@ import {
 
 const { Container } = Grid;
 const { Checkmark } = AnimatedIcon;
-const { Content: { FramedContent } } = Layout;
 
 const ConfigurationSuccess = ({goToProjectManagement}) => {
   return (
     <Container>
-      <FramedContent>
-        <SuccessContainer>
-          <Checkmark style={{ width: 150, display: 'block' }} />
-          <Heading wrapperTag="h1">Thank You</Heading>
-          <Paragraph>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. When an unknown printer took a galley of type and
-            scrambled it to make a type specimen book.
-          </Paragraph>
-        </SuccessContainer>
-        <ActionContainer>
-          <Button onClick={goToProjectManagement}>Check out progress</Button>
-        </ActionContainer>
-      </FramedContent>
+      <SuccessContainer>
+        <Checkmark style={{ width: 150, display: 'block' }} />
+        <Heading wrapperTag="h1">Looks good! Now let's find you a mover.</Heading>
+        <Paragraph>
+          We've provided your move details to several potential movers and will soon provide you with several 
+          moving options to choose from. Check your Move's status page to see the progress. 
+        </Paragraph>
+      </SuccessContainer>
+      <ActionContainer>
+        <Button onClick={goToProjectManagement}>Check out progress</Button>
+      </ActionContainer>
     </Container>
   );
 };

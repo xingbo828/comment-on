@@ -5,30 +5,8 @@ import { withTheme } from 'styled-components';
 
 const Heading = ({ className, wrapperTag, children, underline, theme, size }) => {
 
-
-
   const HeadingContainer = Styled.div`
     margin: 0 0 1rem;
-
-    ${size === 'xl' && `
-      font-size: 4rem;
-    `}
-
-    ${size === 'lg' && `
-      font-size: 3rem;
-    `}
-
-    ${size === 'md' && `
-      font-size: 2.5rem;
-    `}
-
-    ${size === 'sm' && `
-      font-size: 1.5rem;
-    `}
-
-    ${size === 'xs' && `
-      margin: 0 0 1rem;
-    `}
   `;
 
   const Tag = Styled[wrapperTag]`
@@ -40,24 +18,47 @@ const Heading = ({ className, wrapperTag, children, underline, theme, size }) =>
     font-weight: bold;
 
     ${size === 'xl' && `
-      font-size: 4rem;
+      font-size: 2rem;
     `}
 
     ${size === 'lg' && `
-      font-size: 3rem;
+      font-size: 1.75rem;
     `}
 
     ${size === 'md' && `
-      font-size: 2.5rem;
-    `}
-
-    ${size === 'sm' && `
       font-size: 1.5rem;
     `}
 
-    ${size === 'xs' && `
+    ${size === 'sm' && `
       font-size: 1rem;
     `}
+
+    ${size === 'xs' && `
+      font-size: .875rem;
+    `}
+
+
+    ${theme.media.greaterThan('md')`
+      ${size === 'xl' && `
+        font-size: 4rem;
+      `}
+
+      ${size === 'lg' && `
+        font-size: 3rem;
+      `}
+
+      ${size === 'md' && `
+        font-size: 2.5rem;
+      `}
+
+      ${size === 'sm' && `
+        font-size: 1.5rem;
+      `}
+
+      ${size === 'xs' && `
+        font-size: 1rem;
+      `}
+    `};
 
     ${underline && `
       padding: 0 0 1rem;
