@@ -27,9 +27,9 @@ class ServiceLocation extends React.Component {
   }
 
   mapCities(cities) {
-    return cities.map(({comingSoon, name}) => {      
+    return cities.map(({comingSoon, name}) => {
       return (
-        <City comingSoon={comingSoon}>{name}</City>
+        <City key={name} comingSoon={comingSoon}>{name}</City>
       )
     })
   }
@@ -38,7 +38,7 @@ class ServiceLocation extends React.Component {
     return Object.values(provinces).map((prov) => {
       const isVisible = this.state.selectedCity === prov.key
       return (
-        <ProvinceDetails visible={isVisible}>
+        <ProvinceDetails key={prov.key} visible={isVisible}>
           <ProvinceHeading>{prov.name}</ProvinceHeading>
           <CityList>
             {
