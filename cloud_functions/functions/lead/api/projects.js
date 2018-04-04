@@ -163,15 +163,14 @@ const handleAcceptLead = (body, projectId, userData, response) => {
 
       if (body.notes) {
         admin.firestore().collection('messages').add({
-          conversation: convoDoc.ref,
-          from: admin.firestore().collection('users').doc(uid).ref,
+          conversation: convoDoc,
+          from: admin.firestore().collection('users').doc(uid),
           status: constants.message_status.unread,
           text: body.notes,
           timestamp: admin.firestore.FieldValue.serverTimestamp(),
           type: constants.message_type.text
         });
       }
-      console.log(data);
       return doc.ref.set(data);
 
     }).then(()=>{
