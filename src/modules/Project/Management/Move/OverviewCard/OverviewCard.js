@@ -1,5 +1,4 @@
 import React from 'react';
-import moment from 'moment';
 import Card from '../../../../../globalComponents/Card';
 import Map from '../../../../../globalComponents/Map';
 import Icon from '../../../../../globalComponents/Icon';
@@ -14,9 +13,7 @@ import {
 const OverviewCard = ({ configuration, history, projectId }) => {
   const {
     addresses: { pickUpAddress, deliveryAddress },
-    dateTime: { pickUpDate }
   } = configuration;
-  const pickUpDateMoment = moment(pickUpDate);
   const direction = [
     pickUpAddress,
     deliveryAddress
@@ -62,12 +59,6 @@ const OverviewCard = ({ configuration, history, projectId }) => {
                 {...deliveryAddress}
                 google={window.google}
               />
-          </OverviewCardMetaItem>
-          <OverviewCardMetaItem>
-            <OverviewCardMetaItemIcon>
-              <Icon icon="calendar" />
-            </OverviewCardMetaItemIcon>
-            {pickUpDateMoment.format('MMMM, DD, Y')}
           </OverviewCardMetaItem>
         </OverviewCardMeta>
       </Card>

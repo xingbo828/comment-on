@@ -12,29 +12,14 @@ import DateStep from './Date';
 import scrollToTopOnMount from '../../../../Common/scrollToTopOnMount';
 import validators, { validateFunc } from '../../../../Common/validators';
 
-import { localSaveDateTime, loadDateTime } from '../moveActions';
+import { localSaveDate, loadDate } from '../moveActions';
 
-import { getDateTime } from '../moveReducers';
+import { getDate } from '../moveReducers';
 
 const validate = validateFunc(
   [
     {
       field: 'pickUpDate',
-      validator: 'isRequired',
-      message: 'Required'
-    },
-    {
-      field: 'pickUpTime',
-      validator: 'isRequired',
-      message: 'Required'
-    },
-    {
-      field: 'deliveryDate',
-      validator: 'isRequired',
-      message: 'Required'
-    },
-    {
-      field: 'deliveryTime',
       validator: 'isRequired',
       message: 'Required'
     }
@@ -43,10 +28,10 @@ const validate = validateFunc(
 );
 
 const mapDispatchToProps = dispatch => ({
-  loadDateTime: () => dispatch(loadDateTime())
+  loadDate: () => dispatch(loadDate())
 });
 
-const mapStateToProps = state => ({ initialValues: getDateTime(state) });
+const mapStateToProps = state => ({ initialValues: getDate(state) });
 
 const isLoading = props => props.initialValues.get('status') !== 'LOADED';
 
@@ -55,7 +40,7 @@ const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
     componentDidMount() {
-      this.props.loadDateTime();
+      this.props.loadDate();
     }
   }),
   branch(isLoading, renderNothing),
@@ -63,7 +48,7 @@ const enhance = compose(
     form: 'project.configurations.move.date',
     validate,
     onSubmit: (values, dispatch, props) => {
-      return localSaveDateTime(values.toJS());
+      return localSaveDate(values.toJS());
     },
     onSubmitSuccess: (result, dispatch, props) => {
       if (props.location.fromOverview) {

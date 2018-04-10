@@ -1,7 +1,6 @@
 import localforge from 'localforage';
 import omit from 'lodash/omit';
 import moment from 'moment';
-import isObject from 'lodash/isObject';
 
 export const LOCALSTOREAGE_STEP_INFO_KEY = 'steps-info';
 
@@ -75,38 +74,33 @@ export const loadItems = () => async dispatch => {
 };
 
 // MOVING DATE TIME
-export const GET_DATE_TIME = 'GET_DATE_TIME';
+export const GET_DATE = 'GET_DATE';
 
-export const LOADING_DATE_TIME = 'LOADING_DATE_TIME';
+export const LOADING_DATE = 'LOADING_DATE';
 
-export const localSaveDateTime = async dateTime => {
+export const localSaveDate = async date => {
   const stepInfo = await localforge.getItem(LOCALSTOREAGE_STEP_INFO_KEY);
   return await localforge.setItem(
     LOCALSTOREAGE_STEP_INFO_KEY,
     Object.assign(stepInfo || {}, {
-      dateTime: {
-        pickUpDate: dateTime.pickUpDate.format('YYYYMMDD'),
-        pickUpTime: dateTime.pickUpTime,
-        deliveryDate: isObject(dateTime.deliveryDate) ? dateTime.deliveryDate.format('YYYYMMDD') : dateTime.deliveryDate,
-        deliveryTime: dateTime.deliveryTime,
+      date: {
+        pickUpDate: date.pickUpDate.map(d => d.format('YYYYMMDD'))
       }
     })
   );
 };
 
-export const loadDateTime = () => async dispatch => {
+export const loadDate = () => async dispatch => {
   dispatch({
-    type: LOADING_DATE_TIME
+    type: LOADING_DATE
   });
   const stepInfo = await localforge.getItem(LOCALSTOREAGE_STEP_INFO_KEY);
-  const dateTime = stepInfo && stepInfo.dateTime ? stepInfo.dateTime : null;
+  const date = stepInfo && stepInfo.date ? stepInfo.date : null;
+  const pickUpDate = date ? date.pickUpDate.map(d => moment(d)): null;
   dispatch({
-    type: GET_DATE_TIME,
+    type: GET_DATE,
     data: {
-      pickUpDate: dateTime ? moment(dateTime.pickUpDate) : null,
-      pickUpTime: dateTime ? dateTime.pickUpTime : null,
-      deliveryDate: dateTime ? (dateTime.deliveryDate === 'sameDayDelivery' ? dateTime.deliveryDate : moment(dateTime.deliveryDate)) : null,
-      deliveryTime: dateTime ? dateTime.deliveryTime : null
+      pickUpDate
     }
   });
 };

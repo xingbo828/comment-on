@@ -1,5 +1,5 @@
 import React from 'react';
-import isObject from 'lodash/isObject';
+// import isObject from 'lodash/isObject';
 import isEmpty from 'lodash/isEmpty';
 import capitalize from 'lodash/capitalize';
 import startCase from 'lodash/startCase';
@@ -10,7 +10,7 @@ import { Button, TextArea, TextField, Legend } from '../../../../../globalCompon
 import Icon from '../../../../../globalComponents/Icon';
 // import PlaceIdToAddress from '../../../../../globalComponents/GooglePlaceIdToAddress';
 import LatLngToAddress from '../../../../../globalComponents/LatLngToAddress';
-import { MOVING_SEARCH_TIME_RANGE } from '../../../../../constants';
+// import { MOVING_SEARCH_TIME_RANGE } from '../../../../../constants';
 import {
   Section,
   SectionHeader,
@@ -31,7 +31,7 @@ const ConfigurationOverview = ({
   projectName,
   additionalNotes,
   addresses: rootAddresses,
-  dateTime,
+  date,
   logistics,
   items,
   validators,
@@ -41,10 +41,10 @@ const ConfigurationOverview = ({
   isLoggedIn,
   signIn
 }) => {
-  const areFieldsValidate = (addresses, dateTime, logistics, validators) => {
+  const areFieldsValidate = (addresses, date, logistics, validators) => {
     const isValid =
       validators.addressesValidator(addresses) &&
-      validators.dateTimeValidator(dateTime) &&
+      validators.dateValidator(date) &&
       validators.logisticsValidator(logistics);
     return isValid;
   };
@@ -101,49 +101,50 @@ const ConfigurationOverview = ({
     );
   };
 
-  const renderdateTimeSection = (dateTime, validator) => {
-    const renderInner = (dateTime, validator) => {
-      if (!validator(dateTime)) {
+  const renderdateSection = (date, validator) => {
+    const renderInner = (date, validator) => {
+      if (!validator(date)) {
         return (
-          <SectionInvalid>Invalid date & time configuration.</SectionInvalid>
+          <SectionInvalid>Invalid date configuration.</SectionInvalid>
         );
       }
-      const { pickUpDate, pickUpTime, deliveryDate, deliveryTime } = dateTime;
-      const mappedPickUpTime = MOVING_SEARCH_TIME_RANGE.find(
-        i => i.value === pickUpTime
-      );
-      const mappedDeliveryTime = MOVING_SEARCH_TIME_RANGE.find(
-        i => i.value === deliveryTime
-      );
+      const { pickUpDate } = date;
+      // const { pickUpDate, pickUpTime, deliveryDate, deliveryTime } = dateTime;
+      // const mappedPickUpTime = MOVING_SEARCH_TIME_RANGE.find(
+      //   i => i.value === pickUpTime
+      // );
+      // const mappedDeliveryTime = MOVING_SEARCH_TIME_RANGE.find(
+      //   i => i.value === deliveryTime
+      // );
 
       return (
         <SectionBody>
           <SectionBodyItem>
             <SectionBodyItemLabel>Pick-up date</SectionBodyItemLabel>
             <SectionBodyItemContent>
-              {pickUpDate.format('MMMM, D, YYYY')}
+              {pickUpDate.map(p => <p>{p.format('dddd, MMMM, D, YYYY')}</p>)}
             </SectionBodyItemContent>
           </SectionBodyItem>
-          <SectionBodyItem>
+          {/* <SectionBodyItem>
             <SectionBodyItemLabel>Pick-up time</SectionBodyItemLabel>
             <SectionBodyItemContent>
               {mappedPickUpTime && mappedPickUpTime.label}
             </SectionBodyItemContent>
-          </SectionBodyItem>
-          <SectionBodyItem>
+          </SectionBodyItem> */}
+          {/* <SectionBodyItem>
             <SectionBodyItemLabel>Delivery date</SectionBodyItemLabel>
             <SectionBodyItemContent>
               {isObject(deliveryDate)
                 ? deliveryDate.format('MMMM, D, YYYY')
                 : startCase(deliveryDate)}
             </SectionBodyItemContent>
-          </SectionBodyItem>
-          {deliveryDate !== 'sameDayDelivery' && <SectionBodyItem>
+          </SectionBodyItem> */}
+          {/* {deliveryDate !== 'sameDayDelivery' && <SectionBodyItem>
             <SectionBodyItemLabel>Delivery time</SectionBodyItemLabel>
             <SectionBodyItemContent>
               {mappedDeliveryTime && mappedDeliveryTime.label}
             </SectionBodyItemContent>
-          </SectionBodyItem>}
+          </SectionBodyItem>} */}
         </SectionBody>
       );
     };
@@ -152,7 +153,7 @@ const ConfigurationOverview = ({
       <Section>
         <SectionHeader>
           <Heading wrapperTag="h2" size="sm">
-            Date & Time
+            Date
           </Heading>
           <SectionHeaderEditLink
             to={{ pathname: '/projects/configurations/move/date', fromOverview: true }}
@@ -160,7 +161,7 @@ const ConfigurationOverview = ({
             Edit
           </SectionHeaderEditLink>
         </SectionHeader>
-        {renderInner(dateTime, validator)}
+        {renderInner(date, validator)}
       </Section>
     );
   };
@@ -347,7 +348,7 @@ const ConfigurationOverview = ({
           <FormFieldSet>
             <Legend>Let's review everything so far. Feel free to go back and make any changes.</Legend>
             {renderAddressSection(rootAddresses, validators.addressesValidator)}
-            {renderdateTimeSection(dateTime, validators.dateTimeValidator)}
+            {renderdateSection(date, validators.dateValidator)}
             {renderLogistics(logistics, validators.logisticsValidator)}
             {renderItemsSection(items)}
           </FormFieldSet>
@@ -366,7 +367,7 @@ const ConfigurationOverview = ({
             disabled={
               !areFieldsValidate(
                 rootAddresses.addresses,
-                dateTime,
+                date,
                 logistics,
                 validators
               )
@@ -381,7 +382,7 @@ const ConfigurationOverview = ({
             disabled={
               !areFieldsValidate(
                 rootAddresses.addresses,
-                dateTime,
+                date,
                 logistics,
                 validators
               )
@@ -396,7 +397,7 @@ const ConfigurationOverview = ({
             disabled={
               !areFieldsValidate(
                 rootAddresses.addresses,
-                dateTime,
+                date,
                 logistics,
                 validators
               )
