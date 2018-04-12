@@ -43,13 +43,21 @@ const _subscribeToConversations = (dispatch) => (projectwithConversations) => {
   });
 };
 
+const _findProvider = async (providers, projectId) => {
+  const providersData = await Promise.all(Object.values(providers).map(async (p) => p.get()))
+  return providersData.map(p => p.data()).find(provider => {
+    return Object.keys(provider.projects).includes(projectId)
+  })
+}
+
 const _resolveMsgDetail = async (msg, project) => {
   const senderDetail = await msg.from.get();
-  const moverId = senderDetail.data().moverId;
-  const moverDetail = await firestore.collection('providers').doc(moverId).get();
+  const providers = senderDetail.data().providers;
+  const providerDetail = await _findProvider(providers, project)
+
   return Object.assign({}, msg, {
     from: senderDetail.data(),
-    provider: moverDetail.data(),
+    provider: providerDetail,
     project
   });
 };
