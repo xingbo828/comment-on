@@ -22,7 +22,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={asyncLoad(() => import('./modules/Home'))} />
               <ProtectedRoute path="/account" component={asyncLoad(() => import('./modules/Account'))} />
-              <Route path="/mover" component={asyncLoad(() => import('./modules/Mover'))} />
+              {/* <Route path="/mover" component={asyncLoad(() => import('./modules/Mover'))} /> */}
               <Route path="/projects" component={asyncLoad(() => import('./modules/Project'))} />
               <ProtectedRoute path="/conversation" component={asyncLoad(() => import('./modules/Conversation'))} />
               <Route path="/login" component={asyncLoad(() => import('./modules/Account/Login'))} />

@@ -6,7 +6,7 @@ import Icon from '../../../globalComponents/Icon';
 import Link from '../../../globalComponents/Link';
 import PageHeader from '../../../globalComponents/Layout/PageHeader';
 import Address from './components/Address';
-import DateTime from './components/DateTime';
+import Date from './components/Date';
 import Logistics from './components/Logistics';
 import Items from './components/Items';
 import AdditionalInfo from './components/AdditionalInfo';
@@ -17,7 +17,7 @@ import {
 
 const Summary = ({
   projectData: {
-    configuration: { projectName, addresses, dateTime, logistics, items, notes }
+    configuration: { projectName, addresses, date, logistics, items, notes }
   },
   history
 }) => {
@@ -37,7 +37,7 @@ const Summary = ({
       </PageHeader>
       <SummaryBody>
         <Address addresses={addresses} />
-        <DateTime dateTime={dateTime} />
+        <Date date={date} />
         <Logistics logistics={logistics} />
         <Items items={items} />
         <AdditionalInfo notes={notes} />
