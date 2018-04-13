@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import { array, string, object, func } from 'prop-types';
 import camelCase from 'lodash/camelCase';
 import reduce from 'lodash/reduce';
-import { Select, Legend } from '../../../../../../globalComponents/Form';
-import {
-  StyledContainer,
-  StyledItems,
-  StyledItem
-} from './Styled';
+import { Legend, ItemQuantity } from '../../../../../../globalComponents/Form';
+import { StyledContainer } from './Styled';
+
 
 class ItemsCount extends Component {
+
   constructor(props) {
     super(props);
     this.state = this.initState(this.props.value, this.props.configs);
@@ -23,12 +21,11 @@ class ItemsCount extends Component {
   }
 
   getSelectedValue = (label) => {
-    const key = camelCase(label);
+    const key = label;
     return this.state[key] ? this.state[key] : 0
   };
 
-  onOptionSelect = (e) => {
-    const { value, name } = e.target;
+  onOptionSelect = (name, value) => {
     const setState = (name, value) => (prevState, props) => ({[name]: value});
     this.setState(setState(name, value), () => {
       const output = reduce(this.state, (result, value, key) => {
@@ -43,26 +40,15 @@ class ItemsCount extends Component {
     });
   }
 
-
   renderChild = (c) => {
     return (
-      <StyledItem key={c}>
-        <Select
-          label={c}
-          value={this.getSelectedValue(c)}
-          name={camelCase(c)}
-          onChange={this.onOptionSelect}
-        >
-          {Array(6).fill('').map((e, index) => {
-            const current = index === 5 ? '5+' : index;
-            return (
-              <option key={`${c}-${index}`} value={current}>
-                {current}
-              </option>
-            );
-          })}
-        </Select>
-      </StyledItem>
+      <ItemQuantity.ItemQuantity
+        image={c.image}
+        title={c.title}
+        unit="Quantity"
+        value={this.getSelectedValue(c.title)}
+        onChange={this.onOptionSelect}
+      />
     );
   }
   render() {
@@ -72,9 +58,9 @@ class ItemsCount extends Component {
         <Legend>
           {label}
         </Legend>
-        <StyledItems>
+        <ItemQuantity.ItemQuantityList>
           {configs.map(c => this.renderChild(c))}
-        </StyledItems>
+        </ItemQuantity.ItemQuantityList>
       </StyledContainer>
     );
   }

@@ -5,7 +5,7 @@ import Grid from '../../../../../globalComponents/Grid';
 import Layout from '../../../../../globalComponents/Layout';
 import Icon from '../../../../../globalComponents/Icon';
 import ResidenceTypeSelection from './ResidenceTypeSelection';
-import DeliveryAccess from './DeliveryAccess';
+import Access from './Access';
 import WillYouBeAssisting from './WillYouBeAssisting';
 
 const { Form, FormActions, FormInner, FormFieldSet } = Layout.Form;
@@ -20,9 +20,19 @@ const renderResidenceTypeSelection = ({ input, name, label, desc }) => {
   );
 };
 
+const renderPickUpAccess = ({ input, name, label, desc }) => {
+  return (
+    <Access
+      onChange={input.onChange}
+      value={input.value}
+      label={label}
+    />
+  );
+};
+
 const renderDeliveryAccess = ({ input, name, label, desc }) => {
   return (
-    <DeliveryAccess
+    <Access
       onChange={input.onChange}
       value={input.value}
       label={label}
@@ -59,6 +69,13 @@ const Logistics = ({
                 component={renderResidenceTypeSelection}
                 name="residenceType"
                 label="Choose the option that best describes the pick-up space"
+              />
+            </FormFieldSet>
+            <FormFieldSet>
+              <Field
+                component={renderPickUpAccess}
+                name="pickUpAccess"
+                label="How is the pick-up space accessed?"
               />
             </FormFieldSet>
             <FormFieldSet>

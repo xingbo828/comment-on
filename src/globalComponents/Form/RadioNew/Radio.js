@@ -77,31 +77,39 @@ const IconContainer = Styled.div`
   color: ${props=>props.theme.colors.textLight};
 `
 
-const Radio = ({ label, description, value, onCheck, checked, name, secondary, color, icon }) => (
-  <Container>
-    <label>
-      <RadioInput
-        type="radio"
-        value={value}
-        onChange={onCheck}
-        checked={checked}
-        name={name}
-      />
-      {
-        icon && 
-        <IconContainer>
-          <Icon icon={icon} />
-        </IconContainer>
-      }
-      <IndicatorContainer>
-        <RadioIndicator color={color} checked={checked} />
-        <PseudoLabel>{label}</PseudoLabel>
-        {description &&
-          <Description>{description}</Description>
+const Radio = ({ label, description, value, onCheck, checked, name, secondary, color, icon }) => {
+
+  const handleClick = (e) => {
+    e.stopPropagation()
+  }
+
+  return (
+    <Container>
+      <label>
+        <RadioInput
+          type="radio"
+          value={value}
+          onChange={onCheck}
+          onClick={handleClick}
+          checked={checked}
+          name={name}
+        />
+        {
+          icon && 
+          <IconContainer>
+            <Icon icon={icon} />
+          </IconContainer>
         }
-      </IndicatorContainer>
-    </label>
-  </Container>
-)
+        <IndicatorContainer>
+          <RadioIndicator color={color} checked={checked} />
+          <PseudoLabel>{label}</PseudoLabel>
+          {description &&
+            <Description>{description}</Description>
+          }
+        </IndicatorContainer>
+      </label>
+    </Container>
+  )
+}
 
 export default Radio

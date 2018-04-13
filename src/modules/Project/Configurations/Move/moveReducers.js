@@ -52,19 +52,20 @@ const searchAddressesStep = (state = initAddressesState, action) => {
 
 // Items
 const initItemsState = Immutable.fromJS({
-  speciality: {},
-  large: {},
-  medium: {},
+  specialCare: {},
+  appliances: {},
+  decore: {},
   status: 'UNINIT'
 });
 
 const searchItemsStep = (state = initItemsState, action) => {
   switch (action.type) {
     case GET_ITEMS: {
+      console.log(action)
       return state.withMutations(st => {
-        st.set('speciality', action.data.speciality || {});
-        st.set('large', action.data.large || {});
-        st.set('medium', action.data.medium || {});
+        st.set('specialCare', action.data.specialCare || {});
+        st.set('appliances', action.data.appliances || {});
+        st.set('decore', action.data.decore || {});
         st.set('status', 'LOADED');
       });
     }

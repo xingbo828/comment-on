@@ -47,19 +47,25 @@ export const RouteInfoContainer = styled.div`
 
 
 export const InputsContainer = styled.div`
-  padding: 3rem;
-
+  padding: 2rem 2rem .5rem;
   position: relative;
+
+  ${props=>props.theme.media.greaterThan('sm')`
+    padding: 3rem;
+  `}
+
   &:before {
     font-family: 'FontAwesome';
     content: "\f111\00a0\f111\00a0\f111";
     position: absolute;
     color: #d3d3d3;
-    top: 68px;
+    top: 70px;
     font-size: .45rem;
-    left: calc(${props=>props.theme.spaces.tight} + 7px);
+    left: calc(2rem + 7px);
+
     ${props=>props.theme.media.greaterThan('sm')`
-      left: calc(${props=>props.theme.spaces.xWide} + 7px);
+      top: 83px;
+      left: calc(3rem + 7px);
     `}
     width: 5px;
     overflow-wrap: break-word;

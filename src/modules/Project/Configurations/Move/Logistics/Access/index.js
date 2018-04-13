@@ -3,13 +3,14 @@ import { func, string } from 'prop-types';
 import { Select, Legend } from '../../../../../../globalComponents/Form';
 import { RadioList, RadioListItem } from '../../../../../../globalComponents/Form/RadioNew';
 import Animation from '../../../../../../globalComponents/Animation';
-import { stairsConfig, elevatorNoStairConfig } from './configs';
+import { stairsConfig, elevatorNoStairConfig, mainFloorConfig } from './configs';
 import { StyledContainer } from './Styled';
 class DeliveryAccess extends Component {
   constructor(props) {
     super(props);
     this.stairsConfig = stairsConfig;
     this.elevatorNoStairConfig = elevatorNoStairConfig;
+    this.mainFloorConfig = mainFloorConfig;
 
     this.state = {
       value: this.props.value,
@@ -21,10 +22,10 @@ class DeliveryAccess extends Component {
   }
 
   selectStairs = e => {
-    const changeValue =
+    let changeValue =
       e.target.value === 'stairs'
         ? this.stairsConfig[0].value
-        : this.elevatorNoStairConfig.value;
+        : e.target.value;
     const setState = value => (prevState, props) => ({
       hasStairs: value === 'stairs',
       value: changeValue
@@ -74,7 +75,13 @@ class DeliveryAccess extends Component {
           <RadioListItem
             label={this.elevatorNoStairConfig.label}
             value={this.elevatorNoStairConfig.value}
-            checked={hasStairs === false}
+            checked={value === elevatorNoStairConfig.value}
+            onCheck={this.selectStairs}
+          />
+          <RadioListItem
+            label={this.mainFloorConfig.label}
+            value={this.mainFloorConfig.value}
+            checked={value === mainFloorConfig.value}
             onCheck={this.selectStairs}
           />
         </RadioList>

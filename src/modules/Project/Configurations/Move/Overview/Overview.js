@@ -293,21 +293,11 @@ const ConfigurationOverview = ({
     return (
       <div>
         <Legend>Enter a name for your project</Legend>
-        <TextField input={input} />
+        <TextField 
+          input={input}
+          label="Project name"
+        />
       </div>
-      // <Section noBorder>
-      //   <SectionHeader>
-      //     <Heading wrapperTag="h2" size="sm">
-      //       Project Name
-      //     </Heading>
-      //   </SectionHeader>
-      //   <SubLabel>
-      //       Please give your project a name.
-      //     </SubLabel>
-      //   <SectionBody>
-      //     <TextField input={input} />
-      //   </SectionBody>
-      // </Section>
     );
   };
 
@@ -323,21 +313,11 @@ const ConfigurationOverview = ({
     return (
       <div>
         <Legend>Provide us with any additional notes. This is the place for any additional quetions, concerns or information pertaining to your move you feel we may have missed.</Legend>
-        <TextArea input={input} />
+        <TextArea 
+          input={input}
+          label="Additional notes"
+        />
       </div>
-      // <Section noBorder>
-      //   <SectionHeader>
-      //     <Heading wrapperTag="h2" size="sm">
-      //       Additional Notes
-      //     </Heading>
-      //   </SectionHeader>
-      //   <SubLabel>
-      //       Please do not enter your personal contact information.
-      //     </SubLabel>
-      //   <SectionBody>
-      //     <TextArea input={input} />
-      //   </SectionBody>
-      // </Section>
     );
   };
   return (

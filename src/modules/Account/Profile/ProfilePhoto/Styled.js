@@ -4,12 +4,13 @@ import { ImgUpload } from '../../../../globalComponents/Form';
 export const StyledImgUpload = styled(ImgUpload.SingleImgUpload)`
   width: 180px;
   margin: 0 auto;
-  transform: translateY(-90px);
-  > div {
-    box-shadow: 0 5px 5px 0px ${props=>props.theme.colors.border};
-  }
 `;
 
 export const Container = styled.div`
-  height: 90px;
+  width: 214px;
+  margin: 0 auto;
+  margin: 0 auto 2rem;
+  padding: 1rem;
+  border: 1px solid ${props=>props.theme.colors.border};
+  border-radius: 99rem;
 `;

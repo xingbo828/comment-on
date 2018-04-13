@@ -39,6 +39,7 @@ export const GeosuggestStyled = styled(Geosuggest)`
   display: inline-block;
   width: calc(100% - 20px);
   text-align: left;
+  
   .geosuggest__input {
     border-radius: 0;
     outline: 0;

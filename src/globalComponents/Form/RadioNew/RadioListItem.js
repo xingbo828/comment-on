@@ -47,6 +47,7 @@ const RadioListItem = ({ children, secondary, label, description, value, onCheck
           name={name}
           secondary={secondary}
           icon={icon}
+          ref={(ref) => this.input = ref }
         />
       </ClickableArea>
       <Children>

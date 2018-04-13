@@ -7,8 +7,8 @@ const Form = styled.form`
   margin: 0 auto 4rem;
   flex-direction: column;
 
-  ${props=>props.theme.media.greaterThan('md')`
-    max-width: 768px;
+  ${props=>props.theme.media.greaterThan('xs')`
+    max-width: ${props.small ? '428px' : '640px'};
     margin: 0 auto 6rem;
   `}
 `;
@@ -17,7 +17,6 @@ const FormActions = styled.div`
   width: 100%;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
-  padding: 0 ${props=>props.theme.spaces.base};
   position: static;
   left: 0;
   right: 0;
@@ -26,7 +25,6 @@ const FormActions = styled.div`
 
   ${props=>props.theme.media.greaterThan('md')`
     position: static;
-    padding: 0 ${props=>props.theme.spaces.xWide};
     bottom: 0;
     height:130px;
     
@@ -41,10 +39,10 @@ const FormActions = styled.div`
 `;
 
 const FormInner = styled.div`
-  padding: 4rem 1rem 0rem;
+  padding: 4rem 0 0;
 
   ${props=>props.theme.media.greaterThan('md')`
-    padding: 6rem 4rem 0rem;
+    padding: 6rem 0 0;
   `}
 `;
 

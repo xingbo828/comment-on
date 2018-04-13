@@ -140,8 +140,8 @@ export const StyledButton = styled.button`
   background-image: none;
   border: 1px solid transparent;
   white-space: nowrap;
-  box-shadow:
   min-width: 120px;
+  width: ${props=> props.fullWidth ? '100%' : 'auto'};
   user-select: none;
   transition: all .3s cubic-bezier(.645,.045,.355,1);
   color: ${props=> props.ghost || props.outline ? getBackgroundColor(props) : 'white'};
@@ -159,10 +159,6 @@ export const StyledButton = styled.button`
   ${props => !props.disabled && !props.ghost && !props.outline && `
     box-shadow: ${props.theme.boxShadow.small};
   `}
-
-  ${props=>props.theme.media.greaterThan('md')`
-    width: auto;
-  `};
 
   &:hover {
     background-color: ${getHoverBackgroundColor};

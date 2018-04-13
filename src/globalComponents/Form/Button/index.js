@@ -12,6 +12,7 @@ const Button = ({
   danger,
   success,
   outline,
+  fullWidth,
   ...rest
 }) => {
   const getIconPosition = (children) => {
@@ -35,6 +36,7 @@ const Button = ({
       disabled={disabled}
       ghost={ghost}
       outline={outline}
+      fullWidth={fullWidth}
       {...rest}
     >
       {children}

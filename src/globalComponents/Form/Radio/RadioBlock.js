@@ -12,7 +12,7 @@ const RadioBlock = ({desc, label, value, checked, onCheck, children}) => {
   return (
     <RadioBlockContainer>
       <RadioBlockContainerInner checked={checked}>
-        <Radio label={label} value={value} checked={checked} onCheck={onCheck }/>
+        <Radio label={label} value={value} checked={checked} onCheck={onCheck} />
         <Paragraph>{desc}</Paragraph>
       </RadioBlockContainerInner>
       <RadioBlockNestedChildren>

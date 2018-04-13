@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field } from 'redux-form/immutable';
-import { Button } from '../../../../../globalComponents/Form';
+import { Button, TextArea, Legend } from '../../../../../globalComponents/Form';
 import Grid from '../../../../../globalComponents/Grid';
 import Icon from '../../../../../globalComponents/Icon';
 import Layout from '../../../../../globalComponents/Layout';
@@ -37,25 +37,34 @@ const Items = ({
             <FormFieldSet>
               <Field
                 component={renderItemsCounts}
-                name="speciality"
-                label="How many specialty items do you need moved? These items require special care when handling."
-                configs={configs.speciality}
+                name="specialCare"
+                label="How many of the following fragile items do you need moved? These items may require special care when handling."
+                configs={configs.specialCare}
               />
             </FormFieldSet>
             <FormFieldSet>
               <Field
                 component={renderItemsCounts}
-                name="large"
-                label="How many large sized items do you need moved? Typically items that won't fit in a regular size sedan."
-                configs={configs.large}
+                name="appliances"
+                label="How many of the following home appliances are you moving?"
+                configs={configs.appliances}
               />
             </FormFieldSet>
             <FormFieldSet>
               <Field
                 component={renderItemsCounts}
-                name="medium"
-                label="How many medium sized items do you need moved? These items should fit in a regular size sedan."
-                configs={configs.medium}
+                name="decore"
+                label="How many of the following home decore items are you moving?"
+                configs={configs.decore}
+              />
+            </FormFieldSet>
+            <FormFieldSet>
+
+              <Legend>Did we miss anything? Briefly describe any items not listed above that you feel may require special care or handling. We'll ensure they're properly accounted for</Legend>
+              <Field
+                component={TextArea}
+                name="otherItems" 
+                label="Other items"
               />
             </FormFieldSet>
           </FormInner>

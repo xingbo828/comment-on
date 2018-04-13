@@ -25,3 +25,8 @@ export const elevatorNoStairConfig = {
   label: 'Elevator',
   value: 'elevator/no-stair'
 };
+
+export const mainFloorConfig = {
+  label: 'Main floor',
+  value: 'main-floor/no-stair'
+};

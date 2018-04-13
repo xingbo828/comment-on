@@ -10,6 +10,7 @@ import DateTime from './DateTime';
 import Switch from './Switch';
 import Select from './Select';
 import Legend from './Legend';
+import ItemQuantity from './ItemQuantity';
 import { Label, SubLabel } from './Label';
 
 export {
@@ -26,5 +27,6 @@ export {
   ImgUpload,
   Label,
   SubLabel,
-  Legend
+  Legend,
+  ItemQuantity
 };
