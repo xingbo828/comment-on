@@ -12,7 +12,6 @@ import Grid from '../../../../../globalComponents/Grid';
 const { Form, FormActions, FormInner, FormFieldSet } = Layout.Form;
 
 const renderDateSelection = ({ input, label }) => {
-  console.log(input.value)
   return (
     <DateSelection
       label={label}
