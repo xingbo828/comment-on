@@ -10,7 +10,7 @@
 export default {
   specialCare: [
     {
-      title: 'Studio Piano',
+      title: 'Grand Piano',
       image: 'http://cdn.shopify.com/s/files/1/1064/6612/products/kawai_gx7_pe_grand_piano_psvh_grande.jpg?v=1505594795'
     },
     {

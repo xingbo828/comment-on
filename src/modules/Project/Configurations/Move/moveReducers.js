@@ -55,6 +55,7 @@ const initItemsState = Immutable.fromJS({
   specialCare: {},
   appliances: {},
   decore: {},
+  otherItems: "",
   status: 'UNINIT'
 });
 
@@ -66,6 +67,7 @@ const searchItemsStep = (state = initItemsState, action) => {
         st.set('specialCare', action.data.specialCare || {});
         st.set('appliances', action.data.appliances || {});
         st.set('decore', action.data.decore || {});
+        st.set('otherItems', action.data.otherItems || "");
         st.set('status', 'LOADED');
       });
     }
