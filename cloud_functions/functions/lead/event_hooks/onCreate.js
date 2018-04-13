@@ -5,9 +5,9 @@ const admin = require('firebase-admin');
 
 module.exports = functions.firestore
   .document("projects/{projectId}")
-  .onCreate(event => {
-    let lead = event.data.data();
-    console.log('Lead:', event.params.projectId, lead);
+  .onCreate((snap, context) => {
+    let lead = snap.data();
+    console.log('Lead:', context.params.projectId, lead);
     if (typeof(lead) !== 'object') {
       lead = {};
     }
@@ -15,12 +15,12 @@ module.exports = functions.firestore
     if (!lead.owner || !lead.configuration) {
       lead.status = constants.project_status.invalid;
     }
-    lead.id = event.params.projectId;
+    lead.id = context.params.projectId;
     lead.creationTimestamp = admin.firestore.FieldValue.serverTimestamp();
     lead.updateTimestamp = admin.firestore.FieldValue.serverTimestamp();
 
-    const batch = event.data.ref.firestore.batch();
-    return getProviders(lead.configuration, event.data.ref, batch)
+    const batch = snap.ref.firestore.batch();
+    return getProviders(lead.configuration, snap.ref, batch)
       .then((providerRefPaths) => {
         lead.receivers = {};
 
@@ -33,7 +33,7 @@ module.exports = functions.firestore
             email: data.email || 'invalid@invalid.in'
           };
         });
-        batch.set(event.data.ref, lead);
+        batch.set(snap.ref, lead);
         return batch.commit();
       })
       .then(()=>{
