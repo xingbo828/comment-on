@@ -1,54 +1,77 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { instanceOf, func } from 'prop-types';
+import { arrayOf, instanceOf, func } from 'prop-types';
 
 import Calendar from './Calendar';
 
-class DateTime extends Component {
+class CalendarContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       selectedDate: this.props.value,
+      currentDisplayDate: moment().startOf('day')
     };
-    this.handleInputBtnClick = this.handleInputBtnClick.bind(this);
+
   }
 
-  handleInputBtnClick(e) {
+  prevMonth = (e) => {
     e.preventDefault();
     this.setState({
-      isOverlayVisible: true
+      currentDisplayDate: this.state.currentDisplayDate
+        .clone()
+        .subtract(1, 'month')
+    });
+  }
+
+  nextMonth = (e) => {
+    e.preventDefault();
+    this.setState({
+      currentDisplayDate: this.state.currentDisplayDate.clone().add(1, 'month')
     });
   }
 
   onSelect = (value) => {
+    const index = this.state.selectedDate.findIndex((d) => d.isSame(value));
+    let newSelectedDate
+    if(index === -1) {
+      newSelectedDate = this.state.selectedDate.concat([value])
+    } else {
+      newSelectedDate = this.state.selectedDate.filter((d) => !d.isSame(value))
+    }
     this.setState(() => ({
-      selectedDate: value
+      selectedDate: newSelectedDate
     }));
-    this.props.onChange(value);
+    this.props.onChange(newSelectedDate)
   }
 
   render() {
     const { disabledDate } = this.props;
-    const { selectedDate } = this.state;
+    const { selectedDate, currentDisplayDate } = this.state;
     return (
+      <React.Fragment>
         <Calendar
           disabledDate={disabledDate}
           selectedDate={selectedDate}
+          nextMonth={this.nextMonth}
+          prevMonth={this.prevMonth}
           onSelectionComplete={this.onSelect}
+          currentDisplayDate={currentDisplayDate}
         />
+
+      </React.Fragment>
     );
   }
 }
 
-DateTime.propTypes = {
-  value: instanceOf(moment),
+CalendarContainer.propTypes = {
+  value: arrayOf(instanceOf(moment)),
   onChange: func,
   disabledDate: func
 };
 
-DateTime.defaultProps = {
-  value: moment(),
+CalendarContainer.defaultProps = {
+  value: [],
   disabledDate: () => false
 };
 
-export default DateTime;
+export default CalendarContainer;

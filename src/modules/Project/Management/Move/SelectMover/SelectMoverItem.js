@@ -66,7 +66,7 @@ const SelectMoverItem = ({
           <MoverLogo>
             <MoverLogoImg src={moverInfo.provider.logo || noLogoImg} alt="Mover Logo" />
           </MoverLogo>
-          <MoverName>{moverInfo.provider.businessName}</MoverName>
+          <MoverName>{moverInfo.provider.name}</MoverName>
           <MoverInfoBar>
             <MoverPrice>${moverInfo.estimatedPrice}</MoverPrice>
           </MoverInfoBar>

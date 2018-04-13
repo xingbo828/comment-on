@@ -4,7 +4,7 @@ import { Heading, Paragraph } from '../../../globalComponents/Typography';
 import PageHeader from '../../../globalComponents/Layout/PageHeader';
 import Link from '../../../globalComponents/Link';
 import Icon from '../../../globalComponents/Icon';
-import Comment from '../../../globalComponents/Comment';
+// import Comment from '../../../globalComponents/Comment';
 
 import {
   ContactInfoContainer,
@@ -13,8 +13,8 @@ import {
   ContactInfoListItem,
   ContactInfoListItemLink,
   ImgContainer,
-  CrewMemberContainer,
-  CrewMemberItemContainer
+  // CrewMemberContainer,
+  // CrewMemberItemContainer
 } from './Styled';
 
 const { Container, Row, Col } = Grid;
@@ -29,7 +29,7 @@ const MoverProfile = ({ profile, history }) => (
               <Icon icon="arrow-left" />&nbsp;&nbsp;Back
             </Link>
             <Heading wrapperTag="h1" size="md">
-              {profile.businessName}
+              {profile.name}
             </Heading>
           </Col>
         </Row>
@@ -47,18 +47,18 @@ const MoverProfile = ({ profile, history }) => (
             <ContactInfoList>
               <ContactInfoListItem>
                 <ContactInfoListItemLink
-                  href={`tel:${profile.businessPhoneNumber}`}
+                  href={`tel:${profile.phoneNumber}`}
                 >
                   <Icon icon="phone" style={{ marginRight: '1rem' }} />
-                  {profile.businessPhoneNumber}
+                  {profile.phoneNumber}
                 </ContactInfoListItemLink>
               </ContactInfoListItem>
               <ContactInfoListItem>
                 <ContactInfoListItemLink
-                  href={`mailto:${profile.businessEmail}`}
+                  href={`mailto:${profile.email}`}
                 >
                   <Icon icon="envelope" style={{ marginRight: '1rem' }} />
-                  {profile.businessEmail}
+                  {profile.email}
                 </ContactInfoListItemLink>
               </ContactInfoListItem>
             </ContactInfoList>
@@ -79,11 +79,11 @@ const MoverProfile = ({ profile, history }) => (
           <Heading wrapperTag="h3" size="sm" underline>
             About
           </Heading>
-          <Paragraph>{profile.businessDescription}</Paragraph>
+          <Paragraph>{profile.description}</Paragraph>
         </Col>
       </Row>
     </Container>
-    {profile.crewMembers && (
+    {/* {profile.crewMembers && (
       <Container>
         <Row>
           <Col xs={24} sm={24} md={24} lg={16}>
@@ -102,7 +102,7 @@ const MoverProfile = ({ profile, history }) => (
           </Col>
         </Row>
       </Container>
-    )}
+    )} */}
   </div>
 );
 

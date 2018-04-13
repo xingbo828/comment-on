@@ -9,7 +9,7 @@ const MessageCardItem = ({ receiver }) => {
       <MessageCardItemLink to={`/conversation/${receiver.conversation.id}`}>
         <Badge scale={.85} offsetX={15} offsetY={5} count={receiver.unreadMsgCount}>
           <MessageCardItemName>
-            {receiver.businessName}
+            {receiver.name}
           </MessageCardItemName>
         </Badge>
       </MessageCardItemLink>

@@ -17,7 +17,7 @@ import isLoggedIn from '../../../../Common/isLoggedIn';
 import isCompletedProfile from '../../../../Common/isCompletedProfile';
 import {
   loadItems,
-  loadDateTime,
+  loadDate,
   loadLogistics,
   loadAddresses,
   setAdditionalNotes,
@@ -34,14 +34,14 @@ import {
 import {
   getItems,
   getLogistics,
-  getDateTime,
+  getDate,
   getAddresses,
   getOverview
 } from '../moveReducers';
 
 const mapDispatchToProps = dispatch => ({
   loadAddresses: () => dispatch(loadAddresses()),
-  loadDateTime: () => dispatch(loadDateTime()),
+  loadDate: () => dispatch(loadDate()),
   loadLogistics: () => dispatch(loadLogistics()),
   loadItems: () => dispatch(loadItems()),
   getAdditionalNotes: () => dispatch(getAdditionalNotes()),
@@ -53,7 +53,7 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({
   addresses: getAddresses(state),
-  dateTime: getDateTime(state),
+  date: getDate(state),
   logistics: getLogistics(state),
   items: getItems(state),
   projectName: getOverview(state).get('projectName'),
@@ -63,13 +63,13 @@ const mapStateToProps = state => ({
 const isLoading = props => {
   const {
     addresses,
-    dateTime,
+    date,
     logistics,
     items
   } = props;
   return (
     addresses.get('status') !== 'LOADED' ||
-    dateTime.get('status') !== 'LOADED' ||
+    date.get('status') !== 'LOADED' ||
     logistics.get('status') !== 'LOADED' ||
     items.get('status') !== 'LOADED'
   );
@@ -86,11 +86,9 @@ const validators = ({
     }
     return true;
   },
-  dateTimeValidator: (dateTime) => {
+  dateValidator: (date) => {
     if(
-      isNull(dateTime.pickUpDate) ||
-      isNull(dateTime.pickUpTime) ||
-      isNull(dateTime.deliveryDate)
+      isNull(date.pickUpDate)
     ) {
       return false;
     }
@@ -117,14 +115,14 @@ const enhance = compose(
     componentDidMount() {
       const {
         loadAddresses,
-        loadDateTime,
+        loadDate,
         loadLogistics,
         loadItems,
         getAdditionalNotes,
         getProjectName
       } = this.props;
         loadAddresses();
-        loadDateTime();
+        loadDate();
         loadLogistics();
         loadItems();
         getAdditionalNotes();

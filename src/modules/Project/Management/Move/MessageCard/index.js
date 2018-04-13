@@ -22,7 +22,7 @@ const mapStateToProps = (state, ownProps) => ({
   projectUnread: getProjectUnreadCount(state, ownProps.projectId),
   receivers: ownProps.receivers.map(r => ({
       id: r.provider.id,
-      businessName: r.provider.businessName,
+      name: r.provider.name,
       conversation: r.conversation,
       unreadMsgCount: retrieveUnreadMsgCountPerConvo(state, ownProps.projectId, r.conversation)
   }))
