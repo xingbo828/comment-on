@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { array, string, object, func } from 'prop-types';
-import camelCase from 'lodash/camelCase';
 import reduce from 'lodash/reduce';
 import { Legend, ItemQuantity } from '../../../../../../globalComponents/Form';
 import { StyledContainer } from './Styled';
@@ -14,7 +13,7 @@ class ItemsCount extends Component {
   };
 
   initState = (value, configs) => {
-    return configs.map(camelCase).reduce((accu, curr) => {
+    return configs.map(c => c.title).reduce((accu, curr) => {
       accu[curr] = value[curr] || 0;
       return accu;
     }, {});
