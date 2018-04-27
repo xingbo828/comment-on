@@ -6,9 +6,7 @@ const path = require('path');
 const os = require('os');
 const fs = require('fs');
 
-module.exports = functions.storage.object().onFinalize(event => {
-  const object = event.data; // The Storage object.
-
+module.exports = functions.storage.object().onFinalize(object => {
   const fileBucket = object.bucket; // The Storage bucket that contains the file.
   const filePath = object.name; // File path in the bucket.
   const contentType = object.contentType; // File content type.
