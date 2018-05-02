@@ -52,6 +52,25 @@ app.get('/:providerId/review', (request, response) => {
 
 });
 
+app.get('/yelp/search', (req, res) => {
+  const location = req.query.location;
+  const term = req.query.term;
+  return res.json([
+    {
+      id: 'DJplkq9x17wm2V4vIT4brg',
+      name: 'Boulevard Kitchen & Oyster Bar',
+      image_url: 'https://s3-media2.fl.yelpcdn.com/bphoto/AUNMtI5cDEx9qO3g-S8zqA/o.jpg',
+      address: '845 Burrard Street, Vancouver, BC V6Z 2K7, Canada'
+    },
+    {
+      id: 'KHC5XtWh7ulyQAlZ44-AiA',
+      name: 'The Boulevard Coffee Roasting',
+      image_url: 'https://s3-media1.fl.yelpcdn.com/bphoto/vun0SsX571wQMM6wIMPhdA/o.jpg',
+      address: '5970 University Boulevard, Vancouver, BC V6T 1Z3, Canada'
+    }
+  ]);
+});
+
 module.exports = () => {
   return {
     providers: functions.https.onRequest(app)
