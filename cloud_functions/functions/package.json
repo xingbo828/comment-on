@@ -2,6 +2,7 @@
   "name": "functions",
   "description": "Cloud Functions for Firebase",
   "dependencies": {
+    "axios": "^0.18.0",
     "express": "latest",
     "body-parser": "latest",
     "firebase-admin": "latest",
@@ -13,7 +14,8 @@
     "swagger-tools": "latest",
     "yamljs": "latest",
     "@google-cloud/storage": "latest",
-    "child-process-promise": "latest"
+    "child-process-promise": "latest",
+    "lodash": "^4.17.10"
   },
   "scripts": {
     "serve": "firebase serve --only=functions",

@@ -9,6 +9,13 @@ const googleMapsClient = require('@google/maps').createClient({
   key: 'AIzaSyDJjuf5Cli-bjDPh_lWLhPoSqy7UPCr0xM',
   Promise: Promise
 });
+const axios = require('axios');
+const yelpInstance = axios.create({
+  baseURL: 'https://api.yelp.com/v3/',
+  headers: {'Authorization': 'Bearer w5Ac-Db5r7Vm0r9Ne4_f573HLMjTvmZR4gpmvoS_qbhgvvuFDOXFhA7qyEMQhEhuFrlRyhWiYpKD3owRXZ1jZBFmqnDx-eP0rVJEa8SWSdxnpV81wzrXdhZeSvbfWnYx'}
+});
+
+const _ = require('lodash');
 
 const app = express();
 
@@ -23,52 +30,95 @@ app.use((err, req, res, next) => {
   }
 });
 
-const getReview = (business) => {
-  return {
-    google: {
-      url: "https://maps.google.com/?cid=10281119596374313554",
-      rating: 4.5,
-      reviews_count: 321
-    },
-    yelp: {
-      url: "https://www.yelp.com/biz/gary-danko-san-francisco",
-      rating: 3.2,
-      reviews_count: 133
-    }
-  };
+
+const getGoogleRating = (placeid) => {
+  return googleMapsClient.place({placeid: placeid}).asPromise()
+    .then((place) => {
+      const url = _.get(place, 'json.result.url', '');
+      const rating = _.get(place, 'json.result.rating', '');
+      return {
+        type: 'google',
+        url: url,
+        rating: rating,
+        reviews_count: 0
+      };
+    }).catch(() => {
+      return {type: 'google'};
+    });
+};
+
+const getYelpRating = (businessid) => {
+  return yelpInstance.get(`businesses/${businessid}`)
+    .then(({data}) => {
+      return {
+        type: 'yelp',
+        url: data.url || '',
+        rating: data.rating || '',
+        review_count: data.review_count || 0
+      }
+
+    }).catch(() => {
+      return {type: 'yelp'};
+    });
+};
+
+const getReview = (reviewInfo) => {
+  const getReviews = [];
+
+  if (reviewInfo.googleInfo) {
+    getReviews.push(getGoogleRating(reviewInfo.googleInfo.id));
+  }
+
+  if (reviewInfo.yelpInfo) {
+    getReviews.push(getYelpRating(reviewInfo.yelpInfo.id));
+  }
+
+  return Promise.all(getReviews)
+    .then(((reviews) => {
+      return reviews.reduce((result, review) => {
+        result[review.type] = review;
+        delete review.type;
+        return result;
+      }, {});
+    }));
 };
 
 app.get('/:providerId/review', (request, response) => {
   const providerId = request.params.providerId;
   return admin.firestore().collection('providers').doc(providerId).get().then((doc) => {
     const data = doc.data();
-    if (!data.review) {
-      return getReview(data);
+    if (!data.review && data.reviewInfo) {
+      return getReview(data.reviewInfo);
     }
     return data.review;
   }).then((review) => {
     return response.json(review);
   });
-
 });
 
 app.get('/yelp/search', (req, res) => {
-  const location = req.query.location;
+  const location = req.query.location || 'Vancouver,BC';
   const term = req.query.term;
-  return res.json([
-    {
-      id: 'DJplkq9x17wm2V4vIT4brg',
-      name: 'Boulevard Kitchen & Oyster Bar',
-      image_url: 'https://s3-media2.fl.yelpcdn.com/bphoto/AUNMtI5cDEx9qO3g-S8zqA/o.jpg',
-      address: '845 Burrard Street, Vancouver, BC V6Z 2K7, Canada'
-    },
-    {
-      id: 'KHC5XtWh7ulyQAlZ44-AiA',
-      name: 'The Boulevard Coffee Roasting',
-      image_url: 'https://s3-media1.fl.yelpcdn.com/bphoto/vun0SsX571wQMM6wIMPhdA/o.jpg',
-      address: '5970 University Boulevard, Vancouver, BC V6T 1Z3, Canada'
+  yelpInstance.get('businesses/search', {
+    params: {
+      term,
+      location
     }
-  ]);
+  }).then(({data}) => {
+    const result = data.businesses.map(business => {
+      return {
+        rating: business.rating,
+        id: business.id,
+        name: business.name,
+        image_url: business.image_url,
+        address: business.location.display_address.join(', ')
+      };
+    });
+    return res.json(result);
+  }).catch(error => {
+    console.log(error);
+    return res.json([]);
+  });
 });
 
 module.exports = () => {
