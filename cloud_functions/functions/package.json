@@ -15,7 +15,8 @@
     "yamljs": "latest",
     "@google-cloud/storage": "latest",
     "child-process-promise": "latest",
-    "lodash": "^4.17.10"
+    "lodash": "^4.17.10",
+    "@sendgrid/mail": "^6.2.1"
   },
   "scripts": {
     "serve": "firebase serve --only=functions",

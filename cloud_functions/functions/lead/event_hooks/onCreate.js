@@ -1,6 +1,7 @@
 const functions = require('firebase-functions');
 const constants = require('../constants');
 const admin = require('firebase-admin');
+const {sendNewProviderEmails} = require('../../utils/mailClient');
 
 
 module.exports = functions.firestore
@@ -34,7 +35,12 @@ module.exports = functions.firestore
           };
         });
         batch.set(snap.ref, lead);
-        return batch.commit();
+        return sendNewProviderEmails(lead.receivers, lead.id)
+          .then(() => {
+            return batch.commit();
+          }).catch((err) => {
+            console.log(err);
+          });
       })
       .then(()=>{
         console.log('success');
