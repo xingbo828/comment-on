@@ -1,7 +1,7 @@
 import Styled from 'styled-components';
 
 const Blockquote = Styled.blockquote`
-  padding: 0;
+  padding: 0 0 0 calc(60px + 1rem);
   margin: 0;
   line-height: 1.5;
 
@@ -29,7 +29,7 @@ const ContentContainer = Styled.div`
 `;
 
 const User = Styled.div`
-  padding:  0 0 0 calc(40px + 1rem);
+  padding:  0 0 0 calc(60px + 1rem);
 `;
 
 const Context = Styled.div`

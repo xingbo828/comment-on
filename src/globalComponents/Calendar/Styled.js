@@ -1,16 +1,18 @@
 import styled from 'styled-components';
 
 export const CalendarContainer = styled.div`
+  margin: 0 0 4rem; 
 `;
 
 export const CalendarToolbar = styled.div`display: flex;`;
 
 const CalendarBtn = styled.button`
+  box-shadow: ${props=>props.theme.boxShadow.large};
   flex: 1;
   cursor: pointer;
   outline: none;
   border-radius: 3px;
-  background-color: transparent;
+  background-color: white;
   border: 1px solid ${props => props.theme.colors.border};
 
   white-space: nowrap;
@@ -47,6 +49,8 @@ export const CurrentDate = styled.span`
 `;
 
 export const CalenderTable = styled.table`
+  box-shadow: ${props=>props.theme.boxShadow.large};
+  border-radius: 4px;
   margin: 10px 0;
   font-size: 0.8rem;
   width: 100%;

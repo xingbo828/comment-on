@@ -1,36 +1,30 @@
 import React, { Component } from 'react';
 import { array, string, object, func } from 'prop-types';
-import camelCase from 'lodash/camelCase';
 import reduce from 'lodash/reduce';
-import { Select } from '../../../../../../globalComponents/Form';
-import {
-  StyledContainer,
-  Label,
-  StyledItems,
-  StyledItem,
-  Desc
-} from './Styled';
+import { Legend, ItemQuantity } from '../../../../../../globalComponents/Form';
+import { StyledContainer } from './Styled';
+
 
 class ItemsCount extends Component {
+
   constructor(props) {
     super(props);
     this.state = this.initState(this.props.value, this.props.configs);
   };
 
   initState = (value, configs) => {
-    return configs.map(camelCase).reduce((accu, curr) => {
+    return configs.map(c => c.title).reduce((accu, curr) => {
       accu[curr] = value[curr] || 0;
       return accu;
     }, {});
   }
 
   getSelectedValue = (label) => {
-    const key = camelCase(label);
+    const key = label;
     return this.state[key] ? this.state[key] : 0
   };
 
-  onOptionSelect = (e) => {
-    const { value, name } = e.target;
+  onOptionSelect = (name, value) => {
     const setState = (name, value) => (prevState, props) => ({[name]: value});
     this.setState(setState(name, value), () => {
       const output = reduce(this.state, (result, value, key) => {
@@ -45,41 +39,27 @@ class ItemsCount extends Component {
     });
   }
 
-
   renderChild = (c) => {
     return (
-      <StyledItem key={c}>
-        <Select
-          label={c}
-          value={this.getSelectedValue(c)}
-          name={camelCase(c)}
-          onChange={this.onOptionSelect}
-        >
-          {Array(6).fill('').map((e, index) => {
-            const current = index === 5 ? '5+' : index;
-            return (
-              <option key={`${c}-${index}`} value={current}>
-                {current}
-              </option>
-            );
-          })}
-        </Select>
-      </StyledItem>
+      <ItemQuantity.ItemQuantity
+        image={c.image}
+        title={c.title}
+        unit="Quantity"
+        value={this.getSelectedValue(c.title)}
+        onChange={this.onOptionSelect}
+      />
     );
   }
   render() {
-    const { label, desc, configs } = this.props;
+    const { label, configs } = this.props;
     return (
       <StyledContainer>
-        <Label>
+        <Legend>
           {label}
-        </Label>
-        {desc && <Desc>
-          {desc}
-        </Desc>}
-        <StyledItems>
+        </Legend>
+        <ItemQuantity.ItemQuantityList>
           {configs.map(c => this.renderChild(c))}
-        </StyledItems>
+        </ItemQuantity.ItemQuantityList>
       </StyledContainer>
     );
   }

@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Avatar from '../../../../globalComponents/Avatar';
 import Icon from '../../../../globalComponents/Icon';
+import { connect } from 'react-redux'
+import { toggleMenu } from '../GlobalNavActions'
 import {
   ContainerDiv,
   Menu,
@@ -11,7 +13,6 @@ import {
   Account,
   Username
 } from './Styled';
-import DropDownTransition from './DropDownTransition';
 
 class AccountNav extends React.Component {
 
@@ -37,11 +38,14 @@ class AccountNav extends React.Component {
   handleClickOutside(e) {
     if (this.containerRef && !this.containerRef.contains(e.target)) {
       this.setState({ active: false });
+      this.props.toggleMenuActiveState(false)
     }
   }
 
   handleClick(event) {
-    this.setState({ active: !this.state.active });
+    const active = !this.state.active;
+    this.props.toggleMenuActiveState(active)
+    this.setState({ active });
   }
 
   handleLogout(e) {
@@ -67,25 +71,31 @@ class AccountNav extends React.Component {
         active={active}
         innerRef={(el) => { this.containerRef = el; }}
       >
-        <Account role="button" onClick={this.handleClick} >
+        <Account role="button" active={active} onClick={this.handleClick} >
           <Username>{this.formatUserName(user.displayName)}&nbsp;&nbsp;<Icon icon="chevron-down" />&nbsp;&nbsp;</Username>
           <Avatar src={user.photoURL} />
         </Account>
-        { active && <DropDownTransition in={active}>
-          {() =>
-            <Menu active={active}>
-              <DisplayName>{user.displayName}</DisplayName>
-              <MenuList onClick={this.handleClick}>
-                <MenuItem><Link to="/account">Manage my account</Link></MenuItem>
-                {user.moverId && <MenuItem><Link to={`/mover/edit/basic-profile`}>Manage my mover account</Link></MenuItem>}
-                <MenuItem><a href="" onClick={this.handleLogout}>Logout</a></MenuItem>
-              </MenuList>
+        { active &&
+          <Menu active={active}>
+            <DisplayName active={active}>{user.displayName}</DisplayName>
+            <MenuList onClick={this.handleClick}>
+              <MenuItem><Link to="/account">Manage my account</Link></MenuItem>
+              {user.moverId && <MenuItem><Link to={`/mover/edit/basic-profile`}>Manage my mover account</Link></MenuItem>}
+              <MenuItem><a href="" onClick={this.handleLogout}>Logout</a></MenuItem>
+            </MenuList>
           </Menu>
         }
-        </DropDownTransition> }
       </ContainerDiv>
     );
   }
 }
 
-export default AccountNav;
+// const mapStateToProps = () => {}
+
+const mapDispatchToProps = (dispatch) => ({
+  toggleMenuActiveState: (isActive) => {
+    dispatch(toggleMenu(isActive))
+  }
+})
+
+export default connect(null, mapDispatchToProps)(AccountNav);

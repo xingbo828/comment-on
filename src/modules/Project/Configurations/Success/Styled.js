@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 
 export const SuccessContainer = styled.div`
+  text-align: center;
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: ${props=>props.theme.spaces.tight};
+  padding: 3rem 0;
+
   ${props=> props.theme.media.greaterThan('md')`
-    padding: ${props=>props.theme.spaces.xWide};
+    padding: 4rem 0;
   `};
 `;
 
@@ -19,3 +21,7 @@ export const ActionContainer = styled.div`
     padding: ${props=>props.theme.spaces.xWide};
   `};
 `;
+
+export const Content = styled.div`
+  margin: 2rem 0;
+`

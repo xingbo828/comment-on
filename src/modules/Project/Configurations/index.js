@@ -1,15 +1,14 @@
 import React from 'react';
-import { withRouter, Route } from 'react-router-dom';
+import { withRouter, Route, Switch } from 'react-router-dom';
 import MoveConfig from './Move';
 import Success from './Success';
-import SwitchWithException from '../../Common/SwitchWithException';
 
 const Project = ({ match }) => {
   return (
-    <SwitchWithException>
+    <Switch>
       <Route path={`${match.url}/move`} component={MoveConfig} />
       <Route path={`${match.url}/success`} component={Success} />
-    </SwitchWithException>
+    </Switch>
   );
 };
 

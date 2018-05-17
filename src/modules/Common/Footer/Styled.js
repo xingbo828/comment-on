@@ -1,37 +1,57 @@
 import Styled from 'styled-components';
 
 const Footer = Styled.footer`
-  margin: 4rem 0 0;
-  padding: 4rem 0 0;
-  border-top: 1px solid ${props => props.theme.colors.border};
-  background: border-top: 1px solid ${props => props.theme.colors.offWhite};
+  margin: 6rem 0 0;
+  padding: 6rem 0 0;
+  background: ${props => props.theme.colors.offWhite};
 `;
 
-
 const OrgContainer = Styled.div`
-  margin: 4rem 0 0;
-  border-top: 1px solid ${props => props.theme.colors.border};
-  line-height: 200px;
+  margin: 0 0 0;
+  line-height: 80px;
+  height: 80px;
+  background: ${props => props.theme.colors.darkOffWhite};
 `;
 
 const List = Styled.ul`
+  display: flex;
+  flex-wrap: wrap;
   padding: 0;
-  margin: 0;
-  line-height: 1.5;
+  margin: 0 0 6rem;
   list-style-type: none;
 `;
 
 const ListItem = Styled.li`
-  font-weight: 600;
+  flex: 1 50%;
+  font-weight: 500;
+  margin: 0 0 .5rem;
+  line-height: 1.5;
+  font-size: .75rem;
   text-decoration: none;
-  color: ${props => props.theme.colors.textLight};
+  color: ${props => props.theme.colors.textDark};
 `;
 
+const ListHeading = Styled.h3`
+  font-size: .75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid ${props => props.theme.colors.border};;
+  padding: 0 0 1rem;
+  margin: 0 0 1rem;
+  text-transform: uppercase;
+  color: ${props => props.theme.colors.textLight};
+`
 
+
+const Copyright = Styled.span`
+  font-size: .75rem;
+`;
 
 export {
   Footer,
   OrgContainer,
   List,
-  ListItem
+  ListItem,
+  Copyright,
+  ListHeading
 }

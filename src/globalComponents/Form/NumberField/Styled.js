@@ -1,66 +1,53 @@
 import Styled from 'styled-components';
 
 export const InputContainer = Styled.div`
-  display: inline-block;
-  padding: 0.5rem 0;
   position: relative;
-  margin: 0 0 1rem;
-  width: 120px;
 `;
 
 export const InputWrapper = Styled.div`
   position: relative;
   width: 100%;
+  display: flex;
 `;
 
-export const NumberHandlerWrapper = Styled.div`
-  position: absolute;
-  right: 0;
-  top: 0;
-  height: 100%;
-  width: 40px;
-`;
-
-const NumberHandler = Styled.span`
-
-cursor: pointer;
-text-align: center;
-height: 100%;
-overflow: hidden;
-color: ${props=>props.theme.colors.textLight};
-position: absolute;
-display: ${props=> props.available ? 'block' : 'none'};
-width: 2rem;
-font-weight: 700;
-border-radius: 500px;
-&:hover {
-  color: ${props=>props.theme.colors.primary};
-}
+const NumberHandler = Styled.div`
+  display: inline-block;
+  width: 50px;
+  min-width: 50px;
+  height: 50px;
+  line-height: 50px;
+  cursor: pointer;
+  text-align: center;
+  color: ${props=>props.theme.colors.textLight};
+  border: 1px solid ${props=>props.theme.colors.textLight};
+  font-weight: 700;
+  text-align: center;
+  border-radius: 500px;
+  &:hover {
+    color: ${props=>props.theme.colors.primary};
+  }
 `;
 
 export const PlusNumberHandler = NumberHandler.extend`
-right: 0;
+  right: 0;
 `;
 
 export const MinusNumberHandler = NumberHandler.extend`
-left: 0;
+  left: 0;
 `;
 
 export const Icon = Styled.i`
-  position: absolute;
-  left:10px;
-  top:50%;
-  line-height: 0;
+
 `;
 
-export const Input = Styled.span`
+export const Quantity = Styled.div`
   display: block;
   width: 100%;
-  border: solid ${props=>props.theme.colors.border};
   border-width: 1px;
   border-radius: 500px;
-  font-size: 1.5rem;
-  padding: 1rem 0;
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 50px;
   outline: none;
   text-align: center;
 
@@ -86,3 +73,10 @@ font-size: 1rem;
 export const InputErrorMsg = Styled.span`
 color: red;
 `;
+
+export const Unit = Styled.div`
+  font-size: .875rem;
+  font-weight: 600;
+  margin-top: -6px;
+  color: ${props=>props.theme.colors.textLight}
+`

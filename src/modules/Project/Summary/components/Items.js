@@ -31,18 +31,18 @@ const Items = ({ items }) => {
 
   const renderInner = items => {
     if (
-      isEmpty(items.speciality) &&
-      isEmpty(items.large) &&
-      isEmpty(items.medium)
+      isEmpty(items.specialCare) &&
+      isEmpty(items.appliances) &&
+      isEmpty(items.decore)
     ) {
       return 'No items';
     }
 
     return (
       <SectionBody>
-        {renderItemsSubSection(items.speciality)}
-        {renderItemsSubSection(items.large)}
-        {renderItemsSubSection(items.medium)}
+        {renderItemsSubSection(items.specialCare)}
+        {renderItemsSubSection(items.appliances)}
+        {renderItemsSubSection(items.decore)}
       </SectionBody>
     );
   };

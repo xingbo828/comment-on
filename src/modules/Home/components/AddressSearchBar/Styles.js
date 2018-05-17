@@ -7,7 +7,7 @@ export const AddressSearchBarContainer = styled.div`
     height: 100px;
     border-radius: 100px;
     background-color: #ffffff;
-    box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.07);
+    box-shadow: ${props.theme.boxShadow.large};
     margin-top: -50px;
   `}
   margin-top: 1rem;

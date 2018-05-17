@@ -1,0 +1,39 @@
+{
+  "bc": {
+    "name": "British Columbia",
+    "key": "bc",
+    "cities": [
+      {
+        "name": "Vancouver",
+        "comingSoon": false
+      },
+      {
+        "name": "North Vancouver",
+        "comingSoon": false
+      },
+      {
+        "name": "Surrey",
+        "comingSoon": true
+      },
+      {
+        "name": "Delta",
+        "comingSoon": true
+      }
+      ,
+      {
+        "name": "Burnaby",
+        "comingSoon": true
+      }
+    ]
+  },
+  "ab": {
+    "key": "ab",
+    "name": "Alberta",
+    "cities": [
+      {
+        "name": "Calgary",
+        "comingSoon": true
+      }
+    ]
+  }
+}

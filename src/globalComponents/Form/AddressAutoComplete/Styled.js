@@ -39,6 +39,7 @@ export const GeosuggestStyled = styled(Geosuggest)`
   display: inline-block;
   width: calc(100% - 20px);
   text-align: left;
+  
   .geosuggest__input {
     border-radius: 0;
     outline: 0;
@@ -65,7 +66,7 @@ export const GeosuggestStyled = styled(Geosuggest)`
     left: 10px;
     right: 0px;
     padding: 0;
-    margin-top: -5px;
+    margin-top: -2px;
     background: #fff;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -73,7 +74,7 @@ export const GeosuggestStyled = styled(Geosuggest)`
     overflow-x: hidden;
     overflow-y: auto;
     list-style: none;
-    box-shadow: 0 25px 32px 0 rgba(0,0,0,0.25);
+    box-shadow: ${props => props.theme.boxShadow.large};
   }
 
   .geosuggest__suggests--hidden {

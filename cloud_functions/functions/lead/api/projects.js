@@ -20,46 +20,69 @@ app.use((err, req, res, next) => {
   }
 });
 
+app.get('/', (request, response) => {
+  return getProviderId(request)
+  .then(userData =>
+    admin.firestore().collection('providers').doc(userData.moverId).get().then(d => ({userData, provider: d.data()}))
+  )
+  .then(({ userData, provider: { projects } }) =>
+    Promise.all(Object.keys(projects).map(key => projects[key].get())).then(projects => ({userData, projects}))
+  )
+  .then(({userData, projects}) => Promise.all(projects.map(p => processProject(p, userData))))
+  .then(result => {
+    response.json(result)
+  })
+  .catch(err => {
+    console.error(err)
+    response.send(err)
+  })
+});
+
+const processProject = (projectRef, moverData) => {
+  const data = projectRef.data();
+
+  if (!data) {
+    return Promise.reject('invalid project');
+  }
+  data.receiver = data.receivers[moverData.moverId];
+  delete data.receivers;
+
+  if (!data.receiver) {
+    return Promise.reject('invalid provider');
+  }
+  data.receiver.provider = data.receiver.provider.id;
+  const ownerId = data.owner;
+  return admin.firestore().collection('users').doc(ownerId).get()
+    .then(ownerData => {
+      ownerData = ownerData.data();
+      data.owner = {
+        displayName: ownerData.displayName
+      };
+      if (data.status === constants.project_status.completed) {
+        if (data.receiver.status === constants.receiver_status.confirmed) {
+          data.owner.email = ownerData.email;
+          data.owner.phone = ownerData.phoneNumber;
+        } else {
+          data.status = constants.project_status.rejected;
+        }
+      }
+
+      return data;
+    });
+};
+
 app.get('/:projectId', (request, response) => {
   const projectId = request.params.projectId;
   return getProviderId(request)
-  .then(userData => {
-    return admin.firestore().collection('projects').doc(projectId).get().then((doc) => {
-      const data = doc.data();
-      if (!data) {
-        return Promise.reject('invalid project');
-      }
-      data.receiver = data.receivers[userData.moverId];
-      delete data.receivers;
-
-      if (!data.receiver) {
-        return Promise.reject('invalid provider');
-      }
-      data.receiver.provider = data.receiver.provider.id;
-      const ownerId = data.owner;
-      return admin.firestore().collection('users').doc(ownerId).get()
-      .then(ownerData => {
-        ownerData = ownerData.data();
-        data.owner = {
-          displayName: ownerData.displayName
-        };
-        if (data.status === constants.project_status.completed) {
-          if (data.receiver.status === constants.receiver_status.confirmed) {
-            data.owner.email = ownerData.email;
-            data.owner.phone = ownerData.phoneNumber;
-          } else {
-            data.status = constants.project_status.rejected;
-          }
-        }
-
-        return data;
+    .then(userData => {
+      return admin.firestore().collection('projects').doc(projectId).get().then((doc) => {
+        return processProject(doc, userData);
+      }).then((data)=>{
+        response.json(data);
+      }).catch((err) => {
+        return response.status(400).json({error: err.message || err});
       });
-    }).then((data)=>{
-      response.json(data);
-    }).catch((err) => {
-      return response.status(400).json({error: err.message || err});
     });
-  });
 });
 
 app.put('/:projectId/', (request, response) => {
@@ -69,13 +92,13 @@ app.put('/:projectId/', (request, response) => {
     return response.status(400).json({error: 'missing action'});
   }
   switch(body.action) {
-    case 'accept':
-      return getProviderId(request)
+  case 'accept':
+    return getProviderId(request)
       .then( data => {
         return handleAcceptLead(body, projectId, data, response);
       });
-    case 'reject':
-      return getProviderId(request)
+  case 'reject':
+    return getProviderId(request)
       .then(data => {
         return handleRejectLead(body, projectId, data, response);
       });
@@ -92,24 +115,26 @@ const getProviderId = (request) =>{
     // Read the ID Token from cookie.
     idToken = request.cookies && request.cookies.__session;
   }
-  if(!idToken) {
+
+  if(!idToken || !request.headers.provider) {
     return Promise.resolve('');
   }
   return admin.auth().verifyIdToken(idToken)
-  .then((decodedToken) => {
-    const uid = decodedToken.uid;
-    return admin.firestore().collection('users').doc(uid).get();
-  })
-  .then((user) => {
-    return {
-      moverId: user.data().moverId,
-      userId: user.id
-    };
-  })
-  .catch((error)=> {
-    console.log(error);
-    return Promise.resolve('');
-  });
+    .then((decodedToken) => {
+      const uid = decodedToken.uid;
+      return admin.firestore().collection('users').doc(uid).get();
+    })
+    // TODO: check if provider belongs to user
+    .then((user) => {
+      return {
+        moverId: request.headers.provider,
+        userId: user.id
+      };
+    })
+    .catch((error)=> {
+      console.log(error);
+      return Promise.resolve('');
+    });
 };
 
 const handleAcceptLead = (body, projectId, userData, response) => {
@@ -134,12 +159,12 @@ const handleAcceptLead = (body, projectId, userData, response) => {
       convoDoc.set({
         project: doc.ref
       });
-      receiver.conversation = convoDoc.ref;
+      receiver.conversation = convoDoc;
 
       if (body.notes) {
         admin.firestore().collection('messages').add({
-          conversation: convoDoc.ref,
-          from: admin.firestore().collection('users').doc(uid).ref,
+          conversation: convoDoc,
+          from: admin.firestore().collection('users').doc(uid),
           status: constants.message_status.unread,
           text: body.notes,
           timestamp: admin.firestore.FieldValue.serverTimestamp(),
@@ -151,7 +176,7 @@ const handleAcceptLead = (body, projectId, userData, response) => {
     }).then(()=>{
       response.json({status: 'success'});
     }).catch((err) => {
-      return response.status(400).json({error: err.toString()});
+      return response.status(400).json({error: err.toString(), stack: err.stack});
     });
   }
   return response.status(400).json({error: 'missing price'});

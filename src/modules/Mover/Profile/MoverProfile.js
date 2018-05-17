@@ -1,50 +1,109 @@
 import React from 'react';
 import Grid from '../../../globalComponents/Grid';
 import { Heading, Paragraph } from '../../../globalComponents/Typography';
-import Comment from '../../../globalComponents/Comment';
-import ActionCard from './ActionCard';
+import PageHeader from '../../../globalComponents/Layout/PageHeader';
+import Link from '../../../globalComponents/Link';
+import Icon from '../../../globalComponents/Icon';
+// import Comment from '../../../globalComponents/Comment';
 
 import {
-  HeadingContainer,
-  ProfileContentContainer,
-  CommentContainer,
-  Content,
+  ContactInfoContainer,
+  Divider,
+  ContactInfoList,
+  ContactInfoListItem,
+  ContactInfoListItemLink,
+  ImgContainer,
+  // CrewMemberContainer,
+  // CrewMemberItemContainer
 } from './Styled';
 
-const { Container } = Grid;
+const { Container, Row, Col } = Grid;
 
-const mapCrew = (Crew) => (
-  Crew.map((person) => (
-    <CommentContainer>
-      <Comment
-        name={'Steve Jobs'}
-        meta={'Oct. 17 2017'}
-        copy={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."}
-      />
-    </CommentContainer>
-  ))
-);
-
-const MoverProfile = ({ profile, location }) => (
+const MoverProfile = ({ profile, history }) => (
   <div>
-    <HeadingContainer>
+    <PageHeader>
       <Container>
-        <Heading wrapperTag="h1" size="l">{profile.businessName}</Heading>
+        <Row>
+          <Col xs={24} sm={24} md={24} lg={24}>
+            <Link secondary onClick={history.goBack}>
+              <Icon icon="arrow-left" />&nbsp;&nbsp;Back
+            </Link>
+            <Heading wrapperTag="h1" size="md">
+              {profile.name}
+            </Heading>
+          </Col>
+        </Row>
       </Container>
-    </HeadingContainer>
+    </PageHeader>
+    <ContactInfoContainer>
+      <Container>
+        <Row>
+          <Col xs={8} sm={10} md={10} lg={8}>
+            <ImgContainer>
+              <img src={profile.logo} alt="Logo" />
+            </ImgContainer>
+          </Col>
+          <Col xs={16} sm={14} md={14} lg={8}>
+            <ContactInfoList>
+              <ContactInfoListItem>
+                <ContactInfoListItemLink
+                  href={`tel:${profile.phoneNumber}`}
+                >
+                  <Icon icon="phone" style={{ marginRight: '1rem' }} />
+                  {profile.phoneNumber}
+                </ContactInfoListItemLink>
+              </ContactInfoListItem>
+              <ContactInfoListItem>
+                <ContactInfoListItemLink
+                  href={`mailto:${profile.email}`}
+                >
+                  <Icon icon="envelope" style={{ marginRight: '1rem' }} />
+                  {profile.email}
+                </ContactInfoListItemLink>
+              </ContactInfoListItem>
+            </ContactInfoList>
+          </Col>
+        </Row>
+      </Container>
+    </ContactInfoContainer>
     <Container>
-      <ProfileContentContainer>
-        <Content>
-          <Heading wrapperTag="h3" size="sm" underline>About</Heading>
-          <Paragraph>{profile.businessDescription}</Paragraph>
-          <Heading wrapperTag="h3" size="sm" underline>Crew</Heading>
-          {mapCrew([1,2])}
-        </Content>
-        <ActionCard/>
-      </ProfileContentContainer>
+      <Row>
+        <Col xs={24} sm={24} md={24} lg={16}>
+          <Divider />
+        </Col>
+      </Row>
     </Container>
+    <Container>
+      <Row>
+        <Col xs={24} sm={24} md={24} lg={16}>
+          <Heading wrapperTag="h3" size="sm" underline>
+            About
+          </Heading>
+          <Paragraph>{profile.description}</Paragraph>
+        </Col>
+      </Row>
+    </Container>
+    {/* {profile.crewMembers && (
+      <Container>
+        <Row>
+          <Col xs={24} sm={24} md={24} lg={16}>
+            <Heading wrapperTag="h3" size="sm" underline>
+              Crew
+            </Heading>
+            <CrewMemberContainer>
+              {profile.crewMembers.map(member => {
+                return (
+                  <CrewMemberItemContainer key={member.name}>
+                    <Comment photo={member.avatar} name={member.name} copy={member.description} />
+                  </CrewMemberItemContainer>
+                );
+              })}
+            </CrewMemberContainer>
+          </Col>
+        </Row>
+      </Container>
+    )} */}
   </div>
 );
-
 
 export default MoverProfile;

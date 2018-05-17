@@ -48,17 +48,17 @@ const MoveProjectManagement = ({ projectData, theme, history }) => {
 
   const current = getCurrentStep(projectData);
   return (
-    <Container>
+    <Container overlap>
       <Row>
         <Col xm={24} sm={24} md={24} lg={16}>
           <ProgressPanels current={current}>
             <ProgressPanels.Panel
-              header="completed form"
+              header="Move details submitted"
               panelKey="completed-form"
             />
             <ProgressPanels.Panel
               inProgressIndexReplacement={<Icon icon="spinner" spin />}
-              header="finding movers"
+              header="Getting estimates"
               panelKey="finding-movers"
             />
             <ProgressPanels.Panel

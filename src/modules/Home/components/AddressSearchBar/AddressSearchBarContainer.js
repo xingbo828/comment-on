@@ -3,20 +3,23 @@ import { compose, withProps } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import AddressSearchBar from './AddressSearchBar';
 import validators, { validateFunc } from '../../../Common/validators';
-import {
-  localSaveAddresses
-} from '../../../Project/Configurations/Move/moveActions';
+import { localSaveAddresses } from '../../../Project/Configurations/Move/moveActions';
 
-const validate = validateFunc([{
-  field: 'pickUpAddress',
-  validator: 'isRequired',
-  message: 'Required'
-}, {
-  field: 'deliveryAddress',
-  validator: 'isRequired',
-  message: 'Required'
-}] , validators);
-
+const validate = validateFunc(
+  [
+    {
+      field: 'pickUpAddress',
+      validator: 'isRequired',
+      message: 'Required'
+    },
+    {
+      field: 'deliveryAddress',
+      validator: 'isRequired',
+      message: 'Required'
+    }
+  ],
+  validators
+);
 
 const enhance = compose(
   withRouter,
@@ -34,8 +37,22 @@ const enhance = compose(
       const rawAddresses = values.toJS();
       const newAddress = {
         addresses: {
-          pickUpAddress: rawAddresses.pickUpAddress.location,
-          deliveryAddress: rawAddresses.deliveryAddress.location
+          pickUpAddress: Object.assign(
+            {},
+            rawAddresses.pickUpAddress.location,
+            {
+              formattedAddress:
+                rawAddresses.pickUpAddress.gmaps.formatted_address
+            }
+          ),
+          deliveryAddress: Object.assign(
+            {},
+            rawAddresses.deliveryAddress.location,
+            {
+              formattedAddress:
+                rawAddresses.deliveryAddress.gmaps.formatted_address
+            }
+          )
         }
       };
       return localSaveAddresses(newAddress);

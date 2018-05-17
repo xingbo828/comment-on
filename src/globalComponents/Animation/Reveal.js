@@ -5,16 +5,18 @@ import { Transition } from 'react-transition-group'
 const defaultStyle = timeout => ({
   transition: `height ${timeout}ms`,
   height: 0,
-  overflow: 'hidden',
+  opacity: 0
 });
 
 const transitionStyles = height => {
   const styles = {
-    height: `${height}px`
+    height: `${height}px`,
+    opacity: 1
   }
 
   const enteredStyle = {
-    height: 'auto'
+    height: 'auto',
+    opacity: 1
   }
 
   return {

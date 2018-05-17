@@ -1,7 +1,8 @@
 import React from 'react';
 import Grid from '../../../globalComponents/Grid';
 import { Heading } from '../../../globalComponents/Typography';
-import PageHero from '../../../globalComponents/Layout/PageHero';
+// import asyncLoad from '../../Common/asyncLoad';
+import PageHeader from '../../../globalComponents/Layout/PageHeader';
 import Link from '../../../globalComponents/Link';
 import Icon from '../../../globalComponents/Icon';
 import { withRouter } from 'react-router-dom';
@@ -32,7 +33,7 @@ const ProjectManagement = ({ projectData, selectedProvider, history }) => {
 
   return (
     <Container>
-      <PageHero>
+      <PageHeader>
         <Grid.Container>
           <Grid.Row>
             <Grid.Col xs={24} sm={24} md={24} lg={24}>
@@ -43,13 +44,11 @@ const ProjectManagement = ({ projectData, selectedProvider, history }) => {
             </Grid.Col>
           </Grid.Row>
         </Grid.Container>
-      </PageHero>
-      <Grid.Container overlap>
-        <TypedProjectManagement
-          selectedProvider={selectedProvider}
-          projectData={projectData}
-        />
-      </Grid.Container>
+      </PageHeader>
+      <TypedProjectManagement
+        selectedProvider={selectedProvider}
+        projectData={projectData}
+      />
     </Container>
   );
 };

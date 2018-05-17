@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import {
   InputContainer,
-  Input,
+  Quantity,
   FocusBorder,
   InputWrapper,
   PlusNumberHandler,
   MinusNumberHandler,
-  Icon
+  Icon,
+  Unit
 } from './Styled'
 
 class NumberField extends Component {
@@ -36,19 +37,20 @@ class NumberField extends Component {
   decAvailable = (min) => (v) => v-1 >= min;
 
   render() {
-    const { placeholder, onChange, max, min } = this.props;
+    const { placeholder, onChange, max, min, unit } = this.props;
     const { value } = this.state;
     return (
       <InputContainer>
         <InputWrapper>
-          <PlusNumberHandler available={this.incAvailable(max)(value)} onClick={this.handleClick(1)}>
-            <Icon className="fa fa-plus" aria-hidden="true"></Icon>
-          </PlusNumberHandler>
           <MinusNumberHandler available={this.decAvailable(min)(value)} onClick={this.handleClick(-1)}>
             <Icon className="fa fa-minus" aria-hidden="true"></Icon>
           </MinusNumberHandler>
-          <Input onChange={onChange} placeholder={placeholder}>{value}</Input>
+          <Quantity onChange={onChange} placeholder={placeholder}>{value}</Quantity>
+          <PlusNumberHandler available={this.incAvailable(max)(value)} onClick={this.handleClick(1)}>
+            <Icon className="fa fa-plus" aria-hidden="true"></Icon>
+          </PlusNumberHandler>
         </InputWrapper>
+        <Unit>{unit}</Unit>
         <FocusBorder />
       </InputContainer>
     );

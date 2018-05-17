@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  border-radius: 3px;
+  box-shadow: ${props=>props.theme.boxShadow.large};
   position: relative;
 `;
 
@@ -31,7 +33,6 @@ export const RouteInfoContainer = styled.div`
   `}
   background-color: white;
   color: ${props=>props.theme.colors.primary};
-  border-radius: 3px;
   font-weight: ${props=>props.theme.fontWeights.roman};
   text-align: center;
   display: inline-block;
@@ -46,25 +47,25 @@ export const RouteInfoContainer = styled.div`
 
 
 export const InputsContainer = styled.div`
-  padding-top: ${props=>props.theme.spaces.wide};
-  padding-left: ${props=>props.theme.spaces.tight};
-  padding-right: ${props=>props.theme.spaces.tight};
-  ${props=>props.theme.media.greaterThan('sm')`
-    padding-top: ${props=>props.theme.spaces.wide};
-    padding-left: ${props=>props.theme.spaces.xWide};
-    padding-right: ${props=>props.theme.spaces.xWide};
-  `}
+  padding: 2rem 2rem .5rem;
   position: relative;
+
+  ${props=>props.theme.media.greaterThan('sm')`
+    padding: 3rem;
+  `}
+
   &:before {
     font-family: 'FontAwesome';
     content: "\f111\00a0\f111\00a0\f111";
     position: absolute;
     color: #d3d3d3;
-    top: 68px;
+    top: 70px;
     font-size: .45rem;
-    left: calc(${props=>props.theme.spaces.tight} + 7px);
+    left: calc(2rem + 7px);
+
     ${props=>props.theme.media.greaterThan('sm')`
-      left: calc(${props=>props.theme.spaces.xWide} + 7px);
+      top: 83px;
+      left: calc(3rem + 7px);
     `}
     width: 5px;
     overflow-wrap: break-word;

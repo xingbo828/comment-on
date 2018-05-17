@@ -6,12 +6,17 @@ const tailEffect = keyframes`
   }
 `;
 
+export const StepsContainer = styled.div`
+  background: white;
+  box-shadow: inset 0px -1px 0px 0px ${props => props.theme.colors.border};
+`;
 
-export const StepsContainer = styled.ul`
+export const StepsInner = styled.ul`
   display: flex;
   padding: 0;
   margin: 0;
   font-size: .625rem;
+  
   ${props=>props.theme.media.greaterThan('sm')`
     font-size: .875rem;
   `}
@@ -40,22 +45,22 @@ export const StepContainer = styled.li`
   list-style: none;
   text-align: center;
   padding: .5rem 0;
+
   ${props=>props.theme.media.greaterThan('sm')`
     padding: 2.5rem 0;
-    border-top: 1px solid ${props=>props.theme.colors.border};
   `}
+
   border-bottom-width: 1px;
   border-bottom-style: solid;
   text-transform: uppercase;
   font-weight: ${props=>props.theme.fontWeights.medium};
+
   ${props => {
     if (props.status === 'completed' ) {
       return `
         cursor: pointer;
         border-bottom-color: ${props.theme.colors.success};
-        i {
-          color: ${props.theme.colors.success};
-        }
+        color: ${props.theme.colors.success};
       `;
     } else if (props.status === 'inProgress') {
       return `
@@ -71,12 +76,9 @@ export const StepContainer = styled.li`
         return `
           cursor: pointer;
           border-bottom-color: ${props.theme.colors.success};
-          i {
-            color: ${props.theme.colors.success};
-          }
+          color: ${props.theme.colors.success};
         `;
       }
-
     }
   }}
 `;

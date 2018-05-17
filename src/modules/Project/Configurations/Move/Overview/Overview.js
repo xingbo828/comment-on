@@ -1,16 +1,16 @@
 import React from 'react';
-import isObject from 'lodash/isObject';
+// import isObject from 'lodash/isObject';
 import isEmpty from 'lodash/isEmpty';
 import capitalize from 'lodash/capitalize';
 import startCase from 'lodash/startCase';
 import Grid from '../../../../../globalComponents/Grid';
 import Layout from '../../../../../globalComponents/Layout';
-import { Heading, Paragraph } from '../../../../../globalComponents/Typography';
-import { Button, SubLabel, TextArea, TextField } from '../../../../../globalComponents/Form';
+import { Heading } from '../../../../../globalComponents/Typography';
+import { Button, TextArea, TextField, Legend } from '../../../../../globalComponents/Form';
 import Icon from '../../../../../globalComponents/Icon';
 // import PlaceIdToAddress from '../../../../../globalComponents/GooglePlaceIdToAddress';
 import LatLngToAddress from '../../../../../globalComponents/LatLngToAddress';
-import { MOVING_SEARCH_TIME_RANGE } from '../../../../../constants';
+// import { MOVING_SEARCH_TIME_RANGE } from '../../../../../constants';
 import {
   Section,
   SectionHeader,
@@ -22,7 +22,7 @@ import {
   SectionInvalid
 } from './Styled';
 
-const { Form, FormActions, FormHeading, FormInner } = Layout.Form;
+const { Form, FormActions, FormInner, FormFieldSet } = Layout.Form;
 
 const ConfigurationOverview = ({
   loginStatus,
@@ -31,7 +31,7 @@ const ConfigurationOverview = ({
   projectName,
   additionalNotes,
   addresses: rootAddresses,
-  dateTime,
+  date,
   logistics,
   items,
   validators,
@@ -41,10 +41,10 @@ const ConfigurationOverview = ({
   isLoggedIn,
   signIn
 }) => {
-  const areFieldsValidate = (addresses, dateTime, logistics, validators) => {
+  const areFieldsValidate = (addresses, date, logistics, validators) => {
     const isValid =
       validators.addressesValidator(addresses) &&
-      validators.dateTimeValidator(dateTime) &&
+      validators.dateValidator(date) &&
       validators.logisticsValidator(logistics);
     return isValid;
   };
@@ -101,49 +101,50 @@ const ConfigurationOverview = ({
     );
   };
 
-  const renderdateTimeSection = (dateTime, validator) => {
-    const renderInner = (dateTime, validator) => {
-      if (!validator(dateTime)) {
+  const renderdateSection = (date, validator) => {
+    const renderInner = (date, validator) => {
+      if (!validator(date)) {
         return (
-          <SectionInvalid>Invalid date & time configuration.</SectionInvalid>
+          <SectionInvalid>Invalid date configuration.</SectionInvalid>
         );
       }
-      const { pickUpDate, pickUpTime, deliveryDate, deliveryTime } = dateTime;
-      const mappedPickUpTime = MOVING_SEARCH_TIME_RANGE.find(
-        i => i.value === pickUpTime
-      );
-      const mappedDeliveryTime = MOVING_SEARCH_TIME_RANGE.find(
-        i => i.value === deliveryTime
-      );
+      const { pickUpDate } = date;
+      // const { pickUpDate, pickUpTime, deliveryDate, deliveryTime } = dateTime;
+      // const mappedPickUpTime = MOVING_SEARCH_TIME_RANGE.find(
+      //   i => i.value === pickUpTime
+      // );
+      // const mappedDeliveryTime = MOVING_SEARCH_TIME_RANGE.find(
+      //   i => i.value === deliveryTime
+      // );
 
       return (
         <SectionBody>
           <SectionBodyItem>
             <SectionBodyItemLabel>Pick-up date</SectionBodyItemLabel>
             <SectionBodyItemContent>
-              {pickUpDate.format('MMMM, D, YYYY')}
+              {pickUpDate.map(p => <p>{p.format('dddd, MMMM, D, YYYY')}</p>)}
             </SectionBodyItemContent>
           </SectionBodyItem>
-          <SectionBodyItem>
+          {/* <SectionBodyItem>
             <SectionBodyItemLabel>Pick-up time</SectionBodyItemLabel>
             <SectionBodyItemContent>
               {mappedPickUpTime && mappedPickUpTime.label}
             </SectionBodyItemContent>
-          </SectionBodyItem>
-          <SectionBodyItem>
+          </SectionBodyItem> */}
+          {/* <SectionBodyItem>
             <SectionBodyItemLabel>Delivery date</SectionBodyItemLabel>
             <SectionBodyItemContent>
               {isObject(deliveryDate)
                 ? deliveryDate.format('MMMM, D, YYYY')
                 : startCase(deliveryDate)}
             </SectionBodyItemContent>
-          </SectionBodyItem>
-          {deliveryDate !== 'sameDayDelivery' && <SectionBodyItem>
+          </SectionBodyItem> */}
+          {/* {deliveryDate !== 'sameDayDelivery' && <SectionBodyItem>
             <SectionBodyItemLabel>Delivery time</SectionBodyItemLabel>
             <SectionBodyItemContent>
               {mappedDeliveryTime && mappedDeliveryTime.label}
             </SectionBodyItemContent>
-          </SectionBodyItem>}
+          </SectionBodyItem>} */}
         </SectionBody>
       );
     };
@@ -152,7 +153,7 @@ const ConfigurationOverview = ({
       <Section>
         <SectionHeader>
           <Heading wrapperTag="h2" size="sm">
-            Date & Time
+            Date
           </Heading>
           <SectionHeaderEditLink
             to={{ pathname: '/projects/configurations/move/date', fromOverview: true }}
@@ -160,7 +161,7 @@ const ConfigurationOverview = ({
             Edit
           </SectionHeaderEditLink>
         </SectionHeader>
-        {renderInner(dateTime, validator)}
+        {renderInner(date, validator)}
       </Section>
     );
   };
@@ -249,18 +250,18 @@ const ConfigurationOverview = ({
   const renderItemsSection = items => {
     const renderInner = items => {
       if (
-        isEmpty(items.speciality) &&
-        isEmpty(items.large) &&
-        isEmpty(items.medium)
+        isEmpty(items.specialCare) &&
+        isEmpty(items.appliances) &&
+        isEmpty(items.decore)
       ) {
         return 'No items';
       }
 
       return (
         <SectionBody>
-          {renderItemsSubSection(items.speciality)}
-          {renderItemsSubSection(items.large)}
-          {renderItemsSubSection(items.medium)}
+          {renderItemsSubSection(items.specialCare)}
+          {renderItemsSubSection(items.appliances)}
+          {renderItemsSubSection(items.decore)}
         </SectionBody>
       );
     };
@@ -291,19 +292,13 @@ const ConfigurationOverview = ({
       onChange: onChangeHandler
     };
     return (
-      <Section noBorder>
-        <SectionHeader>
-          <Heading wrapperTag="h2" size="sm">
-            Project Name
-          </Heading>
-        </SectionHeader>
-        <SubLabel>
-            Please give your project a name.
-          </SubLabel>
-        <SectionBody>
-          <TextField input={input} />
-        </SectionBody>
-      </Section>
+      <div>
+        <Legend>Enter a name for your project</Legend>
+        <TextField 
+          input={input}
+          label="Project name"
+        />
+      </div>
     );
   };
 
@@ -317,35 +312,32 @@ const ConfigurationOverview = ({
       onChange: onChangeHandler
     };
     return (
-      <Section noBorder>
-        <SectionHeader>
-          <Heading wrapperTag="h2" size="sm">
-            Additional Notes
-          </Heading>
-        </SectionHeader>
-        <SubLabel>
-            Please do not enter your personal contact information.
-          </SubLabel>
-        <SectionBody>
-          <TextArea input={input} />
-        </SectionBody>
-      </Section>
+      <div>
+        <Legend>Provide us with any additional notes. This is the place for any additional quetions, concerns or information pertaining to your move you feel we may have missed.</Legend>
+        <TextArea 
+          input={input}
+          label="Additional notes"
+        />
+      </div>
     );
   };
   return (
     <Grid.Container>
-      <FormHeading>
-        <Heading wrapperTag="h1">Overview</Heading>
-        <Paragraph>Here is an overview of your move.</Paragraph>
-      </FormHeading>
       <Form onSubmit={handleSubmit}>
         <FormInner>
-          {renderAddressSection(rootAddresses, validators.addressesValidator)}
-          {renderdateTimeSection(dateTime, validators.dateTimeValidator)}
-          {renderLogistics(logistics, validators.logisticsValidator)}
-          {renderItemsSection(items)}
-          {renderProjectName(projectName, setProjectName)}
-          {renderAdditionalNoteSection(additionalNotes, setAdditionalNotes)}
+          <FormFieldSet>
+            <Legend>Let's review everything so far. Feel free to go back and make any changes.</Legend>
+            {renderAddressSection(rootAddresses, validators.addressesValidator)}
+            {renderdateSection(date, validators.dateValidator)}
+            {renderLogistics(logistics, validators.logisticsValidator)}
+            {renderItemsSection(items)}
+          </FormFieldSet>
+          <FormFieldSet>
+            {renderProjectName(projectName, setProjectName)}
+          </FormFieldSet>
+          <FormFieldSet>
+            {renderAdditionalNoteSection(additionalNotes, setAdditionalNotes)}
+          </FormFieldSet>
         </FormInner>
         <FormActions>
           {loginStatus === 'AUTHENTICATED' && isCompletedProfile && <Button
@@ -355,13 +347,13 @@ const ConfigurationOverview = ({
             disabled={
               !areFieldsValidate(
                 rootAddresses.addresses,
-                dateTime,
+                date,
                 logistics,
                 validators
               )
             }
           >
-            Submit<Icon icon="arrow-right" />
+            Find a mover <Icon icon="arrow-right" />
           </Button>}
           {loginStatus === 'NOT_AUTHENTICATED' && <Button
             style={{ float: 'right' }}
@@ -370,13 +362,13 @@ const ConfigurationOverview = ({
             disabled={
               !areFieldsValidate(
                 rootAddresses.addresses,
-                dateTime,
+                date,
                 logistics,
                 validators
               )
             }
           >
-            Sign in<Icon icon="sign-in" />
+            Sign in to continue
           </Button>}
           {loginStatus === 'AUTHENTICATED' && !isCompletedProfile && <Button
             style={{ float: 'right' }}
@@ -385,13 +377,13 @@ const ConfigurationOverview = ({
             disabled={
               !areFieldsValidate(
                 rootAddresses.addresses,
-                dateTime,
+                date,
                 logistics,
                 validators
               )
             }
           >
-            Update Profile<Icon icon="sign-in" />
+            Update profile to continue
           </Button>}
           <Button style={{ float: 'left' }} ghost onClick={goBack}>
             <Icon icon="arrow-left" />Back

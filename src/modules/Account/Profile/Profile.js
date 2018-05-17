@@ -30,12 +30,12 @@ class Profile extends Component {
       } = this.props;
     return (
       <Container>
-        <Form onSubmit={handleSubmit} style={{marginTop: 120}}>
-          <Field
+        <Form small onSubmit={handleSubmit}>
+          <FormInner>
+            <Field
               component={this.renderProfilePhoto}
               name="photoURL"
             />
-          <FormInner>
             <Field
               component={TextField}
               type="text"
@@ -56,13 +56,14 @@ class Profile extends Component {
             />
           </FormInner>
           <FormActions>
-            <Button
+            <Button 
+              fullWidth
               style={{ float: 'right' }}
               type="submit"
               primary
               disabled={submitting || pristine || !valid}
             >
-              Update<Icon icon={submitting ? 'refresh' : 'pencil'} spin={submitting} />
+              Update<Icon icon={submitting ? 'refresh' : ''} spin={submitting} />
             </Button>
           </FormActions>
         </Form>

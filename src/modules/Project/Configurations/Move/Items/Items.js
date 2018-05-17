@@ -1,17 +1,15 @@
 import React from 'react';
 import { Field } from 'redux-form/immutable';
-import { Button } from '../../../../../globalComponents/Form';
+import { Button, TextArea, Legend } from '../../../../../globalComponents/Form';
 import Grid from '../../../../../globalComponents/Grid';
 import Icon from '../../../../../globalComponents/Icon';
 import Layout from '../../../../../globalComponents/Layout';
-import { Heading, Paragraph } from '../../../../../globalComponents/Typography';
 import ItemsCount from './ItemsCount';
 import configs from './ItemsCount/configs';
 
-const { Form, FormActions, FormHeading, FormInner } = Layout.Form;
+const { Form, FormActions, FormInner, FormFieldSet } = Layout.Form;
 
 const renderItemsCounts = ({ input, name, label, desc, configs }) => {
-  // debugger;
   return (
     <ItemsCount
       onChange={input.onChange}
@@ -32,56 +30,60 @@ const Items = ({
   goBack
 }) => {
   return (
-    <Grid.Container>
-      <FormHeading>
-        <Heading wrapperTag="h1">Items</Heading>
-        <Paragraph>
-          Contrary to popular belief, Lorem Ipsum is not simply random text. It
-          has roots in a piece of classical Latin literature from 45 BC, making
-          it over 2000 years old.
-        </Paragraph>
-      </FormHeading>
-      <Form onSubmit={handleSubmit}>
-        <FormInner>
-          <Field
-            component={renderItemsCounts}
-            name="speciality"
-            label="Speciality Items"
-            desc="Special items"
-            configs={configs.speciality}
-          />
+    <section>
+      <Grid.Container>
+        <Form onSubmit={handleSubmit}>
+          <FormInner>
+            <FormFieldSet>
+              <Field
+                component={renderItemsCounts}
+                name="specialCare"
+                label="How many of the following fragile items do you need moved? These items may require special care when handling."
+                configs={configs.specialCare}
+              />
+            </FormFieldSet>
+            <FormFieldSet>
+              <Field
+                component={renderItemsCounts}
+                name="appliances"
+                label="How many of the following home appliances are you moving?"
+                configs={configs.appliances}
+              />
+            </FormFieldSet>
+            <FormFieldSet>
+              <Field
+                component={renderItemsCounts}
+                name="decore"
+                label="How many of the following home decore items are you moving?"
+                configs={configs.decore}
+              />
+            </FormFieldSet>
+            <FormFieldSet>
 
-          <Field
-            component={renderItemsCounts}
-            name="large"
-            label="Large Items"
-            desc="Anything that doesn't fit in a regular size sedan."
-            configs={configs.large}
-          />
-
-          <Field
-            component={renderItemsCounts}
-            name="medium"
-            label="Medium Items"
-            desc="Anything that fits in a regular size sedan"
-            configs={configs.medium}
-          />
-        </FormInner>
-        <FormActions>
-          <Button
-            style={{ float: 'right' }}
-            type="submit"
-            primary
-            disabled={submitting || !valid}
-          >
-            Next<Icon icon="arrow-right" />
-          </Button>
-          <Button style={{ float: 'left' }} ghost onClick={goBack}>
-            <Icon icon="arrow-left" />Back
-          </Button>
-        </FormActions>
-      </Form>
-    </Grid.Container>
+              <Legend>Did we miss anything? Briefly describe any items not listed above that you feel may require special care or handling. We'll ensure they're properly accounted for</Legend>
+              <Field
+                component={TextArea}
+                name="otherItems" 
+                label="Other items"
+              />
+            </FormFieldSet>
+          </FormInner>
+          <FormActions>
+            <Button
+              style={{ float: 'right' }}
+              type="submit"
+              primary
+              disabled={submitting || !valid}
+            >
+              Next<Icon icon="arrow-right" />
+            </Button>
+            <Button style={{ float: 'left' }} ghost onClick={goBack}>
+              <Icon icon="arrow-left" />Back
+            </Button>
+          </FormActions>
+        </Form>
+      </Grid.Container>
+    </section>
   );
 };
 

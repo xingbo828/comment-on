@@ -6,8 +6,8 @@ import {
   RESET_ADDRESSES,
   GET_ITEMS,
   LOADING_ITEMS,
-  GET_DATE_TIME,
-  LOADING_DATE_TIME,
+  GET_DATE,
+  LOADING_DATE,
   LOADING_LOGISTICS,
   GET_LOGISTICS,
   GET_ADDITIONAL_NOTES,
@@ -52,19 +52,22 @@ const searchAddressesStep = (state = initAddressesState, action) => {
 
 // Items
 const initItemsState = Immutable.fromJS({
-  speciality: {},
-  large: {},
-  medium: {},
+  specialCare: {},
+  appliances: {},
+  decore: {},
+  otherItems: "",
   status: 'UNINIT'
 });
 
 const searchItemsStep = (state = initItemsState, action) => {
   switch (action.type) {
     case GET_ITEMS: {
+      console.log(action)
       return state.withMutations(st => {
-        st.set('speciality', action.data.speciality || {});
-        st.set('large', action.data.large || {});
-        st.set('medium', action.data.medium || {});
+        st.set('specialCare', action.data.specialCare || {});
+        st.set('appliances', action.data.appliances || {});
+        st.set('decore', action.data.decore || {});
+        st.set('otherItems', action.data.otherItems || "");
         st.set('status', 'LOADED');
       });
     }
@@ -81,27 +84,21 @@ const searchItemsStep = (state = initItemsState, action) => {
 };
 
 // Date time
-const initDateTimeState = Immutable.fromJS({
+const initDateState = Immutable.fromJS({
   pickUpDate: null,
-  pickUpTime: null,
-  deliveryDate: null,
-  deliveryTime: null,
   status: 'UNINIT'
 });
 
-const searchDateTimeStep = (state = initDateTimeState, action) => {
+const searchDateStep = (state = initDateState, action) => {
   switch (action.type) {
-    case GET_DATE_TIME: {
+    case GET_DATE: {
       return state.withMutations(st => {
         st.set('pickUpDate', action.data.pickUpDate);
-        st.set('pickUpTime', action.data.pickUpTime);
-        st.set('deliveryDate', action.data.deliveryDate);
-        st.set('deliveryTime', action.data.deliveryTime);
         st.set('status', 'LOADED');
       });
     }
 
-    case LOADING_DATE_TIME: {
+    case LOADING_DATE: {
       return state.withMutations(st => {
         st.set('status', 'PENDING');
       });
@@ -174,7 +171,7 @@ const searchOverviewStep = (state = initOverviewState, action) => {
 export default combineReducers({
   addressesStep: searchAddressesStep,
   itemsStep: searchItemsStep,
-  dateTimeStep: searchDateTimeStep,
+  dateStep: searchDateStep,
   logisticsStep: searchLogisticsStep,
   overviewStep: searchOverviewStep
 });
@@ -184,8 +181,8 @@ export const getAddresses = state =>
   state.getIn(['project', 'configurations', 'move', 'addressesStep']);
 export const getItems = state =>
   state.getIn(['project', 'configurations', 'move', 'itemsStep']);
-export const getDateTime = state =>
-  state.getIn(['project', 'configurations', 'move', 'dateTimeStep']);
+export const getDate = state =>
+  state.getIn(['project', 'configurations', 'move', 'dateStep']);
 export const getLogistics = state =>
   state.getIn(['project', 'configurations', 'move', 'logisticsStep']);
 export const getOverview = state =>

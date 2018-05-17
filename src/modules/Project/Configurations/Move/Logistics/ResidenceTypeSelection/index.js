@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import { func, string } from 'prop-types';
-import { Radio } from '../../../../../../globalComponents/Form';
+import Legend from '../../../../../../globalComponents/Form/Legend'
+import {
+  Radio,
+  RadioListItem,
+  RadioList 
+} from '../../../../../../globalComponents/Form/RadioNew';
 import Animation from '../../../../../../globalComponents/Animation';
 import configs from './configs';
-
-import {
-  ResidenceTypeSelectionContainer,
-  ResidenceTypeContainer,
-  ResidenceType,
-  ChildrenTypeContainer,
-  ChildContainer,
-  Label
-} from './Styled';
 
 class ResidenceTypeSelection extends Component {
   constructor(props) {
@@ -54,51 +50,46 @@ class ResidenceTypeSelection extends Component {
 
   renderType = type => {
     return (
-      <ResidenceType key={type.value}>
-        <Radio.Radio
-          value={type.value}
-          label={type.label}
-          checked={this.isTopLvSelected(type.value)}
-          onCheck={this.onTopLvRadioSelection}
-        />
+      <RadioListItem
+        value={type.value}
+        label={type.label}
+        checked={this.isTopLvSelected(type.value)}
+        onCheck={this.onTopLvRadioSelection}
+      >
         <Animation.Reveal
           timeout={300}
           height={type.children.length * 40}
           in={this.isTopLvSelected(type.value)}
         >
           {() => (
-            <ChildrenTypeContainer>
-              {this.renderTypeChildren(type.children, type.value)}
-            </ChildrenTypeContainer>
+              this.renderTypeChildren(type.children, type.value)
           )}
         </Animation.Reveal>
-      </ResidenceType>
+      </RadioListItem>
     );
   };
 
   renderTypeChildren = (children) => {
     return children.map(c => (
-      <ChildContainer key={c.value}>
-        <Radio.Radio
-          value={c.value}
-          label={c.label}
-          color="#1d407f"
-          checked={this.isChildLvSelected(c.value)}
-          onCheck={this.onChildLvRadioSelect}
-        />
-      </ChildContainer>
+      <Radio
+        value={c.value}
+        label={c.label}
+        color="#1d407f"
+        checked={this.isChildLvSelected(c.value)}
+        onCheck={this.onChildLvRadioSelect}
+      />
     ));
   };
 
   render() {
     const { label } = this.props;
     return (
-      <ResidenceTypeSelectionContainer>
-        <Label>{label}</Label>
-        <ResidenceTypeContainer>
+      <div>
+        <Legend>{label}</Legend>
+        <RadioList>
           {this.configs.map(c => this.renderType(c))}
-        </ResidenceTypeContainer>
-      </ResidenceTypeSelectionContainer>
+        </RadioList>
+      </div>
     );
   }
 }

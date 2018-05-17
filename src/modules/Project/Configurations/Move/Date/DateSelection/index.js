@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import { Legend } from '../../../../../../globalComponents/Form'
 import Calendar from '../../../../../../globalComponents/Calendar';
 import {
-  DateTimeSelectionContainer,
-  Label
+  DateTimeSelectionContainer
 } from './Styled';
 
 class DateSelection extends Component {
@@ -12,7 +12,7 @@ class DateSelection extends Component {
     const disabledDate = date => date.diff(moment(), 'days') < 1;
     return (
       <DateTimeSelectionContainer>
-        <Label>{label}</Label>
+        <Legend>{label}</Legend>
         <Calendar
           value={value}
           onChange={onChange}

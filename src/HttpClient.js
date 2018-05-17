@@ -1,8 +1,12 @@
 import axios from 'axios';
 
+
+import getConfig from './config';
+
 const createHttpClient = () => {
   const getBaseUrl = () => {
-    return 'https://us-central1-comment-on-85597.cloudfunctions.net';
+    const domain = getConfig().cloudFunctionDomain;
+    return domain;
   };
   const client = axios.create({
     baseURL: getBaseUrl(),

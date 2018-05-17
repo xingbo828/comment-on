@@ -1,4 +1,5 @@
 [
   "\/login.*",
-  "\/conversation\/.*"
+  "\/conversation\/.*",
+  "\/projects/configurations\/.*"
  ]

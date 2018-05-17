@@ -1,15 +1,14 @@
 import React from 'react';
 import { Field } from 'redux-form/immutable';
 import Immutable from 'immutable';
-import { Button } from '../../../../../globalComponents/Form';
+import { Button, Legend } from '../../../../../globalComponents/Form';
 import Layout from '../../../../../globalComponents/Layout';
 import Grid from '../../../../../globalComponents/Grid';
 import Icon from '../../../../../globalComponents/Icon';
 import AddressSelection from './AddressSelection';
-import { Heading, Paragraph } from '../../../../../globalComponents/Typography';
 
 
-const { Form, FormActions, FormHeading } = Layout.Form;
+const { Form, FormInner, FormActions, FormFieldSet } = Layout.Form;
 
 const renderAddressSelection = ({ input, label, desc, ...rest }) => {
   const value = Immutable.Iterable.isIterable(input.value)
@@ -29,33 +28,32 @@ const renderAddressSelection = ({ input, label, desc, ...rest }) => {
 
 const Address = ({ handleSubmit, pristine, reset, valid, submitting }) => {
   return (
-    <Grid.Container>
-      <FormHeading>
-        <Heading wrapperTag="h1">Address Information</Heading>
-        <Paragraph>
-          Contrary to popular belief, Lorem Ipsum is not simply random text. It
-          has roots in a piece of classical Latin literature from 45 BC, making
-          it over 2000 years old.
-        </Paragraph>
-      </FormHeading>
-      <Form style={{overflow: 'hidden'}} onSubmit={handleSubmit}>
-        <Field
-          component={renderAddressSelection}
-          name="addresses"
-          desc={renderAddressSelection}
-        />
-        <FormActions>
-          <Button
-            style={{ float: 'right' }}
-            type="submit"
-            primary
-            disabled={submitting || !valid}
-          >
-            Next<Icon icon="arrow-right" />
-          </Button>
-      </FormActions>
-      </Form>
-    </Grid.Container>
+    <section>
+      <Grid.Container>
+        <Form onSubmit={handleSubmit}>
+          <FormInner>
+            <FormFieldSet>
+              <Legend>Start by telling us your pick-up and destination address</Legend>
+              <Field
+                component={renderAddressSelection}
+                name="addresses"
+                desc={renderAddressSelection}
+              />
+            </FormFieldSet>
+            <FormActions>
+              <Button
+                style={{ float: 'right' }}
+                type="submit"
+                primary
+                disabled={submitting || !valid}
+              >
+                Next<Icon icon="arrow-right" />
+              </Button>
+            </FormActions>
+          </FormInner>
+        </Form>
+      </Grid.Container>
+    </section>
   );
 };
 

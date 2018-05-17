@@ -2,40 +2,47 @@ import styled from 'styled-components';
 
 const Form = styled.form`
   display: flex;
-  border-radius: 5px;
-  background-color: white;
-  box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.07);
+  border-radius: 8px;
   width: 100%;
-  margin: 0 auto;
+  margin: 0 auto 4rem;
   flex-direction: column;
-  ${props=>props.theme.media.greaterThan('md')`
-    width: calc(1000%/12);
+
+  ${props=>props.theme.media.greaterThan('xs')`
+    max-width: ${props.small ? '428px' : '640px'};
+    margin: 0 auto 6rem;
   `}
 `;
 
 const FormActions = styled.div`
   width: 100%;
-  margin-top: ${props=>props.theme.spaces.base};
-  overflow: hidden;
-  padding: ${props=>props.theme.spaces.base};
-  > button:not(:last-child) {
-    margin-bottom: ${props=>props.theme.spaces.wide};
-  }
-  border-top: 1px solid #e3e3e3;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  position: static;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: white;
+
   ${props=>props.theme.media.greaterThan('md')`
-    padding: ${props=>props.theme.spaces.wide} ${props=>props.theme.spaces.xWide} 0;
+    position: static;
     bottom: 0;
     height:130px;
+    
     > button:not(:last-child) {
       margin-bottom: 0;
     }
   `}
+
+  // > button:not(:last-child) {
+  //   margin-bottom: ${props=>props.theme.spaces.wide};
+  // }
 `;
 
 const FormInner = styled.div`
-  padding: ${props=>props.theme.spaces.base} ${props=>props.theme.spaces.tight};
+  padding: 4rem 0 0;
+
   ${props=>props.theme.media.greaterThan('md')`
-    padding: ${props=>props.theme.spaces.wide} ${props=>props.theme.spaces.xWide} 0 ;
+    padding: 6rem 0 0;
   `}
 `;
 
@@ -55,10 +62,14 @@ const FormHeading = styled.div`
   }
 `;
 
+const FormFieldSet = styled.div`
+  margin: 0 0 6rem;
+`
 
 export default {
   Form,
   FormActions,
   FormInner,
-  FormHeading
+  FormHeading,
+  FormFieldSet
 };

@@ -5,11 +5,10 @@ import Grid from '../../../../../globalComponents/Grid';
 import Layout from '../../../../../globalComponents/Layout';
 import Icon from '../../../../../globalComponents/Icon';
 import ResidenceTypeSelection from './ResidenceTypeSelection';
-import DeliveryAccess from './DeliveryAccess';
+import Access from './Access';
 import WillYouBeAssisting from './WillYouBeAssisting';
-import { Heading, Paragraph } from '../../../../../globalComponents/Typography';
 
-const { Form, FormActions, FormHeading, FormInner } = Layout.Form;
+const { Form, FormActions, FormInner, FormFieldSet } = Layout.Form;
 
 const renderResidenceTypeSelection = ({ input, name, label, desc }) => {
   return (
@@ -21,9 +20,19 @@ const renderResidenceTypeSelection = ({ input, name, label, desc }) => {
   );
 };
 
+const renderPickUpAccess = ({ input, name, label, desc }) => {
+  return (
+    <Access
+      onChange={input.onChange}
+      value={input.value}
+      label={label}
+    />
+  );
+};
+
 const renderDeliveryAccess = ({ input, name, label, desc }) => {
   return (
-    <DeliveryAccess
+    <Access
       onChange={input.onChange}
       value={input.value}
       label={label}
@@ -51,50 +60,55 @@ const Logistics = ({
   goBack
 }) => {
   return (
-    <Grid.Container>
-      <FormHeading>
-        <Heading wrapperTag="h1">Logistics</Heading>
-        <Paragraph>
-          Contrary to popular belief, Lorem Ipsum is not simply random text. It
-          has roots in a piece of classical Latin literature from 45 BC, making
-          it over 2000 years old.
-        </Paragraph>
-      </FormHeading>
-      <Form onSubmit={handleSubmit}>
-        <FormInner>
-          <Field
-            component={renderResidenceTypeSelection}
-            name="residenceType"
-            label="Pick-up residence"
-          />
-
-          <Field
-            component={renderDeliveryAccess}
-            name="deliveryAccess"
-            label="Delivery access"
-          />
-
-          <Field
-            component={renderAbleToAssist}
-            name="ableToAssist"
-            label="Will you be assisting?"
-          />
-        </FormInner>
-        <FormActions>
-          <Button
-            style={{ float: 'right' }}
-            type="submit"
-            primary
-            disabled={submitting || !valid}
-          >
-            Next<Icon icon="arrow-right" />
-          </Button>
-          <Button onClick={goBack} ghost style={{ float: 'left' }}>
-            <Icon icon="arrow-left" />Back
-          </Button>
-        </FormActions>
-      </Form>
-    </Grid.Container>
+    <section>
+      <Grid.Container>
+        <Form onSubmit={handleSubmit}>
+          <FormInner>
+            <FormFieldSet>
+              <Field
+                component={renderResidenceTypeSelection}
+                name="residenceType"
+                label="Choose the option that best describes the pick-up space"
+              />
+            </FormFieldSet>
+            <FormFieldSet>
+              <Field
+                component={renderPickUpAccess}
+                name="pickUpAccess"
+                label="How is the pick-up space accessed?"
+              />
+            </FormFieldSet>
+            <FormFieldSet>
+              <Field
+                component={renderDeliveryAccess}
+                name="deliveryAccess"
+                label="How is the delivery space accessed?"
+              />
+            </FormFieldSet>
+            <FormFieldSet>
+              <Field
+                component={renderAbleToAssist}
+                name="ableToAssist"
+                label="Will you be assisting?"
+              />
+            </FormFieldSet>
+          </FormInner>
+          <FormActions>
+            <Button
+              style={{ float: 'right' }}
+              type="submit"
+              primary
+              disabled={submitting || !valid}
+            >
+              Next<Icon icon="arrow-right" />
+            </Button>
+            <Button onClick={goBack} ghost style={{ float: 'left' }}>
+              <Icon icon="arrow-left" />Back
+            </Button>
+          </FormActions>
+        </Form>
+      </Grid.Container>
+    </section>
   );
 };
 

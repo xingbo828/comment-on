@@ -3,7 +3,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withInfo } from '@storybook/addon-info';
-import TextArea from '../../../globalComponents/Form/TextArea';
+import TextField from '../../../globalComponents/Form/TextField';
 import Layout from '../../../globalComponents/Layout';
 
 const { Form, FormInner } = Layout.Form;
@@ -15,26 +15,28 @@ const meta = {
   touched: true,
   error: 'oops, something is wrong!'
 };
-const BasicTextArea = withInfo('Basic TextArea')(() => (
+const BasicTextField = withInfo('Basic TextField')(() => (
   <Form>
     <FormInner>
-      <TextArea
-        name="desc"
-        label="Description"
-        placeholder="Talk about yourself"
+      <TextField
+        type="text"
+        name="address"
+        lable="Address"
+        placeholder="Enter your address"
         input={input}
       />
     </FormInner>
   </Form>
 ));
 
-const TextAreaWithError = withInfo('With error message')(() => (
+const TextFieldWithError = withInfo('With error message')(() => (
   <Form>
     <FormInner>
-      <TextArea
-        name="desc"
-        label="Description"
-        placeholder="Talk about yourself"
+      <TextField
+        type="text"
+        name="address"
+        lable="Address"
+        placeholder="Enter your address"
         input={input}
         meta={meta}
       />
@@ -42,7 +44,7 @@ const TextAreaWithError = withInfo('With error message')(() => (
   </Form>
 ));
 
-const TextAreaStory = storiesOf('Global/Data Entry/TextArea', module)
-  .add('Basic textarea', BasicTextArea)
-  .add('With error message', TextAreaWithError);
-export default TextAreaStory;
+const TextFieldStory = storiesOf('Global/Data Entry/TextField', module)
+  .add('Basic text field', BasicTextField)
+  .add('With error message', TextFieldWithError);
+export default TextFieldStory;

@@ -35,7 +35,7 @@ const MoveConfigSteps = ({current, history}) => {
       />
 
       <Step
-        title="overview"
+        title="review"
         onStepClick={stepClickHandler.bind(this, 'overview')}
       />
 

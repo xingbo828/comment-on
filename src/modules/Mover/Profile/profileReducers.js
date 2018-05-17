@@ -17,13 +17,13 @@ const profile = (state = initProfileState, action) => {
         // formatting
         const profile = Immutable.fromJS(action.data.profile).withMutations((pr) => {
           // pr.set('businessServiceArea', Immutable.fromJS((Object.values(action.data.profile.businessServiceArea))));
-          pr.set('businessHour', Immutable.fromJS((Object.values(action.data.profile.businessHour))));
+          // pr.set('businessHour', Immutable.fromJS((Object.values(action.data.profile.businessHour))));
           if(action.data.profile.profileImgs) {
             pr.set('profileImgs', Immutable.fromJS((Object.values(action.data.profile.profileImgs))));
           }
-          if(action.data.profile.crewMembers) {
-            pr.set('crewMembers', Immutable.fromJS((Object.values(action.data.profile.crewMembers))));
-          }
+          // if(action.data.profile.crewMembers) {
+          //   pr.set('crewMembers', Immutable.fromJS((Object.values(action.data.profile.crewMembers))));
+          // }
         });
         st.set('profile', profile);
         st.set('status', 'LOADED');

@@ -16,15 +16,18 @@
 export const MOVING_SEARCH_TIME_RANGE = [
     {
       label: 'Morning (8:00AM - 12:00PM)',
-      value: '8,12'
+      value: '8,12',
+      icon: 'adjust'
     },
     {
       label: 'Afternoon (12:00PM - 5:00PM)',
-      value: '12,17'
+      value: '12,17',
+      icon: 'sun-o'
     },
     {
-      label: 'Night (5:00PM - 9:00PM)',
-      value: '17,21'
+      label: 'Evening (5:00PM - 9:00PM)',
+      value: '17,21',
+      icon: 'moon-o'
     }
   ];
 

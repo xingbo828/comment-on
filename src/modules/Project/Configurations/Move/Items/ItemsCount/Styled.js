@@ -21,11 +21,11 @@ export const Desc = Paragraph.extend`
 
 
 export const StyledItems = styled.ul`
-  padding: 0;
-  margin: ${props=>props.theme.spaces.base} 0 0;
+  border-radius: 4px;
+  padding: 2rem 2rem 1rem;
+  box-shadow: ${props=>props.theme.boxShadow.large};
 `;
 
 export const StyledItem = styled.li`
   list-style: none;
-  padding: ${props=>props.theme.spaces.xTight} 0;
 `;

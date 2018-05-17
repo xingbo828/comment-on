@@ -1,20 +1,42 @@
 import React from 'react';
-import { Banner, InnerContainer } from './Styled';
+import {
+  Banner,
+  InnerContainer,
+  SectionContainer,
+  Hero
+} from './Styled';
+import { Tiled } from './components/StepTiles'
 import AddressSearchBar from './components/AddressSearchBar';
 import Grid from '../../globalComponents/Grid';
-import { Heading } from '../../globalComponents/Typography';
+import ServiceLocation from '../../globalComponents/ServiceLocation';
+import { Heading, Eyebrow } from '../../globalComponents/MarketingTypography';
 
 const HomePage = () => (
-  <Grid.Container fluid>
-    <Grid.Row>
+  <div>
+    <Hero>
       <InnerContainer>
         <Banner>
-          <Heading wrapperTag="h1">Your move. Made easy</Heading>
+          <Eyebrow wrapperTag="h3" size="lg">Finding a mover should be easy</Eyebrow>
+          <Heading wrapperTag="h1" size="xl">So we made it easy!</Heading>
         </Banner>
         <AddressSearchBar />
       </InnerContainer>
-    </Grid.Row>
-  </Grid.Container>
+    </Hero>
+    <Grid.Container>
+      <Grid.Row>
+        <Grid.Col>
+          <SectionContainer>
+            <Tiled/>
+          </SectionContainer>
+          <SectionContainer>
+            <Eyebrow wrapperTag="h4" centered size="md">Service availability</Eyebrow>
+            <Heading wrapperTag="h3" centered size="md">Where we operate</Heading>
+            <ServiceLocation />
+          </SectionContainer>
+        </Grid.Col>
+      </Grid.Row>
+    </Grid.Container>
+  </div>
 );
 
 export default HomePage;
