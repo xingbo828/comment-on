@@ -15,9 +15,6 @@ export const TabBar = styled.ul`
 export const TabBarLinkContainer = styled.li`
   list-style: none;
   padding: ${props=>props.theme.spaces.tight} ${props=>props.theme.spaces.base};
-  ${props=>props.theme.media.greaterThan('md')`
-    padding: ${props=>props.theme.spaces.base} ${props=>props.theme.spaces.wide};
-  `}
   position: relative;
   cursor: pointer;
   ${props => {
@@ -65,9 +62,6 @@ export const TabPanelContainer = styled.div`
   transform: translateX(32px);
   visibility: hidden;
   padding: ${props=>props.theme.spaces.tight};
-  ${props=>props.theme.media.greaterThan('md')`
-    padding: ${props=>props.theme.spaces.wide} ${props=>props.theme.spaces.base};
-  `}
   ${props => {
     if(props.isActive){
       return `
