@@ -16,8 +16,7 @@ import {
 
 const TabPanel = Tabs.TabPanel;
 
-const Login = ({ location, account, facebookLogin, googleLogin, logout }) => {
-
+const Login = ({ isAuthenticated, location, account, facebookLogin, googleLogin, logout, msgEmailVerificationError }) => {
   const redirectAfterLogin = () => {
     let redirectTo = '/';
     if(includes(location.search, '?redirect=')) {
@@ -34,11 +33,11 @@ const Login = ({ location, account, facebookLogin, googleLogin, logout }) => {
           <LogoWrapper>
             <Logo />
           </LogoWrapper>
-          <Tabs activeKey="login">
-            <TabPanel panelKey="login" header={<span style={{fontSize: '1.15rem', padding: '0 1rem'}}><Icon icon="sign-in" /> Login</span>}>
-              <LoginPanel facebookLogin={facebookLogin} googleLogin={googleLogin} />
+          <Tabs fillWidth={true} activeKey="login">
+            <TabPanel panelKey="login" header={<span style={{fontSize: '1.05rem'}}><Icon icon="sign-in" /> Login</span>}>
+              <LoginPanel msgEmailVerificationError={msgEmailVerificationError} facebookLogin={facebookLogin} googleLogin={googleLogin} />
             </TabPanel>
-            <TabPanel panelKey="register" header={<span style={{fontSize: '1.15rem', padding: '0 1rem'}}><Icon icon="user-plus" /> Register</span>}>
+            <TabPanel panelKey="register" header={<span style={{fontSize: '1.05rem'}}><Icon icon="user-plus" /> Register</span>}>
               <RegisterPanel facebookLogin={facebookLogin} googleLogin={googleLogin} />
             </TabPanel>
           </Tabs>
@@ -47,7 +46,7 @@ const Login = ({ location, account, facebookLogin, googleLogin, logout }) => {
     );
   };
 
-  return account.status === 'AUTHENTICATED' ? redirectAfterLogin() : renderLoginOptions();
+  return isAuthenticated ? redirectAfterLogin() : renderLoginOptions();
 };
 
 export default Login;

@@ -22,15 +22,15 @@ class TextField extends React.Component {
     this.setState({ isFocused: true });
   }
 
-  onBlur() {
+  onBlur(e) {
+    this.props.input.onBlur(e);
     this.setState({ isFocused: false });
   }
 
   onChange(e) {
     const isFilled = !!e.target.value.length
-    console.log(this.props.meta)
-    this.setState({ isFilled })
     this.props.input.onChange(e)
+    this.setState({ isFilled })
   }
 
   isFilled() {
@@ -43,7 +43,7 @@ class TextField extends React.Component {
     return (
       <InputContainer>
         {label &&
-          <Label 
+          <Label
             focused={this.state.isFocused}
             filled={this.isFilled()}
           >
@@ -51,11 +51,11 @@ class TextField extends React.Component {
           </Label>
         }
         <Input
-          value={input.value} 
+          value={input.value}
           onChange={this.onChange}
           type={type} onFocus={this.onFocus.bind(this)}
-          onBlur={this.onBlur.bind(this)} 
-          autoComplete={autoComplete} 
+          onBlur={this.onBlur.bind(this)}
+          autoComplete={autoComplete}
           placeholder={placeholder}
           ref={(ref)=>this.ref=ref}
         />

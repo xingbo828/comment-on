@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const BadgeContainer = styled.span`
   position: relative;
   display: inline-block;
-  width: 100%;
 `;
 
 

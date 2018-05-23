@@ -12,11 +12,19 @@ export const TabBar = styled.ul`
   flex-wrap: wrap;
 `;
 
+const fillWidth = props => {
+  if(props.fillWidth) {
+    return `flex: 1`;
+  }
+}
+
 export const TabBarLinkContainer = styled.li`
   list-style: none;
   padding: ${props=>props.theme.spaces.tight} ${props=>props.theme.spaces.base};
   position: relative;
   cursor: pointer;
+  text-align: center;
+  ${fillWidth};
   ${props => {
     if(props.isActive){
       return `

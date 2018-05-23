@@ -10,7 +10,7 @@ import {
   ActionWrapper,
 } from '../LoginPanel/Styled';
 
-const LoginPanel = ({ handleSubmit, facebookLogin, googleLogin }) => {
+const LoginPanel = ({ handleSubmit, submitting, valid, facebookLogin, googleLogin }) => {
   return (
     <Wrapper>
       <Form onSubmit={handleSubmit}>
@@ -28,14 +28,14 @@ const LoginPanel = ({ handleSubmit, facebookLogin, googleLogin }) => {
           label="Confirm password"
         />
         <ActionWrapper>
-          <Button type="primary" style={{display: 'inline-block'}}>Register</Button>
+          <Button disabled={submitting || !valid} small success style={{display: 'inline-block'}}>Register</Button>
         </ActionWrapper>
       </Form>
 
       <OtherServicesWrapper>
         <OtherServicesText>Register with other services:</OtherServicesText>
-        <OtherServiceIcon onClick={googleLogin} size="2x" icon="google-plus-square" style={{color: '#d31b1c'}}/>
-        <OtherServiceIcon onClick={facebookLogin} size="2x" icon="facebook-square" style={{color: '#3b5899'}}/>
+        <OtherServiceIcon onClick={googleLogin} icon="google-plus-square" style={{color: '#d31b1c'}}/>
+        <OtherServiceIcon onClick={facebookLogin} icon="facebook-square" style={{color: '#3b5899'}}/>
       </OtherServicesWrapper>
     </Wrapper>
   );

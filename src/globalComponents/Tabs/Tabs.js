@@ -1,5 +1,5 @@
 import React, { Component, Children } from 'react';
-import { string, func } from 'prop-types';
+import { string, func, bool } from 'prop-types';
 import {
   TabContainer,
   TabBar,
@@ -44,7 +44,7 @@ class Tabs extends Component {
   }
 
 
-  construct() {
+  construct(fillWidth) {
     const activeKey = this.state.activekey;
     const updateParentHeight = this.updateParentHeight;
     const panels = [];
@@ -67,14 +67,15 @@ class Tabs extends Component {
         updateParentHeight,
         children: child.props.children
       };
-      tabBarLinks.push(<TabBarLink key={panelKey} panelKey={panelKey} header={header} isActive={isActive} onSelect={this.onSelect} />);
+      tabBarLinks.push(<TabBarLink fillWidth={fillWidth} key={panelKey} panelKey={panelKey} header={header} isActive={isActive} onSelect={this.onSelect} />);
       panels.push(React.cloneElement(child, props));
     })
     return { panels, tabBarLinks };
   }
 
   render() {
-    const tabs = this.construct();
+    const { fillWidth }= this.props;
+    const tabs = this.construct(fillWidth);
     return (
       <TabContainer {...this.props} containerHeight={this.state.containerHeight}>
         <TabBar>{tabs.tabBarLinks}</TabBar>
@@ -86,7 +87,11 @@ class Tabs extends Component {
 
 Tabs.propTypes = {
   activeKey: string,
-  onTabChange: func
+  onTabChange: func,
+  fillWidth: bool
 };
 
+Tabs.defaultProps = {
+  fillWidth: false
+};
 export default Tabs;

@@ -8,6 +8,7 @@ import Spin from '../../globalComponents/Spin';
 const ProtectedRoute = ({
   component: Component,
   isLoggedIn,
+  user,
   isCompletedProfile,
   location,
   shouldCheckProfile,
@@ -16,7 +17,7 @@ const ProtectedRoute = ({
   <Route
     {...rest}
     render={props =>
-      (isLoggedIn && (!shouldCheckProfile || isCompletedProfile)) ? (
+      (isLoggedIn && user.emailVerified &&(!shouldCheckProfile || isCompletedProfile)) ? (
         <Component {...props} />
       ) : (
         <Redirect

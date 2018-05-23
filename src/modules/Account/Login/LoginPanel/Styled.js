@@ -32,8 +32,9 @@ export const OtherServicesText = styled.p`
 `;
 
 export const OtherServiceIcon = styled(Icon)`
-  margin-right: 1rem;
+  margin-right: 1.5rem;
   cursor: pointer;
+  font-size: 2.5rem;
 `;
 
 export const ActionWrapper = styled.div`

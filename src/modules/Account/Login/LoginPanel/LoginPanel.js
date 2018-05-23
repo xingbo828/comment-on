@@ -11,7 +11,7 @@ import {
   ActionForgotPw
 } from './Styled';
 
-const LoginPanel = ({ handleSubmit, facebookLogin, googleLogin }) => {
+const LoginPanel = ({ handleSubmit, submitting, valid, facebookLogin, googleLogin }) => {
   return (
     <Wrapper>
       <Form onSubmit={handleSubmit}>
@@ -23,15 +23,15 @@ const LoginPanel = ({ handleSubmit, facebookLogin, googleLogin }) => {
           label="Password"
         />
         <ActionWrapper>
-          <Button type="primary" style={{display: 'inline-block'}}>Login</Button>
+          <Button small disabled={submitting || !valid} success style={{display: 'inline-block'}}>Login</Button>
           <ActionForgotPw to="/reset-password">Forgot password</ActionForgotPw>
         </ActionWrapper>
       </Form>
 
       <OtherServicesWrapper>
         <OtherServicesText>Login with other services:</OtherServicesText>
-        <OtherServiceIcon onClick={googleLogin} size="2x" icon="google-plus-square" style={{color: '#d31b1c'}}/>
-        <OtherServiceIcon onClick={facebookLogin} size="2x" icon="facebook-square" style={{color: '#3b5899'}}/>
+        <OtherServiceIcon onClick={googleLogin} icon="google-plus-square" style={{color: '#d31b1c'}}/>
+        <OtherServiceIcon onClick={facebookLogin} icon="facebook-square" style={{color: '#3b5899'}}/>
       </OtherServicesWrapper>
     </Wrapper>
   );
