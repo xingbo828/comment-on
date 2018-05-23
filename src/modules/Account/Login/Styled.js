@@ -17,7 +17,7 @@ const WrapperDiv = Styled.div`
 `;
 
 const InnerDiv = Styled.div`
-  padding 2rem;
+  padding: 0 2rem;
   ${props=>props.theme.media.greaterThan('sm')`
     width: 400px;
     border-radius: 3px;
