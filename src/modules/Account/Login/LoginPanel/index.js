@@ -37,10 +37,7 @@ const enhance = compose(
     validate,
     onSubmit: async (values, dispatch, props) => {
       try {
-        const user = await firebaseAuth.signInWithEmailAndPassword(values.get('email'), values.get('password'));
-        if(!user.emailVerified) {
-          props.msgEmailVerificationError();
-        }
+        await firebaseAuth.signInWithEmailAndPassword(values.get('email'), values.get('password'));
       } catch(error) {
         console.error(error)
         message.error(error.message, 10);
