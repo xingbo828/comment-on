@@ -1,42 +1,40 @@
 import styled from 'styled-components';
+import Box from '../../globalComponents/Box';
 
-export const Hero = styled.div`
-  padding: 200px 0 100px;
-  width: 100%;
-  align-items: center;
-  display: flex;
-  position: relative;
-  z-index: 1;
 
-  // div::after {
-  //   content: "";
-  //   background: url('https://media.istockphoto.com/vectors/crossroad-graphic-black-white-landscape-sketch-illustration-vector-vector-id623666484') center center no-repeat;
-  //   background-size: contain;
-  //   opacity: .004;
-  //   top: 0;
-  //   left: 0;
-  //   bottom: 0;
-  //   right: 0;
-  //   position: absolute;
-  //   z-index: -1;   
-  // }
+export const Hero = styled(Box)`
+  height: 100%;
 `;
 
-
-export const Banner = styled.div`
-  color: ${props=>props.theme.colors.offWhite};
+export const ButtonContainer = styled.div`
   text-align: center;
-  padding: 4rem 0;
+`
+
+export const ImagePlaceHolder = styled.div`
+  display: none;
+  position: relative;
+  z-index: -1;
+  width: 100%;
+  padding-bottom: 100%;
+  border-radius: 4px;
+  background: url(http://res.cloudinary.com/simpleview/image/upload/v1486505969/clients/vancouverbc/Aerial_Sunset_Vancouver_d3_copy_1bb86ed0-1edc-4cda-841d-0b033ca0bb72.jpg);
+  background-size: cover;
 
   ${props=>props.theme.media.greaterThan('md')`
-    padding: 0 0 6rem;
-  `};
-`;
+    display: block;
+  `}
+`
 
-export const InnerContainer = styled.div`
-  width: 100%;
-`;
+export const HeroInner = styled.div`
+  width: 50%;
+`
+export const Logo = styled.img`
+  height: 35px;
+`
 
+export const Header = styled(Box)`
+  justify-content: space-between;
+`
 
 export const SectionContainer = styled.div`
   margin: 10rem 0;

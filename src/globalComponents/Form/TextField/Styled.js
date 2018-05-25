@@ -8,6 +8,7 @@ export const InputContainer = Styled.div`
 `;
 
 export const Input = Styled.input`
+  z-index: 2;
   background: none;
   display: block;
   width: 100%;

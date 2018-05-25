@@ -1,8 +1,8 @@
 import DescriptionList from './DescriptionList';
-import Row from './Row';
+import DescriptionEntry from './DescriptionEntry';
 
 
 export {
   DescriptionList,
-  Row 
+  DescriptionEntry 
 };

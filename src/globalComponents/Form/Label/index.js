@@ -4,7 +4,7 @@ export const Label = styled.label`
   position: absolute;
   left: 0;
   top: 35px;
-  z-index: -99;
+  z-index: 1;
   display: block;
   font-size: 1.125rem;
   letter-spacing: .05em;
@@ -12,6 +12,7 @@ export const Label = styled.label`
   color: ${props=>props.theme.colors.textLight};
   transform: scale(1);
   transform-origin: top left;
+  white-space: nowrap;
 
   ${props=>props.focused &&`
     color: ${props.theme.colors.primary};

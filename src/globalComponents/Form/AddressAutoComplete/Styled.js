@@ -1,59 +1,79 @@
 import styled from 'styled-components';
 import Geosuggest from 'react-geosuggest';
 
-export const Label = styled.label`
+export const Container = styled.div`
+  position: relative;
   display: inline-block;
+  padding: 0;
+`;
+
+export const FocusBorder = styled.span`
+  display: block;
+  height: 2px;
   width: 100%;
+  background: ${props=>props.theme.colors.border};
+  margin-top: -2px;
+  transition: .3s;
+  transform: scaleX(0);
+  transform-origin: 0;
 `;
 
-export const FocusBorder = styled.div`
-height: 2px;
-display: block;
-padding-left: 10px;
-background: ${props=>props.theme.colors.primary};
-margin-top: -4px;
-transition: .3s;
-margin-left: 30px;
-${props => {
-  if(props.focused) {
-    return `
-      transform: scale(1);
-    `;
-  }
-  return `transform: scale(0);`;
-}}
-`;
+export const Label = styled.label`
+  position: absolute;
 
-export const IconContainer = styled.span`
-  width: 20px;
-  display: inline-block;
-  text-align: center;
-  color: #8a8a8a;
-`;
+  left: 0;
+  top: 17px;
+  z-index: 1;
+  display: block;
+  font-size: 1.125rem;
+  letter-spacing: .05em;
+  transition: .3s;
+  color: ${props=>props.theme.colors.textLight};
+  transform: scale(1);
+  transform-origin: top left;
+  white-space: nowrap;
 
+  ${props=>props.focused &&`
+    color: ${props.theme.colors.primary};
+  `}
+
+  ${props=>(props.filled || props.focused) && `
+    text-transform: uppercase;
+    transform: scale(.65);
+    top: 0;
+
+    ~ span {
+      transform: scaleX(1);
+    }
+  `}
+
+  ${props=>(props.focused) && `
+    ~ span {
+      background: ${props.theme.colors.primary} !important;
+    }
+  `}
+`;
 
 export const GeosuggestStyled = styled(Geosuggest)`
   position: relative;
   line-height: 40px;
-  padding-left: 10px;
   display: inline-block;
-  width: calc(100% - 20px);
+  width: 100%;
   text-align: left;
   
   .geosuggest__input {
+    position: relative;
+    z-index: 2;
+    line-height: 1.5;
+    background: none;
     border-radius: 0;
     outline: 0;
-    font-size: .875rem;
+    font-size: 1.125rem;
     width: 100%;
     box-sizing: border-box;
-    padding: .5rem;
-    border: solid ${props=>props.theme.colors.border};
-    border-width: 0 0 1px 0;
+    padding: 1rem 0;
+    border-width:0;
     color: ${props => props.theme.colors.textDark};
-
-    ${props=>props.theme.media.greaterThan('md')`
-      font-size: 1rem;
-    `}
   }
 
   .geosuggest__input:focus {

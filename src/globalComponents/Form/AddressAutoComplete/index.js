@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
-import { GeosuggestStyled, Label, FocusBorder, IconContainer } from './Styled';
-import Icon from '../../Icon';
+import { 
+  GeosuggestStyled, 
+  Container, 
+  FocusBorder,
+  Label
+} from './Styled';
+
+
 class AddressAutoComplete extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      focused: false
+      focused: false,
+      filled: false
     };
 
     this.handleFocus = this.handleFocus.bind(this);
@@ -31,8 +38,11 @@ class AddressAutoComplete extends Component {
 
   handleOnChange(value) {
     if (value === '') {
+      this.setState({ filled: false })
       this.props.onSelect(null);
+      return
     }
+    this.setState({ filled: true })
   }
 
   mapSuggestDescription(suggest) {
@@ -40,31 +50,30 @@ class AddressAutoComplete extends Component {
   }
 
   render() {
-    const { initialValue, onSelect, placeholder } = this.props;
+    const { onSelect, label } = this.props;
     return (
-      <Label>
-        <IconContainer><Icon icon={this.props.icon} size="lg" /></IconContainer>
+      <Container>
+        <Label filled={this.state.filled} focused={this.state.focused}>{label}</Label >
         <GeosuggestStyled
           innerRef={el => (this._geoSuggest = el)}
           country="ca"
+          placeholder=""
           minLength={2}
-          placeholder={placeholder}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
           onSuggestSelect={onSelect}
           onChange={this.handleOnChange}
-          initialValue={initialValue.replace(', Canada', '')}
           getSuggestLabel={this.mapSuggestDescription}
         />
-        <FocusBorder focused={this.state.focused} />
-      </Label>
+        <FocusBorder />
+      </Container>
     );
   }
 }
 
 AddressAutoComplete.defaultProps = {
   onSelect: () => {},
-  placeholder: 'Search place',
+  label: '',
   initialValue: '',
   icon: 'map-marker'
 };

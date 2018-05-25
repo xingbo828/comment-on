@@ -36,7 +36,7 @@ const getIconColor = props => {
     return props => props.theme.colors.primaryLight
   }
 
-  return props => props.theme.colors.secondary
+  return props => props.theme.colors.secondaryLight
 }
 
 const getHoverColor = props => {
