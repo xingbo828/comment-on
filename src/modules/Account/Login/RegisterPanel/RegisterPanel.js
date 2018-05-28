@@ -28,7 +28,7 @@ const LoginPanel = ({ handleSubmit, submitting, valid, facebookLogin, googleLogi
           label="Confirm password"
         />
         <ActionWrapper>
-          <Button disabled={submitting || !valid} small success style={{display: 'inline-block'}}>Register</Button>
+          <Button disabled={submitting || !valid} small style={{display: 'inline-block'}}>Register</Button>
         </ActionWrapper>
       </Form>
 

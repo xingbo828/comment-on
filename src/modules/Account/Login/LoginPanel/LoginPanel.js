@@ -23,7 +23,7 @@ const LoginPanel = ({ handleSubmit, submitting, valid, facebookLogin, googleLogi
           label="Password"
         />
         <ActionWrapper>
-          <Button small disabled={submitting || !valid} success style={{display: 'inline-block'}}>Login</Button>
+          <Button small disabled={submitting || !valid} style={{display: 'inline-block'}}>Login</Button>
           <ActionForgotPw to="/reset-password">Forgot password</ActionForgotPw>
         </ActionWrapper>
       </Form>
