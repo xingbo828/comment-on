@@ -26,7 +26,7 @@ const calculateFirst = (size, viewport) => {
 const calculateDisplay = (ratio) => (!isUndefined(ratio) && ratio === 0) && 'display: none';
 
 export default styled.div`
-  padding: 0 1rem;
+  padding: 0 1.5rem;
   ${props => `
     ${calculateDisplay(props.xs)};
     ${calculateBasis(props.xs)};

@@ -119,8 +119,21 @@ class AddressSelection extends Component {
         </MapContainer>
         {this.renderRouteInfo(route)}
         <InputsContainer>
-          <InputContainer><AddressAutoComplete  icon="circle-o" initialValue={this.getInitValue(from)} placeholder="Pick-up address" onSelect={this.onFromAddressSelect} /></InputContainer>
-          <InputContainer><AddressAutoComplete  initialValue={this.getInitValue(to)} placeholder="Delivery address" onSelect={this.onToAddressSelect} /></InputContainer>
+          <InputContainer>
+            <AddressAutoComplete  
+              icon="circle-o" 
+              initialValue={this.getInitValue(from)} 
+              label="Pick-up address" 
+              onSelect={this.onFromAddressSelect} 
+            />
+          </InputContainer>
+          <InputContainer>
+            <AddressAutoComplete  
+              initialValue={this.getInitValue(to)} 
+              label="Delivery address" 
+              onSelect={this.onToAddressSelect} 
+            />
+          </InputContainer>
         </InputsContainer>
       </Container>
     );

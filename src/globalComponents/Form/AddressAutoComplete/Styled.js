@@ -5,6 +5,7 @@ export const Container = styled.div`
   position: relative;
   display: inline-block;
   padding: 0;
+  width: 100%;
 `;
 
 export const FocusBorder = styled.span`
@@ -62,6 +63,7 @@ export const GeosuggestStyled = styled(Geosuggest)`
   text-align: left;
   
   .geosuggest__input {
+    width: 100%;
     position: relative;
     z-index: 2;
     line-height: 1.5;

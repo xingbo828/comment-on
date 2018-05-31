@@ -41,10 +41,11 @@ const MarketingHeading = ({ className, wrapperTag, children, theme, size, center
         right: 0;
         left: 0;
         bottom: 0;
-        line-height: .75;
+        line-height: .81;
         font-size: ${fontSizesThin[size] * underlayMultiplier}rem; 
         text-align: center;
-        color: ${theme.colors.offWhite};
+        // color: ${theme.colors.offWhite};
+        color: #f8fafd;
       }
     `}
 
@@ -54,7 +55,6 @@ const MarketingHeading = ({ className, wrapperTag, children, theme, size, center
         font-weight: 700;
         letter-spacing: .08rem;
         content: "${eyebrow}";
-        margin: 0 0 .25rem;
         bottom: 0;
         font-size: ${fontSizesThin[size] * eyebrowMultiplier}rem; 
         color: ${theme.colors.primary};
@@ -82,7 +82,7 @@ const MarketingHeading = ({ className, wrapperTag, children, theme, size, center
     display: inline-block;
     font-size: 2rem;
     font-weight: bold;
-    color: ${theme.colors.secondaryLight};
+    color: ${theme.colors.secondary};
     font-size: ${fontSizesThin[size]}rem;
 
     ${props=>props.theme.media.greaterThan('sm')`

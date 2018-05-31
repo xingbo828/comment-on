@@ -13,8 +13,8 @@ export default styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  margin-right: -1rem;
-  margin-left: -1rem;
+  margin-right: -1.5rem;
+  margin-left: -1.5rem;
 
   ${props => `
     ${getItemAlignment(props.middle, 'xs' ,'center')};
