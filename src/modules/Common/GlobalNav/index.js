@@ -9,7 +9,7 @@ import globalNavHiddenList from './globalNavHiddenList.json';
 import NotificationCenter from '../NotificationCenter';
 import { Button } from '../../../globalComponents/Form';
 import UnauthenticatedNav from '../UnauthenticatedNav'
-import Link from '../../../globalComponents/Link';
+import { Link } from '../../../globalComponents/Link';
 import Logo from '../../../globalComponents/Logo';
 
 

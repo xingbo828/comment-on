@@ -1,40 +1,38 @@
 import React from 'react'
 import Styled from 'styled-components'
-import Tile from './Tile'
-import { 
-  Heading as MarketingHeading, 
-  Eyebrow, 
-  Paragraph as MarketingParagraph 
-} from '../../../../globalComponents/MarketingTypography';
+import Box from '../../../../globalComponents/Box'
+import Grid from '../../../../globalComponents/Grid';
 
 
 const Container = Styled.div`
   display: flex; 
   flex-wrap: wrap;
 `
-
-const Summary = Styled.div`
+const Tile = Styled.div`
+  background: white;
   width: 100%;
-  padding: 5em;
-  text-align: center;
 
-  ${props=>props.theme.media.greaterThan('md')`
-    width: 41.666%;
-  `}
+  &:nth-of-type(even) {
+    background: linear-gradient(45deg, #ffbf37 1%,#ffa500 99%);
+  }
 
+  &:nth-of-type(odd) {
+    background: linear-gradient(45deg, #1f5ffc 0%,#39a9ff 98%);
+  }
 `
 
 const Heading = Styled.h3`
   margin-top: -.95rem;
   margin-left: 1.65rem;
   line-height: 1.25;
-  font-size: 1rem;
+  font-size: 1.5rem;
   position: relative;
+  color: white;
 
   &:after {
-    height: 3px;
+    height: 4px;
     position: absolute;
-    background: white;
+    background: ${props=>props.underlineColor};
     width: 30%;
     bottom: -1rem;
     left: 0;
@@ -55,7 +53,7 @@ const Number = Styled.div`
   font-size: 6rem;
   line-height: 4.15rem;
   font-weight: 800;
-  color: ${props=>props.theme.colors.primaryLight};
+  opacity: .2;
 
   ${props=>props.theme.media.greaterThan('md')`
     font-size: 14rem;
@@ -63,44 +61,93 @@ const Number = Styled.div`
   `}
 `
 
+const Image = Styled.div`
+  background: url(${props=>props.src}) center center no-repeat;
+  background-size: contain;
+  height: 200px;
+  width: 100%;
+
+  ${props=>props.theme.media.greaterThan('md')`
+    height: 400px;
+  `}
+`
+
 const Paragraph = Styled.p`
   margin: 2rem 0 0 1.65rem;
   line-height: 1.5;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
 
   ${props=>props.theme.media.greaterThan('md')`
     margin-left: 4rem;
+    font-size: 1.125rem;
   `}
 `
 
 const Tiled = ({ children }) => {
   return (
     <Container>
-      <Summary>
-        <Eyebrow wrapperTag="h4" size="md">It's Easy!</Eyebrow>
-        <MarketingHeading wrapperTag="h3" size="md">Here's how it works</MarketingHeading>
-        <MarketingParagraph>Here's how we help you find a mover that best fits your moving needs.</MarketingParagraph>
-      </Summary>
-
       <Tile>
-        <Number>1</Number>
-        <Heading>Tell us about your move</Heading> 
-        <Paragraph>We give you all the tools you need to quickly determine the size and scope of your move.</Paragraph> 
+        <Grid.Container>
+          <Grid.Row middle="md">
+            <Grid.Col lg={12} md={12}>
+              <Box vertical={10}>
+                <div>
+                  <Number>1</Number>
+                  <Heading underlineColor="#ffa500" >Tell us about your move</Heading> 
+                  <Paragraph>We give you all the tools you need to quickly determine the size and scope of your move.</Paragraph>
+                </div>
+              </Box>
+            </Grid.Col>
+            <Grid.Col lg={12} md={12}>
+              <Box vertical={{ md: 10, sm:0 }} below={10}>
+                <Image src="https://firebasestorage.googleapis.com/v0/b/comment-on-85597.appspot.com/o/images%2Fgui%2Fmarketing%2FItems.png?alt=media&token=f17d90ea-4257-4adf-a42b-d2ea6b64ddeb" />
+              </Box>
+            </Grid.Col>
+          </Grid.Row>
+        </Grid.Container>
       </Tile>
-
       <Tile>
-        <Number>2</Number>
-        <Heading>Get free estimates</Heading> 
-        <Paragraph>We'll provide you with the estimated moving costs from a variety of Movers.</Paragraph> 
+        <Grid.Container>
+          <Grid.Row middle="md">
+            <Grid.Col lg={12} md={12}>
+              <Box vertical={10}>
+                <div>
+                  <Number>2</Number>
+                  <Heading underlineColor="white">Get free estimates</Heading> 
+                  <Paragraph>We'll provide you with the estimated moving costs from a variety of Movers.</Paragraph>
+                </div>
+              </Box>
+            </Grid.Col>
+            <Grid.Col lg={12} md={12} first="md">
+              <Box vertical={{ md: 10, sm:0 }} below={10}>
+                <Image src="https://firebasestorage.googleapis.com/v0/b/comment-on-85597.appspot.com/o/images%2Fgui%2Fmarketing%2FEstimates.png?alt=media&token=aad0ad8d-44c6-489a-b3bf-8ef7381923b5" />
+              </Box>
+            </Grid.Col>
+          </Grid.Row>
+        </Grid.Container>
       </Tile>
-
       <Tile>
-        <Number>3</Number>
-        <Heading>Choose your mover</Heading> 
-        <Paragraph>Once you're happy with your choice, we'll put you in touch. Easy as that!</Paragraph> 
+        <Grid.Container>
+          <Grid.Row middle="md">
+            <Grid.Col lg={12} md={12}>
+              <Box vertical={10}>
+                <div>
+                  <Number>3</Number>
+                  <Heading underlineColor="#ffa500">Choose your mover</Heading> 
+                  <Paragraph>Once you're happy with your choice, we'll put you in touch. Easy as that!</Paragraph>
+                </div>
+              </Box>
+            </Grid.Col>
+            <Grid.Col lg={12} md={12}>
+              <Box vertical={{ md: 10, sm:0 }} below={10}>
+                <Image src="https://firebasestorage.googleapis.com/v0/b/comment-on-85597.appspot.com/o/images%2Fgui%2Fmarketing%2FTrucks.png?alt=media&token=8931390d-b16c-4e90-b84c-4e01fafd18d7" />
+              </Box>
+            </Grid.Col>
+          </Grid.Row>
+        </Grid.Container>
       </Tile>
-
-
-
     </Container>
   )
 }

@@ -53,25 +53,9 @@ export const InputsContainer = styled.div`
   ${props=>props.theme.media.greaterThan('sm')`
     padding: 3rem;
   `}
-
-  &:before {
-    font-family: 'FontAwesome';
-    content: "\f111\00a0\f111\00a0\f111";
-    position: absolute;
-    color: #d3d3d3;
-    top: 70px;
-    font-size: .45rem;
-    left: calc(2rem + 7px);
-
-    ${props=>props.theme.media.greaterThan('sm')`
-      top: 83px;
-      left: calc(3rem + 7px);
-    `}
-    width: 5px;
-    overflow-wrap: break-word;
-  }
 `;
 
 export const InputContainer = styled.div`
   margin-bottom: ${props=>props.theme.spaces.wide};
+  box-shadow: 0 -1px 0 inset ${props=>props.theme.colors.border};
 `;

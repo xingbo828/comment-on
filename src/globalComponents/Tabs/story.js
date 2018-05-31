@@ -34,9 +34,23 @@ const TabsWithReactEleHeader = () => (
     </Tabs>
   );
 
+  const TabsWithFillWidthHeader = () => (
+    <Tabs fillWidth style={{ width: '800px'}} activeKey="tab-1" onTabChange={action('tab changed')}>
+      <TabPanel panelKey="tab-1" header={<span><Icon icon="gear" /> Config</span>}>
+        <h2>This is Tab #1</h2>
+        <p>This is body of Tab #1</p>
+      </TabPanel>
+      <TabPanel panelKey="tab-2" header={<span><Icon icon="camera-retro" /> Camera</span>}>
+        <h2>This is Tab #2</h2>
+        <p>This is body of Tab #2</p>
+      </TabPanel>
+    </Tabs>
+  );
+
 
 const TabsStory = storiesOf('Global/Data Display/Tabs', module)
 .add('basic tabs', withInfo('Basic Tabs')(BasicTabs))
-.add('custom header link', withInfo('React element header links')(TabsWithReactEleHeader));
+.add('custom header link', withInfo('React element header links')(TabsWithReactEleHeader))
+.add('fill width header', withInfo('Fill with space')(TabsWithFillWidthHeader));
 
 export default TabsStory;

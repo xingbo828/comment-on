@@ -1,27 +1,5 @@
 import Styled from 'styled-components';
 
-export const Divider = Styled.hr`
-  margin: ${props=> props.theme.spaces.wide} 0;
-  border: none;
-  border-top: 1px dashed ${props=>props.theme.colors.border};
-`;
-
-export const ContactInfoContainer = Styled.section`
-  padding-top: ${props=>props.theme.spaces.wide};
-  padding-bottom: ${props=>props.theme.spaces.base};
-`;
-
-
-export const ContactInfoList = Styled.ul`
-  padding: ${props=>props.theme.spaces.base} 0;
-  margin: 0;
-`;
-
-export const ContactInfoListItem = Styled.li`
-  list-style: none;
-  padding: ${props=>props.theme.spaces.tight} 0;
-`;
-
 export const ContactInfoListItemLink = Styled.a`
   color: ${props=>props.theme.colors.textDark};
   text-decoration: none;
@@ -50,4 +28,33 @@ export const CrewMemberItemContainer = Styled.li`
   list-style: none;
   padding: ${props=>props.theme.spaces.base} 0;
 `;
+
+export const ContentWrapper = Styled.div`
+  margin: 2.5rem 0;
+`
+
+export const ProfileHeader = Styled.header`
+  display: flex;
+  margin: 3rem 0;
+  align-items: center;
+`
+
+export const ProfileImage = Styled.div`
+  width: 100px;
+  height: 100px;
+  background: url(${props=>props.src}) center center no-repeat;
+  background-size: contain;
+  border-radius: 4px;
+  border: 1px solid ${props=>props.theme.colors.border};
+`
+
+export const ProfileInfo = Styled.div`
+
+`
+
+export const ProfileName = Styled.h1`
+  font-size: 2rem;
+  margin: 0 0 0 1.5rem;
+  font-weight: 800;
+`
 

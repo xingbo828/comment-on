@@ -1,9 +1,9 @@
 import List from './List';
 import ListItem from './ListItem';
-import OrderedListItem from './OrderedListItem';
+import OrderedList from './OrderedList';
 
 export {
   List,
   ListItem,
-  OrderedListItem
+  OrderedList
 };

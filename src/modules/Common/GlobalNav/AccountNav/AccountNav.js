@@ -54,6 +54,9 @@ class AccountNav extends React.Component {
   }
 
   formatUserName(_name){
+    if(!_name) {
+      return null;
+    }
     const nameList = _name.split(' ')
     nameList[nameList.length - 1] = `${nameList[nameList.length - 1].charAt(0)}.`
     return nameList.join(' ')
@@ -77,7 +80,7 @@ class AccountNav extends React.Component {
         </Account>
         { active &&
           <Menu active={active}>
-            <DisplayName active={active}>{user.displayName}</DisplayName>
+            {user.displayName && <DisplayName active={active}>{user.displayName}</DisplayName>}
             <MenuList onClick={this.handleClick}>
               <MenuItem><Link to="/account">Manage my account</Link></MenuItem>
               {user.moverId && <MenuItem><Link to={`/mover/edit/basic-profile`}>Manage my mover account</Link></MenuItem>}

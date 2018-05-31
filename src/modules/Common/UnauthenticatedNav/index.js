@@ -2,7 +2,6 @@ import React from 'react'
 import Styled from 'styled-components'
 import { withRouter } from 'react-router-dom';
 import Button from '../../../globalComponents/Form/Button';
-import Sticky from '../../../globalComponents/Sticky';
 import Logo from '../../../globalComponents/Logo';
 
 
@@ -16,19 +15,6 @@ const Container = Styled.nav`
   line-height: 100px;
   transition: .3s;
   border-bottom: 1px solid transparent;
-
-  ul {
-    opacity: 0;
-  }
-
-
-  ${props=>props.isFixed && `
-    border-bottom: 1px solid ${props.theme.colors.border};
-
-    ul {
-      opacity: 1;
-    }
-  `}
 `
 
 const Menu = Styled.ul`
@@ -41,7 +27,7 @@ const Menu = Styled.ul`
 
 const MenuItem = Styled.li`
   margin: 0;
-  padding: 0 0 0 1rem;
+  padding: 0 0 0 2rem;
   flex:1
 `
 
@@ -60,25 +46,16 @@ const UnauthenticatedNav = ({ history }) => {
     })
   };
 
-  const goToConfigure = (e) => {
-    e.preventDefault();
-    history.push({
-      pathname: '/projects/configurations/move/address'
-    })
-  };
-
   return (
-    <Sticky>
-      <Container>
-        <LogoWrapper>
-          <Logo />
-        </LogoWrapper>
-        <Menu>
-          <MenuItem><Button small outline onClick={goToLogin}>Login / Sign up</Button></MenuItem>
-          <MenuItem><Button small primary onClick={goToConfigure}>Get started</Button></MenuItem>
-        </Menu>
-      </Container>
-    </Sticky>
+    <Container>
+      <LogoWrapper>
+        <Logo />
+      </LogoWrapper>
+      <Menu>
+        <MenuItem><Button small ghost onClick={goToLogin}>Sign up</Button></MenuItem>
+        <MenuItem><Button small secondary onClick={goToLogin}>Login</Button></MenuItem>
+      </Menu>
+    </Container>
   )
 }
 

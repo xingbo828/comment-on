@@ -1,6 +1,7 @@
-import Styled from 'styled-components'
+import Styled, { css } from 'styled-components'
+import { Link as RouterLink } from 'react-router-dom';
 
-const Link = Styled.a`
+const LinkStyles = css`
   margin: 0 0 .875rem;
   display: block;
   color: ${props => props.theme.colors.primary};
@@ -20,7 +21,8 @@ const Link = Styled.a`
   &:hover {
     color: ${props=>props.theme.colors.secondaryLight};
   }
-
 `
 
+export const Link = Styled.a`${LinkStyles}`
+export const ReactRouterLink = Styled(RouterLink)`${LinkStyles}`
 export default Link

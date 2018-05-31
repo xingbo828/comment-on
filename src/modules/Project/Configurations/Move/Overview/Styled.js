@@ -24,7 +24,7 @@ export const SectionHeader = styled.div`
 `;
 
 export const SectionHeaderEditLink = styled(Link)`
-  line-height: 90px;
+  ${'' /* line-height: 90px; */}
   color: ${props=>props.theme.colors.secondary};
   text-decoration: none;
   font-weight: ${props=>props.theme.fontWeights.roman};
@@ -40,12 +40,12 @@ export const SectionBody = styled.ul`
 `;
 
 export const SectionBodyItem = styled.li`
-  ${props=>props.theme.media.greaterThan('sm')`
-    display: flex;
-    justify-content: space-between;
-  `}
-
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
   padding: ${props=>props.theme.spaces.tight} 0;
+  ${props=>props.border && `border-bottom: 1px solid ${props.theme.colors.border}`};
 `;
 
 export const SectionBodyItemLabel = styled.span`

@@ -1,26 +1,23 @@
 import React from 'react';
 import { Field } from 'redux-form/immutable';
-import { Button, AddressAutoComplete } from '../../../../globalComponents/Form';
-import Grid from '../../../../globalComponents/Grid';
-import Icon from '../../../../globalComponents/Icon';
+import { AddressAutoComplete } from '../../../../globalComponents/Form';
 import {
   AddressSearchBarContainer,
   InputWrapper,
   Form,
-  MobileCtaWrapper
+  Button,
+  Copy
 } from './Styles';
 
-const renderMoveAddress = ({ input, label, ...rest, placeholder }) =>
-<InputWrapper>
+const renderMoveAddress = ({ input, label, ...rest, placeholder }) => (
   <AddressAutoComplete
     onSelect={input.onChange}
     placeholder={placeholder}
     label={label}
     {...rest}
   />
-</InputWrapper>;
+)
 
-const { Col, Row } = Grid;
 
 const AddressSearchBar = ({
   handleSubmit,
@@ -33,38 +30,27 @@ const AddressSearchBar = ({
   return (
     <AddressSearchBarContainer>
       <Form onSubmit={handleSubmit}>
-        <Row>
-          <Col xs={24} lgOffset={1} sm={24} md={24} lg={8}>
-            <Field
-              component={renderMoveAddress}
-              name="pickUpAddress"
-              placeholder="Pick-up address"
-            />
-          </Col>
-          <Col xs={24} sm={24} md={24} lg={8}>
-            <Field
-              component={renderMoveAddress}
-              placeholder="Delivery address"
-              name="deliveryAddress"
-            />
-          </Col>
-          <Col xs={24} sm={24} md={24} lg={6}>
-          <InputWrapper>
-            <Button primary disabled={pristine || submitting || !valid}>
-              Get Started
-            </Button>
-            {/* <Button primary disabled={pristine || submitting || !valid}>
-              Get Started
-            </Button> */}
-          </InputWrapper>
-          </Col>
-        </Row>
-      </Form>
-      <MobileCtaWrapper>
-        <Button primary icon="arrow-right" onClick={navToSearch}>
-          Get Started<Icon icon="magic" />
+        <Copy>
+          Inneed is the fastest and easiest way to find professional movers in your area. We partner with a varietey of moving companys to help you choose a mover who fits your exact needs. To get started, tell us where you're moving below.
+        </Copy>
+        <InputWrapper>
+          <Field
+            component={renderMoveAddress}
+            name="pickUpAddress"
+            label="Pick-up address"
+          />
+        </InputWrapper>
+        <InputWrapper>
+          <Field
+            component={renderMoveAddress}
+            label="Delivery address"
+            name="deliveryAddress"
+          />
+        </InputWrapper>
+        <Button primary disabled={pristine || submitting || !valid}>
+          Get Started
         </Button>
-      </MobileCtaWrapper>
+      </Form>
     </AddressSearchBarContainer>
   );
 };

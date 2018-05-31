@@ -3,10 +3,18 @@ import Styled from 'styled-components';
 import { withTheme } from 'styled-components';
 
 
-const Heading = ({ className, wrapperTag, children, underline, theme, size }) => {
+const Heading = ({ className, wrapperTag, children, underline, indent, theme, size }) => {
 
   const HeadingContainer = Styled.div`
     margin: 0 0 1rem;
+
+    ${size === 'sm' && `
+      margin: 0 0 .5rem;
+    `}
+
+    ${size === 'xs' && `
+      margin: 0 0 .5rem;
+    `}
   `;
 
   const Tag = Styled[wrapperTag]`
@@ -40,25 +48,41 @@ const Heading = ({ className, wrapperTag, children, underline, theme, size }) =>
 
     ${theme.media.greaterThan('md')`
       ${size === 'xl' && `
-        font-size: 4rem;
+        font-size: 3rem;
+        font-weight: 800;
       `}
 
       ${size === 'lg' && `
-        font-size: 3rem;
+        font-size: 2rem;
       `}
 
       ${size === 'md' && `
-        font-size: 2.5rem;
+        font-size: 1.5rem;
+        font-weight: 300;
       `}
 
       ${size === 'sm' && `
-        font-size: 1.5rem;
+        font-size: 1em;
       `}
 
       ${size === 'xs' && `
         font-size: 1rem;
       `}
     `};
+
+    ${indent && `
+      padding: 0 0 0 1rem;
+
+      ::before{
+        content: '';
+        position: absolute;
+        width: 4px;
+        background: ${theme.colors.primary};
+        bottom: 0;
+        top: 0;
+        left: 0;
+      }
+    `}
 
     ${underline && `
       padding: 0 0 1rem;

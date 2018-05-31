@@ -5,7 +5,7 @@ import {
   Definition
 } from './Styled';
 
-const Row = ({ term, definition }) => {
+const DescriptionEntry = ({ term, definition }) => {
   return (
     <DefinitionContainer>
       <Term>{term}</Term>
@@ -14,4 +14,4 @@ const Row = ({ term, definition }) => {
   );
 }
 
-export default Row;
+export default DescriptionEntry;

@@ -4,9 +4,11 @@ import { compose, withProps, branch, renderComponent } from 'recompose';
 import * as firebase from 'firebase';
 import mapImmutablePropsToPlainProps from '../../Common/mapImmutablePropsToPlainProps';
 import Login from './Login';
+// import AccountVerificationPanel from './AccountVerificationPanel'
 import { auth as firebaseAuth } from '../../../firebaseClient';
 import { getAccount } from '../accountReducer';
 import Spin from '../../../globalComponents/Spin';
+
 
 const facebookLogin = () => {
   const provider = new firebase.auth.FacebookAuthProvider();
@@ -28,15 +30,22 @@ const mapStateToProps = state => getAccount(state);
 const enhance = compose(
   withRouter,
   connect(mapStateToProps),
-  withProps(props => ({
-    facebookLogin,
-    googleLogin
-  })),
   mapImmutablePropsToPlainProps,
+  withProps(( {account }) => ({
+    facebookLogin,
+    googleLogin,
+    isAuthenticated: account.status === 'AUTHENTICATED',
+    // isAuthenticated: account.status === 'AUTHENTICATED' && account.user.emailVerified,
+    // isAccountNotVerified: account.status === 'AUTHENTICATED' && !account.user.emailVerified
+    // msgEmailVerificationError: () => {
+    //   message.info('Thanks for registering. To complete the account activation, please click the link we sent to your email.', 0);
+    // }
+  })),
   branch(
     props => props.account.status === 'UNINIT',
     renderComponent(Spin.FullScreenSpinner)
-  )
+  ),
+  // branch(props => props.isAccountNotVerified, renderComponent(AccountVerificationPanel))
 );
 
 export default enhance(Login);

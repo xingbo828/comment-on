@@ -41,7 +41,7 @@ class ItemsCount extends Component {
 
   renderChild = (c) => {
     return (
-      <ItemQuantity.ItemQuantity
+      <ItemQuantity.ItemQuantity key={c.title}
         image={c.image}
         title={c.title}
         unit="Quantity"

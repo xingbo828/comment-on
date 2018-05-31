@@ -1,44 +1,35 @@
 import styled from 'styled-components';
-
-export const Hero = styled.div`
-  padding: 200px 0 100px;
-  width: 100%;
-  align-items: center;
-  display: flex;
-  position: relative;
-  z-index: 1;
-
-  // div::after {
-  //   content: "";
-  //   background: url('https://media.istockphoto.com/vectors/crossroad-graphic-black-white-landscape-sketch-illustration-vector-vector-id623666484') center center no-repeat;
-  //   background-size: contain;
-  //   opacity: .004;
-  //   top: 0;
-  //   left: 0;
-  //   bottom: 0;
-  //   right: 0;
-  //   position: absolute;
-  //   z-index: -1;   
-  // }
-`;
+import Box from '../../globalComponents/Box';
 
 
-export const Banner = styled.div`
-  color: ${props=>props.theme.colors.offWhite};
+export const Hero = styled(Box)`
+  height: 100%;
+`
+
+export const ButtonContainer = styled.div`
   text-align: center;
-  padding: 4rem 0;
+`
 
-  ${props=>props.theme.media.greaterThan('md')`
-    padding: 0 0 6rem;
-  `};
-`;
+export const HeroInner = styled.div`
+  width: 50%;
+`
+export const Logo = styled.img`
+  height: 35px;
+`
 
-export const InnerContainer = styled.div`
-  width: 100%;
-`;
-
+export const Header = styled(Box)`
+  justify-content: space-between;
+`
 
 export const SectionContainer = styled.div`
   margin: 10rem 0;
 `
 
+export const Divider = styled.div`
+  background: linear-gradient(to bottom, #f4f6f9 0%,#ffffff 100%);
+  height: 100px;
+
+  ${props=>props.theme.media.greaterThan('md')`
+    height: 200px;
+  `}
+`
