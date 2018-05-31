@@ -62,7 +62,6 @@ const initItemsState = Immutable.fromJS({
 const searchItemsStep = (state = initItemsState, action) => {
   switch (action.type) {
     case GET_ITEMS: {
-      console.log(action)
       return state.withMutations(st => {
         st.set('specialCare', action.data.specialCare || {});
         st.set('appliances', action.data.appliances || {});
@@ -112,7 +111,7 @@ const searchDateStep = (state = initDateState, action) => {
 // Logistics
 const initLogisticsState = Immutable.fromJS({
   deliveryAccess: null,
-  ableToAssist: null,
+  pickUpAccess: null,
   residenceType: null,
   status: 'UNINIT'
 });
@@ -123,7 +122,7 @@ const searchLogisticsStep = (state = initLogisticsState, action) => {
       return state.withMutations(st => {
         st.set('residenceType', action.data.residenceType);
         st.set('deliveryAccess', action.data.deliveryAccess);
-        st.set('ableToAssist', action.data.ableToAssist);
+        st.set('pickUpAccess', action.data.pickUpAccess);
         st.set('status', 'LOADED');
       });
     }

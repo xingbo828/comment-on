@@ -57,7 +57,7 @@ const ConfigurationOverview = ({
       const { addresses: { pickUpAddress, deliveryAddress } } = rootAddresses;
       return (
         <SectionBody>
-          <SectionBodyItem>
+          <SectionBodyItem border>
             <SectionBodyItemLabel>Pick-up address</SectionBodyItemLabel>
             <SectionBodyItemContent>
               <LatLngToAddress
@@ -109,42 +109,14 @@ const ConfigurationOverview = ({
         );
       }
       const { pickUpDate } = date;
-      // const { pickUpDate, pickUpTime, deliveryDate, deliveryTime } = dateTime;
-      // const mappedPickUpTime = MOVING_SEARCH_TIME_RANGE.find(
-      //   i => i.value === pickUpTime
-      // );
-      // const mappedDeliveryTime = MOVING_SEARCH_TIME_RANGE.find(
-      //   i => i.value === deliveryTime
-      // );
 
       return (
         <SectionBody>
           <SectionBodyItem>
-            <SectionBodyItemLabel>Pick-up date</SectionBodyItemLabel>
             <SectionBodyItemContent>
-              {pickUpDate.map(p => <p>{p.format('dddd, MMMM, D, YYYY')}</p>)}
+              {pickUpDate.map(p => <p key={p}>{p.format('dddd, MMMM, D, YYYY')}</p>)}
             </SectionBodyItemContent>
           </SectionBodyItem>
-          {/* <SectionBodyItem>
-            <SectionBodyItemLabel>Pick-up time</SectionBodyItemLabel>
-            <SectionBodyItemContent>
-              {mappedPickUpTime && mappedPickUpTime.label}
-            </SectionBodyItemContent>
-          </SectionBodyItem> */}
-          {/* <SectionBodyItem>
-            <SectionBodyItemLabel>Delivery date</SectionBodyItemLabel>
-            <SectionBodyItemContent>
-              {isObject(deliveryDate)
-                ? deliveryDate.format('MMMM, D, YYYY')
-                : startCase(deliveryDate)}
-            </SectionBodyItemContent>
-          </SectionBodyItem> */}
-          {/* {deliveryDate !== 'sameDayDelivery' && <SectionBodyItem>
-            <SectionBodyItemLabel>Delivery time</SectionBodyItemLabel>
-            <SectionBodyItemContent>
-              {mappedDeliveryTime && mappedDeliveryTime.label}
-            </SectionBodyItemContent>
-          </SectionBodyItem>} */}
         </SectionBody>
       );
     };
@@ -153,7 +125,7 @@ const ConfigurationOverview = ({
       <Section>
         <SectionHeader>
           <Heading wrapperTag="h2" size="sm">
-            Date
+            Pick-up date(s)
           </Heading>
           <SectionHeaderEditLink
             to={{ pathname: '/projects/configurations/move/date', fromOverview: true }}
@@ -173,39 +145,44 @@ const ConfigurationOverview = ({
           <SectionInvalid>Invalid logistics configuration.</SectionInvalid>
         );
       }
-      const { residenceType, deliveryAccess, ableToAssist } = logistics;
+      const { residenceType, deliveryAccess, pickUpAccess } = logistics;
       return (
         <SectionBody>
-          <SectionBodyItem>
+          <SectionBodyItem border>
             <SectionBodyItemLabel>Pick-up residence type</SectionBodyItemLabel>
             <SectionBodyItemContent>
               {capitalize(residenceType.split(' | ')[0])}
             </SectionBodyItemContent>
           </SectionBodyItem>
-          <SectionBodyItem>
+          <SectionBodyItem border>
             <SectionBodyItemLabel>Pick-up residence size</SectionBodyItemLabel>
             <SectionBodyItemContent>
               {residenceType.split(' | ')[0] === 'apartment' ? '' : 'Up to'}{' '}
               {residenceType.split(' | ')[1]}
             </SectionBodyItemContent>
           </SectionBodyItem>
-          <SectionBodyItem>
+          <SectionBodyItem border>
+            <SectionBodyItemLabel>Pick-up location access</SectionBodyItemLabel>
+            <SectionBodyItemContent>
+            {pickUpAccess.startsWith('elevator') || pickUpAccess.startsWith('main-floor')
+                ? pickUpAccess
+                    .split('/')
+                    .map(w => capitalize(w).replace('-', ' '))
+                    .join(' / ')
+                : `${pickUpAccess.split('|').map(w => w.trim())[1]} stairs`}
+            </SectionBodyItemContent>
+          </SectionBodyItem>
+          <SectionBodyItem >
             <SectionBodyItemLabel>
               Delivery location access
             </SectionBodyItemLabel>
             <SectionBodyItemContent>
-              {deliveryAccess.startsWith('elevator')
+              {deliveryAccess.startsWith('elevator') || deliveryAccess.startsWith('main-floor')
                 ? deliveryAccess
                     .split('/')
                     .map(w => capitalize(w).replace('-', ' '))
                     .join(' / ')
                 : `${deliveryAccess.split('|').map(w => w.trim())[1]} stairs`}
-            </SectionBodyItemContent>
-          </SectionBodyItem>
-          <SectionBodyItem>
-            <SectionBodyItemLabel>Able to assist</SectionBodyItemLabel>
-            <SectionBodyItemContent>
-              {capitalize(ableToAssist)}
             </SectionBodyItemContent>
           </SectionBodyItem>
         </SectionBody>
@@ -232,12 +209,13 @@ const ConfigurationOverview = ({
     );
   };
 
-  const renderItemsSubSection = v => {
-    return Object.keys(v)
-      .filter(f => v[f] !== '0' || v[f]=== '5+')
-      .map(i => {
+  const renderItemsSubSection = (v, isLast=false) => {
+    const data = Object.keys(v)
+    .filter(f => v[f] !== '0' || v[f]=== '5+');
+    return data
+      .map((i, index)=> {
         return (
-          <SectionBodyItem key={i}>
+          <SectionBodyItem key={i} border={!isLast && (index <= data.length)}>
             <SectionBodyItemLabel>
               {capitalize(startCase(i))}
             </SectionBodyItemLabel>
@@ -261,7 +239,13 @@ const ConfigurationOverview = ({
         <SectionBody>
           {renderItemsSubSection(items.specialCare)}
           {renderItemsSubSection(items.appliances)}
-          {renderItemsSubSection(items.decore)}
+          {renderItemsSubSection(items.decore, true)}
+          {items.otherItems && <SectionBodyItem>
+            <SectionBodyItemLabel>
+              Other items
+            </SectionBodyItemLabel>
+            <SectionBodyItemContent>{items.otherItems}</SectionBodyItemContent>
+          </SectionBodyItem>}
         </SectionBody>
       );
     };
@@ -294,7 +278,7 @@ const ConfigurationOverview = ({
     return (
       <div>
         <Legend>Enter a name for your project</Legend>
-        <TextField 
+        <TextField
           input={input}
           label="Project name"
         />
@@ -314,7 +298,7 @@ const ConfigurationOverview = ({
     return (
       <div>
         <Legend>Provide us with any additional notes. This is the place for any additional quetions, concerns or information pertaining to your move you feel we may have missed.</Legend>
-        <TextArea 
+        <TextArea
           input={input}
           label="Additional notes"
         />

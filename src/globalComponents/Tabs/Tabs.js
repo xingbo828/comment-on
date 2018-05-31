@@ -38,9 +38,12 @@ class Tabs extends Component {
   }
 
   updateParentHeight(height) {
-    this.setState({
-      containerHeight: height
-    });
+    if (height !== this.state.containerHeight) {
+      this.setState({
+        containerHeight: height
+      });
+    }
+
   }
 
 

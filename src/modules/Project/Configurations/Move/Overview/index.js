@@ -97,8 +97,7 @@ const validators = ({
   logisticsValidator: (logistics) => {
     if(
       isUndefined(logistics.residenceType) ||
-      isUndefined(logistics.deliveryAccess) ||
-      isUndefined(logistics.ableToAssist)
+      isUndefined(logistics.deliveryAccess)
     ) {
       return false;
     }
