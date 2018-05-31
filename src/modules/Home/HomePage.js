@@ -58,7 +58,7 @@ const HomePage = ({ navToGetStarted }) => (
             src="https://firebasestorage.googleapis.com/v0/b/comment-on-85597.appspot.com/o/images%2Fgui%2Fmarketing%2FTrucks.png?alt=media&token=8931390d-b16c-4e90-b84c-4e01fafd18d7" 
             eyebrow="Step 3"
             title="Choose your mover"
-            body="WOnce you're happy with your choice, we'll put you in touch. Easy as that!"
+            body="Once you're happy with your choice, we'll put you in touch. Easy as that!"
             handleClick={navToGetStarted}
           />
         </Grid.Col>
