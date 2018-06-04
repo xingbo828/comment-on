@@ -57,7 +57,7 @@ export const Label = styled.label`
 
 export const GeosuggestStyled = styled(Geosuggest)`
   position: relative;
-  line-height: 40px;
+  line-height: 1.5;
   display: inline-block;
   width: 100%;
   text-align: left;
@@ -82,13 +82,14 @@ export const GeosuggestStyled = styled(Geosuggest)`
   }
 
   .geosuggest__suggests {
+    margin: 0;
+    padding: 0;
     z-index: ${props => props.theme.zIndex.dropdown};
     position: absolute;
     top: 100%;
-    left: 10px;
-    right: 0px;
+    left: 0;
+    right: 0;
     padding: 0;
-    margin-top: -2px;
     background: #fff;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -104,24 +105,34 @@ export const GeosuggestStyled = styled(Geosuggest)`
   }
 
   .geosuggest__item {
-    font-size: .825rem;
-    ${props=>props.theme.media.greaterThan('md')`
-      font-size: 1rem;
-    `}
-    padding: ${props => props.theme.spaces.xTight};
-    ${props=>props.theme.media.greaterThan('md')`
-      padding: ${props.theme.spaces.tight};
-    `}
+    font-size: .875rem;
+    padding: 1em;
+    position: relative;
     cursor: pointer;
+
+    &:after {
+      content: '';
+      display: block;
+      height: 1px;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 1em;
+      background: ${props => props.theme.colors.border};
+    }
+
+    &:hover {
+      &:after {
+        background: ${props => props.theme.colors.offWhite};
+      }
+    }
   }
   .geosuggest__item:hover,
   .geosuggest__item:focus {
-    background: ${props => props.theme.colors.primary};
-    color: #fff;
+    background: ${props => props.theme.colors.offWhite};
   }
   .geosuggest__item--active {
-    background: ${props => props.theme.colors.primary};
-    color: #fff;
+    background: ${props => props.theme.colors.offWhite};
   }
   .geosuggest__item--active:hover,
   .geosuggest__item--active:focus {

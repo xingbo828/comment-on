@@ -37,7 +37,7 @@ const Hero = () => (
                   <Tagline>Need a mover?</Tagline>
                   <Heading>We'll find you the right one for the job</Heading>
                   <Description>
-                    Inneed is the fastest and easiest way to find professional movers in your area. We partner with a varietey of moving companys to help you choose a mover who fits your exact needs. To get started, tell us where you're moving below.
+                    Inneed is the fastest and easiest way to find professional movers in your area. We partner with a variety of moving companys to help you choose a mover who fits your exact needs.
                   </Description>
                 </Box>
               </WideHeroMessage>

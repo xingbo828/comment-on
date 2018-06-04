@@ -8,7 +8,7 @@ const colors = {
   secondaryDark: '#1a71bd',
   border: '#dee0df',
   danger: '#FF6B6B',
-  success: '#42b56b',
+  success: '#0ACB7A',
   textDarkest: '#2d2d2d',
   textDark: '#525458',
   textLight: '#a6a7a9',
