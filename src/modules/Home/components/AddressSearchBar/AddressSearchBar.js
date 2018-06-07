@@ -5,8 +5,7 @@ import {
   AddressSearchBarContainer,
   InputWrapper,
   Form,
-  Button,
-  Copy
+  Button
 } from './Styles';
 
 const renderMoveAddress = ({ input, label, ...rest, placeholder }) => (
@@ -30,9 +29,6 @@ const AddressSearchBar = ({
   return (
     <AddressSearchBarContainer>
       <Form onSubmit={handleSubmit}>
-        <Copy>
-          Inneed is the fastest and easiest way to find professional movers in your area. We partner with a varietey of moving companys to help you choose a mover who fits your exact needs. To get started, tell us where you're moving below.
-        </Copy>
         <InputWrapper>
           <Field
             component={renderMoveAddress}

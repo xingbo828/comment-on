@@ -14,8 +14,8 @@ const colors = {
   textLight: '#a6a7a9',
   offWhite: '#f4f6f9',
   darkOffWhite: '#ecedf2',
-  primaryDark: '#f6820c',
-  primaryLight: '#FFD17B',
+  primaryDark: '#ffac37',
+  primaryLight: '#ffe17b',
   // alias
   get info() { return this.secondary },
   get error() { return this.danger },

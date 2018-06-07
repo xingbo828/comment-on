@@ -2,12 +2,8 @@ import styled from 'styled-components';
 
 export const AddressSearchBarContainer = styled.div`
   background-color: white;
-  margin: 0 1.5rem;
-  box-shadow: rgba(29,29,31,0.15) 0 -80px 60px;
-
-  ${props=>props.theme.media.greaterThan('sm')`
-    margin: 0 8rem;
-  `}
+  margin: 0;
+  box-shadow: rgba(29,29,31,0.15) 0 -160px 60px;
 
   ${props=>props.theme.media.greaterThan('md')`
     margin: 0 0 0 -2rem;
@@ -86,14 +82,5 @@ export const Button = styled.button`
     box-shadow: none;
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
-  `}
-`
-
-export const Copy = styled.p`
-  margin: 0 0 1rem;
-  line-height: 1.5;
-
-  ${props=>props.theme.media.greaterThan('md')`
-    display: none;
   `}
 `

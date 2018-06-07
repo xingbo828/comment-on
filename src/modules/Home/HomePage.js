@@ -21,7 +21,7 @@ const HomePage = ({ navToGetStarted }) => (
     <Grid.Container>
       <Grid.Row>
         <Grid.Col>
-          <Box vertical={{ xs:6, lg:10 }}>
+          <Box vertical={6}>
             <Heading eyebrow="It's easy" underlay="how" wrapperTag="h3" centered size="md">Here's how it works</Heading>
           </Box>
         </Grid.Col>
