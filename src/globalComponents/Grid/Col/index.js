@@ -27,7 +27,6 @@ const calculateDisplay = (ratio) => (!isUndefined(ratio) && ratio === 0) && 'dis
 
 export default styled.div`
   padding: 0 1.5rem;
-  overflow: hidden;
 
   ${props => `
     ${calculateDisplay(props.xs)};
