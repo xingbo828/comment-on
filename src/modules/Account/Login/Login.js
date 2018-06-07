@@ -45,7 +45,7 @@ const Login = ({ isAuthenticated, location, account, facebookLogin, googleLogin,
       <WrapperDiv>
         <InnerDiv>
           <LogoWrapper>
-            <Logo />
+            <Logo style={{width: '130px'}} />
           </LogoWrapper>
           <Tabs fillWidth={true} activeKey={activeTabKey}>
             <TabPanel panelKey="login" header={<span style={{fontSize: '1.05rem'}}><Icon icon="sign-in" /> Login</span>}>

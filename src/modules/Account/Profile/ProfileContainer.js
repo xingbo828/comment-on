@@ -12,6 +12,7 @@ import { getUser } from '../accountReducer';
 import { withSettingsContext } from '../../Common/Settings';
 import validators, { validateFunc } from '../../Common/validators';
 import message from '../../../globalComponents/Message';
+import scrollToTopOnMount from '../../Common/scrollToTopOnMount';
 
 const mapStateToProps = state => {
   const defaultV = Immutable.Map({ receiveEmail: true })
@@ -76,7 +77,8 @@ const enhance = compose(
       console.error(error);
       message.error(error.message, 0);
     }
-  })
+  }),
+  scrollToTopOnMount
 );
 
 export default enhance(Profile);

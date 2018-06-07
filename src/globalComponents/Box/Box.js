@@ -47,13 +47,13 @@ const getLevelIndex = (property, size) => {
   }
 
   switch(size) {
-    case 'lg': 
+    case 'lg':
       if(property['lg'] > -1) return property['lg']
       // falls through
     case 'md':
       if(property['md'] > -1) return property['md']
       // falls through
-    case 'sm': 
+    case 'sm':
       if(property['sm'] > -1) return property['sm']
       // falls through
     case 'xs':
@@ -113,7 +113,7 @@ Box.propTypes = {
   tag: PropTypes.string,
   inline: PropTypes.bool,
   between: PropTypes.oneOf([0,1,2,3,4,5,6,7,8,9,10,11,12,null]),
-  vertical: PropTypes.oneOf([0,1,2,3,4,5,6,7,8,9,10,11,12,null]),
+  // vertical: PropTypes.oneOf([0,1,2,3,4,5,6,7,8,9,10,11,12,null]),
   horizontal: PropTypes.oneOf([0,1,2,3,4,5,6,7,8,9,10,11,12,null]),
   inset: PropTypes.oneOf([0,1,2,3,4,5,6,7,8,9,10,11,12,null])
 }

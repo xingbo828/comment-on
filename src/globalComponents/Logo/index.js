@@ -17,8 +17,7 @@ const Container = Styled.img`
   }
 `
 
-const Logo = ({ history }) => {
-  console.log(logoSvg)
+const Logo = ({ history, ...rest }) => {
   // TODO: Move navigation logic
   const goToHome = (e) => {
     e.preventDefault();
@@ -28,7 +27,7 @@ const Logo = ({ history }) => {
   };
 
   return (
-    <Container onClick={goToHome} src={logoSvg} />
+    <Container {...rest} onClick={goToHome} src={logoSvg} />
   )
 }
 
