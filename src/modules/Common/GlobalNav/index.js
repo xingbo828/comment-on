@@ -1,28 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
-import { compose, withProps, branch, renderNothing, renderComponent } from 'recompose';
+import { compose, withProps, branch, renderNothing } from 'recompose';
 import { auth } from '../../../firebaseClient';
 import isLoggedIn from '../isLoggedIn';
-import AccountNav from './AccountNav';
 import globalNavHiddenList from './globalNavHiddenList.json';
-import NotificationCenter from '../NotificationCenter';
-import { Button } from '../../../globalComponents/Form';
-import UnauthenticatedNav from '../UnauthenticatedNav'
-import { Link } from '../../../globalComponents/Link';
+
 import Logo from '../../../globalComponents/Logo';
+import AuthAwareNav from './AuthAwareNav'
 
-
-
-// const fromTheme = (prop) => ({ theme }) => theme.colors[prop]
-
-const ContextHeaderLink = styled.span`
-  padding: 0 1rem 0 0;
-
-  ${props=>props.theme.media.greaterThan('sm')`
-    display: none;
-  `}
-`
 
 const ContextHeader = styled.div`
   display: flex;
@@ -30,51 +16,15 @@ const ContextHeader = styled.div`
   height: 60px;
   line-height: 60px;
   width: 100%;
-  padding: 0 0 0 1rem;
+  padding: 0 1rem;
 
   ${props=>props.theme.media.greaterThan('sm')`
-    padding: 0 0 0 1.5rem;
+    padding: 0 1.5rem;
     height: 80px;
     line-height: 80px;
   `}
 `;
 
-// const Heading = styled.h1`
-//   text-decoration: none;
-//   flex: 1;
-//   display: inline;
-//   font-size: 1rem;
-//   color: white;
-//   margin: 0 1rem 0 0;
-//   padding: 0 1rem 0 0;
-//   border-right: 1px solid white;
-//   font-weight: 800;
-//   letter-spacing: .1em;
-//   color: ${fromTheme('primary')};
-// `;
-
-const ContextHeaderLinks = styled.ul`
-  flex: 10;
-  display: flex;
-  padding: 0;
-  flex-direction: row-reverse;
-  margin: 0;
-  align-items: center;
-`;
-
-const ContextHeaderButton = styled.li`
-  list-style: none;
-  line-height: 30px;
-  margin: 0 1.5rem 0 0;
-
-> a {
-    text-decoration: none;
-  }
-
-  ${props=>props.theme.media.lessThan('sm')`
-    display: none;
-  `}
-`;
 
 const NavRoot = styled.nav`
   position: relative;
@@ -91,13 +41,8 @@ const LogoWrapper = styled.div`
   align-items: center;
 `
 
-export const Nav = ({ user, isLoggedIn, logout, history }) => {
-  const sentToMyMovesPage = (e) => {
-    e.preventDefault();
-    history.push({
-      pathname: '/projects'
-    })
-  };
+export const Nav = ({ user, isLoggedIn, loginStatus, logout, history }) => {
+
 
   return (
     <NavRoot>
@@ -105,20 +50,7 @@ export const Nav = ({ user, isLoggedIn, logout, history }) => {
         <LogoWrapper>
           <Logo />
         </LogoWrapper>
-        <ContextHeaderLinks>
-        {isLoggedIn && (
-          <div>
-            <ContextHeaderButton>
-              <Button small onClick={sentToMyMovesPage}>My moves</Button>
-            </ContextHeaderButton>
-            <ContextHeaderLink>
-              <Link inline secondary onClick={sentToMyMovesPage}>My moves</Link>
-            </ContextHeaderLink>
-          </div>
-        )}
-        </ContextHeaderLinks>
-        <NotificationCenter />
-        <AccountNav />
+        <AuthAwareNav loginStatus={loginStatus} isLoggedIn={isLoggedIn} />
       </ContextHeader>
     </NavRoot>
   );
@@ -141,10 +73,6 @@ const NavContainer = compose(
   branch(
     props => pathMatchesHiddenList(props.location.pathname),
     renderNothing
-  ),
-  branch(
-    props => !props.isLoggedIn,
-    renderComponent(UnauthenticatedNav)
   ),
   withProps(props => ({
     logout

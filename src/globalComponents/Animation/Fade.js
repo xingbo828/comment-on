@@ -14,13 +14,14 @@ const transitionStyles = {
   entered: { opacity: 1 },
 };
 
-const Fade = ({ children, component, ...rest }) => {
+const Fade = ({ children, component, style={}, ...rest }) => {
   const C = component;
   return (
     <Transition {...rest}>
       {status => (
         <C
           style={{
+            ...style,
             ...defaultStyle(rest.timeout),
             ...transitionStyles[status],
           }}

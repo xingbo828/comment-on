@@ -12,7 +12,6 @@ const MoveCard = ({ project,  unreads, navToProject}) => {
   const status = project.status !== 'completed' ? 'In Progress': 'Completed';
 
   const name = project.configuration.projectName;
-
   return (
       <Card onClick={navToProject}>
         <Badge count={unreads} offsetY={-8} scale={1.2}>

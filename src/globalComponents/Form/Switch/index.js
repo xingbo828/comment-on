@@ -1,64 +1,83 @@
 import React, { Component } from 'react';
-import { bool, func, oneOf } from 'prop-types';
+import { bool, func, oneOf, shape, string, object } from 'prop-types';
+import { Label } from '../Label';
 import {
-  SwitchContainer
+  SwitchContainer,
+  SwitchWrapper,
+  InputContainer,
+  InputErrorMsg
 } from './Styled';
 
 class Switch extends Component {
-
-  state = {
-    checked: this.props.checked
+  handleToggle = e => {
+    this.props.input.onChange(!this.props.input.checked);
   };
 
-  setChecked = (checked) => {
-    this.setState({
-      checked
-    });
-    this.props.onChange(checked);
+  setChecked = v => {
+    this.props.input.onChange(v);
   };
 
-  handleToggle = (e) => {
-    const checked = !this.state.checked;
-    this.setChecked(checked);
-  };
-
-  handleKeyDown = (e) => {
-    if (e.keyCode === 37) { // Left
+  handleKeyDown = e => {
+    if (e.keyCode === 37) {
+      // Left
       this.setChecked(false);
-    } else if (e.keyCode === 39) { // Right
+    } else if (e.keyCode === 39) {
+      // Right
       this.setChecked(true);
-    } else if (e.keyCode === 32 || e.keyCode === 13) { // Space, Enter
+    } else if (e.keyCode === 32 || e.keyCode === 13) {
+      // Space, Enter
       this.handleToggle(e);
     }
-  }
+  };
 
   render() {
-    const { checked } = this.state;
-    const { size } = this.props;
+    const {
+      size,
+      label,
+      input: { checked },
+      meta: { touched, error }
+    } = this.props;
     return (
-      <SwitchContainer
-        onKeyDown={this.handleKeyDown}
-        onClick={this.handleToggle}
-        checked={checked}
-        size={size}
-        tabIndex="0"
-      />
+      <InputContainer>
+        <Label focused={false} filled>
+          {label}
+        </Label>
+        <SwitchWrapper>
+          <SwitchContainer
+            onKeyDown={this.handleKeyDown}
+            onClick={this.handleToggle}
+            checked={checked}
+            size={size}
+            tabIndex="0"
+          />
+        </SwitchWrapper>
+        {touched &&
+        ((error &&
+          <InputErrorMsg>
+            {error}
+          </InputErrorMsg>))}
+      </InputContainer>
     );
   }
 }
 
 Switch.propTypes = {
   /** State of the switch */
-  checked: bool,
   /** Callback function of switch toggle */
-  onChange: func,
+  lable: string,
+  meta: object,
+  input: shape({
+    onChange: func,
+    checked: bool,
+  }),
   /** Size of the swtich 'small' or 'default' */
   size: oneOf(['small', 'default'])
 };
 
 Switch.defaultProps = {
-  checked: false,
-  size: 'default'
-}
+  size: 'default',
+  label: '',
+  meta: {},
+};
 
 export default Switch;

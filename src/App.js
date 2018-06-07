@@ -27,7 +27,6 @@ class App extends Component {
               <ProtectedRoute path="/conversation" component={asyncLoad(() => import('./modules/Conversation'))} />
               <Route path="/login" component={asyncLoad(() => import('./modules/Account/Login'))} />
               <Route path="/reset-password" component={asyncLoad(() => import('./modules/Account/ResetPassword'))} />
-              <Route component={asyncLoad(() => import('./modules/Errors/404'))} />
             </Switch>
             <Footer />
           </main>
