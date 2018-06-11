@@ -9,11 +9,8 @@ export const CardContainer = styled.div`
   position: relative;
   cursor: ${props=>props.clickable ? 'pointer': 'default' };
   width: 100%;
-  min-height: 200px;
   box-shadow: ${props=>props.theme.boxShadow.large};
-  &:hover {
-    transform: ${props=>props.clickable ? 'scale(1.02)': 'none' };
-  }
+  overflow: hidden;
 `;
 
 export const ChildrenContainer = styled.div`

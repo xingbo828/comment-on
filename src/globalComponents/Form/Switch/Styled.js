@@ -1,25 +1,42 @@
 import styled from 'styled-components';
 
+export const InputContainer = styled.div`
+  position: relative;
+  display: block;
+  padding: 0;
+  margin: 0 0 3rem;
+`;
+
+
+export const InputErrorMsg = styled.div`
+  padding: 1rem 0 0;
+  font-size: .75rem;
+  letter-spacing: .05em;
+  font-weight: 400;
+  color: ${props => props.theme.colors.danger};
+`;
+
+
 const renderSize = (props) => {
   if(props.size === 'default') {
     return `
-      height: 22px;
-      min-width: 44px;
-      line-height: 20px;
+      height: 29px;
+      min-width: 64px;
+      line-height: 26px;
       ::after {
-        width: 18px;
-        height: 18px;
+        width: 25px;
+        height: 25px;
         top: 1px;
       }
     `;
   } else {
     return `
-      height: 14px;
-      min-width: 28px;
-      line-height: 12px;
+      height: 20px;
+      min-width: 44px;
+      line-height: 20px;
       ::after {
-        width: 12px;
-        height: 12px;
+        width: 18px;
+        height: 18px;
         top: 0;
       }
     `;
@@ -32,17 +49,21 @@ const renderChecked = (props) => {
       background-color: ${props.theme.colors.primary};
       ::after {
         left: 100%;
-        margin-left: ${props.size === 'default' ? '-19px' : ' -12.5px'};
+        margin-left: ${props.size === 'default' ? '-25px' : ' -19px'};
       }
     `;
   }
   return `
     background-color: rgba(0,0,0,.25);
     ::after {
-      left: ${props.size==='default' ? '1px' : '.5px'};
+      left: ${props.size==='default' ? '1px' : '1px'};
     }
   `;
 };
+
+export const SwitchWrapper = styled.div`
+  padding: 2rem 0 1.5rem;
+`;
 
 
 export const SwitchContainer = styled.span`
@@ -64,7 +85,7 @@ export const SwitchContainer = styled.span`
 
   ::after {
     position: absolute;
-    border-radius: 18px;
+    border-radius: 100%;
     background-color: ${props=>props.theme.colors.offWhite};
     content: " ";
     cursor: pointer;

@@ -29,10 +29,11 @@ const _getMyMoverId = async () => {
 };
 
 export const getMover = () => async dispatch => {
-  dispatch({
-    type: LOADING_MOVER_PROFILE
-  });
   const moverId = await _getMyMoverId();
+  dispatch({
+    type: LOADING_MOVER_PROFILE,
+    data: { key: moverId }
+  });
   const moverDocRef = await moverCollectionRef.doc(moverId);
   const moverDoc = await moverDocRef.get();
   if(moverDoc.exists) {
@@ -57,7 +58,8 @@ export const getMover = () => async dispatch => {
 
 export const getMoverWithId = (moverId) => async dispatch => {
   dispatch({
-    type: LOADING_MOVER_PROFILE
+    type: LOADING_MOVER_PROFILE,
+    data: { key: moverId }
   });
   const moverDocRef = await moverCollectionRef.doc(moverId);
   const moverDoc = await moverDocRef.get();

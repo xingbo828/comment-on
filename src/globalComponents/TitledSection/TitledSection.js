@@ -1,5 +1,6 @@
 import React from 'react'
 import Box from '../Box'
+import Heading from '../Typography/Heading'
 import {
   Container,
   Title,
@@ -8,9 +9,9 @@ import {
 
 const TitledSection = ({ title, children }) => (
   <Container>
-    <Box inline between={4} vertical={8}>
+    <Box inline="md" between={4} vertical={9}>
         <Title>
-          <h3>{ title }</h3>
+          <Heading wrapperTag="h3" size="sm">{ title }</Heading>
         </Title>
         <Content>
           { children }

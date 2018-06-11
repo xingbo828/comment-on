@@ -4,7 +4,9 @@ import Icon from '../../../globalComponents/Icon';
 
 
 const Item = Styled.li`
-  margin: 0 0 .5rem;
+  margin: 0 0 1rem;
+  flex-wrap: wrap;
+  flex: 1 50%;
 `;
 
 const Glyph = Styled.div`

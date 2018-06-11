@@ -7,6 +7,7 @@ module.exports = functions.auth.user().onCreate(event => {
   return userDocRef.set({
     displayName,
     email,
-    photoURL
+    photoURL,
+    receiveEmail: true
   });
 });

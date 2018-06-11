@@ -36,7 +36,6 @@ export const ContentWrapper = Styled.div`
 
 export const ProfileHeader = Styled.header`
   display: flex;
-  margin: 3rem 0;
   align-items: center;
 `
 

@@ -9,8 +9,8 @@ import Button from '../../globalComponents/Form/Button';
 import ServiceLocation from '../../globalComponents/ServiceLocation';
 import Hero from './components/Hero'
 import StepCard from '../../globalComponents/StepCard';
-import { 
-  Heading, 
+import {
+  Heading,
   Paragraph
 } from '../../globalComponents/MarketingTypography';
 
@@ -30,10 +30,10 @@ const HomePage = ({ navToGetStarted }) => (
     <Grid.Container>
       <Grid.Row>
         <Grid.Col lg={8} md={8} sm={8} xs={24}>
-          <StepCard 
+          <StepCard
             type="primary"
             number={1}
-            src="https://firebasestorage.googleapis.com/v0/b/comment-on-85597.appspot.com/o/images%2Fgui%2Fmarketing%2FItems.png?alt=media&token=f17d90ea-4257-4adf-a42b-d2ea6b64ddeb" 
+            src="https://firebasestorage.googleapis.com/v0/b/comment-on-85597.appspot.com/o/images%2Fgui%2Fmarketing%2FItems.png?alt=media&token=f17d90ea-4257-4adf-a42b-d2ea6b64ddeb"
             eyebrow="Step 1"
             title="Tell us about your move"
             body="We give you all the tools you need to quickly determine the size and scope of your move."
@@ -41,10 +41,10 @@ const HomePage = ({ navToGetStarted }) => (
           />
         </Grid.Col>
         <Grid.Col lg={8} md={8} sm={8} xs={24}>
-          <StepCard 
+          <StepCard
             type="secondary"
             number={2}
-            src="https://firebasestorage.googleapis.com/v0/b/comment-on-85597.appspot.com/o/images%2Fgui%2Fmarketing%2FEstimates.png?alt=media&token=aad0ad8d-44c6-489a-b3bf-8ef7381923b5" 
+            src="https://firebasestorage.googleapis.com/v0/b/comment-on-85597.appspot.com/o/images%2Fgui%2Fmarketing%2FEstimates.png?alt=media&token=aad0ad8d-44c6-489a-b3bf-8ef7381923b5"
             eyebrow="Step 2"
             title="Get free estimates"
             body="We'll provide you with the estimated moving costs from a variety of Movers."
@@ -52,10 +52,10 @@ const HomePage = ({ navToGetStarted }) => (
           />
         </Grid.Col>
         <Grid.Col lg={8} md={8} sm={8} xs={24}>
-          <StepCard 
+          <StepCard
             type="tertiary"
             number={3}
-            src="https://firebasestorage.googleapis.com/v0/b/comment-on-85597.appspot.com/o/images%2Fgui%2Fmarketing%2FTrucks.png?alt=media&token=8931390d-b16c-4e90-b84c-4e01fafd18d7" 
+            src="https://firebasestorage.googleapis.com/v0/b/comment-on-85597.appspot.com/o/images%2Fgui%2Fmarketing%2FTrucks.png?alt=media&token=8931390d-b16c-4e90-b84c-4e01fafd18d7"
             eyebrow="Step 3"
             title="Choose your mover"
             body="Once you're happy with your choice, we'll put you in touch. Easy as that!"

@@ -23,9 +23,9 @@ export const updateProfile = profile => async dispatch => {
     const uid = auth.currentUser.uid;
     const userDocRef = userCollectionRef.doc(uid);
 
-    const { displayName, email, phoneNumber, photoURL } = profile;
+    const { displayName, email, phoneNumber, photoURL, receiveEmail } = profile;
     const { downloadUrl, originalUrl, photoURLUpdated } = await _uploadProfileImg(photoURL, uid);
-    const updatedProfile = Object.assign({ displayName, email, phoneNumber }, { photoURL: photoURLUpdated ? downloadUrl : originalUrl });
+    const updatedProfile = Object.assign({ displayName, email, phoneNumber, receiveEmail }, { photoURL: photoURLUpdated ? downloadUrl : originalUrl });
     await userDocRef.set(updatedProfile);
     const tempProfile = Object.assign({}, updatedProfile, { photoURL: originalUrl });
 

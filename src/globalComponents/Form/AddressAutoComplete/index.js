@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { 
-  GeosuggestStyled, 
-  Container, 
+import {
+  GeosuggestStyled,
+  Container,
   FocusBorder,
   Label
 } from './Styled';
@@ -19,6 +19,14 @@ class AddressAutoComplete extends Component {
     this.handleBlur = this.handleBlur.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
     this.mapSuggestDescription = this.mapSuggestDescription.bind(this);
+  }
+
+  componentDidMount() {
+    if(this.props.initialValue !== '') {
+      this.setState(() => ({
+        filled: true
+      }));
+    }
   }
 
   handleFocus(event) {
@@ -45,18 +53,21 @@ class AddressAutoComplete extends Component {
     this.setState({ filled: true })
   }
 
+
+
   mapSuggestDescription(suggest) {
     return suggest.description.replace(', Canada', '');
   }
 
   render() {
-    const { onSelect, label } = this.props;
+    const { onSelect, label, initialValue } = this.props;
     return (
       <Container>
-        <Label filled={this.state.filled} focused={this.state.focused}>{label}</Label >
+        <Label filled={this.state.filled} focused={this.state.focused}>{label}</Label>
         <GeosuggestStyled
           innerRef={el => (this._geoSuggest = el)}
           country="ca"
+          initialValue={initialValue}
           placeholder=""
           minLength={2}
           onFocus={this.handleFocus}

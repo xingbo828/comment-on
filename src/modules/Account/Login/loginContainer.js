@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose, withProps, branch, renderComponent } from 'recompose';
 import * as firebase from 'firebase';
+import get from 'lodash/get';
 import mapImmutablePropsToPlainProps from '../../Common/mapImmutablePropsToPlainProps';
 import Login from './Login';
 // import AccountVerificationPanel from './AccountVerificationPanel'
@@ -31,10 +32,11 @@ const enhance = compose(
   withRouter,
   connect(mapStateToProps),
   mapImmutablePropsToPlainProps,
-  withProps(( {account }) => ({
+  withProps(( {account, location }) => ({
     facebookLogin,
     googleLogin,
     isAuthenticated: account.status === 'AUTHENTICATED',
+    activeTabKey: get(location, 'state.tab') || 'login'
     // isAuthenticated: account.status === 'AUTHENTICATED' && account.user.emailVerified,
     // isAccountNotVerified: account.status === 'AUTHENTICATED' && !account.user.emailVerified
     // msgEmailVerificationError: () => {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Field } from 'redux-form/immutable';
-import { Button, TextField } from '../../../globalComponents/Form';
+import { Button, TextField, Switch } from '../../../globalComponents/Form';
 import Grid from '../../../globalComponents/Grid';
 import Icon from '../../../globalComponents/Icon';
 import Layout from '../../../globalComponents/Layout';
@@ -24,7 +24,6 @@ class Profile extends Component {
   render() {
     const {
         handleSubmit,
-        pristine,
         valid,
         submitting
       } = this.props;
@@ -54,14 +53,20 @@ class Profile extends Component {
               name="email"
               label="Email"
             />
+            <Field
+              component={Switch}
+              type="checkbox"
+              name="receiveEmail"
+              label="Receive email notifications"
+            />
           </FormInner>
           <FormActions>
-            <Button 
+            <Button
               fullWidth
               style={{ float: 'right' }}
               type="submit"
               primary
-              disabled={submitting || pristine || !valid}
+              disabled={submitting || !valid}
             >
               Update<Icon icon={submitting ? 'refresh' : ''} spin={submitting} />
             </Button>
