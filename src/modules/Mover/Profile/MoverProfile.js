@@ -4,6 +4,7 @@ import { Heading, Paragraph } from '../../../globalComponents/Typography';
 import { HairlineDivider } from '../../../globalComponents/Dividers';
 import { DescriptionList, DescriptionEntry } from '../../../globalComponents/Typography/Description';
 import { List, ListItem } from '../../../globalComponents/Typography/List';
+import TitledSection from '../../../globalComponents/TitledSection';
 import {
   ContentWrapper,
   ContactInfoListItemLink,
@@ -19,18 +20,53 @@ const { Container, Row, Col } = Grid;
 const MoverProfile = ({ profile, history }) => (
   <Container>
     <Row>
-      <Col xs={8} sm={10} md={10} lg={8}>
+      <Col xs={24} sm={24} md={24} lg={16}>
         <ProfileHeader>
           <ProfileImage src={profile.logo} />
           <ProfileInfo>
             <ProfileName>{profile.name}</ProfileName>
           </ProfileInfo>
         </ProfileHeader>
+        <HairlineDivider />
       </Col>
     </Row>
     <Row>
       <Col xs={24} sm={24} md={24} lg={16}>
-        <HairlineDivider />
+        <TitledSection title="About">
+          <Paragraph>{profile.description}</Paragraph>
+        </TitledSection>
+        <TitledSection title="Payment">
+          <Paragraph>{profile.description}</Paragraph>
+        </TitledSection>
+        <TitledSection title="Contact info">
+          <DescriptionList>
+            <DescriptionEntry term="Phone Number">
+              <ContactInfoListItemLink
+                href={`tel:${profile.phoneNumber}`}
+              >
+                {profile.phoneNumber}
+              </ContactInfoListItemLink>
+            </DescriptionEntry>
+            <DescriptionEntry term="Email">
+              <ContactInfoListItemLink
+                  href={`mailto:${profile.email}`}
+                >
+                {profile.email}
+              </ContactInfoListItemLink>
+            </DescriptionEntry>
+            <DescriptionEntry term="Website">
+              <ContactInfoListItemLink
+                  href="#"
+                >
+                nathansmoving.com
+              </ContactInfoListItemLink>
+            </DescriptionEntry>
+          </DescriptionList>
+        </TitledSection>
+      </Col>
+    </Row>
+    {/* <Row>
+      <Col xs={24} sm={24} md={24} lg={16}>
         <Heading wrapperTag="h3" size="md" indent>
           About
         </Heading>
@@ -113,7 +149,7 @@ const MoverProfile = ({ profile, history }) => (
           </DescriptionList>
         </ContentWrapper>
       </Col>
-    </Row>
+    </Row> */}
   </Container>
 );
 

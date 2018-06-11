@@ -1,7 +1,8 @@
 import Styled from 'styled-components';
 
 export const ContactInfoListItemLink = Styled.a`
-  color: ${props=>props.theme.colors.textDark};
+  color: ${props=>props.theme.colors.secondary};
+  font-weight: 600;
   text-decoration: none;
   &:hover {
     text-decoration: underline;
