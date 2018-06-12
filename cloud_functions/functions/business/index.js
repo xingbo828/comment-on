@@ -36,11 +36,13 @@ const getGoogleRating = (placeid) => {
     .then((place) => {
       const url = _.get(place, 'json.result.url', '');
       const rating = _.get(place, 'json.result.rating', '');
+      const name = _.get(place, 'json.result.name', '');
       return {
         type: 'google',
-        url: url,
-        rating: rating,
-        reviews_count: 0
+        url,
+        rating,
+        name,
+        review_count: 0
       };
     }).catch(() => {
       return {type: 'google'};
@@ -54,6 +56,7 @@ const getYelpRating = (businessid) => {
         type: 'yelp',
         url: data.url || '',
         rating: data.rating || '',
+        name: data.name || '',
         review_count: data.review_count || 0
       }
 
