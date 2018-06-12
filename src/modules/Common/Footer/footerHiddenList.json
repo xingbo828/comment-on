@@ -1,5 +1,6 @@
 [
  "\/login.*",
+ "\/reset-password.*",
  "\/conversation\/.*",
  "\/projects/configurations\/.*"
 ]

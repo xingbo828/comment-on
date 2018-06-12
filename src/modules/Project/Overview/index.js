@@ -1,5 +1,7 @@
 import { connect } from 'react-redux';
 import { compose, lifecycle, withProps} from 'recompose';
+import { withRouter } from 'react-router-dom';
+import { withTheme } from 'styled-components'
 import isLoggedIn from '../../Common/isLoggedIn';
 import scrollToTopOnMount from '../../Common/scrollToTopOnMount';
 import {
@@ -21,6 +23,8 @@ const mapDispatchToProps = dispatch => ({
 
 const enhance = compose(
   isLoggedIn,
+  withRouter,
+  withTheme,
   connect(mapStateToProps, mapDispatchToProps),
   withProps(props => ({
     navToProject: (projectId) => {

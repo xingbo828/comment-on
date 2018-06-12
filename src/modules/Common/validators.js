@@ -14,6 +14,14 @@ export const isNotEmpty = value => {
   return false;
 }
 
+export const isValidPassword = value => {
+  const formattedValue = value ? value.trim() : '';
+  return formattedValue.length >= 6;
+};
+
+export const matchPassword = (value, allValues) => {
+  return value && value.length >= 6 && value === allValues.get('password');
+};
 
 export const isValidEmail = value => {
   const formattedValue = value ? value.trim() : '';
@@ -22,6 +30,8 @@ export const isValidEmail = value => {
   }
   return !(formattedValue && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,63}$/i.test(formattedValue));
 };
+
+
 
 export const isValidBirthDate = (date) => {
   const momentDate = moment(date, 'YYYY-MM-DD');
@@ -72,7 +82,9 @@ const validators = {
   isValidPhoneNumber,
   isValidPostalCode,
   isValidAddressesInput,
-  isValidCurrency
+  isValidCurrency,
+  isValidPassword,
+  matchPassword
 };
 export default validators;
 
@@ -86,7 +98,7 @@ ex:
 */
 export const validateFunc = (configs, validators) => (values) => {
   return configs.reduce((currentErrors, config) => {
-    if (!validators[config.validator](values.get(config.field))) {
+    if (!validators[config.validator](values.get(config.field), values)) {
       currentErrors[config.field] = config.message;
     }
     return currentErrors;

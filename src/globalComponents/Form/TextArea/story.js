@@ -44,7 +44,7 @@ const TextFieldWithError = withInfo('With error message')(() => (
   </Form>
 ));
 
-const TextFieldStory = storiesOf('Global/Data Entry/TextField', module)
+const TextFieldStory = storiesOf('Global/Data Entry/Text Area', module)
   .add('Basic text field', BasicTextField)
   .add('With error message', TextFieldWithError);
 export default TextFieldStory;

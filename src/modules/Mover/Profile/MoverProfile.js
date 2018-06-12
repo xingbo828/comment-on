@@ -1,109 +1,155 @@
 import React from 'react';
+import get from 'lodash/get';
 import Grid from '../../../globalComponents/Grid';
+import Box from '../../../globalComponents/Box';
 import { Heading, Paragraph } from '../../../globalComponents/Typography';
-import PageHeader from '../../../globalComponents/Layout/PageHeader';
-import Link from '../../../globalComponents/Link';
-import Icon from '../../../globalComponents/Icon';
-// import Comment from '../../../globalComponents/Comment';
+import { HairlineDivider } from '../../../globalComponents/Dividers';
+import {
+  DescriptionList,
+  DescriptionEntry
+} from '../../../globalComponents/Typography/Description';
+import { List, ListItem } from '../../../globalComponents/Typography/List';
+import BusinessReview from './BusinessReview';
 
 import {
-  ContactInfoContainer,
-  Divider,
-  ContactInfoList,
-  ContactInfoListItem,
+  ContentWrapper,
   ContactInfoListItemLink,
-  ImgContainer,
-  // CrewMemberContainer,
-  // CrewMemberItemContainer
+  ProfileHeader,
+  ProfileImage,
+  ProfileInfo,
+  ProfileName
 } from './Styled';
 
 const { Container, Row, Col } = Grid;
 
-const MoverProfile = ({ profile, history }) => (
-  <div>
-    <PageHeader>
-      <Container>
-        <Row>
-          <Col xs={24} sm={24} md={24} lg={24}>
-            <Link secondary onClick={history.goBack}>
-              <Icon icon="arrow-left" />&nbsp;&nbsp;Back
-            </Link>
-            <Heading wrapperTag="h1" size="md">
-              {profile.name}
-            </Heading>
-          </Col>
-        </Row>
-      </Container>
-    </PageHeader>
-    <ContactInfoContainer>
-      <Container>
-        <Row>
-          <Col xs={8} sm={10} md={10} lg={8}>
-            <ImgContainer>
-              <img src={profile.logo} alt="Logo" />
-            </ImgContainer>
-          </Col>
-          <Col xs={16} sm={14} md={14} lg={8}>
-            <ContactInfoList>
-              <ContactInfoListItem>
-                <ContactInfoListItemLink
-                  href={`tel:${profile.phoneNumber}`}
-                >
-                  <Icon icon="phone" style={{ marginRight: '1rem' }} />
-                  {profile.phoneNumber}
-                </ContactInfoListItemLink>
-              </ContactInfoListItem>
-              <ContactInfoListItem>
-                <ContactInfoListItemLink
-                  href={`mailto:${profile.email}`}
-                >
-                  <Icon icon="envelope" style={{ marginRight: '1rem' }} />
-                  {profile.email}
-                </ContactInfoListItemLink>
-              </ContactInfoListItem>
-            </ContactInfoList>
-          </Col>
-        </Row>
-      </Container>
-    </ContactInfoContainer>
-    <Container>
-      <Row>
-        <Col xs={24} sm={24} md={24} lg={16}>
-          <Divider />
-        </Col>
-      </Row>
-    </Container>
-    <Container>
-      <Row>
-        <Col xs={24} sm={24} md={24} lg={16}>
-          <Heading wrapperTag="h3" size="sm" underline>
-            About
+const MoverProfile = ({ profileData, reviewStatus, reviewData, history }) => (
+  <Container>
+    <Row>
+      <Col xs={8} sm={10} md={10} lg={8}>
+        <ProfileHeader>
+          <ProfileImage src={profileData.logo} />
+          <ProfileInfo>
+            <ProfileName>{profileData.name}</ProfileName>
+          </ProfileInfo>
+        </ProfileHeader>
+      </Col>
+    </Row>
+    <Row>
+      <Col xs={24} sm={24} md={24} lg={16}>
+        <HairlineDivider />
+        <Heading wrapperTag="h3" size="md" indent>
+          About
+        </Heading>
+        <ContentWrapper>
+          <Paragraph>{profileData.description}</Paragraph>
+          <Heading wrapperTag="h3" size="sm">
+            Return policy
           </Heading>
-          <Paragraph>{profile.description}</Paragraph>
-        </Col>
-      </Row>
-    </Container>
-    {/* {profile.crewMembers && (
-      <Container>
-        <Row>
-          <Col xs={24} sm={24} md={24} lg={16}>
-            <Heading wrapperTag="h3" size="sm" underline>
-              Crew
-            </Heading>
-            <CrewMemberContainer>
-              {profile.crewMembers.map(member => {
-                return (
-                  <CrewMemberItemContainer key={member.name}>
-                    <Comment photo={member.avatar} name={member.name} copy={member.description} />
-                  </CrewMemberItemContainer>
-                );
-              })}
-            </CrewMemberContainer>
-          </Col>
-        </Row>
-      </Container>
-    )} */}
-  </div>
+          <Paragraph>100% Money back</Paragraph>
+          <Heading wrapperTag="h3" size="sm">
+            Return policy
+          </Heading>
+          <Paragraph>100% Money back</Paragraph>
+          <Heading wrapperTag="h3" size="sm">
+            Return policy
+          </Heading>
+          <Paragraph>100% Money back</Paragraph>
+        </ContentWrapper>
+      </Col>
+    </Row>
+
+    <Row>
+      <Col xs={24} sm={24} md={24} lg={16}>
+        <HairlineDivider />
+        <Heading wrapperTag="h3" size="md" indent>
+          Reviews
+        </Heading>
+        <Container>
+          <Row>
+            <Col xs={24} sm={24} md={12} lg={12}>
+              <Box vertical={2}>
+                <BusinessReview
+                  type="google"
+                  loading={reviewStatus !== 'LOADED'}
+                  rateCount={get(reviewData, ['google', 'reviews_count'])}
+                  rating={get(reviewData, ['google', 'rating'])}
+                  link={get(reviewData, ['google', 'url'])}
+                />
+              </Box>
+            </Col>
+            <Col xs={24} sm={24} md={12} lg={12}>
+              <Box vertical={2}>
+                <BusinessReview
+                  type="yelp"
+                  loading={reviewStatus !== 'LOADED'}
+                  link={get(reviewData, ['yelp', 'url'])}
+                  rateCount={get(reviewData, ['yelp', 'review_count'])}
+                  rating={get(reviewData, ['yelp', 'rating'])}
+                />
+              </Box>
+            </Col>
+          </Row>
+        </Container>
+      </Col>
+    </Row>
+    <Row>
+      <Col xs={24} sm={24} md={24} lg={16}>
+        <HairlineDivider />
+        <Heading wrapperTag="h3" size="md" indent>
+          About us
+        </Heading>
+        <ContentWrapper>
+          <Paragraph>{profileData.description}</Paragraph>
+        </ContentWrapper>
+      </Col>
+    </Row>
+    <Row>
+      <Col xs={24} sm={24} md={24} lg={16}>
+        <HairlineDivider />
+        <Heading wrapperTag="h3" size="md" indent>
+          Contact
+        </Heading>
+        <ContentWrapper>
+          <List>
+            <ListItem glyph="phone">
+              <ContactInfoListItemLink href={`tel:${profileData.phoneNumber}`}>
+                {profileData.phoneNumber}
+              </ContactInfoListItemLink>
+            </ListItem>
+            <ListItem glyph="envelope">
+              <ContactInfoListItemLink href={`mailto:${profileData.email}`}>
+                {profileData.email}
+              </ContactInfoListItemLink>
+            </ListItem>
+            <ListItem glyph="globe">
+              <ContactInfoListItemLink href="#">
+                nathansmoving.com
+              </ContactInfoListItemLink>
+            </ListItem>
+          </List>
+        </ContentWrapper>
+      </Col>
+    </Row>
+    <Row>
+      <Col xs={24} sm={24} md={24} lg={16}>
+        <HairlineDivider />
+        <Heading wrapperTag="h3" size="md" indent>
+          Business hours
+        </Heading>
+        <ContentWrapper>
+          <DescriptionList>
+            <DescriptionEntry term="Sunday" definition="Closed" />
+            <DescriptionEntry term="Monday" definition="10:00am - 6:00pm" />
+            <DescriptionEntry term="Tuesday" definition="10:00am - 6:00pm" />
+            <DescriptionEntry term="Wednesday" definition="10:00am - 6:00pm" />
+            <DescriptionEntry term="Thursday" definition="10:00am - 6:00pm" />
+            <DescriptionEntry term="Friday" definition="10:00am - 6:00pm" />
+            <DescriptionEntry term="Saturday" definition="10:00am - 5:00pm" />
+          </DescriptionList>
+        </ContentWrapper>
+      </Col>
+    </Row>
+  </Container>
 );
 
 export default MoverProfile;

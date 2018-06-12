@@ -5,9 +5,16 @@ import {
   LOADING_MOVER_PROFILE
 } from '../moverAction';
 
+import {
+  GET_REVIEW_PENDING,
+  GET_REVIEW_SUCCESS,
+  GET_REVIEW_FAIL
+} from './profileActions'
+
 const initProfileState = Immutable.fromJS({
-  status: 'UNINIT',
-  profile: null
+  // status: 'UNINIT',
+  // profile: null,
+  // reviews: {}
 });
 
 const profile = (state = initProfileState, action) => {
@@ -25,15 +32,33 @@ const profile = (state = initProfileState, action) => {
           //   pr.set('crewMembers', Immutable.fromJS((Object.values(action.data.profile.crewMembers))));
           // }
         });
-        st.set('profile', profile);
-        st.set('status', 'LOADED');
+        st.setIn([action.data.key, 'profile', 'result'], profile);
+        st.setIn([action.data.key, 'profile', 'status'], 'LOADED');
       });
     }
 
     case LOADING_MOVER_PROFILE: {
       return state.withMutations((st) => {
-        st.set('status', 'PENDING');
-        st.set('profile', null);
+        st.setIn([action.data.key, 'profile', 'status'], 'PENDING');
+      });
+    }
+
+    case GET_REVIEW_PENDING: {
+      return state.withMutations((st) => {
+        st.setIn([action.provider, 'reviews', 'status'], 'PENDING');
+      });
+    }
+
+    case GET_REVIEW_SUCCESS: {
+      return state.withMutations((st) => {
+        st.setIn([action.provider, 'reviews', 'status'], 'LOADED');
+        st.setIn([action.provider, 'reviews', 'result'], action.data);
+      });
+    }
+
+    case GET_REVIEW_FAIL: {
+      return state.withMutations((st) => {
+        st.setIn([action.provider, 'reviews', 'status'], 'FAIL');
       });
     }
 
@@ -46,4 +71,9 @@ export default profile;
 
 
 // Selectors
-export const getProfile = (state, moverId) => state.getIn(['mover', 'profile']);
+export const getProfileData = (state, moverId) => state.getIn(['mover', 'profile', moverId, 'profile', 'result']);
+export const getProfileStatus = (state, moverId) => state.getIn(['mover', 'profile', moverId, 'profile', 'status']);
+
+export const getReviewStatus = (state, moverId) => state.getIn(['mover', 'profile', moverId, 'reviews', 'status']);
+export const getReviewData = (state, moverId) => state.getIn(['mover', 'profile', moverId, 'reviews', 'result']);
+

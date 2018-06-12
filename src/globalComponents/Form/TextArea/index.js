@@ -32,7 +32,6 @@ class TextField extends React.Component {
   }
 
   adjustHeight() {
-    console.log(this.textArea)
     this.textArea.style.height = '5px'
     this.textArea.style.height = `${this.textArea.scrollHeight}px`
     this.forceUpdate()
@@ -56,20 +55,20 @@ class TextField extends React.Component {
     return (
       <InputContainer>
         {label &&
-          <Label 
+          <Label
             focused={this.state.isFocused}
             filled={this.isFilled()}
           >
             {label}
           </Label>
         }
-        <TextArea 
+        <TextArea
           value={input.value}
           innerRef={(comp)=> { this.textArea = comp }}
           onChange={this.onChange}
           type={type} onFocus={this.onFocus.bind(this)}
-          onBlur={this.onBlur.bind(this)} 
-          autoComplete={autoComplete} 
+          onBlur={this.onBlur.bind(this)}
+          autoComplete={autoComplete}
           placeholder={placeholder}
           ref={(ref)=>this.ref=ref}
         />

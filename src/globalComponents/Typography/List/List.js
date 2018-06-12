@@ -1,9 +1,9 @@
 import Styled from 'styled-components';
 
-const list = Styled.ul`
+const List = Styled.ul`
+  margin: 0 0 1.5rem;
+  padding: 0;
   list-style-type: ${props => props.bulleted ? 'circle' : 'none'}
 `
 
-const listItem = Styled.li`
-  font-size: 1rem;
-`;
+export default List

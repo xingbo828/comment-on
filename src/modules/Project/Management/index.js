@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
-import { compose, lifecycle, branch, renderNothing } from 'recompose';
+import { compose, lifecycle, branch, renderComponent } from 'recompose';
 import Management from './Management';
+import Spin from '../../../globalComponents/Spin';
 import mapImmutablePropsToPlainProps from '../../Common/mapImmutablePropsToPlainProps';
 import scrollToTopOnMount from '../../Common/scrollToTopOnMount';
 import {
@@ -38,7 +39,7 @@ const enhance = compose(
       }
     }
   }),
-  branch(isLoading, renderNothing),
+  branch(isLoading, renderComponent(Spin.FullScreenSpinner)),
   mapImmutablePropsToPlainProps,
   scrollToTopOnMount
 );

@@ -2,21 +2,21 @@ import Styled from 'styled-components';
 
 const DefinitionContainer = Styled.div`
   display: flex;
+  width: 250px;
 `;
 
 const Term = Styled.dt`
-  flex: 1;
   text-align: left;
-  color: ${({theme}) => theme.colors.textLight };
-  
+
   &:not(:last-child) {
-    margin: 0 0 1rem;
+    margin: 0 0 .65rem;
   }
 `;
 
 const Definition = Styled.dd`
-  flex: 1;
+  margin: 0 0 0 4rem;
   text-align: right;
+  margin-left: auto;
 `;
 
 export {

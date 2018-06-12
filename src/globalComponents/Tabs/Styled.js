@@ -12,14 +12,19 @@ export const TabBar = styled.ul`
   flex-wrap: wrap;
 `;
 
+const fillWidth = props => {
+  if(props.fillWidth) {
+    return `flex: 1`;
+  }
+}
+
 export const TabBarLinkContainer = styled.li`
   list-style: none;
   padding: ${props=>props.theme.spaces.tight} ${props=>props.theme.spaces.base};
-  ${props=>props.theme.media.greaterThan('md')`
-    padding: ${props=>props.theme.spaces.base} ${props=>props.theme.spaces.wide};
-  `}
   position: relative;
   cursor: pointer;
+  text-align: center;
+  ${fillWidth};
   ${props => {
     if(props.isActive){
       return `
@@ -65,9 +70,6 @@ export const TabPanelContainer = styled.div`
   transform: translateX(32px);
   visibility: hidden;
   padding: ${props=>props.theme.spaces.tight};
-  ${props=>props.theme.media.greaterThan('md')`
-    padding: ${props=>props.theme.spaces.wide} ${props=>props.theme.spaces.base};
-  `}
   ${props => {
     if(props.isActive){
       return `

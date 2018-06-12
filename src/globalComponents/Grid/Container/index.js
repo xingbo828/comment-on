@@ -3,9 +3,8 @@ import styled from 'styled-components';
 export default styled.div`
   margin-left: auto;
   margin-right: auto;
-  padding-right: 1rem;
-  padding-left: 1rem;
-
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
 
   ${props => props.overlap && `
     &:before {
@@ -19,12 +18,20 @@ export default styled.div`
     }
   `}
 
-  ${props => !props.fluid && `
-    max-width: 1200px;
+  ${props=>props.theme.media.greaterThan('xs')`
+    ${!props.fluid && `max-width: 576px`};
   `}
 
-  ${props => !props.fluid && props.small && `
-    max-width: 768px;
+  ${props=>props.theme.media.greaterThan('sm')`
+    ${!props.fluid && `max-width: 768px`};
+  `}
+
+  ${props=>props.theme.media.greaterThan('md')`
+    ${!props.fluid && `max-width: 992px`};
+  `}
+
+  ${props=>props.theme.media.greaterThan('lg')`
+    ${!props.fluid && `max-width: 1200px`};
   `}
 `;
 

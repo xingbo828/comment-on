@@ -1,5 +1,5 @@
 import React, { Component, Children } from 'react';
-import { string, func } from 'prop-types';
+import { string, func, bool } from 'prop-types';
 import {
   TabContainer,
   TabBar,
@@ -11,13 +11,14 @@ class Tabs extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activekey: null,
+      activekey: this.props.activeKey,
       containerHeight: 0
     };
     this.construct = this.construct.bind(this);
     this.onSelect = this.onSelect.bind(this);
     this.updateParentHeight = this.updateParentHeight.bind(this);
   }
+
 
   componentWillReceiveProps(nextProps) {
     if(!!nextProps.activeKey && nextProps.activeKey !== this.state.activekey) {
@@ -38,13 +39,16 @@ class Tabs extends Component {
   }
 
   updateParentHeight(height) {
-    this.setState({
-      containerHeight: height
-    });
+    if (height !== this.state.containerHeight) {
+      this.setState({
+        containerHeight: height
+      });
+    }
+
   }
 
 
-  construct() {
+  construct(fillWidth) {
     const activeKey = this.state.activekey;
     const updateParentHeight = this.updateParentHeight;
     const panels = [];
@@ -67,14 +71,16 @@ class Tabs extends Component {
         updateParentHeight,
         children: child.props.children
       };
-      tabBarLinks.push(<TabBarLink key={panelKey} panelKey={panelKey} header={header} isActive={isActive} onSelect={this.onSelect} />);
+      tabBarLinks.push(<TabBarLink fillWidth={fillWidth} key={panelKey} panelKey={panelKey} header={header} isActive={isActive} onSelect={this.onSelect} />);
       panels.push(React.cloneElement(child, props));
     })
     return { panels, tabBarLinks };
   }
 
   render() {
-    const tabs = this.construct();
+    console.log(this.state.activekey)
+    const { fillWidth }= this.props;
+    const tabs = this.construct(fillWidth);
     return (
       <TabContainer {...this.props} containerHeight={this.state.containerHeight}>
         <TabBar>{tabs.tabBarLinks}</TabBar>
@@ -86,7 +92,12 @@ class Tabs extends Component {
 
 Tabs.propTypes = {
   activeKey: string,
-  onTabChange: func
+  onTabChange: func,
+  fillWidth: bool
 };
 
+Tabs.defaultProps = {
+  fillWidth: false,
+  activeKey: null
+};
 export default Tabs;

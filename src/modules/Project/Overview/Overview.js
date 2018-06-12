@@ -3,6 +3,7 @@ import chunk from 'lodash/chunk';
 import Grid from '../../../globalComponents/Grid';
 import PageHeader from '../../../globalComponents/Layout/PageHeader';
 import Card from '../../../globalComponents/Card';
+import Icon from '../../../globalComponents/Icon';
 import { Heading, Paragraph } from '../../../globalComponents/Typography';
 // import asyncLoad from '../../Common/asyncLoad';
 import MoveCard from './MoveCard';
@@ -23,14 +24,16 @@ const ProjectOverview = ({
   myProjectsData,
   user,
   selectedProvider,
-  navToProject
+  navToProject,
+  history,
+  theme
 }) => {
   const renderUnLoadedProjectCards = projects => {
     const projectChunks = chunk(projects, 3);
     return projectChunks.map((projectChunk, index) => (
       <Grid.Row key={index} className="row">
         {projectChunk.map(p => (
-          <Grid.Col key={p.id} xs={24} sm={24} md={8} lg={8}>
+          <Grid.Col key={p.id} xs={24} sm={24} md={12} lg={8}>
             <CardContainer>
               <Card loading style={{minHeight: 320}}/>
             </CardContainer>
@@ -45,7 +48,7 @@ const ProjectOverview = ({
     return projectChunks.map((projectChunk, index) => (
       <Grid.Row key={index} className="row">
         {projectChunk.map(p => (
-          <Grid.Col key={p.id} xs={24} sm={24} md={8} lg={8}>
+          <Grid.Col key={p.id} xs={24} sm={24} md={12} lg={8}>
             <CardContainer>
               <MoveCard
                 project={p}
@@ -61,7 +64,18 @@ const ProjectOverview = ({
   const renderCards = (status, myProjectsData, user) => {
     if(!user.projects) {
       // no project
-      return <Paragraph>No project yet...</Paragraph>
+      return (
+        <Grid.Row className="row">
+          <Grid.Col xs={24} sm={24} md={12} lg={8}>
+            <Card onClick={() => {history.push('/projects/configurations/move/address')}}>
+              <div style={{padding: '2rem', textAlign: 'center'}}>
+                <Paragraph>No project yet. Let's add one.</Paragraph>
+                <Icon size="3x" icon="plus" style={{color: theme.colors.secondary}}/>
+              </div>
+            </Card>
+          </Grid.Col>
+        </Grid.Row>
+      )
     }
 
     return status === 'LOADED'

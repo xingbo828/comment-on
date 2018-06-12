@@ -8,6 +8,7 @@ module.exports = functions.auth.user().onCreate(data => {
     displayName,
     email,
     photoURL,
-    providers: {}
+    providers: {},
+    receiveEmail: true
   });
 });

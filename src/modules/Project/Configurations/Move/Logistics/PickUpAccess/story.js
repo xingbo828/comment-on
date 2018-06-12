@@ -15,9 +15,9 @@ const Demo = withInfo('Delivery Access Selection')(() =>
 );
 
 
-const Story = storiesOf('Project/Configurations/Move/Logistics/DeliveryAccess', module)
+const Story = storiesOf('Project/Configurations/Move/Logistics/Pick Up Access', module)
 .addDecorator(withKnobs)
-.add('Usage', Demo);
+.add('Demo', Demo);
 
 
 export default Story;

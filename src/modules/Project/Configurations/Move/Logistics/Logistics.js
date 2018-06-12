@@ -6,7 +6,6 @@ import Layout from '../../../../../globalComponents/Layout';
 import Icon from '../../../../../globalComponents/Icon';
 import ResidenceTypeSelection from './ResidenceTypeSelection';
 import Access from './Access';
-import WillYouBeAssisting from './WillYouBeAssisting';
 
 const { Form, FormActions, FormInner, FormFieldSet } = Layout.Form;
 
@@ -36,17 +35,6 @@ const renderDeliveryAccess = ({ input, name, label, desc }) => {
       onChange={input.onChange}
       value={input.value}
       label={label}
-    />
-  );
-};
-
-const renderAbleToAssist = ({ input, name, label, desc }) => {
-  return (
-    <WillYouBeAssisting
-      onChange={input.onChange}
-      value={input.value}
-      label={label}
-      name={name}
     />
   );
 };
@@ -83,13 +71,6 @@ const Logistics = ({
                 component={renderDeliveryAccess}
                 name="deliveryAccess"
                 label="How is the delivery space accessed?"
-              />
-            </FormFieldSet>
-            <FormFieldSet>
-              <Field
-                component={renderAbleToAssist}
-                name="ableToAssist"
-                label="Will you be assisting?"
               />
             </FormFieldSet>
           </FormInner>

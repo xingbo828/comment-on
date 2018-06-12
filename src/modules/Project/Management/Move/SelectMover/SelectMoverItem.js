@@ -1,18 +1,11 @@
 import React from 'react';
 import { withTheme } from 'styled-components';
-import Card from '../../../../../globalComponents/Card';
 import Icon from '../../../../../globalComponents/Icon';
 import { Radio, Button } from '../../../../../globalComponents/Form';
+import ProviderCard from '../../../../../globalComponents/ProviderCard';
+import { ReactRouterLink } from '../../../../../globalComponents/Link';
 import noLogoImg from './no-logo.jpeg';
 import {
-  MoverCard,
-  InnerCardContainer,
-  MoverLogo,
-  MoverLogoImg,
-  MoverInfoBar,
-  MoverName,
-  MoverPrice,
-  MoverProfileLink,
   IsCheckedIndicator
 } from './Styled';
 
@@ -21,9 +14,11 @@ const SelectMoverItem = ({
   moverInfo,
   checked,
   onCheck,
+  projectId,
   history,
   theme
 }) => {
+  
   // const goToProfilePage = e => {
   //   e.preventDefault();
   //   history.push({
@@ -35,15 +30,22 @@ const SelectMoverItem = ({
     e.stopPropagation();
   };
 
-  const cardStyle = checked =>
-    !!checked ? { boxShadow: `inset 0 0 0 2px ${theme.colors.primary}` } : {};
+  // const cardStyle = checked =>
+  //   !!checked ? { boxShadow: `inset 0 0 0 2px ${theme.colors.primary}` } : {};
 
   const renderPrimaryAction = checked => {
-    if (!!checked) return null;
+    
+    if (!!checked) {
+      return (
+        <IsCheckedIndicator>
+          <Icon icon="check" />
+        </IsCheckedIndicator>
+      )
+    }
 
     return (
-      <Button small onClick={chooseMover} style={{padding: 0}}>
-        <label style={{cursor: 'pointer', display: 'inline-block', padding: '.875rem 1rem'}}>
+      <Button onClick={chooseMover} style={{ padding: 0 }}>
+        <label style={{cursor: 'pointer', display: 'inline-block', padding: '1.5rem 2rem'}}>
           <Radio.Radio
             value={value}
             checked={checked}
@@ -56,32 +58,51 @@ const SelectMoverItem = ({
     );
   };
 
+  const renderSecondaryAction = () => {
+    return (
+      <ReactRouterLink secondary to={`/mover/profile/${moverInfo.provider.id}`} >View profile</ReactRouterLink>
+    )
+  }
+
   return (
-    <MoverCard checked={checked}>
-      <Card
-        style={cardStyle(checked)}
-        primaryAction={renderPrimaryAction(checked)}
-      >
-        <InnerCardContainer>
-          <MoverLogo>
-            <MoverLogoImg src={moverInfo.provider.logo || noLogoImg} alt="Mover Logo" />
-          </MoverLogo>
-          <MoverName>{moverInfo.provider.name}</MoverName>
-          <MoverInfoBar>
-            <MoverPrice>${moverInfo.estimatedPrice}</MoverPrice>
-          </MoverInfoBar>
-          <MoverInfoBar>
-            <MoverProfileLink to={`/mover/profile/${moverInfo.provider.id}`}>View profile</MoverProfileLink>
-          </MoverInfoBar>
-        </InnerCardContainer>
-        {checked && (
-          <IsCheckedIndicator>
-            <Icon icon="check" />
-          </IsCheckedIndicator>
-        )}
-      </Card>
-    </MoverCard>
-  );
+    <ProviderCard
+      estimate={moverInfo.estimatedPrice}
+      imageSrc={moverInfo.provider.logo || noLogoImg}
+      name={moverInfo.provider.name}
+      primaryAction={renderPrimaryAction(checked)}
+      secondaryAction={renderSecondaryAction()}
+    />
+  )
+
+  // return (
+  //   <MoverCard checked={checked}>
+  //     <Card
+  //       style={cardStyle(checked)}
+  //       primaryAction={renderPrimaryAction(checked)}
+  //     >
+  //       <InnerCardContainer>
+  //         <MoverLogo>
+  //           <MoverLogoImg src={moverInfo.provider.logo || noLogoImg} alt="Mover Logo" />
+  //         </MoverLogo>
+  //         <MoverName>{moverInfo.provider.name}</MoverName>
+  //         <MoverInfoBar>
+  //           <MoverPrice>${moverInfo.estimatedPrice}</MoverPrice>
+  //         </MoverInfoBar>
+  //         <MoverInfoBar>
+  //           <MoverProfileLink to={{ 
+  //             pathname: `/mover/profile/${moverInfo.provider.id}`,
+  //             search: `?project=${projectId}`
+  //           }}>View profile</MoverProfileLink>
+  //         </MoverInfoBar>
+  //       </InnerCardContainer>
+  //       {checked && (
+  //         <IsCheckedIndicator>
+  //           <Icon icon="check" />
+  //         </IsCheckedIndicator>
+  //       )}
+  //     </Card>
+  //   </MoverCard>
+  // );
 };
 
 export default withTheme(SelectMoverItem);

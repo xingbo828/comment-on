@@ -21,12 +21,12 @@ const validate = validateFunc(
       message: 'Required'
     },
     {
-      field: 'deliveryAccess',
+      field: 'pickUpAccess',
       validator: 'isRequired',
       message: 'Required'
     },
     {
-      field: 'ableToAssist',
+      field: 'deliveryAccess',
       validator: 'isRequired',
       message: 'Required'
     }

@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 
 const appear = keyframes`
   from {
-    transform: translateY(50%) scale(0);
+    transform: scale(.5);
   }
 
   to {
-    transform: translateY(50%) scale(1);
+    transform: scale(1);
   }
 `;
 
@@ -20,8 +20,8 @@ export const MoverCard = styled.div`
 `;
 
 export const IsCheckedIndicator = styled.div`
-  width: 47px;
-  height: 47px;
+  width: 68px;
+  height: 68px;
   color: white;
   margin: 0 auto;
   border-radius: 50%;

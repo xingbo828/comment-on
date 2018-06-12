@@ -6,6 +6,9 @@ const userCollectionRef = firestore.collection('users');
 export const UPDATE_PROFILE = 'UPDATE_PROFILE';
 
 const _uploadProfileImg = async (img, uid) => {
+  if(!img) {
+    return { originalUrl : null, photoURLUpdated: false };
+  }
   if (typeof img === 'string') {
     return { originalUrl : img, photoURLUpdated: false };
   }
@@ -20,9 +23,9 @@ export const updateProfile = profile => async dispatch => {
     const uid = auth.currentUser.uid;
     const userDocRef = userCollectionRef.doc(uid);
 
-    const { displayName, email, phoneNumber } = profile;
-    const { downloadUrl, originalUrl, photoURLUpdated } = await _uploadProfileImg(profile.photoURL, uid);
-    const updatedProfile = Object.assign({ displayName, email, phoneNumber }, { photoURL: photoURLUpdated ? downloadUrl : originalUrl });
+    const { displayName, email, phoneNumber, photoURL, receiveEmail } = profile;
+    const { downloadUrl, originalUrl, photoURLUpdated } = await _uploadProfileImg(photoURL, uid);
+    const updatedProfile = Object.assign({ displayName, email, phoneNumber, receiveEmail }, { photoURL: photoURLUpdated ? downloadUrl : originalUrl });
     await userDocRef.set(updatedProfile);
     const tempProfile = Object.assign({}, updatedProfile, { photoURL: originalUrl });
 
