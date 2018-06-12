@@ -1,6 +1,6 @@
 import React from 'react';
-import { withRouter, Switch } from 'react-router-dom';
-import ProtectedRoute from '../Common/ProtectedRoute';
+import { withRouter, Switch, Route } from 'react-router-dom';
+// import ProtectedRoute from '../Common/ProtectedRoute';
 // import MoverCreation from './Create';
 import Profile from './Profile';
 // import MoverEdit from './Edit';
@@ -12,7 +12,7 @@ const Mover = ({ match: { isExact } }) => {
     <Switch>
       {/* <ProtectedRoute path="/mover/create" component={MoverCreation} /> */}
       {/* <ProtectedRoute path="/mover/edit" component={MoverEdit} /> */}
-      <ProtectedRoute path="/mover/profile/:moverId" component={Profile} />
+      <Route path="/mover/profile/:moverId" component={Profile} />
       {/* <ProtectedRoute path="/mover/my-profile" component={Profile.MyMoverProfile} /> */}
       {/* <ProtectedRoute path="/mover/project" component={MoverProject} /> */}
     </Switch>

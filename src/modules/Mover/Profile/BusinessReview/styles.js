@@ -19,4 +19,7 @@ export const Logo = styled.img`
   width: 100%;
 `;
 
+export const BusinessName = styled.span`
+  font-weight: ${props=>props.theme.fontWeights.roman};
+`;
 

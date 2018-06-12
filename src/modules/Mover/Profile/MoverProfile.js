@@ -73,6 +73,7 @@ const MoverProfile = ({ profileData, reviewStatus, reviewData, history }) => (
                   loading={reviewStatus !== 'LOADED'}
                   rateCount={get(reviewData, ['google', 'reviews_count'])}
                   rating={get(reviewData, ['google', 'rating'])}
+                  name={get(reviewData, ['google', 'name'])}
                   link={get(reviewData, ['google', 'url'])}
                 />
               </Box>
@@ -81,6 +82,7 @@ const MoverProfile = ({ profileData, reviewStatus, reviewData, history }) => (
               <Box vertical={2}>
                 <BusinessReview
                   type="yelp"
+                  name={get(reviewData, ['yelp', 'name'])}
                   loading={reviewStatus !== 'LOADED'}
                   link={get(reviewData, ['yelp', 'url'])}
                   rateCount={get(reviewData, ['yelp', 'review_count'])}

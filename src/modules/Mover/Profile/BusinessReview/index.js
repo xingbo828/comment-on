@@ -11,7 +11,7 @@ import {
  Logo,
  LogoWrapper,
  DetailWrapper,
-
+ BusinessName
 } from './styles';
 
 class BusinessReview extends Component {
@@ -23,13 +23,14 @@ class BusinessReview extends Component {
   }
 
   render() {
-    const { type, rating, loading, rateCount } = this.props;
+    const { type, name, rating, loading, rateCount } = this.props;
     return (
-      <Card style={{width: '300px', minHeight: '120px'}} loading={loading} onClick={this.handleClick}>
+      <Card style={{ minHeight: '120px'}} loading={loading} onClick={this.handleClick}>
           <Container>
               <LogoWrapper><Box vertical={5}><Logo src={this.getLogoSrc(type)} /></Box></LogoWrapper>
               <DetailWrapper>
                 <Box vertical={5} between={2}>
+                <BusinessName>{name}</BusinessName>
                 <Rate
                   value={rating}
                   caption={rating.toString()}

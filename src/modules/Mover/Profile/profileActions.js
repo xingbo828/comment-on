@@ -10,7 +10,7 @@ export const getReview = providerId => async dispatch => {
       type: GET_REVIEW_PENDING,
       provider: providerId
     });
-    const reviewHttpClient = await createReviewHttpClient();
+    const reviewHttpClient = createReviewHttpClient();
     const data = await reviewHttpClient.getReview(providerId);
     dispatch({
         type: GET_REVIEW_SUCCESS,
