@@ -2,7 +2,7 @@ import Styled, { css } from 'styled-components'
 import { Link as RouterLink } from 'react-router-dom';
 
 const LinkStyles = css`
-  margin: 0 0 .875rem;
+  margin: 0;
   display: block;
   color: ${props => props.theme.colors.primary};
   font-weight: 600;
@@ -20,6 +20,7 @@ const LinkStyles = css`
 
   &:hover {
     color: ${props=>props.theme.colors.secondaryLight};
+    text-decoration: underline;
   }
 `
 

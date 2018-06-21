@@ -1,12 +1,17 @@
 import styled from 'styled-components';
+import Box from '../../../../globalComponents/Box';
+
 
 export const Container = styled.div`
-  display: flex;
-  padding: 0 ${props=>props.theme.spaces.base};
-`;
+  &:not(:last-of-type) {
+    margin: 0 0 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid ${props=>props.theme.colors.border};
+  }
+`
 
-export const LogoWrapper = styled.div`
-  flex: 6;
+export const ContainerBox = styled(Box)`
+  align-items: center;
 `;
 
 export const DetailWrapper = styled.div`
@@ -15,8 +20,11 @@ export const DetailWrapper = styled.div`
 `;
 
 
-export const Logo = styled.img`
-  width: 100%;
+export const Logo = styled.div`
+  width: 80px;
+  height: 80px;
+  background: url(${props=>props.src}) center center no-repeat;
+  background-size: contain;
 `;
 
 

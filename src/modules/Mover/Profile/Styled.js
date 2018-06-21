@@ -4,6 +4,7 @@ export const ContactInfoListItemLink = Styled.a`
   color: ${props=>props.theme.colors.secondary};
   font-weight: 600;
   text-decoration: none;
+  
   &:hover {
     text-decoration: underline;
   }
@@ -15,6 +16,7 @@ export const ImgContainer = Styled.div`
   > img {
     width: 100%;
   }
+
   ${props=>props.theme.media.greaterThan('lg')`
     width: 60%;
   `}
@@ -45,7 +47,6 @@ export const ProfileImage = Styled.div`
   background: url(${props=>props.src}) center center no-repeat;
   background-size: contain;
   border-radius: 4px;
-  border: 1px solid ${props=>props.theme.colors.border};
 `
 
 export const ProfileInfo = Styled.div`
@@ -54,7 +55,7 @@ export const ProfileInfo = Styled.div`
 
 export const ProfileName = Styled.h1`
   font-size: 2rem;
-  margin: 0 0 0 1.5rem;
+  margin: 0;
   font-weight: 800;
 `
 

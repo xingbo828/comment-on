@@ -59,4 +59,12 @@ export default styled.div`
     ${calculateFirst(props.first, 'lg')}
     ${calculateLast(props.last, 'lg')}
   `}
+
+  ${props=>props.theme.media.greaterThan('lg')`
+    ${calculateDisplay(props.xl)};
+    ${calculateBasis(props.xl)};
+    ${calculateOffset(props.xlOffset)};
+    ${calculateFirst(props.first, 'xl')}
+    ${calculateLast(props.last, 'xl')}
+  `}
 `;

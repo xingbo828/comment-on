@@ -66,6 +66,10 @@ const getLevelIndex = (property, size) => {
 
 const getDirection = (property, size) => {
 
+  if (typeof property === 'boolean' && property) {
+    return 'flex-direction: row'
+  }
+
   if (!property) {
     return 0
   }
@@ -93,6 +97,12 @@ const Box = ({ children, tag, inline, between, vertical, horizontal, below, inse
   const Component = Styled[tag]`
     display: flex;
     flex-direction: column;
+
+    // TODO: Maybe remove this, then remove all margin from global components and require <Box> for spacing
+    > *:last-child {
+      margin-bottom: 0;
+      margin-right: 0;
+    }
 
     ${props=>props.theme.media.lessThan('xs')`
       ${getDirection(inline, 'xs')};

@@ -10,14 +10,13 @@ const { Container, Row, Col } = Grid;
 const FooterNav = props => {
   return (
     <Footer>
-      <Container>
+      {/* <Container>
         <Row>
           <Col xs={24} sm={24} md={7} lg={7}>
             <ListHeading wrapperTag="h4" size="xs">
               Company
             </ListHeading>
             <List>
-              {/* <ListItem><Link to="/mover/create">Become Mover</Link></ListItem> */}
               <ListItem>Become a mover</ListItem>
               <ListItem>Facebook</ListItem>
               <ListItem>Twitter</ListItem>
@@ -45,7 +44,7 @@ const FooterNav = props => {
             </List>
           </Col>
         </Row>
-      </Container>
+      </Container> */}
       <OrgContainer>
         <Grid.Container>
           <Copyright>Copyright ©2018  Comment On. All rights reserved.</Copyright>

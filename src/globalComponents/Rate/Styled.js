@@ -58,8 +58,6 @@ export const RateIcon = styled.li`
 `;
 
 export const RateCaption = styled.span`
-  color: ${props=>props.theme.colors.brand};
-  padding-left: ${props=>props.theme.spaces.tight};
-  font-weight: ${props=>props.theme.fontWeights.roman};
+  font-weight: 700;
   font-size: 1.125rem;
 `;

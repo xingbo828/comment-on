@@ -6,6 +6,16 @@ export const Container = styled.div`
   display: inline-block;
   padding: 0;
   width: 100%;
+  transition: border-color .3s;
+
+  ${props=>props.bordered && `
+    border-radius: 4px;
+    border: 1px solid ${props.theme.colors.border};
+  `}
+
+  ${props=>(props.filled || props.focused) && `
+    border-color: white;
+  `}
 `;
 
 export const FocusBorder = styled.span`
@@ -21,24 +31,29 @@ export const FocusBorder = styled.span`
 
 export const Label = styled.label`
   position: absolute;
-
   left: 0;
   top: 17px;
   z-index: 1;
   display: block;
   font-size: 1.125rem;
   letter-spacing: .05em;
+  line-height: 1.5;
   transition: .3s;
   color: ${props=>props.theme.colors.textLight};
   transform: scale(1);
   transform-origin: top left;
   white-space: nowrap;
 
+  ${props=>props.bordered && `
+    left: 1rem;
+  `}
+
   ${props=>props.focused &&`
     color: ${props.theme.colors.primary};
   `}
 
   ${props=>(props.filled || props.focused) && `
+    left: 0;
     text-transform: uppercase;
     transform: scale(.65);
     top: 0;

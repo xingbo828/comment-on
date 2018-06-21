@@ -29,7 +29,7 @@ const HomePage = ({ navToGetStarted }) => (
     </Grid.Container>
     <Grid.Container>
       <Grid.Row>
-        <Grid.Col lg={8} md={8} sm={8} xs={24}>
+        <Grid.Col xl={8} lg={8} md={8} sm={8} xs={24}>
           <StepCard
             type="primary"
             number={1}
@@ -40,7 +40,7 @@ const HomePage = ({ navToGetStarted }) => (
             handleClick={navToGetStarted}
           />
         </Grid.Col>
-        <Grid.Col lg={8} md={8} sm={8} xs={24}>
+        <Grid.Col xl={8} lg={8} md={8} sm={8} xs={24}>
           <StepCard
             type="secondary"
             number={2}
@@ -51,7 +51,7 @@ const HomePage = ({ navToGetStarted }) => (
             handleClick={navToGetStarted}
           />
         </Grid.Col>
-        <Grid.Col lg={8} md={8} sm={8} xs={24}>
+        <Grid.Col xl={8} lg={8} md={8} sm={8} xs={24}>
           <StepCard
             type="tertiary"
             number={3}
@@ -77,7 +77,7 @@ const HomePage = ({ navToGetStarted }) => (
     </Grid.Container>
     <Grid.Container>
       <Grid.Row>
-        <Grid.Col lg={12} lgOffset={6} md={12} mdOffset={6} sm={24} xs={24}>
+        <Grid.Col xl={12} xlOffset={6} lg={12} lgOffset={6} md={12} mdOffset={6} sm={24} xs={24}>
           <Box between={6} vertical={{ xs:6, lg:10 }}>
             <Heading eyebrow="Moving somewhere?" underlay="easy" wrapperTag="h3" centered size="md">It's easier with Inneed</Heading>
             <Paragraph center>

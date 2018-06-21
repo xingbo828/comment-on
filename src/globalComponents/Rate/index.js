@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { number, string, oneOf, func, bool } from 'prop-types';
+import Box from '../Box';
 import Icon from '../Icon';
 import {
   RateContainer,
@@ -99,10 +100,12 @@ class Rate extends Component {
     const renderValue = isHovering ? hoverValue : value;
     return (
       <RateContainer>
-        <RateIconList>
-          {this.renderStars(renderValue, icon, size, readOnly)}
-        </RateIconList>
-        {caption && <RateCaption>{caption}</RateCaption>}
+        <Box inline between={3}>
+          {caption && <RateCaption>{caption}</RateCaption>}
+          <RateIconList>
+            {this.renderStars(renderValue, icon, size, readOnly)}
+          </RateIconList>
+        </Box>
       </RateContainer>
     );
   }

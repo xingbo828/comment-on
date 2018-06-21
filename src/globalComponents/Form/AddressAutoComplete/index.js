@@ -60,10 +60,10 @@ class AddressAutoComplete extends Component {
   }
 
   render() {
-    const { onSelect, label, initialValue } = this.props;
+    const { onSelect, label, initialValue, bordered } = this.props;
     return (
-      <Container>
-        <Label filled={this.state.filled} focused={this.state.focused}>{label}</Label>
+      <Container bordered={bordered} filled={this.state.filled} focused={this.state.focused}>
+        <Label bordered={bordered} filled={this.state.filled} focused={this.state.focused}>{label}</Label>
         <GeosuggestStyled
           innerRef={el => (this._geoSuggest = el)}
           country="ca"

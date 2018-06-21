@@ -10,7 +10,6 @@ export const CardContainer = styled.div`
   cursor: ${props=>props.clickable ? 'pointer': 'default' };
   width: 100%;
   box-shadow: ${props=>props.theme.boxShadow.large};
-  overflow: hidden;
 `;
 
 export const ChildrenContainer = styled.div`

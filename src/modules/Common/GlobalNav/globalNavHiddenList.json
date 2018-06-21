@@ -1,4 +1,5 @@
 [
+  "\/mover.*",
   "\/login.*",
   "\/reset-password.*",
   "\/conversation\/.*",

@@ -7,11 +7,9 @@ import googleLogoSrc from './google-my-business.jpg';
 import yelpLogoSrc from './yelp-logo.png';
 
 import {
- Container,
- Logo,
- LogoWrapper,
- DetailWrapper,
-
+  Container,
+  ContainerBox,
+  Logo,
 } from './styles';
 
 class BusinessReview extends Component {
@@ -25,22 +23,18 @@ class BusinessReview extends Component {
   render() {
     const { type, rating, loading, rateCount } = this.props;
     return (
-      <Card loading={loading} onClick={this.handleClick}>
-          <Container>
-              <LogoWrapper><Box vertical={5}><Logo src={this.getLogoSrc(type)} /></Box></LogoWrapper>
-              <DetailWrapper>
-                <Box vertical={5} between={2}>
-                <Rate
-                  value={rating}
-                  caption={rating.toString()}
-                  size="lg"
-                  readOnly
-                />
-                <span>{rateCount} reviews</span>
-              </Box>
-              </DetailWrapper>
-          </Container>
-      </Card>
+      <Container>
+        <ContainerBox inline between={3}>
+          <Logo src={this.getLogoSrc(type)} />
+          <Rate
+            value={rating}
+            caption={rating.toString()}
+            size="lg"
+            readOnly
+          />
+          <span>({rateCount})</span>
+        </ContainerBox>
+      </Container>
     );
   }
 }

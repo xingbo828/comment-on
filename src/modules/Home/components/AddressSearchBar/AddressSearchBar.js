@@ -9,7 +9,6 @@ import {
 } from './Styles';
 
 const renderMoveAddress = ({ input, label, ...rest, placeholder }) => (
-  
   <AddressAutoComplete
     onSelect={input.onChange}
     placeholder={placeholder}
