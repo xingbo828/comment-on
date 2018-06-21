@@ -30,9 +30,10 @@ export const FocusBorder = styled.span`
 `;
 
 export const Label = styled.label`
+  font-weight: 600;
   position: absolute;
   left: 0;
-  top: 17px;
+  top: 1.5rem;
   z-index: 1;
   display: block;
   font-size: 1.125rem;
@@ -88,12 +89,13 @@ export const GeosuggestStyled = styled(Geosuggest)`
     font-size: 1.125rem;
     width: 100%;
     box-sizing: border-box;
-    padding: 1rem 0;
+    padding: 1.5rem 0 1rem;
     border-width:0;
     color: ${props => props.theme.colors.textDark};
   }
 
-  .geosuggest__input:focus {
+  .geosuggest__input::placeholder {
+    color: ${props => props.theme.colors.border};
   }
 
   .geosuggest__suggests {

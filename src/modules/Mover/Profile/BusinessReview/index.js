@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { oneOf } from 'prop-types';
-import Card from '../../../../globalComponents/Card';
 import Rate from '../../../../globalComponents/Rate';
-import Box from '../../../../globalComponents/Box';
 import googleLogoSrc from './google-my-business.jpg';
 import yelpLogoSrc from './yelp-logo.png';
-
 import {
   Container,
   ContainerBox,
@@ -21,7 +18,7 @@ class BusinessReview extends Component {
   }
 
   render() {
-    const { type, rating, loading, rateCount } = this.props;
+    const { type, rating, rateCount } = this.props;
     return (
       <Container>
         <ContainerBox inline between={3}>

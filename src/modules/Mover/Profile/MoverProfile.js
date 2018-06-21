@@ -2,9 +2,7 @@ import React from 'react';
 import get from 'lodash/get';
 import Grid from '../../../globalComponents/Grid';
 import Box from '../../../globalComponents/Box';
-import ReactMarkdown from 'react-markdown';
 import { Heading, Paragraph } from '../../../globalComponents/Typography';
-import { StickyContainer, Sticky } from 'react-sticky';
 import { HairlineDivider } from '../../../globalComponents/Dividers';
 import {
   DescriptionList,
@@ -24,7 +22,7 @@ import GetStartedThin from './GetStartedThin';
 
 const { Container, Row, Col } = Grid;
 
-const MoverProfile = ({ profileData, reviewStatus, reviewData, history }) => (
+const MoverProfile = ({ profileData, reviewStatus, reviewData }) => (
   <React.Fragment>
     <Container>
       <Row>

@@ -1,11 +1,6 @@
 import React from 'react'
-import { Field } from 'redux-form/immutable';
-import Card from '../../../../globalComponents/Card'
-import Button from '../../../../globalComponents/Form/Button'
-import Responsive from '../../../../globalComponents/Responsive'
 import Box from '../../../../globalComponents/Box'
 import Grid from '../../../../globalComponents/Grid';
-import Sticky from '../../../../globalComponents/Sticky';
 import {
   Heading,
   Paragraph
@@ -19,7 +14,6 @@ import {
 
 class GetStartedThin extends React.Component {
   render() {
-    const { handleSubmit } = this.props
     return (
       <Container>
         <Grid.Container>

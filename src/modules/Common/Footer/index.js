@@ -1,13 +1,13 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose, renderNothing, branch } from 'recompose';
-import { Footer, OrgContainer, List, ListItem, Copyright, ListHeading } from './Styled';
+import { Footer, OrgContainer, Copyright } from './Styled';
 import Grid from '../../../globalComponents/Grid';
 import footerHiddenList from './footerHiddenList.json';
 
-const { Container, Row, Col } = Grid;
+// const { Container, Row, Col } = Grid;
 
-const FooterNav = props => {
+const FooterNav = () => {
   return (
     <Footer>
       {/* <Container>

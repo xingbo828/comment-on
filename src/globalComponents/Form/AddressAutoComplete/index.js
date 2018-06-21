@@ -53,22 +53,20 @@ class AddressAutoComplete extends Component {
     this.setState({ filled: true })
   }
 
-
-
   mapSuggestDescription(suggest) {
     return suggest.description.replace(', Canada', '');
   }
 
   render() {
-    const { onSelect, label, initialValue, bordered } = this.props;
+    const { onSelect, label, initialValue, bordered, placeholder } = this.props;
     return (
-      <Container bordered={bordered} filled={this.state.filled} focused={this.state.focused}>
-        <Label bordered={bordered} filled={this.state.filled} focused={this.state.focused}>{label}</Label>
+      <Container bordered={bordered} filled={this.state.filled || placeholder} focused={this.state.focused}>
+        <Label bordered={bordered} filled={this.state.filled || placeholder} focused={this.state.focused}>{label}</Label>
         <GeosuggestStyled
           innerRef={el => (this._geoSuggest = el)}
           country="ca"
           initialValue={initialValue}
-          placeholder=""
+          placeholder={placeholder}
           minLength={2}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
@@ -86,7 +84,8 @@ AddressAutoComplete.defaultProps = {
   onSelect: () => {},
   label: '',
   initialValue: '',
-  icon: 'map-marker'
+  icon: 'map-marker',
+  placeholder: ''
 };
 
 export default AddressAutoComplete;

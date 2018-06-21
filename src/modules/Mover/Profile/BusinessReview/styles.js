@@ -27,4 +27,7 @@ export const Logo = styled.div`
   background-size: contain;
 `;
 
+export const BusinessName = styled.span`
+  font-weight: ${props=>props.theme.fontWeights.roman};
+`;
 
