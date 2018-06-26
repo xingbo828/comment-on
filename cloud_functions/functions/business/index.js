@@ -16,6 +16,7 @@ const yelpInstance = axios.create({
 });
 
 const _ = require('lodash');
+const onCreate = require('./event_hooks/onCreate');
 
 const app = express();
 
@@ -126,6 +127,7 @@ app.get('/yelp/search', (req, res) => {
 
 module.exports = () => {
   return {
-    providers: functions.https.onRequest(app)
+    providers: functions.https.onRequest(app),
+    onCreate
   };
 };
