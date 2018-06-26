@@ -5,25 +5,56 @@ const projectCollectionRef = firestore.collection('projects');
 
 export const PROJECT_CREATED = 'PROJECT_CREATED';
 
-export const addProject = (projectType, configuration) => async dispatch => {
+export const addProject = (projectCategory, configuration) => async dispatch => {
   const uid = auth.currentUser.uid;
-  const configurationWithGeoPoint = Object.assign({}, configuration, {
-    addresses: {
-      formattedPickUpAddress: configuration.addresses.pickUpAddress.formattedAddress,
-      formattedDeliveryAddress: configuration.addresses.deliveryAddress.formattedAddress,
-      pickUpAddress: new firebaseInstance.firestore.GeoPoint(configuration.addresses.pickUpAddress.lat, configuration.addresses.pickUpAddress.lng),
-      deliveryAddress:  new firebaseInstance.firestore.GeoPoint(configuration.addresses.deliveryAddress.lat, configuration.addresses.deliveryAddress.lng),
-    }
-  });
+  let configurationWithGeoPoint;
+  if(configuration.addresses) {
+    configurationWithGeoPoint = Object.assign({}, configuration, {
+      addresses: {
+        formattedPickUpAddress: configuration.addresses.pickUpAddress.formattedAddress,
+        formattedDeliveryAddress: configuration.addresses.deliveryAddress.formattedAddress,
+        pickUpAddress: new firebaseInstance.firestore.GeoPoint(configuration.addresses.pickUpAddress.lat, configuration.addresses.pickUpAddress.lng),
+        deliveryAddress:  new firebaseInstance.firestore.GeoPoint(configuration.addresses.deliveryAddress.lat, configuration.addresses.deliveryAddress.lng),
+      }
+    });
+  } else {
+    configurationWithGeoPoint = configuration
+  }
   const project = Object.assign(
-    {},
-    { type: projectType, configuration: configurationWithGeoPoint, owner: uid }
-  );
+      {},
+      { category: projectCategory, configuration: configurationWithGeoPoint, owner: uid, type: 'BROADCAST' }
+    );
+
   const projectRef = await projectCollectionRef.add(project);
   const projectId = projectRef.id;
   await updateUserProjects(projectRef)(dispatch);
   return projectId;
 };
+
+export const addDirectProject = (projectCategory, configuration, providerId) => async dispatch => {
+  let configurationWithGeoPoint;
+  if(configuration.addresses) {
+    configurationWithGeoPoint = Object.assign({}, configuration, {
+      addresses: {
+        formattedPickUpAddress: configuration.addresses.pickUpAddress.formattedAddress,
+        formattedDeliveryAddress: configuration.addresses.deliveryAddress.formattedAddress,
+        pickUpAddress: new firebaseInstance.firestore.GeoPoint(configuration.addresses.pickUpAddress.lat, configuration.addresses.pickUpAddress.lng),
+        deliveryAddress:  new firebaseInstance.firestore.GeoPoint(configuration.addresses.deliveryAddress.lat, configuration.addresses.deliveryAddress.lng),
+      }
+    });
+  } else {
+    configurationWithGeoPoint = configuration
+  }
+  const project = Object.assign(
+      {},
+      { category: projectCategory, configuration: configurationWithGeoPoint, type: 'DIRECT', providerId }
+    );
+
+  const projectRef = await projectCollectionRef.add(project);
+  const projectId = projectRef.id;
+  return projectId;
+
+}
 
 export const GET_MY_PROJECT_PENDING = 'GET_MY_PROJECT_PENDING';
 export const GET_MY_PROJECT_SUCCESS = 'GET_MY_PROJECT_SUCCESS';

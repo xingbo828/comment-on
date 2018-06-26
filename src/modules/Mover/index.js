@@ -1,20 +1,15 @@
 import React from 'react';
 import { withRouter, Switch, Route } from 'react-router-dom';
-// import ProtectedRoute from '../Common/ProtectedRoute';
-// import MoverCreation from './Create';
 import Profile from './Profile';
-// import MoverEdit from './Edit';
+import MoverConfiguration from './Configurations';
+import MoverConfigurationSuccess from './Configurations/Success';
 
-// import MoverProject from './Project'
-
-const Mover = ({ match: { isExact } }) => {
+const Mover = () => {
   return (
     <Switch>
-      {/* <ProtectedRoute path="/mover/create" component={MoverCreation} /> */}
-      {/* <ProtectedRoute path="/mover/edit" component={MoverEdit} /> */}
       <Route path="/mover/profile/:moverId" component={Profile} />
-      {/* <ProtectedRoute path="/mover/my-profile" component={Profile.MyMoverProfile} /> */}
-      {/* <ProtectedRoute path="/mover/project" component={MoverProject} /> */}
+      <Route path="/mover/:moverId/configuration" component={MoverConfiguration} />
+      <Route path="/mover/configuration/success" component={MoverConfigurationSuccess} />
     </Switch>
   );
 };

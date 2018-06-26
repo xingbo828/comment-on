@@ -3,7 +3,7 @@ import { compose, withProps } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import AddressSearchBar from './AddressSearchBar';
 import validators, { validateFunc } from '../../../Common/validators';
-import { localSaveAddresses } from '../../../Project/Configurations/Move/moveActions';
+import { localSaveAddresses } from '../../../Common/Configurations/Move/Address/actions';
 
 const validate = validateFunc(
   [
