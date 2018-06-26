@@ -41,8 +41,8 @@ const renderDeliveryAccess = ({ input, name, label, desc }) => {
 
 const Logistics = ({
   handleSubmit,
-  pristine,
-  reset,
+  next,
+  previous,
   valid,
   submitting,
   goBack
@@ -55,37 +55,37 @@ const Logistics = ({
             <FormFieldSet>
               <Field
                 component={renderResidenceTypeSelection}
-                name="residenceType"
+                name="detail.residenceType"
                 label="Choose the option that best describes the pick-up space"
               />
             </FormFieldSet>
             <FormFieldSet>
               <Field
                 component={renderPickUpAccess}
-                name="pickUpAccess"
+                name="detail.pickUpAccess"
                 label="How is the pick-up space accessed?"
               />
             </FormFieldSet>
             <FormFieldSet>
               <Field
                 component={renderDeliveryAccess}
-                name="deliveryAccess"
+                name="detail.deliveryAccess"
                 label="How is the delivery space accessed?"
               />
             </FormFieldSet>
           </FormInner>
           <FormActions>
-            <Button
+          {next && <Button
               style={{ float: 'right' }}
               type="submit"
               primary
               disabled={submitting || !valid}
             >
               Next<Icon icon="arrow-right" />
-            </Button>
-            <Button onClick={goBack} ghost style={{ float: 'left' }}>
+            </Button>}
+            {previous && <Button onClick={goBack} style={{ float: 'left' }} ghost>
               <Icon icon="arrow-left" />Back
-            </Button>
+            </Button>}
           </FormActions>
         </Form>
       </Grid.Container>

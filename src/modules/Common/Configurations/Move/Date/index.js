@@ -7,12 +7,12 @@ import {
   renderNothing,
   withProps
 } from 'recompose';
-import { reduxForm, formValues } from 'redux-form/immutable';
+import { reduxForm } from 'redux-form/immutable';
 import DateStep from './Date';
 import scrollToTopOnMount from '../../../../Common/scrollToTopOnMount';
 import validators, { validateFunc } from '../../../../Common/validators';
-
-import { localSaveDate, loadDate } from '../moveActions';
+import isUndefined from 'lodash/isUndefined';
+import { localSaveDate, loadDate } from './actions';
 
 import { getDate } from '../moveReducers';
 
@@ -33,7 +33,11 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({ initialValues: getDate(state) });
 
-const isLoading = props => props.initialValues.get('status') !== 'LOADED';
+
+const notLoaded = props => {
+  const isNotLoaded = isUndefined(props.initialValues) || props.initialValues.get('status') !== 'LOADED'
+  return isNotLoaded
+};
 
 const enhance = compose(
   withRouter,
@@ -43,22 +47,22 @@ const enhance = compose(
       this.props.loadDate();
     }
   }),
-  branch(isLoading, renderNothing),
+  branch(notLoaded, renderNothing),
   reduxForm({
-    form: 'project.configurations.move.date',
+    form: 'configurations.move.date',
     validate,
-    onSubmit: (values, dispatch, props) => {
-      return localSaveDate(values.toJS());
+    onSubmit: (values) => {
+      return localSaveDate(values.get('detail').toJS());
     },
     onSubmitSuccess: (result, dispatch, props) => {
       if (props.location.fromOverview) {
         return props.history.push({
-          pathname: '/projects/configurations/move/overview'
+          pathname: props.postEdit,
         });
       }
       // send user to next step
       props.history.push({
-        pathname: '/projects/configurations/move/logistics',
+        pathname: props.next,
         state: props.location.state
       });
     }
@@ -67,15 +71,11 @@ const enhance = compose(
     goBack: e => {
       e.preventDefault();
       props.history.push({
-        pathname: '/projects/configurations/move/address',
+        pathname: props.previous,
         state: props.location.state
       });
     }
   })),
-  formValues({
-    selectedPickUpDate: 'pickUpDate',
-    selectedDeliveryDate: 'deliveryDate'
-  }),
   scrollToTopOnMount
 );
 

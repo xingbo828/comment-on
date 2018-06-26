@@ -1,5 +1,6 @@
 import React from 'react';
 // import isNull from 'lodash/isNull';
+import Immutable from 'immutable';
 import { Field } from 'redux-form/immutable';
 import { Button } from '../../../../../globalComponents/Form';
 import Icon from '../../../../../globalComponents/Icon';
@@ -12,10 +13,13 @@ import Grid from '../../../../../globalComponents/Grid';
 const { Form, FormActions, FormInner, FormFieldSet } = Layout.Form;
 
 const renderDateSelection = ({ input, label }) => {
+  const value = Immutable.Iterable.isIterable(input.value)
+    ? input.value.toJS()
+    : input.value;
   return (
     <DateSelection
       label={label}
-      value={input.value || undefined}
+      value={value||undefined}
       onChange={input.onChange}
     />
   );
@@ -43,13 +47,11 @@ const renderDateSelection = ({ input, label }) => {
 
 const DateTime = ({
   handleSubmit,
-  pristine,
-  reset,
+  next,
+  previous,
   valid,
   submitting,
-  goBack,
-  selectedPickUpDate,
-  selectedDeliveryDate
+  goBack
 }) => {
   return (
     <section>
@@ -59,7 +61,7 @@ const DateTime = ({
             <FormFieldSet>
               <Field
                 component={renderDateSelection}
-                name="pickUpDate"
+                name="detail.pickUpDate"
                 label="Which day would you like to schedule your move?"
               />
             </FormFieldSet>
@@ -86,17 +88,17 @@ const DateTime = ({
             } */}
           </FormInner>
           <FormActions>
-            <Button
+          {next && <Button
               style={{ float: 'right' }}
               type="submit"
               primary
               disabled={submitting || !valid}
             >
               Next<Icon icon="arrow-right" />
-            </Button>
-            <Button onClick={goBack} style={{ float: 'left' }} ghost>
+            </Button>}
+            {previous && <Button onClick={goBack} style={{ float: 'left' }} ghost>
               <Icon icon="arrow-left" />Back
-            </Button>
+            </Button>}
           </FormActions>
         </Form>
       </Grid.Container>

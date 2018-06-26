@@ -23,7 +23,9 @@ class TextField extends React.Component {
   }
 
   onBlur(e) {
-    this.props.input.onBlur(e);
+    if(this.props.input.onBlur) {
+      this.props.input.onBlur(e);
+    }
     this.setState({ isFocused: false });
   }
 

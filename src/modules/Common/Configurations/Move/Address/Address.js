@@ -26,7 +26,7 @@ const renderAddressSelection = ({ input, label, desc, ...rest }) => {
   );
 };
 
-const Address = ({ handleSubmit, pristine, reset, valid, submitting }) => {
+const Address = ({ handleSubmit, next, previous, goBack, valid, submitting }) => {
   return (
     <section>
       <Grid.Container>
@@ -36,19 +36,22 @@ const Address = ({ handleSubmit, pristine, reset, valid, submitting }) => {
               <Legend>Start by telling us your pick-up and destination address</Legend>
               <Field
                 component={renderAddressSelection}
-                name="addresses"
+                name="detail"
                 desc={renderAddressSelection}
               />
             </FormFieldSet>
             <FormActions>
-              <Button
+              {next && <Button
                 style={{ float: 'right' }}
                 type="submit"
                 primary
                 disabled={submitting || !valid}
               >
                 Next<Icon icon="arrow-right" />
-              </Button>
+              </Button>}
+              {previous && <Button onClick={goBack} style={{ float: 'left' }} ghost>
+              <Icon icon="arrow-left" />Back
+            </Button>}
             </FormActions>
           </FormInner>
         </Form>

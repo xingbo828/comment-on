@@ -4,11 +4,11 @@ import { compose, lifecycle, branch, renderNothing, withProps } from 'recompose'
 import { reduxForm } from 'redux-form/immutable';
 import Items from './Items';
 import scrollToTopOnMount from '../../../../Common/scrollToTopOnMount';
-
+import isUndefined from 'lodash/isUndefined';
 import {
   loadItems,
   localSaveItems
-} from '../moveActions';
+} from './actions';
 
 import { getItems } from '../moveReducers';
 
@@ -21,7 +21,10 @@ const mapStateToProps = state => ({
   initialValues: getItems(state)
 });
 
-const isLoading = props => props.initialValues.get('status') !== 'LOADED';
+const notLoaded = props => {
+  const isNotLoaded = isUndefined(props.initialValues) || props.initialValues.get('status') !== 'LOADED'
+  return isNotLoaded
+};
 
 const enhance = compose(
   withRouter,
@@ -31,15 +34,20 @@ const enhance = compose(
       this.props.loadItems();
     }
   }),
-  branch(isLoading, renderNothing),
+  branch(notLoaded, renderNothing),
   reduxForm({
-    form: 'project.configurations.move.items',
+    form: 'configurations.move.items',
     onSubmit: (values, dispatch, props) => {
-      return localSaveItems(values.toJS());
+      return localSaveItems(values.get('detail').toJS());
     },
     onSubmitSuccess: async (result, dispatch, props) => {
+      if(props.location.fromOverview) {
+        return props.history.push({
+          pathname: props.postEdit
+        });
+      }
       props.history.push({
-        pathname: '/projects/configurations/move/overview',
+        pathname: props.next,
         state: props.location.state
       });
     }
@@ -48,7 +56,7 @@ const enhance = compose(
     goBack: (e) => {
       e.preventDefault();
       props.history.push({
-        pathname: '/projects/configurations/move/logistics',
+        pathname: props.previous,
         state: props.location.state
       });
     }

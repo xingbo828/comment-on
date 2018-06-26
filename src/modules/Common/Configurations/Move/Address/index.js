@@ -1,19 +1,19 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-
-import { compose, lifecycle, branch, renderNothing } from 'recompose';
+import { compose, lifecycle, branch, withProps, renderNothing } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import AddressStep from './Address';
 import scrollToTopOnMount from '../../../../Common/scrollToTopOnMount';
 import validators, { validateFunc } from '../../../../Common/validators';
-import { localSaveAddresses, loadAddresses, resetAddresses } from '../moveActions';
+import { localSaveAddresses, loadAddresses, resetAddresses } from './actions';
 
 import { getAddresses } from '../moveReducers';
+import isUndefined from 'lodash/isUndefined';
 
 const validate = validateFunc(
   [
     {
-      field: 'addresses',
+      field: 'detail',
       validator: 'isValidAddressesInput',
       message: 'Required'
     }
@@ -31,7 +31,8 @@ const mapStateToProps = state => {
 };
 
 const notLoaded = props => {
-  return props.initialValues.get('status') !== 'LOADED'
+  const isNotLoaded = isUndefined(props.initialValues) || props.initialValues.get('status') !== 'LOADED'
+  return isNotLoaded
 };
 
 const enhance = compose(
@@ -39,29 +40,39 @@ const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
     componentDidMount() {
-      if(this.props.initialValues.get('status')==='UNINIT'){
+      const shouldFetch = isUndefined(this.props.initialValues) || this.props.initialValues.get('status') === 'UNINIT';
+      if(shouldFetch){
         this.props.loadAddresses();
       }
     }
   }),
   branch(notLoaded, renderNothing),
+  withProps(props => ({
+    goBack: e => {
+      e.preventDefault();
+      props.history.push({
+        pathname: props.previous,
+        state: props.location.state
+      });
+    }
+  })),
   reduxForm({
-    form: 'project.configurations.move.address',
+    form: 'configurations.move.address',
     validate,
     onSubmit: (values, dispatch, props) => {
       props.resetAddresses();
       return localSaveAddresses({
-        addresses: values.get('addresses')
+        addresses: values.get('detail')
       });
     },
     onSubmitSuccess: (result, dispatch, props) => {
       if(props.location.fromOverview) {
         return props.history.push({
-          pathname: '/projects/configurations/move/overview'
+          pathname: props.postEdit
         });
       }
       props.history.push({
-        pathname: '/projects/configurations/move/date',
+        pathname: props.next,
         state: props.location.state
       });
     }

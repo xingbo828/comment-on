@@ -5,11 +5,12 @@ import { reduxForm } from 'redux-form/immutable';
 import LogisticsStep from './Logistics';
 import scrollToTopOnMount from '../../../../Common/scrollToTopOnMount';
 import validators, { validateFunc } from '../../../../Common/validators';
+import isUndefined from 'lodash/isUndefined';
 
 import {
   localSaveLogistics,
   loadLogistics
-} from '../moveActions';
+} from './actions';
 
 import { getLogistics } from '../moveReducers';
 
@@ -42,7 +43,11 @@ const mapStateToProps = state => ({
   initialValues: getLogistics(state)
 });
 
-const isLoading = props => props.initialValues.get('status') !== 'LOADED';
+
+const notLoaded = props => {
+  const isNotLoaded = isUndefined(props.initialValues) || props.initialValues.get('status') !== 'LOADED'
+  return isNotLoaded
+};
 
 const enhance = compose(
   withRouter,
@@ -52,30 +57,30 @@ const enhance = compose(
       this.props.loadLogistics();
     }
   }),
-  branch(isLoading, renderNothing),
+  branch(notLoaded, renderNothing),
   reduxForm({
-    form: 'project.configurations.move.logistics',
+    form: 'configurations.move.logistics',
     validate,
-    onSubmit: (values, dispatch, props) => {
-      return localSaveLogistics(values.toJS());
+    onSubmit: (values) => {
+      return localSaveLogistics(values.get('detail').toJS());
     },
     onSubmitSuccess: async (result, dispatch, props) => {
       if(props.location.fromOverview) {
         return props.history.push({
-          pathname: '/projects/configurations/move/overview'
+          pathname: props.postEdit,
         });
       }
       props.history.push({
-        pathname: '/projects/configurations/move/items',
+        pathname: props.next,
         state: props.location.state
       });
     }
   }),
-  withProps((props)=> ({
-    goBack: (e) => {
+  withProps(props => ({
+    goBack: e => {
       e.preventDefault();
       props.history.push({
-        pathname: '/projects/configurations/move/date',
+        pathname: props.previous,
         state: props.location.state
       });
     }
