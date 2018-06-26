@@ -27,7 +27,6 @@ export const getAdditionalNotes = () => async dispatch => {
 };
 
 export const setAdditionalNotes = (additionalNotes) => async dispatch => {
-  debugger
   const stepInfo = await localforge.getItem(LOCALSTOREAGE_STEP_INFO_KEY);
   await localforge.setItem(
     LOCALSTOREAGE_STEP_INFO_KEY,

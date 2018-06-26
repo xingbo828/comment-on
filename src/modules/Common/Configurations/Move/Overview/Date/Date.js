@@ -8,12 +8,12 @@ import {
   SectionHeaderEditLink,
   SectionBody,
   SectionBodyItem,
-  SectionBodyItemLabel,
   SectionBodyItemContent,
   SectionInvalid
 } from '../Styled';
 
-const Date = ({ date: { detail }, isValid, editPath }) => {
+const Date = ({ date: { detail }, isValid, editPath, setValidationStatus }) => {
+  setValidationStatus('Date', isValid)
   const renderInner = ( detail, isValid ) => {
     if (!isValid) {
       return (

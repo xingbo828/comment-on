@@ -56,3 +56,5 @@ export const getLogistics = state =>
   state.getIn(['configurations', 'move', 'logistics']);
 export const getOverview = state =>
   state.getIn(['configurations', 'move', 'overview']);
+export const getContactInfo = state =>
+  state.getIn(['configurations', 'move', 'contactInfo']);

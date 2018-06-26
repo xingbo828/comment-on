@@ -26,7 +26,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({ addresses: getAddresses(state) });
-const notLoaded = props => { console.log(props); return isUndefined(props.addresses) || props.addresses.get('status') !== 'LOADED'};
+const notLoaded = props => isUndefined(props.addresses) || props.addresses.get('status') !== 'LOADED';
 
 const enhance = compose(
   connect(

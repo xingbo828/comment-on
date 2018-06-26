@@ -14,7 +14,8 @@ import {
   SectionInvalid
 } from '../Styled';
 
-const Address = ({ addresses: { detail }, isValid, editPath }) => {
+const Address = ({ addresses: { detail }, isValid, editPath, setValidationStatus }) => {
+  setValidationStatus('Address', isValid)
   const renderInner = ({ pickUpAddress, deliveryAddress }, isValid) => {
     if (!isValid) {
       return <SectionInvalid>Invalid address configuration.</SectionInvalid>;

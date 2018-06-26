@@ -14,7 +14,8 @@ import {
   SectionInvalid
 } from '../Styled';
 
-const Logistics = ({ detail, isValid }) => {
+const Logistics = ({ logistics: { detail }, isValid, editPath, setValidationStatus }) => {
+  setValidationStatus('Logistics', isValid)
   const renderInner = (detail, isValid) => {
     if (!isValid) {
       return (
@@ -73,7 +74,7 @@ const Logistics = ({ detail, isValid }) => {
         </Heading>
         <SectionHeaderEditLink
           to={{
-            pathname: '/projects/configurations/move/logistics',
+            pathname: `${editPath}/logistics`,
             fromOverview: true
           }}
         >

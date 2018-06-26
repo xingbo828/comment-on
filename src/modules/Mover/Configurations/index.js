@@ -11,9 +11,6 @@ import scrollToTopOnMount from '../../Common/scrollToTopOnMount';
 
 import DynamicBuildConfigurations from './DynamicBuildConfigurations'
 
-// addProject: (type, config) => dispatch(addProject(type, config)),
-
-
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(

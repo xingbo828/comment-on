@@ -1,4 +1,5 @@
 import React from 'react';
+import startCase from 'lodash/startCase';
 import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
 import Address from '../../../Common/Configurations/Move/Address';
@@ -9,8 +10,10 @@ import Overview from '../../../Common/Configurations/Move/Overview';
 
 import Steps from '../../../../globalComponents/Steps';
 import FadeInRouteTransition from '../../../Common/RouteTransitions/FadeInRouteTransition';
+import overviewEnhancer from './overviewEnhancer';
 
 const Step = Steps.Step;
+
 
 
 const availableConfigSteps = {
@@ -18,11 +21,11 @@ const availableConfigSteps = {
   Date,
   Logistics,
   Items,
-  Overview
+  Overview: overviewEnhancer(Overview)
 };
 
-const MoveConfigurations = ({ location, history, match, addProject }) => {
-  const configurations = [ 'Date','Logistics', 'Address', 'Items', 'Overview' ]
+const MoveConfigurations = ({ location, history, match }) => {
+  const configurations = [ 'Address', 'Date','Logistics', 'Items', 'Overview' ]
 
   const paths = configurations.map((c, index) => {
     const essential =  {
@@ -37,9 +40,6 @@ const MoveConfigurations = ({ location, history, match, addProject }) => {
     }
     if(index > 0 && configurations.length > 1) {
       Object.assign(essential, { previous: `${match.url}/${configurations[index -1].toLowerCase()}` })
-    }
-    if(index === configurations.length -1) {
-      Object.assign(essential, { addProject: addProject })
     }
 
     return essential
@@ -57,7 +57,7 @@ const MoveConfigurations = ({ location, history, match, addProject }) => {
         {configurations.map(c => (
           <Step
             key={c}
-            title={c}
+            title={startCase(c)}
             onStepClick={stepClickHandler.bind(this, c.toLowerCase())}
           />
         ))}
@@ -85,7 +85,6 @@ const MoveConfigurations = ({ location, history, match, addProject }) => {
                       editPath={p.editPath}
                       next={p.next}
                       previous={p.previous}
-                      addProject={p.addProject}
                       postEdit={p.postEdit}
                       />}
                   />

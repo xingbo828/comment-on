@@ -16,7 +16,8 @@ import {
 } from '../Styled';
 
 
-const Items = ({ detail, isValid }) => {
+const Items = ({ items: { detail }, editPath, setValidationStatus }) => {
+  setValidationStatus('Items', true)
   const renderItemsSubSection = (v, isLast=false) => {
     const data = Object.keys(v)
     .filter(f => v[f] !== '0' || v[f]=== '5+');
@@ -33,7 +34,7 @@ const Items = ({ detail, isValid }) => {
       });
   };
 
-  const renderInner = (detail, isValid) => {
+  const renderInner = (detail) => {
     if (
       isEmpty(detail.specialCare) &&
       isEmpty(detail.appliances) &&
@@ -44,9 +45,12 @@ const Items = ({ detail, isValid }) => {
 
     return (
       <SectionBody>
-        {renderItemsSubSection(detail.specialCare)}
-        {renderItemsSubSection(detail.appliances)}
-        {renderItemsSubSection(detail.decore, true)}
+        {Object.keys(detail).filter(m=>m!=='otherItems').map((d, index) => {
+          if(index!==Object.keys(detail).length -1) {
+            return renderItemsSubSection(detail[d]);
+          }
+          return renderItemsSubSection(detail[d], true);
+        })}
         {detail.otherItems && <SectionBodyItem>
           <SectionBodyItemLabel>
             Other items
@@ -63,12 +67,12 @@ const Items = ({ detail, isValid }) => {
           Items
         </Heading>
         <SectionHeaderEditLink
-          to={{ pathname: '/projects/configurations/move/items', fromOverview: true }}
+          to={{ pathname:  `${editPath}/items`, fromOverview: true }}
         >
           Edit
         </SectionHeaderEditLink>
       </SectionHeader>
-      {renderInner(detail, isValid)}
+      {renderInner(detail)}
     </Section>
   );
 };

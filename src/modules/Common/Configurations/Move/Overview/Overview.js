@@ -1,5 +1,6 @@
 import React from 'react';
-
+import values from 'lodash/values';
+import isEmpty from 'lodash/isEmpty';
 import Grid from '../../../../../globalComponents/Grid';
 import Layout from '../../../../../globalComponents/Layout';
 
@@ -8,14 +9,15 @@ import Address from './Address';
 import Date from './Date';
 import Items from './Items';
 import Logistics from './Logistics';
-
+import ContactInfo from './ContactInfo';
 
 const { Form, FormInner, FormFieldSet } = Layout.Form;
 const AvailableSections = {
   Address,
   Date,
   Items,
-  Logistics
+  Logistics,
+  ContactInfo
 };
 
 const ConfigurationOverview = ({
@@ -24,12 +26,26 @@ const ConfigurationOverview = ({
   handleSubmit,
   setProjectName,
   setAdditionalNotes,
-  editPath
+  editPath,
+  formAction,
+  setValidationStatus,
+  configurationsValidationStatus,
+  ...rest
 }) => {
-  const renderSections = (configurations) => configurations.filter(s => s.toLowerCase() === 'address').map(c => {
-      const Comp = AvailableSections[c];
-      return <Comp key={c} editPath={editPath} />
+  const renderSections = (configurations) => configurations.filter(s => s.toLowerCase() !== 'overview').map(c => {
+    const Comp = AvailableSections[c];
+      return <Comp key={c} editPath={editPath} setValidationStatus={setValidationStatus} />
     })
+
+  const renderFormAction = (C) => {
+    return <C {...rest} isOverviewValid={isOverviewValid()}/>
+  }
+
+  const isOverviewValid = () => {
+    const configValidateStatusAllTrue = values(configurationsValidationStatus).filter(s => s !== true).length === 0
+    const isProjectNameValid = !isEmpty(overview.projectName.detail)
+    return configValidateStatusAllTrue && isProjectNameValid
+  }
 
 
   const renderProjectName = (name, onChange) => {
@@ -41,12 +57,18 @@ const ConfigurationOverview = ({
       value: name,
       onChange: onChangeHandler
     };
+    const meta = {}
+    if(isEmpty(name)) {
+      meta.error = 'Required'
+      meta.touched = true
+    }
     return (
       <div>
         <Legend>Enter a name for your project</Legend>
         <TextField
           input={input}
           label="Project name"
+          meta={meta}
         />
       </div>
     );
@@ -79,10 +101,6 @@ const ConfigurationOverview = ({
           <FormFieldSet>
             <Legend>Let's review everything so far. Feel free to go back and make any changes.</Legend>
             {renderSections(configurations)}
-            {/* <AddressOverview detail={addresses.detail} isValid={addressValidator()}/>
-            {renderdateSection(date, validators.dateValidator)}
-            {renderLogistics(logistics, validators.logisticsValidator)}
-            {renderItemsSection(items)} */}
           </FormFieldSet>
           <FormFieldSet>
             {renderProjectName(overview.projectName.detail, setProjectName)}
@@ -91,7 +109,7 @@ const ConfigurationOverview = ({
             {renderAdditionalNoteSection(overview.notes.detail, setAdditionalNotes)}
           </FormFieldSet>
         </FormInner>
-
+        {renderFormAction(formAction)}
       </Form>
     </Grid.Container>
   );
