@@ -24,7 +24,7 @@ class GetStartedThin extends React.Component {
                   <Heading wrapperTag="h3" size="sm">Get a Quote</Heading>
                   <Paragraph>Lorem ipsum.</Paragraph>
                 </Messaging>
-                <Action primary>
+                <Action primary onClick={this.props.handleClick}>
                   Get a Quote
                 </Action>
               </Box>
