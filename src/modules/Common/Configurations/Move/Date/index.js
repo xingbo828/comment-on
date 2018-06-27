@@ -31,11 +31,11 @@ const mapDispatchToProps = dispatch => ({
   loadDate: () => dispatch(loadDate())
 });
 
-const mapStateToProps = state => ({ initialValues: getDate(state) });
+const mapStateToProps = state => ({ date: getDate(state) });
 
 
 const notLoaded = props => {
-  const isNotLoaded = isUndefined(props.initialValues) || props.initialValues.get('status') !== 'LOADED'
+  const isNotLoaded = isUndefined(props.date) || props.date.get('status') !== 'LOADED'
   return isNotLoaded
 };
 
@@ -48,11 +48,14 @@ const enhance = compose(
     }
   }),
   branch(notLoaded, renderNothing),
+  withProps(props => ({
+    initialValues: props.date.get('detail')
+  })),
   reduxForm({
     form: 'configurations.move.date',
     validate,
     onSubmit: (values) => {
-      return localSaveDate(values.get('detail').toJS());
+      return localSaveDate(values.toJS());
     },
     onSubmitSuccess: (result, dispatch, props) => {
       if (props.location.fromOverview) {

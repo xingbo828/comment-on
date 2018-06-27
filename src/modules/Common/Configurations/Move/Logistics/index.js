@@ -40,12 +40,12 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  initialValues: getLogistics(state)
+  logistics: getLogistics(state)
 });
 
 
 const notLoaded = props => {
-  const isNotLoaded = isUndefined(props.initialValues) || props.initialValues.get('status') !== 'LOADED'
+  const isNotLoaded = isUndefined(props.logistics) || props.logistics.get('status') !== 'LOADED'
   return isNotLoaded
 };
 
@@ -58,11 +58,14 @@ const enhance = compose(
     }
   }),
   branch(notLoaded, renderNothing),
+  withProps(props => ({
+    initialValues: props.logistics.get('detail')
+  })),
   reduxForm({
     form: 'configurations.move.logistics',
     validate,
     onSubmit: (values) => {
-      return localSaveLogistics(values.get('detail').toJS());
+      return localSaveLogistics(values.toJS());
     },
     onSubmitSuccess: async (result, dispatch, props) => {
       if(props.location.fromOverview) {

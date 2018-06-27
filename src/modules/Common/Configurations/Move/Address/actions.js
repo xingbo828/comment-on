@@ -1,5 +1,4 @@
 import localforge from 'localforage';
-import omit from 'lodash/omit';
 
 import {
   LOCALSTOREAGE_STEP_INFO_KEY,
@@ -15,7 +14,7 @@ export const localSaveAddresses = async (addresses) => {
   const stepInfo = await localforge.getItem(LOCALSTOREAGE_STEP_INFO_KEY);
   return await localforge.setItem(
     LOCALSTOREAGE_STEP_INFO_KEY,
-    Object.assign(stepInfo || {}, omit(addresses, ['status']))
+    Object.assign(stepInfo || {}, addresses)
   );
 };
 

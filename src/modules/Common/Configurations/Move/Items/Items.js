@@ -41,7 +41,7 @@ const Items = ({
             <FormFieldSet>
               <Field
                 component={renderItemsCounts}
-                name="detail.specialCare"
+                name="specialCare"
                 label="How many of the following fragile items do you need moved? These items may require special care when handling."
                 configs={configs.specialCare}
               />
@@ -49,7 +49,7 @@ const Items = ({
             <FormFieldSet>
               <Field
                 component={renderItemsCounts}
-                name="detail.appliances"
+                name="appliances"
                 label="How many of the following home appliances are you moving?"
                 configs={configs.appliances}
               />
@@ -57,7 +57,7 @@ const Items = ({
             <FormFieldSet>
               <Field
                 component={renderItemsCounts}
-                name="detail.decore"
+                name="decore"
                 label="How many of the following home decore items are you moving?"
                 configs={configs.decore}
               />
@@ -67,7 +67,7 @@ const Items = ({
               <Legend>Did we miss anything? Briefly describe any items not listed above that you feel may require special care or handling. We'll ensure they're properly accounted for</Legend>
               <Field
                 component={TextArea}
-                name="detail.otherItems"
+                name="otherItems"
                 label="Other items"
               />
             </FormFieldSet>

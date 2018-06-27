@@ -18,11 +18,11 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  initialValues: getItems(state)
+  items: getItems(state)
 });
 
 const notLoaded = props => {
-  const isNotLoaded = isUndefined(props.initialValues) || props.initialValues.get('status') !== 'LOADED'
+  const isNotLoaded = isUndefined(props.items) || props.items.get('status') !== 'LOADED'
   return isNotLoaded
 };
 
@@ -35,10 +35,13 @@ const enhance = compose(
     }
   }),
   branch(notLoaded, renderNothing),
+  withProps(props => ({
+    initialValues: props.items.get('detail')
+  })),
   reduxForm({
     form: 'configurations.move.items',
     onSubmit: (values, dispatch, props) => {
-      return localSaveItems(values.get('detail').toJS());
+      return localSaveItems(values.toJS());
     },
     onSubmitSuccess: async (result, dispatch, props) => {
       if(props.location.fromOverview) {

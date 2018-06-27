@@ -13,7 +13,7 @@ import isUndefined from 'lodash/isUndefined';
 const validate = validateFunc(
   [
     {
-      field: 'detail',
+      field: 'addresses',
       validator: 'isValidAddressesInput',
       message: 'Required'
     }
@@ -27,11 +27,11 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => {
-  return {initialValues: getAddresses(state)}
+  return { addresses: getAddresses(state) }
 };
 
 const notLoaded = props => {
-  const isNotLoaded = isUndefined(props.initialValues) || props.initialValues.get('status') !== 'LOADED'
+  const isNotLoaded = isUndefined(props.addresses) || props.addresses.get('status') !== 'LOADED'
   return isNotLoaded
 };
 
@@ -40,7 +40,7 @@ const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
     componentDidMount() {
-      const shouldFetch = isUndefined(this.props.initialValues) || this.props.initialValues.get('status') === 'UNINIT';
+      const shouldFetch = isUndefined(this.props.addresses) || this.props.addresses.get('status') === 'UNINIT';
       if(shouldFetch){
         this.props.loadAddresses();
       }
@@ -48,6 +48,7 @@ const enhance = compose(
   }),
   branch(notLoaded, renderNothing),
   withProps(props => ({
+    initialValues: { addresses: props.addresses.get('detail') },
     goBack: e => {
       e.preventDefault();
       props.history.push({
@@ -61,9 +62,7 @@ const enhance = compose(
     validate,
     onSubmit: (values, dispatch, props) => {
       props.resetAddresses();
-      return localSaveAddresses({
-        addresses: values.get('detail')
-      });
+      return localSaveAddresses(values.toJS());
     },
     onSubmitSuccess: (result, dispatch, props) => {
       if(props.location.fromOverview) {

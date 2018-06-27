@@ -55,21 +55,21 @@ const Logistics = ({
             <FormFieldSet>
               <Field
                 component={renderResidenceTypeSelection}
-                name="detail.residenceType"
+                name="residenceType"
                 label="Choose the option that best describes the pick-up space"
               />
             </FormFieldSet>
             <FormFieldSet>
               <Field
                 component={renderPickUpAccess}
-                name="detail.pickUpAccess"
+                name="pickUpAccess"
                 label="How is the pick-up space accessed?"
               />
             </FormFieldSet>
             <FormFieldSet>
               <Field
                 component={renderDeliveryAccess}
-                name="detail.deliveryAccess"
+                name="deliveryAccess"
                 label="How is the delivery space accessed?"
               />
             </FormFieldSet>
@@ -92,7 +92,5 @@ const Logistics = ({
     </section>
   );
 };
-
-Logistics.propTypes = {};
 
 export default Logistics;
