@@ -2,17 +2,29 @@ const functions = require('firebase-functions');
 
 module.exports = functions.firestore
   .document("providers/{providerId}")
-  .onCreate(onCreate);
+  .onUpdate(onUpdate);
 
-function onCreate(snap, context) {
-  const provider = snap.data();
+function onUpdate(change, context) {
+  const provider = change.after.data();
+  console.log('Provider:', provider);
 
-  if (typeof(provider) !== 'object' || !provider.name) {
-    return Promise.resolce();
+  if (typeof(provider) !== 'object' || !provider.name || provider.slug) {
+    console.log('Already updated');
+    return Promise.resolve();
   }
   const slug = getSlug(provider.name);
-  return snap.ref.set({
-    slug
+  const configurations = [
+    'Address',
+    'Date',
+    'Items',
+    'ContactInfo',
+    'Overview'
+  ];
+  const type = 'Move';
+  return change.after.ref.set({
+    configurations,
+    slug,
+    type
   }, {merge: true});
 }
 
