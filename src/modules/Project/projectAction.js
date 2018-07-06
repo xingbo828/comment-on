@@ -22,7 +22,7 @@ export const addProject = (projectCategory, configuration) => async dispatch => 
   }
   const project = Object.assign(
       {},
-      { category: projectCategory, configuration: configurationWithGeoPoint, owner: uid, type: 'BROADCAST' }
+      { category: projectCategory, configuration: configurationWithGeoPoint, owner: uid, type: 'INDIRECT' }
     );
 
   const projectRef = await projectCollectionRef.add(project);
