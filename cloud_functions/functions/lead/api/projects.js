@@ -52,6 +52,14 @@ const processProject = (projectRef, moverData) => {
   }
   data.receiver.provider = data.receiver.provider.id;
   const ownerId = data.owner;
+  if (!ownerId) {
+    data.owner = {
+      displayName: data.configuration.contactInfo.name,
+      email: data.configuration.contactInfo.email,
+      phone: data.configuration.contactInfo.phoneNumber
+    }
+    return Promise.resolve(data);
+  }
   return admin.firestore().collection('users').doc(ownerId).get()
     .then(ownerData => {
       ownerData = ownerData.data();

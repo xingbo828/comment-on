@@ -25,9 +25,9 @@ const handleDirectProject = (lead, snap, context) => {
     .then(data => {
       batch.update(providerRef, updateObj);
       lead.receivers = {};
-      lead.receivers[projectRef.id] = {
+      lead.receivers[providerRef.id] = {
         status: constants.receiver_status.sent,
-        provider: projectRef,
+        provider: providerRef,
         exist: true,
         email: data.email || 'invalid@invalid.in'
       };
