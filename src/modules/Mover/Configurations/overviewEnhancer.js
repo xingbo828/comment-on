@@ -24,10 +24,11 @@ const enhance = compose(
     handleSubmit: async e => {
       e.preventDefault();
       const config = await getLocalstorageStepInfo();
+      debugger;
       await props.addDirectProject(PROJECT_TYPES.MOVE, config, props.providerId);
       await deleteStepInfo();
       props.history.push({
-        pathname: `/mover/configuration/success`
+        pathname: `/configuration/${props.slug}/success`
       });
     },
     goBack: e => {

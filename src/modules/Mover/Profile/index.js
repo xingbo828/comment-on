@@ -25,16 +25,16 @@ const mapDispatchToProps = dispatch =>
   );
 
 const mapStateToProps = (state, ownProps) => ({
-  profileData: getProfileData(state, ownProps.match.params.moverId),
-  profileStatus: getProfileStatus(state, ownProps.match.params.moverId),
+  profileData: getProfileData(state, ownProps.match.params.slug),
+  profileStatus: getProfileStatus(state, ownProps.match.params.slug),
   projectStatus: getMyProjectSelector(state, ownProps.match.params.project).get(
     'status'
   ),
   projectData: getMyProjectSelector(state, ownProps.match.params.project).get(
     'projectData'
   ),
-  reviewStatus: getReviewStatus(state, ownProps.match.params.moverId),
-  reviewData: getReviewData(state, ownProps.match.params.moverId)
+  reviewStatus: getReviewStatus(state, ownProps.match.params.slug),
+  reviewData: getReviewData(state, ownProps.match.params.slug)
 });
 
 const isLoading = props => { console.log('PROPS___', props); return props.profileStatus !== 'LOADED' };
@@ -47,14 +47,19 @@ const enhance = compose(
   ),
   lifecycle({
     componentDidMount() {
-      const moverId = this.props.match.params.moverId;
-      this.props.getMoverWithSlug(moverId);
-      this.props.getReview(moverId);
+      const slug = this.props.match.params.slug;
+      this.props.getMoverWithSlug(slug);
+      // this.props.getReview(moverId);
       if (this.props.projectStatus !== 'LOADED') {
         const projectId = QueryString.parse(this.props.location.search).project;
         if (projectId) {
           this.props.getMyProject(projectId);
         }
+      }
+    },
+    componentWillReceiveProps(nextProps) {
+      if(this.props.profileStatus !== 'LOADED' && nextProps.profileStatus === 'LOADED') {
+        nextProps.getReview(nextProps.profileData.get('id'));
       }
     }
   }),
