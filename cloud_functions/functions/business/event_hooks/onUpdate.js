@@ -1,4 +1,5 @@
 const functions = require('firebase-functions');
+const admin = require('firebase-admin');
 
 module.exports = functions.firestore
   .document("providers/{providerId}")
@@ -12,10 +13,18 @@ function onUpdate(change, context) {
     console.log('Already updated');
     return Promise.resolve();
   }
-  const slug = getSlug(provider.name);
+  let slug = getSlug(provider.name);
+  const providerRef = admin.firestore().collection('providers');
+  providerRef.where('slug', '==', slug).get().then(data => {
+    if (!data.empty) {
+      slug = `${slug}-${data.size}`;
+    }
+  });
+
   const configurations = [
     'Address',
     'Date',
+    'Logistics',
     'Items',
     'ContactInfo',
     'Overview'

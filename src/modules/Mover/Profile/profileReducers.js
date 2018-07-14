@@ -2,7 +2,8 @@ import Immutable from 'immutable';
 
 import {
   LOADED_MOVER_PROFILE,
-  LOADING_MOVER_PROFILE
+  LOADING_MOVER_PROFILE,
+  ERROR_MOVER_PROFILE
 } from '../moverAction';
 
 import {
@@ -43,6 +44,10 @@ const profile = (state = initProfileState, action) => {
       });
     }
 
+    case ERROR_MOVER_PROFILE: {
+      return state;
+    }
+
     case GET_REVIEW_PENDING: {
       return state.withMutations((st) => {
         st.setIn([action.provider, 'reviews', 'status'], 'PENDING');
@@ -71,9 +76,9 @@ export default profile;
 
 
 // Selectors
-export const getProfileData = (state, moverId) => state.getIn(['mover', 'profile', moverId, 'profile', 'result']);
-export const getProfileStatus = (state, moverId) => state.getIn(['mover', 'profile', moverId, 'profile', 'status']);
+export const getProfileData = (state, slug) => state.getIn(['mover', 'profile', slug, 'profile', 'result']);
+export const getProfileStatus = (state, slug) => state.getIn(['mover', 'profile', slug, 'profile', 'status']);
 
-export const getReviewStatus = (state, moverId) => state.getIn(['mover', 'profile', moverId, 'reviews', 'status']);
-export const getReviewData = (state, moverId) => state.getIn(['mover', 'profile', moverId, 'reviews', 'result']);
+export const getReviewStatus = (state, slug) => state.getIn(['mover', 'profile', slug, 'reviews', 'status']);
+export const getReviewData = (state, slug) => state.getIn(['mover', 'profile', slug, 'reviews', 'result']);
 

@@ -7,9 +7,9 @@ import MoverConfigurationSuccess from './Configurations/Success';
 const Mover = () => {
   return (
     <Switch>
-      <Route path="/mover/profile/:moverId" component={Profile} />
-      <Route path="/mover/:moverId/configuration" component={MoverConfiguration} />
-      <Route path="/mover/configuration/success" component={MoverConfigurationSuccess} />
+      <Route path="/profile/:slug" component={Profile} />
+      <Route exact path="/configuration/:slug" component={MoverConfiguration} />
+      <Route path="/configuration/:slug/success" component={MoverConfigurationSuccess} />
     </Switch>
   );
 };

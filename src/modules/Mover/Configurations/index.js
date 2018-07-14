@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { compose, lifecycle, branch, renderComponent } from 'recompose';
 
-import { getMoverWithId } from '../moverAction';
+import { getMoverWithSlug } from '../moverAction';
 import { getProfileStatus, getProfileData } from '../Profile/profileReducers';
 import mapImmutablePropsToPlainProps from '../../Common/mapImmutablePropsToPlainProps';
 import Spin from '../../../globalComponents/Spin';
@@ -15,14 +15,14 @@ import DynamicBuildConfigurations from './DynamicBuildConfigurations'
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getMoverWithId
+      getMoverWithSlug
     },
     dispatch
   );
 
 const mapStateToProps = (state, ownProps) => ({
-  profileData: getProfileData(state, ownProps.match.params.moverId),
-  profileStatus: getProfileStatus(state, ownProps.match.params.moverId)
+  profileData: getProfileData(state, ownProps.match.params.slug),
+  profileStatus: getProfileStatus(state, ownProps.match.params.slug)
 });
 
 const isLoading = props => props.profileStatus !== 'LOADED';
@@ -35,8 +35,8 @@ const enhance = compose(
   ),
   lifecycle({
     componentDidMount() {
-      const moverId = this.props.match.params.moverId;
-      this.props.getMoverWithId(moverId);
+      const slug = this.props.match.params.slug;
+      this.props.getMoverWithSlug(slug);
     }
   }),
   branch(isLoading, renderComponent(Spin.FullScreenSpinner)),

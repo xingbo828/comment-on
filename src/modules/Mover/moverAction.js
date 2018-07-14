@@ -15,6 +15,7 @@ const imgStorageRef = storage.ref();
 
 export const LOADING_MOVER_PROFILE = 'LOADING_MOVER_PROFILE';
 export const LOADED_MOVER_PROFILE = 'LOADED_MOVER_PROFILE';
+export const ERROR_MOVER_PROFILE = 'ERROR_MOVER_PROFILE';
 
 
 const _getMyMoverId = async () => {
@@ -55,6 +56,34 @@ export const getMover = () => async dispatch => {
     });
   }
 };
+
+export const getMoverWithSlug = (slug) => async dispatch => {
+  dispatch({
+    type: LOADING_MOVER_PROFILE,
+    data: { key: slug }
+  });
+  const moverDocRef = await moverCollectionRef.where('slug', '==', slug);
+  const moverDocs = await moverDocRef.get();
+  if(!moverDocs.empty) {
+    const moverDoc = moverDocs.docs[0];
+    const moverData = await  moverDoc.data();
+    moverData.id = moverDoc.id;
+    dispatch({
+      type: LOADED_MOVER_PROFILE,
+      data: {
+        key: slug,
+        profile: moverData,
+      }
+    });
+  } else {
+    dispatch({
+      type: ERROR_MOVER_PROFILE,
+      data: {
+        key: slug,
+      }
+    });
+  }
+}
 
 export const getMoverWithId = (moverId) => async dispatch => {
   dispatch({

@@ -12,6 +12,7 @@ import Overview from '../../Common/Configurations/Move/Overview';
 import Steps from '../../../globalComponents/Steps';
 import FadeInRouteTransition from '../../Common/RouteTransitions/FadeInRouteTransition';
 import overviewEnhancer from './overviewEnhancer';
+// import profile from '../Profile/profileReducers';
 
 const Step = Steps.Step;
 
@@ -24,7 +25,7 @@ const availableConfigSteps = {
   Overview: overviewEnhancer(Overview)
 };
 
-const DynamicBuildConfigurations = ({ match, history, location, profileData: { configurations } }) => {
+const DynamicBuildConfigurations = ({ match, history, location, profileData: { id, configurations } }) => {
   const paths = configurations.map((c, index) => {
     const essential =  {
       path: `${match.url}/${c.toLowerCase()}`,
@@ -83,7 +84,8 @@ const DynamicBuildConfigurations = ({ match, history, location, profileData: { c
                       configurations={p.configurations}
                       editPath={p.editPath}
                       next={p.next}
-                      providerId={match.params.moverId}
+                      slug={match.params.slug}
+                      providerId={id}
                       previous={p.previous}
                       postEdit={p.postEdit}
                     />}
