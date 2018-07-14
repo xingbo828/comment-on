@@ -36,7 +36,7 @@ const handleDirectProject = (lead, snap, context) => {
     }).then(() => {
       return batch.commit();
     }).catch(err => {
-      console.log('error:', err);
+      console.error('error:', err);
       return;
     });
 };
@@ -74,7 +74,7 @@ const handleIndirectProject = (lead, snap, context) => {
     .then(()=>{
       console.log('success');
     }).catch((e)=>{
-      console.log('error: ', e);
+      console.error('error: ', e);
     });
 }
 

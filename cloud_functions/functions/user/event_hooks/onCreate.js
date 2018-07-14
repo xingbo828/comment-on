@@ -10,5 +10,7 @@ module.exports = functions.auth.user().onCreate(data => {
     photoURL,
     providers: {},
     receiveEmail: true
+  }).catch(err => {
+    console.error(err);
   });
 });
