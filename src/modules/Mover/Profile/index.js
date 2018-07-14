@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { compose, lifecycle, branch, renderComponent } from 'recompose';
 
 import MoverProfile from './MoverProfile';
-import { getMoverWithId } from '../moverAction';
+import { getMoverWithSlug } from '../moverAction';
 import { getReview } from './profileActions';
 import { getProfileStatus, getProfileData, getReviewStatus, getReviewData } from './profileReducers';
 import mapImmutablePropsToPlainProps from '../../Common/mapImmutablePropsToPlainProps';
@@ -17,7 +17,7 @@ import { getMyProjectSelector } from '../../Project/Management/managementReducer
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getMoverWithId,
+      getMoverWithSlug,
       getMyProject,
       getReview
     },
@@ -48,7 +48,7 @@ const enhance = compose(
   lifecycle({
     componentDidMount() {
       const moverId = this.props.match.params.moverId;
-      this.props.getMoverWithId(moverId);
+      this.props.getMoverWithSlug(moverId);
       this.props.getReview(moverId);
       if (this.props.projectStatus !== 'LOADED') {
         const projectId = QueryString.parse(this.props.location.search).project;

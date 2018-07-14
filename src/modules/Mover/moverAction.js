@@ -56,6 +56,35 @@ export const getMover = () => async dispatch => {
   }
 };
 
+export const getMoverWithSlug = (slug) => async dispatch => {
+  dispatch({
+    type: LOADING_MOVER_PROFILE,
+    data: { key: slug }
+  });
+  const moverDocRef = await moverCollectionRef.where('slug', '==', slug);
+  const moverDocs = await moverDocRef.get();
+  if(!moverDocs.empty) {
+    const moverDoc = moverDocs.docs[0];
+    debugger;
+    const moverData = await  moverDoc.data();
+    dispatch({
+      type: LOADED_MOVER_PROFILE,
+      data: {
+        key: slug,
+        profile: moverData
+      }
+    });
+  } else {
+    dispatch({
+      type: LOADED_MOVER_PROFILE,
+      data: {
+        key: slug,
+        profile: {}
+      }
+    });
+  }
+}
+
 export const getMoverWithId = (moverId) => async dispatch => {
   dispatch({
     type: LOADING_MOVER_PROFILE,
