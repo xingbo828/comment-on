@@ -10,7 +10,7 @@ const enhance = compose(
       e.preventDefault();
       const slug = props.match.params.slug;
       props.history.push({
-        pathname: `/configuration/${slug}`
+        pathname: `/configuration/move/${slug}`
       });
     }
   }))

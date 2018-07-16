@@ -7,9 +7,9 @@ const enhance = compose(
   withProps(props => ({
     handleClick: (e) => {
       e.preventDefault();
-      const providerId = props.match.params.moverId;
+      const slug = props.match.params.slug;
       props.history.push({
-        pathname: `/mover/${providerId}/configuration`
+        pathname: `/configuration/move/${slug}`
       });
     }
   }))
