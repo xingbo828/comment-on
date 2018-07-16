@@ -27,6 +27,7 @@ const calculateDisplay = (ratio) => (!isUndefined(ratio) && ratio === 0) && 'dis
 
 export default styled.div`
   padding: 0 1.5rem;
+
   ${props => `
     ${calculateDisplay(props.xs)};
     ${calculateBasis(props.xs)};
@@ -57,5 +58,13 @@ export default styled.div`
     ${calculateOffset(props.lgOffset)};
     ${calculateFirst(props.first, 'lg')}
     ${calculateLast(props.last, 'lg')}
+  `}
+
+  ${props=>props.theme.media.greaterThan('lg')`
+    ${calculateDisplay(props.xl)};
+    ${calculateBasis(props.xl)};
+    ${calculateOffset(props.xlOffset)};
+    ${calculateFirst(props.first, 'xl')}
+    ${calculateLast(props.last, 'xl')}
   `}
 `;

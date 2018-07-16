@@ -1,8 +1,6 @@
 import Styled from 'styled-components';
 
 const Footer = Styled.footer`
-  margin: 6rem 0 0;
-  padding: 6rem 0 0;
   background: ${props => props.theme.colors.offWhite};
 `;
 

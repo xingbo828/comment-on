@@ -27,5 +27,9 @@ module.exports = {
   },
   message_type: {
     text: 'text'
+  },
+  project_type: {
+    indirect: 'INDIRECT',
+    direct: 'DIRECT'
   }
 }

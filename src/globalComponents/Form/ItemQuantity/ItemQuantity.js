@@ -37,7 +37,6 @@ class ItemQuantity extends React.Component {
   }
 
   handleChange(value) {
-    console.log(this.props)
     this.props.onChange(this.props.title, value)
   }
 

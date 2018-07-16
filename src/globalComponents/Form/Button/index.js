@@ -13,6 +13,7 @@ const Button = ({
   success,
   outline,
   fullWidth,
+  squared,
   ...rest
 }) => {
   const getIconPosition = (children) => {
@@ -37,12 +38,17 @@ const Button = ({
       ghost={ghost}
       outline={outline}
       fullWidth={fullWidth}
+      squared={squared}
       {...rest}
     >
       {children}
     </StyledButton>
   );
 };
+
+Button.defaultProps = {
+  squared: false
+}
 
 Button.propTypes = {
   disabled: bool,
@@ -52,6 +58,7 @@ Button.propTypes = {
   success: bool,
   small: bool,
   outline: bool,
+  squared: bool,
   /**
    * make background transparent and invert text and border colors
    */

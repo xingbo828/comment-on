@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 app.use((err, req, res, next) => {
   if (err) {
     res.status(400).send('Invalid Request data');
+    console.error(err);
   } else {
     next();
   }
@@ -22,20 +23,20 @@ app.use((err, req, res, next) => {
 
 app.get('/', (request, response) => {
   return getProviderId(request)
-  .then(userData =>
-    admin.firestore().collection('providers').doc(userData.moverId).get().then(d => ({userData, provider: d.data()}))
-  )
-  .then(({ userData, provider: { projects } }) =>
-    Promise.all(Object.keys(projects).map(key => projects[key].get())).then(projects => ({userData, projects}))
-  )
-  .then(({userData, projects}) => Promise.all(projects.map(p => processProject(p, userData))))
-  .then(result => {
-    response.json(result)
-  })
-  .catch(err => {
-    console.error(err)
-    response.send(err)
-  })
+    .then(userData =>
+      admin.firestore().collection('providers').doc(userData.moverId).get().then(d => ({userData, provider: d.data()}))
+    )
+    .then(({ userData, provider: { projects } }) =>
+      Promise.all(Object.keys(projects).map(key => projects[key].get())).then(projects => ({userData, projects}))
+    )
+    .then(({userData, projects}) => Promise.all(projects.map(p => processProject(p, userData))))
+    .then(result => {
+      response.json(result);
+    })
+    .catch(err => {
+      console.error(err);
+      response.status(500).send(err);
+    });
 });
 
 const processProject = (projectRef, moverData) => {
@@ -52,6 +53,14 @@ const processProject = (projectRef, moverData) => {
   }
   data.receiver.provider = data.receiver.provider.id;
   const ownerId = data.owner;
+  if (!ownerId) {
+    data.owner = {
+      displayName: data.configuration.contactInfo.name,
+      email: data.configuration.contactInfo.email,
+      phone: data.configuration.contactInfo.phoneNumber
+    };
+    return Promise.resolve(data);
+  }
   return admin.firestore().collection('users').doc(ownerId).get()
     .then(ownerData => {
       ownerData = ownerData.data();
@@ -68,6 +77,8 @@ const processProject = (projectRef, moverData) => {
       }
 
       return data;
+    }).catch(err => {
+      return Promise.reject(err);
     });
 };
 
@@ -80,6 +91,7 @@ app.get('/:projectId', (request, response) => {
       }).then((data)=>{
         response.json(data);
       }).catch((err) => {
+        console.error(err);
         return response.status(400).json({error: err.message || err});
       });
     });
@@ -89,6 +101,7 @@ app.put('/:projectId/', (request, response) => {
   const body = request.body;
   const projectId = request.params.projectId;
   if (!body.action) {
+    console.error({error: projectId + ': missing action'});
     return response.status(400).json({error: 'missing action'});
   }
   switch(body.action) {
@@ -96,11 +109,17 @@ app.put('/:projectId/', (request, response) => {
     return getProviderId(request)
       .then( data => {
         return handleAcceptLead(body, projectId, data, response);
+      }).catch(err => {
+        console.error(err);
+        return response.status(400).json({err});
       });
   case 'reject':
     return getProviderId(request)
       .then(data => {
         return handleRejectLead(body, projectId, data, response);
+      }).catch(err => {
+        console.error(err);
+        return response.status(400).json({err});
       });
   }
   return response.json(request.body);
@@ -132,8 +151,7 @@ const getProviderId = (request) =>{
       };
     })
     .catch((error)=> {
-      console.log(error);
-      return Promise.resolve('');
+      return Promise.reject(error);
     });
 };
 

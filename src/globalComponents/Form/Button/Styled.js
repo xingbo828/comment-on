@@ -151,6 +151,10 @@ export const StyledButton = styled.button`
 
   ${getPadding}
 
+  ${props => props.squared && `
+    border-radius: 4px;
+  `}
+
   ${props => props.outline && `
     background: none;
     border-color: ${getOutlineBorderColor(props)};

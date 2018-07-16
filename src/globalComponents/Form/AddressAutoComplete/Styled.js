@@ -6,6 +6,16 @@ export const Container = styled.div`
   display: inline-block;
   padding: 0;
   width: 100%;
+  transition: border-color .3s;
+
+  ${props=>props.bordered && `
+    border-radius: 4px;
+    border: 1px solid ${props.theme.colors.border};
+  `}
+
+  ${props=>(props.filled || props.focused) && `
+    border-color: white;
+  `}
 `;
 
 export const FocusBorder = styled.span`
@@ -20,25 +30,31 @@ export const FocusBorder = styled.span`
 `;
 
 export const Label = styled.label`
+  font-weight: 600;
   position: absolute;
-
   left: 0;
-  top: 17px;
+  top: 1.5rem;
   z-index: 1;
   display: block;
   font-size: 1.125rem;
   letter-spacing: .05em;
+  line-height: 1.5;
   transition: .3s;
   color: ${props=>props.theme.colors.textLight};
   transform: scale(1);
   transform-origin: top left;
   white-space: nowrap;
 
+  ${props=>props.bordered && `
+    left: 1rem;
+  `}
+
   ${props=>props.focused &&`
     color: ${props.theme.colors.primary};
   `}
 
   ${props=>(props.filled || props.focused) && `
+    left: 0;
     text-transform: uppercase;
     transform: scale(.65);
     top: 0;
@@ -57,7 +73,7 @@ export const Label = styled.label`
 
 export const GeosuggestStyled = styled(Geosuggest)`
   position: relative;
-  line-height: 40px;
+  line-height: 1.5;
   display: inline-block;
   width: 100%;
   text-align: left;
@@ -73,22 +89,24 @@ export const GeosuggestStyled = styled(Geosuggest)`
     font-size: 1.125rem;
     width: 100%;
     box-sizing: border-box;
-    padding: 1rem 0;
+    padding: 1.5rem 0 1rem;
     border-width:0;
     color: ${props => props.theme.colors.textDark};
   }
 
-  .geosuggest__input:focus {
+  .geosuggest__input::placeholder {
+    color: ${props => props.theme.colors.border};
   }
 
   .geosuggest__suggests {
+    margin: 0;
+    padding: 0;
     z-index: ${props => props.theme.zIndex.dropdown};
     position: absolute;
     top: 100%;
-    left: 10px;
-    right: 0px;
+    left: 0;
+    right: 0;
     padding: 0;
-    margin-top: -2px;
     background: #fff;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -104,24 +122,34 @@ export const GeosuggestStyled = styled(Geosuggest)`
   }
 
   .geosuggest__item {
-    font-size: .825rem;
-    ${props=>props.theme.media.greaterThan('md')`
-      font-size: 1rem;
-    `}
-    padding: ${props => props.theme.spaces.xTight};
-    ${props=>props.theme.media.greaterThan('md')`
-      padding: ${props.theme.spaces.tight};
-    `}
+    font-size: .875rem;
+    padding: 1em;
+    position: relative;
     cursor: pointer;
+
+    &:after {
+      content: '';
+      display: block;
+      height: 1px;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 1em;
+      background: ${props => props.theme.colors.border};
+    }
+
+    &:hover {
+      &:after {
+        background: ${props => props.theme.colors.offWhite};
+      }
+    }
   }
   .geosuggest__item:hover,
   .geosuggest__item:focus {
-    background: ${props => props.theme.colors.primary};
-    color: #fff;
+    background: ${props => props.theme.colors.offWhite};
   }
   .geosuggest__item--active {
-    background: ${props => props.theme.colors.primary};
-    color: #fff;
+    background: ${props => props.theme.colors.offWhite};
   }
   .geosuggest__item--active:hover,
   .geosuggest__item--active:focus {

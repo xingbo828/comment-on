@@ -6,7 +6,7 @@ import { withTheme } from 'styled-components';
 const Heading = ({ className, wrapperTag, children, underline, indent, theme, size }) => {
 
   const HeadingContainer = Styled.div`
-    margin: 0 0 1rem;
+    margin: 0;
 
     ${size === 'sm' && `
       margin: 0 0 .5rem;
@@ -38,11 +38,11 @@ const Heading = ({ className, wrapperTag, children, underline, indent, theme, si
     `}
 
     ${size === 'sm' && `
-      font-size: 1rem;
+      font-size: 1.25rem;
     `}
 
     ${size === 'xs' && `
-      font-size: .875rem;
+      font-size: 1rem;
     `}
 
 
@@ -62,7 +62,7 @@ const Heading = ({ className, wrapperTag, children, underline, indent, theme, si
       `}
 
       ${size === 'sm' && `
-        font-size: 1em;
+        font-size: 1.25em;
       `}
 
       ${size === 'xs' && `

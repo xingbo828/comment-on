@@ -5,11 +5,11 @@ import {
   Definition
 } from './Styled';
 
-const DescriptionEntry = ({ term, definition }) => {
+const DescriptionEntry = ({ term, children }) => {
   return (
     <DefinitionContainer>
       <Term>{term}</Term>
-      <Definition>{definition}</Definition>
+      <Definition>{children}</Definition>
     </DefinitionContainer>
   );
 }

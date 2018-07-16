@@ -1,7 +1,9 @@
 import moment from 'moment';
 import Immutable from 'immutable';
 
-export const isRequired = value => !(typeof value === 'string' ? !value.trim() : !value);
+export const isRequired = value => {
+  return !(typeof value === 'string' ? !value.trim() : !value);
+}
 
 // need more logic
 export const isNotEmpty = value => {
@@ -98,7 +100,7 @@ ex:
 */
 export const validateFunc = (configs, validators) => (values) => {
   return configs.reduce((currentErrors, config) => {
-    if (!validators[config.validator](values.get(config.field), values)) {
+    if (!validators[config.validator](values.getIn(config.field.split('.')), values)) {
       currentErrors[config.field] = config.message;
     }
     return currentErrors;

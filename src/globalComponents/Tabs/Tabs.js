@@ -11,13 +11,14 @@ class Tabs extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activekey: null,
+      activekey: this.props.activeKey,
       containerHeight: 0
     };
     this.construct = this.construct.bind(this);
     this.onSelect = this.onSelect.bind(this);
     this.updateParentHeight = this.updateParentHeight.bind(this);
   }
+
 
   componentWillReceiveProps(nextProps) {
     if(!!nextProps.activeKey && nextProps.activeKey !== this.state.activekey) {
@@ -77,6 +78,7 @@ class Tabs extends Component {
   }
 
   render() {
+    console.log(this.state.activekey)
     const { fillWidth }= this.props;
     const tabs = this.construct(fillWidth);
     return (
@@ -95,6 +97,7 @@ Tabs.propTypes = {
 };
 
 Tabs.defaultProps = {
-  fillWidth: false
+  fillWidth: false,
+  activeKey: null
 };
 export default Tabs;

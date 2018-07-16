@@ -1,13 +1,13 @@
 import React from 'react';
-// import {
+import Styled from 'styled-components'
 
-// } from './Styled';
+const Container = Styled.dl`
+  margin: 0;
+`
 
 const DescriptionList = ({ children }) => {
   return (
-    <dl>
-      {children}
-    </dl>
+    <Container>{ children }</Container>
   );
 }
 

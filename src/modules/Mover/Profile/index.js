@@ -1,53 +1,69 @@
 import { withRouter } from 'react-router-dom';
-import QueryString from 'query-string'
+import QueryString from 'query-string';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { compose, lifecycle, branch, renderComponent } from 'recompose';
+
 import MoverProfile from './MoverProfile';
-import { getMoverWithId } from '../moverAction';
-import { getProfile } from './profileReducers';
+import { getMoverWithSlug } from '../moverAction';
+import { getReview } from './profileActions';
+import { getProfileStatus, getProfileData, getReviewStatus, getReviewData } from './profileReducers';
 import mapImmutablePropsToPlainProps from '../../Common/mapImmutablePropsToPlainProps';
 import Spin from '../../../globalComponents/Spin';
 import scrollToTopOnMount from '../../Common/scrollToTopOnMount';
-import {
-  getMyProject
-} from '../../Project/projectAction';
-import {
-  getMyProjectSelector
-} from '../../Project/Management/managementReducer';
+import { getMyProject } from '../../Project/projectAction';
+import { getMyProjectSelector } from '../../Project/Management/managementReducer';
 
-const mapDispatchToProps = dispatch => ({
-  getMoverWithId: (moverId) => dispatch(getMoverWithId(moverId)),
-  getMyProject: (projectId) => dispatch(getMyProject(projectId))
-});
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      getMoverWithSlug,
+      getMyProject,
+      getReview
+    },
+    dispatch
+  );
 
 const mapStateToProps = (state, ownProps) => ({
-  profile: getProfile(state).get('profile'),
-  status: getProfile(state).get('status'),
-  projectStatus: getMyProjectSelector(state, ownProps.match.params.project).get('status'),
-  projectData: getMyProjectSelector(state, ownProps.match.params.project).get('projectData')
+  profileData: getProfileData(state, ownProps.match.params.slug),
+  profileStatus: getProfileStatus(state, ownProps.match.params.slug),
+  projectStatus: getMyProjectSelector(state, ownProps.match.params.project).get(
+    'status'
+  ),
+  projectData: getMyProjectSelector(state, ownProps.match.params.project).get(
+    'projectData'
+  ),
+  reviewStatus: getReviewStatus(state, ownProps.match.params.slug),
+  reviewData: getReviewData(state, ownProps.match.params.slug)
 });
 
-const isLoading = props => props.status !== 'LOADED';
+const isLoading = props => { console.log('PROPS___', props); return props.profileStatus !== 'LOADED' };
 
 const enhance = compose(
   withRouter,
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
   lifecycle({
     componentDidMount() {
-      const moverId = this.props.match.params.moverId;
-      this.props.getMoverWithId(moverId);
-      if(this.props.projectStatus !== 'LOADED') {
+      const slug = this.props.match.params.slug;
+      this.props.getMoverWithSlug(slug);
+      // this.props.getReview(moverId);
+      if (this.props.projectStatus !== 'LOADED') {
         const projectId = QueryString.parse(this.props.location.search).project;
         if (projectId) {
           this.props.getMyProject(projectId);
         }
       }
+    },
+    componentWillReceiveProps(nextProps) {
+      if(this.props.profileStatus !== 'LOADED' && nextProps.profileStatus === 'LOADED') {
+        nextProps.getReview(nextProps.profileData.get('id'));
+      }
     }
   }),
-  branch(
-    isLoading,
-    renderComponent(Spin.FullScreenSpinner)
-  ),
+  branch(isLoading, renderComponent(Spin.FullScreenSpinner)),
   mapImmutablePropsToPlainProps,
   scrollToTopOnMount
 );

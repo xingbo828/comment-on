@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { 
-  GeosuggestStyled, 
-  Container, 
+import {
+  GeosuggestStyled,
+  Container,
   FocusBorder,
   Label
 } from './Styled';
@@ -19,6 +19,14 @@ class AddressAutoComplete extends Component {
     this.handleBlur = this.handleBlur.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
     this.mapSuggestDescription = this.mapSuggestDescription.bind(this);
+  }
+
+  componentDidMount() {
+    if(this.props.initialValue !== '') {
+      this.setState(() => ({
+        filled: true
+      }));
+    }
   }
 
   handleFocus(event) {
@@ -50,14 +58,15 @@ class AddressAutoComplete extends Component {
   }
 
   render() {
-    const { onSelect, label } = this.props;
+    const { onSelect, label, initialValue, bordered, placeholder } = this.props;
     return (
-      <Container>
-        <Label filled={this.state.filled} focused={this.state.focused}>{label}</Label >
+      <Container bordered={bordered} filled={this.state.filled || placeholder} focused={this.state.focused}>
+        <Label bordered={bordered} filled={this.state.filled || placeholder} focused={this.state.focused}>{label}</Label>
         <GeosuggestStyled
           innerRef={el => (this._geoSuggest = el)}
           country="ca"
-          placeholder=""
+          initialValue={initialValue}
+          placeholder={placeholder}
           minLength={2}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
@@ -75,7 +84,8 @@ AddressAutoComplete.defaultProps = {
   onSelect: () => {},
   label: '',
   initialValue: '',
-  icon: 'map-marker'
+  icon: 'map-marker',
+  placeholder: ''
 };
 
 export default AddressAutoComplete;

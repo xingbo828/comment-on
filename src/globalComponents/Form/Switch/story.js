@@ -1,16 +1,43 @@
 import React from 'react';
 
 import { storiesOf } from '@storybook/react';
-import { withInfo } from '@storybook/addon-info';
-import { action } from '@storybook/addon-actions';
+import { compose, withStateHandlers, withProps, toClass } from 'recompose';
+
 import Switch from './';
 
-const SwitchDemo= withInfo('Basic checkbox group')(() =>
-  <div style={{padding: '25px'}}>
-    <p><label>Regular switch : <Switch onChange={action('toggled')}/></label></p>
-    <p><label>Small switch : <Switch onChange={action('toggled')} size="small"/></label></p>
-  </div>
+
+
+const enhance = compose(
+  toClass,
+  withStateHandlers(
+    ({ initialChecked = false }) => ({
+      checked: initialChecked
+    }),
+    {
+      toggle: ({ checked }) => () => ({
+        checked: !checked
+      })
+    }
+  ),
+  withProps((props) => ({
+    input: {
+      checked: props.checked,
+      onChange: () => {
+        props.toggle();
+      }
+    }
+  }))
 );
+
+const SwitchWithState = enhance(Switch)
+
+
+const SwitchDemo= () =>
+  <div style={{padding: '25px'}}>
+    <SwitchWithState label="Default size" />
+    <SwitchWithState label="Small size"  size="small"/>
+  </div>
+;
 
 
 const SwitchStory = storiesOf('Global/Data Entry/Switch', module)

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const RateContainer = styled.div`
-
+  display: flex;
 `;
 
 export const RateIconList = styled.ul`
@@ -58,6 +58,6 @@ export const RateIcon = styled.li`
 `;
 
 export const RateCaption = styled.span`
-  color: ${props=>props.theme.colors.textLight};
-  font-size: .75rem;
+  font-weight: 700;
+  font-size: 1.125rem;
 `;

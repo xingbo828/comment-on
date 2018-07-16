@@ -1,6 +1,6 @@
 {
-  "short_name": "Ezy Pzy",
-  "name": "Ezy Pzy | Make moving fun",
+  "short_name": "Inneed",
+  "name": "Inneed | Make moving fun",
   "icons": [
     {
       "src": "favicon.ico",
@@ -9,7 +9,7 @@
     }
   ],
   "start_url": "./index.html",
-  "display": "standalone",
+  "display": "fullscreen",
   "theme_color": "#000000",
   "background_color": "#ffffff"
 }

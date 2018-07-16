@@ -1,120 +1,111 @@
 import React from 'react';
+import get from 'lodash/get';
 import Grid from '../../../globalComponents/Grid';
+import Box from '../../../globalComponents/Box';
 import { Heading, Paragraph } from '../../../globalComponents/Typography';
 import { HairlineDivider } from '../../../globalComponents/Dividers';
-import { DescriptionList, DescriptionEntry } from '../../../globalComponents/Typography/Description';
-import { List, ListItem } from '../../../globalComponents/Typography/List';
 import {
-  ContentWrapper,
-  ContactInfoListItemLink,
+  DescriptionList,
+  DescriptionEntry
+} from '../../../globalComponents/Typography/Description';
+import { List, ListItem } from '../../../globalComponents/Typography/List';
+import { Link } from '../../../globalComponents/Link';
+import TitledSection from '../../../globalComponents/TitledSection';
+import BusinessReview from './BusinessReview';
+import Gallery from './Gallery'
+import {
   ProfileHeader,
-  ProfileImage,
-  ProfileInfo,
-  ProfileName
+  ProfileInfo
 } from './Styled';
-
+import GetStartedWide from './GetStartedWide';
+import GetStartedThin from './GetStartedThin';
 
 const { Container, Row, Col } = Grid;
 
-const MoverProfile = ({ profile, history }) => (
-  <Container>
-    <Row>
-      <Col xs={8} sm={10} md={10} lg={8}>
-        <ProfileHeader>
-          <ProfileImage src={profile.logo} />
-          <ProfileInfo>
-            <ProfileName>{profile.name}</ProfileName>
-          </ProfileInfo>
-        </ProfileHeader>
-      </Col>
-    </Row>
-    <Row>
-      <Col xs={24} sm={24} md={24} lg={16}>
-        <HairlineDivider />
-        <Heading wrapperTag="h3" size="md" indent>
-          About
-        </Heading>
-        <ContentWrapper>
-          <Paragraph>{profile.description}</Paragraph>
-          <Heading wrapperTag="h3" size="sm" >
-            Return policy
-          </Heading>
-          <Paragraph>100% Money back</Paragraph>
-          <Heading wrapperTag="h3" size="sm" >
-            Return policy
-          </Heading>
-          <Paragraph>100% Money back</Paragraph>
-          <Heading wrapperTag="h3" size="sm" >
-            Return policy
-          </Heading>
-          <Paragraph>100% Money back</Paragraph>
-        </ContentWrapper>
-      </Col>
-    </Row>
-    <Row>
-      <Col xs={24} sm={24} md={24} lg={16}>
-        <HairlineDivider />
-        <Heading wrapperTag="h3" size="md" indent>
-          Reviews
-        </Heading>
-        <ContentWrapper>
-          <Paragraph>{profile.description}</Paragraph>
-        </ContentWrapper>
-      </Col>
-    </Row>
-    <Row>
-      <Col xs={24} sm={24} md={24} lg={16}>
-        <HairlineDivider />
-        <Heading wrapperTag="h3" size="md" indent>
-          Contact
-        </Heading>
-        <ContentWrapper>
-          <List>
-            <ListItem glyph="phone">
-              <ContactInfoListItemLink
-                href={`tel:${profile.phoneNumber}`}
-              >
-                {profile.phoneNumber}
-              </ContactInfoListItemLink>
-            </ListItem>
-            <ListItem glyph="envelope">
-              <ContactInfoListItemLink
-                  href={`mailto:${profile.email}`}
+const MoverProfile = ({ profileData, reviewStatus, reviewData }) => (
+  <React.Fragment>
+    <Container>
+      <Row>
+        <Col xs={24} sm={24} md={24} lg={24} xl={24}>
+          <Box vertical={9} below={0}>
+            <Gallery images={profileData.coverPhotos} />
+          </Box>
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={24} sm={24} md={24} lg={14} xl={14}>
+          <Box vertical={9}>
+            <ProfileHeader>
+              <ProfileInfo>
+                <Heading eyebrow="test" wrapperTag="h2" size="xs">Moving Services</Heading>
+                <Heading eyebrow="test" wrapperTag="h1" size="xl">{profileData.name}</Heading>
+              </ProfileInfo>
+            </ProfileHeader>
+          </Box>
+          <HairlineDivider />
+          <TitledSection title="About">
+            <Paragraph>
+              {profileData.description}
+            </Paragraph>
+          </TitledSection>
+          <TitledSection title="Reviews">
+            <BusinessReview
+              type="google"
+              loading={reviewStatus !== 'LOADED'}
+              rateCount={get(reviewData, ['google', 'reviews_count'])}
+              rating={get(reviewData, ['google', 'rating'])}
+              link={get(reviewData, ['google', 'url'])}
+            />
+            <BusinessReview
+              type="yelp"
+              loading={reviewStatus !== 'LOADED'}
+              link={get(reviewData, ['yelp', 'url'])}
+              rateCount={get(reviewData, ['yelp', 'review_count'])}
+              rating={get(reviewData, ['yelp', 'rating'])}
+            />
+          </TitledSection>
+          <TitledSection title="Payment">
+            <List bulleted grid>
+              <ListItem>Credit Card</ListItem>
+              <ListItem>Debit</ListItem>
+              <ListItem>Cash</ListItem>
+              <ListItem>Cheque</ListItem>
+              <ListItem>Draft</ListItem>
+            </List>
+          </TitledSection>
+          <TitledSection title="Contact info">
+            <DescriptionList>
+              <DescriptionEntry term="Phone Number">
+                <Link secondary inline
+                  href={`tel:${profileData.phoneNumber}`}
                 >
-                {profile.email}
-              </ContactInfoListItemLink>
-            </ListItem>
-            <ListItem glyph="globe">
-              <ContactInfoListItemLink
-                href="#"
-              >
-                nathansmoving.com
-              </ContactInfoListItemLink>
-            </ListItem>
-          </List>
-        </ContentWrapper>
-      </Col>
-    </Row>
-    <Row>
-      <Col xs={24} sm={24} md={24} lg={16}>
-        <HairlineDivider />
-        <Heading wrapperTag="h3" size="md" indent>
-          Business hours
-        </Heading>
-        <ContentWrapper>
-          <DescriptionList>
-            <DescriptionEntry term="Sunday" definition="Closed" />
-            <DescriptionEntry term="Monday" definition="10:00am - 6:00pm" />
-            <DescriptionEntry term="Tuesday" definition="10:00am - 6:00pm" />
-            <DescriptionEntry term="Wednesday" definition="10:00am - 6:00pm" />
-            <DescriptionEntry term="Thursday" definition="10:00am - 6:00pm" />
-            <DescriptionEntry term="Friday" definition="10:00am - 6:00pm" />
-            <DescriptionEntry term="Saturday" definition="10:00am - 5:00pm" />
-          </DescriptionList>
-        </ContentWrapper>
-      </Col>
-    </Row>
-  </Container>
+                  {profileData.phoneNumber}
+                </Link>
+              </DescriptionEntry>
+              <DescriptionEntry term="Email">
+                <Link secondary inline
+                    href={`mailto:${profileData.email}`}
+                  >
+                  {profileData.email}
+                </Link>
+              </DescriptionEntry>
+              <DescriptionEntry term="Website">
+                <Link secondary inline
+                    href="#"
+                  >
+                  nathansmoving.com
+                </Link>
+              </DescriptionEntry>
+            </DescriptionList>
+          </TitledSection>
+        </Col>
+        <Col xs={24} sm={24} md={24} lgOffset={1} lg={9} xlOffset={2} xl={8}>
+          <GetStartedWide />
+        </Col>
+      </Row>
+    </Container>
+    <GetStartedThin />
+  </React.Fragment>
 );
 
 export default MoverProfile;

@@ -1,6 +1,8 @@
 [
+  "\/mover.*",
   "\/login.*",
   "\/reset-password.*",
   "\/conversation\/.*",
-  "\/projects/configurations\/.*"
+  "\/configuration\/.*",
+  "\/profile.*"
  ]

@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import Immutable from 'immutable';
 import { compose } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import Profile from './Profile';
@@ -11,10 +12,12 @@ import { getUser } from '../accountReducer';
 import { withSettingsContext } from '../../Common/Settings';
 import validators, { validateFunc } from '../../Common/validators';
 import message from '../../../globalComponents/Message';
+import scrollToTopOnMount from '../../Common/scrollToTopOnMount';
 
-const mapStateToProps = state => ({
-  initialValues: getUser(state).user
-});
+const mapStateToProps = state => {
+  const defaultV = Immutable.Map({ receiveEmail: true })
+  return {initialValues: defaultV.merge(getUser(state).user)}
+};
 
 
 const mapDispatchToProps = dispatch => ({
@@ -63,7 +66,6 @@ const enhance = compose(
     },
     validate,
     onSubmitSuccess: (values, dispatch, props) => {
-      debugger;
       if(includes(props.location.search, '?redirect=')) {
         const redirectTo = props.location.search.replace('?redirect=', '');
         return props.history.push(redirectTo);
@@ -75,7 +77,8 @@ const enhance = compose(
       console.error(error);
       message.error(error.message, 0);
     }
-  })
+  }),
+  scrollToTopOnMount
 );
 
 export default enhance(Profile);

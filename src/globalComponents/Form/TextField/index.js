@@ -1,5 +1,7 @@
 import React from 'react';
 import { Label } from '../Label';
+import get from 'lodash/get';
+import isEmpty from 'lodash/isEmpty';
 import {
   InputContainer,
   Input,
@@ -23,7 +25,9 @@ class TextField extends React.Component {
   }
 
   onBlur(e) {
-    this.props.input.onBlur(e);
+    if(this.props.input.onBlur) {
+      this.props.input.onBlur(e);
+    }
     this.setState({ isFocused: false });
   }
 
@@ -34,12 +38,11 @@ class TextField extends React.Component {
   }
 
   isFilled() {
-    return !!this.props.input.value.length
+    return !isEmpty(get(this.props,['input','value']))
   }
 
   render() {
     const { label, type, autoComplete, placeholder, input, meta: { touched, error }} = this.props;
-
     return (
       <InputContainer>
         {label &&
