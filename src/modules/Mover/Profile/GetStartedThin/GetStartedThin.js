@@ -1,13 +1,7 @@
 import React from 'react'
-import Box from '../../../../globalComponents/Box'
 import Grid from '../../../../globalComponents/Grid';
 import {
-  Heading,
-  Paragraph
-} from '../../../../globalComponents/Typography'
-import {
   Container,
-  Messaging,
   Action
 } from './Styled'
 

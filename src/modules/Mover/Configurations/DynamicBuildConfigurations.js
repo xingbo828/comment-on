@@ -57,7 +57,7 @@ const DynamicBuildConfigurations = ({ match, history, location, profileData: { i
       <CoverPhoto src={coverPhotos[0]} />
         <Grid.Container>
           <Grid.Row>
-            <Styled.EnhancedGridCol xl={14} xlOffset={5} lg={14} lgOffset={5} md={18} mdOffset={3} sm={24} xs={24}>
+            <Styled.EnhancedGridCol xl={12} xlOffset={6} lg={14} lgOffset={5} md={18} mdOffset={3} sm={24} xs={24}>
               <Box vertical={6} below={10} between={11}>
                 <Box between={8}>
                   <Box between={3}>

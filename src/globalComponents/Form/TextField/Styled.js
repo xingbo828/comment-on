@@ -4,7 +4,7 @@ export const InputContainer = Styled.div`
   position: relative;
   display: block;
   padding: 0;
-  margin: 0 0 3rem;
+  margin: 0 0 1rem;
 `;
 
 export const Input = Styled.input`
@@ -44,6 +44,7 @@ export const InputErrorMsg = Styled.div`
   padding: 1rem 0 0;
   font-size: .75rem;
   letter-spacing: .05em;
-  font-weight: 400;
+  font-weight: 600;
   color: ${props => props.theme.colors.danger};
+  visibility: ${props=>props.active ? 'visible' : 'hidden' };
 `;

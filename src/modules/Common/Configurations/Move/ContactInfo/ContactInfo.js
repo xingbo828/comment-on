@@ -25,17 +25,13 @@ const ContactInfo = ({
             name="name"
             label="Name"
           />
-        </FormFieldSet>
-
-        <FormFieldSet>
+       
           <Field
             component={TextField}
             name="phoneNumber"
             label="Phone number"
           />
-        </FormFieldSet>
 
-        <FormFieldSet>
           <Field
             component={TextField}
             name="email"

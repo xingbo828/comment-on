@@ -63,11 +63,9 @@ class TextField extends React.Component {
           ref={(ref)=>this.ref=ref}
         />
         <FocusBorder />
-        {touched &&
-        ((error &&
-          <InputErrorMsg>
-            {error}
-          </InputErrorMsg>))}
+        <InputErrorMsg active={!!error && touched}>
+          {error}
+        </InputErrorMsg>
       </InputContainer>
     );
   }
