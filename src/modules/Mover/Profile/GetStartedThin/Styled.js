@@ -3,18 +3,13 @@ import Button from '../../../../globalComponents/Form/Button'
 import Box from '../../../../globalComponents/Box'
 
 export const Container = Styled.div`
-  margin: 4rem 0 0;
-  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 50%,rgba(255,255,255,1) 100%);
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 35%,rgba(255,255,255,1) 100%);
   position: sticky;
   bottom: 0;
-
-  ${props=>props.theme.media.greaterThan('xs')`
-    border-top: 1px solid ${props=>props.theme.colors.border};
-    background: white;
-  `};
+  padding: 3rem 0 1rem;
 
   ${props=>props.theme.media.greaterThan('md')`
-    visibility: hidden;
+    display: none;
   `};
 `
 
@@ -26,10 +21,6 @@ export const Messaging = Styled(Box)`
 `
 
 export const Action  = Styled(Button)`
-  margin-left: auto;
   width: 100%;
-
-  ${props=>props.theme.media.greaterThan('xs')`
-    width: auto;
-  `};
+  border-radius: 4px;
 `

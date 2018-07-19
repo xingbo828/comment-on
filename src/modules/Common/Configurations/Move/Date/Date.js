@@ -6,9 +6,7 @@ import { Button } from '../../../../../globalComponents/Form';
 import Icon from '../../../../../globalComponents/Icon';
 import Layout from '../../../../../globalComponents/Layout';
 import DateSelection from './DateSelection';
-// import SearchStepTimeSelection from './TimeSelection';
-import Grid from '../../../../../globalComponents/Grid';
-// import DeliveryDateSelection from './DeliveryDateSelection';
+
 
 const { Form, FormActions, FormInner, FormFieldSet } = Layout.Form;
 
@@ -54,55 +52,51 @@ const DateTime = ({
   goBack
 }) => {
   return (
-    <section>
-      <Grid.Container>
-        <Form onSubmit={handleSubmit}>
-          <FormInner>
-            <FormFieldSet>
-              <Field
-                component={renderDateSelection}
-                name="pickUpDate"
-                label="Which day would you like to schedule your move?"
-              />
-            </FormFieldSet>
-            {/* <FormFieldSet>
-              <Field
-                component={renderTimeRangeSelection}
-                name="pickUpTime"
-                label="Around what time would you like your items picked up?"
-              />
-            </FormFieldSet> */}
-            {/* <Field
-              component={renderDeliveryDateSelection}
-              name="deliveryDate"
-              label="When would you like to have your items delivered? A later date indicates a need for overnight storage services."
-            /> */}
-            {/* {selectedDeliveryDate!== 'sameDayDelivery' && !isNull(selectedDeliveryDate) &&
-              <FormFieldSet>
-                <Field
-                  component={renderTimeRangeSelection}
-                  name="deliveryTime"
-                  label="Which day would you like your items delivered?"
-                />
-              </FormFieldSet>
-            } */}
-          </FormInner>
-          <FormActions>
-          {next && <Button
-              style={{ float: 'right' }}
-              type="submit"
-              primary
-              disabled={submitting || !valid}
-            >
-              Next<Icon icon="arrow-right" />
-            </Button>}
-            {previous && <Button onClick={goBack} style={{ float: 'left' }} ghost>
-              <Icon icon="arrow-left" />Back
-            </Button>}
-          </FormActions>
-        </Form>
-      </Grid.Container>
-    </section>
+    <Form onSubmit={handleSubmit}>
+      <FormInner>
+        <FormFieldSet>
+          <Field
+            component={renderDateSelection}
+            name="pickUpDate"
+            label="Which day would you like to schedule your move?"
+          />
+        </FormFieldSet>
+        {/* <FormFieldSet>
+          <Field
+            component={renderTimeRangeSelection}
+            name="pickUpTime"
+            label="Around what time would you like your items picked up?"
+          />
+        </FormFieldSet> */}
+        {/* <Field
+          component={renderDeliveryDateSelection}
+          name="deliveryDate"
+          label="When would you like to have your items delivered? A later date indicates a need for overnight storage services."
+        /> */}
+        {/* {selectedDeliveryDate!== 'sameDayDelivery' && !isNull(selectedDeliveryDate) &&
+          <FormFieldSet>
+            <Field
+              component={renderTimeRangeSelection}
+              name="deliveryTime"
+              label="Which day would you like your items delivered?"
+            />
+          </FormFieldSet>
+        } */}
+      </FormInner>
+      <FormActions>
+      {next && <Button
+          style={{ float: 'right' }}
+          type="submit"
+          primary
+          disabled={submitting || !valid}
+        >
+          Next<Icon icon="arrow-right" />
+        </Button>}
+        {previous && <Button onClick={goBack} style={{ float: 'left' }} ghost>
+          <Icon icon="arrow-left" />Back
+        </Button>}
+      </FormActions>
+    </Form>
   );
 };
 

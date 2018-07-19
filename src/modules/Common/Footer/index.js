@@ -47,7 +47,7 @@ const FooterNav = () => {
       </Container> */}
       <OrgContainer>
         <Grid.Container>
-          <Copyright>Copyright ©2018  Comment On. All rights reserved.</Copyright>
+          <Copyright>Powered by Inneed.ca</Copyright>
         </Grid.Container>
       </OrgContainer>
     </Footer>

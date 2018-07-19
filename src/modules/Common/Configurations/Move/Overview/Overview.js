@@ -1,7 +1,6 @@
 import React from 'react';
 import values from 'lodash/values';
 import isEmpty from 'lodash/isEmpty';
-import Grid from '../../../../../globalComponents/Grid';
 import Layout from '../../../../../globalComponents/Layout';
 
 import { TextArea, TextField, Legend } from '../../../../../globalComponents/Form';
@@ -95,23 +94,21 @@ const ConfigurationOverview = ({
   };
 
   return (
-    <Grid.Container>
-      <Form onSubmit={handleSubmit}>
-        <FormInner>
-          <FormFieldSet>
-            <Legend>Let's review everything so far. Feel free to go back and make any changes.</Legend>
-            {renderSections(configurations)}
-          </FormFieldSet>
-          <FormFieldSet>
-            {renderProjectName(overview.projectName.detail, setProjectName)}
-          </FormFieldSet>
-          <FormFieldSet>
-            {renderAdditionalNoteSection(overview.notes.detail, setAdditionalNotes)}
-          </FormFieldSet>
-        </FormInner>
-        {renderFormAction(formAction)}
-      </Form>
-    </Grid.Container>
+    <Form onSubmit={handleSubmit}>
+      <FormInner>
+        <FormFieldSet>
+          <Legend>Let's review everything so far. Feel free to go back and make any changes.</Legend>
+          {renderSections(configurations)}
+        </FormFieldSet>
+        <FormFieldSet>
+          {renderProjectName(overview.projectName.detail, setProjectName)}
+        </FormFieldSet>
+        <FormFieldSet>
+          {renderAdditionalNoteSection(overview.notes.detail, setAdditionalNotes)}
+        </FormFieldSet>
+      </FormInner>
+      {renderFormAction(formAction)}
+    </Form>
   );
 };
 

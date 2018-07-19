@@ -8,7 +8,6 @@ const Form = styled.form`
   flex-direction: column;
 
   ${props=>props.theme.media.greaterThan('xs')`
-    max-width: ${props.small ? '428px' : '640px'};
     margin: 0 auto 6rem;
   `}
 `;
@@ -39,11 +38,8 @@ const FormActions = styled.div`
 `;
 
 const FormInner = styled.div`
-  padding: 4rem 0 0;
-
-  ${props=>props.theme.media.greaterThan('md')`
-    padding: 6rem 0 0;
-  `}
+    padding: 0;
+    margin: 0;
 `;
 
 const FormHeading = styled.div`
