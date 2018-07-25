@@ -13,6 +13,9 @@ import Spin from '../../../globalComponents/Spin';
 import scrollToTopOnMount from '../../Common/scrollToTopOnMount';
 import { getMyProject } from '../../Project/projectAction';
 import { getMyProjectSelector } from '../../Project/Management/managementReducer';
+import withErrorBoundary from '../../Common/withErrorBoundary';
+import ErrorPage from '../../Common/ErrorPage';
+
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -37,7 +40,7 @@ const mapStateToProps = (state, ownProps) => ({
   reviewData: getReviewData(state, ownProps.match.params.slug)
 });
 
-const isLoading = props => { console.log('PROPS___', props); return props.profileStatus !== 'LOADED' };
+const isLoading = props => props.profileStatus === 'PENDING' ;
 
 const enhance = compose(
   withRouter,
@@ -65,7 +68,8 @@ const enhance = compose(
   }),
   branch(isLoading, renderComponent(Spin.FullScreenSpinner)),
   mapImmutablePropsToPlainProps,
-  scrollToTopOnMount
+  scrollToTopOnMount,
+  withErrorBoundary(ErrorPage)
 );
 
 export default enhance(MoverProfile);

@@ -10,7 +10,8 @@ import Spin from '../../../globalComponents/Spin';
 import scrollToTopOnMount from '../../Common/scrollToTopOnMount';
 
 import DynamicBuildConfigurations from './DynamicBuildConfigurations'
-
+import withErrorBoundary from '../../Common/withErrorBoundary';
+import ErrorPage from '../../Common/ErrorPage';
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -25,7 +26,7 @@ const mapStateToProps = (state, ownProps) => ({
   profileStatus: getProfileStatus(state, ownProps.match.params.slug)
 });
 
-const isLoading = props => props.profileStatus !== 'LOADED';
+const isLoading = props => props.profileStatus === 'PENDING';
 
 const enhance = compose(
   withRouter,
@@ -41,7 +42,8 @@ const enhance = compose(
   }),
   branch(isLoading, renderComponent(Spin.FullScreenSpinner)),
   mapImmutablePropsToPlainProps,
-  scrollToTopOnMount
+  scrollToTopOnMount,
+  withErrorBoundary(ErrorPage)
 );
 
 export default enhance(DynamicBuildConfigurations);
