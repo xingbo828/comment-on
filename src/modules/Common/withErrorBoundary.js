@@ -3,10 +3,8 @@ import { compose, branch, renderComponent, lifecycle, setDisplayName } from 'rec
 const withErrorBoundary = FallBackComponent => compose(
     lifecycle({
       componentDidCatch(error, info) {
-        if(process.env.REACT_APP_ENV === 'production') {
-          console.error(error, info);
-          this.setState({ error, info });
-        }
+        console.error(error, info);
+        this.setState({ error, info });
       }
     }),
     branch(props => props.error, renderComponent(FallBackComponent)),
