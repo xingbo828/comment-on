@@ -11,6 +11,8 @@ import GlobalNav from './modules/Common/GlobalNav';
 import Footer from './modules/Common/Footer';
 import asyncLoad from './modules/Common/asyncLoad';
 import './foundation/base.js';
+import withErrorBoundary from './modules/Common/withErrorBoundary';
+import ErrorPage from './modules/Common/ErrorPage';
 
 class App extends Component {
   render() {
@@ -38,4 +40,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withErrorBoundary(ErrorPage)(App);
