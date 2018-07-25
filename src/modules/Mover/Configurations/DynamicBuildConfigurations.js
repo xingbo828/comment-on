@@ -25,7 +25,7 @@ const availableConfigSteps = {
   Overview: overviewEnhancer(Overview)
 };
 
-const DynamicBuildConfigurations = ({ match, history, location, profileData: { id, configurations, coverPhotos, name } }) => {
+const DynamicBuildConfigurations = ({ match, history, location, profileData: { id, configurations, coverPhoto, name } }) => {
   const paths = configurations.map((c, index) => {
     const essential =  {
       path: `${match.url}/${c.toLowerCase()}`,
@@ -54,7 +54,7 @@ const DynamicBuildConfigurations = ({ match, history, location, profileData: { i
   return (
     <React.Fragment>
       {match.isExact && <Redirect to={paths[0].path} />}
-      <CoverPhoto src={coverPhotos[0]} />
+      <CoverPhoto src={coverPhoto} />
         <Grid.Container>
           <Grid.Row>
             <Styled.EnhancedGridCol xl={12} xlOffset={6} lg={14} lgOffset={5} md={18} mdOffset={3} sm={24} xs={24}>

@@ -29,7 +29,7 @@ const { Container, Row, Col } = Grid;
 
 const MoverProfile = ({ profileData, reviewStatus, reviewData }) => (
   <React.Fragment>
-    <CoverPhoto src={profileData.coverPhotos[0]} />
+    <CoverPhoto src={profileData.coverPhoto} />
     <Container>
       <Row>
         <Col xs={24} sm={24} md={24} lg={14} xl={14}>
