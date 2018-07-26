@@ -1,6 +1,7 @@
 import React from 'react';
 import get from 'lodash/get';
 import startCase from 'lodash/startCase';
+import lowerCase from 'lodash/lowerCase';
 import Grid from '../../../globalComponents/Grid';
 import Box from '../../../globalComponents/Box';
 import { Heading, Paragraph } from '../../../globalComponents/Typography';
@@ -28,19 +29,27 @@ const mapTypeCodeToLabel = code => {
     case 'MOVE': {
       return 'Moving';
     }
-    case 'STORAGE': {
-      return 'storage';
-    }
-    case 'DELIVERY': {
-      return 'Delivery';
-    }
+
     default: {
-      return code;
+      return startCase(lowerCase(code));
     }
   }
 };
 
+
+const renderServiceAreaTags = (cities) => {
+  const transform = city => {
+    const pieces = city.split('|');
+    pieces[0] = startCase(lowerCase(pieces[0]))
+    return pieces.join(', ')
+  }
+  return cities.map(city => (
+    <Tag key={city} title={transform(city)} icon="map-marker" />
+  ))
+}
 const MoverProfile = ({ profileData, reviewStatus, reviewData }) => {
+
+
   return (
     <React.Fragment>
       <CoverPhoto src={profileData.coverPhoto} />
@@ -66,7 +75,7 @@ const MoverProfile = ({ profileData, reviewStatus, reviewData }) => {
                             .join('  •  ')}
                         </Paragraph>
                         <div>
-                          <Tag title="Vancouver BC" icon="map-marker" />
+                          {renderServiceAreaTags(profileData.businessServiceAreas)}
                         </div>
                       </Box>
                     </Box>
