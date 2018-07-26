@@ -26,7 +26,7 @@ const mapStateToProps = (state, ownProps) => ({
   profileStatus: getProfileStatus(state, ownProps.match.params.slug)
 });
 
-const isLoading = props => props.profileStatus === 'PENDING';
+const isLoading = props => props.profileStatus === 'PENDING' || props.profileStatus === 'UNINIT';
 
 const enhance = compose(
   withRouter,

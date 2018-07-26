@@ -29,7 +29,7 @@ class BusinessReview extends Component {
             size="lg"
             readOnly
           />
-          <span>({rateCount})</span>
+          {rateCount > 0 && <span>({rateCount})</span>}
         </ContainerBox>
       </Container>
     );
