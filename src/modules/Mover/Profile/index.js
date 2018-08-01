@@ -40,7 +40,7 @@ const mapStateToProps = (state, ownProps) => ({
   reviewData: getReviewData(state, ownProps.match.params.slug)
 });
 
-const isLoading = props => props.profileStatus !== 'LOADED' ;
+const isLoading = props =>  props.profileStatus === 'PENDING' || props.profileStatus === 'UNINIT';
 
 const enhance = compose(
   withRouter,
@@ -62,7 +62,8 @@ const enhance = compose(
     },
     componentWillReceiveProps(nextProps) {
       if(this.props.profileStatus !== 'LOADED' && nextProps.profileStatus === 'LOADED') {
-        nextProps.getReview(nextProps.profileData.get('id'));
+        const slug = this.props.match.params.slug;
+        nextProps.getReview(nextProps.profileData.get('id'), slug);
       }
     }
   }),

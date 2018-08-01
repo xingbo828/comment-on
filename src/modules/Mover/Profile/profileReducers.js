@@ -73,8 +73,8 @@ export default profile;
 
 // Selectors
 export const getProfileData = (state, slug) => state.getIn(['mover', 'profile', slug, 'profile', 'result']);
-export const getProfileStatus = (state, slug) => state.getIn(['mover', 'profile', slug, 'profile', 'status']);
+export const getProfileStatus = (state, slug) => state.getIn(['mover', 'profile', slug, 'profile', 'status']) || 'UNINIT';
 
-export const getReviewStatus = (state, slug) => state.getIn(['mover', 'profile', slug, 'reviews', 'status']);
+export const getReviewStatus = (state, slug) => state.getIn(['mover', 'profile', slug, 'reviews', 'status']) || 'UNINIT';
 export const getReviewData = (state, slug) => state.getIn(['mover', 'profile', slug, 'reviews', 'result']);
 
