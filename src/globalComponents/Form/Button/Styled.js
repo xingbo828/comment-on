@@ -5,6 +5,8 @@ const getBackgroundColor = props => {
     return props.theme.colors.border;
   } else if(props.primary) {
     return props.theme.colors.primary;
+  } else if(props.inverted) {
+    return 'white'
   } else if(props.danger) {
     return props.theme.colors.danger;
   } else if(props.success) {
@@ -69,6 +71,10 @@ const getHoverBackgroundColor = props => {
 
   if (props.primary) {
     return props.theme.colors.primaryDark
+  }
+
+  if (props.inverted) {
+    return props.theme.colors.offWhite
   }
 
   if (props.danger || props.success) {
@@ -144,7 +150,8 @@ export const StyledButton = styled.button`
   width: ${props=> props.fullWidth ? '100%' : 'auto'};
   user-select: none;
   transition: all .3s cubic-bezier(.645,.045,.355,1);
-  color: ${props=> props.ghost || props.outline ? getBackgroundColor(props) : 'white'};
+  color: ${props=> props.ghost || props.outline || props.inverted ? getBackgroundColor(props) : 'white'};
+  ${props=>props.inverted && `color: ${props.theme.colors.secondary};`}
   background-color:  ${props=> props.ghost || props.outline ? 'transparent' : getBackgroundColor(props)};
   font-size: ${getFontSize};
   outline: none;

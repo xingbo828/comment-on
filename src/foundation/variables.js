@@ -24,6 +24,12 @@ const colors = {
   get disabled() { return this.offWhite}
 }
 
+const gradients = {
+  secondary: {
+    horizontal: 'linear-gradient(to right, #1f5ffc 0%,#4298fe 100%)'
+  }
+}
+
 const zIndex = {
   negative: -1,
   spinner: 500,
@@ -70,5 +76,6 @@ export default {
   spaces,
   breakPoints,
   boxShadow,
+  gradients,
   media: generateMedia(breakPoints)
 }

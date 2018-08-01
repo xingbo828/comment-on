@@ -40,7 +40,7 @@ const mapStateToProps = (state, ownProps) => ({
   reviewData: getReviewData(state, ownProps.match.params.slug)
 });
 
-const isLoading = props => props.profileStatus === 'PENDING' ;
+const isLoading = props => props.profileStatus !== 'LOADED' ;
 
 const enhance = compose(
   withRouter,

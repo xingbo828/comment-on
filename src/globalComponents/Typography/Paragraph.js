@@ -1,6 +1,7 @@
 import Styled from 'styled-components';
 
 const Paragraph = Styled.p`
+  font-size: 17px;  
   line-height: 1.75;
   margin: 0;
   ${props=>props.centered && `text-align: center;`}

@@ -7,7 +7,6 @@ import {
   Switch
 } from 'react-router-dom';
 // import ProtectedRoute from './modules/Common/ProtectedRoute';
-import GlobalNav from './modules/Common/GlobalNav';
 import Footer from './modules/Common/Footer';
 import asyncLoad from './modules/Common/asyncLoad';
 import './foundation/base.js';
@@ -20,9 +19,9 @@ class App extends Component {
       <Router>
         <ThemeProvider theme={theme}>
           <main>
-            <GlobalNav />
+            {/* <GlobalNav /> */}
             <Switch>
-              <Route exact path="/" component={asyncLoad(() => import('./modules/Home'))} />
+              <Route exact path="/" component={asyncLoad(() => import('./modules/Home/ProviderMarketing'))} />
               {/* <ProtectedRoute path="/account" component={asyncLoad(() => import('./modules/Account'))} /> */}
               {/* <Route path="/projects" component={asyncLoad(() => import('./modules/Project'))} /> */}
               {/* <ProtectedRoute path="/conversation" component={asyncLoad(() => import('./modules/Conversation'))} /> */}
