@@ -8,6 +8,7 @@ import Icon from '../Icon'
 const Container = Styled.div`
   display: inline-block;
   display: flex;
+  flex-wrap: wrap;
 `
 
 const mapTags = (values) => {

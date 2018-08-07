@@ -4,10 +4,12 @@ import Styled from 'styled-components'
 
 const Container = Styled.div`
   background: ${props=>props.theme.colors.secondaryPale};
+  white-space: nowrap;
   padding: .5rem 1rem;
+  margin: 0 0 6px;
   border-radius: 4px;
-  &:not(:first-of-type) {
-    margin-left: 6px;
+  &:not(:last-of-type) {
+    margin-right: 6px;
   }
 `
 
