@@ -17,7 +17,7 @@ import TitledSection from '../../../globalComponents/TitledSection';
 import BusinessReview from './BusinessReview';
 import CoverPhoto from '../../../globalComponents/CoverPhoto';
 import { StickyNavContainer, StickyNavSection } from './StickyNav';
-import { ProfileHeader, ProfileInfo } from './Styled';
+import { ProfileHeader, Logo, ProfileName, TitleInfo } from './Styled';
 import GetStartedWide from './GetStartedWide';
 import GetStartedThin from './GetStartedThin';
 import Markdown from '../../../globalComponents/Markdown';
@@ -59,27 +59,30 @@ const MoverProfile = ({ profileData, reviewStatus, reviewData }) => {
             <StickyNavContainer>
               <Box vertical={9}>
                 <ProfileHeader>
-                  <ProfileInfo>
-                    <Box between={8}>
-                      <Heading eyebrow="test" wrapperTag="h1" size="xl">
-                        {profileData.name}
-                      </Heading>
-                      <Box between={3}>
-                        <Paragraph>
-                          {mapTypeCodeToLabel(
-                            profileData.businessType.primaryType
-                          )}{' '}
-                          •{' '}
-                          {profileData.businessType.subTypes
-                            .map(mapTypeCodeToLabel)
-                            .join('  •  ')}
-                        </Paragraph>
-                        <div>
-                          {renderServiceAreaTags(profileData.businessServiceAreas)}
-                        </div>
-                      </Box>
+                  <Box between={8}>
+                    <TitleInfo>
+                      <ProfileName>
+                        <Heading wrapperTag="h1" size="xl">
+                          {profileData.name}
+                        </Heading>
+                      </ProfileName>
+                      { profileData.logo && <Logo role="img" src={profileData.logo} /> }
+                    </TitleInfo>
+                    <Box between={3}>
+                      <Paragraph>
+                        {mapTypeCodeToLabel(
+                          profileData.businessType.primaryType
+                        )}{' '}
+                        •{' '}
+                        {profileData.businessType.subTypes
+                          .map(mapTypeCodeToLabel)
+                          .join('  •  ')}
+                      </Paragraph>
+                      <div>
+                        {renderServiceAreaTags(profileData.businessServiceAreas)}
+                      </div>
                     </Box>
-                  </ProfileInfo>
+                  </Box>
                 </ProfileHeader>
               </Box>
               <HairlineDivider />
