@@ -20,6 +20,7 @@ const mapItems = (_items, active) => {
       <NavListItem
         onClick={handleClick(_item.node)}
         active={active === _idx}
+        key={_item.name}
       >
         {_item.name}
       </NavListItem>

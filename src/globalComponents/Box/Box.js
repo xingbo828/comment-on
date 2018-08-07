@@ -1,5 +1,6 @@
 import Styled from 'styled-components'
 import PropTypes from 'prop-types'
+import { stringify } from 'postcss';
 
 const baseSpacing = 1;
 
@@ -142,7 +143,7 @@ const Box = Styled.div`
 
 Box.propTypes = {
   tag: PropTypes.string,
-  inline: PropTypes.bool,
+  inline: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   between: PropTypes.oneOf([0,1,2,3,4,5,6,7,8,9,10,11,12,null]),
   // props.vertical: PropTypes.oneOf([0,1,2,3,4,5,6,7,8,9,10,11,12,null]),
   horizontal: PropTypes.oneOf([0,1,2,3,4,5,6,7,8,9,10,11,12,null]),

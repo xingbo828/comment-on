@@ -1,5 +1,7 @@
 import Tag from './Tag'
+import Tags from './Tags'
 
 export {
-  Tag
+  Tag,
+  Tags
 }

@@ -5,7 +5,7 @@ import lowerCase from 'lodash/lowerCase';
 import Grid from '../../../globalComponents/Grid';
 import Box from '../../../globalComponents/Box';
 import { Heading, Paragraph } from '../../../globalComponents/Typography';
-import { Tag } from '../../../globalComponents/Tags';
+import { Tags } from '../../../globalComponents/Tags';
 import { HairlineDivider } from '../../../globalComponents/Dividers';
 import {
   DescriptionList,
@@ -38,18 +38,19 @@ const mapTypeCodeToLabel = code => {
 
 
 const renderServiceAreaTags = (cities) => {
-  const transform = city => {
-    const pieces = city.split('|');
-    pieces[0] = startCase(lowerCase(pieces[0]))
-    return pieces.join(', ')
+  const transform = cities => {
+    return cities.map((city) => {
+      const pieces = city.split('|');
+      pieces[0] = startCase(lowerCase(pieces[0]))
+      return pieces.join(', ')
+    })
   }
-  return cities.map(city => (
-    <Tag key={city} title={transform(city)} icon="map-marker" />
-  ))
+
+  return <Tags values={transform(cities)} icon="map-marker" />
 }
+
+
 const MoverProfile = ({ profileData, reviewStatus, reviewData }) => {
-
-
   return (
     <React.Fragment>
       <CoverPhoto src={profileData.coverPhoto} />
