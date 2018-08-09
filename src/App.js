@@ -21,7 +21,6 @@ class App extends Component {
           <main>
             {/* <GlobalNav /> */}
             <Switch>
-              <Route exact path="/" component={asyncLoad(() => import('./modules/Home/ProviderMarketing'))} />
               {/* <ProtectedRoute path="/account" component={asyncLoad(() => import('./modules/Account'))} /> */}
               {/* <Route path="/projects" component={asyncLoad(() => import('./modules/Project'))} /> */}
               {/* <ProtectedRoute path="/conversation" component={asyncLoad(() => import('./modules/Conversation'))} /> */}
@@ -30,6 +29,7 @@ class App extends Component {
 
               <Route path="/configuration/move" component={asyncLoad(() => import('./modules/Mover'))} />
               <Route path="/profile/:slug" component={asyncLoad(() => import('./modules/Mover/Profile'))} />
+              <Route path="/" component={asyncLoad(() => import('./modules/Home'))} />
             </Switch>
             <Footer />
           </main>

@@ -1,6 +1,5 @@
 import Styled from 'styled-components'
 import PropTypes from 'prop-types'
-import { stringify } from 'postcss';
 
 const baseSpacing = 1;
 
