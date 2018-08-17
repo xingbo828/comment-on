@@ -2,7 +2,7 @@ import { generateMedia } from 'styled-media-query';
 
 const colors = {
   // brand: '#FFA500',
-  brand: '#FFBF37',
+  brand: '#ffac37',
   secondaryLight: '#3d95e6',
   secondary: '#228ae6',
   secondaryDark: '#1a71bd',
@@ -15,7 +15,7 @@ const colors = {
   textLight: '#a6a7a9',
   offWhite: '#f4f6f9',
   darkOffWhite: '#ecedf2',
-  primaryDark: '#ffac37',
+  primaryDark: '#f4a02a',
   primaryLight: '#ffe17b',
   // alias
   get info() { return this.secondary },

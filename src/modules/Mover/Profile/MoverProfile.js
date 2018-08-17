@@ -21,6 +21,7 @@ import { ProfileHeader, Logo, ProfileName, TitleInfo } from './Styled';
 import GetStartedWide from './GetStartedWide';
 import GetStartedThin from './GetStartedThin';
 import Markdown from '../../../globalComponents/Markdown';
+import SkinnyFooter from '../../Common/SkinyFooter'
 
 const { Container, Row, Col } = Grid;
 
@@ -160,6 +161,9 @@ const MoverProfile = ({ profileData, reviewStatus, reviewData }) => {
         </Row>
       </Container>
       <GetStartedThin />
+      <Box vertical={12} below={0}>
+        <SkinnyFooter />
+      </Box>
     </React.Fragment>
   );
 };
