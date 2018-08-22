@@ -1,6 +1,5 @@
 import React from 'react'
 import Grid from '../../../globalComponents/Grid'
-import Box from '../../../globalComponents/Box'
 import {
   Container,
   BrandLink,
