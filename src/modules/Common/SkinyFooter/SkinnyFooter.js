@@ -3,18 +3,25 @@ import Grid from '../../../globalComponents/Grid'
 import Box from '../../../globalComponents/Box'
 import {
   Container,
-  BrandLink
+  BrandLink,
+  Menu,
+  MenuItem,
+  MenuItemLink
 } from './Styled'
 
 
 const SkinnyFooter = () => (
   <Container>
     <Grid.Container>
-      <Grid.Row>
-        <Grid.Col xs={24} sm={24} md={24} lg={24} xl={24}>
-          <Box vertical={6}>
-            <div><BrandLink to="/">Powered by In Need</BrandLink></div>
-          </Box>
+      <Grid.Row middle="md">
+        <Grid.Col xs={24} sm={12} md={12} lg={12} xl={12}>
+          <Menu>
+            <MenuItem><MenuItemLink to="/">Privacy Policy</MenuItemLink></MenuItem>
+            <MenuItem><MenuItemLink to="/">Terms of Use</MenuItemLink></MenuItem>
+          </Menu>
+        </Grid.Col>
+        <Grid.Col xs={24} sm={12} md={12} lg={12} xl={12}>
+          <BrandLink to="/">Powered by In Need</BrandLink>
         </Grid.Col>
       </Grid.Row>
     </Grid.Container>

@@ -7,6 +7,7 @@ import Logistics from '../../Common/Configurations/Move/Logistics';
 import Items from '../../Common/Configurations/Move/Items';
 import ContactInfo from '../../Common/Configurations/Move/ContactInfo';
 import Overview from '../../Common/Configurations/Move/Overview';
+import SkinnyFooter from '../../Common/SkinyFooter'
 import Box from '../../../globalComponents/Box';
 import Grid from '../../../globalComponents/Grid';
 import { Heading, Paragraph } from '../../../globalComponents/Typography';
@@ -58,7 +59,7 @@ const DynamicBuildConfigurations = ({ match, history, location, profileData: { i
         <Grid.Container>
           <Grid.Row>
             <Styled.EnhancedGridCol xl={12} xlOffset={6} lg={14} lgOffset={5} md={18} mdOffset={3} sm={24} xs={24}>
-              <Box vertical={6} below={10} between={11}>
+              <Box vertical={6} below={12} between={11}>
                 <Box between={8}>
                   <Box between={3}>
                     <Box between={3}>
@@ -98,6 +99,7 @@ const DynamicBuildConfigurations = ({ match, history, location, profileData: { i
             </Styled.EnhancedGridCol>
           </Grid.Row>
         </Grid.Container>
+        <SkinnyFooter />
     </React.Fragment>
   );
 };

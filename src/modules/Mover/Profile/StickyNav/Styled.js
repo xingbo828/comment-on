@@ -38,3 +38,8 @@ export const NavListItem = Styled.li`
     transform: ${props=>props.active ? 'scaleX(1)' : 'scaleX(0)'};
   }
 `
+
+export const NavListLink = Styled.a`
+  text-decoration: none;
+  color: ${props=>props.theme.colors.textDark};
+`

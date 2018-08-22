@@ -4,12 +4,7 @@ const Form = styled.form`
   display: flex;
   border-radius: 8px;
   width: 100%;
-  margin: 0 auto 4rem;
   flex-direction: column;
-
-  ${props=>props.theme.media.greaterThan('xs')`
-    margin: 0 auto 6rem;
-  `}
 `;
 
 const FormActions = styled.div`
@@ -25,7 +20,6 @@ const FormActions = styled.div`
   ${props=>props.theme.media.greaterThan('md')`
     position: static;
     bottom: 0;
-    height:130px;
     
     > button:not(:last-child) {
       margin-bottom: 0;
