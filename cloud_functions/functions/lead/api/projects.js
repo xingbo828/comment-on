@@ -97,6 +97,58 @@ app.get('/:projectId', (request, response) => {
     });
 });
 
+app.patch('/:projectId/notes', (request, response) => {
+  const projectId = request.params.projectId;
+  const body = request.body;
+  if (!body || !body.notes) {
+    return response.status(400).json({error: 'empty payload'});
+  }
+
+  return getProviderId(request)
+    .then(data => {
+      const providerId = data.moverId;
+      return admin.firestore().collection('projects').doc(projectId).get().then((doc) => {
+        const project = doc.data();
+        const receiver = project.receivers[providerId];
+        if (!receiver) {
+          return Promise.reject('invalid provider');
+        }
+        receiver.notes = body.notes;
+        return doc.ref.set(project);
+      });
+    })
+    .catch((error)=>{
+      console.log(error);
+      return res.status(400).json({});
+    });
+});
+
+app.patch('/:projectId/status', (request, response) => {
+  const projectId = request.params.projectId;
+  const body = request.body;
+  if (!body || !body.status) {
+    return response.status(400).json({error: 'empty payload'});
+  }
+
+  return getProviderId(request)
+    .then(data => {
+      const providerId = data.moverId;
+      return admin.firestore().collection('projects').doc(projectId).get().then((doc) => {
+        const project = doc.data();
+        const receiver = project.receivers[providerId];
+        if (!receiver) {
+          return Promise.reject('invalid provider');
+        }
+        receiver.status = body.status;
+        return doc.ref.set(project);
+      });
+    })
+    .catch((error)=>{
+      console.log(error);
+      return res.status(400).json({});
+    });
+});
+
 app.put('/:projectId/', (request, response) => {
   const body = request.body;
   const projectId = request.params.projectId;
