@@ -86,26 +86,6 @@ const getReview = (reviewInfo) => {
     }));
 };
 
-app.patch('/:providerId/status', (request, response) => {
-  const providerId = request.params.providerId;
-  const body = request.body;
-  if (!body || !body.status) {
-    return response.status(400).json({error: 'empty payload'});
-  }
-  admin.firestore().collection('providers').doc(providerId).update({
-    status: body.status
-  }).then(() => {
-    return admin.firestore().collection('providers').doc(providerId).get()
-  }).then((doc) => {
-    const data = doc.data();
-    return response.json(data);
-  })
-  .catch((error)=>{
-    console.log(error);
-    return res.status(400).json({});
-  });
-});
-
 app.get('/:providerId/review', (request, response) => {
   const providerId = request.params.providerId;
   return admin.firestore().collection('providers').doc(providerId).get().then((doc) => {
