@@ -100,36 +100,51 @@ app.get('/:projectId', (request, response) => {
 app.patch('/:projectId/notes', (request, response) => {
   const projectId = request.params.projectId;
   const body = request.body;
-  if (!body || !body.notes) {
+  if (!body.notes) {
+    console.log("body", body);
     return response.status(400).json({error: 'empty payload'});
   }
 
   return getProviderId(request)
     .then(data => {
+      
       const providerId = data.moverId;
       return admin.firestore().collection('projects').doc(projectId).get().then((doc) => {
+        
         const project = doc.data();
         const receiver = project.receivers[providerId];
         if (!receiver) {
           return Promise.reject('invalid provider');
         }
         receiver.notes = body.notes;
-        return doc.ref.set(project);
+        return doc.ref.set(project)
+          .then(() => {
+            return data;
+          });
       });
+    })
+    .then((userData) => {
+      return admin.firestore().collection('projects').doc(projectId).get().then((doc) => {
+        return processProject(doc, userData);
+      })
+    })
+    .then((project) => {
+      return response.json(project);
     })
     .catch((error)=>{
       console.log(error);
-      return res.status(400).json({});
+      return response.status(400).json({});
     });
 });
 
 app.patch('/:projectId/status', (request, response) => {
   const projectId = request.params.projectId;
   const body = request.body;
-  if (!body || !body.status) {
+  if (!body.status) {
+    console.log(body);
     return response.status(400).json({error: 'empty payload'});
   }
-
+  return res.status(400).json({});
   return getProviderId(request)
     .then(data => {
       const providerId = data.moverId;
@@ -140,8 +155,19 @@ app.patch('/:projectId/status', (request, response) => {
           return Promise.reject('invalid provider');
         }
         receiver.status = body.status;
-        return doc.ref.set(project);
+        return doc.ref.set(project)
+          .then(() => {
+            return data;
+          });
       });
+    })
+    .then((userData) => {
+      return admin.firestore().collection('projects').doc(projectId).get().then((doc) => {
+        return processProject(doc, userData);
+      })
+    })
+    .then((project) => {
+      return response.json(project);
     })
     .catch((error)=>{
       console.log(error);
