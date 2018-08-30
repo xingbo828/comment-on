@@ -13,7 +13,7 @@ export const Input = Styled.input`
   display: block;
   width: 100%;
   border: solid ${props=>props.theme.colors.border};
-  border-width: 0 0 1px 0;
+  border-width: 0 0 2px 0;
   font-size: 1.125rem;
   padding: 2rem 0 1.5rem;
   outline: none;
@@ -31,12 +31,14 @@ export const Input = Styled.input`
 `;
 
 export const FocusBorder = Styled.div`
+  position: relative;
   height: 2px;
   width: 100%;
   background: ${props=>props.theme.colors.primary};
   margin-top: -2px;
   transition: .3s;
   transform: scale(0);
+  z-index: 3;
 `;
 
 

@@ -6,6 +6,7 @@ import Box from '../../../globalComponents/Box'
 import {
   TextField
 } from '../../../globalComponents/Form'
+import Footer from '../../Common/Footer'
 import { Paragraph, ThematicBreak, Heading } from '../../../globalComponents/Typography';
 import Button from '../../../globalComponents/Form/Button';
 
@@ -33,7 +34,7 @@ const Registration = ({ handleSubmit, history }) => {
               </Box>
               <ThematicBreak short />
               <form onSubmit={handleRegistration} >
-                <Box vertical={3}>
+                <Box between={3} vertical={4}>
                   <Field 
                     component={TextField}
                     label="Your name"
@@ -58,6 +59,7 @@ const Registration = ({ handleSubmit, history }) => {
           </Grid.Col>
         </Grid.Row>
       </Grid.Container>
+      <Footer />
     </React.Fragment>
   )
 }

@@ -13,7 +13,7 @@ export const Label = styled.label`
   transform: scale(1);
   transform-origin: top left;
   white-space: nowrap;
-  z-index: 99;
+  z-index: -1;
 
   ${props=>props.focused &&`
     color: ${props.theme.colors.primary};

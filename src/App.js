@@ -7,7 +7,6 @@ import {
   Switch
 } from 'react-router-dom';
 // import ProtectedRoute from './modules/Common/ProtectedRoute';
-import Footer from './modules/Common/Footer';
 import asyncLoad from './modules/Common/asyncLoad';
 import './foundation/base.js';
 import withErrorBoundary from './modules/Common/withErrorBoundary';
@@ -31,7 +30,6 @@ class App extends Component {
               <Route path="/profile/:slug" component={asyncLoad(() => import('./modules/Mover/Profile'))} />
               <Route path="/" component={asyncLoad(() => import('./modules/Home'))} />
             </Switch>
-            <Footer />
           </main>
         </ThemeProvider>
       </Router>

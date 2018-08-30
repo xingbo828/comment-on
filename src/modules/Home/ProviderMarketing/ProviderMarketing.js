@@ -7,6 +7,7 @@ import Hero from './Hero'
 import ImageWrapper from './ImageWrapper'
 import { Heading as MarketingHeading } from '../../../globalComponents/MarketingTypography'
 import { Paragraph, ThematicBreak, Heading } from '../../../globalComponents/Typography';
+import Footer from '../../Common/Footer'
 import Link from '../../../globalComponents/Link'
 import {
   PlaceholderImage,
@@ -27,7 +28,7 @@ class ProviderMarketing extends React.PureComponent {
         <Grid.Container>
           <Grid.Row>
             <Grid.Col xs={24} sm={24} md={24} lg={24} xl={24} >
-              <MarketingHeading eyebrow="It's easy" underlay="how" wrapperTag="h3" centered size="md">Here's how it works</MarketingHeading>
+              <MarketingHeading eyebrow="It's easy" underlay="Features" wrapperTag="h3" centered size="md">Here's how it works</MarketingHeading>
             </Grid.Col>
           </Grid.Row>
         </Grid.Container>
@@ -108,7 +109,7 @@ class ProviderMarketing extends React.PureComponent {
               </Grid.Col>
               <Grid.Col xs={24} sm={24} md={24} lgOffset={2} lg={6} xlOffset={2} xl={6}>
                 <Box vertical={{ xs:6, lg: 12 }} below={{ xs:12, lg:12}}>
-                  <div><Button primary>Test</Button></div>
+                  <div><Button primary>Try the demo</Button></div>
                 </Box>
               </Grid.Col>
             </Grid.Row>
@@ -178,6 +179,7 @@ class ProviderMarketing extends React.PureComponent {
             </Grid.Row>
           </Grid.Container>
         </ImageWrapper>
+        <Footer />
       </React.Fragment>
     )
   }
