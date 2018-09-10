@@ -47,15 +47,10 @@ export const RouteInfoContainer = styled.div`
 
 
 export const InputsContainer = styled.div`
-  padding: 2rem 2rem .5rem;
+  padding: 3rem 2rem;
   position: relative;
 
   ${props=>props.theme.media.greaterThan('sm')`
     padding: 3rem;
   `}
-`;
-
-export const InputContainer = styled.div`
-  margin-bottom: ${props=>props.theme.spaces.wide};
-  box-shadow: 0 -1px 0 inset ${props=>props.theme.colors.border};
 `;

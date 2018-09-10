@@ -1,9 +1,8 @@
 import React from 'react';
 import values from 'lodash/values';
-import isEmpty from 'lodash/isEmpty';
 import Layout from '../../../../../globalComponents/Layout';
 
-import { TextArea, TextField, Legend } from '../../../../../globalComponents/Form';
+import { TextArea, Legend } from '../../../../../globalComponents/Form';
 import Address from './Address';
 import Date from './Date';
 import Items from './Items';

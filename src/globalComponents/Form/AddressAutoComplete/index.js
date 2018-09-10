@@ -74,7 +74,7 @@ class AddressAutoComplete extends Component {
           onChange={this.handleOnChange}
           getSuggestLabel={this.mapSuggestDescription}
         />
-        <FocusBorder />
+        <FocusBorder className="focus-border"/>
       </Container>
     );
   }

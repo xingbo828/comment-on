@@ -7,6 +7,7 @@ export const Container = styled.div`
   padding: 0;
   width: 100%;
   transition: border-color .3s;
+  box-shadow: none;
 
   ${props=>props.bordered && `
     border-radius: 4px;
@@ -18,15 +19,17 @@ export const Container = styled.div`
   `}
 `;
 
-export const FocusBorder = styled.span`
+export const FocusBorder = styled.div`
+  position: relative;
   display: block;
   height: 2px;
   width: 100%;
   background: ${props=>props.theme.colors.border};
-  margin-top: -2px;
+  margin-top: -3px;
   transition: .3s;
-  transform: scaleX(0);
+  transform: scale(0);
   transform-origin: 0;
+  z-index: 3;
 `;
 
 export const Label = styled.label`
@@ -58,15 +61,13 @@ export const Label = styled.label`
     text-transform: uppercase;
     transform: scale(.65);
     top: 0;
-
-    ~ span {
-      transform: scaleX(1);
-    }
+    z-index: 3;
   `}
 
   ${props=>(props.focused) && `
-    ~ span {
+    ~ div.focus-border {
       background: ${props.theme.colors.primary} !important;
+      transform: scaleX(1);
     }
   `}
 `;
@@ -90,7 +91,8 @@ export const GeosuggestStyled = styled(Geosuggest)`
     width: 100%;
     box-sizing: border-box;
     padding: 1.5rem 0 1rem;
-    border-width:0;
+    border-color: ${props => props.theme.colors.border};
+    border-width: 0 0 2px 0;
     color: ${props => props.theme.colors.textDark};
   }
 

@@ -4,13 +4,13 @@ import isNull from 'lodash/isNull';
 import isObject from 'lodash/isObject';
 import Map from '../../../../../../globalComponents/Map';
 import Icon from '../../../../../../globalComponents/Icon';
+import Box from '../../../../../../globalComponents/Box';
 import AddressAutoComplete from '../../../../../../globalComponents/Form/AddressAutoComplete';
 import {
   Container,
   MapContainer,
   RouteInfoContainer,
-  InputsContainer,
-  InputContainer
+  InputsContainer
 } from './Styled';
 
 class AddressSelection extends Component {
@@ -119,21 +119,19 @@ class AddressSelection extends Component {
         </MapContainer>
         {this.renderRouteInfo(route)}
         <InputsContainer>
-          <InputContainer>
+          <Box between={5}>
             <AddressAutoComplete
               icon="circle-o"
               initialValue={this.getInitValue(from)}
               label="Pick-up address"
               onSelect={this.onFromAddressSelect}
             />
-          </InputContainer>
-          <InputContainer>
             <AddressAutoComplete
               initialValue={this.getInitValue(to)}
               label="Delivery address"
               onSelect={this.onToAddressSelect}
             />
-          </InputContainer>
+          </Box>
         </InputsContainer>
       </Container>
     );

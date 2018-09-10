@@ -9,7 +9,10 @@ export const Container = Styled.nav`
   z-index: 99;
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
-  
+
+  ${props=>props.theme.media.lessThan('xs')`
+    display: none;
+  `};
 `
 
 export const NavList = Styled.ul`
@@ -25,7 +28,7 @@ export const NavListItem = Styled.li`
   margin-right: 1.5rem;
   font-weight: 600;
   height: 4rem;
-ß
+
   &:after {
     transition: .3s;
     position: absolute;

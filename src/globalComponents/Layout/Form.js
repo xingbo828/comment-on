@@ -53,7 +53,11 @@ const FormHeading = styled.div`
 `;
 
 const FormFieldSet = styled.div`
-  margin: 0 0 6rem;
+  margin: 0 0 3rem;
+  
+  ${props=>props.theme.media.greaterThan('md')`
+    margin: 0 0 6rem;
+  `}
 `
 
 export default {
