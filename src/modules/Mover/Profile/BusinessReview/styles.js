@@ -20,7 +20,7 @@ export const DetailWrapper = styled.div`
 `;
 
 
-export const Logo = styled.div`
+export const Logo = styled.a`
   width: 80px;
   height: 80px;
   background: url(${props=>props.src}) center center no-repeat;

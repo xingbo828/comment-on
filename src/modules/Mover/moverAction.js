@@ -39,6 +39,7 @@ export const getMover = () => async dispatch => {
   const moverDoc = await moverDocRef.get();
   if(moverDoc.exists) {
     const moverData = await  moverDoc.data();
+    debugger
     dispatch({
       type: LOADED_MOVER_PROFILE,
       data: {

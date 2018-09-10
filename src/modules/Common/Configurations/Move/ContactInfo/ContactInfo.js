@@ -18,24 +18,21 @@ const ContactInfo = ({
     <Form onSubmit={handleSubmit}>
       <FormInner>
         <Legend>How can we contact you?</Legend>
-
         <FormFieldSet>
           <Field
             component={TextField}
             name="name"
             label="Name"
           />
-       
-          <Field
-            component={TextField}
-            name="phoneNumber"
-            label="Phone number"
-          />
-
           <Field
             component={TextField}
             name="email"
             label="Email"
+          />
+          <Field
+            component={TextField}
+            name="phoneNumber"
+            label="Phone number (Optional)"
           />
         </FormFieldSet>
 

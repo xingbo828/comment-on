@@ -28,7 +28,7 @@ const availableConfigSteps = {
 };
 
 const MoveConfigurations = ({ location, history, match }) => {
-  const configurations = [ 'Address', 'Date','Logistics', 'Items', 'Overview' ]
+  const configurations = [ 'Address', 'Date', 'Logistics', 'Items', 'Overview' ]
 
   const paths = configurations.map((c, index) => {
     const essential =  {
@@ -72,7 +72,7 @@ const MoveConfigurations = ({ location, history, match }) => {
           <Box vertical={10} between={11}>
             <Box between={8}>
               <Box between={3}>
-                <Heading wrapperTag="h2" size="xs" centered styles={{ color: 'red' }} >GET A QUOTE</Heading>
+                <Heading wrapperTag="h2" size="xs" centered>GET A QUOTE</Heading>
                 <Heading wrapperTag="h1" centered>Nathan's Moving Company</Heading>
                 <Paragraph centered>Step {currentStep + 1}/{configurations.length}: {configurations[currentStep]}</Paragraph>
               </Box>

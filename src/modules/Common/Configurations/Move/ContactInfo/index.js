@@ -25,11 +25,6 @@ const validate = validateFunc(
     },
     {
       field: 'phoneNumber',
-      validator: 'isRequired',
-      message: 'Required'
-    },
-    {
-      field: 'phoneNumber',
       validator: 'isValidPhoneNumber',
       message: 'Invalid phone number'
     },
