@@ -14,7 +14,7 @@ import ContactInfo from './ContactInfo';
 import { loadContactInfo } from '../../ContactInfo/actions';
 import mapImmutablePropsToPlainProps from '../../../../mapImmutablePropsToPlainProps'
 
-const validator = detail => !isEmpty(get(detail, ['name'])) && !isEmpty(get(detail, ['phoneNumber'])) && !isEmpty(get(detail, ['email']));
+const validator = detail => !isEmpty(get(detail, ['name'])) && !isEmpty(get(detail, ['email']));
 
 const mapDispatchToProps = dispatch => ({
   loadContactInfo: () => dispatch(loadContactInfo())

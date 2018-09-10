@@ -13,8 +13,6 @@ import scrollToTopOnMount from '../../../../Common/scrollToTopOnMount';
 import mapImmutablePropsToPlainProps from '../../../../Common/mapImmutablePropsToPlainProps';
 
 import {
-  setProjectName,
-  getProjectName,
   setAdditionalNotes,
   getAdditionalNotes
 } from './actions';
@@ -23,9 +21,7 @@ import { getOverview } from '../moveReducers';
 
 const mapDispatchToProps = dispatch => ({
   getAdditionalNotes: () => dispatch(getAdditionalNotes()),
-  setAdditionalNotes: notes => dispatch(setAdditionalNotes(notes)),
-  getProjectName: () => dispatch(getProjectName()),
-  setProjectName: name => dispatch(setProjectName(name))
+  setAdditionalNotes: notes => dispatch(setAdditionalNotes(notes))
 });
 
 const mapStateToProps = state => ({
@@ -34,9 +30,6 @@ const mapStateToProps = state => ({
 
 const notLoaded = props => {
   if (isUndefined(props.overview)) {
-    return true;
-  }
-  if (props.overview.getIn(['projectName', 'status']) !== 'LOADED') {
     return true;
   }
   if (props.overview.getIn(['notes', 'status']) !== 'LOADED') {
@@ -53,8 +46,7 @@ const enhance = compose(
   ),
   lifecycle({
     componentDidMount() {
-      const { getAdditionalNotes, getProjectName } = this.props;
-      getProjectName();
+      const { getAdditionalNotes } = this.props;
       getAdditionalNotes();
     }
   }),

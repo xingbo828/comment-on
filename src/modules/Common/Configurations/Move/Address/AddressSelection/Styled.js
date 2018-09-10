@@ -22,7 +22,7 @@ export const MapContainer = styled.div`
 
 export const RouteInfoContainer = styled.div`
   position: absolute;
-  right: 50px;
+  right: 60px;
   top: 190px;
   ${props=>props.theme.media.between('sm','md')`
     top: 340px;

@@ -30,6 +30,12 @@ class CalendarContainer extends Component {
     });
   }
 
+  sortDates(dates) {
+    return dates.sort((a, b) => {
+      return a.diff(b)
+    })
+  }
+
   onSelect = (value) => {
     const index = this.state.selectedDate.findIndex((d) => d.isSame(value));
     let newSelectedDate
@@ -38,6 +44,9 @@ class CalendarContainer extends Component {
     } else {
       newSelectedDate = this.state.selectedDate.filter((d) => !d.isSame(value))
     }
+
+    newSelectedDate = this.sortDates(newSelectedDate)
+
     this.setState(() => ({
       selectedDate: newSelectedDate
     }));

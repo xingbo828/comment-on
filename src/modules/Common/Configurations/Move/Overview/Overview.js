@@ -23,7 +23,6 @@ const ConfigurationOverview = ({
   configurations,
   overview,
   handleSubmit,
-  setProjectName,
   setAdditionalNotes,
   editPath,
   formAction,
@@ -42,36 +41,8 @@ const ConfigurationOverview = ({
 
   const isOverviewValid = () => {
     const configValidateStatusAllTrue = values(configurationsValidationStatus).filter(s => s !== true).length === 0
-    const isProjectNameValid = !isEmpty(overview.projectName.detail)
-    return configValidateStatusAllTrue && isProjectNameValid
+    return configValidateStatusAllTrue
   }
-
-
-  const renderProjectName = (name, onChange) => {
-    const onChangeHandler = (e) => {
-      onChange(e.target.value);
-    };
-
-    const input = {
-      value: name,
-      onChange: onChangeHandler
-    };
-    const meta = {}
-    if(isEmpty(name)) {
-      meta.error = 'Required'
-      meta.touched = true
-    }
-    return (
-      <div>
-        <Legend>Enter a name for your project</Legend>
-        <TextField
-          input={input}
-          label="Project name"
-          meta={meta}
-        />
-      </div>
-    );
-  };
 
   const renderAdditionalNoteSection = (notes, onChange) => {
     const onChangeHandler = (e) => {
@@ -99,9 +70,6 @@ const ConfigurationOverview = ({
         <FormFieldSet>
           <Legend>Let's review everything so far. Feel free to go back and make any changes.</Legend>
           {renderSections(configurations)}
-        </FormFieldSet>
-        <FormFieldSet>
-          {renderProjectName(overview.projectName.detail, setProjectName)}
         </FormFieldSet>
         <FormFieldSet>
           {renderAdditionalNoteSection(overview.notes.detail, setAdditionalNotes)}

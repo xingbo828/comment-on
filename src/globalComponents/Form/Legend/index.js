@@ -16,6 +16,13 @@ const Legend = Styled.div`
     font-size: 2rem;
   `};
 
+  ${props=>props.small && `
+    font-size: .875rem !important;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    &:after { display: none; }
+  `}
+
   &:after {
     position: absolute;
     bottom: 0;
@@ -26,5 +33,6 @@ const Legend = Styled.div`
     background: ${props=>props.theme.colors.primary};
   }
 `
+
 
 export default Legend
