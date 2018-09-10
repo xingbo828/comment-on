@@ -11,7 +11,7 @@ export const Container = Styled.nav`
   border-top-left-radius: 4px;
 `
 
-export const NavList = Styled.ul`\
+export const NavList = Styled.ul`
   list-style-type: none;
   padding: 0;
   margin: 0 2rem;
