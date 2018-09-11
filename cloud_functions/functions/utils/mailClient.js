@@ -7,7 +7,7 @@ sgMail.setSubstitutionWrappers('{{', '}}');
 const buildMsg = (to, url) => {
   const msg = {
     to,
-    from: 'noreply@inneed.ca',
+    from: 'InNeed<noreply@inneed.ca>',
     subject: 'New project available from In Need',
     text: 'You have a new project!',
     html: '<p>You have a new project!</p>',
@@ -27,7 +27,7 @@ module.exports = {
   sendLeadNotification: (to, info) => {
     const msg = {
       to,
-      from: 'noreply@inneed.ca',
+      from: 'InNeed<noreply@inneed.ca>',
       subject: 'Your moving request has been sent to mover',
       text: 'Mover will contact you shortly.',
       html: '<p>Mover will contact you shortly.</p>',
