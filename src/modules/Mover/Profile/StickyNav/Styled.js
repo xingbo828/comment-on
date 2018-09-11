@@ -9,9 +9,13 @@ export const Container = Styled.nav`
   z-index: 99;
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
+
+  ${props=>props.theme.media.lessThan('xs')`
+    display: none;
+  `};
 `
 
-export const NavList = Styled.ul`\
+export const NavList = Styled.ul`
   list-style-type: none;
   padding: 0;
   margin: 0 2rem;

@@ -19,6 +19,7 @@ class MarketingNav extends React.Component {
   constructor(props) {
     super(props)
     this.toggleMenu = this.toggleMenu.bind(this)
+    this.goToRegister = this.goToRegister.bind(this)
     this.state  = {
       visible: false
     }
@@ -28,6 +29,13 @@ class MarketingNav extends React.Component {
     console.log(this.state.visible)
     this.setState({ visible: !this.state.visible })
   }
+
+  goToRegister(e) {
+    e.preventDefault();
+    this.props.history.push({
+      pathname: '/register'
+    })
+  };
 
   render() {
     return (
@@ -44,11 +52,10 @@ class MarketingNav extends React.Component {
                 </InnerWrapper>
                 <Menu visible={this.state.visible}>
                   <MenuList>
-                    <MenuListItem><Link secondary href="test">Features</Link></MenuListItem>
-                    <MenuListItem><Link secondary href="test">Pricing</Link></MenuListItem>
-                    <MenuListItem><Link secondary href="test">Demo</Link></MenuListItem>
+                    <MenuListItem><Link secondary to="/">Features</Link></MenuListItem>
+                    <MenuListItem><Link secondary href="/profile/bos-business">Demo</Link></MenuListItem>
                     <MenuListItem><Link secondary href="test">Sign in</Link></MenuListItem>
-                    <MenuListItem><Button secondary small>Register</Button></MenuListItem>
+                    <MenuListItem><Button onClick={this.goToRegister} secondary small>Register</Button></MenuListItem>
                   </MenuList>
                 </Menu>
               </InnerContainer>

@@ -53,29 +53,31 @@ const ConfigurationSuccess = () => {
       <Grid.Container>
         <Grid.Row>
           <Grid.Col xs={24} sm={24} mdOffset={4} md={16} lgOffset={5} lg={14} xlOffset={6} xl={12} >
-            <Card>
-              <Box inset={6}>
-                <Box vertical={6}>
-                  <Content>
-                    <Box between={6}>
-                      <div><Checkmark style={{ width: 125, display: 'block', margin: '0 auto' }} /></div>
-                      <Box between={4}>
-                        <Heading wrapperTag="h1" size="sm">
-                          We've sent your request
-                        </Heading>
-                        <Paragraph>
-                          It is a long established fact that a reader will be distracted
-                          by the readable content of a page when looking at its layout.
-                          The point of using Lorem Ipsum is that it has a more-or-less
-                          normal distribution of letters.
-                        </Paragraph>
+            <Box below={6}>
+              <Card>
+                <Box inset={6}>
+                  <Box vertical={6}>
+                    <Content>
+                      <Box between={6}>
+                        <div><Checkmark style={{ width: 125, display: 'block', margin: '0 auto' }} /></div>
+                        <Box between={4}>
+                          <Heading wrapperTag="h1" size="sm">
+                            We've sent your request
+                          </Heading>
+                          <Paragraph>
+                            It is a long established fact that a reader will be distracted
+                            by the readable content of a page when looking at its layout.
+                            The point of using Lorem Ipsum is that it has a more-or-less
+                            normal distribution of letters.
+                          </Paragraph>
+                        </Box>
+                        <div><Button secondary>Back to profile</Button></div>
                       </Box>
-                      <div><Button secondary>Back to profile</Button></div>
-                    </Box>
-                  </Content>
+                    </Content>
+                  </Box>
                 </Box>
-              </Box>
-            </Card>
+              </Card>
+            </Box>
           </Grid.Col>
         </Grid.Row>
       </Grid.Container>

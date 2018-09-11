@@ -7,6 +7,7 @@ export const Image = Styled.div`
   background: center center no-repeat;
   background-image: url(https://firebasestorage.googleapis.com/v0/b/comment-on-85597.appspot.com/o/images%2Fgui%2Fmarketing%2FimageA.jpg?alt=media&token=8f75c17f-423f-43ac-8e11-818798e9665e);
   background-size: cover;
+  background-color: ${props=>props.theme.colors.secondaryPale};
   margin-bottom: -275px;
 
   * {
