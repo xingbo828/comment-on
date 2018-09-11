@@ -144,7 +144,6 @@ app.patch('/:projectId/status', (request, response) => {
     console.log(body);
     return response.status(400).json({error: 'empty payload'});
   }
-  return res.status(400).json({});
   return getProviderId(request)
     .then(data => {
       const providerId = data.moverId;
@@ -171,7 +170,7 @@ app.patch('/:projectId/status', (request, response) => {
     })
     .catch((error)=>{
       console.log(error);
-      return res.status(400).json({});
+      return response.status(400).json({});
     });
 });
 
