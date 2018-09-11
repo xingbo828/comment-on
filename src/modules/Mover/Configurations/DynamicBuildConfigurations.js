@@ -15,6 +15,7 @@ import FadeInRouteTransition from '../../Common/RouteTransitions/FadeInRouteTran
 import overviewEnhancer from './overviewEnhancer';
 import ProgressBar from '../../../globalComponents/ProgressBar';
 import CoverPhoto from '../../../globalComponents/CoverPhoto';
+
 import Styled from './Styled'
 
 const availableConfigSteps = {
@@ -26,7 +27,7 @@ const availableConfigSteps = {
   Overview: overviewEnhancer(Overview)
 };
 
-const DynamicBuildConfigurations = ({ match, history, location, profileData: { id, configurations, coverPhoto, name } }) => {
+const DynamicBuildConfigurations = ({ match, history, location, profileData: { id, slug, configurations, coverPhoto, name } }) => {
   const paths = configurations.map((c, index) => {
     const essential =  {
       path: `${match.url}/${c.toLowerCase()}`,

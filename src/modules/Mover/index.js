@@ -6,7 +6,7 @@ import MoverConfigurationSuccess from './Configurations/Success';
 const Mover = () => {
   return (
     <Switch>
-      <Route exact path="/configuration/move/success" component={MoverConfigurationSuccess} />
+      <Route exact path="/configuration/move/:slug/success" component={MoverConfigurationSuccess} />
       <Route path="/configuration/move/:slug" component={MoverConfiguration} />
     </Switch>
   );
