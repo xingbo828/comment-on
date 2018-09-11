@@ -1,12 +1,13 @@
 import React from 'react';
-import AnimatedIcon from '../../../globalComponents/AnimatedIcon';
-import Grid from '../../../globalComponents/Grid';
-import Card from '../../../globalComponents/Card';
-import Box from '../../../globalComponents/Box';
+import AnimatedIcon from '../../../../globalComponents/AnimatedIcon';
+import Grid from '../../../../globalComponents/Grid';
+import Card from '../../../../globalComponents/Card';
+import Box from '../../../../globalComponents/Box';
 import Styled from 'styled-components';
+import { withRouter } from 'react-router-dom'
 
-import { Paragraph, Heading } from '../../../globalComponents/Typography';
-import { Button } from '../../../globalComponents/Form';
+import { Paragraph, Heading } from '../../../../globalComponents/Typography';
+import { Button } from '../../../../globalComponents/Form';
 
 export const Header = Styled.div`
   position: relative;
@@ -46,7 +47,14 @@ export const Content = Styled.div`
 
 const { Checkmark } = AnimatedIcon;
 
-const ConfigurationSuccess = () => {
+const ConfigurationSuccess = ({ profileData: { slug, name }, history }) => {
+
+  const backToProfile = () => {
+    history.push({
+      pathname: `/profile/${slug}`
+    });
+  }
+
   return (
     <React.Fragment>
       <Header />
@@ -65,13 +73,10 @@ const ConfigurationSuccess = () => {
                             We've sent your request
                           </Heading>
                           <Paragraph>
-                            It is a long established fact that a reader will be distracted
-                            by the readable content of a page when looking at its layout.
-                            The point of using Lorem Ipsum is that it has a more-or-less
-                            normal distribution of letters.
+                           {`${name} has been notified and will provide you a quote by email. You can expect a response within an hour of submission.`}
                           </Paragraph>
                         </Box>
-                        <div><Button secondary>Back to profile</Button></div>
+                        <div><Button onClick={backToProfile} secondary>Back to profile</Button></div>
                       </Box>
                     </Content>
                   </Box>
@@ -85,4 +90,4 @@ const ConfigurationSuccess = () => {
   );
 };
 
-export default ConfigurationSuccess;
+export default withRouter(ConfigurationSuccess);
