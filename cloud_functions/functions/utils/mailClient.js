@@ -27,7 +27,7 @@ module.exports = {
   sendNewProviderEmails: (receivers, projectId) => {
     const msgs = Object.keys(receivers).map( receiverId => {
       const receiver = receivers[receiverId];
-      return buildMsg(receiver.email, `https://business-dev.ezypzy.ca/projects/${projectId}`);
+      return buildMsg(receiver.email, `https://business.inneed.ca/projects/${projectId}`);
     });
     return sgMail.send(msgs);
   }
