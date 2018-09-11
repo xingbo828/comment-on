@@ -34,7 +34,8 @@ const handleDirectProject = (lead, snap, context) => {
       batch.set(projectRef, lead);
       return sendNewProviderEmails(lead.receivers, lead.id);
     }).then(() => {
-      const email = lead && lead.contactInfo && lead.contactInfo.email;
+      const email = lead && lead.configuration && lead.configuration.contactInfo && lead.configuration.contactInfo.email;
+      console.log(email);
       if (email) {
         sendLeadNotification(email);
       }
