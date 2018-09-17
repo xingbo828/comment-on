@@ -6,7 +6,8 @@ import {
   lifecycle,
   branch,
   withStateHandlers,
-  renderNothing
+  renderNothing,
+  setStatic
 } from 'recompose';
 import Overview from './Overview';
 import scrollToTopOnMount from '../../../../Common/scrollToTopOnMount';
@@ -39,6 +40,7 @@ const notLoaded = props => {
 };
 
 const enhance = compose(
+  setStatic('label', 'Overview'),
   withRouter,
   connect(
     mapStateToProps,

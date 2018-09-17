@@ -47,10 +47,15 @@ const DynamicBuildConfigurations = ({ match, history, location, profileData: { i
   })
   const currentStep = paths.findIndex((p) => p.path === history.location.pathname);
   const renderSteps = (current) => {
-    const progress = (current + 1) / configurations.length * 100 
+    const progress = (current + 1) / configurations.length * 100
     return (
       <ProgressBar value={progress} />
     );
+  }
+
+  const getCurrentStepLabel = (currentStep) => {
+    const key = configurations[currentStep];
+    return availableConfigSteps[key].label;
   }
 
   return (
@@ -67,7 +72,7 @@ const DynamicBuildConfigurations = ({ match, history, location, profileData: { i
                       <Heading wrapperTag="h2" size="xs" secondary centered uppercase>Get a Quote</Heading>
                       <Heading wrapperTag="h1" size="lg" centered>{name}</Heading>
                     </Box>
-                    <Paragraph large centered>Step {currentStep + 1}/{configurations.length}: {configurations[currentStep]}</Paragraph>
+                    <Paragraph large centered>Step {currentStep + 1}/{configurations.length}: {getCurrentStepLabel(currentStep)}</Paragraph>
                   </Box>
                   {renderSteps(currentStep)}
                 </Box>

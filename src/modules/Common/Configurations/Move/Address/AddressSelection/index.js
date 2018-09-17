@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { object, func } from 'prop-types';
 import isNull from 'lodash/isNull';
+import isEmpty from 'lodash/isEmpty'
 import isObject from 'lodash/isObject';
 import Map from '../../../../../../globalComponents/Map';
 import Icon from '../../../../../../globalComponents/Icon';
@@ -50,13 +51,13 @@ class AddressSelection extends Component {
 
   onFromAddressSelect = (v) => {
     this.setState({
-      from: v === null ? v : this.formatAddr(v.gmaps)
+      from: isEmpty(v) ? v : this.formatAddr(v.gmaps)
     });
   }
 
   onToAddressSelect = (v) => {
     this.setState({
-      to: v === null ? v : this.formatAddr(v.gmaps)
+      to: isEmpty(v) ? v : this.formatAddr(v.gmaps)
     });
   };
 

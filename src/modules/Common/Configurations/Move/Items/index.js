@@ -1,6 +1,6 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { compose, lifecycle, branch, renderNothing, withProps } from 'recompose';
+import { compose, setStatic, lifecycle, branch, renderNothing, withProps } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import Items from './Items';
 import scrollToTopOnMount from '../../../../Common/scrollToTopOnMount';
@@ -27,6 +27,7 @@ const notLoaded = props => {
 };
 
 const enhance = compose(
+  setStatic('label', 'Moving items'),
   withRouter,
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({

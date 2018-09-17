@@ -5,7 +5,8 @@ import {
   lifecycle,
   branch,
   renderNothing,
-  withProps
+  withProps,
+  setStatic
 } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import DateStep from './Date';
@@ -40,6 +41,7 @@ const notLoaded = props => {
 };
 
 const enhance = compose(
+  setStatic('label', 'Moving dates'),
   withRouter,
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
