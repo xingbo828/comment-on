@@ -58,9 +58,12 @@ const DynamicBuildConfigurations = ({ match, history, location, profileData: { i
     return availableConfigSteps[key].label;
   }
 
+  if (match.isExact) {
+    return (<Redirect to={paths[0].path} />);
+  }
+
   return (
     <React.Fragment>
-      {match.isExact && <Redirect to={paths[0].path} />}
       <CoverPhoto src={coverPhoto} />
         <Grid.Container>
           <Grid.Row>
