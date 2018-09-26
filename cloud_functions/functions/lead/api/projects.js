@@ -22,6 +22,8 @@ app.use((err, req, res, next) => {
 });
 
 app.get('/', (request, response) => {
+  const filterStartDate = request.query.filterStartDate;
+  const filterEndDate = request.query.filterEndDate;
   return getProviderId(request)
     .then(userData =>
       admin.firestore().collection('providers').doc(userData.moverId).get().then(d => ({userData, provider: d.data()}))
@@ -31,6 +33,15 @@ app.get('/', (request, response) => {
     )
     .then(({userData, projects}) => Promise.all(projects.map(p => processProject(p, userData))))
     .then(result => {
+      if (filterStartDate && filterEndDate) {
+        result = result.filter(project => {
+          const date = project.receiver.date;
+          if (!date) {
+            return false;
+          }
+          return date >= new Date(filterStartDate) && date <= new Date(filterEndDate);
+        });
+      }
       response.json(result);
     })
     .catch(err => {
@@ -97,6 +108,46 @@ app.get('/:projectId', (request, response) => {
     });
 });
 
+app.patch('/:projectId/date', (request, response) => {
+  const projectId = request.params.projectId;
+  const body = request.body;
+  if (!body.date) {
+    console.log("body", body);
+    return response.status(400).json({error: 'empty payload'});
+  }
+
+  return getProviderId(request)
+    .then(data => {
+
+      const providerId = data.moverId;
+      return admin.firestore().collection('projects').doc(projectId).get().then((doc) => {
+
+        const project = doc.data();
+        const receiver = project.receivers[providerId];
+        if (!receiver) {
+          return Promise.reject('invalid provider');
+        }
+        receiver.date = new Date(body.date);
+        return doc.ref.set(project)
+          .then(() => {
+            return data;
+          });
+      });
+    })
+    .then((userData) => {
+      return admin.firestore().collection('projects').doc(projectId).get().then((doc) => {
+        return processProject(doc, userData);
+      })
+    })
+    .then((project) => {
+      return response.json(project);
+    })
+    .catch((error)=>{
+      console.log(error);
+      return response.status(400).json({});
+    });
+});
+
 app.patch('/:projectId/notes', (request, response) => {
   const projectId = request.params.projectId;
   const body = request.body;
@@ -107,10 +158,10 @@ app.patch('/:projectId/notes', (request, response) => {
 
   return getProviderId(request)
     .then(data => {
-      
+
       const providerId = data.moverId;
       return admin.firestore().collection('projects').doc(projectId).get().then((doc) => {
-        
+
         const project = doc.data();
         const receiver = project.receivers[providerId];
         if (!receiver) {
