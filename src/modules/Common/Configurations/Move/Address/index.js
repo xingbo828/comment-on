@@ -1,6 +1,6 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { compose, lifecycle, branch, withProps, renderNothing } from 'recompose';
+import { compose, setStatic, lifecycle, branch, withProps, renderNothing } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import AddressStep from './Address';
 import scrollToTopOnMount from '../../../../Common/scrollToTopOnMount';
@@ -36,6 +36,7 @@ const notLoaded = props => {
 };
 
 const enhance = compose(
+  setStatic('label', 'Moving addresses'),
   withRouter,
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
@@ -78,5 +79,4 @@ const enhance = compose(
   }),
   scrollToTopOnMount
 );
-
 export default enhance(AddressStep);
