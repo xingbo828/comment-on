@@ -29,8 +29,8 @@ const Registration = ({ handleSubmit, history }) => {
           <Grid.Col xs={24} sm={24} md={24} lgOffset={6} lg={12} xlOffset={6} xl={12}>
             <Box vertical={12}>
               <Box vertical={3} between={3} >
-                <Heading wrapperTag="h1">Hello there!</Heading>
-                <Paragraph>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</Paragraph>
+                <Heading wrapperTag="h1">Become an Early Adopter</Heading>
+                <Paragraph>Registration is now open for our first round of early adopters. Our early adopters will be get free - lifetime access to our current suite of tools. If you’re interested leave your details and we’ll be in touch. We’re excited to hear from you!</Paragraph>
               </Box>
               <ThematicBreak short />
               <form onSubmit={handleRegistration} >
@@ -52,7 +52,7 @@ const Registration = ({ handleSubmit, history }) => {
                   />
                 </Box>
                 <Box vertical={4} bottom={0}>
-                  <div><Button type="submit" primary>Get in touch</Button></div>
+                  <div><Button type="submit" primary>Submit</Button></div>
                 </Box>
               </form>
             </Box>
