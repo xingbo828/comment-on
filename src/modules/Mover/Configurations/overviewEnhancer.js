@@ -27,7 +27,6 @@ const enhance = compose(
       debugger;
       await props.addDirectProject(PROJECT_TYPES.MOVE, config, props.providerId);
       await deleteStepInfo();
-      console.log(props)
       props.history.push({
         pathname: `/configuration/move/${props.slug}/success`
       });

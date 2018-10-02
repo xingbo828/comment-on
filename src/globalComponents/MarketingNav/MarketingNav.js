@@ -52,9 +52,8 @@ class MarketingNav extends React.Component {
                 </InnerWrapper>
                 <Menu visible={this.state.visible}>
                   <MenuList>
-                    <MenuListItem><Link secondary to="/">Features</Link></MenuListItem>
-                    <MenuListItem><Link secondary href="/profile/bos-business">Demo</Link></MenuListItem>
-                    <MenuListItem><Link secondary href="test">Sign in</Link></MenuListItem>
+                    <MenuListItem><Link secondary href="test">Sign In</Link></MenuListItem>
+                    <MenuListItem><Link secondary href="/profile/bos-business">Try the Demo</Link></MenuListItem>
                     <MenuListItem><Button onClick={this.goToRegister} secondary small>Register</Button></MenuListItem>
                   </MenuList>
                 </Menu>

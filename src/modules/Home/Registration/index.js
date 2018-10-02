@@ -5,6 +5,8 @@ import Registration from './Registration';
 import validators, { validateFunc } from '../../Common/validators';
 import { submitRegistration } from './RegistrationActions' 
 import message from '../../../globalComponents/Message';
+import scrollToTopOnMount from '../../Common/scrollToTopOnMount';
+
 
 const validate = validateFunc(
   [
@@ -33,6 +35,7 @@ const validate = validateFunc(
 );
 
 const enhance = compose(
+  scrollToTopOnMount,
   withRouter,
   reduxForm({
     form: 'marketing.register',

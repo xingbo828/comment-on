@@ -1,37 +1,47 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 import Grid from '../../../../globalComponents/Grid'
 import { Heading, Paragraph } from '../../../../globalComponents/Typography'
 import Button from '../../../../globalComponents/Form/Button'
 import Box from '../../../../globalComponents/Box'
 import { 
-  Image,
-  Card,
+  ContentWrapper,
   Container
 } from './Styled'
+import Content from '../Content'
 
 class Hero extends React.Component {
 
+  constructor(props) {
+    super(props)
+    this.goTo = this.goTo.bind(this)
+  }
+
+  goTo() {
+    this.props.history.push({
+      pathname: Content.hero.link.href
+    });
+  }
 
   render() {
     return (
-      <Container>
-        <Image />
+      <Container  src={Content.hero.image.src} >
         <Grid.Container>
           <Grid.Row>
-            <Grid.Col xs={24} sm={24} md={24} lgOffset={5} lg={14} xlOffset={5} xl={14} >
-              <Card>
+            <Grid.Col xs={24} sm={24} md={24} lg={14} xl={14} >
+              <ContentWrapper>
                 <Box between={6}>
                   <Box between={3}>
-                    <Heading size="md" wrapperTag="h1">We make moving easier for you and your customers.</Heading>
-                    <Paragraph>Inneed provides moving and delivery companies with the tools you need to quickly and effectively connect with your customers and recieve service requests online.</Paragraph>
+                    <Heading size="xl" wrapperTag="h1">{Content.hero.title}</Heading>
+                    <Paragraph xl color="white">{Content.hero.body}</Paragraph>
                   </Box>
                   <Box>
                     <div>
-                      <Button inverted>Try the Demo</Button>
+                      <Button onClick={this.goTo} inverted>{Content.hero.link.title}</Button>
                     </div>
                   </Box>
                 </Box>
-              </Card>
+              </ContentWrapper>
             </Grid.Col>
           </Grid.Row>
         </Grid.Container>
@@ -41,4 +51,4 @@ class Hero extends React.Component {
 }
 
 
-export default Hero
+export default withRouter(Hero)
