@@ -1,4 +1,6 @@
 import React from 'react'
+import Observer from 'react-intersection-observer'
+import Animation from '../../../globalComponents/Animation'
 import Grid from '../../../globalComponents/Grid' 
 import MarketingNav from '../../../globalComponents/MarketingNav'
 import Box from '../../../globalComponents/Box'
@@ -35,17 +37,27 @@ class ProviderMarketing extends React.PureComponent {
 
   MapRiverFlow(_content) {
     return _content.map((_entry) => (
-      <RiverFlow.Panel 
-        primaryContent={(
-          <Box between={4}>
-            <Heading size="sm" wrapperTag="h3">{_entry.title}</Heading>
-            <Paragraph>{_entry.body}</Paragraph>
-            <ThematicBreak short />
-            <ReactRouterLink secondary to={_entry.link.href}>{_entry.link.name}</ReactRouterLink>
-          </Box>
+      <Observer triggerOnce threshold={.1}>
+        {({inView, ref}) => (
+          <div ref={ref}>
+            <Animation.Fade timeout={300} ref={ref} in={inView}>
+              {() => (
+                <RiverFlow.Panel
+                  primaryContent={(
+                    <Box between={4}>
+                      <Heading size="sm" wrapperTag="h3">{_entry.title}</Heading>
+                      <Paragraph>{_entry.body}</Paragraph>
+                      <ThematicBreak short />
+                      <ReactRouterLink secondary to={_entry.link.href}>{_entry.link.name}</ReactRouterLink>
+                    </Box>
+                  )}
+                  secondaryContent={<PlaceholderImage src={_entry.image.src} />}
+                />
+              )}
+            </Animation.Fade>
+          </div>
         )}
-        secondaryContent={<PlaceholderImage src={_entry.image.src} />}
-      />
+      </Observer>
     ))
   }
 
