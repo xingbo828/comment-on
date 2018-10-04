@@ -1,7 +1,7 @@
 const sgMail = require('@sendgrid/mail');
 const functions = require('firebase-functions');
 
-sgMail.setApiKey(functions.config().sendgrid.key);
+// sgMail.setApiKey(functions.config().sendgrid.key);
 sgMail.setSubstitutionWrappers('{{', '}}');
 
 const buildMsg = (to, url) => {
