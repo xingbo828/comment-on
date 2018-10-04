@@ -64,10 +64,6 @@ export default {
       image: 'https://d2kz53n3bzvihv.cloudfront.net/media/gbu0/prodxxl/gainsborough-loveseat-in-beige-with-beige-scatters-582ed7a0eb1de.jpg'
     },
     {
-      title: 'Sofa Chair',
-      image: 'https://www.ikea.com/ca/en/images/products/stocksund-armchair__0378699_PE556245_S4.JPG'
-    },
-    {
       title: 'Dresser',
       image: 'https://s7d2.scene7.com/is/image/homedepotcanada/p_1000701020.jpg?context=bWFzdGVyfGltYWdlc3wxMjAwMjh8aW1hZ2UvanBlZ3xpbWFnZXMvaDExL2g0Ni8xMzM3ODIyMTA4MDYwNi5qcGd8Zjg1YzMxNDAyMjYxZDBjZTg5YTk4NTUwYWM4MTVlNzg1ZGQ5ZjgxZjMxZGU0NDkwNDgzYzM3Y2I5ZjU5MzJhMQ?$plpProduct$'
     },
