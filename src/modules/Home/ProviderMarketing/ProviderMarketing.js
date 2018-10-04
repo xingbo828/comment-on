@@ -37,11 +37,11 @@ class ProviderMarketing extends React.PureComponent {
 
   MapRiverFlow(_content) {
     return _content.map((_entry, _idx) => (
-      <Observer triggerOnce threshold={.1}>
-        {({inView, ref}) => (
-          <div ref={ref}>
-            <Animation.Fade timeout={300} ref={ref} in={inView}>
-              {() => (
+      // <Observer triggerOnce threshold={.1}>
+      //   {({inView, ref}) => (
+      //     <div ref={ref}>
+      //       <Animation.Fade timeout={300} ref={ref} in={inView}>
+      //         {() => (
                 <RiverFlow.Panel
                   flipped={!(_idx % 2)}
                   primaryContent={(
@@ -54,11 +54,11 @@ class ProviderMarketing extends React.PureComponent {
                   )}
                   secondaryContent={<PlaceholderImage src={_entry.image.src} />}
                 />
-              )}
-            </Animation.Fade>
-          </div>
-        )}
-      </Observer>
+      //         )}
+      //       </Animation.Fade>
+      //     </div>
+      //   )}
+      // </Observer>
     ))
   }
 
