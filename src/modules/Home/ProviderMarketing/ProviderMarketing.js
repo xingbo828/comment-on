@@ -36,13 +36,14 @@ class ProviderMarketing extends React.PureComponent {
   }
 
   MapRiverFlow(_content) {
-    return _content.map((_entry) => (
+    return _content.map((_entry, _idx) => (
       <Observer triggerOnce threshold={.1}>
         {({inView, ref}) => (
           <div ref={ref}>
             <Animation.Fade timeout={300} ref={ref} in={inView}>
               {() => (
                 <RiverFlow.Panel
+                  flipped={!(_idx % 2)}
                   primaryContent={(
                     <Box between={4}>
                       <Heading size="sm" wrapperTag="h3">{_entry.title}</Heading>

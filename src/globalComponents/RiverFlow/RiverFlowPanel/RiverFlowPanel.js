@@ -10,9 +10,9 @@ class RiverFlowPanel extends React.Component {
 
 
   render() {
-    const { primaryContent, secondaryContent } = this.props
+    const { primaryContent, secondaryContent, flipped } = this.props
     return (
-      <Container>
+      <Container flipped={flipped}>
         <SecondaryWrapper>{secondaryContent}</SecondaryWrapper>
         <PrimaryWrapper>{primaryContent}</PrimaryWrapper>
       </Container>
