@@ -1,4 +1,6 @@
 import React from 'react'
+// import Observer from 'react-intersection-observer'
+// import Animation from '../../../globalComponents/Animation'
 import Grid from '../../../globalComponents/Grid' 
 import MarketingNav from '../../../globalComponents/MarketingNav'
 import Box from '../../../globalComponents/Box'
@@ -34,18 +36,29 @@ class ProviderMarketing extends React.PureComponent {
   }
 
   MapRiverFlow(_content) {
-    return _content.map((_entry) => (
-      <RiverFlow.Panel 
-        primaryContent={(
-          <Box between={4}>
-            <Heading size="sm" wrapperTag="h3">{_entry.title}</Heading>
-            <Paragraph>{_entry.body}</Paragraph>
-            <ThematicBreak short />
-            <ReactRouterLink secondary to={_entry.link.href}>{_entry.link.name}</ReactRouterLink>
-          </Box>
-        )}
-        secondaryContent={<PlaceholderImage src={_entry.image.src} />}
-      />
+    return _content.map((_entry, _idx) => (
+      // <Observer triggerOnce threshold={.1}>
+      //   {({inView, ref}) => (
+      //     <div ref={ref}>
+      //       <Animation.Fade timeout={300} ref={ref} in={inView}>
+      //         {() => (
+                <RiverFlow.Panel
+                  flipped={!(_idx % 2)}
+                  primaryContent={(
+                    <Box between={4}>
+                      <Heading size="sm" wrapperTag="h3">{_entry.title}</Heading>
+                      <Paragraph>{_entry.body}</Paragraph>
+                      <ThematicBreak short />
+                      <ReactRouterLink secondary to={_entry.link.href}>{_entry.link.name}</ReactRouterLink>
+                    </Box>
+                  )}
+                  secondaryContent={<PlaceholderImage src={_entry.image.src} />}
+                />
+      //         )}
+      //       </Animation.Fade>
+      //     </div>
+      //   )}
+      // </Observer>
     ))
   }
 
@@ -74,7 +87,7 @@ class ProviderMarketing extends React.PureComponent {
             </Grid.Col>
           </Grid.Row>
         </Grid.Container>
-        <ImageWrapper overlapBottom overlapTop src="https://as1.ftcdn.net/jpg/00/55/83/94/500_F_55839427_QEkWL39Z9kz0ZX1vIFxBHNeht4RQjjaz.jpg">
+        <ImageWrapper overlapBottom overlapTop src="https://firebasestorage.googleapis.com/v0/b/comment-on-85597.appspot.com/o/images%2Fgui%2Fmarketing%2Fprovider_middle.jpg?alt=media&token=2d7a5dff-d531-4c43-a637-d56f43f1e099">
           <Grid.Container>
             <Grid.Row middle="md">
               <Grid.Col xs={24} sm={24} md={24} lgOffset={2} lg={10} xlOffset={2} xl={10} >
@@ -97,7 +110,14 @@ class ProviderMarketing extends React.PureComponent {
           <Grid.Row>
             <Grid.Col xs={24} sm={24} md={24} lg={24} xl={24} >
               <Box below={{ xs:10, lg:12 }} between={4}>
-                <Gallery images={['https://as1.ftcdn.net/jpg/01/82/99/74/240_F_182997459_aIGdpfRQBfj65auxNTld5AmsxRlR2NaT.jpg', 'https://as1.ftcdn.net/jpg/01/76/65/13/240_F_176651374_rMSq8JDUlPS74nHOmRF9gRQCR2KZ9pwq.jpg', 'https://as1.ftcdn.net/jpg/00/55/83/95/240_F_55839525_Qjpsa1ESYGOdWMP4Su1YXCXetF8QRMPh.jpg', 'https://as2.ftcdn.net/jpg/01/73/65/39/500_F_173653930_zy5PPtoNxa0rxfCkH1RuX6KVZyT6UY0J.jpg']} />            
+                <Gallery 
+                  images={[
+                    'https://firebasestorage.googleapis.com/v0/b/comment-on-85597.appspot.com/o/images%2Fgui%2Fmarketing%2Fprovider_collection_1.jpg?alt=media&token=c7dae472-c99f-44bb-b5c9-d1f07cbd27b6', 
+                    'https://firebasestorage.googleapis.com/v0/b/comment-on-85597.appspot.com/o/images%2Fgui%2Fmarketing%2Fprovider_collection_2.jpg?alt=media&token=e70f6455-9d4f-4f85-8fed-ca7e484523d3', 
+                    'https://firebasestorage.googleapis.com/v0/b/comment-on-85597.appspot.com/o/images%2Fgui%2Fmarketing%2Fprovider_collection_3.jpg?alt=media&token=c876d45f-af41-4195-9689-33f24fa8d00e', 
+                    'https://firebasestorage.googleapis.com/v0/b/comment-on-85597.appspot.com/o/images%2Fgui%2Fmarketing%2Fprovider_collection_4.jpg?alt=media&token=1f2629d8-e022-4879-9eb6-8924d36f34bd'
+                  ]} 
+                />            
               </Box>
             </Grid.Col>
           </Grid.Row>
@@ -116,7 +136,7 @@ class ProviderMarketing extends React.PureComponent {
             </Grid.Col>
           </Grid.Row>
         </Grid.Container>
-        <ImageWrapper src="https://as2.ftcdn.net/jpg/01/37/70/17/500_F_137701730_9qgcuA5TBs5wrRcmIr9ttCKQnY6N8ip8.jpg">
+        <ImageWrapper src="https://firebasestorage.googleapis.com/v0/b/comment-on-85597.appspot.com/o/images%2Fgui%2Fmarketing%2Fprovider_footer.jpg?alt=media&token=c8363ff4-49ad-4964-88b0-cf95fa21cbc8">
           <Grid.Container>
             <Grid.Row middle="md">
               <Grid.Col xs={24} sm={24} md={24} lgOffset={2} lg={10} xlOffset={2} xl={10} >

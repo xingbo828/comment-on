@@ -12,7 +12,7 @@ import Box from '../../../globalComponents/Box';
 import Grid from '../../../globalComponents/Grid';
 import footerHiddenList from './footerHiddenList.json';
 import Paragraph from '../../../globalComponents/Typography/Paragraph';
-import Link from '../../../globalComponents/Link';
+import { ReactRouterLink } from '../../../globalComponents/Link';
 
 const { Container, Row, Col } = Grid;
 
@@ -32,11 +32,11 @@ const FooterNav = () => {
           </Col>
           <Col xs={24} sm={24} md={7} lg={7} xl={7}>
             <ListHeading wrapperTag="h4" size="xs">
-              Social
+              Get Started
             </ListHeading>
             <List>
-              <ListItem><Link secondary>Facebook</Link></ListItem>
-              <ListItem><Link secondary>Twitter</Link></ListItem>
+              <ListItem><ReactRouterLink secondary to="/register">Register</ReactRouterLink></ListItem>
+              <ListItem><ReactRouterLink secondary to="/profile/vancouver-moving">Try the Demo</ReactRouterLink></ListItem>
             </List>
           </Col>
           <Col xs={24} sm={24} md={7} lg={7} xl={7}>
@@ -44,9 +44,9 @@ const FooterNav = () => {
               Support
             </ListHeading>
             <List>
-              <ListItem><Link secondary>Contact us</Link></ListItem>
-              <ListItem><Link secondary>Terms &amp; conditions</Link></ListItem>
-              <ListItem><Link secondary>Privacy Policy</Link></ListItem>
+              <ListItem><ReactRouterLink to="" secondary>Contact us</ReactRouterLink></ListItem>
+              <ListItem><ReactRouterLink to="" secondary>Terms &amp; conditions</ReactRouterLink></ListItem>
+              <ListItem><ReactRouterLink to="" secondary>Privacy Policy</ReactRouterLink></ListItem>
             </List>
           </Col>
         </Row>

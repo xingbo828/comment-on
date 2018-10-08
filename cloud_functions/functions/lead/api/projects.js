@@ -108,6 +108,52 @@ app.get('/:projectId', (request, response) => {
     });
 });
 
+app.patch('/:projectId', (request, response) => {
+  const projectId = request.params.projectId;
+  const body = request.body;
+  if (!body || Object.keys(body).length === 0) {
+    console.log("body", body);
+    return response.status(400).json({error: 'empty payload'});
+  }
+
+  return getProviderId(request)
+    .then(data => {
+
+      const providerId = data.moverId;
+      return admin.firestore().collection('projects').doc(projectId).get().then((doc) => {
+
+        const project = doc.data();
+        const receiver = project.receivers[providerId];
+        if (!receiver) {
+          return Promise.reject('invalid provider');
+        }
+        Object.keys(body).forEach(key => {
+          if (key === 'date') {
+            receiver[key] = new Date(body[key]);
+            return;
+          }
+          receiver[key] = body[key];
+        });
+        return doc.ref.set(project)
+          .then(() => {
+            return data;
+          });
+      });
+    })
+    .then((userData) => {
+      return admin.firestore().collection('projects').doc(projectId).get().then((doc) => {
+        return processProject(doc, userData);
+      })
+    })
+    .then((project) => {
+      return response.json(project);
+    })
+    .catch((error)=>{
+      console.log(error);
+      return response.status(400).json({});
+    });
+});
+
 app.patch('/:projectId/date', (request, response) => {
   const projectId = request.params.projectId;
   const body = request.body;
