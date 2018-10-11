@@ -3,11 +3,11 @@ import Card from '../../../../globalComponents/Card'
 import Button from '../../../../globalComponents/Form/Button'
 import Box from '../../../../globalComponents/Box'
 import {
-  Heading,
   Paragraph
 } from '../../../../globalComponents/Typography'
 import {
-  Container
+  Container,
+  Message
 } from './Styled'
 
 class GetStarted extends React.Component {
@@ -15,23 +15,18 @@ class GetStarted extends React.Component {
     const { handleClick } = this.props
     return (
       <Container>
-        <Box vertical={9} below={0}>
-          <Card>
-            <Box inset={4}>
-                <Box between={6}>
-                  <Box between={7}>
-                    <Box between={2}>
-                      <Heading wrapperTag="h3" size="sm">Request a Quote</Heading>
-                      <Paragraph>Average response time: 15 mins</Paragraph>
-                    </Box>
-                  </Box>
-                  <Button primary squared onClick={handleClick}>
-                    Get a Quote
-                  </Button>
-                </Box>
+        <Card>
+          <Box inset={4}>
+            <Button primary squared onClick={handleClick}>
+              Get a Quote
+            </Button>
+          </Box>
+          <Message>
+            <Box inset={3}>
+              <Paragraph>It’s free with no obligations</Paragraph>
             </Box>
-          </Card>
-        </Box>
+          </Message>
+        </Card>
       </Container>
     )
   }

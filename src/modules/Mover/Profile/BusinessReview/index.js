@@ -13,23 +13,20 @@ class BusinessReview extends Component {
   getLogoSrc = (type) => {
     return type === 'google' ? googleLogoSrc : yelpLogoSrc;
   }
-  handleClick = (e) => {
-    window.location.replace(this.props.link);
-  }
 
   render() {
-    const { type, rating, rateCount } = this.props;
+    const { type, rating, rateCount, link } = this.props;
     return (
       <Container>
         <ContainerBox inline between={3}>
-          <Logo src={this.getLogoSrc(type)} />
+          <Logo href={link} src={this.getLogoSrc(type)} />
           <Rate
             value={rating}
             caption={rating.toString()}
             size="lg"
             readOnly
           />
-          <span>({rateCount})</span>
+          {rateCount > 0 && <span>({rateCount})</span>}
         </ContainerBox>
       </Container>
     );

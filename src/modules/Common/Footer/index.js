@@ -1,55 +1,56 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose, renderNothing, branch } from 'recompose';
-import { Footer, OrgContainer, Copyright } from './Styled';
+import Logo from '../../../globalComponents/Logo';
+import { 
+  Footer, 
+  ListHeading,
+  List,
+  ListItem
+} from './Styled';
+import Box from '../../../globalComponents/Box';
 import Grid from '../../../globalComponents/Grid';
 import footerHiddenList from './footerHiddenList.json';
+import Paragraph from '../../../globalComponents/Typography/Paragraph';
+import { ReactRouterLink } from '../../../globalComponents/Link';
 
-// const { Container, Row, Col } = Grid;
+const { Container, Row, Col } = Grid;
 
 const FooterNav = () => {
   return (
     <Footer>
-      {/* <Container>
+      <Container>
         <Row>
-          <Col xs={24} sm={24} md={7} lg={7}>
+          <Col xs={24} sm={24} md={7} lg={7} xl={7}>
+            <Box between={4} below={6}>
+              <Logo />
+              <Box between={0}>
+                <Paragraph small light>Made with love in Vacouver, BC</Paragraph>
+                <Paragraph small light>In Need © 2018 All rights reserved</Paragraph>
+              </Box>
+            </Box>
+          </Col>
+          <Col xs={24} sm={24} md={7} lg={7} xl={7}>
             <ListHeading wrapperTag="h4" size="xs">
-              Company
+              Get Started
             </ListHeading>
             <List>
-              <ListItem>Become a mover</ListItem>
-              <ListItem>Facebook</ListItem>
-              <ListItem>Twitter</ListItem>
-              <ListItem>Instagram</ListItem>
+              <ListItem><ReactRouterLink secondary to="/register">Register</ReactRouterLink></ListItem>
+              <ListItem><ReactRouterLink secondary to="/profile/vancouver-moving">Try the Demo</ReactRouterLink></ListItem>
             </List>
           </Col>
-          <Col xs={24} sm={24} md={7} lg={7}>
+          <Col xs={24} sm={24} md={7} lg={7} xl={7}>
             <ListHeading wrapperTag="h4" size="xs">
               Support
             </ListHeading>
             <List>
-              <ListItem>About us</ListItem>
-              <ListItem>Contact Us</ListItem>
-              <ListItem>Blog</ListItem>
-            </List>
-          </Col>
-          <Col xs={24} sm={24} md={7} lg={7}>
-            <ListHeading wrapperTag="h4" size="xs">
-              Legal
-            </ListHeading>
-            <List>
-              <ListItem>Terms</ListItem>
-              <ListItem>Copyright</ListItem>
-              <ListItem>Privacy Policy</ListItem>
+              <ListItem><ReactRouterLink to="" secondary>Contact us</ReactRouterLink></ListItem>
+              <ListItem><ReactRouterLink to="" secondary>Terms &amp; conditions</ReactRouterLink></ListItem>
+              <ListItem><ReactRouterLink to="" secondary>Privacy Policy</ReactRouterLink></ListItem>
             </List>
           </Col>
         </Row>
-      </Container> */}
-      <OrgContainer>
-        <Grid.Container>
-          <Copyright>Copyright ©2018  Comment On. All rights reserved.</Copyright>
-        </Grid.Container>
-      </OrgContainer>
+      </Container>
     </Footer>
   );
 };

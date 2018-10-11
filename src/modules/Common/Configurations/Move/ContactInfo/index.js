@@ -5,7 +5,8 @@ import {
   lifecycle,
   branch,
   renderNothing,
-  withProps
+  withProps,
+  setStatic
 } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
 import ContactInfo from './ContactInfo';
@@ -20,11 +21,6 @@ const validate = validateFunc(
   [
     {
       field: 'name',
-      validator: 'isRequired',
-      message: 'Required'
-    },
-    {
-      field: 'phoneNumber',
       validator: 'isRequired',
       message: 'Required'
     },
@@ -60,6 +56,7 @@ const notLoaded = props => {
 };
 
 const enhance = compose(
+  setStatic('label', 'Your contact Information'),
   withRouter,
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({

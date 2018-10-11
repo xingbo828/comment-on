@@ -7,10 +7,10 @@ import {
   Switch
 } from 'react-router-dom';
 // import ProtectedRoute from './modules/Common/ProtectedRoute';
-import GlobalNav from './modules/Common/GlobalNav';
-import Footer from './modules/Common/Footer';
 import asyncLoad from './modules/Common/asyncLoad';
 import './foundation/base.js';
+import withErrorBoundary from './modules/Common/withErrorBoundary';
+import ErrorPage from './modules/Common/ErrorPage';
 
 class App extends Component {
   render() {
@@ -18,9 +18,8 @@ class App extends Component {
       <Router>
         <ThemeProvider theme={theme}>
           <main>
-            <GlobalNav />
+            {/* <GlobalNav /> */}
             <Switch>
-              <Route exact path="/" component={asyncLoad(() => import('./modules/Home'))} />
               {/* <ProtectedRoute path="/account" component={asyncLoad(() => import('./modules/Account'))} /> */}
               {/* <Route path="/projects" component={asyncLoad(() => import('./modules/Project'))} /> */}
               {/* <ProtectedRoute path="/conversation" component={asyncLoad(() => import('./modules/Conversation'))} /> */}
@@ -29,8 +28,8 @@ class App extends Component {
 
               <Route path="/configuration/move" component={asyncLoad(() => import('./modules/Mover'))} />
               <Route path="/profile/:slug" component={asyncLoad(() => import('./modules/Mover/Profile'))} />
+              <Route path="/" component={asyncLoad(() => import('./modules/Home'))} />
             </Switch>
-            <Footer />
           </main>
         </ThemeProvider>
       </Router>
@@ -38,4 +37,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withErrorBoundary(ErrorPage)(App);

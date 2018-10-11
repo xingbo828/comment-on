@@ -2,25 +2,32 @@ import { generateMedia } from 'styled-media-query';
 
 const colors = {
   // brand: '#FFA500',
-  brand: '#FFBF37',
+  brand: '#ffac37',
   secondaryLight: '#3d95e6',
   secondary: '#228ae6',
   secondaryDark: '#1a71bd',
+  secondaryPale: '#ECF6FF',
   border: '#E6E9ED',
   danger: '#FF6B6B',
   success: '#0ACB7A',
   textDarkest: '#2d2d2d',
-  textDark: '#525458',
+  textDark: '#484848',
   textLight: '#a6a7a9',
   offWhite: '#f4f6f9',
   darkOffWhite: '#ecedf2',
-  primaryDark: '#ffac37',
+  primaryDark: '#f4a02a',
   primaryLight: '#ffe17b',
   // alias
   get info() { return this.secondary },
   get error() { return this.danger },
   get primary(){ return this.brand },
   get disabled() { return this.offWhite}
+}
+
+const gradients = {
+  secondary: {
+    horizontal: 'linear-gradient(to right, #1f5ffc 0%,#4298fe 100%)'
+  }
 }
 
 const zIndex = {
@@ -69,5 +76,6 @@ export default {
   spaces,
   breakPoints,
   boxShadow,
+  gradients,
   media: generateMedia(breakPoints)
 }

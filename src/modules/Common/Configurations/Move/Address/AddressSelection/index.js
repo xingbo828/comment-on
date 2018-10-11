@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { object, func } from 'prop-types';
 import isNull from 'lodash/isNull';
+import isEmpty from 'lodash/isEmpty'
 import isObject from 'lodash/isObject';
 import Map from '../../../../../../globalComponents/Map';
 import Icon from '../../../../../../globalComponents/Icon';
+import Box from '../../../../../../globalComponents/Box';
 import AddressAutoComplete from '../../../../../../globalComponents/Form/AddressAutoComplete';
 import {
   Container,
   MapContainer,
   RouteInfoContainer,
-  InputsContainer,
-  InputContainer
+  InputsContainer
 } from './Styled';
 
 class AddressSelection extends Component {
@@ -50,13 +51,13 @@ class AddressSelection extends Component {
 
   onFromAddressSelect = (v) => {
     this.setState({
-      from: v === null ? v : this.formatAddr(v.gmaps)
+      from: isEmpty(v) ? v : this.formatAddr(v.gmaps)
     });
   }
 
   onToAddressSelect = (v) => {
     this.setState({
-      to: v === null ? v : this.formatAddr(v.gmaps)
+      to: isEmpty(v) ? v : this.formatAddr(v.gmaps)
     });
   };
 
@@ -119,21 +120,19 @@ class AddressSelection extends Component {
         </MapContainer>
         {this.renderRouteInfo(route)}
         <InputsContainer>
-          <InputContainer>
+          <Box between={5}>
             <AddressAutoComplete
               icon="circle-o"
               initialValue={this.getInitValue(from)}
               label="Pick-up address"
               onSelect={this.onFromAddressSelect}
             />
-          </InputContainer>
-          <InputContainer>
             <AddressAutoComplete
               initialValue={this.getInitValue(to)}
               label="Delivery address"
               onSelect={this.onToAddressSelect}
             />
-          </InputContainer>
+          </Box>
         </InputsContainer>
       </Container>
     );

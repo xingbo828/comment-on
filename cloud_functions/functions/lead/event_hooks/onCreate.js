@@ -1,7 +1,7 @@
 const functions = require('firebase-functions');
 const constants = require('../constants');
 const admin = require('firebase-admin');
-const {sendNewProviderEmails} = require('../../utils/mailClient');
+const {sendNewProviderEmails, sendLeadNotification} = require('../../utils/mailClient');
 
 const handleDirectProject = (lead, snap, context) => {
   if (!lead.configuration || !lead.providerId) {
@@ -34,6 +34,12 @@ const handleDirectProject = (lead, snap, context) => {
       batch.set(projectRef, lead);
       return sendNewProviderEmails(lead.receivers, lead.id);
     }).then(() => {
+      const email = lead && lead.configuration && lead.configuration.contactInfo && lead.configuration.contactInfo.email;
+      console.log(email);
+      if (email) {
+        sendLeadNotification(email);
+      }
+
       return batch.commit();
     }).catch(err => {
       console.error('error:', err);
@@ -66,6 +72,10 @@ const handleIndirectProject = (lead, snap, context) => {
       batch.set(snap.ref, lead);
       return sendNewProviderEmails(lead.receivers, lead.id)
         .then(() => {
+          const email = lead && lead.contactInfo && lead.contactInfo.email;
+          if (email) {
+            sendLeadNotification(email);
+          }
           return batch.commit();
         }).catch((err) => {
           console.log(err);

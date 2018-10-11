@@ -26,7 +26,7 @@ function onUpdate(change, context) {
     'Date',
     'Logistics',
     'Items',
-    'ContactInfo',
+    'Contact Info',
     'Overview'
   ];
   const type = 'Move';

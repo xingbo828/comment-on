@@ -2,10 +2,10 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Section = styled.section`
-  padding: ${props=>props.theme.spaces.base} ${props=>props.theme.spaces.tight};
   background: ${props=>props.theme.colors.offWhite};
   margin: 0 0 1rem;
   text-decoration: none;
+  padding: 1rem;
 
   ${props => {
     if(!props.noBorder) {
@@ -14,7 +14,7 @@ export const Section = styled.section`
   }}
 
   ${props=>props.theme.media.greaterThan('md')`
-    padding: ${props=>props.theme.spaces.wide};
+    padding: 2rem;
   `}
 `;
 

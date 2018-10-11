@@ -22,16 +22,10 @@ const profile = (state = initProfileState, action) => {
   switch (action.type) {
     case LOADED_MOVER_PROFILE: {
       return state.withMutations((st) => {
-        // formatting
         const profile = Immutable.fromJS(action.data.profile).withMutations((pr) => {
-          // pr.set('businessServiceArea', Immutable.fromJS((Object.values(action.data.profile.businessServiceArea))));
-          // pr.set('businessHour', Immutable.fromJS((Object.values(action.data.profile.businessHour))));
           if(action.data.profile.profileImgs) {
             pr.set('profileImgs', Immutable.fromJS((Object.values(action.data.profile.profileImgs))));
           }
-          // if(action.data.profile.crewMembers) {
-          //   pr.set('crewMembers', Immutable.fromJS((Object.values(action.data.profile.crewMembers))));
-          // }
         });
         st.setIn([action.data.key, 'profile', 'result'], profile);
         st.setIn([action.data.key, 'profile', 'status'], 'LOADED');
@@ -45,7 +39,9 @@ const profile = (state = initProfileState, action) => {
     }
 
     case ERROR_MOVER_PROFILE: {
-      return state;
+      return state.withMutations((st) => {
+        st.setIn([action.data.key, 'profile', 'status'], 'ERROR');
+      });
     }
 
     case GET_REVIEW_PENDING: {
@@ -63,7 +59,7 @@ const profile = (state = initProfileState, action) => {
 
     case GET_REVIEW_FAIL: {
       return state.withMutations((st) => {
-        st.setIn([action.provider, 'reviews', 'status'], 'FAIL');
+        st.setIn([action.provider, 'reviews', 'status'], 'ERROR');
       });
     }
 
@@ -77,8 +73,8 @@ export default profile;
 
 // Selectors
 export const getProfileData = (state, slug) => state.getIn(['mover', 'profile', slug, 'profile', 'result']);
-export const getProfileStatus = (state, slug) => state.getIn(['mover', 'profile', slug, 'profile', 'status']);
+export const getProfileStatus = (state, slug) => state.getIn(['mover', 'profile', slug, 'profile', 'status']) || 'UNINIT';
 
-export const getReviewStatus = (state, slug) => state.getIn(['mover', 'profile', slug, 'reviews', 'status']);
+export const getReviewStatus = (state, slug) => state.getIn(['mover', 'profile', slug, 'reviews', 'status']) || 'UNINIT';
 export const getReviewData = (state, slug) => state.getIn(['mover', 'profile', slug, 'reviews', 'result']);
 

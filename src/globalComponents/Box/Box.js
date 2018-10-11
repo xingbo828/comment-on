@@ -1,4 +1,3 @@
-import React from 'react'
 import Styled from 'styled-components'
 import PropTypes from 'prop-types'
 
@@ -93,8 +92,7 @@ const getDirection = (property, size) => {
 }
 
 
-const Box = ({ children, tag, inline, between, vertical, horizontal, below, inset, ...rest }) => {
-  const Component = Styled[tag]`
+const Box = Styled.div`
     display: flex;
     flex-direction: column;
 
@@ -105,53 +103,48 @@ const Box = ({ children, tag, inline, between, vertical, horizontal, below, inse
     }
 
     ${props=>props.theme.media.lessThan('xs')`
-      ${getDirection(inline, 'xs')};
-      padding: ${inset || inset === 0 ? `${smallScreenLevels[getLevelIndex(inset, 'xs')]}rem` : `${smallScreenLevels[getLevelIndex(vertical, 'xs')]}rem ${smallScreenLevels[getLevelIndex(horizontal, 'xs')]}rem`};
-      ${ below || below === 0 ? `padding-bottom: ${smallScreenLevels[getLevelIndex(below, 'xs')]}rem;` : '' }
+      ${getDirection(props.inline, 'xs')};
+      padding: ${props.inset || props.inset === 0 ? `${smallScreenLevels[getLevelIndex(props.inset, 'xs')]}rem` : `${smallScreenLevels[getLevelIndex(props.vertical, 'xs')]}rem ${smallScreenLevels[getLevelIndex(props.horizontal, 'xs')]}rem`};
+      ${ props.below || props.below === 0 ? `padding-bottom: ${smallScreenLevels[getLevelIndex(props.below, 'xs')]}rem;` : '' }
       > *:not(:last-child) {
-        margin: ${getDirection(inline, 'xs') ? `0 ${smallScreenLevels[getLevelIndex(between, 'xs')]}rem 0 0` : `0 0 ${smallScreenLevels[getLevelIndex(between, 'xs')]}rem 0`};
+        margin: ${getDirection(props.inline, 'xs') ? `0 ${smallScreenLevels[getLevelIndex(props.between, 'xs')]}rem 0 0` : `0 0 ${smallScreenLevels[getLevelIndex(props.between, 'xs')]}rem 0`};
       }
     `};
 
     ${props=>props.theme.media.between('xs', 'sm')`
-      ${getDirection(inline, 'sm')};
-      padding: ${inset || inset === 0 ? `${smallScreenLevels[getLevelIndex(inset, 'sm')]}rem` : `${smallScreenLevels[getLevelIndex(vertical, 'sm')]}rem ${smallScreenLevels[getLevelIndex(horizontal, 'sm')]}rem`};
-      ${ below || below === 0 ? `padding-bottom: ${smallScreenLevels[getLevelIndex(below, 'sm')]}rem;` : '' }
+      ${getDirection(props.inline, 'sm')};
+      padding: ${props.inset || props.inset === 0 ? `${smallScreenLevels[getLevelIndex(props.inset, 'sm')]}rem` : `${smallScreenLevels[getLevelIndex(props.vertical, 'sm')]}rem ${smallScreenLevels[getLevelIndex(props.horizontal, 'sm')]}rem`};
+      ${ props.below || props.below === 0 ? `padding-bottom: ${smallScreenLevels[getLevelIndex(props.below, 'sm')]}rem;` : '' }
       > *:not(:last-child) {
-        margin: ${getDirection(inline, 'xs') ? `0 ${smallScreenLevels[getLevelIndex(between, 'sm')]}rem 0 0` : `0 0 ${smallScreenLevels[getLevelIndex(between, 'sm')]}rem 0`};
+        margin: ${getDirection(props.inline, 'xs') ? `0 ${smallScreenLevels[getLevelIndex(props.between, 'sm')]}rem 0 0` : `0 0 ${smallScreenLevels[getLevelIndex(props.between, 'sm')]}rem 0`};
       }
     `};
 
     ${props=>props.theme.media.between('sm', 'md')`
-      ${getDirection(inline, 'md')};
-      padding: ${inset || inset === 0 ? `${largeScreenLevels[getLevelIndex(inset, 'md')]}rem` : `${largeScreenLevels[getLevelIndex(vertical, 'md')]}rem ${largeScreenLevels[getLevelIndex(horizontal, 'md')]}rem`};
-      ${ below || below === 0 ? `padding-bottom: ${largeScreenLevels[getLevelIndex(below, 'md')]}rem;` : '' }
+      ${getDirection(props.inline, 'md')};
+      padding: ${props.inset || props.inset === 0 ? `${largeScreenLevels[getLevelIndex(props.inset, 'md')]}rem` : `${largeScreenLevels[getLevelIndex(props.vertical, 'md')]}rem ${largeScreenLevels[getLevelIndex(props.horizontal, 'md')]}rem`};
+      ${ props.below || props.below === 0 ? `padding-bottom: ${largeScreenLevels[getLevelIndex(props.below, 'md')]}rem;` : '' }
       > *:not(:last-child) {
-        margin: ${getDirection(inline, 'xs') ? `0 ${largeScreenLevels[getLevelIndex(between, 'md')]}rem 0 0` : `0 0 ${largeScreenLevels[getLevelIndex(between, 'md')]}rem 0`};
+        margin: ${getDirection(props.inline, 'xs') ? `0 ${largeScreenLevels[getLevelIndex(props.between, 'md')]}rem 0 0` : `0 0 ${largeScreenLevels[getLevelIndex(props.between, 'md')]}rem 0`};
       }
     `};
 
     ${props=>props.theme.media.greaterThan('md')`
-      ${getDirection(inline, 'lg')};
-      padding: ${inset || inset === 0 ? `${largeScreenLevels[getLevelIndex(inset, 'lg')]}rem` : `${largeScreenLevels[getLevelIndex(vertical, 'lg')]}rem ${largeScreenLevels[getLevelIndex(horizontal, 'lg')]}rem`};
-      ${ below || below === 0 ? `padding-bottom: ${largeScreenLevels[getLevelIndex(below, 'lg')]}rem;` : '' }
+      ${getDirection(props.inline, 'lg')};
+      padding: ${props.inset || props.inset === 0 ? `${largeScreenLevels[getLevelIndex(props.inset, 'lg')]}rem` : `${largeScreenLevels[getLevelIndex(props.vertical, 'lg')]}rem ${largeScreenLevels[getLevelIndex(props.horizontal, 'lg')]}rem`};
+      ${ props.below || props.below === 0 ? `padding-bottom: ${largeScreenLevels[getLevelIndex(props.below, 'lg')]}rem;` : '' }
       > *:not(:last-child) {
-        margin: ${getDirection(inline, 'xs') ? `0 ${largeScreenLevels[getLevelIndex(between, 'lg')]}rem 0 0` : `0 0 ${largeScreenLevels[getLevelIndex(between, 'lg')]}rem 0`};
+        margin: ${getDirection(props.inline, 'xs') ? `0 ${largeScreenLevels[getLevelIndex(props.between, 'lg')]}rem 0 0` : `0 0 ${largeScreenLevels[getLevelIndex(props.between, 'lg')]}rem 0`};
       }
     `};
-  `
-  return (
-    <Component {...rest}>
-      {children}
-    </Component>
-  )
-}
+`
+
 
 Box.propTypes = {
   tag: PropTypes.string,
-  inline: PropTypes.bool,
+  inline: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   between: PropTypes.oneOf([0,1,2,3,4,5,6,7,8,9,10,11,12,null]),
-  // vertical: PropTypes.oneOf([0,1,2,3,4,5,6,7,8,9,10,11,12,null]),
+  // props.vertical: PropTypes.oneOf([0,1,2,3,4,5,6,7,8,9,10,11,12,null]),
   horizontal: PropTypes.oneOf([0,1,2,3,4,5,6,7,8,9,10,11,12,null]),
   inset: PropTypes.oneOf([0,1,2,3,4,5,6,7,8,9,10,11,12,null])
 }

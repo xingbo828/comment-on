@@ -28,7 +28,7 @@ const enhance = compose(
       await props.addDirectProject(PROJECT_TYPES.MOVE, config, props.providerId);
       await deleteStepInfo();
       props.history.push({
-        pathname: `/configuration/move/success`
+        pathname: `/configuration/move/${props.slug}/success`
       });
     },
     goBack: e => {

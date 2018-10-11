@@ -4,13 +4,7 @@ const Form = styled.form`
   display: flex;
   border-radius: 8px;
   width: 100%;
-  margin: 0 auto 4rem;
   flex-direction: column;
-
-  ${props=>props.theme.media.greaterThan('xs')`
-    max-width: ${props.small ? '428px' : '640px'};
-    margin: 0 auto 6rem;
-  `}
 `;
 
 const FormActions = styled.div`
@@ -26,7 +20,6 @@ const FormActions = styled.div`
   ${props=>props.theme.media.greaterThan('md')`
     position: static;
     bottom: 0;
-    height:130px;
     
     > button:not(:last-child) {
       margin-bottom: 0;
@@ -39,11 +32,8 @@ const FormActions = styled.div`
 `;
 
 const FormInner = styled.div`
-  padding: 4rem 0 0;
-
-  ${props=>props.theme.media.greaterThan('md')`
-    padding: 6rem 0 0;
-  `}
+    padding: 0;
+    margin: 0;
 `;
 
 const FormHeading = styled.div`
@@ -63,7 +53,11 @@ const FormHeading = styled.div`
 `;
 
 const FormFieldSet = styled.div`
-  margin: 0 0 6rem;
+  margin: 0 0 3rem;
+  
+  ${props=>props.theme.media.greaterThan('md')`
+    margin: 0 0 6rem;
+  `}
 `
 
 export default {

@@ -31,7 +31,6 @@ app.use((err, req, res, next) => {
   }
 });
 
-
 const getGoogleRating = (placeid) => {
   return googleMapsClient.place({placeid: placeid}).asPromise()
     .then((place) => {

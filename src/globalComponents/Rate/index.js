@@ -16,6 +16,14 @@ class Rate extends Component {
     isHovering: false
   };
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.value !== nextProps.value) {
+      this.setState({
+        value: nextProps.value
+      })
+    }
+  }
+
   handleMouseEnter = (value, readOnly) => (e) => {
     if(readOnly) {
       return;

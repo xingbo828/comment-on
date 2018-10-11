@@ -3,10 +3,15 @@ import Styled from 'styled-components';
 import { withTheme } from 'styled-components';
 
 
-const Heading = ({ className, wrapperTag, children, underline, indent, theme, size }) => {
+const Heading = ({ className, wrapperTag, children, underline, indent, theme, size='md', centered, uppercase, primary, secondary }) => {
 
   const HeadingContainer = Styled.div`
     margin: 0;
+    ${centered && `text-align: center;`}
+    ${uppercase && `
+      text-transform: uppercase;
+      letter-spacing: .02rem;
+    `}
 
     ${size === 'sm' && `
       margin: 0 0 .5rem;
@@ -24,6 +29,14 @@ const Heading = ({ className, wrapperTag, children, underline, indent, theme, si
     display: inline-block;
     font-size: 2rem;
     font-weight: bold;
+
+    ${primary && `
+      color: ${theme.colors.primary};
+    `}
+
+    ${secondary && `
+      color: ${theme.colors.secondary};
+    `}
 
     ${size === 'xl' && `
       font-size: 2rem;
@@ -57,12 +70,11 @@ const Heading = ({ className, wrapperTag, children, underline, indent, theme, si
       `}
 
       ${size === 'md' && `
-        font-size: 1.5rem;
-        font-weight: 300;
+        font-size: 1.75rem;
       `}
 
       ${size === 'sm' && `
-        font-size: 1.25em;
+        font-size: 1.5em;
       `}
 
       ${size === 'xs' && `

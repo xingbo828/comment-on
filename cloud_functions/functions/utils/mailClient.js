@@ -6,12 +6,12 @@ sgMail.setSubstitutionWrappers('{{', '}}');
 
 const buildMsg = (to, url) => {
   const msg = {
-    to: to,
-    from: 'noreply@ezypzy.io',
-    subject: 'New project from EzyPzy',
+    to,
+    from: 'InNeed<noreply@inneed.ca>',
+    subject: 'New project available from In Need',
     text: 'You have a new project!',
     html: '<p>You have a new project!</p>',
-    templateId: '188aa486-1147-478a-a029-dcc3677da425',
+    templateId: 'ee98176e-dd85-4ed1-9481-70b23d90e9cb',
     substitutions: {
       url
     },
@@ -20,14 +20,25 @@ const buildMsg = (to, url) => {
 };
 
 module.exports = {
-  sendNewProviderEmail: (to, body, {url, name}) => {
-    const msg = buildMsg(to, body, {url, name});
+  sendNewProviderEmail: (to, url) => {
+    const msg = buildMsg(to, url);
+    return sgMail.send(msg);
+  },
+  sendLeadNotification: (to, info) => {
+    const msg = {
+      to,
+      from: 'InNeed<noreply@inneed.ca>',
+      subject: 'Your moving request has been sent to mover',
+      text: 'Mover will contact you shortly.',
+      html: '<p>Mover will contact you shortly.</p>',
+      templateId: '22002495-c69a-4fe8-95a6-e49e44348241'
+    };
     return sgMail.send(msg);
   },
   sendNewProviderEmails: (receivers, projectId) => {
     const msgs = Object.keys(receivers).map( receiverId => {
       const receiver = receivers[receiverId];
-      return buildMsg(receiver.email, `https://business-dev.ezypzy.ca/projects/${projectId}`);
+      return buildMsg(receiver.email, `https://business.inneed.ca/projects/${projectId}`);
     });
     return sgMail.send(msgs);
   }

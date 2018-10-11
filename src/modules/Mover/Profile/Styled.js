@@ -39,6 +39,11 @@ export const ContentWrapper = Styled.div`
 export const ProfileHeader = Styled.header`
   display: flex;
   align-items: center;
+  width: 100%;
+
+  > div {
+    width: 100%;
+  }
 `
 
 export const ProfileImage = Styled.div`
@@ -49,13 +54,22 @@ export const ProfileImage = Styled.div`
   border-radius: 4px;
 `
 
-export const ProfileInfo = Styled.div`
+export const ProfileName = Styled.div`
+  flex: 1;
+`
+export const Logo = Styled.div`
+  width: 80px;
+  height: 80px;
+  background: url(${props=>props.src}) center center no-repeat;
+  background-size: contain;
 
+  ${props=>props.theme.media.greaterThan('sm')`
+    width: 120px;
+    height: 120px;
+  `}
 `
 
-export const ProfileName = Styled.h1`
-  font-size: 2rem;
-  margin: 0;
-  font-weight: 800;
+export const TitleInfo = Styled.div`
+  display: flex;
+  align-items: center;
 `
-
