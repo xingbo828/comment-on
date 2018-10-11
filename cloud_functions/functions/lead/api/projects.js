@@ -128,6 +128,10 @@ app.patch('/:projectId', (request, response) => {
           return Promise.reject('invalid provider');
         }
         Object.keys(body).forEach(key => {
+          if (body[key] === null) {
+            delete receiver[key];
+            return;
+          }
           if (key === 'date') {
             receiver[key] = new Date(body[key]);
             return;
