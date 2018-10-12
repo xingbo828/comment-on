@@ -11,14 +11,12 @@ install:
 deploy:
   - provider: script
     skip_cleanup: true
-    before_script: REACT_APP_ENV=staging && npm run build
-    script: REACT_APP_ENV=staging && firebase use default && firebase deploy --token $FIREBASE_TOKEN
+    script: REACT_APP_ENV=staging && firebase use default && npm run build && firebase deploy --token $FIREBASE_TOKEN
     on:
       branch: qa
   - provider: script
     skip_cleanup: true
-    before_script: REACT_APP_ENV=production && npm run build
-    script: REACT_APP_ENV=production && firebase use production && firebase deploy --token $FIREBASE_TOKEN
+    script: REACT_APP_ENV=production && firebase use production && npm run build && firebase deploy --token $FIREBASE_TOKEN
     on:
       branch: master
 
