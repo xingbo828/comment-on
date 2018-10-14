@@ -2,8 +2,8 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose, renderNothing, branch } from 'recompose';
 import Logo from '../../../globalComponents/Logo';
-import { 
-  Footer, 
+import {
+  Footer,
   ListHeading,
   List,
   ListItem
@@ -12,7 +12,7 @@ import Box from '../../../globalComponents/Box';
 import Grid from '../../../globalComponents/Grid';
 import footerHiddenList from './footerHiddenList.json';
 import Paragraph from '../../../globalComponents/Typography/Paragraph';
-import { ReactRouterLink } from '../../../globalComponents/Link';
+import { ReactRouterLink, Link } from '../../../globalComponents/Link';
 
 const { Container, Row, Col } = Grid;
 
@@ -44,9 +44,9 @@ const FooterNav = () => {
               Support
             </ListHeading>
             <List>
-              <ListItem><ReactRouterLink to="" secondary>Contact us</ReactRouterLink></ListItem>
-              <ListItem><ReactRouterLink to="" secondary>Terms &amp; conditions</ReactRouterLink></ListItem>
-              <ListItem><ReactRouterLink to="" secondary>Privacy Policy</ReactRouterLink></ListItem>
+              <ListItem><ReactRouterLink to="/register" secondary>Contact us</ReactRouterLink></ListItem>
+              <ListItem><Link href={process.env.PUBLIC_URL+'/documents/term_cond.pdf'} secondary>Terms &amp; conditions</Link></ListItem>
+              <ListItem><Link href={process.env.PUBLIC_URL+'/documents/privacy_policy.pdf'} secondary>Privacy Policy</Link></ListItem>
             </List>
           </Col>
         </Row>
