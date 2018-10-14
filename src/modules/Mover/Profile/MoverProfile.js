@@ -5,7 +5,7 @@ import lowerCase from 'lodash/lowerCase';
 import Grid from '../../../globalComponents/Grid';
 import Box from '../../../globalComponents/Box';
 import { Heading, Paragraph } from '../../../globalComponents/Typography';
-import { Tags } from '../../../globalComponents/Tags';
+// import { Tags } from '../../../globalComponents/Tags';
 import { HairlineDivider } from '../../../globalComponents/Dividers';
 import {
   DescriptionList,
@@ -22,6 +22,7 @@ import GetStartedWide from './GetStartedWide';
 import GetStartedThin from './GetStartedThin';
 import Markdown from '../../../globalComponents/Markdown';
 import SkinnyFooter from '../../Common/SkinyFooter'
+import Icon from '../../../globalComponents/Icon';
 
 const { Container, Row, Col } = Grid;
 
@@ -38,17 +39,17 @@ const mapTypeCodeToLabel = code => {
 };
 
 
-const renderServiceAreaTags = (cities) => {
-  const transform = cities => {
-    return cities.map((city) => {
-      const pieces = city.split('|');
-      pieces[0] = startCase(lowerCase(pieces[0]))
-      return pieces.join(', ')
-    })
-  }
+// const renderServiceAreaTags = (cities) => {
+//   const transform = cities => {
+//     return cities.map((city) => {
+//       const pieces = city.split('|');
+//       pieces[0] = startCase(lowerCase(pieces[0]))
+//       return pieces.join(', ')
+//     })
+//   }
 
-  return <Tags values={transform(cities)} icon="map-marker" />
-}
+//   return <Tags values={transform(cities)} icon="map-marker" />
+// }
 
 
 const MoverProfile = ({ profileData, reviewStatus, reviewData }) => {
@@ -80,9 +81,9 @@ const MoverProfile = ({ profileData, reviewStatus, reviewData }) => {
                           .map(mapTypeCodeToLabel)
                           .join('  •  ')}
                       </Paragraph>
-                      <div>
-                        {renderServiceAreaTags(profileData.businessServiceAreas)}
-                      </div>
+                      <Paragraph>
+                        <Icon icon="map-marker" style={{ marginRight: 15 }}/>{profileData.businessServiceAddress}
+                        </Paragraph>
                     </Box>
                   </Box>
                 </ProfileHeader>

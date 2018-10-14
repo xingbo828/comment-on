@@ -20,7 +20,8 @@
   },
   "scripts": {
     "serve": "firebase serve --only=functions",
-    "deploy": "firebase deploy --only=functions"
+    "deploy": "firebase deploy --only=functions",
+    "deploy:prod": "firebase use production && firebase deploy --only=functions"
   },
   "private": true
 }
