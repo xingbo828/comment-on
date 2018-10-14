@@ -13,10 +13,10 @@ install:
 
 before_script:
 - if [ $TRAVIS_BRANCH == "master" ]; then
-    REACT_APP_ENV=production && npm run build
+    REACT_APP_ENV=production npm run build;
   fi
 - if [ $TRAVIS_BRANCH == "qa" ]; then
-    REACT_APP_ENV=staging && npm run build
+    REACT_APP_ENV=staging npm run build;
   fi
 
 
