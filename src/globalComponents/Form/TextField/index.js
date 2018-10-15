@@ -3,6 +3,7 @@ import { Label } from '../Label';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import {
+  Container,
   InputContainer,
   Input,
   FocusBorder,
@@ -44,7 +45,7 @@ class TextField extends React.Component {
   render() {
     const { label, type, autoComplete, placeholder, input, meta: { touched, error }} = this.props;
     return (
-      <InputContainer>
+      <Container>
         {label &&
           <Label
             focused={this.state.isFocused}
@@ -53,20 +54,25 @@ class TextField extends React.Component {
             {label}
           </Label>
         }
-        <Input
-          value={input.value}
-          onChange={this.onChange}
-          type={type} onFocus={this.onFocus.bind(this)}
-          onBlur={this.onBlur.bind(this)}
-          autoComplete={autoComplete}
-          placeholder={placeholder}
-          ref={(ref)=>this.ref=ref}
-        />
-        <FocusBorder />
+        <InputContainer
+          error={!!error && touched}
+        >
+          <Input
+            value={input.value}
+            onChange={this.onChange}
+            type={type} onFocus={this.onFocus.bind(this)}
+            onBlur={this.onBlur.bind(this)}
+            autoComplete={autoComplete}
+            placeholder={placeholder}
+            filled={this.isFilled()}
+            ref={(ref)=>this.ref=ref}
+          />
+          <FocusBorder filled={this.isFilled()} />
+        </InputContainer>
         <InputErrorMsg active={!!error && touched}>
           {error}
         </InputErrorMsg>
-      </InputContainer>
+      </Container>
     );
   }
 };

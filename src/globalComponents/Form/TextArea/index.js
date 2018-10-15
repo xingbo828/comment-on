@@ -3,6 +3,7 @@ import { Label } from '../Label';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import {
+  Container,
   InputContainer,
   TextArea,
   FocusBorder,
@@ -55,7 +56,7 @@ class TextField extends React.Component {
     const { label, type, autoComplete, placeholder, input, meta: { touched, error }} = this.props;
 
     return (
-      <InputContainer>
+      <Container>
         {label &&
           <Label
             focused={this.state.isFocused}
@@ -64,23 +65,24 @@ class TextField extends React.Component {
             {label}
           </Label>
         }
-        <TextArea
-          value={input.value}
-          innerRef={(comp)=> { this.textArea = comp }}
-          onChange={this.onChange}
-          type={type} onFocus={this.onFocus.bind(this)}
-          onBlur={this.onBlur.bind(this)}
-          autoComplete={autoComplete}
-          placeholder={placeholder}
-          ref={(ref)=>this.ref=ref}
-        />
-        <FocusBorder />
-        {touched &&
-        ((error &&
-          <InputErrorMsg>
-            {error}
-          </InputErrorMsg>))}
-      </InputContainer>
+        <InputContainer error={!!error && touched}>
+          <TextArea
+            value={input.value}
+            innerRef={(comp)=> { this.textArea = comp }}
+            onChange={this.onChange}
+            type={type} onFocus={this.onFocus.bind(this)}
+            onBlur={this.onBlur.bind(this)}
+            autoComplete={autoComplete}
+            placeholder={placeholder}
+            ref={(ref)=>this.ref=ref}
+            filled={this.isFilled()}
+          />
+          <FocusBorder filled={this.isFilled()} />
+        </InputContainer>
+        <InputErrorMsg active={!!error && touched}>
+          {error}
+        </InputErrorMsg>
+      </Container>
     );
   }
 };
