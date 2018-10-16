@@ -42,9 +42,8 @@ const MarketingHeading = ({ className, wrapperTag, children, theme, size, center
         left: 0;
         bottom: 0;
         line-height: .81;
-        font-size: ${fontSizesThin[size] * underlayMultiplier}rem; 
+        font-size: ${fontSizesThin[size] * 4}rem; 
         text-align: center;
-        // color: ${theme.colors.offWhite};
         color: #f8fafd;
       }
     `}
