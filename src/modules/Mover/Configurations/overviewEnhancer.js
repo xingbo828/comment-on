@@ -1,4 +1,4 @@
-import { compose, withProps } from 'recompose';
+import { compose, withProps, setStatic } from 'recompose';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
@@ -19,6 +19,7 @@ const mapDispatchToProps = dispatch => ({
 
 const enhance = compose(
   withRouter,
+  setStatic('label', 'Overview'),
   connect(null, mapDispatchToProps),
   withProps(props => ({
     handleSubmit: async e => {

@@ -28,8 +28,13 @@ app.get('/', (request, response) => {
     .then(userData =>
       admin.firestore().collection('providers').doc(userData.moverId).get().then(d => ({userData, provider: d.data()}))
     )
-    .then(({ userData, provider: { projects } }) =>
-      Promise.all(Object.keys(projects).map(key => projects[key].get())).then(projects => ({userData, projects}))
+    .then(({ userData, provider: { projects } }) => {
+      // console.log(projects)
+      if (!projects) {
+        return {userData, projects: [] }
+      }
+      return  Promise.all(Object.keys(projects).map(key => projects[key].get())).then(projects => ({userData, projects}))
+      }
     )
     .then(({userData, projects}) => Promise.all(projects.map(p => processProject(p, userData))))
     .then(result => {
