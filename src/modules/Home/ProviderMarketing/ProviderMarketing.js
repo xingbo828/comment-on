@@ -72,7 +72,7 @@ class ProviderMarketing extends React.PureComponent {
         <Grid.Container>
           <Grid.Row>
             <Grid.Col xs={24} sm={24} md={24} lg={24} xl={24} >
-              <MarketingHeading eyebrow="Tools &amp; Features" underlay="Features" wrapperTag="h3" centered size="md">Here's What You Get</MarketingHeading>
+              <MarketingHeading eyebrow="Tools &amp; Features" underlay="ABOUT" wrapperTag="h3" centered size="md">Here's What You Get</MarketingHeading>
             </Grid.Col>
           </Grid.Row>
         </Grid.Container>

@@ -10,7 +10,7 @@ import Footer from '../../Common/Footer'
 import { Paragraph, ThematicBreak, Heading } from '../../../globalComponents/Typography';
 import Button from '../../../globalComponents/Form/Button';
 
-const Registration = ({ handleSubmit, history }) => {
+const Registration = ({ handleSubmit, history , valid, submitting }) => {
 
   const handleRegistration = async (e) => {
     e.preventDefault();
@@ -39,20 +39,31 @@ const Registration = ({ handleSubmit, history }) => {
                     component={TextField}
                     label="Your name"
                     name="name"
+                    placeholder="Full name"
                   />
                   <Field 
                     component={TextField}
                     label="Company name"
                     name="companyName"
+                    placeholder="Company name"
                   />
                   <Field 
                     component={TextField}
-                    label="Email"
+                    label="Email address"
+                    placeholder="Email address"
                     name="email"
                   />
                 </Box>
                 <Box vertical={4} bottom={0}>
-                  <div><Button type="submit" primary>Submit</Button></div>
+                  <div>
+                    <Button 
+                      type="submit" 
+                      disabled={submitting || !valid} 
+                      primary
+                    >
+                      Submit
+                    </Button>
+                  </div>
                 </Box>
               </form>
             </Box>
