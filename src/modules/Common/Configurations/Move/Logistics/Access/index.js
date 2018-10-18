@@ -47,7 +47,7 @@ class DeliveryAccess extends Component {
           <RadioListItem
             label="Stairs"
             value="stairs"
-            checked={value.startsWith('stairs')}
+            checked={value.indexOf('stairs') > -1}
             onCheck={this.selectStairs}
           >
             <Select

@@ -46,7 +46,7 @@ const Logistics = ({ logistics: { detail }, isValid, editPath, setValidationStat
                   .split('/')
                   .map(w => capitalize(w).replace('-', ' '))
                   .join(' / ')
-              : `${pickUpAccess.split('|').map(w => w.trim())[1]} stairs`}
+              : `${pickUpAccess.split('|').map(w => w.trim())[1]} flights of stairs`}
           </SectionBodyItemContent>
         </SectionBodyItem>
         <SectionBodyItem >
@@ -59,7 +59,7 @@ const Logistics = ({ logistics: { detail }, isValid, editPath, setValidationStat
                   .split('/')
                   .map(w => capitalize(w).replace('-', ' '))
                   .join(' / ')
-              : `${deliveryAccess.split('|').map(w => w.trim())[1]} stairs`}
+              : `${deliveryAccess.split('|').map(w => w.trim())[1]}  flights of stairs`}
           </SectionBodyItemContent>
         </SectionBodyItem>
       </SectionBody>

@@ -57,14 +57,12 @@ class TextField extends React.Component {
 
     return (
       <Container>
-        {label &&
-          <Label
-            focused={this.state.isFocused}
-            filled={this.isFilled()}
-          >
-            {label}
-          </Label>
-        }
+        <Label
+          focused={this.state.isFocused}
+          filled={this.isFilled()}
+        >
+          {label}
+        </Label>
         <InputContainer error={!!error && touched}>
           <TextArea
             value={input.value}
