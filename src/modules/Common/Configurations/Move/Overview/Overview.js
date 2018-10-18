@@ -54,7 +54,7 @@ const ConfigurationOverview = ({
     };
     return (
       <div>
-        <Legend>Provide us with any additional notes. This is the place for any additional quetions, concerns or information pertaining to your move you feel we may have missed.</Legend>
+        <Legend>Provide us with any additional notes. This is the place for any additional questions, concerns or information pertaining to your move you feel we may have missed.</Legend>
         <TextArea
           input={input}
           placeholder="ex: Is there parking lot available?"
