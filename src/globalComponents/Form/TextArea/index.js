@@ -27,11 +27,11 @@ class TextField extends React.Component {
   }
 
   onFocus() {
-    this.setState({ isFocused: true });
+    this.setState(() => ({ isFocused: true }));
   }
 
   onBlur() {
-    this.setState({ isFocused: false });
+    this.setState(() => ({ isFocused: false }));
   }
 
   adjustHeight() {
@@ -42,7 +42,7 @@ class TextField extends React.Component {
 
   onChange(e) {
     const isFilled = !!e.target.value.length
-    this.setState({ isFilled })
+    this.setState(() => ({ isFilled }))
     this.adjustHeight()
     this.props.input.onChange(e)
   }

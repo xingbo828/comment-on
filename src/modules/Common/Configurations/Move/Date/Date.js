@@ -58,7 +58,7 @@ const DateTime = ({
           <Field
             component={renderDateSelection}
             name="pickUpDate"
-            label="Which day would you like to schedule your move?"
+            label="Which day would you like to schedule your move? You may choose more than one."
           />
         </FormFieldSet>
         {/* <FormFieldSet>

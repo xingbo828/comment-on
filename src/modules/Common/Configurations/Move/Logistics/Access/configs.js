@@ -1,22 +1,22 @@
 export const stairsConfig =  [
   {
-    label: '1',
+    label: '1st',
     value: 'stairs | 1'
   },
   {
-    label: '2',
+    label: '2nd',
     value: 'stairs | 2'
   },
   {
-    label: '3',
+    label: '3rd',
     value: 'stairs | 3'
   },
   {
-    label: '4',
+    label: '4th',
     value: 'stairs | 4'
   },
   {
-    label: '5+',
+    label: '5th+',
     value: 'stairs | 5+'
   }
 ];

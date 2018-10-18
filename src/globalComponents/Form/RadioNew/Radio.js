@@ -58,6 +58,7 @@ const RadioInput = Styled.input`
 const PseudoLabel = Styled.span`
   font-size: 1rem;
   line-height: 24px;
+  cursor: pointer;
 `
 
 const Description = Styled.p`
@@ -77,10 +78,17 @@ const IconContainer = Styled.div`
   color: ${props=>props.theme.colors.textLight};
 `
 
+
 const Radio = ({ label, description, value, onCheck, checked, name, secondary, color, icon }) => {
 
   const handleClick = (e) => {
     e.stopPropagation()
+  }
+
+  const handleChange = () => {
+    if (!checked) {
+      onCheck(value)
+    }
   }
 
   return (
@@ -89,7 +97,7 @@ const Radio = ({ label, description, value, onCheck, checked, name, secondary, c
         <RadioInput
           type="radio"
           value={value}
-          onChange={onCheck}
+          onChange={handleChange}
           onClick={handleClick}
           checked={checked}
           name={name}

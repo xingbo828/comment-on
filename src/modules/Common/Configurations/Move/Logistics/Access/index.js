@@ -2,40 +2,35 @@ import React, { Component } from 'react';
 import { func, string } from 'prop-types';
 import { Select, Legend } from '../../../../../../globalComponents/Form';
 import { RadioList, RadioListItem } from '../../../../../../globalComponents/Form/RadioNew';
-import Animation from '../../../../../../globalComponents/Animation';
 import { stairsConfig, elevatorNoStairConfig, mainFloorConfig } from './configs';
 import { StyledContainer } from './Styled';
+
+
 class DeliveryAccess extends Component {
   constructor(props) {
     super(props);
     this.stairsConfig = stairsConfig;
     this.elevatorNoStairConfig = elevatorNoStairConfig;
     this.mainFloorConfig = mainFloorConfig;
-
     this.state = {
-      value: this.props.value,
-      hasStairs:
-        this.props.value === ''
-          ? null
-          : this.props.value === this.elevatorNoStairConfig.value ? false : true
+      value: props.value
     };
   }
 
-  selectStairs = e => {
+  selectStairs = value => {
     let changeValue =
-      e.target.value === 'stairs'
+    value === 'stairs'
         ? this.stairsConfig[0].value
-        : e.target.value;
-    const setState = value => (prevState, props) => ({
-      hasStairs: value === 'stairs',
+        : value;
+    const setState = () => (prevState, props) => ({
       value: changeValue
     });
-    this.setState(setState(e.target.value));
+    this.setState(setState());
     this.props.onChange(changeValue);
   };
 
   onOptionSelect = e => {
-    const setState = value => (prevState, props) => ({
+    const setState = (value) => (prevState, props) => ({
       value
     });
     this.setState(setState(e.target.value));
@@ -44,7 +39,7 @@ class DeliveryAccess extends Component {
 
   render() {
     const { label } = this.props;
-    const { value, hasStairs } = this.state;
+    const { value } = this.state;
     return (
       <StyledContainer>
         <Legend>{label}</Legend>
@@ -52,25 +47,21 @@ class DeliveryAccess extends Component {
           <RadioListItem
             label="Stairs"
             value="stairs"
-            checked={hasStairs === true}
+            checked={value.startsWith('stairs')}
             onCheck={this.selectStairs}
           >
-            <Animation.Reveal timeout={300} height={50} in={hasStairs}>
-              {() => (
-                <Select
-                  label="Floors"
-                  value={value}
-                  name="Floors"
-                  onChange={this.onOptionSelect}
-                >
-                  {this.stairsConfig.map(c => (
-                    <option key={c.value} value={c.value}>
-                      {c.label}
-                    </option>
-                  ))}
-                </Select>
-              )}
-            </Animation.Reveal>
+            <Select
+              label="Floor"
+              value={value}
+              name="Floors"
+              onChange={this.onOptionSelect}
+            >
+              {this.stairsConfig.map(c => (
+                <option key={c.value} value={c.value}>
+                  {c.label}
+                </option>
+              ))}
+            </Select>
           </RadioListItem>
           <RadioListItem
             label={this.elevatorNoStairConfig.label}
