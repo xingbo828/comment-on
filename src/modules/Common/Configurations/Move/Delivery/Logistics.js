@@ -1,32 +1,16 @@
 import React from 'react';
-// import isNull from 'lodash/isNull';
-import Immutable from 'immutable';
 import { Field } from 'redux-form/immutable';
 import { Button } from '../../../../../globalComponents/Form';
-import Icon from '../../../../../globalComponents/Icon';
 import Layout from '../../../../../globalComponents/Layout';
-import DateSelection from './DateSelection';
-import StorageSelection from './StorageSelection'
-
+import Icon from '../../../../../globalComponents/Icon';
+import ResidenceTypeSelection from './ResidenceTypeSelection';
+import Access from './Access';
 
 const { Form, FormActions, FormInner, FormFieldSet } = Layout.Form;
 
-const renderDateSelection = ({ input, label }) => {
-  const value = Immutable.Iterable.isIterable(input.value)
-    ? input.value.toJS()
-    : input.value;
+const renderResidenceTypeSelection = ({ input, name, label, desc }) => {
   return (
-    <DateSelection
-      label={label}
-      value={value||undefined}
-      onChange={input.onChange}
-    />
-  );
-};
-
-const renderStorageSelection = ({ input, label }) => {
-  return (
-    <StorageSelection
+    <ResidenceTypeSelection
       onChange={input.onChange}
       value={input.value}
       label={label}
@@ -34,7 +18,27 @@ const renderStorageSelection = ({ input, label }) => {
   );
 };
 
-const DateTime = ({
+const renderPickUpAccess = ({ input, name, label, desc }) => {
+  return (
+    <Access
+      onChange={input.onChange}
+      value={input.value}
+      label={label}
+    />
+  );
+};
+
+const renderDeliveryAccess = ({ input, name, label, desc }) => {
+  return (
+    <Access
+      onChange={input.onChange}
+      value={input.value}
+      label={label}
+    />
+  );
+};
+
+const Logistics = ({
   handleSubmit,
   next,
   previous,
@@ -47,16 +51,23 @@ const DateTime = ({
       <FormInner>
         <FormFieldSet>
           <Field
-            component={renderDateSelection}
-            name="pickUpDate"
-            label="Which day would you like to schedule your move? You may choose more than one."
+            component={renderResidenceTypeSelection}
+            name="residenceType"
+            label="Choose the option that best describes the pick-up space"
           />
         </FormFieldSet>
         <FormFieldSet>
           <Field
-            component={renderStorageSelection}
-            name="storage"
-            label="Do you require storage services?"
+            component={renderPickUpAccess}
+            name="pickUpAccess"
+            label="How is the pick-up space accessed?"
+          />
+        </FormFieldSet>
+        <FormFieldSet>
+          <Field
+            component={renderDeliveryAccess}
+            name="deliveryAccess"
+            label="How is the delivery space accessed?"
           />
         </FormFieldSet>
       </FormInner>
@@ -77,4 +88,4 @@ const DateTime = ({
   );
 };
 
-export default DateTime;
+export default Logistics;

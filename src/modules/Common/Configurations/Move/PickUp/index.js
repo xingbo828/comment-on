@@ -1,31 +1,38 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {
-  compose,
-  lifecycle,
-  branch,
-  renderNothing,
-  withProps,
-  setStatic
-} from 'recompose';
+import { compose, setStatic, lifecycle, branch, renderNothing, withProps } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
-import DateStep from './Date';
+import PickUpStep from './PickUp';
 import scrollToTopOnMount from '../../../../Common/scrollToTopOnMount';
 import validators, { validateFunc } from '../../../../Common/validators';
 import isUndefined from 'lodash/isUndefined';
-import { localSaveDate, loadDate } from './actions';
 
-import { getDate } from '../moveReducers';
+import {
+  localSavePickUp,
+  loadPickUp
+} from './actions';
+
+import { getPickUp } from '../moveReducers';
 
 const validate = validateFunc(
   [
     {
-      field: 'pickUpDate',
+      field: 'residenceType',
       validator: 'isRequired',
       message: 'Required'
     },
     {
-      field: 'storage',
+      field: 'pickUpAccess',
+      validator: 'isRequired',
+      message: 'Required'
+    },
+    {
+      field: 'pickUpParking',
+      validator: 'isRequired',
+      message: 'Required'
+    },
+    {
+      field: 'pickUpJunkRemoval',
       validator: 'isRequired',
       message: 'Required'
     }
@@ -34,43 +41,44 @@ const validate = validateFunc(
 );
 
 const mapDispatchToProps = dispatch => ({
-  loadDate: () => dispatch(loadDate())
+  loadPickUp: () => dispatch(loadPickUp())
 });
 
-const mapStateToProps = state => ({ date: getDate(state) });
+const mapStateToProps = state => ({
+  pickUp: getPickUp(state)
+});
 
 
 const notLoaded = props => {
-  const isNotLoaded = isUndefined(props.date) || props.date.get('status') !== 'LOADED'
+  const isNotLoaded = isUndefined(props.pickUp) || props.pickUp.get('status') !== 'LOADED'
   return isNotLoaded
 };
 
 const enhance = compose(
-  setStatic('label', 'Moving dates'),
+  setStatic('label', 'Pick up'),
   withRouter,
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
     componentDidMount() {
-      this.props.loadDate();
+      this.props.loadPickUp();
     }
   }),
   branch(notLoaded, renderNothing),
   withProps(props => ({
-    initialValues: props.date.get('detail')
+    initialValues: props.pickUp.get('detail')
   })),
   reduxForm({
-    form: 'configurations.move.date',
+    form: 'configurations.move.pickUp',
     validate,
     onSubmit: (values) => {
-      return localSaveDate(values.toJS());
+      return localSavePickUp(values.toJS());
     },
-    onSubmitSuccess: (result, dispatch, props) => {
-      if (props.location.fromOverview) {
+    onSubmitSuccess: async (result, dispatch, props) => {
+      if(props.location.fromOverview) {
         return props.history.push({
           pathname: props.postEdit,
         });
       }
-      // send user to next step
       props.history.push({
         pathname: props.next,
         state: props.location.state
@@ -89,4 +97,4 @@ const enhance = compose(
   scrollToTopOnMount
 );
 
-export default enhance(DateStep);
+export default enhance(PickUpStep);

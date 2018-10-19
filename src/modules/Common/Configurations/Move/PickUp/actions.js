@@ -1,40 +1,33 @@
 import localforge from 'localforage';
-import moment from 'moment';
+import omit from 'lodash/omit';
+
 import {
   LOCALSTOREAGE_STEP_INFO_KEY,
   CONFIGURATION_MOVE_LOAD_DATA,
   CONFIGURATION_MOVE_RECEIVED_DATA
 } from '../../constants'
 
-const category = 'date';
+const category = 'pickUp';
 
-export const localSaveDate = async dates => {
+// Logistics
+export const localSavePickUp = async (pickUp) => {
   const stepInfo = await localforge.getItem(LOCALSTOREAGE_STEP_INFO_KEY);
   return await localforge.setItem(
     LOCALSTOREAGE_STEP_INFO_KEY,
-    Object.assign(stepInfo || {}, {
-      date: {
-        storage: dates.storage,
-        pickUpDate: dates.pickUpDate.map(d => d.format('YYYYMMDD'))
-      }
-    })
+    Object.assign(stepInfo || {}, { pickUp: omit(pickUp, ['status']) })
   );
 };
 
-export const loadDate = () => async dispatch => {
+export const loadPickUp = () => async dispatch => {
   dispatch({
     type: CONFIGURATION_MOVE_LOAD_DATA,
     category
   });
   const stepInfo = await localforge.getItem(LOCALSTOREAGE_STEP_INFO_KEY);
-  const date = stepInfo && stepInfo.date ? stepInfo.date : null;
-  const pickUpDate = date ? date.pickUpDate.map(d => moment(d)): null;
+  const pickUp = stepInfo && stepInfo.pickUp ? stepInfo.pickUp : {};
   dispatch({
     type: CONFIGURATION_MOVE_RECEIVED_DATA,
     category,
-    data: {
-      storage: date.storage,
-      pickUpDate
-    }
+    data: pickUp
   });
 };
