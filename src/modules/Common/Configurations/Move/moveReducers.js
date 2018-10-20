@@ -54,8 +54,8 @@ export const getDate = state =>
   state.getIn(['configurations', 'move', 'date']);
 export const getPickUp = state =>
   state.getIn(['configurations', 'move', 'pickUp']);
-export const getLogistics = state =>
-  state.getIn(['configurations', 'move', 'logistics']);
+export const getDelivery = state =>
+  state.getIn(['configurations', 'move', 'delivery']);
 export const getOverview = state =>
   state.getIn(['configurations', 'move', 'overview']);
 export const getContactInfo = state =>

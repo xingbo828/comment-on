@@ -14,15 +14,15 @@ import {
   SectionInvalid
 } from '../Styled';
 
-const Logistics = ({ logistics: { detail }, isValid, editPath, setValidationStatus }) => {
-  setValidationStatus('Logistics', isValid)
+const PickUp = ({ pickUp: { detail }, isValid, editPath, setValidationStatus }) => {
+  setValidationStatus('PickUp', isValid)
   const renderInner = (detail, isValid) => {
     if (!isValid) {
       return (
-        <SectionInvalid>Invalid logistics configuration.</SectionInvalid>
+        <SectionInvalid>Invalid Pick Up configuration.</SectionInvalid>
       );
     }
-    const { residenceType, deliveryAccess, pickUpAccess } = detail;
+    const { residenceType, parkingLocation, pickUpJunkRemoval, pickUpAccess } = detail;
     return (
       <SectionBody>
         <SectionBodyItem border>
@@ -39,6 +39,12 @@ const Logistics = ({ logistics: { detail }, isValid, editPath, setValidationStat
           </SectionBodyItemContent>
         </SectionBodyItem>
         <SectionBodyItem border>
+          <SectionBodyItemLabel>Pick-up parking location</SectionBodyItemLabel>
+          <SectionBodyItemContent>
+            {parkingLocation}
+          </SectionBodyItemContent>
+        </SectionBodyItem>
+        <SectionBodyItem border>
           <SectionBodyItemLabel>Pick-up location access</SectionBodyItemLabel>
           <SectionBodyItemContent>
           {pickUpAccess.startsWith('elevator') || pickUpAccess.startsWith('main-floor')
@@ -49,17 +55,10 @@ const Logistics = ({ logistics: { detail }, isValid, editPath, setValidationStat
               : `${pickUpAccess.split('|').map(w => w.trim())[1]} flights of stairs`}
           </SectionBodyItemContent>
         </SectionBodyItem>
-        <SectionBodyItem >
-          <SectionBodyItemLabel>
-            Delivery location access
-          </SectionBodyItemLabel>
+        <SectionBodyItem>
+          <SectionBodyItemLabel>Pick-up junk removal</SectionBodyItemLabel>
           <SectionBodyItemContent>
-            {deliveryAccess.startsWith('elevator') || deliveryAccess.startsWith('main-floor')
-              ? deliveryAccess
-                  .split('/')
-                  .map(w => capitalize(w).replace('-', ' '))
-                  .join(' / ')
-              : `${deliveryAccess.split('|').map(w => w.trim())[1]}  flights of stairs`}
+            {pickUpJunkRemoval}
           </SectionBodyItemContent>
         </SectionBodyItem>
       </SectionBody>
@@ -70,11 +69,11 @@ const Logistics = ({ logistics: { detail }, isValid, editPath, setValidationStat
     <Section>
       <SectionHeader>
         <Heading wrapperTag="h2" size="sm">
-          Logistics
+          Pick Up
         </Heading>
         <SectionHeaderEditLink
           to={{
-            pathname: `${editPath}/logistics`,
+            pathname: `${editPath}/pickup`,
             fromOverview: true
           }}
         >
@@ -86,4 +85,4 @@ const Logistics = ({ logistics: { detail }, isValid, editPath, setValidationStat
   );
 };
 
-export default Logistics;
+export default PickUp;

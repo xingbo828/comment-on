@@ -27,7 +27,7 @@ const validate = validateFunc(
       message: 'Required'
     },
     {
-      field: 'pickUpParking',
+      field: 'parkingLocation',
       validator: 'isRequired',
       message: 'Required'
     },

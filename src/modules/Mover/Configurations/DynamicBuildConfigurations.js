@@ -3,7 +3,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
 import Address from '../../Common/Configurations/Move/Address';
 import Date from '../../Common/Configurations/Move/Date';
-import Logistics from '../../Common/Configurations/Move/Logistics';
+// import Logistics from '../../Common/Configurations/Move/Logistics';
 import PickUp from '../../Common/Configurations/Move/PickUp';
 import Delivery from '../../Common/Configurations/Move/Delivery';
 import Items from '../../Common/Configurations/Move/Items';
@@ -23,7 +23,7 @@ import Styled from './Styled'
 const availableConfigSteps = {
   Address,
   Date,
-  Logistics,
+  // Logistics,
   PickUp,
   Delivery,
   Items,

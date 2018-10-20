@@ -79,7 +79,7 @@ const PickUp = ({
         <FormFieldSet>
           <Field
             component={renderParking}
-            name="deliveryAccess"
+            name="parkingLocation"
             label="Where is parking available at the pick up location?"
           />
         </FormFieldSet>

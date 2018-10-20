@@ -2,27 +2,22 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose, setStatic, lifecycle, branch, renderNothing, withProps } from 'recompose';
 import { reduxForm } from 'redux-form/immutable';
-import LogisticsStep from './Logistics';
+import LogisticsStep from './Delivery';
 import scrollToTopOnMount from '../../../../Common/scrollToTopOnMount';
 import validators, { validateFunc } from '../../../../Common/validators';
 import isUndefined from 'lodash/isUndefined';
 
 import {
-  localSaveLogistics,
-  loadLogistics
+  localSaveDelivery,
+  loadDelivery
 } from './actions';
 
-import { getLogistics } from '../moveReducers';
+import { getDelivery } from '../moveReducers';
 
 const validate = validateFunc(
   [
     {
       field: 'residenceType',
-      validator: 'isRequired',
-      message: 'Required'
-    },
-    {
-      field: 'pickUpAccess',
       validator: 'isRequired',
       message: 'Required'
     },
@@ -36,16 +31,16 @@ const validate = validateFunc(
 );
 
 const mapDispatchToProps = dispatch => ({
-  loadLogistics: () => dispatch(loadLogistics())
+  loadDelivery: () => dispatch(loadDelivery())
 });
 
 const mapStateToProps = state => ({
-  logistics: getLogistics(state)
+  delivery: getDelivery(state)
 });
 
 
 const notLoaded = props => {
-  const isNotLoaded = isUndefined(props.logistics) || props.logistics.get('status') !== 'LOADED'
+  const isNotLoaded = isUndefined(props.delivery) || props.delivery.get('status') !== 'LOADED'
   return isNotLoaded
 };
 
@@ -55,18 +50,18 @@ const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
     componentDidMount() {
-      this.props.loadLogistics();
+      this.props.loadDelivery();
     }
   }),
   branch(notLoaded, renderNothing),
   withProps(props => ({
-    initialValues: props.logistics.get('detail')
+    initialValues: props.delivery.get('detail')
   })),
   reduxForm({
-    form: 'configurations.move.logistics',
+    form: 'configurations.move.delivery',
     validate,
     onSubmit: (values) => {
-      return localSaveLogistics(values.toJS());
+      return localSaveDelivery(values.toJS());
     },
     onSubmitSuccess: async (result, dispatch, props) => {
       if(props.location.fromOverview) {

@@ -1,5 +1,6 @@
 import localforge from 'localforage';
 import moment from 'moment';
+import get from 'lodash/get'
 import {
   LOCALSTOREAGE_STEP_INFO_KEY,
   CONFIGURATION_MOVE_LOAD_DATA,
@@ -33,7 +34,7 @@ export const loadDate = () => async dispatch => {
     type: CONFIGURATION_MOVE_RECEIVED_DATA,
     category,
     data: {
-      storage: date.storage,
+      storage: get(date, 'storage'),
       pickUpDate
     }
   });

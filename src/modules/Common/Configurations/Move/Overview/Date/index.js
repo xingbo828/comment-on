@@ -1,6 +1,5 @@
 import isUndefined from 'lodash/isUndefined';
-import get from 'lodash/get';
-import isEmpty from 'lodash/isEmpty'
+import has from 'lodash/has'
 import { connect } from 'react-redux';
 import {
   compose,
@@ -14,7 +13,7 @@ import Date from './Date';
 import { loadDate } from '../../Date/actions';
 import mapImmutablePropsToPlainProps from '../../../../mapImmutablePropsToPlainProps'
 
-const validator = detail => !isEmpty(get(detail, ['pickUpDate']));
+export const validator = (detail) => has(detail, ['pickUpDate']) && has(detail, ['storage']);
 
 const mapDispatchToProps = dispatch => ({
   loadDate: () => dispatch(loadDate())

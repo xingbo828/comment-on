@@ -9,10 +9,12 @@ import {
   SectionBody,
   SectionBodyItem,
   SectionBodyItemContent,
-  SectionInvalid
+  SectionInvalid,
+  SectionBodyItemLabel
 } from '../Styled';
 
 const Date = ({ date: { detail }, isValid, editPath, setValidationStatus }) => {
+  console.log(detail)
   setValidationStatus('Date', isValid)
   const renderInner = ( detail, isValid ) => {
     if (!isValid) {
@@ -20,13 +22,19 @@ const Date = ({ date: { detail }, isValid, editPath, setValidationStatus }) => {
         <SectionInvalid>Invalid date configuration.</SectionInvalid>
       );
     }
-    const { pickUpDate } = detail;
+    const { pickUpDate, storage } = detail;
 
     return (
       <SectionBody>
-        <SectionBodyItem>
+        <SectionBodyItem border>
           <SectionBodyItemContent>
             {pickUpDate.map(p => <p key={p}>{p.format('dddd, MMMM, D, YYYY')}</p>)}
+          </SectionBodyItemContent>
+        </SectionBodyItem>
+        <SectionBodyItem>
+          <SectionBodyItemLabel>Storage</SectionBodyItemLabel>
+          <SectionBodyItemContent>
+            {storage === 'none' ? storage : storage.split('|')[1]}
           </SectionBodyItemContent>
         </SectionBodyItem>
       </SectionBody>
