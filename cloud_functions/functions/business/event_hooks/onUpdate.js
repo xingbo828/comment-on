@@ -24,7 +24,8 @@ function onUpdate(change, context) {
   const configurations = [
     'Address',
     'Date',
-    'Logistics',
+    'PickUp',
+    'Delivery',
     'Items',
     'ContactInfo',
     'Overview'
