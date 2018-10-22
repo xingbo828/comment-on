@@ -1,5 +1,6 @@
 const sgMail = require('@sendgrid/mail');
 const functions = require('firebase-functions');
+const _ = require('lodash');
 
 sgMail.setApiKey(functions.config().sendgrid.key);
 sgMail.setSubstitutionWrappers('{{', '}}');
@@ -26,15 +27,16 @@ module.exports = {
     const msg = buildMsg(to, url);
     return sgMail.send(msg);
   },
-  sendLeadNotification: (to, info) => {
+  sendLeadNotification: ({ provider, lead }) => {
+    const to = _.get(lead, 'configuration.contactInfo.email')
     const msg = {
       to,
       from: 'InNeed<noreply@inneed.ca>',
       subject: 'Your Request Has Been Sent',
-      text: 'The service provider will contact you shortly.',
+      text: `${provider.name}  will contact you shortly.`,
       html: `
         <p>Good news. Your request has been sent.</p>
-        <p>The service provider will contact you shortly.</p>
+        <p>${provider.name} will contact you shortly.</p>
         <p>Thank you!</p>
       `,
       templateId: '83e18289-8e28-4fde-b7b7-c0e4322b700e'

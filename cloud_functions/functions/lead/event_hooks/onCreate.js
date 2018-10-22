@@ -1,6 +1,7 @@
 const functions = require('firebase-functions');
 const constants = require('../constants');
 const admin = require('firebase-admin');
+const _ = require('lodash')
 const {sendNewProviderEmails, sendLeadNotification} = require('../../utils/mailClient');
 
 const handleDirectProject = (lead, snap, context) => {
@@ -32,12 +33,11 @@ const handleDirectProject = (lead, snap, context) => {
         email: data.email || 'invalid@invalid.in'
       };
       batch.set(projectRef, lead);
-      return sendNewProviderEmails(lead.receivers, lead.id);
-    }).then(() => {
-      const email = lead && lead.configuration && lead.configuration.contactInfo && lead.configuration.contactInfo.email;
-      console.log(email);
-      if (email) {
-        sendLeadNotification(email);
+      sendNewProviderEmails(lead.receivers, lead.id);
+      return data;
+    }).then((provider) => {
+      if (_.has(lead, 'configuration.contactInfo.email')) {
+        sendLeadNotification({ lead, provider });
       }
 
       return batch.commit();
@@ -47,46 +47,45 @@ const handleDirectProject = (lead, snap, context) => {
     });
 };
 
-const handleIndirectProject = (lead, snap, context) => {
-  if (!lead.owner || !lead.configuration) {
-    lead.status = constants.project_status.invalid;
-  }
-  lead.id = context.params.projectId;
-  lead.creationTimestamp = admin.firestore.FieldValue.serverTimestamp();
-  lead.updateTimestamp = admin.firestore.FieldValue.serverTimestamp();
+// const handleIndirectProject = (lead, snap, context) => {
+//   if (!lead.owner || !lead.configuration) {
+//     lead.status = constants.project_status.invalid;
+//   }
+//   lead.id = context.params.projectId;
+//   lead.creationTimestamp = admin.firestore.FieldValue.serverTimestamp();
+//   lead.updateTimestamp = admin.firestore.FieldValue.serverTimestamp();
 
-  const batch = snap.ref.firestore.batch();
-  return getProviders(lead.configuration, snap.ref, batch)
-    .then((providerRefPaths) => {
-      lead.receivers = {};
+//   const batch = snap.ref.firestore.batch();
+//   return getProviders(lead.configuration, snap.ref, batch)
+//     .then((providerRefPaths) => {
+//       lead.receivers = {};
 
-      providerRefPaths.forEach((doc) => {
-        const data = doc.data();
-        lead.receivers[doc.ref.id] = {
-          status: constants.receiver_status.sent,
-          provider: doc.ref,
-          exist: true,
-          email: data.email || 'invalid@invalid.in'
-        };
-      });
-      batch.set(snap.ref, lead);
-      return sendNewProviderEmails(lead.receivers, lead.id)
-        .then(() => {
-          const email = lead && lead.contactInfo && lead.contactInfo.email;
-          if (email) {
-            sendLeadNotification(email);
-          }
-          return batch.commit();
-        }).catch((err) => {
-          console.log(err);
-        });
-    })
-    .then(()=>{
-      console.log('success');
-    }).catch((e)=>{
-      console.error('error: ', e);
-    });
-}
+//       providerRefPaths.forEach((doc) => {
+//         const data = doc.data();
+//         lead.receivers[doc.ref.id] = {
+//           status: constants.receiver_status.sent,
+//           provider: doc.ref,
+//           exist: true,
+//           email: data.email || 'invalid@invalid.in'
+//         };
+//       });
+//       batch.set(snap.ref, lead);
+//       return sendNewProviderEmails(lead.receivers, lead.id)
+//         .then(() => {
+//           if (email) {
+//             sendLeadNotification({ lead, provider });
+//           }
+//           return batch.commit();
+//         }).catch((err) => {
+//           console.log(err);
+//         });
+//     })
+//     .then(()=>{
+//       console.log('success');
+//     }).catch((e)=>{
+//       console.error('error: ', e);
+//     });
+// }
 
 module.exports = functions.firestore
   .document("projects/{projectId}")
@@ -100,8 +99,8 @@ module.exports = functions.firestore
     switch (lead.type) {
     case constants.project_type.direct:
       return handleDirectProject(lead, snap, context);
-    case constants.project_type.indirect:
-      return handleIndirectProject(lead, snap, context);
+    // case constants.project_type.indirect:
+    //   return handleIndirectProject(lead, snap, context);
     }
   });
 
