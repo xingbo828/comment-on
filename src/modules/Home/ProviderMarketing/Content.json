@@ -1,9 +1,9 @@
 {
   "hero": {
     "title": "We make moving easier for you and your customers.",
-    "body": "We provide your moving or delivery company with the digital tools you need to succeed.",
+    "body": "We provide your moving or delivery company with the digital tools you need to succeed. Best of all - it's free.",
     "image": {
-      "src": "https://firebasestorage.googleapis.com/v0/b/comment-on-85597.appspot.com/o/images%2Fgui%2Fmarketing%2Fhero.jpg?alt=media&token=d8da70ca-0a9d-405a-8110-3e67105b2194",
+      "src": "https://firebasestorage.googleapis.com/v0/b/comment-on-85597.appspot.com/o/images%2Fgui%2Fmarketing%2Fprovider_hero.jpg?alt=media&token=96890aa5-b5b2-4818-be94-75cddd436124",
       "alt": ""
     },
     "link": {
@@ -14,37 +14,37 @@
   "riverFlowA": [
     {
       "title": "Personalized Landing Page",
-      "body": "Showcase your company and services online. We provide your company with a distinct and customizable online presence. We offer a one-stop-shop for customers to learn and inquire about your services. Optimized for all devices, big and small!",
+      "body": "Showcase your company and services online. We provide your company with a distinct and customizable online presence. We offer a place for customers to learn and inquire about your services. Optimized for use on all mobile and desktop devices.",
       "link": {
-        "name": "Check out the demo profile",
+        "name": "See an example landing page",
         "href": "/profile/vancouver-moving"
       },
       "image": {
-        "src": "https://firebasestorage.googleapis.com/v0/b/comment-on-85597.appspot.com/o/images%2Fgui%2Fmarketing%2Fprofile.png?alt=media&token=1c92da4d-1326-4048-8c87-690461a8ec86",
+        "src": "https://firebasestorage.googleapis.com/v0/b/comment-on-85597.appspot.com/o/images%2Fgui%2Fmarketing%2Fprofile.png?alt=media&token=b8a6ad2f-a966-495a-a9de-802d5e859534",
         "alt": "test"
       }  
     },
     {
       "title": "Service Inquiry Form",
-      "body": "We make it even easier for prospective clients to inquire about your services. With our powerful, customizable and easy to use lead generation tools, we enable you to collect the customer information you need to better understand the size and scope of a service request.",
+      "body": "We make it even easier for prospective clients to inquire about your services. With our powerful, customizable and easy-to-use lead generation tools, we enable you to collect the customer information you need to better understand the size and scope of a service request. ",
       "link": {
-        "name": "See an example",
+        "name": "See an example form",
         "href": "/configuration/move/vancouver-moving/address"
       },
       "image": {
-        "src": "https://firebasestorage.googleapis.com/v0/b/comment-on-85597.appspot.com/o/images%2Fgui%2Fmarketing%2Finquiry.png?alt=media&token=9f7a4225-5256-4e6b-abb9-81726c66b3be",
+        "src": "https://firebasestorage.googleapis.com/v0/b/comment-on-85597.appspot.com/o/images%2Fgui%2Fmarketing%2Finquiry_mobile.png?alt=media&token=c38bf971-545f-4e1c-8eb8-18e87df1e335",
         "alt": "test"
       }  
     },
     {
       "title": "Management Dashboard",
-      "body": "A place to manage all your incoming customer service inquiries. View customer details, organize and schedule all in one place.",
+      "body": "A place to manage all your incoming customer service inquiries — view customer details, organize and schedule all in one place.",
       "link": {
         "name": "Become an early adopter to gain access",
         "href": "/register"
       },
       "image": {
-        "src": "https://firebasestorage.googleapis.com/v0/b/comment-on-85597.appspot.com/o/images%2Fgui%2Fmarketing%2Fprofile.png?alt=media&token=1c92da4d-1326-4048-8c87-690461a8ec86",
+        "src": "https://firebasestorage.googleapis.com/v0/b/comment-on-85597.appspot.com/o/images%2Fgui%2Fmarketing%2Fdashboard.png?alt=media&token=f38940da-210f-46e4-8dad-592d9eaac080",
         "alt": "test"
       }  
     }
@@ -52,7 +52,7 @@
   "riverFlowB": [
     {
       "title": "Easy Integration",
-      "body": "Already have a website? You can send customers directly to your service request form from anywhere. We’ll provide the tools you need to replace your existing online forms, and breathe new life into your customer experience.",
+      "body": "Already have a website? You can send customers directly to your service request form from anywhere. We’ll provide you with the tools you need to replace your existing online forms and breathe new life into your customer experience.",
       "link": null,
       "image": {
         "src": "https://firebasestorage.googleapis.com/v0/b/comment-on-85597.appspot.com/o/images%2Fprovider%2FlFv42wxItuXMq0PYqkBZ%2F16_1530941154.jpg?alt=media&token=b98f1d8d-d338-4b86-9f5d-6bd882a42a64",
@@ -61,7 +61,7 @@
     },
     {
       "title": "All the Benefits. No Cost.",
-      "body": "Early adopters will be get free - lifetime access to our current suite of tools. All we ask in return is your feedback so we can make our tools even better!",
+      "body": "Early adopters will get free lifetime access to our current suite of tools. All we ask in return is your feedback, so we can make our tools even better!",
       "link": null,
       "image": {
         "src": "https://firebasestorage.googleapis.com/v0/b/comment-on-85597.appspot.com/o/images%2Fprovider%2FlFv42wxItuXMq0PYqkBZ%2F16_1530941154.jpg?alt=media&token=b98f1d8d-d338-4b86-9f5d-6bd882a42a64",
@@ -70,8 +70,8 @@
     }
   ],
   "demo": {
-    "title": "Try it now",
-    "body": "Check out our example account, complete with profile and service inquiry form. See if In Need is the solution you’ve been looking for!",
+    "title": "Try the Demo",
+    "body": "Check out our example service provider, complete with profile and service inquiry form. See if In Need is the solution you’ve been looking for!",
     "link": {
       "title": "See the demo",
       "href": "/profile/vancouver-moving"
@@ -79,7 +79,7 @@
   },
   "register": {
     "title": "Become an Early Adopter",
-    "body": "Registration is now open for our first round of early adopters. If you’re interested leave your details and we’ll be in touch. We’re excited to hear from you!",
+    "body": "Registration is now open for our first round of early adopters. Our early adopters will get free - lifetime access to our current suite of tools. If you’re interested leave your details and we’ll be in touch. We’re excited to hear from you!",
     "link": {
       "title": "Register",
       "href": "/register"

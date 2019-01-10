@@ -19,8 +19,9 @@
     "@sendgrid/mail": "^6.2.1"
   },
   "scripts": {
-    "serve": "firebase serve --only=functions",
-    "deploy": "firebase deploy --only=functions"
+    "serve": "firebase use default && firebase serve --only=functions",
+    "deploy": "firebase use default && firebase deploy --only=functions",
+    "deploy:prod": "firebase use production && firebase deploy --only=functions"
   },
   "private": true
 }

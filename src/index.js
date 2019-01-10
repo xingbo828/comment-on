@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './App';
 import configureStore from './store/configure-store';
-// import registerServiceWorker from './registerServiceWorker';
+import { unregister } from './registerServiceWorker';
 import { onAuthChange } from './modules/Account/onAuthChangeAction';
 
 const store = configureStore();
@@ -14,4 +14,4 @@ ReactDOM.render(
   document.getElementById('root')
 );
 store.dispatch(onAuthChange());
-// registerServiceWorker();
+unregister();

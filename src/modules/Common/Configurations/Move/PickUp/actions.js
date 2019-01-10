@@ -7,27 +7,27 @@ import {
   CONFIGURATION_MOVE_RECEIVED_DATA
 } from '../../constants'
 
-const category = 'logistics';
+const category = 'pickUp';
 
 // Logistics
-export const localSaveLogistics = async (logistics) => {
+export const localSavePickUp = async (pickUp) => {
   const stepInfo = await localforge.getItem(LOCALSTOREAGE_STEP_INFO_KEY);
   return await localforge.setItem(
     LOCALSTOREAGE_STEP_INFO_KEY,
-    Object.assign(stepInfo || {}, { logistics: omit(logistics, ['status']) })
+    Object.assign(stepInfo || {}, { pickUp: omit(pickUp, ['status']) })
   );
 };
 
-export const loadLogistics = () => async dispatch => {
+export const loadPickUp = () => async dispatch => {
   dispatch({
     type: CONFIGURATION_MOVE_LOAD_DATA,
     category
   });
   const stepInfo = await localforge.getItem(LOCALSTOREAGE_STEP_INFO_KEY);
-  const logistics = stepInfo && stepInfo.logistics ? stepInfo.logistics : {};
+  const pickUp = stepInfo && stepInfo.pickUp ? stepInfo.pickUp : {};
   dispatch({
     type: CONFIGURATION_MOVE_RECEIVED_DATA,
     category,
-    data: logistics
+    data: pickUp
   });
 };

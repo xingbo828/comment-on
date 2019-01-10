@@ -23,6 +23,11 @@ const validate = validateFunc(
       field: 'pickUpDate',
       validator: 'isRequired',
       message: 'Required'
+    },
+    {
+      field: 'storage',
+      validator: 'isRequired',
+      message: 'Required'
     }
   ],
   validators

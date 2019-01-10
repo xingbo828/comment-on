@@ -7,15 +7,14 @@ export const Container = Styled.div`
   flex-wrap: wrap;
   padding: 0 1.5rem;
 
-  &:nth-of-type(odd) {
-    background-color: ${props=>props.theme.colors.offWhite};
-  }
+  ${props=>props.flipped && `
+    background-color: ${props.theme.colors.offWhite};
+  `}
 
   ${props=>props.theme.media.greaterThan('sm')`
     padding: 0 3rem;
 
-    &:nth-of-type(even) {
-
+    ${props=>!props.flipped && `
       & > div:last-of-type {
         order: 1;
       }
@@ -23,7 +22,7 @@ export const Container = Styled.div`
       & > div:first-of-type {
         order: 2;
       }
-    }
+    `}
   `};
 `
 export const PrimaryWrapper = Styled.div`

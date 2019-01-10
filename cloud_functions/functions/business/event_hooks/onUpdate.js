@@ -24,9 +24,10 @@ function onUpdate(change, context) {
   const configurations = [
     'Address',
     'Date',
-    'Logistics',
+    'PickUp',
+    'Delivery',
     'Items',
-    'Contact Info',
+    'ContactInfo',
     'Overview'
   ];
   const type = 'Move';

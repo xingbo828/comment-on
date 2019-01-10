@@ -1,5 +1,6 @@
 const sgMail = require('@sendgrid/mail');
 const functions = require('firebase-functions');
+const _ = require('lodash');
 
 // sgMail.setApiKey(functions.config().sendgrid.key);
 sgMail.setSubstitutionWrappers('{{', '}}');
@@ -8,13 +9,15 @@ const buildMsg = (to, url) => {
   const msg = {
     to,
     from: 'InNeed<noreply@inneed.ca>',
-    subject: 'New project available from In Need',
-    text: 'You have a new project!',
-    html: '<p>You have a new project!</p>',
-    templateId: 'ee98176e-dd85-4ed1-9481-70b23d90e9cb',
-    substitutions: {
-      url
-    },
+    subject: 'You Received a New Lead',
+    text: 'You have a new lead available with In Need.',
+    html: `
+      <p>Good news! You have a new lead available from In Need.</p>
+      <p>
+        View the full details <strong><a style="color: rgb(34, 138, 230); text-decoration: none;" href="${url}">here</a>.</strong>
+      </p>
+    `,
+    templateId: '14b9145f-dfad-460d-b7da-f4523bdf65e6',
   };
   return msg;
 };
@@ -24,14 +27,19 @@ module.exports = {
     const msg = buildMsg(to, url);
     return sgMail.send(msg);
   },
-  sendLeadNotification: (to, info) => {
+  sendLeadNotification: ({ provider, lead }) => {
+    const to = _.get(lead, 'configuration.contactInfo.email')
     const msg = {
       to,
       from: 'InNeed<noreply@inneed.ca>',
-      subject: 'Your moving request has been sent to mover',
-      text: 'Mover will contact you shortly.',
-      html: '<p>Mover will contact you shortly.</p>',
-      templateId: '22002495-c69a-4fe8-95a6-e49e44348241'
+      subject: 'Your Request Has Been Sent',
+      text: `${provider.name}  will contact you shortly.`,
+      html: `
+        <p>Good news. Your request has been sent.</p>
+        <p>${provider.name} will contact you shortly.</p>
+        <p>Thank you!</p>
+      `,
+      templateId: '83e18289-8e28-4fde-b7b7-c0e4322b700e'
     };
     return sgMail.send(msg);
   },

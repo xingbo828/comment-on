@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const getBackgroundColor = props => {
   if (props.disabled) {
-    return props.theme.colors.border;
+    return props.theme.colors.offWhite;
   } else if(props.primary) {
     return props.theme.colors.primary;
   } else if(props.inverted) {

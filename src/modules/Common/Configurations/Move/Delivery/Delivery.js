@@ -18,15 +18,15 @@ const renderResidenceTypeSelection = ({ input, name, label, desc }) => {
   );
 };
 
-const renderPickUpAccess = ({ input, name, label, desc }) => {
-  return (
-    <Access
-      onChange={input.onChange}
-      value={input.value}
-      label={label}
-    />
-  );
-};
+// const renderPickUpAccess = ({ input, name, label, desc }) => {
+//   return (
+//     <Access
+//       onChange={input.onChange}
+//       value={input.value}
+//       label={label}
+//     />
+//   );
+// };
 
 const renderDeliveryAccess = ({ input, name, label, desc }) => {
   return (
@@ -53,14 +53,7 @@ const Logistics = ({
           <Field
             component={renderResidenceTypeSelection}
             name="residenceType"
-            label="Choose the option that best describes the pick-up space"
-          />
-        </FormFieldSet>
-        <FormFieldSet>
-          <Field
-            component={renderPickUpAccess}
-            name="pickUpAccess"
-            label="How is the pick-up space accessed?"
+            label="Choose the option that best describes the delivery space"
           />
         </FormFieldSet>
         <FormFieldSet>

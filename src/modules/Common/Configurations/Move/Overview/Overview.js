@@ -6,7 +6,8 @@ import { TextArea, Legend } from '../../../../../globalComponents/Form';
 import Address from './Address';
 import Date from './Date';
 import Items from './Items';
-import Logistics from './Logistics';
+import PickUp from './PickUp';
+import Delivery from './Delivery';
 import ContactInfo from './ContactInfo';
 
 const { Form, FormInner, FormFieldSet } = Layout.Form;
@@ -14,7 +15,8 @@ const AvailableSections = {
   Address,
   Date,
   Items,
-  Logistics,
+  PickUp,
+  Delivery,
   ContactInfo
 };
 
@@ -54,7 +56,7 @@ const ConfigurationOverview = ({
     };
     return (
       <div>
-        <Legend>Provide us with any additional notes. This is the place for any additional quetions, concerns or information pertaining to your move you feel we may have missed.</Legend>
+        <Legend>Provide us with any additional notes. This is the place for any additional questions, concerns or information pertaining to your move you feel we may have missed.</Legend>
         <TextArea
           input={input}
           placeholder="ex: Is there parking lot available?"

@@ -3,6 +3,7 @@ import { Label } from '../Label';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import {
+  Container,
   InputContainer,
   Input,
   FocusBorder,
@@ -21,20 +22,20 @@ class TextField extends React.Component {
   }
 
   onFocus() {
-    this.setState({ isFocused: true });
+    this.setState(() => ({ isFocused: true }));
   }
 
   onBlur(e) {
     if(this.props.input.onBlur) {
       this.props.input.onBlur(e);
     }
-    this.setState({ isFocused: false });
+    this.setState(() => ({ isFocused: false }));
   }
 
   onChange(e) {
     const isFilled = !!e.target.value.length
     this.props.input.onChange(e)
-    this.setState({ isFilled })
+    this.setState(() => ({ isFilled }))
   }
 
   isFilled() {
@@ -44,29 +45,32 @@ class TextField extends React.Component {
   render() {
     const { label, type, autoComplete, placeholder, input, meta: { touched, error }} = this.props;
     return (
-      <InputContainer>
-        {label &&
-          <Label
-            focused={this.state.isFocused}
+      <Container>
+        <Label
+          focused={this.state.isFocused}
+          filled={this.isFilled()}
+        >
+          {label}
+        </Label>
+        <InputContainer
+          error={!!error && touched}
+        >
+          <Input
+            value={input.value}
+            onChange={this.onChange}
+            type={type} onFocus={this.onFocus.bind(this)}
+            onBlur={this.onBlur.bind(this)}
+            autoComplete={autoComplete}
+            placeholder={placeholder}
             filled={this.isFilled()}
-          >
-            {label}
-          </Label>
-        }
-        <Input
-          value={input.value}
-          onChange={this.onChange}
-          type={type} onFocus={this.onFocus.bind(this)}
-          onBlur={this.onBlur.bind(this)}
-          autoComplete={autoComplete}
-          placeholder={placeholder}
-          ref={(ref)=>this.ref=ref}
-        />
-        <FocusBorder />
+            ref={(ref)=>this.ref=ref}
+          />
+          <FocusBorder filled={this.isFilled()} />
+        </InputContainer>
         <InputErrorMsg active={!!error && touched}>
           {error}
         </InputErrorMsg>
-      </InputContainer>
+      </Container>
     );
   }
 };

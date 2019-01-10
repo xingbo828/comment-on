@@ -66,6 +66,7 @@ const Items = ({
             component={TextArea}
             name="otherItems"
             label="Other items"
+            placeholder="other items"
           />
         </FormFieldSet>
       </FormInner>

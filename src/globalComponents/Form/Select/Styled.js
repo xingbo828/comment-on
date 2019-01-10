@@ -14,7 +14,7 @@ export const StyledSelect = styled.select`
     box-shadow: none;
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iNiIgd2lkdGg9IjEwIj48cG9seWdvbiBwb2ludHM9IjAsMCAxMCwwIDUsNiIgc3R5bGU9ImZpbGw6cmdiYSgwLDAsMCwuMjQpOyIvPjwvc3ZnPg==);
     background-repeat: no-repeat;
-    background-position: 40px center;
+    background-position: right 10px center;
     cursor: pointer;
     color: rgba(0,0,0,.87);
     font-size: 1rem;

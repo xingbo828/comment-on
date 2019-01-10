@@ -60,13 +60,10 @@ const RegistrationSuccess = () => {
                       <div><Checkmark style={{ width: 125, display: 'block', margin: '0 auto' }} /></div>
                       <Box between={4}>
                         <Heading wrapperTag="h1" size="sm">
-                          Message recieved!
+                          Message received!
                         </Heading>
                         <Paragraph>
-                          It is a long established fact that a reader will be distracted
-                          by the readable content of a page when looking at its layout.
-                          The point of using Lorem Ipsum is that it has a more-or-less
-                          normal distribution of letters.
+                          Thanks for the details. We're excited to hear from you and look forward to getting you up and running with In Need. We'll be in touch soon!
                         </Paragraph>
                       </Box>
                     </Box>

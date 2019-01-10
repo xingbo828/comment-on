@@ -4,22 +4,31 @@ node_js:
 before_install:
 - npm install -g firebase-tools
 
+cache:
+  directories:
+    - "node_modules"
+
 install:
-- npm install && npm install --prefix cloud_functions/functions
+- npm install
 
 before_script:
-- npm run build
+- if [ $TRAVIS_BRANCH == "master" ]; then
+    REACT_APP_ENV=production npm run build;
+  fi
+- if [ $TRAVIS_BRANCH == "qa" ]; then
+    REACT_APP_ENV=staging npm run build;
+  fi
 
 
 deploy:
   - provider: script
     skip_cleanup: true
-    script: REACT_APP_ENV=staging && firebase use default && firebase deploy --token $FIREBASE_TOKEN
+    script: firebase use default && firebase deploy --token $FIREBASE_TOKEN
     on:
       branch: qa
   - provider: script
     skip_cleanup: true
-    script: REACT_APP_ENV=production && firebase use production && firebase deploy --token $FIREBASE_TOKEN
+    script: firebase use production && firebase deploy --token $FIREBASE_TOKEN
     on:
       branch: master
 

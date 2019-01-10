@@ -16,17 +16,19 @@ const meta = {
   error: 'oops, something is wrong!'
 };
 const BasicTextField = withInfo('Basic TextField')(() => (
-  <Form>
-    <FormInner>
-      <TextField
-        type="text"
-        name="address"
-        lable="Address"
-        placeholder="Enter your address"
-        input={input}
-      />
-    </FormInner>
-  </Form>
+  <div style={{ padding: '100px', maxWidth: '600px', margin: '0 auto' }}>
+    <Form>
+      <FormInner>
+        <TextField
+          type="text"
+          name="address"
+          label="Address"
+          placeholder="Enter your address"
+          input={input}
+        />
+      </FormInner>
+    </Form>
+  </div>
 ));
 
 const TextFieldWithError = withInfo('With error message')(() => (

@@ -1,5 +1,7 @@
 import localforge from 'localforage';
 import moment from 'moment';
+import get from 'lodash/get'
+import isNull from 'lodash/isNull'
 import {
   LOCALSTOREAGE_STEP_INFO_KEY,
   CONFIGURATION_MOVE_LOAD_DATA,
@@ -14,6 +16,7 @@ export const localSaveDate = async dates => {
     LOCALSTOREAGE_STEP_INFO_KEY,
     Object.assign(stepInfo || {}, {
       date: {
+        storage: dates.storage,
         pickUpDate: dates.pickUpDate.map(d => d.format('YYYYMMDD'))
       }
     })
@@ -27,12 +30,22 @@ export const loadDate = () => async dispatch => {
   });
   const stepInfo = await localforge.getItem(LOCALSTOREAGE_STEP_INFO_KEY);
   const date = stepInfo && stepInfo.date ? stepInfo.date : null;
-  const pickUpDate = date ? date.pickUpDate.map(d => moment(d)): null;
-  dispatch({
-    type: CONFIGURATION_MOVE_RECEIVED_DATA,
-    category,
-    data: {
-      pickUpDate
-    }
-  });
+  if(isNull(date)) {
+    dispatch({
+      type: CONFIGURATION_MOVE_RECEIVED_DATA,
+      category,
+      data: date
+    });
+  } else {
+    const pickUpDate = date.pickUpDate.map(d => moment(d));
+    dispatch({
+      type: CONFIGURATION_MOVE_RECEIVED_DATA,
+      category,
+      data: {
+        storage: get(date, 'storage'),
+        pickUpDate
+      }
+    });
+  }
+
 };

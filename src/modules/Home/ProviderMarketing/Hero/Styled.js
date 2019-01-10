@@ -20,6 +20,7 @@ export const Image = Styled.div`
 
 
 export const Container = Styled.div`
+  overflow: hidden;
   position: relative;
   width: 100%;
   height: 600px;

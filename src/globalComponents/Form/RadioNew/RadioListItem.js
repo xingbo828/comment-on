@@ -1,6 +1,8 @@
 import React from 'react'
 import Styled from 'styled-components'
 import Radio from './Radio'
+import Animation from '../../Animation';
+
 
 
 const Container = Styled.div`
@@ -35,9 +37,16 @@ const Children = Styled.div`
 `
 
 const RadioListItem = ({ children, secondary, label, description, value, onCheck, checked, name, icon }) => {
+
+  const handleClick = () => {
+    if (!checked) {
+      onCheck(value)
+    }
+  }
+
   return (
-    <Container checked={checked}>
-      <ClickableArea onClick={onCheck}>
+    <Container checked={checked} onClick={handleClick}>
+      <ClickableArea>
         <Radio 
           label={label}
           description={description}
@@ -47,14 +56,18 @@ const RadioListItem = ({ children, secondary, label, description, value, onCheck
           name={name}
           secondary={secondary}
           icon={icon}
-          ref={(ref) => this.input = ref }
         />
       </ClickableArea>
       <Children>
-        {children}
+        {children && (
+          <Animation.Reveal timeout={500} in={checked}>
+            {() => children}
+          </Animation.Reveal>
+        )}
       </Children>
     </Container>
   )
 }
+
 
 export default RadioListItem

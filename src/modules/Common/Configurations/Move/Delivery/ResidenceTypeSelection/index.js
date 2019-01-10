@@ -6,7 +6,6 @@ import {
   RadioListItem,
   RadioList 
 } from '../../../../../../globalComponents/Form/RadioNew';
-import Animation from '../../../../../../globalComponents/Animation';
 import configs from './configs';
 
 class ResidenceTypeSelection extends Component {
@@ -28,9 +27,9 @@ class ResidenceTypeSelection extends Component {
     }
   };
 
-  onTopLvRadioSelection = e => {
+  onTopLvRadioSelection = value => {
     const setState = value => (prevState, props) => ({ type: value, child: '' });
-    this.setState(setState(e.target.value));
+    this.setState(setState(value));
     this.props.onChange('');
   };
 
@@ -38,10 +37,10 @@ class ResidenceTypeSelection extends Component {
     return value === this.state.type;
   };
 
-  onChildLvRadioSelect = e => {
-    const setState = value => (prevState, props) => ({ child: value });
-    this.setState(setState(e.target.value));
-    this.props.onChange(e.target.value);
+  onChildLvRadioSelect = value => {
+    const setState = () => (prevState, props) => ({ child: value });
+    this.setState(setState(value));
+    this.props.onChange(value);
   };
 
   isChildLvSelected = (value) => {
@@ -56,15 +55,7 @@ class ResidenceTypeSelection extends Component {
         checked={this.isTopLvSelected(type.value)}
         onCheck={this.onTopLvRadioSelection}
       >
-        <Animation.Reveal
-          timeout={300}
-          height={type.children.length * 40}
-          in={this.isTopLvSelected(type.value)}
-        >
-          {() => (
-              this.renderTypeChildren(type.children, type.value)
-          )}
-        </Animation.Reveal>
+        {this.renderTypeChildren(type.children, type.value)}
       </RadioListItem>
     );
   };

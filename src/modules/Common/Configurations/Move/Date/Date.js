@@ -6,6 +6,7 @@ import { Button } from '../../../../../globalComponents/Form';
 import Icon from '../../../../../globalComponents/Icon';
 import Layout from '../../../../../globalComponents/Layout';
 import DateSelection from './DateSelection';
+import StorageSelection from './StorageSelection'
 
 
 const { Form, FormActions, FormInner, FormFieldSet } = Layout.Form;
@@ -23,25 +24,15 @@ const renderDateSelection = ({ input, label }) => {
   );
 };
 
-// const renderTimeRangeSelection = ({ input, label }) => {
-//   return (
-//     <SearchStepTimeSelection
-//       label={label}
-//       value={input.value}
-//       onChange={input.onChange}
-//     />
-//   );
-// };
-
-// const renderDeliveryDateSelection = ({ input, label }) => {
-//   return (
-//     <DeliveryDateSelection
-//       value={input.value || undefined}
-//       label={label}
-//       onChange={input.onChange}
-//     />
-//   );
-// };
+const renderStorageSelection = ({ input, label }) => {
+  return (
+    <StorageSelection
+      onChange={input.onChange}
+      value={input.value}
+      label={label}
+    />
+  );
+};
 
 const DateTime = ({
   handleSubmit,
@@ -58,30 +49,16 @@ const DateTime = ({
           <Field
             component={renderDateSelection}
             name="pickUpDate"
-            label="Which day would you like to schedule your move?"
+            label="Which day would you like to schedule your move? You may choose more than one."
           />
         </FormFieldSet>
-        {/* <FormFieldSet>
+        <FormFieldSet>
           <Field
-            component={renderTimeRangeSelection}
-            name="pickUpTime"
-            label="Around what time would you like your items picked up?"
+            component={renderStorageSelection}
+            name="storage"
+            label="Do you require storage services?"
           />
-        </FormFieldSet> */}
-        {/* <Field
-          component={renderDeliveryDateSelection}
-          name="deliveryDate"
-          label="When would you like to have your items delivered? A later date indicates a need for overnight storage services."
-        /> */}
-        {/* {selectedDeliveryDate!== 'sameDayDelivery' && !isNull(selectedDeliveryDate) &&
-          <FormFieldSet>
-            <Field
-              component={renderTimeRangeSelection}
-              name="deliveryTime"
-              label="Which day would you like your items delivered?"
-            />
-          </FormFieldSet>
-        } */}
+        </FormFieldSet>
       </FormInner>
       <FormActions>
       {next && <Button
